@@ -350,14 +350,14 @@ metaBook.setMode=
                         metaBookHUD.className);
             if (flag) {
                 metaBook.hudup=true;
-                dropClass(document.body,"cxSKIMMING");
+                dropClass(document.body,"mbSKIMMING");
                 addClass(document.body,"hudup");}
             else {
                 metaBook.hudup=false;
                 metaBook.scrolling=false;
                 if (metaBook.previewing)
                     metaBook.stopPreview("setHUD");
-                dropClass(document.body,"cxSHRINK");
+                dropClass(document.body,"mbSHRINK");
                 if (clearmode) {
                     if (metaBook.popmode) {
                         var fn=metaBook.popmode;
@@ -367,9 +367,9 @@ metaBook.setMode=
                     dropClass(metaBookHUD,"openhead");
                     dropClass(metaBookHUD,"full");
                     dropClass(metaBookHUD,metaBookModes);
-                    dropClass(document.body,"cxSKIMMING");
-                    dropClass(document.body,"cxSKIMSTART");
-                    dropClass(document.body,"cxSKIMEND");
+                    dropClass(document.body,"mbSKIMMING");
+                    dropClass(document.body,"mbSKIMSTART");
+                    dropClass(document.body,"mbSKIMEND");
                     metaBook.mode=false;}
                 dropClass(document.body,"hudup");
                 dropClass(document.body,"openhud");
@@ -381,16 +381,16 @@ metaBook.setMode=
         function showCover(){
             if (metaBook._setup)
                 fdjtState.dropLocal("metabook.opened("+metaBook.docuri+")");
-            addClass(document.body,"cxCOVER");}
+            addClass(document.body,"mbCOVER");}
         metaBook.showCover=showCover;
         function hideCover(){
             if (metaBook._setup)
                 fdjtState.setLocal(
                     "metabook.opened("+metaBook.docuri+")",fdjtTime());
-            dropClass(document.body,"cxCOVER");}
+            dropClass(document.body,"mbCOVER");}
         metaBook.hideCover=hideCover;
         function toggleCover(){
-            if (hasClass(document.body,"cxCOVER")) hideCover();
+            if (hasClass(document.body,"mbCOVER")) hideCover();
             else showCover();}
         metaBook.toggleCover=toggleCover;
         
@@ -436,7 +436,7 @@ metaBook.setMode=
                 var fn=metaBook.popmode;
                 metaBook.popmode=false;
                 fn();}
-            if (hasClass(document.body,"cxCOVER")) {
+            if (hasClass(document.body,"mbCOVER")) {
                 if (!(mode)) hideCover();
                 else if (mode.search(metaBookCoverModes)>=0)
                     hideCover();
@@ -448,7 +448,7 @@ metaBook.setMode=
             if (mode) {
                 if (mode==="search") mode=metaBook.search_mode||"refinesearch";
                 if (mode==="addgloss") {}
-                else dropClass(document.body,"cxSHRINK");
+                else dropClass(document.body,"mbSHRINK");
                 if (mode===metaBook.mode) {}
                 else if (mode===true) {
                     /* True just puts up the HUD with no mode info */
@@ -542,9 +542,9 @@ metaBook.setMode=
                 dropClass(metaBookHUD,"openheart");
                 dropClass(metaBookHUD,"openhead");
                 dropClass(document.body,"dimmed");
-                dropClass(document.body,"metabookhelp");
-                dropClass(document.body,"cxPREVIEW");
-                dropClass(document.body,"cxSHRINK");
+                dropClass(document.body,"mbSHOWHELP");
+                dropClass(document.body,"mbPREVIEW");
+                dropClass(document.body,"mbSHRINK");
                 dropClass(metaBookHUD,metaBookModes);
                 metaBook.cxthelp=false;
                 if (display_sync) metaBook.displaySync();
@@ -715,7 +715,7 @@ metaBook.setMode=
             var pelt=metaBook.skimming;
             var i=0, lim=0;
             if (typeof dir !== "number") dir=0;
-            addClass(document.body,"cxSKIMMING"); setHUD(false,false);
+            addClass(document.body,"mbSKIMMING"); setHUD(false,false);
             if (mB.Trace.mode)
                 fdjtLog("metaBookSkim() %o (src=%o) mode=%o scn=%o/%o dir=%o",
                         elt,src,metaBook.mode,metaBook.skimming,metaBook.target,
@@ -748,10 +748,10 @@ metaBook.setMode=
                                0);}
                 // This all makes sure that the >| and |< buttons
                 // appear appropriately
-                if (next) dropClass(document.body,"cxSKIMEND");
-                else addClass(document.body,"cxSKIMEND");
-                if (prev) dropClass(document.body,"cxSKIMSTART");
-                else addClass(document.body,"cxSKIMSTART");
+                if (next) dropClass(document.body,"mbSKIMEND");
+                else addClass(document.body,"mbSKIMEND");
+                if (prev) dropClass(document.body,"mbSKIMSTART");
+                else addClass(document.body,"mbSKIMSTART");
                 while (slice) {before++; slice=prevSlice(slice);}
                 slice=next; while (slice) {
                     after++; slice=nextSlice(slice);}
@@ -827,7 +827,7 @@ metaBook.setMode=
             // Tapping the tochead returns to results/glosses/etc
             var skimming=metaBook.skimming;
             if (!(skimming)) return;
-            dropClass(document.body,"cxSKIMMING");
+            dropClass(document.body,"mbSKIMMING");
             if (getParent(skimming,fdjtID("METABOOKALLGLOSSES"))) 
                 metaBook.setMode("allglosses");
             else if (getParent(skimming,fdjtID("METABOOKSEARCHRESULTS"))) 
@@ -987,9 +987,9 @@ metaBook.setMode=
 
         /* Setting/clearing help mode */
         metaBook.hideHelp=function(){
-            fdjtDOM.dropClass(document.body,"metabookhelp");};
+            fdjtDOM.dropClass(document.body,"mbSHOWHELP");};
         metaBook.showHelp=function(){
-            fdjtDOM.addClass(document.body,"metabookhelp");};
+            fdjtDOM.addClass(document.body,"mbSHOWHELP");};
 
         return setMode;})();
 

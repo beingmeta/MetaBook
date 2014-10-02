@@ -164,7 +164,7 @@ body.hudup #METABOOKHUD.openhead.overtoc #METABOOKTOP {
 body.hudup #METABOOKHUD.openhead #METABOOKTOP .hudpanel {
     position: static;}
 #METABOOKHUD.openglossmark #METABOOKSKIMMER,
-body.cxSKIMMING #METABOOKHUD #METABOOKSKIMMER,
+body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER,
 #METABOOKHUD.allglosses #METABOOKSKIMMER {
     overflow: hidden;}
 #METABOOKHUD.addgloss #METABOOKTOP {
@@ -183,8 +183,8 @@ body.hudup #METABOOKHUD #METABOOKFOOT { height: 50px;}
 
 #METABOOKHUD.openhead #METABOOKTOP {max-height: 50%;}
 #METABOOKHUD.openglossmark #METABOOKSKIMMER.expanded,
-body.cxSKIMMING #METABOOKHUD #METABOOKSKIMMER.expanded,
-body.cxSKIMMING #METABOOKHUD #METABOOKSKIMMER.expanded {
+body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER.expanded,
+body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER.expanded {
     height: auto; max-height: 50%; overflow: visible;}
 
 #METABOOKHEARTFRAME {
@@ -338,7 +338,7 @@ body.hudup #METABOOKHUD.openheart #METABOOKHEARTFRAME {
 #METABOOKHUD #METABOOKFOOT {
     position: absolute; bottom: 0px; z-index: 300;}
 
-body.cxSKIMMING #METABOOKHUD #METABOOKSKIMMER {display: block;}
+body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER {display: block;}
 
 /* HUD panels */
 
@@ -396,8 +396,8 @@ body.hudup #METABOOKHUD div.hudpanel {
     -moz-opacity: 0.98;
     -o-opacity: 0.98;}
 
-body.cxSKIMMING #METABOOKHUD.allglosses #METABOOKSOURCES,
-body.cxSKIMMING #METABOOKHUD.searchresults #METABOOKSEARCH {
+body.mbSKIMMING #METABOOKHUD.allglosses #METABOOKSOURCES,
+body.mbSKIMMING #METABOOKHUD.searchresults #METABOOKSEARCH {
     display: none; }
 
 /* Heart rules */
@@ -502,7 +502,7 @@ div.completions.hudpanel .normal { line-height: 250%;}
     border-color: blue; opacity: 0.99;}
 ._MOUSE #METABOOKHUD img.hudbutton:hover {
     border-color: blue; border-style: dotted; opacity: 0.99;}
-body.cxSKIMMING #METABOOKHUD img.hudbutton {
+body.mbSKIMMING #METABOOKHUD img.hudbutton {
     opacity: 0.80;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
     filter: alpha(opacity=80);
@@ -534,11 +534,11 @@ body.cxSKIMMING #METABOOKHUD img.hudbutton {
     opacity: 0.8; -webkit-opacity: 0.8;
     -moz-opacity: 0.8; -o-opacity: 0.8;}
 #METABOOKHUD.addgloss #METABOOKFOOT img.hudbutton[alt="save gloss"],
-body.cxSKIMMING #METABOOKHUD.searchresults
+body.mbSKIMMING #METABOOKHUD.searchresults
    img.hudbutton[hudmode="searchresults"] {
     display: inline-block; }
 #METABOOKHUD.addgloss img.hudbutton[hudmode="allglosses"],
-body.cxSKIMMING #METABOOKHUD.searchresults
+body.mbSKIMMING #METABOOKHUD.searchresults
   img.hudbutton[hudmode="allglosses"] {
     display: none; }
 
@@ -638,8 +638,8 @@ body._TOUCH #METABOOKHEAD.tapholding:hover #METABOOKSHOWCOVER {
 body._TOUCH #METABOOKHEAD:hover #METABOOKSHOWCOVER {opacity: 0;}
 body.hudup #METABOOKSHOWCOVER, body.hudup #METABOOKHEAD:hover #METABOOKSHOWCOVER {
     opacity: 1.0;}
-body.cxPREVIEW #METABOOKSHOWCOVER, 
-body.cxPREVIEW.hudup #METABOOKSHOWCOVER,
+body.mbPREVIEW #METABOOKSHOWCOVER, 
+body.mbPREVIEW.hudup #METABOOKSHOWCOVER,
 body.hudup #METABOOKHUD.openhead #METABOOKSHOWCOVER {
     opacity: 0;}
 #METABOOKSHOWCOVER { pointer-events: none; }
@@ -740,9 +740,9 @@ body._TOUCH #METABOOKFRAME > #METABOOKHUD > #METABOOKPOINTGLOSSES {
 
 /* The METABOOKSKIMMER */
 
-body.cxPREVIEW #METABOOKHUD.allglosses #METABOOKSKIMMER,
-body.cxPREVIEW #METABOOKHUD.searchresults #METABOOKSKIMMER,
-body.cxSKIMMING #METABOOKHUD #METABOOKSKIMMER {
+body.mbPREVIEW #METABOOKHUD.allglosses #METABOOKSKIMMER,
+body.mbPREVIEW #METABOOKHUD.searchresults #METABOOKSKIMMER,
+body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER {
     display: block; overflow: hidden; border-color: steelblue;
     opacity: 0.90;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
@@ -976,24 +976,24 @@ body img.metabookskimbutton#METABOOKSTARTSKIM,
 body img.metabookpagebutton#METABOOKPREVPAGE {
     left: 0px;}
 
-body.cxSKIMMING img.metabookskimbutton {display: block;}
-body.cxSKIMMING img.metabookpagebutton { display: none;}
-body.cxSKIMMING img.metabookskimbutton#METABOOKSTARTSKIM,
-body.cxSKIMMING img.metabookskimbutton#METABOOKENDSKIM {
+body.mbSKIMMING img.metabookskimbutton {display: block;}
+body.mbSKIMMING img.metabookpagebutton { display: none;}
+body.mbSKIMMING img.metabookskimbutton#METABOOKSTARTSKIM,
+body.mbSKIMMING img.metabookskimbutton#METABOOKENDSKIM {
     display: none;}
 
-body.cxSKIMMING.cxSKIMSTART img.metabookskimbutton#METABOOKSTARTSKIM,
-body.cxSKIMMING.cxSKIMEND img.metabookskimbutton#METABOOKENDSKIM {
+body.mbSKIMMING.mbSKIMSTART img.metabookskimbutton#METABOOKSTARTSKIM,
+body.mbSKIMMING.mbSKIMEND img.metabookskimbutton#METABOOKENDSKIM {
     display: block;}
-body.cxSKIMMING.cxSKIMSTART img.metabookskimbutton#METABOOKPREVSKIM,
-body.cxSKIMMING.cxSKIMEND img.metabookskimbutton#METABOOKNEXTSKIM {
+body.mbSKIMMING.mbSKIMSTART img.metabookskimbutton#METABOOKPREVSKIM,
+body.mbSKIMMING.mbSKIMEND img.metabookskimbutton#METABOOKNEXTSKIM {
     display: none;}
 
 /* Don't display any buttons when you're at both the start and end */
-body.cxSKIMMING.cxSKIMSTART.cxSKIMEND img.metabookskimbutton#METABOOKSTARTSKIM,
-body.cxSKIMMING.cxSKIMSTART.cxSKIMEND img.metabookskimbutton#METABOOKENDSKIM,
-body.cxSKIMMING.cxSKIMSTART.cxSKIMEND img.metabookskimbutton#METABOOKNEXTSKIM,
-body.cxSKIMMING.cxSKIMSTART.cxSKIMEND img.metabookskimbutton#METABOOKPREVSKIM {
+body.mbSKIMMING.mbSKIMSTART.mbSKIMEND img.metabookskimbutton#METABOOKSTARTSKIM,
+body.mbSKIMMING.mbSKIMSTART.mbSKIMEND img.metabookskimbutton#METABOOKENDSKIM,
+body.mbSKIMMING.mbSKIMSTART.mbSKIMEND img.metabookskimbutton#METABOOKNEXTSKIM,
+body.mbSKIMMING.mbSKIMSTART.mbSKIMEND img.metabookskimbutton#METABOOKPREVSKIM {
     display: none;}
 
 #METABOOKHUD #SBOOKABOUT {
@@ -1082,7 +1082,7 @@ body.cxSKIMMING.cxSKIMSTART.cxSKIMEND img.metabookskimbutton#METABOOKPREVSKIM {
 
 /* The page layout message/progress indicator */
 
-body.cxLAYOUT.cxLAYOUTMESSAGE #METABOOKLAYOUTMESSAGE {
+body.mbLAYOUT.mbLAYOUTMESSAGE #METABOOKLAYOUTMESSAGE {
     display: block; opacity: 0.8;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
     filter: alpha(opacity=80);
@@ -1104,8 +1104,8 @@ body.cxLAYOUT.cxLAYOUTMESSAGE #METABOOKLAYOUTMESSAGE {
 
 /* The cloud population message/progress indicator */
 
-body.cxINDEXING #METABOOKHUD.search #METABOOKINDEXMESSAGE,
-body.cxINDEXING #METABOOKHUD.searchresults #METABOOKINDEXMESSAGE {
+body.mbINDEXING #METABOOKHUD.search #METABOOKINDEXMESSAGE,
+body.mbINDEXING #METABOOKHUD.searchresults #METABOOKINDEXMESSAGE {
     display: block; opacity: 0.8;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
     filter: alpha(opacity=80);
@@ -1195,7 +1195,7 @@ img.metabookclosehud#METABOOKSTOPSKIM {
     width: 40px; height: 40px;
     /* Let's try to do without this for now */
     display: none;}
-body.cxSKIMMING #METABOOKHUD img.metabookclosehud#METABOOKSTOPSKIM {
+body.mbSKIMMING #METABOOKHUD img.metabookclosehud#METABOOKSTOPSKIM {
     z-index: 500; display: block;}
 
 /* Full height/width rules */
@@ -1210,7 +1210,7 @@ body._FULLHEIGHT._FULLWIDTH #METABOOKHUD {display: none;}
 body._FULLHEIGHT._FULLWIDTH.hudup #METABOOKHUD,
 body._FULLHEIGHT._FULLWIDTH.openhud #METABOOKHUD,
 body._FULLHEIGHT._FULLWIDTH.openglossmark #METABOOKHUD,
-body._FULLHEIGHT._FULLWIDTH.cxSKIMMING #METABOOKHUD,
+body._FULLHEIGHT._FULLWIDTH.mbSKIMMING #METABOOKHUD,
 body._FULLHEIGHT._FULLWIDTH.hudup #METABOOKHUD {
     display: block;}
 

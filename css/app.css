@@ -38,7 +38,7 @@ body._SCROLL #CODEXPAGE, img.metabookpagebutton { display: none;}
 
 body._BYPAGE { overflow: hidden; }
 body._BYPAGE #CODEXCONTENT { display: none;}
-body.cxLAYOUT #CODEXCONTENT { display: none;}
+body.mbLAYOUT #CODEXCONTENT { display: none;}
 
 /* The page content gets a little transparent when the HUD comes up*/
 body._ANIMATE.hudup #CODEXPAGE {
@@ -58,7 +58,7 @@ body._ANIMATE.hudup #CODEXPAGE {
     -moz-opacity: 0.80;
     -o-opacity: 0.80;}
 /* When the page is shrunk, the border is visible */
-body.cxPREVIEW #CODEXPAGE, body.cxSHRINK #CODEXPAGE  {
+body.mbPREVIEW #CODEXPAGE, body.mbSHRINK #CODEXPAGE  {
     border-color: rgba(48, 60, 97, 0.54);}
 
 /* This is for page shrinking when appropriate */
@@ -75,8 +75,8 @@ body #CODEXPAGE {
 body._NOSHRINK #CODEXPAGE {
     transform: inherit; -webkit-transform: inherit;
     -moz-transform: inherit; -o-transform: inherit;}
-body.cxSHRINK #CODEXPAGE, body.cxPREVIEW #CODEXPAGE,
-body.cxSKIMMING #CODEXPAGE {
+body.mbSHRINK #CODEXPAGE, body.mbPREVIEW #CODEXPAGE,
+body.mbSKIMMING #CODEXPAGE {
     transform-origin: center top;
     -webkit-transform-origin: center top;
     -moz-transform-origin: center top;
@@ -85,9 +85,9 @@ body.cxSKIMMING #CODEXPAGE {
 body._ANIMATE._NOSHRINK #CODEXPAGE .codexpage {
     transform: inherit; -webkit-transform: inherit;
     -moz-transform: inherit; -o-transform: inherit;}
-body.cxSHRINK #CODEXPAGE .codexpage,
-body.cxPREVIEW #CODEXPAGE .codexpage,
-body.cxSKIMMING #CODEXPAGE .codexpage {
+body.mbSHRINK #CODEXPAGE .codexpage,
+body.mbPREVIEW #CODEXPAGE .codexpage,
+body.mbSKIMMING #CODEXPAGE .codexpage {
     transform: scale(0.98,0.98); -webkit-transform:scale(0.98,0.98);
     -moz-transform: scale(0.98,0.98); -o-transform:scale(0.98,0.98);}
 
@@ -121,7 +121,7 @@ body._SCROLL #CODEXCONTENT {
     -moz-user-select: auto;
     -webkit-user-select: auto;}
 
-body.cxSTARTUP #CODEXCONTENT {
+body.mbSTARTUP #CODEXCONTENT {
     opacity: 0.35;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=35)";
     filter: alpha(opacity=35);
@@ -408,7 +408,7 @@ body.hudup .metabooktarget.metabookglosstarget .metabookglossbutton {
 
 /* Displaying the sbook target */
 
-body._ANIMATE .metabooktarget, body.cxSHRINK .metabooktarget {
+body._ANIMATE .metabooktarget, body.mbSHRINK .metabooktarget {
     transition-property: color,background-color;
     transition-duration: 6s;
     -o-transition-property: color,background-color;
@@ -417,7 +417,7 @@ body._ANIMATE .metabooktarget, body.cxSHRINK .metabooktarget {
     -moz-transition-duration: 6s;
     -webkit-transition-property: color,background-color;
     -webkit-transition-duration: 6s;}
-body.hudup .metabooktarget, body.cxSHRINK .metabooktarget {
+body.hudup .metabooktarget, body.mbSHRINK .metabooktarget {
     cursor: pointer;}
 
 body.hudup .metabooktarget.metabooknewtarget {
@@ -435,7 +435,7 @@ div.sbooksection.metabooknewtarget > *:first-child {
    */
 body.metabooktarget { color: inherit;}
 
-/* body.cxSKIMMING .metabooktarget {outline: dotted steelblue 2px;} */
+/* body.mbSKIMMING .metabooktarget {outline: dotted steelblue 2px;} */
 
 body._ANIMATE .metabookglossmark > img {
     transition-property: opacity;
@@ -687,7 +687,7 @@ div.codexpage.previewpage { display: block; }
 div.codexpage.curpage.hidepage {display: none;}
 div.codexpage.curpage.hidepage.previewpage {display: block;}
 
-body._ANIMATE.cxPREVIEW div.codexpage {
+body._ANIMATE.mbPREVIEW div.codexpage {
     transition-property: none !important;
     -o-transition-property: none !important;
     -moz-transition-property: none !important;
@@ -782,16 +782,16 @@ img.metabookcoverpage {
 
 /* Highlighting */
 
-body.cxSKIMMING .metabookhighlightexcerpt,
-body.cxPREVIEW .metabookhighlightexcerpt,
+body.mbSKIMMING .metabookhighlightexcerpt,
+body.mbPREVIEW .metabookhighlightexcerpt,
 body.openhud .metabookhighlightexcerpt {
     background-color: yellow;}
-body.cxSKIMMING .metabookhighlightpassage,
-body.cxPREVIEW .metabookhighlightpassage,
+body.mbSKIMMING .metabookhighlightpassage,
+body.mbPREVIEW .metabookhighlightpassage,
 body.openhud .metabookhighlightpassage {
     background-color: rgba(255, 255, 0, 0.21);}
-body.cxSKIMMING .metabookhighlightsearch,
-body.cxPREVIEW .metabookhighlightsearch {
+body.mbSKIMMING .metabookhighlightsearch,
+body.mbPREVIEW .metabookhighlightsearch {
     background-color: gold;}
 .metabookpreviewtarget {
     color: rgb(122,34,95);
@@ -831,7 +831,7 @@ body._ANIMATE #METABOOKSTARTUPMESSAGES {
     -o-transition-duration: 1s;
     -moz-transition-property: opacity;
     -moz-transition-duration: 1s;}
-body.cxSTARTUP #METABOOKSTARTUPMESSAGES { display: block;}
+body.mbSTARTUP #METABOOKSTARTUPMESSAGES { display: block;}
 div.startupmessage { display: none;}
 div.startupmessage {
     text-align: center; font-size: 20px; font-weight: bold;

@@ -1450,7 +1450,7 @@ var metaBook={
             var headinfo=metaBook.docinfo[target]||metaBook.docinfo[target.id];
             if ((headinfo)&&((!(headinfo.sub))||(headinfo.sub.length===0))) {
                 metaBook.setMode("statictoc"); metaBook.setHUD(false,false);
-                addClass(document.body,"cxSKIMMING");}}
+                addClass(document.body,"mbSKIMMING");}}
         metaBook.GoTo(target,"metaBookSkimTo");}
     metaBook.Skimto=metaBookSkimTo;
 
@@ -1507,8 +1507,8 @@ var metaBook={
             scrollPreview(target,caller);
             addClass(target,"metabookpreviewtarget");}
         metaBook.previewing=target;
-        addClass(document.body,"cxPREVIEW");
-        if (hasClass(target,"codexpage")) addClass(document.body,"cxPAGEPREVIEW");
+        addClass(document.body,"mbPREVIEW");
+        if (hasClass(target,"codexpage")) addClass(document.body,"mbPAGEPREVIEW");
         return target;}
     metaBook.startPreview=startPreview;
     function stopPreview(caller,jumpto){
@@ -1526,8 +1526,8 @@ var metaBook={
             oldscroll=false; scrollPreview(false,caller);}
         else scrollPreview(false,caller);
         metaBook.previewing=false; metaBook.previewTarget=false;
-        dropClass(document.body,"cxPREVIEW");
-        dropClass(document.body,"cxPAGEPREVIEW");
+        dropClass(document.body,"mbPREVIEW");
+        dropClass(document.body,"mbPAGEPREVIEW");
         if (jumpto) {
             if (metaBook.hudup) metaBook.setHUD(false);
             metabookGoTo(jumpto);}

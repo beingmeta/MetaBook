@@ -32,7 +32,7 @@
 @charset "UTF-8";
 
 /* Help is displayed in fixed position boxes and selectively displayed
-    based on the body class body.metabookhelp and the individual state
+    based on the body class body.mbSHOWHELP and the individual state
     CSS classes maintained in the DOM tree.  */
 
 /* The help HUD */
@@ -60,12 +60,12 @@ div.helpbox img.inline { background-color: gray; }
     text-align: right; padding-top: 2px; padding-right: 8px;
     color: darkblue;
     display: none;}
-body.cxSTARTUP #METABOOKSTARTPAGE #METABOOKSTARTUPMSG {
+body.mbSTARTUP #METABOOKSTARTPAGE #METABOOKSTARTUPMSG {
     display: inline;}
-body.cxSTARTUP #METABOOKSTARTPAGE #METABOOKHELPTITLE {
+body.mbSTARTUP #METABOOKSTARTPAGE #METABOOKHELPTITLE {
     display: none;}
 
-body.metabookhelp #METABOOKHUD img.hudbutton#METABOOKHELPBUTTON {
+body.mbSHOWHELP #METABOOKHUD img.hudbutton#METABOOKHELPBUTTON {
     background-color: silver; border-color: black;
     opacity: 0.9;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
@@ -75,7 +75,7 @@ body.metabookhelp #METABOOKHUD img.hudbutton#METABOOKHELPBUTTON {
     -moz-opacity: 0.90;
     -o-opacity: 0.90;}
 
-body.hudup.metabookhelp #METABOOKHUD img.hudbutton#METABOOKHELPBUTTON {
+body.hudup.mbSHOWHELP #METABOOKHUD img.hudbutton#METABOOKHELPBUTTON {
     background-color: silver; border-color: black;}
 
 div.helpbox {
@@ -120,42 +120,42 @@ div.helpbox.atfoot {
 
 #METABOOKHUD div.helpbox {
     border-color: black; z-index: 250;}
-body.metabookhelp #METABOOKHUD .helphud,
-body.metabookhelp #METABOOKHUD > div.metabookhelp {display: block;}
-body.metabookhelp #METABOOKHUD .hudbutton {
+body.mbSHOWHELP #METABOOKHUD .helphud,
+body.mbSHOWHELP #METABOOKHUD > div.metabookhelp {display: block;}
+body.mbSHOWHELP #METABOOKHUD .hudbutton {
     opacity: 0.5;}
-body.metabookhelp.hudup #METABOOKHUD div.metabookhelp, 
-body.metabookhelp.cxSHRINK #METABOOKHUD div.metabookhelp,
-body.metabookhelp.cxPREVIEW #METABOOKHUD div.metabookhelp,
-body.metabookhelp.hudup #METABOOKHUD .helphud,
-body.metabookhelp.cxSKIMMING #METABOOKHUD div.metabookhelp,
-body.metabookhelp.cxSKIMMING #METABOOKHUD .helphud,
-body.metabookhelp #METABOOKHUD.addgloss .helphud,
-body.metabookhelp #METABOOKHUD.overtoc .helphud,
-body.metabookhelp #METABOOKHUD.statictoc .helphud,
-body.metabookhelp.cxSHRINK #METABOOKHUD .helphud,
-body.metabookhelp.cxPREVIEW #METABOOKHUD .helphud {
+body.mbSHOWHELP.hudup #METABOOKHUD div.metabookhelp, 
+body.mbSHOWHELP.mbSHRINK #METABOOKHUD div.metabookhelp,
+body.mbSHOWHELP.mbPREVIEW #METABOOKHUD div.metabookhelp,
+body.mbSHOWHELP.hudup #METABOOKHUD .helphud,
+body.mbSHOWHELP.mbSKIMMING #METABOOKHUD div.metabookhelp,
+body.mbSHOWHELP.mbSKIMMING #METABOOKHUD .helphud,
+body.mbSHOWHELP #METABOOKHUD.addgloss .helphud,
+body.mbSHOWHELP #METABOOKHUD.overtoc .helphud,
+body.mbSHOWHELP #METABOOKHUD.statictoc .helphud,
+body.mbSHOWHELP.mbSHRINK #METABOOKHUD .helphud,
+body.mbSHOWHELP.mbPREVIEW #METABOOKHUD .helphud {
     display: none;}
-body.metabookhelp.hudup #METABOOKHUD.splash div.metabookhelp {
+body.mbSHOWHELP.hudup #METABOOKHUD.splash div.metabookhelp {
     display: block;}
 #METABOOKHUDHELP { z-index: 500; display: none;}
-body.metabookhelp #METABOOKHUDHELP { display: block; }
+body.mbSHOWHELP #METABOOKHUDHELP { display: block; }
 body.hudup.metabookhelp #METABOOKHUDHELP { display: block; }
 
-body.metabookhelp #METABOOKHUD.addgloss #METABOOKHUDHELP { display: block; }
-body.metabookhelp #METABOOKHUD.addgloss #METABOOKSTARTPAGE,
-body.metabookhelp.cxSHRINK #METABOOKHUD.addgloss #METABOOKSTARTPAGE {
+body.mbSHOWHELP #METABOOKHUD.addgloss #METABOOKHUDHELP { display: block; }
+body.mbSHOWHELP #METABOOKHUD.addgloss #METABOOKSTARTPAGE,
+body.mbSHOWHELP.mbSHRINK #METABOOKHUD.addgloss #METABOOKSTARTPAGE {
     display: none; }
 
-body.metabookhelp.hudup #METABOOKHUD.overtoc #METABOOKTOCHELP.helpbox,
-body.metabookhelp #METABOOKHUD.addgloss #METABOOKADDGLOSSHELP.helpbox,
-body.metabookhelp.cxSKIMMING #METABOOKHUD.allglosses #METABOOKSKIMMINGHELP.helpbox,
-body.metabookhelp.cxSKIMMING #METABOOKHUD.searchresults #METABOOKSKIMMINGHELP.helpbox,
-body.metabookhelp #METABOOKHUD.refinesearch #METABOOKSEARCHINPUTHELP.helpbox,
-body.metabookhelp #METABOOKHUD.expandsearch #METABOOKSEARCHINPUTHELP.helpbox,
-body.metabookhelp #METABOOKHUD.searchresults #METABOOKSEARCHRESULTSHELP.helpbox,
-body.metabookhelp #METABOOKHUD.allglosses #METABOOKALLGLOSSESHELP.helpbox,
-body.metabookhelp #METABOOKHUD.statictoc #METABOOKSTATICTOCHELP.helpbox {
+body.mbSHOWHELP.hudup #METABOOKHUD.overtoc #METABOOKTOCHELP.helpbox,
+body.mbSHOWHELP #METABOOKHUD.addgloss #METABOOKADDGLOSSHELP.helpbox,
+body.mbSHOWHELP.mbSKIMMING #METABOOKHUD.allglosses #METABOOKSKIMMINGHELP.helpbox,
+body.mbSHOWHELP.mbSKIMMING #METABOOKHUD.searchresults #METABOOKSKIMMINGHELP.helpbox,
+body.mbSHOWHELP #METABOOKHUD.refinesearch #METABOOKSEARCHINPUTHELP.helpbox,
+body.mbSHOWHELP #METABOOKHUD.expandsearch #METABOOKSEARCHINPUTHELP.helpbox,
+body.mbSHOWHELP #METABOOKHUD.searchresults #METABOOKSEARCHRESULTSHELP.helpbox,
+body.mbSHOWHELP #METABOOKHUD.allglosses #METABOOKALLGLOSSESHELP.helpbox,
+body.mbSHOWHELP #METABOOKHUD.statictoc #METABOOKSTATICTOCHELP.helpbox {
     border-color: black; z-index: 260; display: block; opacity: 0.9; 
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
     filter: alpha(opacity=90);
@@ -165,9 +165,9 @@ body.metabookhelp #METABOOKHUD.statictoc #METABOOKSTATICTOCHELP.helpbox {
     -o-opacity: 0.90;
     display: block;}
 
-body.metabookhelp.cxSKIMMING #METABOOKHUD.searchresults
+body.mbSHOWHELP.mbSKIMMING #METABOOKHUD.searchresults
   #METABOOKSEARCHRESULTSHELP.helpbox,
-body.metabookhelp.cxSKIMMING #METABOOKHUD.allglosses
+body.mbSHOWHELP.mbSKIMMING #METABOOKHUD.allglosses
   #METABOOKALLGLOSSESHELP.helpbox {
     display: none;}
 
@@ -185,7 +185,7 @@ body.metabookhelp.cxSKIMMING #METABOOKHUD.allglosses
     -moz-opacity: 0.90;
     -o-opacity: 0.90;}
 
-body.metabookhelp.cxPREVIEW #METABOOKHUD #METABOOKHUDHELP {
+body.mbSHOWHELP.mbPREVIEW #METABOOKHUD #METABOOKHUDHELP {
     opacity: 0.05;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=5)";
     filter: alpha(opacity=5);
@@ -194,7 +194,7 @@ body.metabookhelp.cxPREVIEW #METABOOKHUD #METABOOKHUDHELP {
     -moz-opacity: 0.05;
     -o-opacity: 0.05;}
 
-body.metabookhelp #METABOOKHUD.openglossmark #METABOOKPOINTGLOSSES {
+body.mbSHOWHELP #METABOOKHUD.openglossmark #METABOOKPOINTGLOSSES {
     opacity: 0;}
 
 div.helpbox p {
@@ -296,6 +296,7 @@ div.helpbox h3 span.metabooktogglehelp {
     background-color: aliceblue; color: black;
     padding-left: 1ex; padding-right: 1ex;
     border: solid black 2px; border-radius: 1ex;}
+#METABOOKCOVER span.metabooktogglehelp { display: none; }
 
 div.metabookhelp td {
     color: rgba(0,0,0,0.75);}

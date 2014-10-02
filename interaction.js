@@ -329,8 +329,8 @@
             cancel(evt);
             return;}
 
-        if (hasClass(document.body,"metabookhelp")) {
-            dropClass(document.body,"metabookhelp");
+        if (hasClass(document.body,"mbSHOWHELP")) {
+            dropClass(document.body,"mbSHOWHELP");
             cancel(evt);
             return;}
 
@@ -737,7 +737,7 @@
         if (adx>(ady*2)) {
             // Horizontal swipe
             if (dx<-(metaBook.minswipe||10)) {
-                if (hasClass(document.body,"cxSKIMMING"))
+                if (hasClass(document.body,"mbSKIMMING"))
                     metaBook.skimForward(evt);
                 else if (evt.ntouches>1) {
                     if (!(headinfo)) metaBook.Forward(evt);
@@ -750,7 +750,7 @@
                     else metaBook.Forward(evt);}
                 else metaBook.Forward(evt);}
             else if (dx>(metaBook.minswipe||10)) {
-                if (hasClass(document.body,"cxSKIMMING"))
+                if (hasClass(document.body,"mbSKIMMING"))
                     metaBook.skimBackward(evt);
                 else if (evt.ntouches>1) {
                     if (!(headinfo)) metaBook.Forward(evt);
@@ -1167,7 +1167,7 @@
             metaBook.setHUD(false);
             fdjt.UI.cancel(evt);
             return false;}
-        else if (hasClass(document.body,"cxCOVER")) {
+        else if (hasClass(document.body,"mbCOVER")) {
             metaBook.clearStateDialog();
             metaBook.hideCover();
             fdjt.UI.cancel(evt);
@@ -1807,7 +1807,7 @@
         evt=evt||window.event;
         if (metaBook.uisound)
             fdjtDOM.playAudio("METABOOKSKIMFORWARDAUDIO");
-        if (hasClass(document.body,"cxSKIMMING")) {}
+        if (hasClass(document.body,"mbSKIMMING")) {}
         else if (metaBook.mode==="openglossmark") {
             var ids=metaBook.docinfo._ids;
             var id=((metaBook.target)&&(metaBook.target.id));
@@ -1871,7 +1871,7 @@
         else last_motion=now;
         if (metaBook.uisound)
             fdjtDOM.playAudio("METABOOKSKIMBACKWARDAUDIO");
-        if (hasClass(document.body,"cxSKIMMING")) {}
+        if (hasClass(document.body,"mbSKIMMING")) {}
         else if (metaBook.mode==="openglossmark") {
             var ids=metaBook.docinfo._ids;
             var id=((metaBook.target)&&(metaBook.target.id));
@@ -2005,9 +2005,9 @@
         else if (metaBook.mode) {
             fdjtUI.cancel(evt);
             metaBook.setMode(false);}
-        else if (fdjtDOM.hasClass(document.body,"metabookhelp")) {
+        else if (fdjtDOM.hasClass(document.body,"mbSHOWHELP")) {
             fdjtUI.cancel(evt);
-            fdjtDOM.dropClass(document.body,"metabookhelp");}
+            fdjtDOM.dropClass(document.body,"mbSHOWHELP");}
         else if (metaBook.hudup) {
             fdjtUI.cancel(evt);
             metaBook.setMode(false);}
@@ -2381,7 +2381,7 @@
         if (metaBook.mode==="addgloss") 
             metaBook.cancelGloss();
         metaBook.setMode(false);
-        fdjtDOM.dropClass(document.body,"metabookhelp");}
+        fdjtDOM.dropClass(document.body,"mbSHOWHELP");}
 
     function clearMode(evt){
         evt=evt||window.event; metaBook.setMode(false);}
@@ -2443,10 +2443,10 @@
 
     function setHelp(flag){
         if (flag) {
-            fdjtDOM.addClass(document.body,"metabookhelp");
+            fdjtDOM.addClass(document.body,"mbSHOWHELP");
             metaBook.cxthelp=true;}
         else {
-            fdjtDOM.dropClass(document.body,"metabookhelp");
+            fdjtDOM.dropClass(document.body,"mbSHOWHELP");
             metaBook.cxthelp=false;}
         return false;}
     metaBook.setHelp=setHelp;
@@ -2455,10 +2455,10 @@
         evt=evt||window.event;
         fdjtUI.cancel(evt);
         if (metaBook.cxthelp) {
-            fdjtDOM.dropClass(document.body,"metabookhelp");
+            fdjtDOM.dropClass(document.body,"mbSHOWHELP");
             metaBook.cxthelp=false;}
         else {
-            fdjtDOM.addClass(document.body,"metabookhelp");
+            fdjtDOM.addClass(document.body,"mbSHOWHELP");
             metaBook.cxthelp=true;}
         return false;}
     metaBook.toggleHelp=toggleHelp;
@@ -2673,7 +2673,7 @@
          "div.glossetc div.notetext": {click: editglossnote},
          // For checkspans
          ".metabookglossform, #METABOOKSETTINGS": {click: fdjt.UI.CheckSpan.onclick},
-         ".metabooktogglehelp": {click: metaBook.toggleHelp},
+         ".metabooktogglehelp": {click: toggleHelp},
          "#METABOOKCONSOLETEXTINPUT": {
              focus: function(){fdjt.DOM.addClass('METABOOKCONSOLEINPUT','uptop');},
              blur: function(){fdjt.DOM.dropClass('METABOOKCONSOLEINPUT','uptop');}},
@@ -2837,7 +2837,7 @@
              touchend: fdjt.UI.CheckSpan.onclick},
          ".metabooktogglehelp": {
              touchstart: cancel,
-             touchend: metaBook.toggleHelp},
+             touchend: toggleHelp},
         
          "#METABOOKCONSOLETEXTINPUT": {
              touchstart: function(){fdjt.ID('METABOOKCONSOLETEXTINPUT').focus();},
