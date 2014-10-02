@@ -716,7 +716,7 @@ metaBook.setMode=
             var i=0, lim=0;
             if (typeof dir !== "number") dir=0;
             addClass(document.body,"cxSKIMMING"); setHUD(false,false);
-            if (true) // (mB.Trace.mode)
+            if (mB.Trace.mode)
                 fdjtLog("metaBookSkim() %o (src=%o) mode=%o scn=%o/%o dir=%o",
                         elt,src,metaBook.mode,metaBook.skimming,metaBook.target,
                         dir);
