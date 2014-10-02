@@ -1,13 +1,13 @@
 /* -*- Mode: Javascript; Character-encoding: utf-8; -*- */
 
-/* ###################### codex/domscan.js ###################### */
+/* ###################### metabook/domscan.js ###################### */
 
 /* Copyright (C) 2009-2014 beingmeta, inc.
 
    This file implements extraction of map and metadata from the loaded
    DOM.
 
-   This file is part of Codex, a Javascript/DHTML web application for reading
+   This file is part of metaBook, a Javascript/DHTML web application for reading
    large structured documents (sBooks).
 
    For more information on sbooks, visit www.sbooks.net
@@ -35,18 +35,18 @@
 
 */
 /* jshint browser: true */
-/* global Codex: false */
+/* global metaBook: false */
 
 /* Initialize these here, even though they should always be
    initialized before hand.  This will cause various code checkers to
    not generate unbound variable warnings when called on individual
    files. */
 //var fdjt=((typeof fdjt !== "undefined")?(fdjt):({}));
-//var Codex=((typeof Codex !== "undefined")?(Codex):({}));
+//var metaBook=((typeof metaBook !== "undefined")?(metaBook):({}));
 //var Knodule=((typeof Knodule !== "undefined")?(Knodule):({}));
 //var iScroll=((typeof iScroll !== "undefined")?(iScroll):({}));
 
-Codex.DOMScan=(function(){
+metaBook.DOMScan=(function(){
     "use strict";
 
     var fdjtString=fdjt.String;
@@ -56,9 +56,9 @@ Codex.DOMScan=(function(){
     var RefDB=fdjt.RefDB;
     var Ref=RefDB.Ref;
 
-    var getLevel=Codex.getTOCLevel;
+    var getLevel=metaBook.getTOCLevel;
 
-    function CodexDOMScan(root,dbid,docinfo){
+    function metaBookDOMScan(root,dbid,docinfo){
         var md5ID=fdjt.WSN.md5ID;
         var stdspace=fdjtString.stdspace;
         var getStyle=fdjtDOM.getStyle;
@@ -68,16 +68,16 @@ Codex.DOMScan=(function(){
         
         if (typeof root === 'undefined') return this;
         if (!(docinfo)) {
-            if (this instanceof CodexDOMScan) docinfo=this;
-            else docinfo=new CodexDOMScan();}
-        if (!(root)) root=Codex.docroot||document.body;
+            if (this instanceof metaBookDOMScan) docinfo=this;
+            else docinfo=new metaBookDOMScan();}
+        if (!(root)) root=metaBook.docroot||document.body;
         var start=new Date();
         var allheads=[], allids=[];
         docinfo._root=root;
         docinfo._heads=allheads;
         docinfo._ids=allids;
         if (!(root.id)) root.id="SBOOKROOT";
-        if ((Codex.Trace.startup>1)||(Codex.Trace.domscan)) {
+        if ((mB.Trace.startup>1)||(mB.Trace.domscan)) {
             if (root.id) 
                 fdjtLog("Scanning %s#%s for structure and metadata",
                         root.tagName,root.id);
@@ -89,7 +89,7 @@ Codex.DOMScan=(function(){
              tagstack: [],taggings: [],allinfo: [],locinfo: [], idmap: idmap,
              idstate: {prefix: false,count: 0},
              idstack: [{prefix: false,count: 0}],
-             pool: Codex.docdb};
+             pool: metaBook.docdb};
 
         var docdb=new RefDB(dbid);
         
@@ -175,7 +175,7 @@ Codex.DOMScan=(function(){
                 (docinfo[headid]=new ScanInfo(headid,scanstate));
             scanstate.headcount++;
             allheads.push(headid);
-            if (Codex.Trace.domscan>1)
+            if (mB.Trace.domscan>1)
                 fdjtLog("Scanning head item %o under %o at level %d w/id=#%s ",
                         head,curhead,level,headid);
             /* Iniitalize the headinfo */
@@ -213,7 +213,7 @@ Codex.DOMScan=(function(){
                 /* Climb the stack of headers, closing off entries and setting up
                    prev/next pointers where needed. */
                 while (scaninfo) {
-                    if (Codex.Trace.domscan>2)
+                    if (mB.Trace.domscan>2)
                         fdjtLog("Finding head@%d: scan=%o, info=%j, sbook_head=%o, cmp=%o",
                                 scanlevel,scan||false,scaninfo,(scanlevel<level));
                     if (scanlevel<level) break;
@@ -225,7 +225,7 @@ Codex.DOMScan=(function(){
                     scaninfo=scaninfo.head;
                     scan=scaninfo.elt||document.getElementById(scaninfo.frag);
                     scanlevel=((scaninfo)?(scaninfo.level):(0));}
-                if (Codex.Trace.domscan>2)
+                if (mB.Trace.domscan>2)
                     fdjtLog("Found parent: up=%o, upinfo=%o, atlevel=%d, sbook_head=%o",
                             scan||false,scaninfo,scaninfo.level,scaninfo.head);
                 /* We've found the enclosing head for this head, so we
@@ -243,7 +243,7 @@ Codex.DOMScan=(function(){
             if (supinfo) newheads.push(supinfo);
             headinfo.heads=newheads;
             headinfo.indexRef('heads',newheads);
-            if (Codex.Trace.domscan>2)
+            if (mB.Trace.domscan>2)
                 fdjtLog("@%d: Found head=%o, headinfo=%o, sbook_head=%o",
                         scanstate.location,head,headinfo,headinfo.head);
             /* Update the toc state */
@@ -272,19 +272,19 @@ Codex.DOMScan=(function(){
             var tag=child.tagName, classname=child.className;
             var id=child.id;
             if (id) id=child.getAttribute('data-tocid')||id;
-            if ((Codex.ignore)&&(Codex.ignore.match(child))) return;
+            if ((metaBook.ignore)&&(metaBook.ignore.match(child))) return;
             if ((rootns)&&(child.namespaceURI!==rootns)) return;
             if ((classname)&&
                 ((typeof classname !== "string")||
-                 (classname.search(/\b(sbookignore|codexignore)\b/)>=0)))
+                 (classname.search(/\b(sbookignore|metabookignore)\b/)>=0)))
                 return;
-            if ((child.codexui)||((id)&&(id.search("CODEX")===0))) return;
+            if ((child.metabookui)||((id)&&(id.search("METABOOK")===0))) return;
 
-            if (Codex.Trace.domscan>3)
+            if (mB.Trace.domscan>3)
                 fdjtLog("Scanning %o level=%o, loc=%o, head=%o: %j",
                         child,curlevel,location,curhead,curinfo);
 
-            if ((!(id))&&(!(Codex.baseid))) {
+            if ((!(id))&&(!(metaBook.baseid))) {
                 // If there isn't a known BASEID, we generate
                 //  ids for block level elements using WSN.
                 var wsn=false;
@@ -321,7 +321,7 @@ Codex.DOMScan=(function(){
             // Get the location in the TOC for this out of context node
             //  These get generated, for example, when the content of an
             //  authorial footnote is moved elsewhere in the document.
-            var tocloc=(child.codextocloc)||
+            var tocloc=(child.metabooktocloc)||
                 (child.getAttribute("data-tocloc"));
             if ((tocloc)&&(docinfo[tocloc])) {
                 var tocinfo=docinfo[tocloc];
@@ -361,7 +361,7 @@ Codex.DOMScan=(function(){
                 info.sbookhead=curhead.getAttribute('data-tocid')||curhead.id;
                 info.headstart=curinfo.starts_at;}
             // Set the first content node
-            if ((id)&&(info)&&(!start)) Codex.start=start=child;
+            if ((id)&&(info)&&(!start)) metaBook.start=start=child;
             // And the initial content level
             if ((info)&&(toclevel)&&(!(info.toclevel))) info.toclevel=toclevel;
             if ((id)&&(info)) {
@@ -372,7 +372,7 @@ Codex.DOMScan=(function(){
                     (child.getAttribute('data-tags'));
                 if (tags) info.atags=tags.split(',');}
             if (((classname)&&(classname.search(/\bsbookignore\b/)>=0))||
-                ((Codex.ignore)&&(Codex.ignore.match(child))))
+                ((metaBook.ignore)&&(metaBook.ignore.match(child))))
                 return;
             if ((toclevel)&&(!(info.tocdone)))
                 handleHead(child,id,docinfo,scanstate,toclevel,
@@ -382,8 +382,8 @@ Codex.DOMScan=(function(){
             else {}
 
             if (((classname)&&(classname.search(/\bsbookterminal\b/)>=0))||
-                ((classname)&&(Codex.terminals)&&
-                 (Codex.terminals.match(child)))) {
+                ((classname)&&(metaBook.terminals)&&
+                 (metaBook.terminals.match(child)))) {
                 scanstate.location=scanstate.location+textWidth(child);}
             else {
                 var grandchildren=child.childNodes;
@@ -419,7 +419,7 @@ Codex.DOMScan=(function(){
         /* Build the metadata */
         var i=0; while (i<children.length) {
             var child=children[i++];
-            if (!((child.sbookskip)||(child.codexui)))
+            if (!((child.sbookskip)||(child.metabookui)))
                 scanner(child,scanstate,docinfo);} 
         docinfo._nodecount=scanstate.nodecount;
         docinfo._headcount=scanstate.headcount;
@@ -433,7 +433,7 @@ Codex.DOMScan=(function(){
             scaninfo.ends_at=scanstate.location;
             scaninfo=scaninfo.head;}
         var done=new Date();
-        if ((Codex.Trace.startup)||(Codex.Trace.domscan))
+        if ((mB.Trace.startup)||(mB.Trace.domscan))
             fdjtLog('Gathered metadata in %f secs over %d heads, %d nodes',
                     (done.getTime()-start.getTime())/1000,
                     scanstate.headcount,scanstate.eltcount);
@@ -453,8 +453,8 @@ Codex.DOMScan=(function(){
         
         return docinfo;}
 
-    CodexDOMScan.prototype.toJSON=function(){
-        var rep={constructor: "Codex.DOMScan",
+    metaBookDOMScan.prototype.toJSON=function(){
+        var rep={constructor: "metaBook.DOMScan",
                  frag: this.frag,
                  head: this.sbookhead,
                  start: this.starts_at,
@@ -465,8 +465,8 @@ Codex.DOMScan=(function(){
         if (this.title) rep.title=this.title;
         return JSON.stringify(rep);};
     
-    CodexDOMScan.getTOCLevel=getLevel;
-    return CodexDOMScan;})();
+    metaBookDOMScan.getTOCLevel=getLevel;
+    return metaBookDOMScan;})();
 
 /* Emacs local variables
    ;;;  Local variables: ***

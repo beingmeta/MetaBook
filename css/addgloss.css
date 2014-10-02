@@ -6,43 +6,43 @@
 
 /* Gloss form */
 
-div.codexglossformbody { position: relative; }
+div.metabookglossformbody { position: relative; }
 
-#CODEXADDGLOSS div.codexglossform {
+#METABOOKADDGLOSS div.metabookglossform {
     box-sizing: border-box;
     border: solid green 2px; border-top: 0px;
     min-height: 55px;}
-#CODEXADDGLOSS div.codexglossform.private {
+#METABOOKADDGLOSS div.metabookglossform.private {
     border-color: red;}
-#CODEXADDGLOSS div.codexglossform.modified {
+#METABOOKADDGLOSS div.metabookglossform.modified {
     border-style: dotted;}
-body.hudup #CODEXADDGLOSS div.codexglossform {
+body.hudup #METABOOKADDGLOSS div.metabookglossform {
     border-color: transparent;}
 
-#CODEXADDGLOSS div.codexglossform.focused {
+#METABOOKADDGLOSS div.metabookglossform.focused {
     max-height: inherit;
     background-color: ivory;}
 
-div.codexglossform form div.textbox,
-div.codexglossform form div.glossetc {
+div.metabookglossform form div.textbox,
+div.metabookglossform form div.glossetc {
     max-height: 90%;
     clear: left; text-align: left;
     margin-left: 0.5em; margin-right: 60px;
     box-sizing: border-box;}
-div.codexglossform.focused form div.textbox,
-div.codexglossform.focused form div.glossetc {
+div.metabookglossform.focused form div.textbox,
+div.metabookglossform.focused form div.glossetc {
     max-height: inherit;}
-div.codexglossform form div.textbox { margin-top: 2px;}
-div.codexglossform form div.glossetc {
+div.metabookglossform form div.textbox { margin-top: 2px;}
+div.metabookglossform form div.glossetc {
     overflow: hidden;}
-div.codexglossform form div.textbox textarea,
-div.codexglossform form div.textbox input[type="TEXT"] {
+div.metabookglossform form div.textbox textarea,
+div.metabookglossform form div.textbox input[type="TEXT"] {
     min-height: 1.5em; max-height: 3em; padding: 2px;}
-div.codexglossform.focused form div.textbox textarea,
-div.codexglossform.focused form div.textbox input[type="TEXT"] {
+div.metabookglossform.focused form div.textbox textarea,
+div.metabookglossform.focused form div.textbox input[type="TEXT"] {
     max-height: inherit;}
 
-#CODEXADDGLOSS div.codexglossform {
+#METABOOKADDGLOSS div.metabookglossform {
     border-radius: 1ex; -webkit-border-radius: 1ex;
     -o-border-radius: 1ex; -moz-border-radius: 1ex;
     border-top-width: 0px;
@@ -54,69 +54,69 @@ div.codexglossform.focused form div.textbox input[type="TEXT"] {
     -webkit-border-top-right-radius: 0px; 
     -moz-border-radius-topright: 0px;
     -o-border-radius-topright: 0px;}
-#CODEXADDGLOSS div.codexglossform {
+#METABOOKADDGLOSS div.metabookglossform {
     background-color: ivory;
     padding-bottom: 1ex;}
 
-div.codexglossform { display: none;}
-div.codexglossform#CODEXADDGLOSSPROTOTYPE { display: none;}
-div.codexglossform#CODEXLIVEGLOSS {
+div.metabookglossform { display: none;}
+div.metabookglossform#METABOOKADDGLOSSPROTOTYPE { display: none;}
+div.metabookglossform#METABOOKLIVEGLOSS {
     display: block;}
-div.codexglossform div.editgloss {
+div.metabookglossform div.editgloss {
  margin-left: 0.5em; text-align: left; color: black;}
-div.codexglossform div.response {
+div.metabookglossform div.response {
  margin-left: 0.5em; margin-right: 70px;
  text-align: left; color: black;
  max-height: 30px;}
-body.hudup div.codexglossform div.response { max-height: inherit;}
-div.codexglossform div.response .respmaker {font-weight: bold;}
-div.codexglossform div.response .respnote { font-style: italic;}
-div.codexglossform div.response .respnote:before { content: "“";}
-div.codexglossform div.response .respnote:after { content: "”";}
-div.codexglossform div.response .respexcerpt {
+body.hudup div.metabookglossform div.response { max-height: inherit;}
+div.metabookglossform div.response .respmaker {font-weight: bold;}
+div.metabookglossform div.response .respnote { font-style: italic;}
+div.metabookglossform div.response .respnote:before { content: "“";}
+div.metabookglossform div.response .respnote:after { content: "”";}
+div.metabookglossform div.response .respexcerpt {
     font-size: 80%; background-color: yellow;}
-div.codexglossform div .respdate {
+div.metabookglossform div .respdate {
     font-weight: bold; font-variant: small-caps;
     color: purple;}
 
-body.hudup div.codexglossform form div.glossetc .modebuttons,
-body.hudup div.codexglossform form div.glossetc .tags,
-body.hudup div.codexglossform form div.glossetc .links,
-body.hudup div.codexglossform form div.glossetc .sharing,
-body.hudup div.codexglossform form div.checkspan.postgloss {
+body.hudup div.metabookglossform form div.glossetc .modebuttons,
+body.hudup div.metabookglossform form div.glossetc .tags,
+body.hudup div.metabookglossform form div.glossetc .links,
+body.hudup div.metabookglossform form div.glossetc .sharing,
+body.hudup div.metabookglossform form div.checkspan.postgloss {
     display: inline;}
-body div.codexglossform.focused form div.glossetc .modebuttons,
-body div.codexglossform.focused form div.glossetc .tags,
-body div.codexglossform.focused form div.glossetc .links,
-body div.codexglossform.focused form div.glossetc .sharing,
-body div.codexglossform.focused form div.checkspan.postgloss {
+body div.metabookglossform.focused form div.glossetc .modebuttons,
+body div.metabookglossform.focused form div.glossetc .tags,
+body div.metabookglossform.focused form div.glossetc .links,
+body div.metabookglossform.focused form div.glossetc .sharing,
+body div.metabookglossform.focused form div.checkspan.postgloss {
     display: inline;}
 
-div.codexglossform form {
+div.metabookglossform form {
     padding: 0px; margin: 0px;}
-div.codexglossform form .excerpt.empty { display: none;}
-div.codexglossform form .checkspan.excerpt {
+div.metabookglossform form .excerpt.empty { display: none;}
+div.metabookglossform form .checkspan.excerpt {
     white-space: normal; text-decoration: line-through;}
-div.codexglossform form .checkspan.excerpt.ischecked {
+div.metabookglossform form .checkspan.excerpt.ischecked {
     white-space: normal; text-decoration: none;}
-div.codexglossform form .checkspan.excerpt img.redx {
+div.metabookglossform form .checkspan.excerpt img.redx {
     height: 1.5ex; width: auto; vertical-align: middle; padding-right: 0.5ex;}
-div.codexglossform form div.checkspan.excerpt img.redx { height: 2ex; }
-div.codexglossform form .checkspan.excerpt input {
+div.metabookglossform form div.checkspan.excerpt img.redx { height: 2ex; }
+div.metabookglossform form .checkspan.excerpt input {
     display: none;}
-div.codexglossform form .inputhelp {color: black; display: none;}
-div.codexglossform form div.inputhelp {
+div.metabookglossform form .inputhelp {color: black; display: none;}
+div.metabookglossform form div.inputhelp {
     padding-bottom: 4px; text-align: left;}
-div.codexglossform form .bracketbutton {
+div.metabookglossform form .bracketbutton {
     font-weight: bold; font-size: 110%;
     padding: 0px; cursor: pointer;}
-div.codexglossform form .bracketbutton strong {
+div.metabookglossform form .bracketbutton strong {
     font-size: 110%; color: red;}
-div.codexglossform.focused form div.inputhelp { display: block;}
-div.codexglossform.focused form span.inputhelp { display: inline;}
+div.metabookglossform.focused form div.inputhelp { display: block;}
+div.metabookglossform.focused form span.inputhelp { display: inline;}
 
-div.codexglossform form div.textbox textarea,
-div.codexglossform form div.textbox input[TYPE='TEXT'] {
+div.metabookglossform form div.textbox textarea,
+div.metabookglossform form div.textbox input[TYPE='TEXT'] {
     overflow: hidden; font-size: 15px;
     border: solid darkblue 1px;
     margin: 0px; padding-left: 3px;
@@ -127,212 +127,212 @@ div.codexglossform form div.textbox input[TYPE='TEXT'] {
     background-repeat: no-repeat;
     box-sizing: border-box;}
 
-div.codexglossform form div.glossbox {}
+div.metabookglossform form div.glossbox {}
 /* { border-top: solid darkblue 2px;
      padding-top: 2px;} */
 
-div.codexglossform form div.excerpt {
+div.metabookglossform form div.excerpt {
     text-align: left; width: 99%; margin-left: 0.5em;}
-div.codexglossform form div.excerpt {
+div.metabookglossform form div.excerpt {
     font-size: 80%; font-style: italic; font-weight: normal;}
-div.codexglossform form div.excerpt span.text {
+div.metabookglossform form div.excerpt span.text {
     background-color: yellow;}
-div.codexglossform form div.excerpt.ischecked {
+div.metabookglossform form div.excerpt.ischecked {
     display: block;}
 
-div.codexglossform form div.button {
+div.metabookglossform form div.button {
     float: right; width: 40px;}
-div.codexglossform form div.textbox { 
+div.metabookglossform form div.textbox { 
     clear: left; }
 
-div.codexglossform div.glossetc span.showmode {
+div.metabookglossform div.glossetc span.showmode {
     border-left: solid black 1px; margin-left: 2px;
     padding-left: 2px; padding-top: 2px;
     color: black; font-weight: bold; font-size: 120%;
     float: right;}
-div.codexglossform form .showmode {display: none;}
-div.codexglossform form .showmode.add {display: inline;}
-div.codexglossform.glossedit form .showmode.edit,
-div.codexglossform.glossreply form .showmode.respond {
+div.metabookglossform form .showmode {display: none;}
+div.metabookglossform form .showmode.add {display: inline;}
+div.metabookglossform.glossedit form .showmode.edit,
+div.metabookglossform.glossreply form .showmode.respond {
     display: inline;}
-div.codexglossform.glossedit form .showmode.edit,
-div.codexglossform.glossreply form .showmode.respond {
+div.metabookglossform.glossedit form .showmode.edit,
+div.metabookglossform.glossreply form .showmode.respond {
     display: block;}
-div.codexglossform.glossedit form .showmode.add,
-div.codexglossform.glossreply form .showmode.add {
+div.metabookglossform.glossedit form .showmode.add,
+div.metabookglossform.glossreply form .showmode.add {
     display: none;}
 
-div.codexglossform form textarea[name='NOTE'] {
+div.metabookglossform form textarea[name='NOTE'] {
     background-image:
-    url(https://s3.amazonaws.com/beingmeta/static/g/codex/remark.svgz);}
-body._NOSVG div.codexglossform form textarea[name='NOTE'] {
+    url(https://s3.amazonaws.com/beingmeta/static/g/metabook/remark.svgz);}
+body._NOSVG div.metabookglossform form textarea[name='NOTE'] {
     background-image:
-    url(https://s3.amazonaws.com/beingmeta/static/g/codex/remark24x24.png);}
-div.codexglossform div.textbox input[name='TAG'] {
+    url(https://s3.amazonaws.com/beingmeta/static/g/metabook/remark24x24.png);}
+div.metabookglossform div.textbox input[name='TAG'] {
     background-image:
-    url(https://s3.amazonaws.com/beingmeta/static/g/codex/tagicon24x24.png);}
-div.codexglossform div.textbox input[name='LINK'] {
+    url(https://s3.amazonaws.com/beingmeta/static/g/metabook/tagicon24x24.png);}
+div.metabookglossform div.textbox input[name='LINK'] {
     background-image:
-    url(https://s3.amazonaws.com/beingmeta/static/g/codex/diaglink24x24.png);}
-div.codexglossform div.textbox input[name='OUTLET'] {
+    url(https://s3.amazonaws.com/beingmeta/static/g/metabook/diaglink24x24.png);}
+div.metabookglossform div.textbox input[name='OUTLET'] {
     background-image:
-    url(https://s3.amazonaws.com/beingmeta/static/g/codex/sbookspeople24x24.png);}
+    url(https://s3.amazonaws.com/beingmeta/static/g/metabook/sbookspeople24x24.png);}
 
-div.codexglossform form .glossetc .glossdate {
+div.metabookglossform form .glossetc .glossdate {
     padding: 0px; padding-bottom: 1ex; padding-left: 1ex;
     float: right;
     display: none;}
-div.codexglossform .glossetc .glossdate {
+div.metabookglossform .glossetc .glossdate {
     font-size: 80%; font-variant: small-caps; color: purple;}
 
-div.codexglossform form .glossexposure {
+div.metabookglossform form .glossexposure {
     float: right; font-size: 1.5ex;}
 @media (pointer: coarse) {
-  div.codexglossform form .glossetc { font-size: 2ex; }
-  div.codexglossform form .glossexposure { font-size: 1em; }
+  div.metabookglossform form .glossetc { font-size: 2ex; }
+  div.metabookglossform form .glossexposure { font-size: 1em; }
 }
-div.codexglossform form .glossexposure .checkspan {
+div.metabookglossform form .glossexposure .checkspan {
     float: right; margin-right: 1ex; margin-top: 2px;
     font-variant: smallcaps; vertical-align: top;}
-div.codexglossform form .glossexposure .checkspan span {
+div.metabookglossform form .glossexposure .checkspan span {
     vertical-align: top;}
-div.codexglossform.private .checkspan.postgloss {
+div.metabookglossform.private .checkspan.postgloss {
     display: none;}
 
-div.codexglossform form .glossexposure, div.codexglossform form .excerpt {
+div.metabookglossform form .glossexposure, div.metabookglossform form .excerpt {
   display: none; }
-body.hudup div.codexglossform form .glossexposure {
+body.hudup div.metabookglossform form .glossexposure {
   display: inline-block; }
 
-#CODEXHUD .codexglossform .checkspan.private {
+#METABOOKHUD .metabookglossform .checkspan.private {
     color: white; font-weight: bold; background-color: green;
     width: 7em; text-align: center;}
-#CODEXHUD .codexglossform .checkspan.private.ischecked { font-size: 100%;}
-#CODEXHUD .codexglossform .checkspan.private input { display: none; }
-#CODEXHUD .codexglossform .checkspan.private.ischecked {
+#METABOOKHUD .metabookglossform .checkspan.private.ischecked { font-size: 100%;}
+#METABOOKHUD .metabookglossform .checkspan.private input { display: none; }
+#METABOOKHUD .metabookglossform .checkspan.private.ischecked {
     background-color: red; color: white;}
-#CODEXHUD .codexglossform .checkspan.private span {
+#METABOOKHUD .metabookglossform .checkspan.private span {
     padding-left: 1ex; padding-right: 1ex;
     vertical-align: top;}
 
-div.codexglossform .checkspan.postgloss {}
-div.codexglossform .checkspan.postgloss input[type='checkbox'] {
+div.metabookglossform .checkspan.postgloss {}
+div.metabookglossform .checkspan.postgloss input[type='checkbox'] {
     vertical-align: bottom; height: 1em; width: 1em;}
-div.codexglossform .checkspan.postgloss img {
+div.metabookglossform .checkspan.postgloss img {
     height: 2ex; width: auto; padding: 0px; margin: 0px; border: 0px;
     vertical-align: top;}
 
-div.codexglossform.glossedit form .glossetc .glossdate {
+div.metabookglossform.glossedit form .glossetc .glossdate {
     display: inline-block; margin-right: 1ex;}
 
-div.codexglossform form div.glossetc .twisty { display: none;}
-div.codexglossform form div.glossetc.overflow .twisty { display: none;}
-div.codexglossform form div.glossetc.expanded .twisty { display: none;}
-div.codexglossform form div.glossetc.expanded { max-height: inherit;}
+div.metabookglossform form div.glossetc .twisty { display: none;}
+div.metabookglossform form div.glossetc.overflow .twisty { display: none;}
+div.metabookglossform form div.glossetc.expanded .twisty { display: none;}
+div.metabookglossform form div.glossetc.expanded { max-height: inherit;}
 
-body.hudup div.codexglossform form div.glossetc {
+body.hudup div.metabookglossform form div.glossetc {
     max-height: inherit;}
-body.hudup div.codexglossform.focused form div.glossetc {
+body.hudup div.metabookglossform.focused form div.glossetc {
     overflow: visible;}
-div.codexglossform form div.glossetc .glossexposure .checkspan input {
+div.metabookglossform form div.glossetc .glossexposure .checkspan input {
     vertical-align: top;}
 
-div.codexglossform form div.glossetc .notespan {
+div.metabookglossform form div.glossetc .notespan {
     color: purple; font-weight: bold;}
-div.codexglossform form div.glossetc .excerpt {
+div.metabookglossform form div.glossetc .excerpt {
     font-style: italic;}
-div.codexglossform form div.glossetc .excerpt .elision,
-div.codexglossform form div.glossetc .excerpt .delision {
+div.metabookglossform form div.glossetc .excerpt .elision,
+div.metabookglossform form div.glossetc .excerpt .delision {
     font-style: normal; color: black; font-size: 80%;
     white-space: nowrap;}
-div.codexglossform form div.glossetc .checkspan.excerpt.ischecked {
+div.metabookglossform form div.glossetc .checkspan.excerpt.ischecked {
     font-weight: normal;}
-div.codexglossform form div.glossetc .links,
-div.codexglossform form div.glossetc .tags {}
+div.metabookglossform form div.glossetc .links,
+div.metabookglossform form div.glossetc .tags {}
 
-div.codexglossform form div.glossetc .tags span.checkspan .term {
+div.metabookglossform form div.glossetc .tags span.checkspan .term {
     color: black;}
 
-div.codexglossform form div.glossetc .tags span.checkspan {
+div.metabookglossform form div.glossetc .tags span.checkspan {
     padding: 2px; padding-top: 0px;}
-div.codexglossform form div.glossetc .checkspan.waschecked {
+div.metabookglossform form div.glossetc .checkspan.waschecked {
     text-decoration: line-through; text-decoration-color: red;}
-div.codexglossform form div.glossetc .checkspan.ischecked {
+div.metabookglossform form div.glossetc .checkspan.ischecked {
     text-decoration: none;}
-div.codexglossform form div.glossetc .checkspan.waschecked.ischecked {
+div.metabookglossform form div.glossetc .checkspan.waschecked.ischecked {
     text-decoration: none;}
-div.codexglossform form div.glossetc .outlets { padding-left: 1px;}
-div.codexglossform form div.glossetc .links { padding-left: 1px;}
-div.codexglossform form div.glossetc .checkspan img {
+div.metabookglossform form div.glossetc .outlets { padding-left: 1px;}
+div.metabookglossform form div.glossetc .links { padding-left: 1px;}
+div.metabookglossform form div.glossetc .checkspan img {
     height: 1.7ex; width: auto; vertical-align: baseline;
     padding-left: 3px; padding-top: 2px;}
-div.codexglossform form div.glossetc .checkspan input {
+div.metabookglossform form div.glossetc .checkspan input {
     margin-left: 0px;}
-div.codexglossform form div.glossetc .checkspan.anchor input,
-div.codexglossform form div.glossetc .checkspan.outlet input,
-div.codexglossform form div.glossetc .checkspan.glosstag input {
+div.metabookglossform form div.glossetc .checkspan.anchor input,
+div.metabookglossform form div.glossetc .checkspan.outlet input,
+div.metabookglossform form div.glossetc .checkspan.glosstag input {
     display: none;}
 
-div.codexglossform form div.glossetc .outlets.empty,
-div.codexglossform form div.glossetc .links.empty,
-div.codexglossform form div.glossetc .tags.empty,
-div.codexglossform form div.glossetc .excerpt.empty,
-body.hudup div.codexglossform form div.glossetc .outlets.empty,
-body.hudup div.codexglossform form div.glossetc .links.empty,
-body.hudup div.codexglossform form div.glossetc .tags.empty,
-body.hudup div.codexglossform form div.glossetc .excerpt.empty {
+div.metabookglossform form div.glossetc .outlets.empty,
+div.metabookglossform form div.glossetc .links.empty,
+div.metabookglossform form div.glossetc .tags.empty,
+div.metabookglossform form div.glossetc .excerpt.empty,
+body.hudup div.metabookglossform form div.glossetc .outlets.empty,
+body.hudup div.metabookglossform form div.glossetc .links.empty,
+body.hudup div.metabookglossform form div.glossetc .tags.empty,
+body.hudup div.metabookglossform form div.glossetc .excerpt.empty {
     display: none;}
 
-div.codexglossform form div.glossetc .outlets { display: none; }
-div.codexglossform form div.glossetc .networks {
+div.metabookglossform form div.glossetc .outlets { display: none; }
+div.metabookglossform form div.glossetc .networks {
     margin-right: 60px;
     display: none;}
-div.codexglossform form.addoutlet div.glossetc .outlets,
-div.codexglossform form.addoutlet div.glossetc .networks { display: inline; }
-div.codexglossform form.addoutlet div.glossetc .tags,
-div.codexglossform form.addoutlet div.glossetc .links {
+div.metabookglossform form.addoutlet div.glossetc .outlets,
+div.metabookglossform form.addoutlet div.glossetc .networks { display: inline; }
+div.metabookglossform form.addoutlet div.glossetc .tags,
+div.metabookglossform form.addoutlet div.glossetc .links {
     display: none; }
 
-div.codexglossform form div.glossetc span.head {
+div.metabookglossform form div.glossetc span.head {
     padding-left: 0.5ex; font-weight: bold; color: black;}
 
-div.codexglossform form div.glossetc img.twisty[alt='-'] { display: none;}
-div.codexglossform form div.glossetc.expanded {
+div.metabookglossform form div.glossetc img.twisty[alt='-'] { display: none;}
+div.metabookglossform form div.glossetc.expanded {
     max-height: inherit; border-style: solid;}
-div.codexglossform form div.glossetc.expanded img.twisty[alt='-'] {
+div.metabookglossform form div.glossetc.expanded img.twisty[alt='-'] {
     display: inline;}
-div.codexglossform form div.glossetc.expanded img.twisty[alt='+'] {
+div.metabookglossform form div.glossetc.expanded img.twisty[alt='+'] {
     display: none;}
 
-div.codexglossform div.sharing span { vertical-align: top;}
-div.codexglossform div.sharing { max-height: 24px;}
+div.metabookglossform div.sharing span { vertical-align: top;}
+div.metabookglossform div.sharing { max-height: 24px;}
 
-div.codexglossform div.glossetc .networks {
+div.metabookglossform div.glossetc .networks {
     color: black; font-weight: normal; float: right; text-align: right;}
-div.codexglossform div.glossetc .networks .checkspan {
+div.metabookglossform div.glossetc .networks .checkspan {
     float: left;}
-#CODEXHUD .networks .checkspan input[type='checkbox'] { display: none;}
-#CODEXHUD .networks .checkspan img {
+#METABOOKHUD .networks .checkspan input[type='checkbox'] { display: none;}
+#METABOOKHUD .networks .checkspan img {
     height: 20px; width: auto;}
 
 span.facebook_share, span.twitter_share { display: none;}
 span.linkedin_share, span.google_share { display: none;}
 
-div.codexglossform div.glossetc .networks .checkspan.postgloss {
+div.metabookglossform div.glossetc .networks .checkspan.postgloss {
     font-size: 80%; padding-right: 1ex;}
-div.codexglossform form div.checkspan.postgloss {
+div.metabookglossform form div.checkspan.postgloss {
     white-space: nowrap; font-size: 80%;}
-div.codexglossform div.glossetc .networks img {
+div.metabookglossform div.glossetc .networks img {
     height: 3ex; width: auto;}
-div.codexglossform form div.glossetc .links span.checkspan a {
+div.metabookglossform form div.glossetc .links span.checkspan a {
     color: darkblue;}
-div.codexglossform form div.glossetc span.checkspan input {}
+div.metabookglossform form div.glossetc span.checkspan input {}
 
-div.codexglossform form div.glossetc > .checkspan.private {
+div.metabookglossform form div.glossetc > .checkspan.private {
     float: right; vertical-align: top; margin-left: 4px;
     padding-top: 0px; margin-top: 0px;}
 
-div.codexglossform form .button {
+div.metabookglossform form .button {
     font-weight: bold; color: black; font-size: 24px;
     border: solid black 2px; background-color: silver;
     border-radius: 4px; -o-border-radius: 4px;
@@ -341,79 +341,79 @@ div.codexglossform form .button {
     text-align: center; vertical-align: top;
     cursor: pointer;}
 
-div.codexglossform form div.glossetc > .button,
-div.codexglossform form div.glossetc span > .button {
+div.metabookglossform form div.glossetc > .button,
+div.metabookglossform form div.glossetc span > .button {
     border: darkblue solid 2px; cursor: pointer;
     border-radius: 3px; -webkit-border-radius: 3px;
     -moz-border-radius: 3px; -o-border-radius: 3px;}
 
-div.codexglossform form div.glossetc > span.modebuttons { float: right; }
-div.codexglossform form div.glossetc > span.modebuttons img.button,
-div.codexglossform form div.glossetc > span.modebuttons .button img {
+div.metabookglossform form div.glossetc > span.modebuttons { float: right; }
+div.metabookglossform form div.glossetc > span.modebuttons img.button,
+div.metabookglossform form div.glossetc > span.modebuttons .button img {
     background-color: transparent; border-color: transparent;
     height: 40px; width: auto; margin-bottom: 3px;
     border-radius: 6px; -webkit-border-radius: 6px;
     -moz-border-radius: 6px; -o-border-radius: 6px;
     cursor: pointer;}
 
-div.codexglossform form.editnote div.glossetc span .button[alt='note'],
-div.codexglossform form.addtag div.glossetc span .button[alt='tag'],
-div.codexglossform form.editdetail div.glossetc span .button[alt='editdetail'],
-div.codexglossform form.sharing div.glossetc span .button[alt='sharing'],
-div.codexglossform form.attach div.glossetc span .button[alt='attach'] {
+div.metabookglossform form.editnote div.glossetc span .button[alt='note'],
+div.metabookglossform form.addtag div.glossetc span .button[alt='tag'],
+div.metabookglossform form.editdetail div.glossetc span .button[alt='editdetail'],
+div.metabookglossform form.sharing div.glossetc span .button[alt='sharing'],
+div.metabookglossform form.attach div.glossetc span .button[alt='attach'] {
     height: 40px; width: 40px; background-color: silver;
     border: darkblue solid 2px;}
-#CODEXFRAME._ANIMATE div.codexglossform form div.glossetc span .button {
+#METABOOKFRAME._ANIMATE div.metabookglossform form div.glossetc span .button {
     transition-property: opacity; transition-duration: 1s;
     -o-transition-property: opacity; -o-transition-duration: 1s;
     -moz-transition-property: opacity; -moz-transition-duration: 1s;
     -khtml-transition-property: opacity; -khtml-transition-duration: 1s;
     -webkit-transition-property: opacity; -webkit-transition-duration: 1s;}
 
-div.codexglossform form .submitbutton {
+div.metabookglossform form .submitbutton {
     float: right; text-align: center;
     padding-top: 3px; padding-right: 3px;
     height: 50px;}
-div.codexglossform form .submitbutton .button {
+div.metabookglossform form .submitbutton .button {
     margin: 0px; padding: 0px; border: none;
     background-color: transparent;
     border-radius: 0px; -webkit-border-radius: 0px;
     -moz-border-radius: 0px; -o-border-radius: 0px;
     height: 100%; width: auto;}
-div.codexglossform form .submitbutton .edit,
-div.codexglossform form .submitbutton .reply {
+div.metabookglossform form .submitbutton .edit,
+div.metabookglossform form .submitbutton .reply {
     display: none;}
-div.codexglossform.glossedit form .submitbutton .edit,
-div.codexglossform.glossreply form .submitbutton .reply {
+div.metabookglossform.glossedit form .submitbutton .edit,
+div.metabookglossform.glossreply form .submitbutton .reply {
     display: block;}
-div.codexglossform.glossedit form .submitbutton .add,
-div.codexglossform.glossreply form .submitbutton .add {
+div.metabookglossform.glossedit form .submitbutton .add,
+div.metabookglossform.glossreply form .submitbutton .add {
     display: none;}
 
-div.codexglossform.glossadd form div.addglossmenu.expanded >
+div.metabookglossform.glossadd form div.addglossmenu.expanded >
   img[alt="glossupdate"] {
    display: none;}
-div.codexglossform.glossedit form div.addglossmenu.expanded >
+div.metabookglossform.glossedit form div.addglossmenu.expanded >
    img[alt="glosspush"] {
     display: none;}
 
-div.codexglossform.glossadd form div.addglossmenu.expanded >
+div.metabookglossform.glossadd form div.addglossmenu.expanded >
    img[alt="glossdelete"] {
     display: none;}
 
-div.codexglossform form .checkspan {
+div.metabookglossform form .checkspan {
     padding-left: 2px; padding-right: 2px;
     font-family: sans,sans-serif;}
 
-div.codexglossform form span.source:before, .completions span.source:before {
+div.metabookglossform form span.source:before, .completions span.source:before {
     content: '@'; color: darkblue;}
 
-div.codexglossform .button.savebutton,
-div.codexglossform .button.replybutton,
-div.codexglossform .button.addbutton {
+div.metabookglossform .button.savebutton,
+div.metabookglossform .button.replybutton,
+div.metabookglossform .button.addbutton {
     float: right;}
 
-div.codexglossform.submitting form > div {
+div.metabookglossform.submitting form > div {
     opacity: 0.5;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
     filter: alpha(opacity=50);
@@ -421,7 +421,7 @@ div.codexglossform.submitting form > div {
     -khtml-opacity: 0.50;
     -moz-opacity: 0.50;
     -o-opacity: 0.50;}
-div.codexglossform.submitting td.button img {
+div.metabookglossform.submitting td.button img {
     opacity: 0.5;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
     filter: alpha(opacity=50);
@@ -430,103 +430,103 @@ div.codexglossform.submitting td.button img {
     -moz-opacity: 0.50;
     -o-opacity: 0.50;}
 
-#CODEXFRAME._ANIMATE div.codexglossform div.textbox {
+#METABOOKFRAME._ANIMATE div.metabookglossform div.textbox {
     transition-property: height; transition-duration: 2s;
     -o-transition-property: height; -o-transition-duration: 2s;
     -moz-transition-property: height; -moz-transition-duration: 2s;
     -khtml-transition-property: height; -khtml-transition-duration: 2s;
     -webkit-transition-property: height; -webkit-transition-duration: 2s;}
-div.codexglossform div.textbox input[type="TEXT"][name='TAG'] {
+div.metabookglossform div.textbox input[type="TEXT"][name='TAG'] {
     background-image:
-    url(https://s3.amazonaws.com/beingmeta/static/g/codex/tagicon16x16.png);}
-div.codexglossform div.textbox input[type="TEXT"][name='LINK'] {
+    url(https://s3.amazonaws.com/beingmeta/static/g/metabook/tagicon16x16.png);}
+div.metabookglossform div.textbox input[type="TEXT"][name='LINK'] {
     background-image:
-    url(https://s3.amazonaws.com/beingmeta/static/g/codex/diaglink16x16.png);}
+    url(https://s3.amazonaws.com/beingmeta/static/g/metabook/diaglink16x16.png);}
 
 div.glossetc, div.glossetc img, div.glossetc span, div.glossetc input {
     margin-top: 0px;}
 
 /* The add gloss panel */
 
-body.hudup #CODEXHUD.addgloss div.hudpanel#CODEXADDGLOSS {}
+body.hudup #METABOOKHUD.addgloss div.hudpanel#METABOOKADDGLOSS {}
 
-#CODEXHUD #CODEXGLOSSTAGINPUT { display: none;}
-#CODEXHUD.addgloss.glossaddtag #CODEXGLOSSTAGINPUT {
+#METABOOKHUD #METABOOKGLOSSTAGINPUT { display: none;}
+#METABOOKHUD.addgloss.glossaddtag #METABOOKGLOSSTAGINPUT {
     display: block;}
-#CODEXHUD #CODEXGLOSSOUTLETINPUT { display: none;}
-#CODEXHUD.addgloss.glossaddoutlet #CODEXGLOSSOUTLETINPUT {
+#METABOOKHUD #METABOOKGLOSSOUTLETINPUT { display: none;}
+#METABOOKHUD.addgloss.glossaddoutlet #METABOOKGLOSSOUTLETINPUT {
     display: block;}
 
-#CODEXHUD #CODEXGLOSSEDITDETAIL textarea {
+#METABOOKHUD #METABOOKGLOSSEDITDETAIL textarea {
   width: 90%; max-height: 90%; min-height: 250px;}
 
-div.completions#CODEXSHARECLOUD #CODEXSHARECLOUD {
+div.completions#METABOOKSHARECLOUD #METABOOKSHARECLOUD {
     margin-left: 50px; margin-right: 50px;}
-div.completions#CODEXGLOSSCLOUD > div {
+div.completions#METABOOKGLOSSCLOUD > div {
     margin-left: 50px; margin-right: 50px;}
-#CODEXFRAME._ANIMATE div.completions#CODEXSHARECLOUD {
+#METABOOKFRAME._ANIMATE div.completions#METABOOKSHARECLOUD {
     transition-property: height;
     -webkit-transition-property: height;
     -moz-transition-property: height;
     -o-transition-property: height;
     transition-duration: 3s; -webkit-transition-duration: 3s;
     -moz-duration: 3s; -o-transition-duration: 3s;}
-body.hudup #CODEXHUD.addgloss.glossaddoutlet div.completions#CODEXSHARECLOUD {
+body.hudup #METABOOKHUD.addgloss.glossaddoutlet div.completions#METABOOKSHARECLOUD {
     display: block;}
-body.hudup #CODEXHUD.addgloss.glossattach #CODEXGLOSSATTACH {
+body.hudup #METABOOKHUD.addgloss.glossattach #METABOOKGLOSSATTACH {
     display: block;}
 
-#CODEXGLOSSATTACH table { color: black; }
-#CODEXGLOSSATTACH table tr th:first-child {
+#METABOOKGLOSSATTACH table { color: black; }
+#METABOOKGLOSSATTACH table tr th:first-child {
     width: 4em; padding-right: 0.5ex;}
-#CODEXGLOSSATTACH th.headcell {
+#METABOOKGLOSSATTACH th.headcell {
     width: 4em; color: #4682b4;}
-#CODEXGLOSSATTACH th.button { width: 5em;}
-#CODEXGLOSSATTACH th.headcell img { height: 0.75em; width: auto;}
+#METABOOKGLOSSATTACH th.button { width: 5em;}
+#METABOOKGLOSSATTACH th.headcell img { height: 0.75em; width: auto;}
 
-#CODEXGLOSSATTACH .attachtype td .checkspan.ischecked { font-size: 100%;}
-#CODEXGLOSSATTACH .attachtype td .checkspan {
+#METABOOKGLOSSATTACH .attachtype td .checkspan.ischecked { font-size: 100%;}
+#METABOOKGLOSSATTACH .attachtype td .checkspan {
     display: inline-block; width: 4em; }
-#CODEXGLOSSATTACH .attachtype td { vertical-align: middle; }
+#METABOOKGLOSSATTACH .attachtype td { vertical-align: middle; }
 
-#CODEXGLOSSATTACH tbody.upload { display:  none;}
-#CODEXGLOSSATTACH form.uploading tbody.upload {
+#METABOOKGLOSSATTACH tbody.upload { display:  none;}
+#METABOOKGLOSSATTACH form.uploading tbody.upload {
     display:  table-row-group;}
-#CODEXGLOSSATTACH form.uploading tr.url { display: none; }                                                              
-#CODEXGLOSSATTACH tr.detail { display: none;}
-#CODEXGLOSSATTACH tr.spacing td { height: 1ex;}
+#METABOOKGLOSSATTACH form.uploading tr.url { display: none; }                                                              
+#METABOOKGLOSSATTACH tr.detail { display: none;}
+#METABOOKGLOSSATTACH tr.spacing td { height: 1ex;}
 
-#CODEXGLOSSATTACH tr.fileokay {
+#METABOOKGLOSSATTACH tr.fileokay {
     color: black; font-size: 0.9em; font-style: italic; color: red;}
-#CODEXGLOSSATTACH tr.fileokay span.sbooksname { color: black; }
-#CODEXGLOSSATTACH tr.fileokay span.sbooksname em { color: blue; }
-#CODEXGLOSSATTACH tr.fileokay a { color: blue; text-decoration: underline;}
-#CODEXGLOSSATTACH tr.fileokay.ischecked {
+#METABOOKGLOSSATTACH tr.fileokay span.sbooksname { color: black; }
+#METABOOKGLOSSATTACH tr.fileokay span.sbooksname em { color: blue; }
+#METABOOKGLOSSATTACH tr.fileokay a { color: blue; text-decoration: underline;}
+#METABOOKGLOSSATTACH tr.fileokay.ischecked {
     color: green; font-weight: normal;}
-#CODEXGLOSSATTACH table.fdjtform td input[type="TEXT"],
-#CODEXGLOSSATTACH table.fdjtform td input[type="URL"] {
+#METABOOKGLOSSATTACH table.fdjtform td input[type="TEXT"],
+#METABOOKGLOSSATTACH table.fdjtform td input[type="URL"] {
     box-sizing: border-box; width: 100%;}
-#CODEXGLOSSATTACH th button { width: 5em; }
+#METABOOKGLOSSATTACH th button { width: 5em; }
 
-#CODEXNETWORKBUTTONS { text-align: center;}
-#CODEXNETWORKBUTTONS span.completion {}
-#CODEXNETWORKBUTTONS span.checkspan input[TYPE="CHECKBOX"],
-#CODEXNETWORKBUTTONS span.checkspan.ischecked .unchecked,
-#CODEXNETWORKBUTTONS span.checkspan .checked {
+#METABOOKNETWORKBUTTONS { text-align: center;}
+#METABOOKNETWORKBUTTONS span.completion {}
+#METABOOKNETWORKBUTTONS span.checkspan input[TYPE="CHECKBOX"],
+#METABOOKNETWORKBUTTONS span.checkspan.ischecked .unchecked,
+#METABOOKNETWORKBUTTONS span.checkspan .checked {
     display: none;}
-#CODEXNETWORKBUTTONS span.checkspan.ischecked span.checked,
-#CODEXNETWORKBUTTONS span.checkspan.ischecked img.checked {
+#METABOOKNETWORKBUTTONS span.checkspan.ischecked span.checked,
+#METABOOKNETWORKBUTTONS span.checkspan.ischecked img.checked {
     display: inline;}
-#CODEXSHARECLOUD #CODEXNETWORKBUTTONS img {
+#METABOOKSHARECLOUD #METABOOKNETWORKBUTTONS img {
     height: 40px; width: auto;}
 
-#CODEXRIBBON > div.inputbox {
+#METABOOKRIBBON > div.inputbox {
     text-align: center; margin-bottom: 1ex;}
-#CODEXRIBBON > div.inputbox img.label {
+#METABOOKRIBBON > div.inputbox img.label {
     float: right; height: 2em; width: auto;}
-#CODEXRIBBON > div.inputbox span.head {
+#METABOOKRIBBON > div.inputbox span.head {
     color: black; font-weight: bold;}
-#CODEXRIBBON div.inputbox input[type="TEXT"] {
+#METABOOKRIBBON div.inputbox input[type="TEXT"] {
     background-position: right top;
     background-position-x: right; background-position-y: top;
     background-size: 1.2em 1.2em;
@@ -534,43 +534,43 @@ body.hudup #CODEXHUD.addgloss.glossattach #CODEXGLOSSATTACH {
     height: 1.2em; padding-bottom: 1px; padding-top: 1px;
     font-size: 20px;
     width: 90%;}
-#CODEXRIBBON div.inputbox#CODEXGLOSSTAGINPUT input[TYPE="TEXT"] {
+#METABOOKRIBBON div.inputbox#METABOOKGLOSSTAGINPUT input[TYPE="TEXT"] {
     background-image:
-    url(https://s3.amazonaws.com/beingmeta/static/g/codex/tagicon64x64.png);}
-#CODEXRIBBON div.inputbox#CODEXGLOSSOUTLETINPUT input[TYPE="TEXT"] {
+    url(https://s3.amazonaws.com/beingmeta/static/g/metabook/tagicon64x64.png);}
+#METABOOKRIBBON div.inputbox#METABOOKGLOSSOUTLETINPUT input[TYPE="TEXT"] {
     background-image:
-    url(https://s3.amazonaws.com/beingmeta/static/g/codex/sbookspeople64x64.png);}
+    url(https://s3.amazonaws.com/beingmeta/static/g/metabook/sbookspeople64x64.png);}
 
 /* New menu stuff */
 
-div.codexglossform form div.addglossmenu {
+div.metabookglossform form div.addglossmenu {
     position: absolute; top: 0px; right: 0px;
     width: 50px; margin-right: 5px; margin-left: 5px;
     z-index: 800;}
 
-div.codexglossform form div.addglossmenu > img {
+div.metabookglossform form div.addglossmenu > img {
     width: 40px; height: 40px; padding: 2px; margin-bottom: 4px;
     box-sizing: content-box;
     display: none; }
-div.codexglossform form div.addglossmenu > img.held {
+div.metabookglossform form div.addglossmenu > img.held {
     background-color: lightgreen; border-color: green;}
 @media (pointer: coarse) {
-    div.codexglossform form div.addglossmenu > img.held {
+    div.metabookglossform form div.addglossmenu > img.held {
         width: 80px; height: 80px; margin-left: -20px;}
-    div.codexglossform form div.addglossmenu > img.held.menutop {
+    div.metabookglossform form div.addglossmenu > img.held.menutop {
         width: 40px; height: 40px; margin-left: 0px;}}
-body._TOUCH div.codexglossform form div.addglossmenu > img.held {
+body._TOUCH div.metabookglossform form div.addglossmenu > img.held {
     width: 80px; height: 80px; margin-left: -20px;}
-body._TOUCH div.codexglossform form div.addglossmenu > img.held.menutop {
+body._TOUCH div.metabookglossform form div.addglossmenu > img.held.menutop {
     width: 40px; height: 40px; margin-left: 0px;}
-div.codexglossform form div.addglossmenu > img.menutop[alt="downmenu"],
-div.codexglossform form div.addglossmenu.expanded > img.menutop[alt="upmenu"],
-div.codexglossform form div.addglossmenu.held > img.menutop[alt="holdmenu"] {
+div.metabookglossform form div.addglossmenu > img.menutop[alt="downmenu"],
+div.metabookglossform form div.addglossmenu.expanded > img.menutop[alt="upmenu"],
+div.metabookglossform form div.addglossmenu.held > img.menutop[alt="holdmenu"] {
     display: block; }
-div.codexglossform form div.addglossmenu.expanded.held > img.menutop[alt="upmenu"] {
+div.metabookglossform form div.addglossmenu.expanded.held > img.menutop[alt="upmenu"] {
     display: none;}
 
-div.codexglossform form div.addglossmenu.expanded > img {
+div.metabookglossform form div.addglossmenu.expanded > img {
     display: block; opacity: 0.90;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
     filter: alpha(opacity=90);
@@ -578,63 +578,63 @@ div.codexglossform form div.addglossmenu.expanded > img {
     -khtml-opacity: 0.90;
     -moz-opacity: 0.90;
     -o-opacity: 0.90;}
-div.codexglossform form div.addglossmenu.expanded > img.menutop {
+div.metabookglossform form div.addglossmenu.expanded > img.menutop {
     display: none;}
 
-div.codexglossform form.addtag div.addglossmenu > img.menutop {
+div.metabookglossform form.addtag div.addglossmenu > img.menutop {
     display: none; }
-div.codexglossform form.addtag div.addglossmenu > img[alt="addtag"] {
+div.metabookglossform form.addtag div.addglossmenu > img[alt="addtag"] {
     display: block; }
 
-div.codexglossform form.attach div.addglossmenu > img.menutop {
+div.metabookglossform form.attach div.addglossmenu > img.menutop {
     display: none; }
-div.codexglossform form.attach div.addglossmenu > img[alt="attach"] {
+div.metabookglossform form.attach div.addglossmenu > img[alt="attach"] {
     display: block; }
 
-div.codexglossform form.editdetail div.addglossmenu > img.menutop {
+div.metabookglossform form.editdetail div.addglossmenu > img.menutop {
     display: none; }
-div.codexglossform form.editdetail div.addglossmenu > img[alt="editdetail"] {
+div.metabookglossform form.editdetail div.addglossmenu > img[alt="editdetail"] {
     display: block; }
 
-div.codexglossform form.addoutlet div.addglossmenu > img.menutop {
+div.metabookglossform form.addoutlet div.addglossmenu > img.menutop {
     display: none; }
-div.codexglossform form.addoutlet div.addglossmenu > img[alt="addoutlet"] {
+div.metabookglossform form.addoutlet div.addglossmenu > img[alt="addoutlet"] {
     display: block; }
 
-div.codexglossform.glossreply form div.addglossmenu.expanded > img[alt="glossrespond"],
-div.codexglossform.glossadd form div.addglossmenu.expanded > img[alt="glossrespond"] {
+div.metabookglossform.glossreply form div.addglossmenu.expanded > img[alt="glossrespond"],
+div.metabookglossform.glossadd form div.addglossmenu.expanded > img[alt="glossrespond"] {
     display: none;}
 
 /* Saving/saved overlays */
 
-div.codexglossform div.messageoverlay {
+div.metabookglossform div.messageoverlay {
     position: absolute; top: 0px; width: 100%; text-align: center;
     opacity: 0.9; z-index: 45; pointer-events: none;
     background-color: rgba(255,255,255,0.5); 
     font-size: 2.5em; font-weight: bold;
     display: none;}
-div.codexglossform div.messageoverlay > div { display: none;}
-div.codexglossform.submitting form > div.messageoverlay {
+div.metabookglossform div.messageoverlay > div { display: none;}
+div.metabookglossform.submitting form > div.messageoverlay {
     opacity: 0.9;}
 
-div.codexglossform.submitting div.messageoverlay,
-div.codexglossform.submitting div.messageoverlay > div.saving {
+div.metabookglossform.submitting div.messageoverlay,
+div.metabookglossform.submitting div.messageoverlay > div.saving {
     display: block;}
 
-div.codexglossform.submitdone div.messageoverlay,
-div.codexglossform.submitclose div.messageoverlay,
-div.codexglossform.submitclose div.messageoverlay > div.saved,
-div.codexglossform.submitdone div.messageoverlay > div.saved {
+div.metabookglossform.submitdone div.messageoverlay,
+div.metabookglossform.submitclose div.messageoverlay,
+div.metabookglossform.submitclose div.messageoverlay > div.saved,
+div.metabookglossform.submitdone div.messageoverlay > div.saved {
     display: block;}
 
-div.codexglossform.submitclose form > div {
+div.metabookglossform.submitclose form > div {
     opacity: 0.1;}
-#CODEXFRAME._ANIMATE div.codexglossform.submitclose form > div {
+#METABOOKFRAME._ANIMATE div.metabookglossform.submitclose form > div {
     transition-property: opacity; transition-duration: 3s;
     -webkit-transition-property: opacity; -webkit-transition-duration: 3s;
     -moz-transition-property: opacity; -moz-transition-duration: 3s;
     -o-transition-property: opacity; -o-transition-duration: 3s;}
-div.codexglossform.submitclose form > div.messageoverlay {
+div.metabookglossform.submitclose form > div.messageoverlay {
     opacity: 0.9;}
 
 /* Emacs local variables

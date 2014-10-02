@@ -1,13 +1,13 @@
 /* -*- Mode: Javascript; Character-encoding: utf-8; -*- */
 
-/* ###################### codex/search.js ###################### */
+/* ###################### metabook/search.js ###################### */
 
 /* Copyright (C) 2009-2014 beingmeta, inc.
 
    This file implements the search component for the e-reader web
    application, and relies heavily on the Knodules module.
 
-   This file is part of Codex, a Javascript/DHTML web application for reading
+   This file is part of metaBook, a Javascript/DHTML web application for reading
    large structured documents (sBooks).
 
    For more information on sbooks, visit www.sbooks.net
@@ -36,14 +36,14 @@
 
 */
 /* jshint browser: true */
-/* global Codex: false */
+/* global metaBook: false */
 
 /* Initialize these here, even though they should always be
    initialized before hand.  This will cause various code checkers to
    not generate unbound variable warnings when called on individual
    files. */
 // var fdjt=((typeof fdjt !== "undefined")?(fdjt):({}));
-// var Codex=((typeof Codex !== "undefined")?(Codex):({}));
+// var metaBook=((typeof metaBook !== "undefined")?(metaBook):({}));
 // var Knodule=((typeof Knodule !== "undefined")?(Knodule):({}));
 // var iScroll=((typeof iScroll !== "undefined")?(iScroll):({}));
 
@@ -56,10 +56,10 @@
     var fdjtID=fdjt.ID;
     var RefDB=fdjt.RefDB, Query=RefDB.Query; 
 
-    Codex.search_cloud=false;
-    if (!(Codex.empty_cloud)) Codex.empty_cloud=false;
-    if (!(Codex.show_refiners)) Codex.show_refiners=25;
-    if (!(Codex.search_gotlucky)) Codex.search_gotlucky=7;
+    metaBook.search_cloud=false;
+    if (!(metaBook.empty_cloud)) metaBook.empty_cloud=false;
+    if (!(metaBook.show_refiners)) metaBook.show_refiners=25;
+    if (!(metaBook.search_gotlucky)) metaBook.search_gotlucky=7;
     
     var addClass=fdjtDOM.addClass;
     var dropClass=fdjtDOM.dropClass;
@@ -70,53 +70,53 @@
     /* Query functions */
 
     /* Set on main search input */
-    // id="CODEXSEARCHINPUT" 
-    // completions="CODEXSEARCHCLOUD"
+    // id="METABOOKSEARCHINPUT" 
+    // completions="METABOOKSEARCHCLOUD"
 
-    Codex.getQuery=function(){return Codex.query;};
+    metaBook.getQuery=function(){return metaBook.query;};
     
     function setQuery(query){
-        if (Codex.Trace.search) log("Setting working query to %o",query);
+        if (mB.Trace.search) log("Setting working query to %o",query);
         var qstring=query.getString();
-        if (qstring!==Codex.qstring) {
-            Codex.query=query;
-            Codex.qstring=qstring;
+        if (qstring!==metaBook.qstring) {
+            metaBook.query=query;
+            metaBook.qstring=qstring;
             if (query.tags.length===0)  {
-                addClass(Codex.HUD,"emptysearch");
-                Codex.empty_cloud.dom.style.fontSize="";
-                Codex.search_cloud=Codex.empty_cloud;}
+                addClass(metaBook.HUD,"emptysearch");
+                metaBook.empty_cloud.dom.style.fontSize="";
+                metaBook.search_cloud=metaBook.empty_cloud;}
             else {
-                var cloud=Codex.queryCloud(query);
-                dropClass(Codex.HUD,"emptysearch");
-                fdjtDOM.replace("CODEXSEARCHCLOUD",cloud.dom);
-                Codex.search_cloud=cloud;}
-            useQuery(query,fdjtID("CODEXSEARCH"));}
-        if (Codex.mode==="refinesearch") {
+                var cloud=metaBook.queryCloud(query);
+                dropClass(metaBook.HUD,"emptysearch");
+                fdjtDOM.replace("METABOOKSEARCHCLOUD",cloud.dom);
+                metaBook.search_cloud=cloud;}
+            useQuery(query,fdjtID("METABOOKSEARCH"));}
+        if (metaBook.mode==="refinesearch") {
             if (query.results.length===0) {}
             else if (query.results.length<7)
                 showSearchResults();
-            else {fdjtID("CODEXSEARCHINPUT").focus();}}}
+            else {fdjtID("METABOOKSEARCHINPUT").focus();}}}
 
-    Codex.setQuery=setQuery;
+    metaBook.setQuery=setQuery;
 
     function useQuery(query,box_arg){
         if (query instanceof Query) query=query;
-        else query=new Codex.Query(query);
+        else query=new metaBook.Query(query);
         var qstring=query.getString();
         if ((box_arg)&&(typeof box_arg === 'string'))
             box_arg=document.getElementById(box_arg);
-        var box=box_arg||query._box||fdjtID("CODEXSEARCH");
+        var box=box_arg||query._box||fdjtID("METABOOKSEARCH");
         if ((query.dom)&&(box)&&(box!==query.dom))
             fdjtDOM.replace(box_arg,query.dom);
         box.setAttribute("qstring",qstring);
         query.execute();
         query.getCoTags();
-        if (Codex.Trace.search>1)
+        if (mB.Trace.search>1)
             log("Setting query for %o to %o: %o/%o (%o)",
                 box,query.tags,
                 query.results.length,query.cotags.length,
                 qstring);
-        else if (Codex.Trace.search)
+        else if (mB.Trace.search)
             log("Setting query for %o to %o: %d results/%d refiners (%o)",
                 box,query.tags,
                 query.results.length,query.cotags.length,
@@ -124,7 +124,7 @@
         var input=getChild(box,".searchinput");
         var cloudid=input.getAttribute("completions");
         var infoid=input.getAttribute("info");
-        var qtags=getChild(box,".qtags")||fdjtID("CODEXSEARCHTAGS");
+        var qtags=getChild(box,".qtags")||fdjtID("METABOOKSEARCHTAGS");
         var cloud=((cloudid)&&(fdjtID(cloudid)));
         /* These should possibly be used in initializing the .listing
          * field of the query */
@@ -137,14 +137,14 @@
         input.value='';
         var elts=query.tags; var i=0; var lim=elts.length;
         // Update 'notags' class
-        if (elts.length) fdjtDOM.dropClass(Codex.HUD,"emptysearch");
-        else addClass(Codex.HUD,"emptysearch");
+        if (elts.length) fdjtDOM.dropClass(metaBook.HUD,"emptysearch");
+        else addClass(metaBook.HUD,"emptysearch");
         // Update the query tags
         var newtags=fdjtDOM("div.qtags");
         while (i<lim) {
             var tag=elts[i];
             if (typeof tag === 'string') tag=kbref(tag)||tag;
-            fdjtDOM(newtags,((i>0)&&("\u00a0\u00B7 ")),Codex.cloudEntry(tag));
+            fdjtDOM(newtags,((i>0)&&("\u00a0\u00B7 ")),metaBook.cloudEntry(tag));
             i++;}
         if (qtags.id) newtags.id=qtags.id;
         fdjtDOM.replace(qtags,newtags);
@@ -170,62 +170,62 @@
         */
         // Update the search cloud
         var n_refiners=((query.cotags)&&(query.cotags.length))||0;
-        var completions=Codex.queryCloud(query);
+        var completions=metaBook.queryCloud(query);
         refinecount.innerHTML=n_refiners+
             ((n_refiners===1)?(" co-tag"):(" co-tags"));
         fdjtDOM.dropClass(box,"norefiners");
         if (query.tags.length===0) {
             fdjtDOM.replace(
-                "CODEXSEARCHCLOUD",fdjtDOM("div#CODEXSEARCHCLOUD"));
-            Codex.empty_cloud.dom.style.fontSize="";
-            Codex.empty_cloud.complete("");}
+                "METABOOKSEARCHCLOUD",fdjtDOM("div#METABOOKSEARCHCLOUD"));
+            metaBook.empty_cloud.dom.style.fontSize="";
+            metaBook.empty_cloud.complete("");}
         else {
             if (cloudid) completions.id=cloudid;
-            if (Codex.Trace.search>1)
+            if (mB.Trace.search>1)
                 log("Setting search cloud for %o to %o",box,completions.dom);
             cloudid=cloud.id;
             addClass(completions.dom,"hudpanel");
             fdjtDOM.replace(cloud,completions.dom);
             completions.dom.style.fontSize="";
             completions.complete("");
-            Codex.adjustCloudFont(completions);}
+            metaBook.adjustCloudFont(completions);}
         if (n_refiners===0) {
             addClass(box,"norefiners");
             refinecount.innerHTML="no refiners";}
         query._box=box; box.setAttribute("qstring",qstring);
-        Codex.UI.updateScroller(completions.dom);
+        metaBook.UI.updateScroller(completions.dom);
         return query;}
-    Codex.useQuery=useQuery;
+    metaBook.useQuery=useQuery;
 
     function extendQuery(query,elt){
         var elts=[].concat(query.tags);
         if (typeof elt === 'string') 
             elts.push(kbref(elt)||elt);
         else elts.push(elt);
-        return useQuery(new Codex.Query(elts),query._box);}
-    Codex.extendQuery=extendQuery;
+        return useQuery(new metaBook.Query(elts),query._box);}
+    metaBook.extendQuery=extendQuery;
 
-    Codex.updateQuery=function(input_elt){
+    metaBook.updateQuery=function(input_elt){
         var q=Knodule.Query.string2query(input_elt.value);
-        if ((q)!==(Codex.query.tags))
-            Codex.setQuery(q,false);};
+        if ((q)!==(metaBook.query.tags))
+            metaBook.setQuery(q,false);};
 
     function showSearchResults(){
-        var results=Codex.query.showResults();
+        var results=metaBook.query.showResults();
         addClass(results,"hudpanel");
-        fdjtDOM.replace("CODEXSEARCHRESULTS",results);
-        Codex.setMode("searchresults");
-        fdjtID("CODEXSEARCHINPUT").blur();
-        fdjtID("CODEXSEARCHRESULTS").focus();
-        Codex.UI.updateScroller(fdjtID("CODEXSEARCHRESULTS"));}
-    Codex.showSearchResults=showSearchResults;
+        fdjtDOM.replace("METABOOKSEARCHRESULTS",results);
+        metaBook.setMode("searchresults");
+        fdjtID("METABOOKSEARCHINPUT").blur();
+        fdjtID("METABOOKSEARCHRESULTS").focus();
+        metaBook.UI.updateScroller(fdjtID("METABOOKSEARCHRESULTS"));}
+    metaBook.showSearchResults=showSearchResults;
 
     /* Call this to search */
 
     function startSearch(tag){
         setQuery([tag]);
-        Codex.setMode("refinesearch");}
-    Codex.startSearch=startSearch;
+        metaBook.setMode("refinesearch");}
+    metaBook.startSearch=startSearch;
 
     /* Text input handlers */
 
@@ -241,7 +241,7 @@
             var qstring=target.value;
             if (fdjtString.isEmpty(qstring)) showSearchResults();
             else {
-                completeinfo=Codex.queryCloud(Codex.query);
+                completeinfo=metaBook.queryCloud(metaBook.query);
                 if (completeinfo.timer) {
                     clearTimeout(completeinfo.timer);
                     completeinfo.timer=false;}
@@ -251,104 +251,104 @@
                     completeinfo.select();
                 // Signal error?
                 if (!(completion)) {
-                    var found=Codex.docdb.find("~tags",qstring);
+                    var found=metaBook.docdb.find("~tags",qstring);
                     if ((found)&&(found.length))
-                        setQuery(extendQuery(Codex.query,qstring));
+                        setQuery(extendQuery(metaBook.query,qstring));
                     return;}
                 var value=completeinfo.getValue(completion);
-                setQuery(extendQuery(Codex.query,value));}
+                setQuery(extendQuery(metaBook.query,value));}
             fdjtDOM.cancel(evt);
-            if ((Codex.search_gotlucky) && 
-                (Codex.query.results.length>0) &&
-                (Codex.query.results.length<=Codex.search_gotlucky))
+            if ((metaBook.search_gotlucky) && 
+                (metaBook.query.results.length>0) &&
+                (metaBook.query.results.length<=metaBook.search_gotlucky))
                 showSearchResults();
             else {
                 /* Handle new info */
-                completeinfo=Codex.queryCloud(Codex.query);
+                completeinfo=metaBook.queryCloud(metaBook.query);
                 completeinfo.complete("");}
             return false;}
         else if (ch===9) { /* tab */
             var partial_string=target.value;
-            completeinfo=Codex.queryCloud(Codex.query);
+            completeinfo=metaBook.queryCloud(metaBook.query);
             completions=completeinfo.complete(partial_string);
             fdjtUI.cancel(evt);
             if (completions.prefix!==partial_string) {
                 target.value=completions.prefix;
                 fdjtDOM.cancel(evt);
                 setTimeout(function(){
-                    Codex.UI.updateScroller("CODEXSEARCHCLOUD");},
+                    metaBook.UI.updateScroller("METABOOKSEARCHCLOUD");},
                            100);
                 return;}
             else if (evt.shiftKey) completeinfo.selectPrevious();
             else completeinfo.selectNext();}
         else {
-            completeinfo=Codex.queryCloud(Codex.query);
+            completeinfo=metaBook.queryCloud(metaBook.query);
             completeinfo.docomplete(target);
             setTimeout(function(){
-                Codex.UI.updateScroller("CODEXSEARCHCLOUD");},
+                metaBook.UI.updateScroller("METABOOKSEARCHCLOUD");},
                        100);}}
-    Codex.UI.handlers.search_keyup=searchInput_keyup;
+    metaBook.UI.handlers.search_keyup=searchInput_keyup;
 
     function searchUpdate(input,cloud){
-        if (!(input)) input=fdjtID("CODEXSEARCHINPUT");
-        if (!(cloud)) cloud=Codex.queryCloud(Codex.query);
+        if (!(input)) input=fdjtID("METABOOKSEARCHINPUT");
+        if (!(cloud)) cloud=metaBook.queryCloud(metaBook.query);
         cloud.complete(input.value);}
-    Codex.searchUpdate=searchUpdate;
+    metaBook.searchUpdate=searchUpdate;
 
     function searchInput_focus(evt){
         evt=evt||window.event||null;
         var input=fdjtDOM.T(evt);
-        Codex.setFocus(input);
-        if ((Codex.mode)&&(Codex.mode==='searchresults'))
-            Codex.setMode("refinesearch");
+        metaBook.setFocus(input);
+        if ((metaBook.mode)&&(metaBook.mode==='searchresults'))
+            metaBook.setMode("refinesearch");
         searchUpdate(input);}
-    Codex.UI.handlers.search_focus=searchInput_focus;
+    metaBook.UI.handlers.search_focus=searchInput_focus;
 
     function searchInput_blur(evt){
         evt=evt||window.event||null;
         var input=fdjtDOM.T(evt);
-        Codex.clearFocus(input);}
-    Codex.UI.handlers.search_blur=searchInput_blur;
+        metaBook.clearFocus(input);}
+    metaBook.UI.handlers.search_blur=searchInput_blur;
 
     function clearSearch(evt){
         var target=fdjtUI.T(evt||window.event);
         var box=fdjtDOM.getParent(target,".searchbox");
         var input=getChild(box,".searchinput");
         fdjtUI.cancel(evt);
-        if ((Codex.query.tags.length===0)&&
+        if ((metaBook.query.tags.length===0)&&
             (input.value.length===0)) {
-            Codex.setMode(false); return;}
+            metaBook.setMode(false); return;}
         else {
-            Codex.empty_cloud.dom.style.fontSize="";
-            setQuery(Codex.empty_query);
+            metaBook.empty_cloud.dom.style.fontSize="";
+            setQuery(metaBook.empty_query);
             input.value="";}
         input.focus();}
-    Codex.UI.handlers.clearSearch=clearSearch;
+    metaBook.UI.handlers.clearSearch=clearSearch;
     
-    Codex.toggleSearch=function(evt){
+    metaBook.toggleSearch=function(evt){
         evt=evt||window.event;
-        if ((Codex.mode==="refinesearch")||
-            (Codex.mode==="searchresults"))
-            Codex.setMode(false);
+        if ((metaBook.mode==="refinesearch")||
+            (metaBook.mode==="searchresults"))
+            metaBook.setMode(false);
         else {
-            Codex.setMode("refinesearch");
-            fdjtID("CODEXSEARCHINPUT").focus();}
+            metaBook.setMode("refinesearch");
+            fdjtID("METABOOKSEARCHINPUT").focus();}
         fdjtUI.cancel(evt);};
     
     /* Search result listings */
 
-    var CodexSlice=Codex.Slice;
+    var metaBookSlice=metaBook.Slice;
     function SearchResults(query){
         if (!(this instanceof SearchResults))
             return new SearchResults(query);
         this.query=query; this.results=query.results;
-        return CodexSlice.call(
-            this,fdjtDOM("div.codexslice.sbookresults"),this.results);}
-    Codex.SearchResults=SearchResults;
+        return metaBookSlice.call(
+            this,fdjtDOM("div.metabookslice.sbookresults"),this.results);}
+    metaBook.SearchResults=SearchResults;
 
-    SearchResults.prototype=new CodexSlice();
+    SearchResults.prototype=new metaBookSlice();
     SearchResults.prototype.renderCard=function renderSearchResult(result){
-        return Codex.renderCard(result,this.query);};
+        return metaBook.renderCard(result,this.query);};
     SearchResults.prototype.sortfn=function searchResultsSortFn(x,y){
         if (x.score) {
             if (y.score) {

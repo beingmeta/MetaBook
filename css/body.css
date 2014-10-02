@@ -35,7 +35,7 @@
 
 body.sbook { font-size: 62.5%; line-height: inherit;}
 
-#CODEXBODY #CODEXCONTENT {
+#METABOOKBODY #CODEXCONTENT {
     margin-left: 3em; margin-right: 3em;}
 
 #CODEXPAGE { max-width: 40em;}
@@ -43,65 +43,65 @@ body.sbook { font-size: 62.5%; line-height: inherit;}
     box-sizing: border-box; -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;}
 
-#CODEXBODY {
+#METABOOKBODY {
     font-size: 2em;}
-#CODEXBODY.codexbodysizexlarge {
+#METABOOKBODY.metabookbodysizexlarge {
     font-size: 2.5em;}
-#CODEXBODY.codexbodysizelarge {
+#METABOOKBODY.metabookbodysizelarge {
     font-size: 2.5em;}
-#CODEXBODY.codexbodysizenormal {
+#METABOOKBODY.metabookbodysizenormal {
     font-size: 2em;}
-#CODEXBODY.codexbodysizesmall {
+#METABOOKBODY.metabookbodysizesmall {
     font-size: 1.5em;}
-#CODEXBODY.codexbodysizetiny {
+#METABOOKBODY.metabookbodysizetiny {
     font-size: 0.9em;}
-.codexbody.codexlinespacingsingle {
+.metabookbody.metabooklinespacingsingle {
     line-height: 100%;}
-.codexbody.codexlinespacingdouble {
+.metabookbody.metabooklinespacingdouble {
     line-height: 200%;}
-.codexbody.codexlinespacingnormal {}
-.codexbody.codexlinespacingonefive {
+.metabookbody.metabooklinespacingnormal {}
+.metabookbody.metabooklinespacingonefive {
     line-height: 150%;}
 
-.codexbody.codexjustify p, .codexbody.codexjustify li {
+.metabookbody.metabookjustify p, .metabookbody.metabookjustify li {
     text-align: justify;}
 
-#CODEXBODY.codexfamilydefault {
+#METABOOKBODY.metabookfamilydefault {
     font-family: inherit;}
-#CODEXBODY.codexfamilyserif {
+#METABOOKBODY.metabookfamilyserif {
     font-family: Georgia,Palatino,"Times New Roman",Times,serif;}
-#CODEXBODY.codexfamilysans {
+#METABOOKBODY.metabookfamilysans {
     font-family: Arial,Verdana,Helvetica,sans-serif;}
 
-#CODEXBODY h1, #CODEXBODY h2, #CODEXBODY h3, #CODEXBODY h4 {
+#METABOOKBODY h1, #METABOOKBODY h2, #METABOOKBODY h3, #METABOOKBODY h4 {
     font-family: Arial,Verdana,Helvetica,sans-serif;
     page-break-after: avoid;}
-#CODEXBODY.codexfamilyserif h1, #CODEXBODY.codexfamilyserif h2,
-#CODEXBODY.codexfamilyserif h3, #CODEXBODY.codexfamilyserif h4 {
+#METABOOKBODY.metabookfamilyserif h1, #METABOOKBODY.metabookfamilyserif h2,
+#METABOOKBODY.metabookfamilyserif h3, #METABOOKBODY.metabookfamilyserif h4 {
     font-family: Arial,Verdana,Helvetica,sans-serif;}    
 
-#CODEXBODY a:hover, #CODEXBODY a:active { color: blue; }
+#METABOOKBODY a:hover, #METABOOKBODY a:active { color: blue; }
 
-#CODEXBODY.codexbodysizexlarge p, #CODEXBODY.codexbodysizexlarge li,
-#CODEXBODY.codexbodysizexlarge dt, #CODEXBODY.codexbodysizexlarge dd {
+#METABOOKBODY.metabookbodysizexlarge p, #METABOOKBODY.metabookbodysizexlarge li,
+#METABOOKBODY.metabookbodysizexlarge dt, #METABOOKBODY.metabookbodysizexlarge dd {
     font-size: 130%;}
 
-#CODEXBODY.codexcontrasthigh { background-color: #ffffff; color: #111; }
-#CODEXBODY.codexcontrastmedium { background-color: #ffffff; color: #444; }
-#CODEXBODY.codexcontrastlow  { background-color: #e5e0d4; color: #333; }
+#METABOOKBODY.metabookcontrasthigh { background-color: #ffffff; color: #111; }
+#METABOOKBODY.metabookcontrastmedium { background-color: #ffffff; color: #444; }
+#METABOOKBODY.metabookcontrastlow  { background-color: #e5e0d4; color: #333; }
 
 p { line-height: 1.2;}
-#CODEXPAGES .codexpage.codexcoversize p { line-height: 1.05;}
+#METABOOKPAGES .metabookpage.metabookcoversize p { line-height: 1.05;}
 
 body span { font-size: inherit; }
 span { font-size: inherit; }
 
 /*
-#CODEXBODY .tapholdtarget {outline: dotted blue 1px;}
-#CODEXBODY .tapholdtarget .tapholdtarget {outline: none;}
+#METABOOKBODY .tapholdtarget {outline: dotted blue 1px;}
+#METABOOKBODY .tapholdtarget .tapholdtarget {outline: none;}
 */
 
-.codexbody .titlepage, .codexbody .sbooktitlepage { text-align: center;}
+.metabookbody .titlepage, .metabookbody .sbooktitlepage { text-align: center;}
 
 .sbooktitlepage .title { margin-bottom: 1em; }
 .sbooktitlepage .credits {
@@ -114,13 +114,13 @@ span { font-size: inherit; }
 .sbooktitlepage .credits .lifespan {
     white-space: nowrap; font-size: 0.9em;}
 
-body.codexpagesizedefault #CODEXPAGE {}
-body.codexpagesizefull #CODEXPAGE {
+body.metabookpagesizedefault #CODEXPAGE {}
+body.metabookpagesizefull #CODEXPAGE {
     height: 98%; top: 1%; bottom: 1%;
     width: 98%; left: 1%; right: 1%;}
-body.codexpagesizefullheight #CODEXPAGE {
+body.metabookpagesizefullheight #CODEXPAGE {
     height: 98%; top: 1%; bottom: 1%;}
-body.codexpagesizefullwidth #CODEXPAGE {
+body.metabookpagesizefullwidth #CODEXPAGE {
     width: 98%; left: 1%; right: 1%;}
 
 /* Emacs local variables

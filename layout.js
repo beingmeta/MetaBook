@@ -1,13 +1,13 @@
 /* -*- Mode: Javascript; Character-encoding: utf-8; -*- */
 
-/* ###################### codex/layout.js ###################### */
+/* ###################### metabook/layout.js ###################### */
 
 /* Copyright (C) 2009-2014 beingmeta, inc.
 
-   This file implements the layout component of Codex, relying heavily
-   on CodexLayout from the FDJT library.
+   This file implements the layout component of metaBook, relying heavily
+   on metaBookLayout from the FDJT library.
 
-   This file is part of Codex, a Javascript/DHTML web application for reading
+   This file is part of metaBook, a Javascript/DHTML web application for reading
    large structured documents (sBooks).
 
    For more information on sbooks, visit www.sbooks.net
@@ -35,7 +35,7 @@
 
 */
 /* jshint browser: true */
-/* global Codex: false */
+/* global metaBook: false */
 
 /* Reporting progress, debugging */
 
@@ -44,11 +44,11 @@
    not generate unbound variable warnings when called on individual
    files. */
 // var fdjt=((typeof fdjt !== "undefined")?(fdjt):({}));
-// var Codex=((typeof Codex !== "undefined")?(Codex):({}));
+// var metaBook=((typeof metaBook !== "undefined")?(metaBook):({}));
 // var Knodule=((typeof Knodule !== "undefined")?(Knodule):({}));
 // var iScroll=((typeof iScroll !== "undefined")?(iScroll):({}));
 
-Codex.Paginate=
+metaBook.Paginate=
     (function(){
         "use strict";
 
@@ -59,8 +59,8 @@ Codex.Paginate=
         var fdjtLog=fdjt.Log;
         var fdjtDOM=fdjt.DOM;
         var fdjtID=fdjt.ID;
-        var cxID=Codex.ID;
-        var CodexLayout=fdjt.CodexLayout;
+        var cxID=metaBook.ID;
+        var metaBookLayout=fdjt.metaBookLayout;
 
         var getGeometry=fdjtDOM.getGeometry;
         var getParent=fdjtDOM.getParent;
@@ -80,7 +80,7 @@ Codex.Paginate=
         var atoi=parseInt;
 
         function layoutMessage(string,pct){
-            var pb=fdjtID("CODEXLAYOUTMESSAGE");
+            var pb=fdjtID("METABOOKLAYOUTMESSAGE");
             fdjt.UI.ProgressBar.setMessage(pb,string);
             if (typeof pct==="number")
                 fdjt.UI.ProgressBar.setProgress(pb,pct);}
@@ -93,14 +93,14 @@ Codex.Paginate=
             if (!(pagenum)) return;
             var now=fdjtTime();
             var howlong=secs2short((now-started)/1000);
-            var indicator=fdjtID("CODEXLAYOUTINDICATOR");
+            var indicator=fdjtID("METABOOKLAYOUTINDICATOR");
             if (info.done) {
                 if (indicator)
                     indicator.style.width=Math.floor(pct)+"%";
                 fdjtDOM.replace(
-                    "CODEXPAGENOTEXT",
-                    fdjtDOM("div.codexpageno#CODEXPAGENOTEXT",
-                            Codex.curpage||"?",
+                    "METABOOKPAGENOTEXT",
+                    fdjtDOM("div.metabookpageno#METABOOKPAGENOTEXT",
+                            metaBook.curpage||"?",
                             "/",pagenum," (",Math.floor(pct),
                             "%)"));
                 layoutMessage(fdjtString(
@@ -112,17 +112,17 @@ Codex.Paginate=
                         pagenum,info.width,info.height,
                         secs2short((info.done-info.started)/1000));}
             else {
-                if ((info.lastid)&&(Codex.docinfo)&&
-                    ((Codex.docinfo[info.lastid]))) {
-                    var docinfo=Codex.docinfo;
+                if ((info.lastid)&&(metaBook.docinfo)&&
+                    ((metaBook.docinfo[info.lastid]))) {
+                    var docinfo=metaBook.docinfo;
                     var maxloc=docinfo._maxloc;
                     var lastloc=docinfo[info.lastid].starts_at;
                     var pct=(100*lastloc)/maxloc, fpct=Math.floor(pct);
                     if (indicator) indicator.style.width=fpct+"%";
                     fdjtDOM.replace(
-                        "CODEXPAGENOTEXT",
-                        fdjtDOM("div.codexpageno#CODEXPAGENOTEXT",
-                                Codex.curpage||"?",
+                        "METABOOKPAGENOTEXT",
+                        fdjtDOM("div.metabookpageno#METABOOKPAGENOTEXT",
+                                metaBook.curpage||"?",
                                 "/",pagenum," (",fpct,"%)"));
                     layoutMessage(fdjtString(
                         "Laid out %d %dx%d pages (%d%%)",
@@ -140,7 +140,7 @@ Codex.Paginate=
                                 info.pagenum,howlong);}}}
 
         function Paginate(why,init){
-            if (((Codex.layout)&&(!(Codex.layout.done)))) return;
+            if (((metaBook.layout)&&(!(metaBook.layout.done)))) return;
             if (!(why)) why="because";
             layoutMessage("Preparing your book",0);
             dropClass(document.body,"_SCROLL");
@@ -149,15 +149,15 @@ Codex.Paginate=
             var forced=((init)&&(init.forced));
             var geom=getGeometry(fdjtID("CODEXPAGE"),false,true);
             var height=geom.inner_height, width=geom.width;
-            var justify=Codex.justify;
-            var spacing=Codex.bodyspacing;
-            var size=Codex.bodysize||"normal";
-            var family=Codex.bodyfamily||"serif";
-            if ((!(Codex.layout))&&(Codex.Trace.startup))
+            var justify=metaBook.justify;
+            var spacing=metaBook.bodyspacing;
+            var size=metaBook.bodysize||"normal";
+            var family=metaBook.bodyfamily||"serif";
+            if ((!(metaBook.layout))&&(mB.Trace.startup))
                 fdjtLog("Page layout requires %dx%d %s %s pages",
                         width,height,size,family);
-            if (Codex.layout) {
-                var current=Codex.layout;
+            if (metaBook.layout) {
+                var current=metaBook.layout;
                 if ((!(forced))&&
                     (width===current.width)&&
                     (height===current.height)&&
@@ -171,17 +171,17 @@ Codex.Paginate=
                             current.layout_id);
                     return;}
                 // Repaginating, start with reversion
-                Codex.layout.Revert();
-                Codex.layout=false;}
+                metaBook.layout.Revert();
+                metaBook.layout=false;}
 
             // Resize the content
-            Codex.sizeContent();
+            metaBook.sizeContent();
 
             // Create a new layout
             var layout_args=getLayoutArgs();
-            var layout=new CodexLayout(layout_args);
+            var layout=new metaBookLayout(layout_args);
             layout.bodysize=size; layout.bodyfamily=family;
-            Codex.layout=layout;
+            metaBook.layout=layout;
             
             var layout_id=layout.layout_id;
 
@@ -196,42 +196,42 @@ Codex.Paginate=
                 fdjtID("CODEXPAGE").style.visibility='';
                 fdjtID("CODEXCONTENT").style.visibility='';
                 dropClass(document.body,"cxLAYOUT");
-                Codex.layout=layout;
-                Codex.pagecount=layout.pages.length;
-                if (Codex.Trace.startup)
+                metaBook.layout=layout;
+                metaBook.pagecount=layout.pages.length;
+                if (mB.Trace.startup)
                     fdjtLog("Restored %d-page layout %s, adding glosses",
                             layout.pages.length,layout_id);
                 var lostids=layout.lostids, moved_ids=lostids._all_ids;
                 var i=0, lim=moved_ids.length;
                 while (i<lim) {
-                    var addGlossmark=Codex.UI.addGlossmark;
+                    var addGlossmark=metaBook.UI.addGlossmark;
                     var id=moved_ids[i++];
-                    var glosses=Codex.glossdb.find('frag',id);
+                    var glosses=metaBook.glossdb.find('frag',id);
                     if (!((glosses)&&(glosses.length))) continue;
                     var j=0, jlim=glosses.length; while (j<jlim) {
-                        var gloss=Codex.glossdb.probe(glosses[j++]);
+                        var gloss=metaBook.glossdb.probe(glosses[j++]);
                         if (gloss) {
-                            var nodes=Codex.getDups(gloss.frag);
+                            var nodes=metaBook.getDups(gloss.frag);
                             addClass(nodes,"glossed");
                             var k=0, klim=nodes.length; while (k<klim) {
                                 addGlossmark(nodes[k++],gloss);}}}}
-                if (Codex.Trace.startup)
+                if (mB.Trace.startup)
                     fdjtLog("Finished adding glossmarks to saved layout");
                 setupPagebar();
-                if (Codex.layoutdone) {
-                    var fn=Codex.layoutdone;
-                    Codex.layoutdone=false;
+                if (metaBook.layoutdone) {
+                    var fn=metaBook.layoutdone;
+                    metaBook.layoutdone=false;
                     fn();}
-                if (Codex.state)
-                    Codex.restoreState(Codex.state,"layoutRestored");
-                Codex.layout.running=false;
+                if (metaBook.state)
+                    metaBook.restoreState(metaBook.state,"layoutRestored");
+                metaBook.layout.running=false;
 
                 return false;}
             
             var max_layouts=3;
 
             function recordLayout(layout_id,source_id){
-                var key="codex.layouts("+source_id+")";
+                var key="metabook.layouts("+source_id+")";
                 var saved=getLocal(key,true);
                 if (!(saved)) setLocal(key,[layout_id],true);
                 else {
@@ -243,7 +243,7 @@ Codex.Paginate=
                         var j=saved.length-max_layouts-1;
                         while (j>=0) {
                             fdjtLog("Dropping layout #%d %s",j,saved[j]);
-                            CodexLayout.dropLayout(saved[j--]);}
+                            metaBookLayout.dropLayout(saved[j--]);}
                         saved=saved.slice(saved.length-max_layouts);}
                     setLocal(key,saved,true);}}
 
@@ -258,11 +258,11 @@ Codex.Paginate=
                 
                 // Now make the content (temporarily) the same width as
                 // the page
-                var saved_width=Codex.content.style.width;
-                Codex.content.style.width=getGeometry(Codex.page).width+"px";
+                var saved_width=metaBook.content.style.width;
+                metaBook.content.style.width=getGeometry(metaBook.page).width+"px";
                 
                 // Now walk the content
-                var content=Codex.content;
+                var content=metaBook.content;
                 var nodes=toArray(content.childNodes);
                 fdjtLog("Laying out %d root nodes into %dx%d pages (%s), id=%s",
                         nodes.length,layout.width,layout.height,
@@ -270,37 +270,37 @@ Codex.Paginate=
                 
                 layoutMessage("Starting new layout",0);
                 
-                // Do the adjust font bit.  We rely on Codex.content
-                //  having the same width as Codex.page
+                // Do the adjust font bit.  We rely on metaBook.content
+                //  having the same width as metaBook.page
                 fdjt.DOM.tweakFonts(content);
                 
                 // Now reset the width
-                Codex.content.style.width=saved_width;
+                metaBook.content.style.width=saved_width;
                 
                 var i=0; var lim=nodes.length;
                 function rootloop(){
                     if (i>=lim) {
                         layout.Finish();
                         layout_progress(layout);
-                        if (Codex.cache_layout_thresh) {
+                        if (metaBook.cache_layout_thresh) {
                             var elapsed=layout.done-layout.started;
-                            if ((typeof Codex.cache_layout_thresh === "number")?
-                                (elapsed>Codex.cache_layout_thresh):(elapsed>5000)) {
+                            if ((typeof metaBook.cache_layout_thresh === "number")?
+                                (elapsed>metaBook.cache_layout_thresh):(elapsed>5000)) {
                                 layout.saveLayout(function(l){
-                                    recordLayout(l.layout_id,Codex.sourceid);});}}
+                                    recordLayout(l.layout_id,metaBook.sourceid);});}}
                         fdjtID("CODEXPAGE").style.visibility='';
                         fdjtID("CODEXCONTENT").style.visibility='';
                         dropClass(document.body,"cxLAYOUT");
-                        Codex.layout=layout;
-                        Codex.pagecount=layout.pages.length;
+                        metaBook.layout=layout;
+                        metaBook.pagecount=layout.pages.length;
                         setupPagebar();
-                        if (Codex.layoutdone) {
-                            var fn=Codex.layoutdone;
-                            Codex.layoutdone=false;
+                        if (metaBook.layoutdone) {
+                            var fn=metaBook.layoutdone;
+                            metaBook.layoutdone=false;
                             fn();}
-                        if (Codex.state)
-                            Codex.restoreState(Codex.state,"layoutDone");
-                        Codex.layout.running=false;
+                        if (metaBook.state)
+                            metaBook.restoreState(metaBook.state,"layoutDone");
+                        metaBook.layout.running=false;
                         setTimeout(syncLayout,100);
                         return false;}
                     else {
@@ -308,11 +308,11 @@ Codex.Paginate=
                         var timeslice=
                             ((layout.hasOwnProperty('timeslice'))?
                              (layout.timeslice):
-                             (CodexLayout.timeslice||100));
+                             (metaBookLayout.timeslice||100));
                         var timeskip=
                             ((layout.hasOwnProperty('timeskip'))?
                              (layout.timeskip):
-                             (CodexLayout.timeskip||50));
+                             (metaBookLayout.timeskip||50));
                         if (((root.nodeType===3)&&
                              (!(isEmpty(root.nodeValue))))||
                             ((root.nodeType===1)&&
@@ -326,107 +326,107 @@ Codex.Paginate=
       
                 rootloop();}
             
-            if ((Codex.cache_layout_thresh)&&
-                (!((Codex.forcelayout)))&&
+            if ((metaBook.cache_layout_thresh)&&
+                (!((metaBook.forcelayout)))&&
                 (!(forced))) {
-                if (Codex.Trace.layout)
+                if (mB.Trace.layout)
                     fdjtLog("Fetching layout %s",layout_id);
-                CodexLayout.fetchLayout(layout_id,function(content){
+                metaBookLayout.fetchLayout(layout_id,function(content){
                     if (content) {
-                        if (Codex.Trace.layout)
+                        if (mB.Trace.layout)
                             fdjtLog("Got layout %s",layout_id);
-                        recordLayout(layout_id,Codex.sourceid);
+                        recordLayout(layout_id,metaBook.sourceid);
                         restore_layout(content,layout_id);}
                     else new_layout();});}
             else {
                 setTimeout(new_layout,10);}}
-        Codex.Paginate=Paginate;
+        metaBook.Paginate=Paginate;
 
-        CodexLayout.prototype.onresize=function(){
-            if (Codex.bypage) Codex.Paginate("resize");
-            else fdjt.DOM.tweakFonts(Codex.content);};
+        metaBookLayout.prototype.onresize=function(){
+            if (metaBook.bypage) metaBook.Paginate("resize");
+            else fdjt.DOM.tweakFonts(metaBook.content);};
         
-        Codex.addConfig(
+        metaBook.addConfig(
             "layout",
             function(name,val){
-                Codex.page_style=val;
+                metaBook.page_style=val;
                 if (val==='bypage') {
-                    if (!(Codex.docinfo)) {
+                    if (!(metaBook.docinfo)) {
                         // If there isn't any docinfo (during startup, for
                         // instance), don't bother actually paginating.
-                        Codex.bypage=true;}
-                    else if (!(Codex.bypage)) {
+                        metaBook.bypage=true;}
+                    else if (!(metaBook.bypage)) {
                         // set this
-                        Codex.bypage=true;
-                        if (Codex.postconfig)
+                        metaBook.bypage=true;
+                        if (metaBook.postconfig)
                             // If we're in the middle of config,
                             // push off the work of paginating
-                            Codex.postconfig.push(Paginate);
+                            metaBook.postconfig.push(Paginate);
                         // Otherwise, paginate away
-                        else Codex.Paginate("config");}}
+                        else metaBook.Paginate("config");}}
                 else {
                     // If you've already paginated, revert
-                    if (Codex.layout) {
-                        Codex.layout.Revert();
-                        Codex.layout=false;}
-                    else if (((Codex.layout)&&(!(Codex.layout.done)))) {
-                        if (Codex.layout.timer) {
-                            clearTimeout(Codex.layout.timer);
-                            Codex.layout.timer=false;}
-                        Codex.layout.Revert();
-                        Codex.layout=false;}
-                    Codex.bypage=false;
-                    if (Codex.layout) {
-                        Codex.layout.Revert();
-                        Codex.layout=false;}
+                    if (metaBook.layout) {
+                        metaBook.layout.Revert();
+                        metaBook.layout=false;}
+                    else if (((metaBook.layout)&&(!(metaBook.layout.done)))) {
+                        if (metaBook.layout.timer) {
+                            clearTimeout(metaBook.layout.timer);
+                            metaBook.layout.timer=false;}
+                        metaBook.layout.Revert();
+                        metaBook.layout=false;}
+                    metaBook.bypage=false;
+                    if (metaBook.layout) {
+                        metaBook.layout.Revert();
+                        metaBook.layout=false;}
                     dropClass(document.body,"_BYPAGE");
                     addClass(document.body,"_SCROLL");
-                    fdjt.DOM.tweakFonts(Codex.content);}});
+                    fdjt.DOM.tweakFonts(metaBook.content);}});
 
         function updateLayoutProperty(name,val){
             // This updates layout properties
             if (val===true) 
-                fdjtDOM.addClass(Codex.body,"codex"+name);
+                fdjtDOM.addClass(metaBook.body,"metabook"+name);
             else if (!(val))
                 fdjtDOM.dropClass(
-                    Codex.body,new RegExp("codex"+name+"\\w*"));
+                    metaBook.body,new RegExp("metabook"+name+"\\w*"));
             else fdjtDOM.swapClass(
-                Codex.body,new RegExp("codex"+name+"\\w*"),
-                "codex"+name+val);
-            Codex[name]=val;
-            if ((Codex.postconfig)&&(Codex.content)) {
-                if (Codex.postconfig.indexOf(Codex.sizeContent)<0)
-                    Codex.sized=false;
-                    Codex.postconfig.push(Codex.sizeContent);}
-            else if (Codex.content) Codex.sizeContent();
-            if (Codex.layout) {
+                metaBook.body,new RegExp("metabook"+name+"\\w*"),
+                "metabook"+name+val);
+            metaBook[name]=val;
+            if ((metaBook.postconfig)&&(metaBook.content)) {
+                if (metaBook.postconfig.indexOf(metaBook.sizeContent)<0)
+                    metaBook.sized=false;
+                    metaBook.postconfig.push(metaBook.sizeContent);}
+            else if (metaBook.content) metaBook.sizeContent();
+            if (metaBook.layout) {
                 // If you're already paginated, repaginate.  Either
                 // when done with the config or immediately.
-                if (Codex.postconfig) {
-                    Codex.postconfig.push(function(){
-                        Codex.Paginate(name);});}
+                if (metaBook.postconfig) {
+                    metaBook.postconfig.push(function(){
+                        metaBook.Paginate(name);});}
                 else {
-                    Codex.Paginate(name);}}}
-        Codex.addConfig("bodysize",updateLayoutProperty);
-        Codex.addConfig("bodyfamily",updateLayoutProperty);
-        Codex.addConfig("bodyspacing",updateLayoutProperty);
-        Codex.addConfig("justify",updateLayoutProperty);
+                    metaBook.Paginate(name);}}}
+        metaBook.addConfig("bodysize",updateLayoutProperty);
+        metaBook.addConfig("bodyfamily",updateLayoutProperty);
+        metaBook.addConfig("bodyspacing",updateLayoutProperty);
+        metaBook.addConfig("justify",updateLayoutProperty);
         
         function getLayoutID(width,height,family,size,spacing,justify,source_id){
             var page=fdjtID("CODEXPAGE");
             var left=page.style.left, right=page.style.right;
-            var layout_source=fdjt.CodexLayout.sourcehash;
+            var layout_source=fdjt.metaBookLayout.sourcehash;
             page.style.left=""; page.style.right="";
             if (!(width))
                 width=getGeometry(page,false,true).width;
             if (!(height))
                 height=getGeometry(fdjtID("CODEXPAGE"),false,true).inner_height;
-            if (!(family)) family=Codex.bodyfamily||"serif";
-            if (!(size)) size=Codex.bodysize||"normal";
+            if (!(family)) family=metaBook.bodyfamily||"serif";
+            if (!(size)) size=metaBook.bodysize||"normal";
             if (!(source_id))
-                source_id=Codex.sourceid||fdjtHash.hex_md5(Codex.docuri);
-            if (!(justify)) justify=Codex.justify;
-            if (!(spacing)) justify=Codex.bodyspacing;
+                source_id=metaBook.sourceid||fdjtHash.hex_md5(metaBook.docuri);
+            if (!(justify)) justify=metaBook.justify;
+            if (!(spacing)) justify=metaBook.bodyspacing;
             page.style.left=left; page.style.right=right;
             return fdjtString("%dx%d-%s-%s%s%s(%s)%s",
                               width,height,family,size,
@@ -437,58 +437,58 @@ Codex.Paginate=
                               // the REFURI
                               source_id,
                               ((layout_source)?("["+layout_source+"]"):("")));}
-        Codex.getLayoutID=getLayoutID;
+        metaBook.getLayoutID=getLayoutID;
 
         function layoutCached(layout_id){
             if (!(layout_id)) layout_id=getLayoutID();
             else if (typeof layout_id === "number")
                 layout_id=getLayoutID.apply(null,arguments);
             else {}
-            var layouts=getLocal("codex.layouts("+Codex.sourceid+")",true);
+            var layouts=getLocal("metabook.layouts("+metaBook.sourceid+")",true);
             return ((layouts)&&(layouts.indexOf(layout_id)>=0));}
-        Codex.layoutCached=layoutCached;
+        metaBook.layoutCached=layoutCached;
         
         function clearLayouts(source_id){
-            if (typeof source_id === "undefined") source_id=Codex.sourceid;
+            if (typeof source_id === "undefined") source_id=metaBook.sourceid;
             if (source_id) {
-                var layouts=getLocal("codex.layouts("+Codex.sourceid+")",true);
+                var layouts=getLocal("metabook.layouts("+metaBook.sourceid+")",true);
                 var i=0, lim=layouts.length; while (i<lim) {
                     var layout=layouts[i++];
                     fdjtLog("Dropping layout %s",layout);
-                    CodexLayout.dropLayout(layout);}
-                fdjtState.dropLocal("codex.layouts("+Codex.sourceid+")");}
+                    metaBookLayout.dropLayout(layout);}
+                fdjtState.dropLocal("metabook.layouts("+metaBook.sourceid+")");}
             else {
-                CodexLayout.clearLayouts();
-                CodexLayout.clearAll();
-                fdjtState.dropLocal(/^codex.layouts\(/g);}}
-        Codex.clearLayouts=clearLayouts;
+                metaBookLayout.clearLayouts();
+                metaBookLayout.clearAll();
+                fdjtState.dropLocal(/^metabook.layouts\(/g);}}
+        metaBook.clearLayouts=clearLayouts;
 
         function getLayoutArgs(){
             var width=getGeometry(fdjtID("CODEXPAGE"),false,true).width;
             var height=getGeometry(fdjtID("CODEXPAGE"),false,true).inner_height;
             var origin=fdjtDOM("div#CODEXCONTENT");
-            var container=fdjtDOM("div.codexpages#CODEXPAGES");
-            var bodyfamily=Codex.bodyfamily||"serif";
-            var bodysize=Codex.bodysize||"normal";
-            var sourceid=Codex.sourceid||fdjtHash.hex_md5(Codex.docuri);
-            var justify=Codex.justify;
-            var sourcehash=fdjt.CodexLayout.sourcehash;
+            var container=fdjtDOM("div.metabookpages#METABOOKPAGES");
+            var bodyfamily=metaBook.bodyfamily||"serif";
+            var bodysize=metaBook.bodysize||"normal";
+            var sourceid=metaBook.sourceid||fdjtHash.hex_md5(metaBook.docuri);
+            var justify=metaBook.justify;
+            var sourcehash=fdjt.metaBookLayout.sourcehash;
             var layout_id=fdjtString(
                 "%dx%d-%s-%s%s(%s)%s",
                 width,height,bodyfamily,bodysize,
                 ((justify)?("-j"):("")),
                 // Layout depends on the actual file ID, if we've got
                 // one, rather than just the REFURI
-                sourceid||Codex.refuri,
+                sourceid||metaBook.refuri,
                 ((sourcehash)?("["+sourcehash+"]"):("")));
 
-            var docinfo=Codex.docinfo;
+            var docinfo=metaBook.docinfo;
             var goneto=false;
 
             function setPageInfo(page,layout){
                 var pages=layout.pages, pagenum=layout.pagenum;
                 var topnode=getPageTop(page);
-                var topid=topnode.codexbaseid||topnode.id;
+                var topid=topnode.metabookbaseid||topnode.id;
                 var curloc=false;
                 if (topnode) {
                     var topstart=cxID(topid);
@@ -512,19 +512,19 @@ Codex.Paginate=
                                 page.setAttribute("data-sbookloc",prevoff);
                             else page.setAttribute("data-sbookloc","0");}}}
                 if ((typeof curloc === "number")&&(pagenum)&&
-                    (!(Codex.curpage))&&(Codex.state)&&(goneto!==Codex.state)&&
-                    (Codex.state.hasOwnProperty('location'))&&
-                    (curloc>=Codex.state.location)) {
-                    goneto=Codex.state;
+                    (!(metaBook.curpage))&&(metaBook.state)&&(goneto!==metaBook.state)&&
+                    (metaBook.state.hasOwnProperty('location'))&&
+                    (curloc>=metaBook.state.location)) {
+                    goneto=metaBook.state;
                     setTimeout(function(){
-                        Codex.GoToPage(pagenum,"layout",false);},
+                        metaBook.GoToPage(pagenum,"layout",false);},
                                10);}}
             
             function getPageTop(node) {
                 var last=false;
-                if (hasClass(node,"codexpage")) {}
+                if (hasClass(node,"metabookpage")) {}
                 else if (((node.id)&&(docinfo[node.id]))||
-                         ((node.codexbaseid)&&(docinfo[node.codexbaseid]))) {
+                         ((node.metabookbaseid)&&(docinfo[node.metabookbaseid]))) {
                     if (hasContent(node,true)) last=node;}
                 else {}
                 var children=node.childNodes;
@@ -537,9 +537,9 @@ Codex.Paginate=
                             if (first) return first;}}}
                 return last;}
             function getPageLastID(node,id) {
-                if (hasClass(node,"codexpage")) {}
-                else if ((node.id)&&(!(node.codexbaseid))&&
-                         (Codex.docinfo[node.id]))
+                if (hasClass(node,"metabookpage")) {}
+                else if ((node.id)&&(!(node.metabookbaseid))&&
+                         (metaBook.docinfo[node.id]))
                     id=node.id;
                 if (node.nodeType!==1) return id;
                 var children=node.childNodes;
@@ -554,7 +554,7 @@ Codex.Paginate=
             function getDupNode(under,id){
                 var children;
                 if (under.nodeType!==1) return false;
-                else if (under.codexbaseid===id) return under;
+                else if (under.metabookbaseid===id) return under;
                 if (!(children=under.childNodes))
                     return false;
                 else if (!(children.length)) return false;
@@ -568,7 +568,7 @@ Codex.Paginate=
                 var id=topstart.id; var locoff=0;
                 var pagescan=topstart, pagenum, elt=topstart;
                 while (pagescan) {
-                    if (hasClass(pagescan,"codexpage")) {
+                    if (hasClass(pagescan,"metabookpage")) {
                         break;}
                     else pagescan=pagescan.parentNode;}
                 if (!(pagescan)) return locoff;
@@ -585,23 +585,23 @@ Codex.Paginate=
             // We track the sourceid to know when, for example, any
             //  cached layouts need to be invalidated.
             var saved_sourceid=
-                fdjtState.getLocal("codex.sourceid("+Codex.refuri+")");
+                fdjtState.getLocal("metabook.sourceid("+metaBook.refuri+")");
             if ((saved_sourceid)&&(sourceid)&&(sourceid!==sourceid)) {
-                var layouts=fdjtState.getLocal("fdjtCodex.layouts",true);
+                var layouts=fdjtState.getLocal("fdjtmetaBook.layouts",true);
                 var kept=[];
                 if (layouts) {
                     var pat=new RegExp("\\("+saved_sourceid+"\\)$");
                     var i=0, lim=layouts.length; while (i<lim) {
                         var cacheid=layouts[i++];
                         if (cacheid.search(pat)>0)
-                            CodexLayout.dropLayout(cacheid);
+                            metaBookLayout.dropLayout(cacheid);
                         else kept.push(cacheid);}}
                 if (kept.length)
-                    fdjtState.setLocal("fdjtCodex.layouts",kept);
-                else fdjtState.dropLocal("fdjtCodex.layouts",kept);}
+                    fdjtState.setLocal("fdjtmetaBook.layouts",kept);
+                else fdjtState.dropLocal("fdjtmetaBook.layouts",kept);}
             
             if (sourceid)
-                fdjtState.setLocal("codex.sourceid("+Codex.refuri+")",
+                fdjtState.setLocal("metabook.sourceid("+metaBook.refuri+")",
                                    sourceid);
             
             var args={page_height: height,page_width: width,
@@ -610,13 +610,13 @@ Codex.Paginate=
                       //  of layout (can help with debugging)
                       // timeslice: false,timeskip: false,
                       container: container,origin: origin,
-                      pagerule: Codex.CSS.pagerule,
-                      tracelevel: Codex.Trace.layout,
+                      pagerule: metaBook.CSS.pagerule,
+                      tracelevel: mB.Trace.layout,
                       layout_id: layout_id,
                       pagefn: setPageInfo,
                       logfn: fdjtLog};
-            fdjtDOM.replace("CODEXPAGES",container);
-            Codex.pages=container;
+            fdjtDOM.replace("METABOOKPAGES",container);
+            metaBook.pages=container;
             
             var avoidbreakclasses=
                 /\b(sbookfullpage)|(sbooktitlepage)|(stanza)\b/;
@@ -688,28 +688,28 @@ Codex.Paginate=
             else scaletopage=[".sbookscaletopage",".sbookpagescaled"];
             args.scaletopage=scaletopage=scaletopage;
             
-            if ((fdjtDOM.getMeta("Codex.dontbreakblocks"))||
-                (fdjtDOM.getMeta("Codex.keepblocks"))||
-                (fdjtDOM.getMeta("~=Codex.dontbreakblocks"))||
-                (fdjtDOM.getMeta("~=Codex.keepblocks"))||
+            if ((fdjtDOM.getMeta("metaBook.dontbreakblocks"))||
+                (fdjtDOM.getMeta("metaBook.keepblocks"))||
+                (fdjtDOM.getMeta("~=metaBook.dontbreakblocks"))||
+                (fdjtDOM.getMeta("~=metaBook.keepblocks"))||
                 (fdjtDOM.getMeta("~dontbreakblocks"))||
                 (fdjtDOM.getMeta("~keepblocks")))
                 args.break_blocks=false;
             else args.break_blocks=true;
             
-            if ((fdjtDOM.getMeta("Codex.dontscalepages"))||
-                (fdjtDOM.getMeta("~=Codex.dontscalepages"))||
+            if ((fdjtDOM.getMeta("metaBook.dontscalepages"))||
+                (fdjtDOM.getMeta("~=metaBook.dontscalepages"))||
                 (fdjtDOM.getMeta("dontscalepages")))
                 args.scale_pages=false;
             else args.scale_pages=true;
 
-            args.dontsave=fdjt.DOM.Selector(".codexglossmark");
+            args.dontsave=fdjt.DOM.Selector(".metabookglossmark");
             
             return args;}
-        CodexLayout.getLayoutArgs=getLayoutArgs;
+        metaBookLayout.getLayoutArgs=getLayoutArgs;
 
-        function sizeCodexPage(){
-            var page=Codex.page, geom=getGeometry(page);
+        function sizemetaBookPage(){
+            var page=metaBook.page, geom=getGeometry(page);
             var page_width=geom.width, view_width=fdjtDOM.viewWidth();
             var page_margin=(view_width-page_width)/2;
             if (page_margin!==50) {
@@ -720,7 +720,7 @@ Codex.Paginate=
         function scaleLayout(flag){
             // This adjusts to a resize by just scaling (using CSS
             // transforms) the current layout.
-            var cheaprule=Codex.CSS.resizerule;
+            var cheaprule=metaBook.CSS.resizerule;
             if (typeof flag==="undefined") flag=true;
             if ((flag)&&(hasClass(document.body,"_SCALEDLAYOUT"))) return;
             if ((!(flag))&&
@@ -732,18 +732,18 @@ Codex.Paginate=
                 cheaprule.style.top="";}
             if (!(flag)) {
                 dropClass(document.body,"_SCALEDLAYOUT");
-                sizeCodexPage();
+                sizemetaBookPage();
                 return;}
-            else sizeCodexPage();
-            var layout=Codex.layout;
+            else sizemetaBookPage();
+            var layout=metaBook.layout;
             var geom=getGeometry(fdjtID("CODEXPAGE"),false,true);
             var width=geom.width, height=geom.inner_height;
             var lwidth=layout.width, lheight=layout.height;
             var hscale=height/lheight, vscale=width/lwidth;
             var scale=((hscale<vscale)?(hscale):(vscale));
             if (!(cheaprule)) {
-                var s="#CODEXPAGE div.codexpage";
-                Codex.CSS.resizerule=cheaprule=fdjtDOM.addCSSRule(
+                var s="#CODEXPAGE div.metabookpage";
+                metaBook.CSS.resizerule=cheaprule=fdjtDOM.addCSSRule(
                     s+", body._ANIMATE.cxPREVIEW "+s,"");}
             cheaprule.style[fdjtDOM.transformOrigin]="left top";
             cheaprule.style[fdjtDOM.transform]="scale("+scale+","+scale+")";
@@ -754,57 +754,57 @@ Codex.Paginate=
             if (nwidth<width)
                 cheaprule.style.left=((width-nwidth)/2)+"px";
             if (nheight<height) cheaprule.style.top="0px";
-            var n=Codex.pagecount;
-            var spanwidth=(fdjtID("CODEXPAGEBAR").offsetWidth)/n;
+            var n=metaBook.pagecount;
+            var spanwidth=(fdjtID("METABOOKPAGEBAR").offsetWidth)/n;
             if (spanwidth<1) spanwidth=1;
-            if (Codex.CSS.pagespanrule)
-                Codex.CSS.pagespanrule.style.width=spanwidth+"px";
-            else Codex.CSS.pagespanrule=fdjtDOM.addCSSRule(
-                "div.codexpagespans > span","width: "+spanwidth+"px;");
+            if (metaBook.CSS.pagespanrule)
+                metaBook.CSS.pagespanrule.style.width=spanwidth+"px";
+            else metaBook.CSS.pagespanrule=fdjtDOM.addCSSRule(
+                "div.metabookpagespans > span","width: "+spanwidth+"px;");
             addClass(document.body,"_SCALEDLAYOUT");}
-        Codex.scaleLayout=scaleLayout;
+        metaBook.scaleLayout=scaleLayout;
         
         /* Updating the page display */
 
         function updatePageDisplay(pagenum,location,classname) {
             var update_progress=(!(classname));
             if (!(classname)) classname="current";
-            var npages=Codex.pagecount;
-            var page_elt=fdjt.ID("CODEXPAGESPAN"+pagenum);
-            var cur=getChildren("CODEXPAGEBAR","."+classname);
+            var npages=metaBook.pagecount;
+            var page_elt=fdjt.ID("METABOOKPAGESPAN"+pagenum);
+            var cur=getChildren("METABOOKPAGEBAR","."+classname);
             if (cur[0]!==page_elt) {
                 dropClass(cur,classname);
                 addClass(page_elt,classname);}
             var locoff;
             if (typeof location==='number') {
-                var max_loc=Codex.ends_at;
+                var max_loc=metaBook.ends_at;
                 var pct=(100*location)/max_loc;
                 // This is (very roughly) intended to be the precision needed
                 //  for line level (40 character) accuracy.
                 var prec=Math.round(Math.log(max_loc/40)/Math.log(10))-2;
                 if (prec<0) prec=0;
                 locoff=fdjtDOM(
-                    "span.locoff#CODEXLOCPCT",
+                    "span.locoff#METABOOKLOCPCT",
                     fdjtString.precString(pct,prec)+"%");
                 locoff.title=location+"/"+max_loc;}
-            else locoff=fdjtDOM("span.locoff#CODEXLOCPCT");
+            else locoff=fdjtDOM("span.locoff#METABOOKLOCPCT");
             var pageno_text=fdjtDOM(
-                "span#CODEXPAGENOTEXT.codexpageno",pagenum,"/",npages);
-            fdjtDOM.replace("CODEXPAGENOTEXT",pageno_text);
-            fdjtDOM.replace("CODEXLOCPCT",locoff);
+                "span#METABOOKPAGENOTEXT.metabookpageno",pagenum,"/",npages);
+            fdjtDOM.replace("METABOOKPAGENOTEXT",pageno_text);
+            fdjtDOM.replace("METABOOKLOCPCT",locoff);
             locoff.title=
                 ((locoff.title)||"")+
                 ((locoff.title)?("; "):(""))+
                 "click to jump to a percentage location in the book";
             if (update_progress) {
-                var page_progress=fdjtID("CODEXPAGEPROGRESS");
+                var page_progress=fdjtID("METABOOKPAGEPROGRESS");
                 if (page_progress) page_progress.style.width=
                     (((pagenum-1)*100)/npages)+"%";}
             if (update_progress) {
                 /* Update section markers */
                 var page=fdjtID("CODEXPAGE"+pagenum);
                 var topid=(page)&&page.getAttribute("data-topid");
-                var info=(topid)&&Codex.docinfo[topid];
+                var info=(topid)&&metaBook.docinfo[topid];
                 if (info) {
                     var head1=((info.level)?(info):(info.head));
                     var head2=((head1)&&(head1.head));
@@ -817,9 +817,9 @@ Codex.Paginate=
                         if (!(nextspan)) break;
                         head1=head2; head2=head3; head3=head2.head;
                         span1=span2; span2=span3; span3=nextspan;}
-                    var marker1=fdjtID("CODEXSECTMARKER1");
-                    var marker2=fdjtID("CODEXSECTMARKER2");
-                    var marker3=fdjtID("CODEXSECTMARKER3");
+                    var marker1=fdjtID("METABOOKSECTMARKER1");
+                    var marker2=fdjtID("METABOOKSECTMARKER2");
+                    var marker3=fdjtID("METABOOKSECTMARKER3");
                     if ((span1)&&(span1.width)) {
                         marker1.style.left=(100*((span1.start-1)/npages))+"%";
                         marker1.style.width=(100*(span1.width/npages))+"%";
@@ -836,10 +836,10 @@ Codex.Paginate=
                         marker3.style.display='block';                    }
                     else marker3.style.display='none';}}
             fdjtDOM.addListeners(
-                locoff,Codex.UI.handlers[Codex.ui]["#CODEXLOCPCT"]);
+                locoff,metaBook.UI.handlers[metaBook.ui]["#METABOOKLOCPCT"]);
             fdjtDOM.addListeners(
-                pageno_text,Codex.UI.handlers[Codex.ui]["#CODEXPAGENOTEXT"]);}
-        Codex.updatePageDisplay=updatePageDisplay;
+                pageno_text,metaBook.UI.handlers[metaBook.ui]["#METABOOKPAGENOTEXT"]);}
+        metaBook.updatePageDisplay=updatePageDisplay;
         
         function getPageSpan(headinfo) {
             var scan=headinfo, nextinfo, result={};
@@ -855,42 +855,42 @@ Codex.Paginate=
                 if (end_page)
                     result.end=parseInt(
                         (end_page).getAttribute("data-pagenum"),10);}
-            if (!(result.end)) result.end=Codex.layout.pages.length+1;
+            if (!(result.end)) result.end=metaBook.layout.pages.length+1;
             result.width=result.end-result.start;
             return result;}
 
         /* Page info */
         
         function setupPagebar(){
-            var i=0, n=Codex.pagecount; var html=[];
-            var pagemax=fdjt.ID("CODEXGOTOPAGEMAX");
+            var i=0, n=metaBook.pagecount; var html=[];
+            var pagemax=fdjt.ID("METABOOKGOTOPAGEMAX");
             if (pagemax) pagemax.innerHTML=""+n;
             var spanwidth=
-                (fdjtID("CODEXPAGEBAR").offsetWidth)/n;
+                (fdjtID("METABOOKPAGEBAR").offsetWidth)/n;
             if (spanwidth<1) spanwidth=1;
-            if (Codex.CSS.pagespanrule)
-                Codex.CSS.pagespanrule.style.width=spanwidth+"px";
-            else Codex.CSS.pagespanrule=fdjtDOM.addCSSRule(
-                "div.codexpagespans > span","width: "+spanwidth+"px;");
+            if (metaBook.CSS.pagespanrule)
+                metaBook.CSS.pagespanrule.style.width=spanwidth+"px";
+            else metaBook.CSS.pagespanrule=fdjtDOM.addCSSRule(
+                "div.metabookpagespans > span","width: "+spanwidth+"px;");
             while (i<n) {
-                var page=Codex.layout.pages[i];
+                var page=metaBook.layout.pages[i];
                 var topid=(page)&&(page.getAttribute("data-topid"));
-                var topinfo=(topid)&&(Codex.docinfo[topid]);
+                var topinfo=(topid)&&(metaBook.docinfo[topid]);
                 var zstyle=(((topinfo)&&(topinfo.level))?
                             ("; z-index: 50;"):(""));
-                html.push("<span id='CODEXPAGESPAN"+(i+1)+"' "+
-                          "class='codexpagespan' "+
+                html.push("<span id='METABOOKPAGESPAN"+(i+1)+"' "+
+                          "class='metabookpagespan' "+
                           "title='p"+(i+1)+". Hold to glimpse, tap to jump' "+
                           "style='left: "+(100*(i/n))+"%"+zstyle+"'"+
                           ">"+(i+1)+"</span>");
                 i++;}
-            var spans=fdjtID("CODEXPAGESPANS");
+            var spans=fdjtID("METABOOKPAGESPANS");
             spans.innerHTML=html.join("");
             var outer_width=getGeometry(spans);
             var inner_width=fdjt.DOM.getInsideBounds(spans);
             var tweak=outer_width/inner_width;
             spans.style[fdjt.DOM.transform]="scale("+tweak+",1)";}
-        Codex.setupPagebar=setupPagebar;
+        metaBook.setupPagebar=setupPagebar;
         
         /* Movement by pages */
         
@@ -898,21 +898,21 @@ Codex.Paginate=
         
         function GoToPage(spec,caller,savestate,skiphist){
             if (typeof savestate === 'undefined') savestate=true;
-            if (Codex.previewing) Codex.stopPreview("GoToPage",false);
-            dropClass(document.body,"codexhelp");
-            if (Codex.clearGlossmark) Codex.clearGlossmark();
-            if (Codex.mode==="addgloss") Codex.setMode(false,false);
-            var page=(Codex.layout)&&
-                (Codex.layout.getPage(spec)||Codex.layout.getPage(1));
+            if (metaBook.previewing) metaBook.stopPreview("GoToPage",false);
+            dropClass(document.body,"metabookhelp");
+            if (metaBook.clearGlossmark) metaBook.clearGlossmark();
+            if (metaBook.mode==="addgloss") metaBook.setMode(false,false);
+            var page=(metaBook.layout)&&
+                (metaBook.layout.getPage(spec)||metaBook.layout.getPage(1));
             if (page) {
                 var pagenum=parseInt(page.getAttribute("data-pagenum"),10);
                 var dirclass=false;
-                if (savestate) Codex.clearStateDialog();
-                if (Codex.Trace.flips)
+                if (savestate) metaBook.clearStateDialog();
+                if (mB.Trace.flips)
                     fdjtLog("GoToPage/%s Flipping to %o (%d) for %o",
                             caller,page,pagenum,spec);
                 if (!(curpage)) {
-                    var curpages=Codex.pages.getElementsByClassName('curpage');
+                    var curpages=metaBook.pages.getElementsByClassName('curpage');
                     if (curpages.length) dropClass(toArray(curpages),"curpage");
                     addClass(page,"curpage");}
                 else {
@@ -931,7 +931,7 @@ Codex.Paginate=
                         // This handles left over curpages from race
                         // conditions, etc.
                         var whoops=
-                            Codex.pages.getElementsByClassName('curpage');
+                            metaBook.pages.getElementsByClassName('curpage');
                         if (whoops.length) dropClass(toArray(whoops),"curpage");
                         dropClass(lastpage,"curpage");
                         addClass(page,"curpage");
@@ -944,16 +944,16 @@ Codex.Paginate=
                 if (typeof spec === 'number') {
                     var locval=page.getAttribute("data-sbookloc");
                     var location=((locval)&&(parseInt(locval,10)));
-                    if (location) Codex.setLocation(location);}
-                updatePageDisplay(pagenum,Codex.location);
-                curpage=page; Codex.curpage=pagenum;
+                    if (location) metaBook.setLocation(location);}
+                updatePageDisplay(pagenum,metaBook.location);
+                curpage=page; metaBook.curpage=pagenum;
                 var curnode=cxID(page.getAttribute("data-topid"));
                 if (savestate) {
-                    Codex.point=curnode;
-                    if (!((Codex.hudup)||(Codex.mode))) Codex.skimming=false;
-                    Codex.setHead(curnode);}
+                    metaBook.point=curnode;
+                    if (!((metaBook.hudup)||(metaBook.mode))) metaBook.skimming=false;
+                    metaBook.setHead(curnode);}
                 if ((savestate)&&(page)) {
-                    Codex.saveState(
+                    metaBook.saveState(
                         {location: atoi(page.getAttribute("data-sbookloc"),10),
                          page: atoi(page.getAttribute("data-pagenum"),10),
                          target: ((curnode)&&
@@ -961,38 +961,38 @@ Codex.Paginate=
                         skiphist);}
                 var glossed=fdjtDOM.$(".glossed",page);
                 if (glossed) {
-                    var addGlossmark=Codex.UI.addGlossmark;
+                    var addGlossmark=metaBook.UI.addGlossmark;
                     var i=0; var lim=glossed.length;
                     while (i<lim) addGlossmark(glossed[i++]);}}}
-        Codex.GoToPage=GoToPage;
+        metaBook.GoToPage=GoToPage;
         
 
         /** Previewing **/
 
         var previewing=false;
         function startPagePreview(spec,caller){
-            var page=((spec.nodeType)&&(getParent(spec,".codexpage")))||
-                Codex.layout.getPage(spec)||
-                Codex.layout.getPage(1);
+            var page=((spec.nodeType)&&(getParent(spec,".metabookpage")))||
+                metaBook.layout.getPage(spec)||
+                metaBook.layout.getPage(1);
             if (!(page)) return;
             var pagenum=parseInt(page.getAttribute("data-pagenum"),10);
             var pageloc=parseInt(page.getAttribute("data-sbookloc"),10);
             if (previewing===page) return;
             if (previewing) dropClass(previewing,"previewpage");
-            dropClass(getChildren(Codex.pages,".previewpage"),
+            dropClass(getChildren(metaBook.pages,".previewpage"),
                       "previewpage");
-            if ((Codex.Trace.flips)||(Codex.Trace.gestures))
+            if ((mB.Trace.flips)||(mB.Trace.gestures))
                 fdjtLog("startPagePreview/%s to %o (%d) for %o",
                         caller||"nocaller",page,pagenum,spec);
             if (curpage) addClass(curpage,"hidepage");
             addClass(page,"previewpage");
-            Codex.previewing=previewing=page;
+            metaBook.previewing=previewing=page;
             addClass(document.body,"cxPREVIEW");
             updatePageDisplay(pagenum,pageloc,"preview");}
-        Codex.startPagePreview=startPagePreview;
+        metaBook.startPagePreview=startPagePreview;
         function stopPagePreview(caller,target){
             var pagenum=parseInt(curpage.getAttribute("data-pagenum"),10);
-            if ((Codex.Trace.flips)||(Codex.Trace.gestures))
+            if ((mB.Trace.flips)||(mB.Trace.gestures))
                 fdjtLog("stopPagePreview/%s from %o to %o (%d)",
                         caller||"nocaller",previewing,curpage,pagenum);
             var newpage=false;
@@ -1001,8 +1001,8 @@ Codex.Paginate=
                 dropClass(curpage,"curpage");
                 dropClass(curpage,"hidepage");
                 addClass(previewing,"curpage");
-                if (hasClass(target,"codexpage")) newpage=target;
-                else newpage=getParent(target,".codexpage");}
+                if (hasClass(target,"metabookpage")) newpage=target;
+                else newpage=getParent(target,".metabookpage");}
             else if (target)  {
                 dropClass(curpage,"curpage");
                 dropClass(curpage,"hidepage");
@@ -1012,29 +1012,29 @@ Codex.Paginate=
                 dropClass(previewing,"preview");
                 dropClass(curpage,"hidepage");}
             dropClass(previewing,"previewpage");
-            dropClass(getChildren(Codex.pages,".previewpage"),
+            dropClass(getChildren(metaBook.pages,".previewpage"),
                       "previewpage");
-            Codex.previewing=previewing=false;
+            metaBook.previewing=previewing=false;
             dropClass(document.body,"cxPREVIEW");
             if (newpage) {
                 var newnum=parseInt(newpage.getAttribute("data-pagenum"),10);
-                var newloc=Codex.getLocInfo(target);
+                var newloc=metaBook.getLocInfo(target);
                 updatePageDisplay(newnum,((newloc)&&(newloc.starts_at)),
                                   "current");}
-            else updatePageDisplay(pagenum,Codex.location,"current");
-            if (typeof newpage === "number") Codex.GoToPage(newpage);}
-        Codex.stopPagePreview=stopPagePreview;
+            else updatePageDisplay(pagenum,metaBook.location,"current");
+            if (typeof newpage === "number") metaBook.GoToPage(newpage);}
+        metaBook.stopPagePreview=stopPagePreview;
         
         function getPage(arg,location){
             var node=((arg)&&
                       ((arg.nodeType)?(arg):
                        (typeof arg === "string")?(cxID(arg)):
                        (false)));
-            var page=((node)&&(getParent(node,".codexpage")));
+            var page=((node)&&(getParent(node,".metabookpage")));
             if ((!(location))||(!(page))) return page;
             var loc=parseInt(page.getAttribute("data-sbookloc"),10);
             if (loc===location) return page;
-            var layout=Codex.layout, pages=layout.pages, npages=pages.length;
+            var layout=metaBook.layout, pages=layout.pages, npages=pages.length;
             var i=((page)?(parseInt(page.getAttribute("data-pagenum"),10)):(1)); i--;
             var prev=page; while (i<npages) {
                 var next=pages[i++];
@@ -1044,24 +1044,24 @@ Codex.Paginate=
                 else if (loc>location) return prev;
                 else i++;}
             return page;}
-        Codex.getPage=getPage;
+        metaBook.getPage=getPage;
         
         function refreshLayout(why){
-            Codex.Paginate(why,{forced: true});}
-        Codex.refreshLayout=refreshLayout;
+            metaBook.Paginate(why,{forced: true});}
+        metaBook.refreshLayout=refreshLayout;
         
         function syncLayout(){
             var geom=getGeometry(fdjtID("CODEXPAGE"),false,true);
             var height=geom.inner_height, width=geom.width;
-            if ((Codex.layout.height===height)&&
-                (Codex.layout.width===width))
+            if ((metaBook.layout.height===height)&&
+                (metaBook.layout.width===width))
                 return;
             else refreshLayout("sync_resize");}
 
         function displaySync(){
-            if ((Codex.pagecount)&&(Codex.curpage))
-                Codex.GoToPage(Codex.curpage,"displaySync",false);}
-        Codex.displaySync=displaySync;
+            if ((metaBook.pagecount)&&(metaBook.curpage))
+                metaBook.GoToPage(metaBook.curpage,"displaySync",false);}
+        metaBook.displaySync=displaySync;
 
         return Paginate;})();
 

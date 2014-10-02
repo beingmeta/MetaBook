@@ -4,102 +4,102 @@
 
 @charset "UTF-8";
 
-/* codex 'slices' of summaries or glosses */
+/* metabook 'slices' of summaries or glosses */
 
-div.codexslice { cursor: crosshair; }
-div.codexslice button, div.codexslice input[TYPE="SUBMIT"],
-div.codexslice img.button, div.codexslice .tool {
+div.metabookslice { cursor: crosshair; }
+div.metabookslice button, div.metabookslice input[TYPE="SUBMIT"],
+div.metabookslice img.button, div.metabookslice .tool {
     cursor: pointer; }
-div.codexslice input[TYPE="TEXT"], div.codexslice textarea { cursor: text; }
+div.metabookslice input[TYPE="TEXT"], div.metabookslice textarea { cursor: text; }
 
-div.codexslice div.codexcard { margin-left: 20px;}
-div.codexslice.sourced div.codexcard { display: none;}
-div.codexslice.sourced div.codexcard.sourced { display: block;}
+div.metabookslice div.metabookcard { margin-left: 20px;}
+div.metabookslice.sourced div.metabookcard { display: none;}
+div.metabookslice.sourced div.metabookcard.sourced { display: block;}
 @media (pointer: coarse) and (max-width: 650px) {
-    div.codexslice div.codexcard { font-size: 120%; }}
+    div.metabookslice div.metabookcard { font-size: 120%; }}
 
-div.codexslice.sourced div.codexthread { display: none;}
-div.codexslice.sourced div.codexthread > div { display: none;}
-div.codexslice.sourced div.codexthread.sourced { display: block;}
-div.codexslice.sourced div.codexthread.sourced > div.tochead { display: block;}
-div.codexslice.sourced div.codexthread.sourced > div.idhead { display: block;}
-div.codexslice.sourced div.codexthread.sourced > div.codexthread { display: none;}
-div.codexslice.sourced div.codexthread.sourced > div.codexthread.sourced {
+div.metabookslice.sourced div.metabookthread { display: none;}
+div.metabookslice.sourced div.metabookthread > div { display: none;}
+div.metabookslice.sourced div.metabookthread.sourced { display: block;}
+div.metabookslice.sourced div.metabookthread.sourced > div.tochead { display: block;}
+div.metabookslice.sourced div.metabookthread.sourced > div.idhead { display: block;}
+div.metabookslice.sourced div.metabookthread.sourced > div.metabookthread { display: none;}
+div.metabookslice.sourced div.metabookthread.sourced > div.metabookthread.sourced {
     display: block;}
 
-div.codexslice.onepassage .tocblock .tochead {display:none;}
+div.metabookslice.onepassage .tocblock .tochead {display:none;}
 
-div.codexslice .tocthread {}
-div.codexslice .tocthread .codexcard .tochead { display: none;}
-div.codexslice .idthread .codexcard .idhead { display: none;}
-div.codexslice .tocthread > .codexcard .idhead { display: none;}
+div.metabookslice .tocthread {}
+div.metabookslice .tocthread .metabookcard .tochead { display: none;}
+div.metabookslice .idthread .metabookcard .idhead { display: none;}
+div.metabookslice .tocthread > .metabookcard .idhead { display: none;}
 
-div.codexslice .tocthread > .codexcard:first-child .tochead {
+div.metabookslice .tocthread > .metabookcard:first-child .tochead {
     display: block;}
-div.codexslice .tocthread > .idthread:first-child .codexcard:first-child .tochead {
+div.metabookslice .tocthread > .idthread:first-child .metabookcard:first-child .tochead {
     display: block;}
-div.codexslice .idthread > .codexcard:first-child .idhead {
+div.metabookslice .idthread > .metabookcard:first-child .idhead {
     display: block;}
 
-div.codexslice .codexcard div.detail { 
+div.metabookslice .metabookcard div.detail { 
   display: none; color: ivory; clear: both;}
-div.codexslice .showdetail div.detail { display: block;}
-div.codexslice div.xrefs { display: none;}
-div.codexslice .showxrefs div.xrefs { display: block;}
-div.codexslice div.xrefs a { display: block;}
-div.codexslice div.codexcard span.tags span.other { display: none;}
+div.metabookslice .showdetail div.detail { display: block;}
+div.metabookslice div.xrefs { display: none;}
+div.metabookslice .showxrefs div.xrefs { display: block;}
+div.metabookslice div.xrefs a { display: block;}
+div.metabookslice div.metabookcard span.tags span.other { display: none;}
 
-div.codexthread {
+div.metabookthread {
     clear: both; margin: 0px; border: none;
     border-right: gold solid 3px;}
-div.codexthread.singleton {
+div.metabookthread.singleton {
     border-left: none; margin-left: 0px;
     padding-left: 0px; margin-top: 0px; margin-bottom: 6px;}
-div.codexthread .locbar { background-color: silver;}
-div.codexthread.headthread { border-top: solid gold 2px;}
-div.codexthread.idthread {border: none;}
-div.codexthread.idthread .codexcard {}
-div.codexslice div.codexthread div.codexcard div.locbar {border: none;}
-div.codexslice div.codexthread div.codexcard div.locbar {display:none;}
-div.codexslice div.codexthread div.codexcard:first-child div.locbar {
+div.metabookthread .locbar { background-color: silver;}
+div.metabookthread.headthread { border-top: solid gold 2px;}
+div.metabookthread.idthread {border: none;}
+div.metabookthread.idthread .metabookcard {}
+div.metabookslice div.metabookthread div.metabookcard div.locbar {border: none;}
+div.metabookslice div.metabookthread div.metabookcard div.locbar {display:none;}
+div.metabookslice div.metabookthread div.metabookcard:first-child div.locbar {
     display:block;}
 
-div.codexslice div.codexskimpoint {
+div.metabookslice div.metabookskimpoint {
     border-left: solid red 16px;
     border-top: solid red 4px;
     border-bottom: solid red 4px;
     margin-left: 0px;
     background-color: white;}
-div.codexslice div.codexskimpoint.codexcard {}
-div.codexslice div.codexskimpoint.codexcard .tool {
+div.metabookslice div.metabookskimpoint.metabookcard {}
+div.metabookslice div.metabookskimpoint.metabookcard .tool {
     font-size: 47%; font-weight: bold;}
-div.codexslice div.codexskimpoint.codexcard img.userpic,
-div.codexslice div.codexskimpoint.codexcard img.sourcepic {
+div.metabookslice div.metabookskimpoint.metabookcard img.userpic,
+div.metabookslice div.metabookskimpoint.metabookcard img.sourcepic {
     width: 75px;}
 
-div.codexskimpoint .codexcard .codexcardbody { padding-top: 0px;}
+div.metabookskimpoint .metabookcard .metabookcardbody { padding-top: 0px;}
 
-div.codexslice div.codexcard.codexskimpoint + div.codexcard > div.codexcardbody,
-div.codexslice div.codexcard.codexskimpoint .codexcardbody {
+div.metabookslice div.metabookcard.metabookskimpoint + div.metabookcard > div.metabookcardbody,
+div.metabookslice div.metabookcard.metabookskimpoint .metabookcardbody {
     border-top-width: 0px;}
-div.codexslice div.codexcard.codexskimpoint .fdjtclearfloats {
+div.metabookslice div.metabookcard.metabookskimpoint .fdjtclearfloats {
     margin-bottom: 0px;}
 
-/* CODEXSOURCES */
+/* METABOOKSOURCES */
 
-div.codexsources {}
-div.codexsources img.button {
+div.metabooksources {}
+div.metabooksources img.button {
     height: 50px; width: auto; max-width: 50px; border-radius: 10%;
     box-sizing: border-box;}
-div.codexsources img.button.everyone {}
-div.codexsources img.button.everyone.selected { background-color: silver; }
-div.codexsources .button {
+div.metabooksources img.button.everyone {}
+div.metabooksources img.button.everyone.selected { background-color: silver; }
+div.metabooksources .button {
     border: solid transparent 4px;
     margin: 0px; margin-left: 2px; margin-right: 2px;}
-div.codexsources img.button.source.selected,
-div.codexsources div.button.source.selected {
+div.metabooksources img.button.source.selected,
+div.metabooksources div.button.source.selected {
     border-color: blue;}
-div.codexsources div.button.source {
+div.metabooksources div.button.source {
     min-height: 50px; min-width: 50px; display: inline;
     height: 50px; width: 50px; font-size: 32px;
     text-align: center; vertical-align: top;
@@ -107,7 +107,7 @@ div.codexsources div.button.source {
 
 /* Heads of various sorts */
 
-#CODEXHUD div.codexthread > div.locrule {
+#METABOOKHUD div.metabookthread > div.locrule {
     position: relative; left: 0px; bottom: 0px; z-index: 50;
     width: 100%; min-height: 10px;}
 
@@ -168,19 +168,19 @@ div.idhead div {
     -moz-opacity: 0.75;
     -o-opacity: 0.75;}
 
-div.codexslice div.codexcard div.tochead { display: none; }
-div.codexslice div.codexcard div.idhead { display: none; }
-div.codexslice div.codexcard.slicenewhead div.tochead { display: block; }
-div.codexslice div.codexcard.slicenewpassage div.idhead { display: block; }
+div.metabookslice div.metabookcard div.tochead { display: none; }
+div.metabookslice div.metabookcard div.idhead { display: none; }
+div.metabookslice div.metabookcard.slicenewhead div.tochead { display: block; }
+div.metabookslice div.metabookcard.slicenewpassage div.idhead { display: block; }
 
-#CODEXPOINTGLOSSES div.codexslice div.codexcard.gloss.slicenewpassage
-  div.codexcardbody,
-#CODEXSKIMMER div.codexcard div.codexcardbody {
+#METABOOKPOINTGLOSSES div.metabookslice div.metabookcard.gloss.slicenewpassage
+  div.metabookcardbody,
+#METABOOKSKIMMER div.metabookcard div.metabookcardbody {
     border-top: 0px; padding-left: 1em; padding-top: 0.25ex;}
-#CODEXSKIMMER div.codexcard div.idhead {
+#METABOOKSKIMMER div.metabookcard div.idhead {
     border-bottom: 0px;}
 
-#CODEXFRAME._ANIMATE body._ISCROLL div.codexslice {
+#METABOOKFRAME._ANIMATE body._ISCROLL div.metabookslice {
     transition-property: transform;
     -webkit-transition-property: -webkit-transform;
     -moz-transition-property: -moz-transform;

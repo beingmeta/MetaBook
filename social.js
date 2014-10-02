@@ -1,6 +1,6 @@
 /* -*- Mode: Javascript; Character-encoding: utf-8; -*- */
 
-/* ###################### codex/social.js ###################### */
+/* ###################### metabook/social.js ###################### */
 
 /* Copyright (C) 2009-2014 beingmeta, inc.
 
@@ -8,7 +8,7 @@
    their "sources" --- the reasons they're overlaid on the reader's
    book in the first place.
 
-   This file is part of Codex, a Javascript/DHTML web application for reading
+   This file is part of metaBook, a Javascript/DHTML web application for reading
    large structured documents (sBooks).
 
    For more information on sbooks, visit www.sbooks.net
@@ -36,14 +36,14 @@
 
 */
 /* jshint browser: true */
-/* global Codex: false */
+/* global metaBook: false */
 
 /* Initialize these here, even though they should always be
    initialized before hand.  This will cause various code checkers to
    not generate unbound variable warnings when called on individual
    files. */
 // var fdjt=((typeof fdjt !== "undefined")?(fdjt):({}));
-// var Codex=((typeof Codex !== "undefined")?(Codex):({}));
+// var metaBook=((typeof metaBook !== "undefined")?(metaBook):({}));
 // var Knodule=((typeof Knodule !== "undefined")?(Knodule):({}));
 // var iScroll=((typeof iScroll !== "undefined")?(iScroll):({}));
 
@@ -56,7 +56,7 @@
     var RefDB=fdjt.RefDB, fdjtID=fdjt.ID;
 
     var hasClass=fdjtDOM.hasClass;
-    var cxicon=Codex.icon;
+    var cxicon=metaBook.icon;
 
     /* Social UI components */
 
@@ -102,39 +102,39 @@
                     ((info.about)?(info.about):"");
                 icon.title=title; icon.oid=info._id;
                 icon.id="SBOOKSOURCEICON"+humid;
-                fdjtDOM(fdjtID("CODEXSOURCES")," ",icon);}}
+                fdjtDOM(fdjtID("METABOOKSOURCES")," ",icon);}}
         return info;}
-    Codex.UI.addSource=addSource;
-    Codex.UI.addGlossSource=function(info){addSource(info,true);};
+    metaBook.UI.addSource=addSource;
+    metaBook.UI.addGlossSource=function(info){addSource(info,true);};
 
     function everyone_ontap(evt){
         evt=evt||window.event||null;
         var target=fdjtDOM.T(evt);
-        // var sources=fdjtDOM.getParent(target,".codexsources");
+        // var sources=fdjtDOM.getParent(target,".metabooksources");
         // var glosses=fdjtDOM.getParent(target,".sbookglosses");
-        var sources=fdjtID("CODEXSOURCES");
-        var glosses=fdjtID("CODEXALLGLOSSES");
+        var sources=fdjtID("METABOOKSOURCES");
+        var glosses=fdjtID("METABOOKALLGLOSSES");
         if ((!(sources))||(!(glosses)))
             return; /* Warning? */
         if (fdjtDOM.hasClass(target,"selected")) {
-            Codex.setMode(false);
+            metaBook.setMode(false);
             fdjtDOM.cancel(evt);
             return;}
         var selected=fdjtDOM.$(".selected",sources);
         fdjtDOM.toggleClass(selected,"selected");
         fdjtDOM.addClass(target,"selected");
-        Codex.UI.selectSources(Codex.glosses,false);
+        metaBook.UI.selectSources(metaBook.glosses,false);
         fdjtDOM.cancel(evt);}
-    Codex.UI.handlers.everyone_ontap=everyone_ontap;
+    metaBook.UI.handlers.everyone_ontap=everyone_ontap;
 
     function sources_ontap(evt){
         evt=evt||window.event||null;
-        // if (!(Codex.user)) return;
+        // if (!(metaBook.user)) return;
         var target=fdjtDOM.T(evt);
-        // var sources=fdjtDOM.getParent(target,".codexsources");
+        // var sources=fdjtDOM.getParent(target,".metabooksources");
         // var glosses=fdjtDOM.getParent(target,".sbookglosses");
-        var sources=fdjtID("CODEXSOURCES");
-        var glosses=fdjtID("CODEXALLGLOSSES");
+        var sources=fdjtID("METABOOKSOURCES");
+        var glosses=fdjtID("METABOOKALLGLOSSES");
         var new_sources=[];
         if ((!(sources))||(!(glosses))||(!(target.oid)))
             return; /* Warning? */
@@ -154,12 +154,12 @@
         var everyone=fdjtDOM.$(".everyone",sources)[0];
         if (new_sources.length) {
             if (everyone) fdjtDOM.dropClass(everyone,"selected");
-            Codex.UI.selectSources(Codex.glosses,new_sources);}
+            metaBook.UI.selectSources(metaBook.glosses,new_sources);}
         else {
             if (everyone) fdjtDOM.addClass(everyone,"selected");
-            Codex.UI.selectSources(Codex.glosses,false);}
+            metaBook.UI.selectSources(metaBook.glosses,false);}
         fdjtDOM.cancel(evt);}
-    Codex.UI.handlers.sources_ontap=sources_ontap;
+    metaBook.UI.handlers.sources_ontap=sources_ontap;
 
     function geticon(source){
         return ((source.pic)||(source.fb_pic)||
@@ -169,7 +169,7 @@
                   source.fbid+"/picture?type=square")));}
 
     function extendGlossmark(glossmark,glosses,image){
-        var sources=Codex.sourcedb; var glossdb=Codex.glossdb;
+        var sources=metaBook.sourcedb; var glossdb=metaBook.glossdb;
         if (!(image)) image=fdjtDOM.getChild(glossmark,".wedge");
         var images=image.getAttribute("data-images").split("|");
         if ((images.length===1)&&(images[0]==="")) images=[];
@@ -193,15 +193,15 @@
         image.setAttribute("data-images",images.join("|"));
         return glossmark;}
     
-    Codex.UI.addGlossmark=function(passage,gloss){
-        var Glosses=Codex.glossdb;
-        var current_glossmark=fdjtDOM.getChild(passage,".codexglossmark");
+    metaBook.UI.addGlossmark=function(passage,gloss){
+        var Glosses=metaBook.glossdb;
+        var current_glossmark=fdjtDOM.getChild(passage,".metabookglossmark");
         if ((current_glossmark)&&(current_glossmark.parentNode===passage)) {
             if (gloss) extendGlossmark(current_glossmark,[gloss]);
             return current_glossmark;}
         var imgsrc=(cxicon("sbwedge",64,64));
         var wedge=fdjtDOM.Image(imgsrc,"wedge","glosses");
-        var glossmark=fdjtDOM("a.codexglossmark.fdjtskiptext",wedge);
+        var glossmark=fdjtDOM("a.metabookglossmark.fdjtskiptext",wedge);
         // Get all the glosses from the index
         var id=passage.getAttribute("data-baseid")||passage.id;
         var glosses=Glosses.find("frag",id);
@@ -212,47 +212,47 @@
         wedge.defaultsrc=imgsrc;
         wedge.setAttribute("data-images","");
         extendGlossmark(glossmark,glosses,wedge);
-        Codex.UI.addHandlers(glossmark,"glossmark");
+        metaBook.UI.addHandlers(glossmark,"glossmark");
         fdjtDOM.addClass(passage,"glossed");
         fdjtDOM.prepend(passage,glossmark);
-        glossmark.name="CODEX_GLOSSMARK_"+id;
+        glossmark.name="METABOOK_GLOSSMARK_"+id;
         return glossmark;};
     
-    var CodexSlice=Codex.Slice;
+    var metaBookSlice=metaBook.Slice;
 
     function showGlossmark(target,point) {
-        var id=target.codexbaseid||target.id;
+        var id=target.metabookbaseid||target.id;
         if (!(id)) return;
-        var dups=Codex.getDups(target.id);
-        var glossids=Codex.glossdb.find('frag',id), glosses=[];
-        var slicediv=fdjtDOM("div.codexglosses.codexslice");
+        var dups=metaBook.getDups(target.id);
+        var glossids=metaBook.glossdb.find('frag',id), glosses=[];
+        var slicediv=fdjtDOM("div.metabookglosses.metabookslice");
         if ((!(glossids))||(!(glossids.length)))
             fdjtDOM.addClass(slicediv,"noglosses");
-        if (Codex.target) Codex.clearHighlights(Codex.target);
+        if (metaBook.target) metaBook.clearHighlights(metaBook.target);
         var i=0, lim=glossids.length; while (i<lim) {
-            var glossref=Codex.glossdb.ref(glossids[i++]);
+            var glossref=metaBook.glossdb.ref(glossids[i++]);
             glosses.push(glossref);}
-        // Codex.glossdb.load(glosses);
+        // metaBook.glossdb.load(glosses);
         i=0; while (i<lim) {
             var gloss=glosses[i++];
             if (gloss.excerpt) {
-                var range=Codex.findExcerpt(dups,gloss.excerpt,gloss.exoff);
+                var range=metaBook.findExcerpt(dups,gloss.excerpt,gloss.exoff);
                 if (range) {
                     var starts=range.startContainer;
-                    if (!(hasClass(starts,"codexhighlightexcerpt"))) {
-                        fdjtUI.Highlight(range,"codexhighlightexcerpt");}}}}
-        var slice=new CodexSlice(slicediv,glosses);
-        var hudwrapper=fdjtDOM("div.hudpanel#CODEXPOINTGLOSSES",slicediv);
+                    if (!(hasClass(starts,"metabookhighlightexcerpt"))) {
+                        fdjtUI.Highlight(range,"metabookhighlightexcerpt");}}}}
+        var slice=new metaBookSlice(slicediv,glosses);
+        var hudwrapper=fdjtDOM("div.hudpanel#METABOOKPOINTGLOSSES",slicediv);
         if (point) {
             hudwrapper.style.display='block';
             hudwrapper.style.opacity=0.0;
-            fdjtDOM.replace("CODEXPOINTGLOSSES",hudwrapper);
+            fdjtDOM.replace("METABOOKPOINTGLOSSES",hudwrapper);
             var geom=fdjtDOM.getGeometry(slicediv);
             var wgeom=fdjtDOM.getGeometry(hudwrapper);
             var pgeom=fdjtDOM.getGeometry(point);
             var tgeom=fdjtDOM.getGeometry(target);
             var w=fdjtDOM.viewWidth(), h=fdjtDOM.viewHeight();
-            if (Codex.fullwidth) {
+            if (metaBook.fullwidth) {
                 var wspec=(w-30)+"px";
                 hudwrapper.style.left="10px";
                 hudwrapper.style.width=
@@ -271,12 +271,12 @@
                 else hudwrapper.style.maxWidth=(w-100)+"px";}
             geom=fdjtDOM.getGeometry(slicediv);
             wgeom=fdjtDOM.getGeometry(hudwrapper);
-            if ((!(Codex.fullwidth))&&(geom.width>(w-50)))
+            if ((!(metaBook.fullwidth))&&(geom.width>(w-50)))
                 hudwrapper.style.left="10px";
             var wh=false;
             if ((geom.height+15)>h/2) wh=h/2;
             else wh=geom.height+10;
-            if ((!(Codex.fullwidth))&&(wh>50))
+            if ((!(metaBook.fullwidth))&&(wh>50))
                 hudwrapper.style.height=wh+'px';
             slicediv.style.overflow='hidden';
             var above_point=pgeom.top-60, below_point=(h-60)-pgeom.bottom;
@@ -292,7 +292,7 @@
                 hudwrapper.style.top=(pgeom.bottom+15)+'px';
             else {
                 // Now, we're scrolling
-                if (!(Codex.fullwidth)) {
+                if (!(metaBook.fullwidth)) {
                     hudwrapper.style.right=(w-pgeom.left+10)+'px';
                     hudwrapper.style.left='50px';}
                 if (pgeom.top-(h/4)<50) {
@@ -304,30 +304,30 @@
                     hudwrapper.style.bottom='auto';
                     hudwrapper.style.height=(h/2)+'px';}}
             // fdjtLog("geom=%j, pgeom=%j, wgeom=%j ph=%j",geom,pgeom,wgeom,fdjtDOM.viewHeight());
-            if (Codex.fullwidth) {}
+            if (metaBook.fullwidth) {}
             else if (fdjtDOM.viewWidth()<300)
                 hudwrapper.style.minWidth=((fdjtDOM.viewWidth())-10)+"px";
             hudwrapper.style.display='';
             hudwrapper.style.opacity='';}
-        else fdjtDOM.replace("CODEXPOINTGLOSSES",hudwrapper);
+        else fdjtDOM.replace("METABOOKPOINTGLOSSES",hudwrapper);
         if (point) {
-            var cur=fdjtID("CODEXOPENGLOSSMARK");
+            var cur=fdjtID("METABOOKOPENGLOSSMARK");
             if (cur) {
-                if (Codex.target)
-                    Codex.clearHighlights(Codex.target);
+                if (metaBook.target)
+                    metaBook.clearHighlights(metaBook.target);
                 cur.id="";}
-            point.id="CODEXOPENGLOSSMARK";}
-        Codex.setTarget(target);
+            point.id="METABOOKOPENGLOSSMARK";}
+        metaBook.setTarget(target);
         slice.update();
-        Codex.setMode("openglossmark");}
-    Codex.showGlossmark=showGlossmark;
+        metaBook.setMode("openglossmark");}
+    metaBook.showGlossmark=showGlossmark;
 
     function clearGlossmark() {
-        if (Codex.mode==="openglossmark") Codex.setMode(false,true);
-        var slicediv=fdjtDOM("div.codexglosses.codexslice");
-        var hudwrapper=fdjtDOM("div.hudpanel#CODEXPOINTGLOSSES",slicediv);
-        fdjtDOM.replace("CODEXPOINTGLOSSES",hudwrapper);}
-    Codex.clearGlossmark=clearGlossmark;
+        if (metaBook.mode==="openglossmark") metaBook.setMode(false,true);
+        var slicediv=fdjtDOM("div.metabookglosses.metabookslice");
+        var hudwrapper=fdjtDOM("div.hudpanel#METABOOKPOINTGLOSSES",slicediv);
+        fdjtDOM.replace("METABOOKPOINTGLOSSES",hudwrapper);}
+    metaBook.clearGlossmark=clearGlossmark;
 
 })();
 
