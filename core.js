@@ -184,6 +184,8 @@ var metaBook={
     var getLocal=fdjtState.getLocal;
     var setLocal=fdjtState.setLocal;
     
+    var mB=metaBook;
+
     metaBook.tagweights=new ObjectMap();
     metaBook.tagscores=new ObjectMap();
 
@@ -375,7 +377,7 @@ var metaBook={
                 if (metaBook.user) {
                     // For now, we clear layouts, because they might
                     //  contain personalized information
-                    fdjt.metaBookLayout.clearLayouts();}
+                    fdjt.CodexLayout.clearLayouts();}
                 fdjtState.clearLocal();
                 fdjtState.clearSession();}
             else {
@@ -1344,7 +1346,7 @@ var metaBook={
                   (metaBook.getPage(target,location)));
         var pageno=(page)&&(parseInt(page.getAttribute("data-pagenum"),10));
         if (!(target)) {
-            if (metaBook.layout instanceof fdjt.metaBookLayout)
+            if (metaBook.layout instanceof fdjt.CodexLayout)
                 metaBook.GoToPage(arg,caller,savestate);
             else if (arg.nodeType) {
                 var scan=arg;
@@ -1497,7 +1499,7 @@ var metaBook={
         if (mB.Trace.flips)
             fdjtLog("startPreview %o (%s)",target,caller);
         if (target===metaBook.previewing) {}
-        else if (metaBook.layout instanceof fdjt.metaBookLayout) {
+        else if (metaBook.layout instanceof fdjt.CodexLayout) {
             var dups=((getTarget(target))&&(metaBook.getDups(target)));
             metaBook.startPagePreview(target,caller);
             if (dups) addClass(dups,"metabookpreviewtarget");}
@@ -1506,7 +1508,7 @@ var metaBook={
             addClass(target,"metabookpreviewtarget");}
         metaBook.previewing=target;
         addClass(document.body,"cxPREVIEW");
-        if (hasClass(target,"metabookpage")) addClass(document.body,"cxPAGEPREVIEW");
+        if (hasClass(target,"codexpage")) addClass(document.body,"cxPAGEPREVIEW");
         return target;}
     metaBook.startPreview=startPreview;
     function stopPreview(caller,jumpto){
@@ -1517,7 +1519,7 @@ var metaBook={
             fdjtLog("stopPreview/%s jump to %o, pt=%o, p=%o",
                     caller||"nocaller",jumpto,
                     metaBook.previewTarget,metaBook.previewing);
-        if (metaBook.layout instanceof fdjt.metaBookLayout) {
+        if (metaBook.layout instanceof fdjt.CodexLayout) {
             metaBook.stopPagePreview(caller,jumpto);}
         else if (!(jumpto)) scrollPreview(false,caller);
         else if (jumpto===metaBook.previewing) {

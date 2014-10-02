@@ -85,6 +85,7 @@
 (function(){
     "use strict";
 
+    var mB=metaBook;
     var fdjtString=fdjt.String;
     var fdjtTime=fdjt.Time;
     var fdjtLog=fdjt.Log;
@@ -429,7 +430,7 @@
             if (!(found)) return elts[0];
             else return found;}}
 
-    var metaBookSlice=metaBook.Slice;
+    var MetaBookSlice=metaBook.Slice;
 
     function handle_body_click(target){
         // Assume 3s gaps are spurious
@@ -516,7 +517,7 @@
             var gloss=metaBook.glossdb.ref(glossid);
             if (!(gloss)) return false;
             var slicediv=fdjtDOM("div.metabookglosses.metabookslice");
-            var slice=new metaBookSlice(slicediv,[gloss]);
+            var slice=new MetaBookSlice(slicediv,[gloss]);
             var hudwrapper=fdjtDOM("div.hudpanel#METABOOKPOINTGLOSSES",slicediv);
             fdjtDOM.replace("METABOOKPOINTGLOSSES",hudwrapper);
             metaBook.setTarget(target);
@@ -1068,7 +1069,7 @@
     function getTargetDup(scan,target){
         var targetid=target.id;
         while (scan) {
-            if (hasClass(scan,"metabookpage")) return scan;
+            if (hasClass(scan,"codexpage")) return scan;
             else if ((scan.getAttribute)&&
                      ((scan.id===targetid)||
                       (scan.getAttribute("data-baseid")===targetid))) 

@@ -55,10 +55,11 @@ metaBook.DOMScan=(function(){
     var fdjtDOM=fdjt.DOM;
     var RefDB=fdjt.RefDB;
     var Ref=RefDB.Ref;
+    var mB=metaBook;
 
     var getLevel=metaBook.getTOCLevel;
 
-    function metaBookDOMScan(root,dbid,docinfo){
+    function MetaBookDOMScan(root,dbid,docinfo){
         var md5ID=fdjt.WSN.md5ID;
         var stdspace=fdjtString.stdspace;
         var getStyle=fdjtDOM.getStyle;
@@ -68,8 +69,8 @@ metaBook.DOMScan=(function(){
         
         if (typeof root === 'undefined') return this;
         if (!(docinfo)) {
-            if (this instanceof metaBookDOMScan) docinfo=this;
-            else docinfo=new metaBookDOMScan();}
+            if (this instanceof MetaBookDOMScan) docinfo=this;
+            else docinfo=new MetaBookDOMScan();}
         if (!(root)) root=metaBook.docroot||document.body;
         var start=new Date();
         var allheads=[], allids=[];
@@ -453,7 +454,7 @@ metaBook.DOMScan=(function(){
         
         return docinfo;}
 
-    metaBookDOMScan.prototype.toJSON=function(){
+    MetaBookDOMScan.prototype.toJSON=function(){
         var rep={constructor: "metaBook.DOMScan",
                  frag: this.frag,
                  head: this.sbookhead,
@@ -465,8 +466,8 @@ metaBook.DOMScan=(function(){
         if (this.title) rep.title=this.title;
         return JSON.stringify(rep);};
     
-    metaBookDOMScan.getTOCLevel=getLevel;
-    return metaBookDOMScan;})();
+    MetaBookDOMScan.getTOCLevel=getLevel;
+    return MetaBookDOMScan;})();
 
 /* Emacs local variables
    ;;;  Local variables: ***

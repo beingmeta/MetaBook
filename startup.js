@@ -62,7 +62,7 @@ metaBook.Startup=
         var cxID=metaBook.ID;
         var RefDB=fdjt.RefDB, Ref=fdjt.Ref;
         
-        var metaBookLayout=fdjt.metaBookLayout;
+        var CodexLayout=fdjt.CodexLayout;
 
         var https_root="https://s3.amazonaws.com/beingmeta/static/";
 
@@ -79,6 +79,7 @@ metaBook.Startup=
         var getChildren=fdjtDOM.getChildren;
         var getGeometry=fdjtDOM.getGeometry;
 
+        var mB=metaBook;
         var fixStaticRefs=metaBook.fixStaticRefs;
 
         // This is the window outer dimensions, which is stable across
@@ -959,7 +960,7 @@ metaBook.Startup=
                 var layouts=getLocal("metabook.layouts("+oldid+")");
                 if ((layouts)&&(layouts.length)) {
                     var i=0, lim=layouts.length; while (i<lim) 
-                        metaBookLayout.dropLayout(layouts[i++]);}}
+                        CodexLayout.dropLayout(layouts[i++]);}}
             else saveLocal("metabook.sourceid("+metaBook.docuri+")",metaBook.sourceid);
 
             metaBook.bookbuild=getMeta("SBOOKS.buildstamp");
@@ -1889,9 +1890,9 @@ metaBook.Startup=
             if (metaBook.fullheight) addClass(document.body,"_FULLHEIGHT");
             else dropClass(document.body,"_FULLHEIGHT");
             geom=getGeometry(page,page.offsetParent,true);
-            var fakepage=fdjtDOM("DIV.metabookpage");
+            var fakepage=fdjtDOM("DIV.codexpage");
             page.appendChild(fakepage);
-            // There might be a better way to get the .metabookpage settings,
+            // There might be a better way to get the .codexpage settings,
             //  but this seems to work.
             var fakepage_geom=getGeometry(fakepage,page,true);
             var inner_width=geom.inner_width, inner_height=geom.inner_height;
@@ -1908,7 +1909,7 @@ metaBook.Startup=
                 metaBook.CSS.pagerule.style.width=inner_width+"px";
                 metaBook.CSS.pagerule.style.height=inner_height+"px";}
             else metaBook.CSS.pagerule=fdjtDOM.addCSSRule(
-                "div.metabookpage",
+                "div.codexpage",
                 "width: "+inner_width+"px; "+"height: "+inner_height+"px;");
             if (metaBook.CSS.glossmark_rule) {
                 metaBook.CSS.glossmark_rule.style.marginRight=

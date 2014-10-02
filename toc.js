@@ -64,7 +64,7 @@ metaBook.TOC=
             default: return false;}}
         metaBook.navicon=navicon;
 
-        function metaBookTOC(headinfo,depth,tocspec,prefix,headless){
+        function MetaBookTOC(headinfo,depth,tocspec,prefix,headless){
             var sizebar=fdjtDOM("HR.sizebar");
             var progressbar=fdjtDOM("HR.progressbar");
             var head=((headless)?(false):
@@ -109,7 +109,8 @@ metaBook.TOC=
                 return toc;}
             var i=0; var n=sub.length;
             while (i<n) {
-                toc.appendChild(new metaBookTOC(sub[i++],depth+1,spec,prefix,headless));}
+                toc.appendChild(
+                    new MetaBookTOC(sub[i++],depth+1,spec,prefix,headless));}
             if (depth===0) {
                 if (prefix)
                     metaBook.TapHold[prefix]=fdjtUI.TapHold(
@@ -246,9 +247,9 @@ metaBook.TOC=
                     addClass(show.parentNode,"metabooklivehead");
                 addClass(show,"metabooklivehead");}
             addClass(base_elt,"metabookcurhead");}
-        metaBookTOC.updateTOC=updateTOC;
+        MetaBookTOC.updateTOC=updateTOC;
 
-        metaBookTOC.setHead=function setHead(headinfo){
+        MetaBookTOC.setHead=function setHead(headinfo){
             var livetitles=(fdjtDOM.$("a.metabooklivehead.metabooktitle"));
             var i=0; var lim=livetitles.length;
             while (i<lim) livetitles[i++].style.fontSize='';
@@ -289,7 +290,7 @@ metaBook.TOC=
                         if (sw>cw) elt.style.fontSize=(80*(cw/sw))+"%";}}
                 head=head.head;}}
             
-        return metaBookTOC;})();
+        return MetaBookTOC;})();
 
 /* Emacs local variables
    ;;;  Local variables: ***

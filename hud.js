@@ -60,6 +60,8 @@ metaBook.setMode=
         var TapHold=fdjtUI.TapHold;
         var cxID=metaBook.ID;
         
+        var mB=metaBook;
+
         // Helpful dimensions
         // Whether to call displaySync on mode changes
         var display_sync=false;

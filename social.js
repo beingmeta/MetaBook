@@ -218,7 +218,7 @@
         glossmark.name="METABOOK_GLOSSMARK_"+id;
         return glossmark;};
     
-    var metaBookSlice=metaBook.Slice;
+    var MetaBookSlice=metaBook.Slice;
 
     function showGlossmark(target,point) {
         var id=target.metabookbaseid||target.id;
@@ -241,7 +241,7 @@
                     var starts=range.startContainer;
                     if (!(hasClass(starts,"metabookhighlightexcerpt"))) {
                         fdjtUI.Highlight(range,"metabookhighlightexcerpt");}}}}
-        var slice=new metaBookSlice(slicediv,glosses);
+        var slice=new MetaBookSlice(slicediv,glosses);
         var hudwrapper=fdjtDOM("div.hudpanel#METABOOKPOINTGLOSSES",slicediv);
         if (point) {
             hudwrapper.style.display='block';

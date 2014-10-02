@@ -91,7 +91,7 @@ body.sbook { font-size: 62.5%; line-height: inherit;}
 #METABOOKBODY.metabookcontrastlow  { background-color: #e5e0d4; color: #333; }
 
 p { line-height: 1.2;}
-#METABOOKPAGES .metabookpage.metabookcoversize p { line-height: 1.05;}
+#METABOOKPAGES .codexpage.metabookcoversize p { line-height: 1.05;}
 
 body span { font-size: inherit; }
 span { font-size: inherit; }

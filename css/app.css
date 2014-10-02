@@ -82,12 +82,12 @@ body.cxSKIMMING #CODEXPAGE {
     -moz-transform-origin: center top;
     -o-transform: center top;}
 
-body._ANIMATE._NOSHRINK #CODEXPAGE .metabookpage {
+body._ANIMATE._NOSHRINK #CODEXPAGE .codexpage {
     transform: inherit; -webkit-transform: inherit;
     -moz-transform: inherit; -o-transform: inherit;}
-body.cxSHRINK #CODEXPAGE .metabookpage,
-body.cxPREVIEW #CODEXPAGE .metabookpage,
-body.cxSKIMMING #CODEXPAGE .metabookpage {
+body.cxSHRINK #CODEXPAGE .codexpage,
+body.cxPREVIEW #CODEXPAGE .codexpage,
+body.cxSKIMMING #CODEXPAGE .codexpage {
     transform: scale(0.98,0.98); -webkit-transform:scale(0.98,0.98);
     -moz-transform: scale(0.98,0.98); -o-transform:scale(0.98,0.98);}
 
@@ -176,7 +176,7 @@ body._BYPAGE #CODEXPAGE #CODEXCONTENT .metabookpagebreak {
     -moz-opacity: 0.98;
     -o-opacity: 0.98;}
 
-body._ANIMATE body.metabookfixed div.metabookpage {
+body._ANIMATE body.metabookfixed div.codexpage {
     transition-property: opacity; transition-duration: 0.5s;
     -o-transition-property: opacity; -o-transition-duration: 0.5s;
     -moz-transition-property: opacity; -moz-transition-duration: 0.5s;
@@ -346,7 +346,7 @@ body .metabookglossmark > img {
     -khtml-opacity: 0.01;
     -moz-opacity: 0.01;
     -o-opacity: 0.01;}
-div.metabookpage .metabookglossmark img {
+div.codexpage .metabookglossmark img {
     max-width: inherit; max-height: inherit;}
 
 body .metabookglossmark:hover > img, body .metabookglossmark.hover > img {
@@ -559,9 +559,9 @@ h1[toclevel='1'],h2[toclevel='1'] { page-break-before: always;}
     -moz-page-break-inside: avoid;
     -webkit-page-break-inside: avoid;}
 
-div.metabookpage img.sbookpage {
+div.codexpage img.sbookpage {
     position: static; margin: auto;}
-div.metabookpage .sbookpage .sbookinfo {
+div.codexpage .sbookpage .sbookinfo {
     position: absolute; bottom: 0px; width: 100%;
     text-align: center;}
 
@@ -668,38 +668,38 @@ div.metabookglossform form table td textarea { width: 100%;}
 
 /* New pagination model */
 
-div.metabookpage {
+div.codexpage {
     position: absolute;
     box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;
     display: none;}
-div.metabookpage {
+div.codexpage {
     padding: 2px;
     border: solid transparent 4px;
     margin: 0px;}
 
-div.metabookpage img.nomax { max-width: inherit; max-height: inherit;}
+div.codexpage img.nomax { max-width: inherit; max-height: inherit;}
 
-div.metabookpage.curpage {display: block;}
+div.codexpage.curpage {display: block;}
 
-div.metabookpage.oldpage, div.metabookpage.newpage { display: block; }
+div.codexpage.oldpage, div.codexpage.newpage { display: block; }
 
-div.metabookpage.previewpage { display: block; }
-div.metabookpage.curpage.hidepage {display: none;}
-div.metabookpage.curpage.hidepage.previewpage {display: block;}
+div.codexpage.previewpage { display: block; }
+div.codexpage.curpage.hidepage {display: none;}
+div.codexpage.curpage.hidepage.previewpage {display: block;}
 
-body._ANIMATE.cxPREVIEW div.metabookpage {
+body._ANIMATE.cxPREVIEW div.codexpage {
     transition-property: none !important;
     -o-transition-property: none !important;
     -moz-transition-property: none !important;
     -webkit-transition-property: none !important;}
 
-body._ANIMATE #CODEXPAGE div.metabookpage {
+body._ANIMATE #CODEXPAGE div.codexpage {
     transition-duration: 0.15s;
     -o-transition-duration: 0.15s;
     -moz-transition-duration: 0.15s;
     -webkit-transition-duration: 0.15s;}
 
-body._ANIMATE div.metabookpage {
+body._ANIMATE div.codexpage {
     transition-property: opacity,transform;
     -o-transition-property: -o-opacity,-o-transform;
     -moz-transition-property: -moz-opacity,-moz-transform;
@@ -707,7 +707,7 @@ body._ANIMATE div.metabookpage {
 
 /* Fade-in/fade-out page animation */
 
-div.metabookpage, div.metabookpage.newpage, div.metabookpage.oldpage {
+div.codexpage, div.codexpage.newpage, div.codexpage.oldpage {
     opacity: 0.0;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
     filter: alpha(opacity=0);
@@ -715,8 +715,8 @@ div.metabookpage, div.metabookpage.newpage, div.metabookpage.oldpage {
     -khtml-opacity: 0.00;
     -moz-opacity: 0.00;
     -o-opacity: 0.00;}
-div.metabookpage.curpage, div.metabookpage.previewpage,
-div.metabookpage.newpage.curpage, div.metabookpage.oldpage.curpage {
+div.codexpage.curpage, div.codexpage.previewpage,
+div.codexpage.newpage.curpage, div.codexpage.oldpage.curpage {
     opacity: 1; 
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
     filter: alpha(opacity=1);
@@ -727,21 +727,21 @@ div.metabookpage.newpage.curpage, div.metabookpage.oldpage.curpage {
 
 /* Sliding page turns */
 
-body._ANIMATE div.metabookpage { transform: translate(0px,0px); }
-body._ANIMATE div.metabookpage.previewpage {
+body._ANIMATE div.codexpage { transform: translate(0px,0px); }
+body._ANIMATE div.codexpage.previewpage {
     transform: translate(0px,0px); }
 
-div.metabookpage.newpage { z-index: 100; }
+div.codexpage.newpage { z-index: 100; }
 
-body._ANIMATE div.metabookpage.newpage.onright {
+body._ANIMATE div.codexpage.newpage.onright {
     transform: translate(100%,0%);
     -webkit-transform: translate(100%,0%);}
-body._ANIMATE div.metabookpage.newpage.onleft {
+body._ANIMATE div.codexpage.newpage.onleft {
     transform: translate(-100%,0%);
     -webkit-transform: translate(-100%,0%);
     -moz-transform: translate(-100%,0%);
     -o-transform: translate(-100%,0%);}
-body._ANIMATE div.metabookpage.newpage.onright.curpage, div.metabookpage.newpage.onleft.curpage {
+body._ANIMATE div.codexpage.newpage.onright.curpage, div.codexpage.newpage.onleft.curpage {
     transform: translate(0%,0%);
     -webkit-transform: translate(0%,0%);
     -moz-transform: translate(0%,0%);
@@ -753,26 +753,26 @@ body._ANIMATE div.metabookpage.newpage.onright.curpage, div.metabookpage.newpage
 
 /* Special rules for overriding properties on split (dup) passages */
 
-body #METABOOKBODY #CODEXPAGE .metabookpage .metabookdupstart {
+body #METABOOKBODY #CODEXPAGE .codexpage .metabookdupstart {
     padding-bottom: 0px;
     border-bottom-width: 0px;
     margin-bottom: 0px;}
-body #METABOOKBODY #CODEXPAGE .metabookpage .metabookdup {
+body #METABOOKBODY #CODEXPAGE .codexpage .metabookdup {
     padding-top: 0px;
     border-top-width: 0px;
     margin-top: 0px;
     padding-bottom: 0px;
     border-bottom-width: 0px;
     margin-bottom: 0px;}
-body #METABOOKBODY #CODEXPAGE .metabookpage p.metabookdup,
-body #METABOOKBODY #CODEXPAGE .metabookpage p.metabookdupend {
+body #METABOOKBODY #CODEXPAGE .codexpage p.metabookdup,
+body #METABOOKBODY #CODEXPAGE .codexpage p.metabookdupend {
   text-indent: 0px;}
-body #METABOOKBODY #CODEXPAGE .metabookpage .metabookdupend {
+body #METABOOKBODY #CODEXPAGE .codexpage .metabookdupend {
     padding-top: 0px;
     border-top-width: 0px;
     margin-top: 0px;}
 
-#CODEXPAGE.metabookpaginating div.metabookpage { visibility: hidden;}
+#CODEXPAGE.metabookpaginating div.codexpage { visibility: hidden;}
 
 img.metabookcoverpage {
     display: block;

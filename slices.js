@@ -567,10 +567,10 @@ metaBook.Slice=(function () {
 
     var named_slices={};
 
-    function metaBookSlice(container,cards,sortfn){
-        if (typeof container === "undefined") return this;
-        else if (!(this instanceof metaBookSlice))
-            return new metaBookSlice(container,cards,sortfn);
+    function MetaBookSlice(container,cards,sortfn){
+        if (typeof container === "undefined") return false;
+        else if (!(this instanceof MetaBookSlice))
+            return new MetaBookSlice(container,cards,sortfn);
         else if (!(container)) 
             container=fdjtDOM("div.metabookslice");
         else if (typeof container === "string") {
@@ -609,7 +609,7 @@ metaBook.Slice=(function () {
         if ((cards)&&(cards.length)) this.update();
         return this;}
 
-    metaBookSlice.prototype.setLive=function setSliceLive(flag){
+    MetaBookSlice.prototype.setLive=function setSliceLive(flag){
         if (flag) {
             if (this.live) return false;
             else {
@@ -620,10 +620,10 @@ metaBook.Slice=(function () {
             return true;}
         else return false;};
 
-    metaBookSlice.prototype.renderCard=function renderCardForSlice(about){
+    MetaBookSlice.prototype.renderCard=function renderCardForSlice(about){
         return renderCard(about);};
 
-    metaBookSlice.prototype.sortfn=function defaultSliceSortFn(x,y){
+    MetaBookSlice.prototype.sortfn=function defaultSliceSortFn(x,y){
         if (x.location) {
             if (y.location) {
                 if (x.location===y.location) {
@@ -636,7 +636,7 @@ metaBook.Slice=(function () {
             else return -1;}
         else return 1;};
 
-    metaBookSlice.prototype.getCard=function getCard(ref){
+    MetaBookSlice.prototype.getCard=function getCard(ref){
         if ((ref.nodeType===1)&&(hasClass(ref,"metabookcard"))) {
             var id=ref.getAttribute("data-gloss")||
                 ref.getAttribute("data-passage");
@@ -658,7 +658,7 @@ metaBook.Slice=(function () {
                 else i++;}}
         return false;}
 
-    metaBookSlice.prototype.display=metaBookSlice.prototype.update=
+    MetaBookSlice.prototype.display=MetaBookSlice.prototype.update=
         function updateSlice(force){
             if ((!(this.changed))&&(!(force))) return;
             var cards=this.cards, byfrag=this.byfrag;
@@ -686,7 +686,7 @@ metaBook.Slice=(function () {
             if (frag!==this.container) this.container.appendChild(frag);
             this.changed=false;};
 
-    metaBookSlice.prototype.filter=function filterSlice(fn){
+    MetaBookSlice.prototype.filter=function filterSlice(fn){
         var cards=this.cards; var i=0, n=cards.length;
         if (!(fn)) while (i<n) delete cards[i++].hidden;
         else while (i<n) {
@@ -696,7 +696,7 @@ metaBook.Slice=(function () {
         this.changed=true;
         this.update();};
 
-    metaBookSlice.prototype.addCards=function addCards(adds){
+    MetaBookSlice.prototype.addCards=function addCards(adds){
         if (!(adds)) return;
         if (!(adds instanceof Array)) adds=[adds];
         if (adds.length===0) return;
@@ -739,7 +739,7 @@ metaBook.Slice=(function () {
         if (this.live) this.update();
         else this.changed=true;};
 
-    return metaBookSlice;
+    return MetaBookSlice;
 
 })();
 

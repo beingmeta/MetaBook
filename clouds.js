@@ -49,6 +49,7 @@
 
 (function(){
     "use strict";
+    var mB=metaBook;
     var fdjtLog=fdjt.Log;
     var fdjtDOM=fdjt.DOM;
     var fdjtUI=fdjt.UI;

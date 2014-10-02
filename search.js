@@ -49,6 +49,7 @@
 
 (function(){
     "use strict";
+    var mB=metaBook;
     var fdjtString=fdjt.String;
     var fdjtLog=fdjt.Log;
     var fdjtDOM=fdjt.DOM;
@@ -337,16 +338,16 @@
     
     /* Search result listings */
 
-    var metaBookSlice=metaBook.Slice;
+    var MetaBookSlice=metaBook.Slice;
     function SearchResults(query){
         if (!(this instanceof SearchResults))
             return new SearchResults(query);
         this.query=query; this.results=query.results;
-        return metaBookSlice.call(
+        return MetaBookSlice.call(
             this,fdjtDOM("div.metabookslice.sbookresults"),this.results);}
     metaBook.SearchResults=SearchResults;
 
-    SearchResults.prototype=new metaBookSlice();
+    SearchResults.prototype=new MetaBookSlice();
     SearchResults.prototype.renderCard=function renderSearchResult(result){
         return metaBook.renderCard(result,this.query);};
     SearchResults.prototype.sortfn=function searchResultsSortFn(x,y){

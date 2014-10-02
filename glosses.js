@@ -59,7 +59,8 @@
     var RefDB=fdjt.RefDB;
     var Ref=fdjt.Ref;
     var fdjtID=fdjt.ID;
-    var cxID=metaBook.ID;
+    var mB=metaBook;
+    var cxID=mB.ID;
     var Trace=mB.Trace;
 
     var addClass=fdjtDOM.addClass;

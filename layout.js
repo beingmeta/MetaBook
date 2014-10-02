@@ -5,7 +5,7 @@
 /* Copyright (C) 2009-2014 beingmeta, inc.
 
    This file implements the layout component of metaBook, relying heavily
-   on metaBookLayout from the FDJT library.
+   on CodexLayout from the FDJT library.
 
    This file is part of metaBook, a Javascript/DHTML web application for reading
    large structured documents (sBooks).
@@ -52,6 +52,7 @@ metaBook.Paginate=
     (function(){
         "use strict";
 
+        var mB=metaBook;
         var fdjtString=fdjt.String;
         var fdjtState=fdjt.State;
         var fdjtHash=fdjt.Hash;
@@ -60,7 +61,7 @@ metaBook.Paginate=
         var fdjtDOM=fdjt.DOM;
         var fdjtID=fdjt.ID;
         var cxID=metaBook.ID;
-        var metaBookLayout=fdjt.metaBookLayout;
+        var CodexLayout=fdjt.CodexLayout;
 
         var getGeometry=fdjtDOM.getGeometry;
         var getParent=fdjtDOM.getParent;
@@ -179,7 +180,7 @@ metaBook.Paginate=
 
             // Create a new layout
             var layout_args=getLayoutArgs();
-            var layout=new metaBookLayout(layout_args);
+            var layout=new CodexLayout(layout_args);
             layout.bodysize=size; layout.bodyfamily=family;
             metaBook.layout=layout;
             
@@ -243,7 +244,7 @@ metaBook.Paginate=
                         var j=saved.length-max_layouts-1;
                         while (j>=0) {
                             fdjtLog("Dropping layout #%d %s",j,saved[j]);
-                            metaBookLayout.dropLayout(saved[j--]);}
+                            CodexLayout.dropLayout(saved[j--]);}
                         saved=saved.slice(saved.length-max_layouts);}
                     setLocal(key,saved,true);}}
 
@@ -308,11 +309,11 @@ metaBook.Paginate=
                         var timeslice=
                             ((layout.hasOwnProperty('timeslice'))?
                              (layout.timeslice):
-                             (metaBookLayout.timeslice||100));
+                             (CodexLayout.timeslice||100));
                         var timeskip=
                             ((layout.hasOwnProperty('timeskip'))?
                              (layout.timeskip):
-                             (metaBookLayout.timeskip||50));
+                             (CodexLayout.timeskip||50));
                         if (((root.nodeType===3)&&
                              (!(isEmpty(root.nodeValue))))||
                             ((root.nodeType===1)&&
@@ -331,7 +332,7 @@ metaBook.Paginate=
                 (!(forced))) {
                 if (mB.Trace.layout)
                     fdjtLog("Fetching layout %s",layout_id);
-                metaBookLayout.fetchLayout(layout_id,function(content){
+                CodexLayout.fetchLayout(layout_id,function(content){
                     if (content) {
                         if (mB.Trace.layout)
                             fdjtLog("Got layout %s",layout_id);
@@ -342,7 +343,7 @@ metaBook.Paginate=
                 setTimeout(new_layout,10);}}
         metaBook.Paginate=Paginate;
 
-        metaBookLayout.prototype.onresize=function(){
+        CodexLayout.prototype.onresize=function(){
             if (metaBook.bypage) metaBook.Paginate("resize");
             else fdjt.DOM.tweakFonts(metaBook.content);};
         
@@ -415,7 +416,7 @@ metaBook.Paginate=
         function getLayoutID(width,height,family,size,spacing,justify,source_id){
             var page=fdjtID("CODEXPAGE");
             var left=page.style.left, right=page.style.right;
-            var layout_source=fdjt.metaBookLayout.sourcehash;
+            var layout_source=fdjt.CodexLayout.sourcehash;
             page.style.left=""; page.style.right="";
             if (!(width))
                 width=getGeometry(page,false,true).width;
@@ -455,11 +456,11 @@ metaBook.Paginate=
                 var i=0, lim=layouts.length; while (i<lim) {
                     var layout=layouts[i++];
                     fdjtLog("Dropping layout %s",layout);
-                    metaBookLayout.dropLayout(layout);}
+                    CodexLayout.dropLayout(layout);}
                 fdjtState.dropLocal("metabook.layouts("+metaBook.sourceid+")");}
             else {
-                metaBookLayout.clearLayouts();
-                metaBookLayout.clearAll();
+                CodexLayout.clearLayouts();
+                CodexLayout.clearAll();
                 fdjtState.dropLocal(/^metabook.layouts\(/g);}}
         metaBook.clearLayouts=clearLayouts;
 
@@ -472,7 +473,7 @@ metaBook.Paginate=
             var bodysize=metaBook.bodysize||"normal";
             var sourceid=metaBook.sourceid||fdjtHash.hex_md5(metaBook.docuri);
             var justify=metaBook.justify;
-            var sourcehash=fdjt.metaBookLayout.sourcehash;
+            var sourcehash=fdjt.CodexLayout.sourcehash;
             var layout_id=fdjtString(
                 "%dx%d-%s-%s%s(%s)%s",
                 width,height,bodyfamily,bodysize,
@@ -522,7 +523,7 @@ metaBook.Paginate=
             
             function getPageTop(node) {
                 var last=false;
-                if (hasClass(node,"metabookpage")) {}
+                if (hasClass(node,"codexpage")) {}
                 else if (((node.id)&&(docinfo[node.id]))||
                          ((node.metabookbaseid)&&(docinfo[node.metabookbaseid]))) {
                     if (hasContent(node,true)) last=node;}
@@ -537,7 +538,7 @@ metaBook.Paginate=
                             if (first) return first;}}}
                 return last;}
             function getPageLastID(node,id) {
-                if (hasClass(node,"metabookpage")) {}
+                if (hasClass(node,"codexpage")) {}
                 else if ((node.id)&&(!(node.metabookbaseid))&&
                          (metaBook.docinfo[node.id]))
                     id=node.id;
@@ -568,7 +569,7 @@ metaBook.Paginate=
                 var id=topstart.id; var locoff=0;
                 var pagescan=topstart, pagenum, elt=topstart;
                 while (pagescan) {
-                    if (hasClass(pagescan,"metabookpage")) {
+                    if (hasClass(pagescan,"codexpage")) {
                         break;}
                     else pagescan=pagescan.parentNode;}
                 if (!(pagescan)) return locoff;
@@ -594,7 +595,7 @@ metaBook.Paginate=
                     var i=0, lim=layouts.length; while (i<lim) {
                         var cacheid=layouts[i++];
                         if (cacheid.search(pat)>0)
-                            metaBookLayout.dropLayout(cacheid);
+                            CodexLayout.dropLayout(cacheid);
                         else kept.push(cacheid);}}
                 if (kept.length)
                     fdjtState.setLocal("fdjtmetaBook.layouts",kept);
@@ -706,7 +707,7 @@ metaBook.Paginate=
             args.dontsave=fdjt.DOM.Selector(".metabookglossmark");
             
             return args;}
-        metaBookLayout.getLayoutArgs=getLayoutArgs;
+        CodexLayout.getLayoutArgs=getLayoutArgs;
 
         function sizemetaBookPage(){
             var page=metaBook.page, geom=getGeometry(page);
@@ -742,7 +743,7 @@ metaBook.Paginate=
             var hscale=height/lheight, vscale=width/lwidth;
             var scale=((hscale<vscale)?(hscale):(vscale));
             if (!(cheaprule)) {
-                var s="#CODEXPAGE div.metabookpage";
+                var s="#CODEXPAGE div.codexpage";
                 metaBook.CSS.resizerule=cheaprule=fdjtDOM.addCSSRule(
                     s+", body._ANIMATE.cxPREVIEW "+s,"");}
             cheaprule.style[fdjtDOM.transformOrigin]="left top";
@@ -971,7 +972,7 @@ metaBook.Paginate=
 
         var previewing=false;
         function startPagePreview(spec,caller){
-            var page=((spec.nodeType)&&(getParent(spec,".metabookpage")))||
+            var page=((spec.nodeType)&&(getParent(spec,".codexpage")))||
                 metaBook.layout.getPage(spec)||
                 metaBook.layout.getPage(1);
             if (!(page)) return;
@@ -1001,8 +1002,8 @@ metaBook.Paginate=
                 dropClass(curpage,"curpage");
                 dropClass(curpage,"hidepage");
                 addClass(previewing,"curpage");
-                if (hasClass(target,"metabookpage")) newpage=target;
-                else newpage=getParent(target,".metabookpage");}
+                if (hasClass(target,"codexpage")) newpage=target;
+                else newpage=getParent(target,".codexpage");}
             else if (target)  {
                 dropClass(curpage,"curpage");
                 dropClass(curpage,"hidepage");
@@ -1030,7 +1031,7 @@ metaBook.Paginate=
                       ((arg.nodeType)?(arg):
                        (typeof arg === "string")?(cxID(arg)):
                        (false)));
-            var page=((node)&&(getParent(node,".metabookpage")));
+            var page=((node)&&(getParent(node,".codexpage")));
             if ((!(location))||(!(page))) return page;
             var loc=parseInt(page.getAttribute("data-sbookloc"),10);
             if (loc===location) return page;
