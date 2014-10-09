@@ -1518,7 +1518,9 @@ metaBook.Startup=
                 fdjtDOM(settings,"\n",metabookbookinfo);}
             metabookbookinfo.innerHTML=
                 "<p>"+metaBook.docref+"#"+metaBook.sourceid+"<br/>"+
-                ((metaBook.sourcetime)?(" ("+metaBook.sourcetime+")"):(""))+"</p>\n"+
+                ((metaBook.sourcetime)?(" ("+metaBook.sourcetime+")"):(""))+
+                ((metaBook.bookbuild)?("("+(metaBook.bookbuild)+")"):"")+
+                "</p>\n"+
                 "<p>metaBook version "+metaBook.version+" built on "+
                 metaBook.buildhost+", "+metaBook.buildtime+"</p>\n"+
                 "<p>Program &amp; Interface are "+

@@ -303,6 +303,8 @@ metaBook.DOMScan=(function(){
                             fdjtLog.warn("Duplicate WSN ID %s: %s",
                                          wsnid,text);}
                         id=child.id=wsnid; idmap[wsnid]=child;}}}
+            else if ((id)&&(metaBook.baseid)&&(id.search(metaBook.baseid)!==0))
+                id=false;
             else if (!(id)) {}
             else if (!(idmap[id])) idmap[id]=child;
             else if (idmap[id]!==child) {
