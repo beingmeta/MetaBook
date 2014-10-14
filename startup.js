@@ -2317,11 +2317,21 @@ metaBook.Startup=
             if (username) {
                 if (fdjtID("METABOOKUSERNAME"))
                     fdjtID("METABOOKUSERNAME").innerHTML=username;
+                if (fdjtID("CODEXUSERNAME"))
+                    fdjtID("CODEXUSERNAME").innerHTML=username;
                 var names=document.getElementsByName("METABOOKUSERNAME");
                 if ((names)&&(names.length)) {
                     i=0; lim=names.length; while (i<lim)
                         names[i++].innerHTML=username;}
+                names=document.getElementsByName("CODEXUSERNAME");
+                if ((names)&&(names.length)) {
+                    i=0; lim=names.length; while (i<lim)
+                        names[i++].innerHTML=username;}
                 names=fdjtDOM.$(".metabookusername");
+                if ((names)&&(names.length)) {
+                    i=0; lim=names.length; while (i<lim)
+                        names[i++].innerHTML=username;}
+                names=fdjtDOM.$(".codexusername");
                 if ((names)&&(names.length)) {
                     i=0; lim=names.length; while (i<lim)
                         names[i++].innerHTML=username;}}
