@@ -195,13 +195,13 @@
     
     metaBook.UI.addGlossmark=function(passage,gloss){
         var Glosses=metaBook.glossdb;
-        var current_glossmark=fdjtDOM.getChild(passage,".metabookglossmark");
+        var current_glossmark=fdjtDOM.getChild(passage,".glossmark");
         if ((current_glossmark)&&(current_glossmark.parentNode===passage)) {
             if (gloss) extendGlossmark(current_glossmark,[gloss]);
             return current_glossmark;}
         var imgsrc=(cxicon("sbwedge",64,64));
         var wedge=fdjtDOM.Image(imgsrc,"wedge","glosses");
-        var glossmark=fdjtDOM("a.metabookglossmark.fdjtskiptext",wedge);
+        var glossmark=fdjtDOM("a.glossmark.fdjtskiptext",wedge);
         // Get all the glosses from the index
         var id=passage.getAttribute("data-baseid")||passage.id;
         var glosses=Glosses.find("frag",id);

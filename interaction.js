@@ -119,7 +119,7 @@
     /* For tracking gestures */
     var preview_timer=false;
 
-    metaBook.uiclasses=/\b(metabookui|metabookglossmark)\b/gi;
+    metaBook.uiclasses=/\b(metabookui|glossmark)\b/gi;
 
     metaBook.addConfig("controlc",function(key,val){metaBook.controlc=val;});
 
@@ -320,7 +320,7 @@
             fdjt.UI.cancel(evt);
             return false;}
 
-        if (hasParent(target,".metabookglossmark")) {
+        if (hasParent(target,".glossmark")) {
              cancel(evt);
             return false;}
 
@@ -355,7 +355,7 @@
             return false;}
 
         // If we're in a glossmark, let its handler apply
-        if (hasParent(target,".metabookglossmark")) {
+        if (hasParent(target,".glossmark")) {
             fdjtUI.cancel(evt);
             return false;}
 
@@ -1623,7 +1623,7 @@
         if ((evt.ctrlKey)||(evt.altKey)||(evt.metaKey)||(evt.shiftKey))
             return;
         var target=fdjtUI.T(evt);
-        var glossmark=getParent(target,".metabookglossmark");
+        var glossmark=getParent(target,".glossmark");
         var passage=
             ((glossmark.name)&&
              (glossmark.name.search("GLOSSMARK_NAME_")===0)&&
@@ -1649,8 +1649,8 @@
     var glossmark_image=false;
     function animate_glossmark(target,enable){
         if ((target)&&(enable)) {
-            var glossmark=((hasClass(target,"metabookglossmark"))?(target):
-                           (getParent(target,".metabookglossmark")));
+            var glossmark=((hasClass(target,"glossmark"))?(target):
+                           (getParent(target,".glossmark")));
             if (!(glossmark)) return;
             if (animated_glossmark===glossmark) return;
             if (glossmark_animated) {
@@ -1687,7 +1687,7 @@
 
     function setTargetUI(target){
         if (target) {
-            var glossmark=getChild(target,".metabookglossmark");
+            var glossmark=getChild(target,".glossmark");
             if (glossmark) animate_glossmark(glossmark,true);
             else animate_glossmark(false,false);}
         else animate_glossmark(false,false);}
@@ -1818,7 +1818,7 @@
                     var g=glossdb.find('frag',ids[i]);
                     if ((g)&&(g.length)) {
                         var passage=cxID(ids[i]);
-                        var glossmark=getChild(passage,".metabookglossmark");
+                        var glossmark=getChild(passage,".glossmark");
                         metaBook.GoTo(passage,"skimForward/glosses",true);
                         metaBook.showGlossmark(passage,glossmark);
                         return;}
@@ -1882,7 +1882,7 @@
                     var g=glossdb.find('frag',ids[i]);
                     if ((g)&&(g.length)) {
                         var passage=cxID(ids[i]);
-                        var glossmark=getChild(passage,".metabookglossmark");
+                        var glossmark=getChild(passage,".glossmark");
                         metaBook.GoTo(passage,"skimBackward/glosses",true);
                         metaBook.showGlossmark(passage,glossmark);
                         return;}

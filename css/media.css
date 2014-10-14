@@ -57,7 +57,7 @@
         left: 50px; right: 50px;}
 
     #CODEXPAGE { left: 1.5em; right: 1.5em;}
-    body._BYPAGE .metabookglossmark {margin-right: 0em;}
+    body._BYPAGE .glossmark {margin-right: 0em;}
 
     div.searchbox div.query { font-size: 12px; }
     div.searchbox div.query .metabookclearsearch {

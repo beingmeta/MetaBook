@@ -1917,7 +1917,7 @@ metaBook.Startup=
                 metaBook.CSS.glossmark_rule.style.marginRight=
                     (-glossmark_offset)+"px";}
             else metaBook.CSS.glossmark_rule=fdjtDOM.addCSSRule(
-                "#CODEXPAGE .metabookglossmark","margin-right: "+
+                "#CODEXPAGE .glossmark","margin-right: "+
                     (-glossmark_offset)+"px;");
             
             var shrinkrule=metaBook.CSS.shrinkrule;

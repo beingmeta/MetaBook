@@ -296,6 +296,9 @@ div.helpbox h3 span.metabooktogglehelp {
     background-color: aliceblue; color: black;
     padding-left: 1ex; padding-right: 1ex;
     border: solid black 2px; border-radius: 1ex;}
+div.helpbox h1 span.metabooktogglehelp,
+div.metabookhelp h1 span.metabooktogglehelp {
+    font-size: 20px;}
 #METABOOKCOVER span.metabooktogglehelp { display: none; }
 
 div.metabookhelp td {

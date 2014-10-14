@@ -319,26 +319,26 @@ div.locbar hr {
 
 /* Glossmarks */
 
-.metabookglossmark {
+.glossmark {
     position: absolute; right: 0px;
     /* float: right; text-align: right; */
     margin: 0px; padding: 0px; text-indent: 0px; 
     border: 0px;
-    border-right: solid rgba(0,0,255,0.70) 4px;
+    border-right: solid rgba(0,0,255,0.70) 3px;
     width: 0px; overflow: visible;
     width: 54px; height: 50px;
     box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;
     z-index: 50;}
-#CODEXPAGE .metabookglossmark {margin-right: -50px;}
-body._NARROW div.fdjtselecting .metabookglossmark {
+#CODEXPAGE .glossmark {margin-right: -50px;}
+body._NARROW div.fdjtselecting .glossmark {
     width: 10px; z-index: -20; }
-div.fdjtselecting .metabookglossmark > img {
+div.fdjtselecting .glossmark > img {
     visibility: hidden;}
-div.fdjtselecting .metabookglossmark:hover > img {
+div.fdjtselecting .glossmark:hover > img {
     visibility: visible;}
-/* #CODEXCONTENT .metabookglossmark { right: 5px;} */
+/* #CODEXCONTENT .glossmark { right: 5px;} */
 
-body .metabookglossmark > img {
+body .glossmark > img {
     opacity: 0.01;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=01)";
     filter: alpha(opacity=01);
@@ -346,10 +346,10 @@ body .metabookglossmark > img {
     -khtml-opacity: 0.01;
     -moz-opacity: 0.01;
     -o-opacity: 0.01;}
-div.codexpage .metabookglossmark img {
+div.codexpage .glossmark img {
     max-width: inherit; max-height: inherit;}
 
-body .metabookglossmark:hover > img, body .metabookglossmark.hover > img {
+body .glossmark:hover > img, body .glossmark.hover > img {
     opacity: 0.50;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
     filter: alpha(opacity=50);
@@ -358,9 +358,9 @@ body .metabookglossmark:hover > img, body .metabookglossmark.hover > img {
     -moz-opacity: 0.50;
     -o-opacity: 0.50;}
 
-body .metabookglossmark#METABOOKOPENGLOSSMARK > img,
-body .metabookglossmark#METABOOKOPENGLOSSMARK:hover > img,
-body .metabookglossmark#METABOOKOPENGLOSSMARK.hover > img {
+body .glossmark#METABOOKOPENGLOSSMARK > img,
+body .glossmark#METABOOKOPENGLOSSMARK:hover > img,
+body .glossmark#METABOOKOPENGLOSSMARK.hover > img {
     opacity: 0.7;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
     filter: alpha(opacity=70);
@@ -369,12 +369,12 @@ body .metabookglossmark#METABOOKOPENGLOSSMARK.hover > img {
     -moz-opacity: 0.70;
     -o-opacity: 0.70;}
 
-.metabookglossmark img {
+.glossmark img {
     position: static;
     vertical-align: middle; text-align: right;
     float: right;}
-.metabookglossmark img { width: 100%; height: auto;}
-.metabookglossmark img.wedge {
+.glossmark img { width: 100%; height: auto;}
+.glossmark img.wedge {
     position: absolute; right: 0px; top: 0px;}
 
 .metabookglossbutton {
@@ -437,7 +437,7 @@ body.metabooktarget { color: inherit;}
 
 /* body.mbSKIMMING .metabooktarget {outline: dotted steelblue 2px;} */
 
-body._ANIMATE .metabookglossmark > img {
+body._ANIMATE .glossmark > img {
     transition-property: opacity;
     transition-duration: 0.5s;
     -o-transition-property: opacity;
@@ -447,8 +447,8 @@ body._ANIMATE .metabookglossmark > img {
     -webkit-transition-property: opacity;
     -webkit-transition-duration: 0.5s;}
 
-body.hudup .metabooktarget .metabookglossmark:hover > img,
-body.hudup .metabooktarget .metabookglossmark.hover > img {
+body.hudup .metabooktarget .glossmark:hover > img,
+body.hudup .metabooktarget .glossmark.hover > img {
     opacity: 0.9;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
     filter: alpha(opacity=90);

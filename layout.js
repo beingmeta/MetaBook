@@ -704,7 +704,7 @@ metaBook.Paginate=
                 args.scale_pages=false;
             else args.scale_pages=true;
 
-            args.dontsave=fdjt.DOM.Selector(".metabookglossmark");
+            args.dontsave=fdjt.DOM.Selector(".glossmark");
             
             return args;}
         CodexLayout.getLayoutArgs=getLayoutArgs;
