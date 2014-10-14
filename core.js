@@ -1593,12 +1593,21 @@ var metaBook={
         return cover;}
     metaBook.getCover=getCover;
 
+    var fillIn=fdjtString.fillIn;
+    var expand=fdjtString.expandEntities;
     function fixStaticRefs(string){
-        return string.replace(
-                /http:\/\/static.beingmeta.com\//g,metaBook.root)
-            .replace(/{{bmg}}/g,metaBook.root+"g/");}
+        return fillIn(expand(string).replace(
+                /http(s)?:\/\/static.beingmeta.com\//g,metaBook.root),
+                      {bmg:metaBook.root+"g/"});}
     metaBook.fixStaticRefs=fixStaticRefs;
     
+    fdjtString.entities.beingmeta=
+        "<span class='beingmeta'>being<span class='bmm'>m<span class='bme'>e<span class='bmt'>t<span class='bma'>a</span></span></span></span></span>";
+    fdjtString.entities.sBooks="<span class='sbooks'><em>s</em>Books</span>";
+    fdjtString.entities.sBook="<span class='sbooks'><em>s</em>Book</span>";
+    fdjtString.entities.metaBook=
+        "<span class='metabook'><span class='bmm'>m<span class='bme'>e<span class='bmt'>t<span class='bma'>a</span></span></span></span>Book</span>";
+
 })();
 
 /* Adding qricons */
