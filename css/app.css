@@ -855,18 +855,28 @@ div.fdjtdialog .closebutton {
 
 /* Logotypes */
 
-.sbooks { }
-.sbooks em, .sbooks i {
+.sbooks, .spresso {
+    font-family: Times,serif;}
+.sbooks em, .sbooks i, .spresso em, .spresso i {
     font-family: Arial,Verdana,Helvetica,sans-serif;
-    font-style: italic;
-    font-variant: normal; font-size: 120%;
-    color: blue;}
-
-.metabook { font-variant: small-caps;}
-.metabook em, .metabook i {
-    font-style: italic;
+    font-style: oblique;
     font-variant: normal;
     color: blue;}
+
+.beingmeta, .bmlogo { }
+span.bmm {
+ color: rgb(255,0,0);}
+span.bme {
+ color: rgb(228,100,17);}
+span.bmt {
+ color: green;}
+span.bma {
+ color: rgb(0,0,255);}
+
+.metabook { font-family: Times,serif;}
+.metabook > span {
+    font-family: Arial,Verdana,Helvetica,sans-serif;
+    font-style: oblique; font-size: 80%; font-weight: bold;}
 
 .mupub { font-variant: small-caps;}
 .mupub em, .mupub i {
