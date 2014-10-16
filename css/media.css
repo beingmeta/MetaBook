@@ -83,13 +83,6 @@
     #METABOOKCOVERMESSAGE > div#METABOOKREADYMESSAGE {
         font-size: 1.0em;}
 
-    #METABOOKHEAD img.hudbutton[hudmode="allglosses"],
-    #METABOOKHEAD img.hudbutton[hudmode="help"] {
-        display: inline-block;}
-    #METABOOKFOOT img.hudbutton[hudmode="allglosses"],
-    #METABOOKFOOT img.hudbutton[hudmode="help"] {
-        display: none;}
-    
    #METABOOKHUD #METABOOKPOINTGLOSSES.hudpanel {
      max-width: 90%; min-width: inherit; left: 5px; right: 10px; }
 

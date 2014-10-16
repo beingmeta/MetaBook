@@ -52,15 +52,15 @@ metaBook.TOC=
         var fdjtDOM=fdjt.DOM;
         var fdjtUI=fdjt.UI;
         var getParent=fdjtDOM.getParent;
-        var cxID=metaBook.ID;
+        var mbID=metaBook.ID;
         
-        var cxicon=metaBook.icon;
+        var mbicon=metaBook.icon;
         function navicon(kind){
             switch (kind) {
-            case 'right': return cxicon("skim_right",64,64);
-            case 'left': return cxicon("skim_left",64,64);
-            case 'start': return cxicon("skim_left_stop",64,64);
-            case 'end': return cxicon("skim_right_stop",64,64);
+            case 'right': return mbicon("skim_right",64,64);
+            case 'left': return mbicon("skim_left",64,64);
+            case 'start': return mbicon("skim_left_stop",64,64);
+            case 'end': return mbicon("skim_right_stop",64,64);
             default: return false;}}
         metaBook.navicon=navicon;
 
@@ -146,7 +146,7 @@ metaBook.TOC=
             var start=headinfo.starts_at, end=headinfo.ends_at;
             var len=end-start;
             var subsections=headinfo.sub, last_info, sectnum=0;
-            var head=headinfo.elt||cxID(headinfo.frag);
+            var head=headinfo.elt||mbID(headinfo.frag);
             spanbar.starts=start; spanbar.ends=end;
             if ((!(subsections)) || (subsections.length===0))
                 return false;
@@ -158,14 +158,14 @@ metaBook.TOC=
             if (range) range.style.left="0%";
             var i=0; while (i<subsections.length) {
                 var spaninfo=subsections[i++];
-                var subsection=spaninfo.elt||cxID(spaninfo.frag);
+                var subsection=spaninfo.elt||mbID(spaninfo.frag);
                 var spanstart; var spanend; var addname=true;
                 if ((sectnum===0) && ((spaninfo.starts_at-start)>0)) {
                     /* Add 'fake section' for the precursor of the
                      * first actual section */
                     spanstart=start;  spanend=spaninfo.starts_at;
                     spaninfo=headinfo;
-                    subsection=headinfo.elt||cxID(headinfo.frag);
+                    subsection=headinfo.elt||mbID(headinfo.frag);
                     i--; sectnum++; addname=false;}
                 else {
                     spanstart=spaninfo.starts_at; spanend=spaninfo.ends_at;

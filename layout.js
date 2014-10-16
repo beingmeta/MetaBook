@@ -60,7 +60,7 @@ metaBook.Paginate=
         var fdjtLog=fdjt.Log;
         var fdjtDOM=fdjt.DOM;
         var fdjtID=fdjt.ID;
-        var cxID=metaBook.ID;
+        var mbID=metaBook.ID;
         var CodexLayout=fdjt.CodexLayout;
 
         var getGeometry=fdjtDOM.getGeometry;
@@ -492,7 +492,7 @@ metaBook.Paginate=
                 var topid=topnode.metabookbaseid||topnode.id;
                 var curloc=false;
                 if (topnode) {
-                    var topstart=cxID(topid);
+                    var topstart=mbID(topid);
                     var locoff=((topstart===topnode)?(0):
                                 (getLocOff(pages,topstart,topnode)));
                     var info=docinfo[topid];
@@ -948,7 +948,7 @@ metaBook.Paginate=
                     if (location) metaBook.setLocation(location);}
                 updatePageDisplay(pagenum,metaBook.location);
                 curpage=page; metaBook.curpage=pagenum;
-                var curnode=cxID(page.getAttribute("data-topid"));
+                var curnode=mbID(page.getAttribute("data-topid"));
                 if (savestate) {
                     metaBook.point=curnode;
                     if (!((metaBook.hudup)||(metaBook.mode))) metaBook.skimming=false;
@@ -1029,7 +1029,7 @@ metaBook.Paginate=
         function getPage(arg,location){
             var node=((arg)&&
                       ((arg.nodeType)?(arg):
-                       (typeof arg === "string")?(cxID(arg)):
+                       (typeof arg === "string")?(mbID(arg)):
                        (false)));
             var page=((node)&&(getParent(node,".codexpage")));
             if ((!(location))||(!(page))) return page;

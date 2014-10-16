@@ -58,7 +58,7 @@ metaBook.setMode=
         var fdjtUI=fdjt.UI;
         var fdjtID=fdjt.ID;
         var TapHold=fdjtUI.TapHold;
-        var cxID=metaBook.ID;
+        var mbID=metaBook.ID;
         
         var mB=metaBook;
 
@@ -267,7 +267,7 @@ metaBook.setMode=
             if (!(item.frag)) {
                 fdjtLog.warn("Warning: skipping gloss %o with no fragment identifier",
                              item.uuid);}
-            else if (cxID(item.frag)) {
+            else if (mbID(item.frag)) {
                 var addGlossmark=metaBook.UI.addGlossmark;
                 allglosses.addCards(item);
                 var nodes=metaBook.getDups(item.frag);
@@ -785,7 +785,7 @@ metaBook.setMode=
                              "metabookhighlightpassage");
                 else addClass(metaBook.getDups(src.about),"metabookhighlightpassage");}
             else if ((src)&&(getParent(src,".sbookresults"))) {
-                var about=src.about, target=cxID(about);
+                var about=src.about, target=mbID(about);
                 if (target) {
                     var info=metaBook.docinfo[target.id];
                     var terms=metaBook.query.tags;
@@ -979,7 +979,7 @@ metaBook.setMode=
                 while (i<lim) {
                     var src=elts[i++];
                     if (hasParent(src,allglosses)) {
-                        var elt=cxID(src.about);
+                        var elt=mbID(src.about);
                         setMode("allglosses");
                         metaBook.Skim(elt,src);
                         return true;}}

@@ -1162,23 +1162,23 @@ body._USER ._NOUSER { display: none;}
 
 body._NOUSER form.sbooksapp { padding-top: 0px;}
 
-.cxwithuser, .cxnouser, .cxdisconn, .cxwithconn { display: none; }
+.mbwithuser, .mbnouser, .mbdisconn, .mbwithconn { display: none; }
 
-body._USER tr.cxwithuser, body._NOUSER tr.cxnouser {
+body._USER tr.mbwithuser, body._NOUSER tr.mbnouser {
    display: table-row; }
-body._USER tbody.cxwithuser, body._NOUSER tbody.cxnouser {
+body._USER tbody.mbwithuser, body._NOUSER tbody.mbnouser {
   display: table-row-group; }
-body._USER._CONN tbody.cxwithconn { display: table-row-group; }
-body._USER._CONN tr.cxwithconn { display: table-row; }
-body._USER._DISCONN tbody.cxdisconn { display: table-row-group; }
-body._USER._DISCONN tr.cxdisconn { display: table-row; }
+body._USER._CONN tbody.mbwithconn { display: table-row-group; }
+body._USER._CONN tr.mbwithconn { display: table-row; }
+body._USER._DISCONN tbody.mbdisconn { display: table-row-group; }
+body._USER._DISCONN tr.mbdisconn { display: table-row; }
 
-body._NOUSER .cxwithuser { display: none;}
-body._NOUSER .cxdisconn {display: none;}
-body._USER._CONN .cxdisconn {display: none;}
-body._USER._CONN .cxdisconn {display: none;}
+body._NOUSER .mbwithuser { display: none;}
+body._NOUSER .mbdisconn {display: none;}
+body._USER._CONN .mbdisconn {display: none;}
+body._USER._CONN .mbdisconn {display: none;}
 body._USER .nouser {display: none;}
-body._USER._DISCONN .cxwithconn {display: none;}
+body._USER._DISCONN .mbwithconn {display: none;}
 
 /* Close HUD buttons */
 
@@ -1228,9 +1228,7 @@ body._FULLHEIGHT #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT {
     .hudup #METABOOKHUD #METABOOKSHOWCOVER img {
         width: 50px; height: 50px;}
     body #METABOOKFRAME > #METABOOKHUD > #METABOOKHEAD {
-        height: 55px; max-height: 55px;
-        background-color: rgba(255,255,240,0.9);
-        border-bottom: solid black 1px;}
+        height: 55px; max-height: 55px;}
     #METABOOKSHOWCOVER {
         width: 50px; margin-top: 0px; border: 0px;
         background-color: transparent;}

@@ -59,7 +59,7 @@ metaBook.Startup=
         var fdjtDOM=fdjt.DOM;
         var fdjtUI=fdjt.UI;
         var fdjtID=fdjt.ID;
-        var cxID=metaBook.ID;
+        var mbID=metaBook.ID;
         var RefDB=fdjt.RefDB, Ref=fdjt.Ref;
         
         var CodexLayout=fdjt.CodexLayout;
@@ -1262,11 +1262,11 @@ metaBook.Startup=
         function getScanSettings(){
             if (!(metaBook.docroot))
                 if (getMeta("SBOOKS.root"))
-                    metaBook.docroot=cxID(getMeta("SBOOKS.root"));
+                    metaBook.docroot=mbID(getMeta("SBOOKS.root"));
             else metaBook.docroot=fdjtID("SBOOKCONTENT")||document.body;
             if (!(metaBook.start))
                 if (getMeta("SBOOKS.start"))
-                    metaBook.start=cxID(getMeta("SBOOKS.start"));
+                    metaBook.start=mbID(getMeta("SBOOKS.start"));
             else if (fdjtID("SBOOKSTART"))
                 metaBook.start=fdjtID("SBOOKSTART");
             else {}
@@ -1794,7 +1794,7 @@ metaBook.Startup=
                 var notable=allnotes[i++];
                 if (!(notable.id)) notable.id="METABOOKNOTE"+(note_counter++);
                 var noteref=notable.id+"_REF";
-                if (!(cxID(noteref))) {
+                if (!(mbID(noteref))) {
                     var label=getChild(notable,"label")||
                         getChild(notable,"summary")||
                         getChild(notable,".sbooklabel")||

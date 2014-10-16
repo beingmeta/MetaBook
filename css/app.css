@@ -464,56 +464,56 @@ body._NOUSER #SBOOKLOGOUT { display: none;}
 body._NOUSER #METABOOKHUD div.hud#METABOOKSOURCES img.button.login {
   display: block;}
 
-.cxwithuser, .cxdisconn, .cxwithconn, .cxneedlogin { display: none;}
-body._USER .cxnouser { display: none;}
+.mbwithuser, .mbdisconn, .mbwithconn, .mbneedlogin { display: none;}
+body._USER .mbnouser { display: none;}
 
-body._NOUSER span.cxnouser, body._NOUSER a.cxnouser,
-body._NOUSER em.cxnouser, body._NOUSER strong.cxnouser {
+body._NOUSER span.mbnouser, body._NOUSER a.mbnouser,
+body._NOUSER em.mbnouser, body._NOUSER strong.mbnouser {
     display: inline; }
 
-body._NOUSER p._nouser, body._NOUSER div.cxnouser,
-body._NOUSER blockquote.cxnouser { display: block; }
+body._NOUSER p._nouser, body._NOUSER div.mbnouser,
+body._NOUSER blockquote.mbnouser { display: block; }
 
-body._NOUSER tr.cxnouser { display: table-row; }
-body._NOUSER tbody.cxnouser { display: table-row-group; }
+body._NOUSER tr.mbnouser { display: table-row; }
+body._NOUSER tbody.mbnouser { display: table-row-group; }
 
-body._USER span.cxwithuser, body._USER a.cxwithuser,
-body._USER em.cxwithuser, body._USER strong.cxwithuser {
+body._USER span.mbwithuser, body._USER a.mbwithuser,
+body._USER em.mbwithuser, body._USER strong.mbwithuser {
     display: inline; }
 
-body._DISCONN span.cxdisconn, body._DISCONN a.cxdisconn,
-body._DISCONN em.cxdisconn, body._DISCONN strong.cxdisconn {
+body._DISCONN span.mbdisconn, body._DISCONN a.mbdisconn,
+body._DISCONN em.mbdisconn, body._DISCONN strong.mbdisconn {
     display: inline; }
 
-body._DISCONN p.cxdisconn, body._DISCONN div.cxdisconn,
-body._DISCONN blockquote.cxdisconn { display: block; }
+body._DISCONN p.mbdisconn, body._DISCONN div.mbdisconn,
+body._DISCONN blockquote.mbdisconn { display: block; }
 
-body._DISCONN tr.cxdisconn { display: table-row; }
-body._DISCONN tbody.cxdisconn { display: table-row-group; }
+body._DISCONN tr.mbdisconn { display: table-row; }
+body._DISCONN tbody.mbdisconn { display: table-row-group; }
 
-body._NOUSER tbody.cxneedlogin, body._DISCONN tbody.cxneedlogin {
+body._NOUSER tbody.mbneedlogin, body._DISCONN tbody.mbneedlogin {
     display: table-row-group; }
-body._NOUSER tr.cxneedlogin, body._DISCONN tr.cxneedlogin {
+body._NOUSER tr.mbneedlogin, body._DISCONN tr.mbneedlogin {
     display: table-row; }
-body._NOUSER p.cxneedlogin, body._DISCONN p.cxneedlogin,
-body._NOUSER div.cxneedlogin, body._DISCONN div.cxneedlogin {
+body._NOUSER p.mbneedlogin, body._DISCONN p.mbneedlogin,
+body._NOUSER div.mbneedlogin, body._DISCONN div.mbneedlogin {
     display: block; }
 
-body._USER p.cxwithuser, body._USER div.cxwithuser,
-body._USER blockquote.cxwithuser { display: block; }
+body._USER p.mbwithuser, body._USER div.mbwithuser,
+body._USER blockquote.mbwithuser { display: block; }
 
-body._USER tr.cxwithuser { display: table-row; }
-body._USER tbody.cxwithuser { display: table-row-group; }
+body._USER tr.mbwithuser { display: table-row; }
+body._USER tbody.mbwithuser { display: table-row-group; }
 
-body._CONN span.cxwithconn, body._CONN a.cxwithconn,
-body._CONN em.cxwithconn, body._CONN strong.cxwithconn {
+body._CONN span.mbwithconn, body._CONN a.mbwithconn,
+body._CONN em.mbwithconn, body._CONN strong.mbwithconn {
     display: inline; }
 
-body._CONN p.cxwithconn, body._CONN div.cxwithconn,
-body._CONN blockquote.cxwithconn { display: block; }
+body._CONN p.mbwithconn, body._CONN div.mbwithconn,
+body._CONN blockquote.mbwithconn { display: block; }
 
-body._CONN tr.cxwithconn { display: table-row; }
-body._CONN tbody.cxwithconn { display: table-row-group; }
+body._CONN tr.mbwithconn { display: table-row; }
+body._CONN tbody.mbwithconn { display: table-row-group; }
 
 /* Pagination stuff */
 
@@ -887,11 +887,11 @@ span.bma {
 /* Media rules */
 
 @media screen and (min-width: 500px) and (max-width: 700px) {
-    #CODEXPAGE {left: 25px; right: 25px;}}
+    #CODEXPAGE {top: 25px; left: 25px; right: 25px;}}
 @media screen and (min-width: 350px) and (max-width: 500px) {
-    #CODEXPAGE {left: 10px; right: 10px;}}
+    #CODEXPAGE {top: 20px; left: 10px; right: 10px;}}
 @media screen and (max-width: 300px) {
-    #CODEXPAGE {left: 5px; right: 5px;}}
+    #CODEXPAGE {top: 10px; left: 5px; right: 5px;}}
 
 @media screen and (min-height: 300px) and (max-height: 500px) {
     #CODEXPAGE {top: 10px; bottom: 20px;}}

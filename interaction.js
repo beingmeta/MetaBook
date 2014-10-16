@@ -93,7 +93,7 @@
     var fdjtUI=fdjt.UI;
     var RefDB=fdjt.RefDB;
     var fdjtID=fdjt.ID;
-    var cxID=metaBook.ID;
+    var mbID=metaBook.ID;
     var Trace=mB.Trace;
 
     // Imports (kind of )
@@ -413,7 +413,7 @@
     metaBook.saveGlossDialog=saveGlossDialog;
 
     function resolve_anchor(ref){
-        var elt=cxID(ref);
+        var elt=mbID(ref);
         if (elt) return elt;
         var elts=document.getElementsByName(ref);
         if (elts.length===0) return false;
@@ -528,7 +528,7 @@
         return false;}
 
     function getNoteNode(ref){
-        var elt=cxID(ref);
+        var elt=mbID(ref);
         var body=fdjt.ID("METABOOKBODY"), db=document.body;
         if (!(elt)) {
             var elts=document.getElementsByName(ref);
@@ -579,7 +579,7 @@
             var anchor=getParent(target,"A");
             var href=((anchor)&&(anchor.getAttribute("href")));
             fdjtUI.cancel(evt);
-            if ((href)&&(href[0]==="#")&&(cxID(href.slice(1)))) {
+            if ((href)&&(href[0]==="#")&&(mbID(href.slice(1)))) {
                 if (Trace.gestures) 
                     fdjtLog("anchor_preview/body_held %o %o %o",
                             evt,anchor,href);
@@ -848,8 +848,8 @@
             var name=about.name||about.getAttribute("name");
             var ref=name.slice(3);
             var info=metaBook.docinfo[ref];
-            var target=info.elt||cxID(ref);
-            if (target.id!==ref) target=cxID(ref);
+            var target=info.elt||mbID(ref);
+            if (target.id!==ref) target=mbID(ref);
             if (Trace.gestures)
                 fdjtLog("toc_tapped %o about=%o ref=%s target=%o",
                         evt,about,ref,target);
@@ -877,7 +877,7 @@
             var spanbar=getParent(about,".spanbar")||getChild(toc,".spanbar");
             addClass(spanbar,"metabookvisible");
             addClass(toc,"metabookheld");
-            metaBook.startPreview(cxID(ref),"toc_held");
+            metaBook.startPreview(mbID(ref),"toc_held");
             return fdjtUI.cancel(evt);}
         else if (Trace.gestures) fdjtLog("toc_held %o noabout", evt);
         else {}}
@@ -960,7 +960,7 @@
             fdjtUI.cancel(evt);
             return;}
         var card=getCard(target);
-        var passage=cxID(card.getAttribute("data-passage"));
+        var passage=mbID(card.getAttribute("data-passage"));
         var glossid=card.getAttribute("data-gloss");
         var gloss=((glossid)&&(metaBook.glossdb.ref(glossid)));
         if (getParent(target,".detail")) {
@@ -1008,7 +1008,7 @@
         var passageid=card.getAttribute("data-passage");
         var glossid=card.getAttribute("data-gloss");
         var gloss=((glossid)&&metaBook.glossdb.ref(glossid));
-        var passage=cxID(passageid), show_target=false;
+        var passage=mbID(passageid), show_target=false;
         var dups=metaBook.getDups(passageid);
         // Set up for preview
         metaBook.previewTarget=passage; addClass(dups,"metabookpreviewtarget");
@@ -1630,7 +1630,7 @@
              (fdjt.ID(glossmark.name.slice(15))))||
             getTarget(glossmark.parentNode,true);
         if ((passage)&&(passage.getAttribute("data-baseid"))) 
-            passage=cxID(passage.getAttribute("data-baseid"));
+            passage=mbID(passage.getAttribute("data-baseid"));
         if (Trace.gestures)
             fdjtLog("glossmark_tapped (%o) on %o gmark=%o passage=%o mode=%o target=%o",
                     evt,target,glossmark,passage,metaBook.mode,metaBook.target);
@@ -1817,7 +1817,7 @@
                 i++; while (i<lim) {
                     var g=glossdb.find('frag',ids[i]);
                     if ((g)&&(g.length)) {
-                        var passage=cxID(ids[i]);
+                        var passage=mbID(ids[i]);
                         var glossmark=getChild(passage,".glossmark");
                         metaBook.GoTo(passage,"skimForward/glosses",true);
                         metaBook.showGlossmark(passage,glossmark);
@@ -1881,7 +1881,7 @@
                 i--; while (i>=0) {
                     var g=glossdb.find('frag',ids[i]);
                     if ((g)&&(g.length)) {
-                        var passage=cxID(ids[i]);
+                        var passage=mbID(ids[i]);
                         var glossmark=getChild(passage,".glossmark");
                         metaBook.GoTo(passage,"skimBackward/glosses",true);
                         metaBook.showGlossmark(passage,glossmark);

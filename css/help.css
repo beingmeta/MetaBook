@@ -351,7 +351,7 @@ div.metabookhelp div.glossbarbox {
 
 #METABOOKHUD div.metabookhelp.hudpanel {
     position: absolute; text-align: center;
-    top: 100px; bottom: 100px; left: 80px; right: 80px; 
+    top: 50px; bottom: 80px; left: 80px; right: 80px; 
     height: auto; width: auto; padding-bottom: 1em;
     font-family: helvetica,sans,sans-serif;
     background-color: lightgray; color: black;

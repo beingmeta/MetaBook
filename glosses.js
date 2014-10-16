@@ -60,7 +60,7 @@
     var Ref=fdjt.Ref;
     var fdjtID=fdjt.ID;
     var mB=metaBook;
-    var cxID=mB.ID;
+    var mbID=mB.ID;
     var Trace=mB.Trace;
 
     var addClass=fdjtDOM.addClass;
@@ -79,7 +79,7 @@
 
     var glossmodes=metaBook.glossmodes;
 
-    var cxicon=metaBook.icon;
+    var mbicon=metaBook.icon;
 
     var getTarget=metaBook.getTarget;
 
@@ -164,7 +164,7 @@
         else if ((arg.maker)&&(arg.maker!==metaBook.user))
             response=true;
         else {}
-        var passage=((gloss)?(cxID(gloss.frag)):(arg));
+        var passage=((gloss)?(mbID(gloss.frag)):(arg));
         var passageid=((passage.metabookbaseid)||(passage.id));
         var formid=((gloss)?
                     ((response)?
@@ -329,14 +329,14 @@
             return;}
         var gloss=false;
         // Identify when the target is a gloss
-        if ((typeof target === 'string')&&(cxID(target))) 
-            target=cxID(target);
+        if ((typeof target === 'string')&&(mbID(target))) 
+            target=mbID(target);
         else if ((typeof target === 'string')&&
                  (metaBook.glossdb.probe(target))) {
             gloss=metaBook.glossdb.ref(target);
-            target=cxID(gloss.frag);}
+            target=mbID(gloss.frag);}
         else if (target._db===metaBook.glossdb) {
-            gloss=target; target=cxID(gloss.frag);}
+            gloss=target; target=mbID(gloss.frag);}
         else {}
         if ((gloss)&&(form)&&(!(form.nodeType))) {
             // Passing a non-false non-node as a form forces a
@@ -521,7 +521,7 @@
         var checkspan=fdjtUI.CheckSpan(
             spanspec,formvar||"SHARE",outlet_id,checked,
             "→",outlet.nick||outlet.name,
-            fdjtDOM.Image(cxicon("redx",32,32),"img.redx","x"));
+            fdjtDOM.Image(mbicon("redx",32,32),"img.redx","x"));
         if ((outlet.nick)&&(outlet.description))
             checkspan.title=outlet.name+": "+outlet.description;
         else if (outlet.description)
@@ -548,12 +548,12 @@
     function addLink(form,url,title) {
         var linkselt=getChild(form,'.links');
         var linkval=((title)?(url+" "+title):(url));
-        var img=fdjtDOM.Image(cxicon("diaglink",64,64),"img");
+        var img=fdjtDOM.Image(mbicon("diaglink",64,64),"img");
         var anchor=fdjtDOM.Anchor(url,"a.glosslink",((title)||url));
         var checkbox=fdjtDOM.Checkbox("LINKS",linkval,true);
         var aspan=fdjtDOM("span.checkspan.ischecked.waschecked.anchor",
                           img,checkbox,anchor,
-                          fdjtDOM.Image(cxicon("redx",32,32),"img.redx","x"));
+                          fdjtDOM.Image(mbicon("redx",32,32),"img.redx","x"));
         var wrapper=getParent(form,".metabookglossform");
         if (Trace.glossing)
             fdjtLog(
@@ -673,7 +673,7 @@
             fdjtDOM.append(span,fdjtDOM(textspec,text));
         else fdjtDOM.append(span,text);
         fdjtDOM.append(
-            span,fdjtDOM.Image(cxicon("redx",32,32),"img.redx","x"));
+            span,fdjtDOM.Image(mbicon("redx",32,32),"img.redx","x"));
         fdjtDOM.append(tagselt,span," ");
         dropClass(tagselt,"empty");
         updateForm(form);

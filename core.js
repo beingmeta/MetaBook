@@ -613,9 +613,9 @@ var metaBook={
                 else target=target.parentNode;}}
         if (target) {
             if (target.level)
-                return cxID(target.frag);
+                return mbID(target.frag);
             else if (target.head)
-                return cxID(target.head.frag);
+                return mbID(target.head.frag);
             else return false;}
         else return false;}
     metaBook.getHead=getHead;
@@ -629,8 +629,8 @@ var metaBook={
             var ref=((target.about)||(target.getAttribute("about")));
             if (!(target.about)) target.about=ref;
             if (ref[0]==='#')
-                return cxID(ref.slice(1));
-            else return cxID(ref);}
+                return mbID(ref.slice(1));
+            else return mbID(ref);}
         else return false;};
     metaBook.getRefElt=function(target){
         while (target)
@@ -651,9 +651,9 @@ var metaBook={
             if ((metaBook.layout)&&(metaBook.layout.dups)) {
                 var dups=metaBook.layout.dups;
                 var d=dups[id];
-                if (d) return [cxID(id)].concat(d);
-                else return [cxID(id)];}
-            else return [cxID(id)];}
+                if (d) return [mbID(id)].concat(d);
+                else return [mbID(id)];}
+            else return [mbID(id)];}
         else return getDups(id.metabookbaseid||id.id);}
     metaBook.getDups=getDups;
 
@@ -700,7 +700,7 @@ var metaBook={
         else return false;}
 
     var metabook_docinfo=false;
-    function cxID(id){
+    function mbID(id){
         var info;
         if ((id)&&(typeof id === "string")&&(id[0]==="#"))
             id=id.slice(1);
@@ -716,7 +716,7 @@ var metaBook={
         elt=fdjtDOM.$("[data-tocid='"+id+"']");
         if (elt.length===1) return elt[0];
         else return false;}
-    metaBook.ID=cxID;
+    metaBook.ID=mbID;
 
     metaBook.getTitle=function(target,tryhard) {
         var targetid;
@@ -769,14 +769,14 @@ var metaBook={
     function setHead(head){
         if (!(head)) return;
         else if (typeof head === "string") 
-            head=getHead(cxID(head))||metaBook.content;
+            head=getHead(mbID(head))||metaBook.content;
         else {}
         var headid=head.metabookbaseid||head.id;
         var headinfo=metaBook.docinfo[headid];
         while ((headinfo)&&(!(headinfo.level))) {
             headinfo=headinfo.head;
             headid=headinfo.frag;
-            head=cxID(headid);}
+            head=mbID(headid);}
         if (mB.Trace.nav)
             fdjtLog("metaBook.setHead #%s",headid);
         if (head===metaBook.head) {
@@ -790,7 +790,7 @@ var metaBook={
             if (metaBook.head) dropClass(metaBook.head,"sbookhead");
             addClass(head,"sbookhead");
             metaBook.setLocation(metaBook.location);
-            metaBook.head=cxID(headid);
+            metaBook.head=mbID(headid);
             metaBook.TOC.setHead(headinfo);}
         else {
             if (mB.Trace.target)
@@ -876,7 +876,7 @@ var metaBook={
             return;
         else {}
         var targetid=target.metabookbaseid||target.id;
-        var primary=((targetid)&&(cxID(targetid)))||target;
+        var primary=((targetid)&&(mbID(targetid)))||target;
         var targets=getDups(targetid);
         addClass(target,"metabooktarget");
         addClass(target,"metabooknewtarget");
@@ -895,7 +895,7 @@ var metaBook={
     metaBook.setTarget=setTarget;
 
     function clearHighlights(target){
-        if (typeof target === "string") target=cxID(target);
+        if (typeof target === "string") target=mbID(target);
         if (!(target)) return;
         else if (target.length) {
             dropClass(target,"metabookhighlightpassage");
@@ -911,7 +911,7 @@ var metaBook={
     metaBook.clearHighlights=clearHighlights;
 
     function findExcerpt(node,excerpt,off){
-        if (typeof node === "string") node=cxID(node);
+        if (typeof node === "string") node=mbID(node);
         if (!(node)) return false;
         if (node.nodeType) node=getDups(node);
         var found=fdjtDOM.findString(node,excerpt,off||0);
@@ -1010,7 +1010,7 @@ var metaBook={
                 metaBook.writeQueuedGlosses();}
         if (((val)&&(!(metaBook.connected)))||
             ((!(val))&&(metaBook.connected)))
-            fdjtDOM.swapClass(document.body,/\bcx(CONN|DISCONN)\b/,
+            fdjtDOM.swapClass(document.body,/\b(_|cx)(CONN|DISCONN)\b/,
                               ((val)?("_CONN"):("_DISCONN")));
         metaBook.connected=val;
     } metaBook.setConnected=setConnected;
@@ -1043,7 +1043,7 @@ var metaBook={
         if (hash) {
             if (hash[0]==="#") hash=hash.slice(1);}
         else hash=false;
-        var elt=((hash)&&(cxID(hash)));
+        var elt=((hash)&&(mbID(hash)));
         if (elt) {
             // If the hash has changed, we take that as a user action
             //  and update the state.  If it hasn't changed, we assume
@@ -1130,18 +1130,18 @@ var metaBook={
         if (mB.Trace.state) fdjtLog("Restoring (%s) state %j",reason,state);
         if (state.location)
             metaBook.GoTo(state.location,reason||"restoreState",
-                       ((state.target)&&(cxID(state.target))),
+                       ((state.target)&&(mbID(state.target))),
                        false,(!(savehist)));
         else if ((state.page)&&(metaBook.layout)) {
             metaBook.GoToPage(state.page,reason||"restoreState",
                            false,(!(savehist)));
-            if ((state.target)&&(cxID(state.target)))
-                setTarget(cxID(state.target));}
+            if ((state.target)&&(mbID(state.target)))
+                setTarget(mbID(state.target));}
         else if (state.target) {
             metaBook.GoTo(state.target,reason||"restoreState",
                        true,false,(!(savehist)));
-            if ((state.target)&&(cxID(state.target)))
-                setTarget(cxID(state.target));}
+            if ((state.target)&&(mbID(state.target)))
+                setTarget(mbID(state.target));}
         if (!(state.refuri)) state.refuri=metaBook.refuri;
         if (!(state.docuri)) state.docuri=metaBook.docuri;
         saveState(state);
@@ -1308,7 +1308,7 @@ var metaBook={
         while (i<lim)  {
             if (allinfo[i].starts_at>loc) break;
             else i++;}
-        return cxID(allinfo[i-1].frag);
+        return mbID(allinfo[i-1].frag);
     } metaBook.resolveLocation=resolveLocation;
 
     // This moves within the document in a persistent way
@@ -1321,7 +1321,7 @@ var metaBook={
             fdjtLog.warn("falsy arg (%s) to metabookGoTo from %s",arg,caller);
             return;}
         if (typeof arg === 'string') {
-            target=cxID(arg);
+            target=mbID(arg);
             locinfo=getLocInfo(target);
             location=locinfo.start;}
         else if (typeof arg === 'number') {
@@ -1337,8 +1337,8 @@ var metaBook={
             fdjtLog.warn("Bad metabookGoTo %o",arg);
             return;}
         if ((istarget)&&(istarget.nodeType)) target=istarget;
-        else if ((typeof istarget === "string")&&(cxID(istarget)))
-            target=cxID(istarget);
+        else if ((typeof istarget === "string")&&(mbID(istarget)))
+            target=mbID(istarget);
         else {}
         var info=(target)&&
             metaBook.docinfo[target.getAttribute("data-baseid")||target.id];
@@ -1409,7 +1409,7 @@ var metaBook={
         while (target)
             if (target.href) break; else target=target.parentNode;
         if ((target)&&(target.href)&&(target.href[0]==='#')) {
-            var elt=cxID(target.href.slice(1));
+            var elt=mbID(target.href.slice(1));
             if (elt) {metaBook.GoTo(elt,"anchorFn"); fdjtUI.cancel(evt);}}}
     metaBook.anchorFn=anchorFn;
 
@@ -1460,7 +1460,7 @@ var metaBook={
         var xoff=window.scrollLeft||0, yoff=window.scrollTop||0;
         if (elt) {
             if (elt.frag) elt=elt.frag;
-            if (typeof elt==="string") elt=cxID(elt);
+            if (typeof elt==="string") elt=mbID(elt);
             if (!(elt)) return;
             else preview_elt=elt;
             if (!(oldscroll)) oldscroll={x: 0,y: yoff};
@@ -1495,7 +1495,7 @@ var metaBook={
             metaBook.clearHighlights(p);}}
 
     function startPreview(spec,caller){
-        var target=((spec.nodeType)?(spec):(cxID(spec)));
+        var target=((spec.nodeType)?(spec):(mbID(spec)));
         if (mB.Trace.flips)
             fdjtLog("startPreview %o (%s)",target,caller);
         if (target===metaBook.previewing) {}

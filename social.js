@@ -56,7 +56,7 @@
     var RefDB=fdjt.RefDB, fdjtID=fdjt.ID;
 
     var hasClass=fdjtDOM.hasClass;
-    var cxicon=metaBook.icon;
+    var mbicon=metaBook.icon;
 
     /* Social UI components */
 
@@ -82,9 +82,9 @@
                 var kind=info.kind;
                 if (pic) {}
                 else if (kind===':CIRCLE')
-                    pic=cxicon("readingcircle",64,64);
+                    pic=mbicon("readingcircle",64,64);
                 else if (kind===':OVERLAY')
-                    pic=cxicon("sideguide",64,64);
+                    pic=mbicon("sideguide",64,64);
                 else {}
                 if (pic)
                   icon=fdjtDOM.Image
@@ -199,7 +199,7 @@
         if ((current_glossmark)&&(current_glossmark.parentNode===passage)) {
             if (gloss) extendGlossmark(current_glossmark,[gloss]);
             return current_glossmark;}
-        var imgsrc=(cxicon("sbwedge",64,64));
+        var imgsrc=(mbicon("sbwedge",64,64));
         var wedge=fdjtDOM.Image(imgsrc,"wedge","glosses");
         var glossmark=fdjtDOM("a.glossmark.fdjtskiptext",wedge);
         // Get all the glosses from the index

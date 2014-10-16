@@ -54,7 +54,7 @@ metaBook.Slice=(function () {
     var fdjtTime=fdjt.Time;
     var fdjtDOM=fdjt.DOM;
     var fdjtUI=fdjt.UI;
-    var cxID=metaBook.ID;
+    var mbID=metaBook.ID;
     var RefDB=fdjt.RefDB, Ref=RefDB.Ref;
 
     var addClass=fdjtDOM.addClass;
@@ -63,16 +63,16 @@ metaBook.Slice=(function () {
     var debug_locbars=false;
     var odq="\u201c"; var cdq="\u201d";
 
-    var cxicon=metaBook.icon;
+    var mbicon=metaBook.icon;
     var addListener=fdjtDOM.addListener;
 
     function renderCard(info,query,idprefix,standalone){
         var target_id=(info.frag)||(info.id);
-        var target=((target_id)&&(cxID(target_id)));
+        var target=((target_id)&&(mbID(target_id)));
         var target_info=metaBook.docinfo[target_id];
         if (!(target_info)) return false;
         var head_info=((target_info.level)?(target_info):(target_info.head));
-        var head=((head_info)&&(cxID(head_info.frag)));
+        var head=((head_info)&&(mbID(head_info.frag)));
         var score=((query)&&(query.scores.get(info)));
         var excerpt_len=((info.excerpt)?(info.excerpt.length):(0));
         var note_len=((info.note)?(info.note.length):(0));
@@ -136,7 +136,7 @@ metaBook.Slice=(function () {
         else return note;}
 
     function showtags(info,query){
-        var tagicon=fdjtDOM.Image(cxicon("tagicon",64,64),
+        var tagicon=fdjtDOM.Image(mbicon("tagicon",64,64),
                                   "img.tagicon","tags");
         var matches=((query)&&(fdjtDOM("span.matches")));
         var toptags=fdjtDOM("span.top");
@@ -222,7 +222,7 @@ metaBook.Slice=(function () {
         for (url in refs) {
             if (url[0]==='_') continue;
             var urlinfo=refs[url];
-            var title; var icon=cxicon("diaglink",64,64);
+            var title; var icon=mbicon("diaglink",64,64);
             if (typeof urlinfo === 'string') title=urlinfo;
             else {
                 title=urlinfo.title;
@@ -261,8 +261,8 @@ metaBook.Slice=(function () {
                     (((user===metaBook.user)||(user===metaBook.user._id))?"modify":"respond")),
             fdjtDOM.Image(
                 (((user===metaBook.user)||(user===metaBook.user._id))?
-                 (cxicon("gloss_edit_titled",64,64)):
-                 (cxicon("gloss_respond_titled",64,64))),
+                 (mbicon("gloss_edit_titled",64,64)):
+                 (mbicon("gloss_respond_titled",64,64))),
                 "img.button",
                 (((user===metaBook.user)||(user===metaBook.user._id))?
                  ("edit"):("reply")),
@@ -388,7 +388,7 @@ metaBook.Slice=(function () {
         var id=target_info.id||target_info.frag;
         if (id) {
             locbar.about="#"+id;
-            locbar.title=sumText(cxID(id));}
+            locbar.title=sumText(mbID(id));}
         return locbar;}
 
     function makelocrule(target_info,cxtinfo,spec){
@@ -475,7 +475,7 @@ metaBook.Slice=(function () {
             var heads=metaBook.Info(head).heads;
             if (heads) {
                 var j=heads.length-1; while (j>0) {
-                    var hinfo=heads[j--]; var elt=cxID(hinfo.frag);
+                    var hinfo=heads[j--]; var elt=mbID(hinfo.frag);
                     if ((!(elt))||(!(hinfo.title))||
                         (elt===metaBook.docroot)||(elt===document.body))
                         continue;
