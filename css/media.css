@@ -8,7 +8,7 @@
 
 @media screen and (max-width: 640px) {
     #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT {
-        left: auto; right: auto; width: 100%;}
+     left: auto; right: auto; width: 100%;}
     #METABOOKHUD.openhead #METABOOKTOP {
         left: 5px; right: 5px;}
     #METABOOKSKIMMER {
@@ -42,9 +42,16 @@
         font-size: 75%;}
     #METABOOKHUD div.metabookhelp.hudpanel {
         left: 5px; right: 5px; top: 60px; bottom: 60px;}
+  #METABOOKHUD div.helphud.topcenter { 
+    top: 50px; width: auto; left: 60px; right: 60px;} 
   #METABOOKHUD div.helphud.rightmiddle,
   #METABOOKHUD div.helphud.leftmiddle {
         display: none;}
+  #METABOOKHUD div.helphud.botright,
+  #METABOOKHUD div.helphud.botleft {
+    bottom: 3px; }
+  #METABOOKHUD div.helphud.botcenter { 
+    bottom: 100px; width: auto; left: 60px; right: 60px;} 
     div.helpbox blockquote {
         margin-left: 2px; margin-right: 2px;}
     div.helpbox blockquote p {
@@ -72,9 +79,12 @@
 /* Handheld media rules */
 
 @media (max-device-width: 500px) {
-    #METABOOKFOOT #METABOOKPAGEBAR {
-        left: 0px; right: 0px;}
 
+  #METABOOKFOOT #METABOOKPAGEBAR {
+        background-color: ivory; opacity: 0.9;
+        margin-left: 2px; margin-right: 2px;
+        left: 0px; right: 0px; bottom: 50px;}
+  body.hudup #METABOOKFOOT #METABOOKPAGEBAR { opacity: 0.9; }
     #METABOOKHEART #METABOOKSTATICTOC {
         margin-left: 2px; margin-right: 2px;}
 

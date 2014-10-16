@@ -103,6 +103,8 @@ body._TOUCH #METABOOKFRAME > #METABOOKHUD.addgloss > div,
 body._TOUCH.mbSKIMMING #METABOOKFRAME > #METABOOKHUD > #METABOOKSKIMMER {
     background-color: transparent;
     pointer-events: all;}
+body._TOUCH.hudup #METABOOKFRAME > #METABOOKHUD > div.helphud {
+    background-color: ivory;}
 
 body._TOUCH #METABOOKFRAME > #METABOOKHUD > #METABOOKHEAD,
 body._TOUCH #METABOOKFRAME > #METABOOKHUD > #METABOOKFOOT {

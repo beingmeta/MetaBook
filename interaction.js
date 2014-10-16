@@ -2037,7 +2037,8 @@
         if (preview_timer) {
             clearTimeout(preview_timer);
             preview_timer=false;}
-        if ((metaBook.hudup)||(metaBook.mode)) {
+        if (((metaBook.hudup)||(metaBook.mode))&&
+            (!(metaBook.fullheight))) {
             fdjtUI.cancel(evt);
             metaBook.setMode(false);
             return;}

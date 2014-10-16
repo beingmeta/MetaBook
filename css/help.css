@@ -127,7 +127,7 @@ body.mbSHOWHELP #METABOOKHUD .hudbutton {
 body.mbSHOWHELP.hudup #METABOOKHUD div.metabookhelp, 
 body.mbSHOWHELP.mbSHRINK #METABOOKHUD div.metabookhelp,
 body.mbSHOWHELP.mbPREVIEW #METABOOKHUD div.metabookhelp,
-body.mbSHOWHELP.hudup #METABOOKHUD .helphud,
+body.mbSHOWHELP.hudup #METABOOKHUD.openhud .helphud,
 body.mbSHOWHELP.mbSKIMMING #METABOOKHUD div.metabookhelp,
 body.mbSHOWHELP.mbSKIMMING #METABOOKHUD .helphud,
 body.mbSHOWHELP #METABOOKHUD.addgloss .helphud,

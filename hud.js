@@ -768,7 +768,7 @@ metaBook.setMode=
             var highlights=[];
             if (metaBook.target)
                 metaBook.clearHighlights(metaBook.getDups(metaBook.target));
-            dropClass("METABOOKSKIMMER","cxfoundhighlights");
+            dropClass("METABOOKSKIMMER","mbfoundhighlights");
             metaBook.setTarget(elt);
             if ((src)&&(hasClass(src,"gloss"))) {
                 var glossinfo=metaBook.glossdb.ref(src.name);
@@ -779,7 +779,7 @@ metaBook.setMode=
                     if (range) {
                         highlights=
                             fdjtUI.Highlight(range,"metabookhighlightexcerpt");
-                        addClass("METABOOKSKIMMER","cxhighlights");}}
+                        addClass("METABOOKSKIMMER","mbfoundhighlights");}}
                 else if (src.about[0]==="#")
                     addClass(metaBook.getDups(src.about.slice(1)),
                              "metabookhighlightpassage");
