@@ -1925,7 +1925,7 @@ metaBook.Startup=
                 shrinkrule=fdjtDOM.addCSSRule(
                     "body.mbSHRINK #CODEXPAGE,body.mbPREVIEW #CODEXPAGE, body.mbSKIMMING #CODEXPAGE", "");
                 metaBook.CSS.shrinkrule=shrinkrule;}
-            var ph=geom.height, sh=ph-25, vs=(sh/ph);
+            var ph=geom.height, sh=ph-100, vs=(sh/ph);
             shrinkrule.style[fdjtDOM.transform]="scale("+vs+","+vs+")";
 
             document.body.style.overflow='';

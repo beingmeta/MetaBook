@@ -269,6 +269,9 @@ body.hudup #METABOOKHUD.openheart #METABOOKHEARTFRAME,
 #METABOOKHUD.glossaddoutlet #METABOOKRIBBON {
     border-bottom: solid blue 2px;
     height: 35px;}
+#METABOOKHUD.refinesearch.emptysearch #METABOOKRIBBON,
+#METABOOKHUD.expandsearch.emptysearch #METABOOKRIBBON {
+    height: 20px;}
 #METABOOKHUD.refinesearch #METABOOKHEART,
 #METABOOKHUD.expandsearch #METABOOKHEART,
 #METABOOKHUD.searchresults #METABOOKHEART,
@@ -276,6 +279,9 @@ body.hudup #METABOOKHUD.openheart #METABOOKHEARTFRAME,
 #METABOOKHUD.glossaddoutlet #METABOOKHEART {
     top: 37px; margin-top: 0px;
     border-radius: 0px;}
+#METABOOKHUD.refinesearch.emptysearch #METABOOKHEART,
+#METABOOKHUD.expandsearch.emptysearch #METABOOKHEART {
+    top: 22px;}
 
 #METABOOKHUD.addgloss.glossaddtag #METABOOKHEART,
 #METABOOKHUD.addgloss.glosstagging #METABOOKHEART,
@@ -475,13 +481,13 @@ div.completions.hudpanel .normal { line-height: 250%;}
 
 #METABOOKHUD img.hudbutton {
     position: absolute; width: 50px; height: 50px;
-    border: solid transparent 2px; opacity: 0.05;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=05)";
-    filter: alpha(opacity=05);
-    -webkit-opacity: 0.05;
-    -khtml-opacity: 0.05;
-    -moz-opacity: 0.05;
-    -o-opacity: 0.05;}
+    border: solid transparent 2px; opacity: 0.02;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=02)";
+    filter: alpha(opacity=02);
+    -webkit-opacity: 0.02;
+    -khtml-opacity: 0.02;
+    -moz-opacity: 0.02;
+    -o-opacity: 0.02;}
 ._MOUSE #METABOOKHUD:hover img.hudbutton {
     opacity: 0.30;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
@@ -750,7 +756,8 @@ body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER {
     -webkit-opacity: 0.90;
     -khtml-opacity: 0.90;
     -moz-opacity: 0.90;
-    -o-opacity: 0.90;}
+    -o-opacity: 0.90;
+    max-height: 50px;}
 
 #METABOOKHUD #METABOOKSKIMMER.expanded, body.hudup #METABOOKSKIMMER.expanded,
 #METABOOKTOP #METABOOKSKIMMER.expanded {
@@ -1205,8 +1212,6 @@ body._FULLHEIGHT #METABOOKFOOT {}
 body._FULLHEIGHT.hudup #METABOOKTOP, body._FULLHEIGHT.hudup #METABOOKFOOT {
     display: block;}
 
-body._FULLHEIGHT._FULLWIDTH #METABOOKHUD {display: none;}
-
 body._FULLHEIGHT._FULLWIDTH.hudup #METABOOKHUD,
 body._FULLHEIGHT._FULLWIDTH.openhud #METABOOKHUD,
 body._FULLHEIGHT._FULLWIDTH.openglossmark #METABOOKHUD,
@@ -1240,19 +1245,25 @@ body._FULLHEIGHT #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT {
     ._TOUCH #METABOOKHUD #METABOOKHEAD.tapholding img.hudbutton.tapholdtarget {
         width: 50px; height: 50px;}
 
-    #METABOOKHUD.refinesearch #METABOOKHEART,
-    #METABOOKHUD.expandsearch #METABOOKHEART,
-    #METABOOKHUD.searchresults #METABOOKHEART,
-    #METABOOKHUD.glossaddtag #METABOOKHEART,
-    #METABOOKHUD.glossaddoutlet #METABOOKHEART {
-        top: 62px;}
-
     #METABOOKHUD.refinesearch #METABOOKRIBBON,
     #METABOOKHUD.expandsearch #METABOOKRIBBON,
     #METABOOKHUD.searchresults #METABOOKRIBBON,
     #METABOOKHUD.glossaddtag #METABOOKRIBBON,
     #METABOOKHUD.glossaddoutlet #METABOOKRIBBON {
         height: 60px;}
+    #METABOOKHUD.refinesearch.emptysearch #METABOOKRIBBON,
+    #METABOOKHUD.expandsearch.emptysearch #METABOOKRIBBON {
+        height: 22px;}
+
+    #METABOOKHUD.refinesearch #METABOOKHEART,
+    #METABOOKHUD.expandsearch #METABOOKHEART,
+    #METABOOKHUD.searchresults #METABOOKHEART,
+    #METABOOKHUD.glossaddtag #METABOOKHEART,
+    #METABOOKHUD.glossaddoutlet #METABOOKHEART {
+        top: 62px;}
+    #METABOOKHUD.refinesearch.emptysearch #METABOOKHEART,
+    #METABOOKHUD.expandsearch.emptysearch #METABOOKHEART {
+        top: 24px;}
 
 }
 

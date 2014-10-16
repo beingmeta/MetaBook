@@ -77,10 +77,10 @@ body._NOSHRINK #CODEXPAGE {
     -moz-transform: inherit; -o-transform: inherit;}
 body.mbSHRINK #CODEXPAGE, body.mbPREVIEW #CODEXPAGE,
 body.mbSKIMMING #CODEXPAGE {
-    transform-origin: center top;
-    -webkit-transform-origin: center top;
-    -moz-transform-origin: center top;
-    -o-transform: center top;}
+    transform-origin: center center;
+    -webkit-transform-origin: center center;
+    -moz-transform-origin: center center;
+    -o-transform: center center;}
 
 body._ANIMATE._NOSHRINK #CODEXPAGE .codexpage {
     transform: inherit; -webkit-transform: inherit;
