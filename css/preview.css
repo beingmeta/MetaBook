@@ -6,19 +6,19 @@
 
 body.mbPREVIEW { cursor: crosshair; }
 
-body.mbPREVIEW #METABOOKTOP { display: none; }
-body.mbPREVIEW #METABOOKHUD.openhead #METABOOKTOP { display: none; }
-
 body.mbPREVIEW #METABOOKHEAD { display: none; }
+body.mbPREVIEW #METABOOKHUD.openhead #METABOOKHEAD { display: none; }
 
-body.mbPREVIEW #METABOOKHUD.openhead.overtoc #METABOOKTOP {
+body.mbPREVIEW #METABOOKTOPBAR { display: none; }
+
+body.mbPREVIEW #METABOOKHUD.openhead.overtoc #METABOOKHEAD {
     display: block; }
 
-body.mbPREVIEW #METABOOKHUD.overtoc #METABOOKTOP,
+body.mbPREVIEW #METABOOKHUD.overtoc #METABOOKHEAD,
 body.mbPREVIEW #METABOOKHUD.overtoc #METABOOKFOOT {
     background-color: transparent;
     border-color: transparent;}
-body.mbPREVIEW #METABOOKHUD.overtoc #METABOOKTOP .hudpanel {
+body.mbPREVIEW #METABOOKHUD.overtoc #METABOOKHEAD .hudpanel {
     background-color: transparent;}
 
 body.mbPREVIEW #METABOOKHUD.allglosses #METABOOKSKIMMER,
@@ -78,13 +78,13 @@ body.mbPREVIEW #METABOOKHUD.openglossmark #METABOOKPOINTGLOSSES.hudpanel {
     -moz-opacity: 0.05;
     -o-opacity: 0.05;}
 
-body.mbPREVIEW #METABOOKHUD.openhead #METABOOKTOP,
+body.mbPREVIEW #METABOOKHUD.openhead #METABOOKHEAD,
 body.mbPREVIEW #METABOOKHUD.openfoot #METABOOKFOOT,
-body.mbPREVIEW #METABOOKHUD.openhead.openheart #METABOOKTOP {
+body.mbPREVIEW #METABOOKHUD.openhead.openheart #METABOOKHEAD {
     background-color: transparent;}
 
-body.hudup.mbPREVIEW #METABOOKHUD.openhead #METABOOKTOP,
-body.mbPREVIEW #METABOOKHUD.addgloss #METABOOKTOP,
+body.hudup.mbPREVIEW #METABOOKHUD.openhead #METABOOKHEAD,
+body.mbPREVIEW #METABOOKHUD.addgloss #METABOOKHEAD,
 body.mbPREVIEW #METABOOKHUD.openglossmark #METABOOKSKIMMER,
 body.mbPREVIEW.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER {
     box-shadow: none;

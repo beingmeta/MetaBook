@@ -110,9 +110,9 @@ metaBook.setMode=
             heart.innerHTML=fixStaticRefs(metaBook.HTML.heart);
             metaBook.DOM.heart=heart;
             // Other HUD parts
-            metaBook.DOM.top=fdjtID("METABOOKTOP");
+            metaBook.DOM.top=fdjtID("METABOOKHEAD");
             metaBook.DOM.heart=fdjtID("METABOOKHEARTBODY");
-            metaBook.DOM.head=fdjtID("METABOOKHEAD");
+            metaBook.DOM.head=fdjtID("METABOOKTOPBAR");
             metaBook.DOM.foot=fdjtID("METABOOKFOOT");
             metaBook.DOM.tabs=fdjtID("METABOOKTABS");
 

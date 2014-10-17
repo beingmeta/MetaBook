@@ -24,7 +24,7 @@
   #METABOOKFOOT .hudbutton { bottom: 30px;}
   #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT {
     bottom: 30px; left: auto; right: auto; width: 100%;}
-    #METABOOKHUD.openhead #METABOOKTOP {
+    #METABOOKHUD.openhead #METABOOKHEAD {
         left: 5px; right: 5px;}
 body.mbPREVIEW.mbPAGEPREVIEW #METABOOKPAGEBARHELP,
 body.mbPREVIEW #METABOOKSEETHRUHELP { display: none; }

@@ -2597,7 +2597,7 @@
                    slip: slice_slipped},
          hud: {click: handleXTarget, tap: handleXTarget},
          "#METABOOKSTARTPAGE": {click: metaBook.UI.dropHUD},
-         "#METABOOKHEAD": {tap: raiseHUD},
+         "#METABOOKTOPBAR": {tap: raiseHUD},
          "#METABOOKSHOWCOVER": {
              tap: showcover_tapped, release: showcover_released},
          "#METABOOKHUDHELP": {click: metaBook.UI.dropHUD},
@@ -2617,7 +2617,7 @@
          // Raise and lower HUD
          "#METABOOKPAGEHEAD": {click: head_tap},
          "#METABOOKTABS": {click: head_tap},
-         "#METABOOKTOP": {click: head_tap},
+         "#METABOOKHEAD": {click: head_tap},
          "#METABOOKPAGEFOOT": {tap: foot_tap},
          "#METABOOKTAGINPUT": {keydown: addtag_keydown},
          "#METABOOKOUTLETINPUT": {keydown: addoutlet_keydown},
@@ -2745,7 +2745,7 @@
          // "#METABOOKHEARTBODY": {touchstart: heart_touched},
          // "#METABOOKFRAME": {touchstart: noDefault,touchmove: noDefault,touchend: noDefault},
          "#METABOOKSTARTPAGE": {touchend: metaBook.UI.dropHUD},
-         "#METABOOKHEAD": {tap: raiseHUD},
+         "#METABOOKTOPBAR": {tap: raiseHUD},
          "#METABOOKSHOWCOVER": {
              tap: showcover_tapped, release: showcover_released},
          "#METABOOKSOURCES": {
@@ -2769,7 +2769,7 @@
          // Raise and lower HUD
          "#METABOOKPAGEHEAD": {touchstart: head_tap},
          "#METABOOKTABS": {touchstart: head_tap},
-         "#METABOOKTOP": {touchend: head_tap},
+         "#METABOOKHEAD": {touchend: head_tap},
          "#METABOOKFOOT": {tap: foot_tap,touchstart: noDefault,touchmove: noDefault},
          "#METABOOKTAGINPUT": {keydown: addtag_keydown},
          "#METABOOKOUTLETINPUT": {keydown: addoutlet_keydown},
