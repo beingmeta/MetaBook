@@ -18,7 +18,9 @@
 #METABOOKFRAME.metabookuifontsmall #METABOOKHUD { font-size: 1em; }
 
 #METABOOKHUD .metabookhelp, #METABOOKHUD .helpbox { font-size: 80%;}
-#METABOOKHUD #METABOOKRIBBON, #METABOOKHUD #METABOOKHEAD, #METABOOKHUD #METABOOKFOOT {
+#METABOOKHUD #METABOOKRIBBON,
+#METABOOKHUD #METABOOKHEAD,
+#METABOOKHUD #METABOOKFOOT {
     font-size: 80%;}
 #METABOOKHUD .metabookslice { font-size: 90%;}
 #METABOOKHUD .metabookslice .tochead, #METABOOKHUD .metabookslice .idhead {
@@ -1209,7 +1211,10 @@ body.mbSKIMMING #METABOOKHUD img.metabookclosehud#METABOOKSTOPSKIM {
 
 body._FULLHEIGHT #METABOOKHEAD {display: none;}
 body._FULLHEIGHT #METABOOKFOOT {}
-body._FULLHEIGHT.hudup #METABOOKHEAD, body._FULLHEIGHT.hudup #METABOOKFOOT {
+body._FULLHEIGHT.hudup #METABOOKHEAD,
+body._FULLHEIGHT.hudup #METABOOKFOOT,
+body._FULLHEIGHT.openhud #METABOOKHEAD,
+body._FULLHEIGHT.openhud #METABOOKFOOT {
     display: block;}
 
 body._FULLHEIGHT._FULLWIDTH.hudup #METABOOKHUD,
