@@ -35,7 +35,7 @@ body.mbPREVIEW #METABOOKHUD {
     -khtml-opacity: 0.80;
     -moz-opacity: 0.80;
     -o-opacity: 0.80;}
-body.hudup.mbPREVIEW #METABOOKHEARTFRAME {
+body.hudup.mbPREVIEW #METABOOKHEART {
     background-color: transparent; border-color: transparent; opacity: 0.0;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
     filter: alpha(opacity=0);
@@ -43,7 +43,7 @@ body.hudup.mbPREVIEW #METABOOKHEARTFRAME {
     -khtml-opacity: 0;
     -moz-opacity: 0;
     -o-opacity: 0;}
-body.hudup.mbPREVIEW #METABOOKHUD.openheart #METABOOKHEARTFRAME {
+body.hudup.mbPREVIEW #METABOOKHUD.openheart #METABOOKHEART {
     background-color: transparent; border-color: transparent; opacity: 0.0; 
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
     filter: alpha(opacity=0);

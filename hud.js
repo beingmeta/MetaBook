@@ -106,12 +106,12 @@ metaBook.setMode=
             var helptext=fdjtID("METABOOKAPPHELP");
             helptext.innerHTML=fixStaticRefs(metaBook.HTML.help);
             // Setup heart
-            var heart=fdjtID("METABOOKHEART");
+            var heart=fdjtID("METABOOKHEARTBODY");
             heart.innerHTML=fixStaticRefs(metaBook.HTML.heart);
             metaBook.DOM.heart=heart;
             // Other HUD parts
             metaBook.DOM.top=fdjtID("METABOOKTOP");
-            metaBook.DOM.heart=fdjtID("METABOOKHEART");
+            metaBook.DOM.heart=fdjtID("METABOOKHEARTBODY");
             metaBook.DOM.head=fdjtID("METABOOKHEAD");
             metaBook.DOM.foot=fdjtID("METABOOKFOOT");
             metaBook.DOM.tabs=fdjtID("METABOOKTABS");
@@ -258,7 +258,7 @@ metaBook.setMode=
         
         function resizeHUD(){
             var view_height=fdjtDOM.viewHeight();
-            fdjtID("METABOOKHEART").style.maxHeight=(view_height-100)+'px';
+            fdjtID("METABOOKHEARTBODY").style.maxHeight=(view_height-100)+'px';
             fdjt.DOM.tweakFonts(metaBook.HUD);}
         metaBook.resizeHUD=resizeHUD;
 
@@ -645,7 +645,7 @@ metaBook.setMode=
                 fdjtLog("Updating scroller for %o",elt);
             if (metaBook.heartscroller) metaBook.heartscroller.refresh();
             else {
-                var heart=fdjtID("METABOOKHEART");
+                var heart=fdjtID("METABOOKHEARTBODY");
                 var contents=fdjtID("METABOOKHEARTCONTENT");
                 if (!(contents)) {
                     contents=fdjtDOM("div#METABOOKHEARTCONTENT");

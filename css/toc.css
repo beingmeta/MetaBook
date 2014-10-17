@@ -93,25 +93,25 @@ div.metabooktoc div.sub {
 div.metabooktoc.metabookcurhead div.head { }
 div.metabooktoc.metabookcurhead div.sub { display: block;}
 
-#METABOOKHEART #METABOOKSTATICTOC {
+#METABOOKHEARTBODY #METABOOKSTATICTOC {
     margin-left: 0.1em; margin-right: 0.1em;
     font-size: 2em;}
-#METABOOKHEART #METABOOKSTATICTOC div.metabooktoc {
+#METABOOKHEARTBODY #METABOOKSTATICTOC div.metabooktoc {
     display: block; font-size: 90%; text-align: left;}
-#METABOOKHEART #METABOOKSTATICTOC div.metabooktoc img { display: none;}
-#METABOOKHUD #METABOOKHEART #METABOOKSTATICTOC div.metabooktoc div.head {
+#METABOOKHEARTBODY #METABOOKSTATICTOC div.metabooktoc img { display: none;}
+#METABOOKHUD #METABOOKHEARTBODY #METABOOKSTATICTOC div.metabooktoc div.head {
     margin-left: 0px; margin-right: 0px;
     padding-left: 0px; padding-right: 0px;
     display: block; font-weight: bold;}
-#METABOOKHUD #METABOOKHEART #METABOOKSTATICTOC div.metabooktocleaf > div.head {
+#METABOOKHUD #METABOOKHEARTBODY #METABOOKSTATICTOC div.metabooktocleaf > div.head {
     display: block; font-weight: normal;}
-#METABOOKHUD #METABOOKHEART #METABOOKSTATICTOC div.progressbox { display: none;}
-#METABOOKHUD #METABOOKHEART #METABOOKSTATICTOC div.metabooklivehead > div.head {
+#METABOOKHUD #METABOOKHEARTBODY #METABOOKSTATICTOC div.progressbox { display: none;}
+#METABOOKHUD #METABOOKHEARTBODY #METABOOKSTATICTOC div.metabooklivehead > div.head {
     color: blue;}
-#METABOOKHUD #METABOOKHEART #METABOOKSTATICTOC
+#METABOOKHUD #METABOOKHEARTBODY #METABOOKSTATICTOC
   div.metabooklivehead > div.spanbar div.progressbox {
       display: block;}
-#METABOOKHEART #METABOOKSTATICTOC div.metabooktoc a.brick {
+#METABOOKHEARTBODY #METABOOKSTATICTOC div.metabooktoc a.brick {
     border: solid black 1px;}
 
 #METABOOKSTATICTOC div.metabooktoc.metabookcurhead div.sub { display: none;}
@@ -119,9 +119,9 @@ div.metabooktoc.metabookcurhead div.sub { display: block;}
 #METABOOKSTATICTOC > div.metabooktoc { margin-left: 0.5ex; margin-right: 0.5ex;}
 #METABOOKSTATICTOC div.spanbar { display: none; }
 
-#METABOOKHUD #METABOOKHEART #METABOOKSTATICTOC div.spanbar div.spans {
+#METABOOKHUD #METABOOKHEARTBODY #METABOOKSTATICTOC div.spanbar div.spans {
     left: 0px;}
-#METABOOKHUD #METABOOKHEART #METABOOKSTATICTOC div.head.metabooklivehead {
+#METABOOKHUD #METABOOKHEARTBODY #METABOOKSTATICTOC div.head.metabooklivehead {
     border-bottom: solid red 1px;}
 
 div.metabooktoc .sectname.cohi {
@@ -354,12 +354,12 @@ body.mbPREVIEW #METABOOKHUD div.metabooktoc.metabooklivehead.metabookcurhead > d
 
 /* Static TOC */
 
-#METABOOKHUD #METABOOKHEART #METABOOKSTATICTOC div.head { color: black; } 
-#METABOOKHUD #METABOOKHEART #METABOOKSTATICTOC a {
+#METABOOKHUD #METABOOKHEARTBODY #METABOOKSTATICTOC div.head { color: black; } 
+#METABOOKHUD #METABOOKHEARTBODY #METABOOKSTATICTOC a {
     color: inherit; font-weight: inherit;}
-#METABOOKHUD #METABOOKHEART #METABOOKSTATICTOC a.cohi {
+#METABOOKHUD #METABOOKHEARTBODY #METABOOKSTATICTOC a.cohi {
     font-weight: bold; background-color: gold;}
-#METABOOKHUD #METABOOKHEART #METABOOKSTATICTOC div.head.cohi {
+#METABOOKHUD #METABOOKHEARTBODY #METABOOKSTATICTOC div.head.cohi {
     background-color: rgba(255,215,0,0.5);}
 
 #METABOOKSTATICTOC div.head.tapholdtarget { outline: solid blue 2px; }

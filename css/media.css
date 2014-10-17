@@ -50,13 +50,13 @@ body.mbPREVIEW #METABOOKSEETHRUHELP { display: none; }
     #METABOOKHUD.openhead img.hudbutton[alt="searchresults"] {
         display: none;}
 
-    #METABOOKHUD.openheart #METABOOKHEARTFRAME {
+    #METABOOKHUD.openheart #METABOOKHEART {
         top: 60px; bottom: 60px;}
 
-    #METABOOKHEARTFRAME {
+    #METABOOKHEART {
         border-radius: 1ex;
         left: 5px; right: 5px;}
-    #METABOOKHEART {
+    #METABOOKHEARTBODY {
         border-radius: 1ex; padding-bottom: 0px;
         margin-bottom: 2px; margin-top: 2px;
         left: 5px; right: 5px;
@@ -83,7 +83,7 @@ body.mbPREVIEW #METABOOKSEETHRUHELP { display: none; }
   body._TOUCH.mbPREVIEW #METABOOKFOOT .hudbutton { display: none; }
     #METABOOKFOOT #METABOOKPAGEBAR div.textfoot {
       height: initial;}
-    #METABOOKHEART #METABOOKSTATICTOC {
+    #METABOOKHEARTBODY #METABOOKSTATICTOC {
         margin-left: 0.2em; margin-right: 0.2em;}
 
     div.fdjtprogress#METABOOKLAYOUTMESSAGE {
@@ -107,7 +107,7 @@ body.mbPREVIEW #METABOOKSEETHRUHELP { display: none; }
 @media (max-device-width: 500px) {
 
   body.hudup #METABOOKFOOT #METABOOKPAGEBAR { opacity: 0.9; }
-    #METABOOKHEART #METABOOKSTATICTOC {
+    #METABOOKHEARTBODY #METABOOKSTATICTOC {
         margin-left: 2px; margin-right: 2px;}
 
     #METABOOKCOVERMESSAGE > div {

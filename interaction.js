@@ -2742,7 +2742,7 @@
                    touchtoo: slice_touchtoo,
                    touchmove: preview_touchmove_nodefault,
                    slip: slice_slipped},
-         // "#METABOOKHEART": {touchstart: heart_touched},
+         // "#METABOOKHEARTBODY": {touchstart: heart_touched},
          // "#METABOOKFRAME": {touchstart: noDefault,touchmove: noDefault,touchend: noDefault},
          "#METABOOKSTARTPAGE": {touchend: metaBook.UI.dropHUD},
          "#METABOOKHEAD": {tap: raiseHUD},

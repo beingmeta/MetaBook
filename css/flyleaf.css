@@ -6,32 +6,32 @@
 
 /* The Flyleaf */
 
-#METABOOKHUD #METABOOKHEART table {
+#METABOOKHUD #METABOOKHEARTBODY table {
     width: 90%; margin-left: auto; margin-right: auto; vertical-align: top;}
 
-#METABOOKHUD #METABOOKHEART .tabcontent {
+#METABOOKHUD #METABOOKHEARTBODY .tabcontent {
     overflow-y: hidden; overflow-x: hidden;}
-#METABOOKHUD.sbooksapp #METABOOKHEART .tabcontent#SBOOKSAPP,
-#METABOOKHUD.login #METABOOKHEART .tabcontent#METABOOKLOGIN {
+#METABOOKHUD.sbooksapp #METABOOKHEARTBODY .tabcontent#SBOOKSAPP,
+#METABOOKHUD.login #METABOOKHEARTBODY .tabcontent#METABOOKLOGIN {
     overflow: visible;}
-#METABOOKHUD.sbooksapp #METABOOKHEART .tabcontent#SBOOKSAPP {
+#METABOOKHUD.sbooksapp #METABOOKHEARTBODY .tabcontent#SBOOKSAPP {
     width: 100%; height: 100%; border: 0px; margin: 0px; padding: 0px;}
-#METABOOKHUD.login #METABOOKHEART .tabcontent#METABOOKLOGIN {
+#METABOOKHUD.login #METABOOKHEARTBODY .tabcontent#METABOOKLOGIN {
     width: 100%; border: 0px; margin: 0px; padding: 0px;}
-#METABOOKHUD #METABOOKHEART .tabcontent section { clear: both;}
+#METABOOKHUD #METABOOKHEARTBODY .tabcontent section { clear: both;}
 
 body._NOUSER a.logout {display: none;}
 
-/* METABOOKHEART content rules */
+/* METABOOKHEARTBODY content rules */
 
-#METABOOKHUD #METABOOKHEART a,
-#METABOOKHUD #METABOOKHEART a:visited { 
+#METABOOKHUD #METABOOKHEARTBODY a,
+#METABOOKHUD #METABOOKHEARTBODY a:visited { 
   color: darkblue; text-decoration: none;}
-#METABOOKHUD #METABOOKHEART a:hover { text-decoration: underline;}
-#METABOOKHUD #METABOOKHEART .flyleafplate a,
-#METABOOKHUD #METABOOKHEART .flyleafplate a:visited {
+#METABOOKHUD #METABOOKHEARTBODY a:hover { text-decoration: underline;}
+#METABOOKHUD #METABOOKHEARTBODY .flyleafplate a,
+#METABOOKHUD #METABOOKHEARTBODY .flyleafplate a:visited {
     text-decoration: none; color: blue;}
-#METABOOKHUD #METABOOKHEART .flyleafplate a:hover {
+#METABOOKHUD #METABOOKHEARTBODY .flyleafplate a:hover {
     text-decoration: underline;}
 
 #METABOOKHUD #METABOOKABOUTBOOK.hudpanel { text-align: left;}
