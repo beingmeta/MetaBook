@@ -7,27 +7,6 @@
 @charset "UTF-8";
 
 @media screen and (max-width: 640px) {
-  #METABOOKFOOT #METABOOKPAGEBAR {
-        margin-left: 2px; margin-right: 2px;
-        left: 0px; right: 0px;}
-#METABOOKFOOT #METABOOKPAGEBAR .metabooksectmarker { 
-  border: solid blue 1px; opacity: 0.3; }
-
-
-#METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER1.metabooksectmarker {
-    height: 60%;}
-#METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER2.metabooksectmarker {
-    height: 35%; }
-#METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER3.metabooksectmarker {
-    height: 20%; }
-
-  #METABOOKFOOT .hudbutton { bottom: 30px;}
-  #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT {
-    bottom: 30px; left: auto; right: auto; width: 100%;}
-    #METABOOKHUD.openhead #METABOOKHEAD {
-        left: 5px; right: 5px;}
-body.mbPREVIEW.mbPAGEPREVIEW #METABOOKPAGEBARHELP,
-body.mbPREVIEW #METABOOKSEETHRUHELP { display: none; }
     #METABOOKSKIMMER {
         border-width: 2px;
         border-bottom-left-radius: 1ex;
@@ -36,19 +15,6 @@ body.mbPREVIEW #METABOOKSEETHRUHELP { display: none; }
         left: 5px; right: 5px; }
     img.metabookclosehud#METABOOKSTOPSKIM {
         bottom: 50px; top: auto;}
-
-  body.mbSKIMMING .hudbutton, body.mbSKIMMING #METABOOKSHOWTEXT,
-  body.hudup.mbSKIMMING .hudbutton, body.hudup.mbSKIMMING #METABOOKSHOWTEXT {
-   display: none; }
-
-    #METABOOKHUD.addgloss img.hudbutton[alt="toc"],
-    #METABOOKHUD.addgloss img.hudbutton[alt="search"] {
-        display: none;}
-
-    #METABOOKHUD.openhead img.hudbutton[alt="toc"],
-    #METABOOKHUD.openhead img.hudbutton[alt="search"],
-    #METABOOKHUD.openhead img.hudbutton[alt="searchresults"] {
-        display: none;}
 
     #METABOOKHUD.openheart #METABOOKHEART {
         top: 60px; bottom: 60px;}
@@ -63,26 +29,26 @@ body.mbPREVIEW #METABOOKSEETHRUHELP { display: none; }
         font-size: 75%;}
     #METABOOKHUD div.metabookhelp.hudpanel {
         left: 5px; right: 5px; top: 60px; bottom: 60px;}
-  #METABOOKHUD div.helphud.topcenter { 
-    top: 50px; width: auto; left: 60px; right: 60px;} 
-  #METABOOKHUD div.helphud.rightmiddle,
-  #METABOOKHUD div.helphud.leftmiddle {
+    #METABOOKHUD div.helphud.topcenter { 
+        top: 50px; width: auto; left: 60px; right: 60px;} 
+    #METABOOKHUD div.helphud.rightmiddle,
+    #METABOOKHUD div.helphud.leftmiddle {
         display: none;}
-  #METABOOKHUD div.helphud.botright,
-  #METABOOKHUD div.helphud.botleft {
-    bottom: 3px; }
-  #METABOOKHUD div.helphud.botcenter { 
-    bottom: 100px; width: auto; left: 60px; right: 60px;} 
+    #METABOOKHUD div.helphud.botright,
+    #METABOOKHUD div.helphud.botleft {
+        bottom: 3px; }
+    #METABOOKHUD div.helphud.botcenter { 
+        bottom: 100px; width: auto; left: 60px; right: 60px;} 
     div.helpbox blockquote {
         margin-left: 2px; margin-right: 2px;}
     div.helpbox blockquote p {
         margin-right: 0px; margin-left: 1ex; text-indent: -1ex;}
 
-  body._TOUCH.mbPREVIEW #METABOOKFOOT #METABOOKPAGEBAR { 
-    height: 80px;}
-  body._TOUCH.mbPREVIEW #METABOOKFOOT .hudbutton { display: none; }
+    body._TOUCH.mbPREVIEW #METABOOKFOOT #METABOOKPAGEBAR { 
+        height: 80px;}
+    body._TOUCH.mbPREVIEW #METABOOKFOOT .hudbutton { display: none; }
     #METABOOKFOOT #METABOOKPAGEBAR div.textfoot {
-      height: initial;}
+        height: initial;}
     #METABOOKHEARTBODY #METABOOKSTATICTOC {
         margin-left: 0.2em; margin-right: 0.2em;}
 
@@ -105,8 +71,45 @@ body.mbPREVIEW #METABOOKSEETHRUHELP { display: none; }
 /* Handheld media rules */
 
 @media (max-device-width: 500px) {
+    #METABOOKFOOT #METABOOKPAGEBAR {
+        margin-left: 2px; margin-right: 2px;
+        left: 0px; right: 0px;}
+    #METABOOKFOOT #METABOOKPAGEBAR .metabooksectmarker { 
+        border: solid blue 1px; opacity: 0.3; }
+    #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER1.metabooksectmarker {
+        height: 60%;}
+    #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER2.metabooksectmarker {
+        height: 35%; }
+    #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER3.metabooksectmarker {
+        height: 20%; }
 
-  body.hudup #METABOOKFOOT #METABOOKPAGEBAR { opacity: 0.9; }
+    #METABOOKFOOT .hudbutton { bottom: 30px;}
+    #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT {
+        bottom: 30px; left: auto; right: auto; width: 100%;}
+    #METABOOKHUD.openhead #METABOOKHEAD {
+        left: 5px; right: 5px;}
+    body.mbPREVIEW.mbPAGEPREVIEW #METABOOKPAGEBARHELP,
+    body.mbPREVIEW #METABOOKSEETHRUHELP { display: none; }
+
+    body.mbSKIMMING .hudbutton,
+    body.hudup.mbSKIMMING .hudbutton, 
+    body.mbSKIMMING #METABOOKSHOWTEXT,
+    body.hudup.mbSKIMMING #METABOOKSHOWTEXT {
+        display: none; }
+
+    #METABOOKHUD.addgloss img.hudbutton[alt="toc"],
+    #METABOOKHUD.addgloss img.hudbutton[alt="search"] {
+        display: none;}
+
+    #METABOOKHUD.openhead img.hudbutton[alt="toc"],
+    #METABOOKHUD.openhead img.hudbutton[alt="search"],
+    #METABOOKHUD.openhead img.hudbutton[alt="searchresults"] {
+        display: none;}
+}
+
+@media (max-device-width: 500px) {
+
+    body.hudup #METABOOKFOOT #METABOOKPAGEBAR { opacity: 0.9; }
     #METABOOKHEARTBODY #METABOOKSTATICTOC {
         margin-left: 2px; margin-right: 2px;}
 
@@ -115,8 +118,8 @@ body.mbPREVIEW #METABOOKSEETHRUHELP { display: none; }
     #METABOOKCOVERMESSAGE > div#METABOOKREADYMESSAGE {
         font-size: 1.0em;}
 
-   #METABOOKHUD #METABOOKPOINTGLOSSES.hudpanel {
-     max-width: 90%; min-width: inherit; left: 5px; right: 10px; }
+    #METABOOKHUD #METABOOKPOINTGLOSSES.hudpanel {
+        max-width: 90%; min-width: inherit; left: 5px; right: 10px; }
 
     #CODEXPAGE {
         top: 0px; bottom: 25px;
@@ -131,7 +134,7 @@ body.mbPREVIEW #METABOOKSEETHRUHELP { display: none; }
 }
 
 body._TOUCH .checkspan input[TYPE="CHECKBOX"], body._TOUCH .checkspan input[TYPE="RADIO"] {
-     height: 1em; width: 1em;}}
+    height: 1em; width: 1em;}}
 
 
 /* Emacs local variables
