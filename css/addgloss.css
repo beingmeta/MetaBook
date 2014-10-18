@@ -63,11 +63,11 @@ div.metabookglossform#METABOOKADDGLOSSPROTOTYPE { display: none;}
 div.metabookglossform#METABOOKLIVEGLOSS {
     display: block;}
 div.metabookglossform div.editgloss {
- margin-left: 0.5em; text-align: left; color: black;}
+    margin-left: 0.5em; text-align: left; color: black;}
 div.metabookglossform div.response {
- margin-left: 0.5em; margin-right: 70px;
- text-align: left; color: black;
- max-height: 30px;}
+    margin-left: 0.5em; margin-right: 70px;
+    text-align: left; color: black;
+    max-height: 30px;}
 body.hudup div.metabookglossform div.response { max-height: inherit;}
 div.metabookglossform div.response .respmaker {font-weight: bold;}
 div.metabookglossform div.response .respnote { font-style: italic;}
@@ -188,8 +188,8 @@ div.metabookglossform .glossetc .glossdate {
 div.metabookglossform form .glossexposure {
     float: right; font-size: 1.5ex;}
 @media (pointer: coarse) {
-  div.metabookglossform form .glossetc { font-size: 2ex; }
-  div.metabookglossform form .glossexposure { font-size: 1em; }
+    div.metabookglossform form .glossetc { font-size: 2ex; }
+    div.metabookglossform form .glossexposure { font-size: 1em; }
 }
 div.metabookglossform form .glossexposure .checkspan {
     float: right; margin-right: 1ex; margin-top: 2px;
@@ -200,9 +200,9 @@ div.metabookglossform.private .checkspan.postgloss {
     display: none;}
 
 div.metabookglossform form .glossexposure, div.metabookglossform form .excerpt {
-  display: none; }
+    display: none; }
 body.hudup div.metabookglossform form .glossexposure {
-  display: inline-block; }
+    display: inline-block; }
 
 #METABOOKHUD .metabookglossform .checkspan.private {
     color: white; font-weight: bold; background-color: green;
@@ -391,14 +391,14 @@ div.metabookglossform.glossreply form .submitbutton .add {
     display: none;}
 
 div.metabookglossform.glossadd form div.addglossmenu.expanded >
-  img[alt="glossupdate"] {
-   display: none;}
+img[alt="glossupdate"] {
+    display: none;}
 div.metabookglossform.glossedit form div.addglossmenu.expanded >
-   img[alt="glosspush"] {
+img[alt="glosspush"] {
     display: none;}
 
 div.metabookglossform.glossadd form div.addglossmenu.expanded >
-   img[alt="glossdelete"] {
+img[alt="glossdelete"] {
     display: none;}
 
 div.metabookglossform form .checkspan {
@@ -406,7 +406,7 @@ div.metabookglossform form .checkspan {
     font-family: sans,sans-serif;}
 
 div.metabookglossform form span.source:before, .completions span.source:before {
-    content: '@'; color: darkblue;}
+                                                   content: '@'; color: darkblue;}
 
 div.metabookglossform .button.savebutton,
 div.metabookglossform .button.replybutton,
@@ -458,7 +458,7 @@ body.hudup #METABOOKHUD.addgloss div.hudpanel#METABOOKADDGLOSS {}
     display: block;}
 
 #METABOOKHUD #METABOOKGLOSSEDITDETAIL textarea {
-  width: 90%; max-height: 90%; min-height: 250px;}
+    width: 90%; max-height: 90%; min-height: 250px;}
 
 div.completions#METABOOKSHARECLOUD #METABOOKSHARECLOUD {
     margin-left: 50px; margin-right: 50px;}

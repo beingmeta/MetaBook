@@ -11,18 +11,18 @@ div.metabooktoc div.spanbar { height: 20px;}
 div.metabooktoc > div, div.metabooktoc > div.head {
     padding-left: 1em; padding-right: 1em;}
 div.metabooktoc div.head {
-  position: relative; margin: 0px; padding: 0px; border: 0px;
-  left: 0px; right: 0px; margin: 0px;
-  padding-left: 1em; padding-right: 1em;
-  display: none;}
+    position: relative; margin: 0px; padding: 0px; border: 0px;
+    left: 0px; right: 0px; margin: 0px;
+    padding-left: 1em; padding-right: 1em;
+    display: none;}
 div.metabooktoc > div.spanbar {
-  margin-left: 0px; margin-right: 0px;
-  padding-left: 0px; padding-right: 0px;}                             
+    margin-left: 0px; margin-right: 0px;
+    padding-left: 0px; padding-right: 0px;}                             
 
 div.metabooktoc div.head { min-height: 24px;}
 @media (pointer: coarse) {
     #METABOOKSTATICTOC div.metabooktoc div.head { min-height: 30px;}
-    }
+}
 
 div.metabooktoc div.head .progressbar, div.metabooktoc div.head .sizebar { 
     padding: 0px; margin: 0px; 
@@ -109,8 +109,8 @@ div.metabooktoc.metabookcurhead div.sub { display: block;}
 #METABOOKHUD #METABOOKHEARTBODY #METABOOKSTATICTOC div.metabooklivehead > div.head {
     color: blue;}
 #METABOOKHUD #METABOOKHEARTBODY #METABOOKSTATICTOC
-  div.metabooklivehead > div.spanbar div.progressbox {
-      display: block;}
+div.metabooklivehead > div.spanbar div.progressbox {
+    display: block;}
 #METABOOKHEARTBODY #METABOOKSTATICTOC div.metabooktoc a.brick {
     border: solid black 1px;}
 
@@ -128,7 +128,7 @@ div.metabooktoc .sectname.cohi {
     background-color: silver;}
 div.metabooktoc .sectname { color: darkblue; cursor: crosshair;}
 div.metabooktoc div.sub a.sectname { 
-  color: darkblue; font-size: 80%; white-space: nowrap;}
+    color: darkblue; font-size: 80%; white-space: nowrap;}
 div.metabooktoc div.sub a.sectname.cohi { background-color: gold; }
 
 div.metabooktoc a.metabooktitle.cohi {
@@ -155,15 +155,15 @@ div.metabooktoc div.spans:hover a.metabooktitle.cohi {
     border-top: 0px; top: 0px; border-bottom: 4px; height: 100%;}
 
 #METABOOKTOC div.spanbar, #METABOOKSTATICTOC div.spanbar {
-  position: relative;
-  text-align: center; clear: both;
-  margin: 0px; padding: 0px; border: 0px;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
-  user-select: none;}
+    position: relative;
+    text-align: center; clear: both;
+    margin: 0px; padding: 0px; border: 0px;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;}
 #METABOOKTOC div.metabooktoc div.spanbar div.metabookhudspan.metabooklivehead {
     z-index: 0;}
 
@@ -243,50 +243,50 @@ div.metabookhudspan a.brick.cohi {
 #METABOOKHUD #METABOOKSTATICTOC div.spans a.metabooktitle { display: none;}
 
 div.spanbar div.spans { 
-  position: relative; width: 100%; /* background-color: black; */
-  margin: 0px; padding: 0px; border: 0px;}
+    position: relative; width: 100%; /* background-color: black; */
+    margin: 0px; padding: 0px; border: 0px;}
 div.metabooktoc div.spanbar div.spans
-    a.metabooktitle {
-        font-weight: bold;}
+a.metabooktitle {
+    font-weight: bold;}
 div.metabooktoc div.spanbar div.spans
-    a.metabooktitle {
-        position: absolute; top: 4px; width: 100%; z-index: 25;
-        display: none; pointer-events: none;}
+a.metabooktitle {
+    position: absolute; top: 4px; width: 100%; z-index: 25;
+    display: none; pointer-events: none;}
 div.metabooktoc div.spanbar div.spans
-    a.metabooktitle.metabooklivehead { display: block;}
+a.metabooktitle.metabooklivehead { display: block;}
 body.mbPREVIEW div.metabooktoc.metabookheld div.spanbar div.spans
-    a.metabooktitle.metabooklivehead { display: none;}
+a.metabooktitle.metabooklivehead { display: none;}
 body.mbPREVIEW div.metabooktoc.metabookheld div.spanbar div.spans
-    a.metabooktitle.metabookpreviewtitle {
-        color: yellow;
-        display: block;}
+a.metabooktitle.metabookpreviewtitle {
+    color: yellow;
+    display: block;}
 div.spanbar div.metabookhudspan {
-  background-color: transparent; clear: none; position: absolute;
-  margin: 0px; padding: 0px; border: 0px;
-  border-right: none; border-left: none;}
+    background-color: transparent; clear: none; position: absolute;
+    margin: 0px; padding: 0px; border: 0px;
+    border-right: none; border-left: none;}
 #METABOOKSTATICTOC div.spanbar div.metabookhudspan { z-index: 75;}
 div.spanbar div.metabookhudspan a.brick {
-  display: block; text-decoration: none;
-  border: 0px; padding: 0px;
-  border-left: solid black 1px; /* border-right: solid black 1px; */
-  height: 100%;}
+    display: block; text-decoration: none;
+    border: 0px; padding: 0px;
+    border-left: solid black 1px; /* border-right: solid black 1px; */
+    height: 100%;}
 div.spanbar div.metabookhudspan[odd] {}
 div.spanbar div.metabookhudspan[even] {}
 div.spanbar div.metabookhudspan.current {
     color: yellow; background-color: transparent;}
 #METABOOKHUD div.metabooktoc { 
-  padding-left: 1em; padding-right: 1em;}
+    padding-left: 1em; padding-right: 1em;}
 #METABOOKHUD #METABOOKTOC div.metabooktoc { 
-  padding-left: 0.5em; padding-right: 0.5em;}
+    padding-left: 0.5em; padding-right: 0.5em;}
 #METABOOKHUD #METABOOKTOC div.metabooktoc.toc0 { 
-  padding-left: 0px; padding-right: 0px;
-  border-right: 0px; border-left: 0px;}
+    padding-left: 0px; padding-right: 0px;
+    border-right: 0px; border-left: 0px;}
 #METABOOKHUD div.metabooktoc.toc0 {
-  padding-left: 0px; padding-right: 0px;}
+    padding-left: 0px; padding-right: 0px;}
 
 div.spanbar { padding: 0px; margin: 0px;}
 div.spanbar div.spans { 
-  width: 100%; padding: 0px; margin: 0px;}
+    width: 100%; padding: 0px; margin: 0px;}
 
 /* Handling preview mode */
 
@@ -349,7 +349,7 @@ body.mbPREVIEW #METABOOKHUD div.metabooktoc.metabooklivehead.metabookcurhead > d
 #METABOOKTOC div.metabooktoc.toc0 > div.spanbar > div.spans {
     border-top-width: 0px;}
 #METABOOKTOC div.metabooktoc.toc0 >
-   div.spanbar div.metabookhudspan a.brick.metabooklivehead {
+div.spanbar div.metabookhudspan a.brick.metabooklivehead {
     border-top-color: darkblue;}
 
 /* Static TOC */
@@ -380,14 +380,14 @@ div.metabooktoc a.brick {
     color: transparent; font-weight: bold;
     background-color: rgba(0,0,0,0.1);}
 #METABOOKHUD #METABOOKTOC a.brick:visited, #METABOOKHUD #METABOOKTOC a.brick:hover {
-    color: transparent;}
+                                               color: transparent;}
 #METABOOKHUD #METABOOKTOC a.brick.metabooklivehead { }
 #METABOOKHUD #METABOOKTOC a:hover { text-decoration: none;}
 
 @media (max-device-width: 500px) {
     #METABOOKHUD div.metabooktoc {
         padding-left:0.5ex; padding-right: 2px;}
-    }
+}
 
 /* Emacs local variables
 ;;;  Local variables: ***

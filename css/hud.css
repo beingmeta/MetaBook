@@ -159,7 +159,7 @@ body.hudup #METABOOKHUD.openhead.overtoc #METABOOKHEAD {
     border-color: transparent;
     box-shadow: none; -webkit-box-shadow: none;
     -moz-box-shadow: none; -o-box-shadow: none;}
-    
+
 #METABOOKFRAME > #METABOOKHUD.openhead > #METABOOKTOPBAR {
     z-index: -20; opacity: 0.7;}
 
@@ -354,7 +354,7 @@ body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER {display: block;}
     color: #4682b4; background-color: rgba(255,255,240,0.7);
     z-index: 100; border: 0px;}
 #METABOOKHUD.overtoc div.hudpanel {
-    }
+}
 /* Being on top */
 #METABOOKHUD .hudpanel {
     position: absolute; left: 0px; right: 0px;
@@ -543,11 +543,11 @@ body.mbSKIMMING #METABOOKHUD img.hudbutton {
     -moz-opacity: 0.8; -o-opacity: 0.8;}
 #METABOOKHUD.addgloss #METABOOKFOOT img.hudbutton[alt="save gloss"],
 body.mbSKIMMING #METABOOKHUD.searchresults
-   img.hudbutton[hudmode="searchresults"] {
+    img.hudbutton[hudmode="searchresults"] {
     display: inline-block; }
 #METABOOKHUD.addgloss img.hudbutton[hudmode="allglosses"],
 body.mbSKIMMING #METABOOKHUD.searchresults
-  img.hudbutton[hudmode="allglosses"] {
+    img.hudbutton[hudmode="allglosses"] {
     display: none; }
 
 body.hudup #METABOOKHUD img.hudbutton  {}
@@ -645,7 +645,7 @@ body._TOUCH #METABOOKTOPBAR.tapholding:hover #METABOOKSHOWCOVER {
     opacity: 0.5;}
 body._TOUCH #METABOOKTOPBAR:hover #METABOOKSHOWCOVER {opacity: 0;}
 body.hudup #METABOOKSHOWCOVER, body.hudup #METABOOKTOPBAR:hover #METABOOKSHOWCOVER {
-    opacity: 1.0;}
+                                   opacity: 1.0;}
 body.mbPREVIEW #METABOOKSHOWCOVER, 
 body.mbPREVIEW.hudup #METABOOKSHOWCOVER,
 body.hudup #METABOOKHUD.openhead #METABOOKSHOWCOVER {
@@ -662,8 +662,8 @@ body._MOUSE #METABOOKSHOWCOVER:hover {
     height: 1.2em; width: auto;
     float: left;}
 #METABOOKSHOWCOVER span.text {
-  vertical-align: middle;
-  font-weight: bold;}
+    vertical-align: middle;
+    font-weight: bold;}
 
 body._NOUSER a.logout {
     display: none !important;}
@@ -768,7 +768,7 @@ body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER {
 #METABOOKSKIMMER.expanded .ellipsis .elided { display: inline; }
 #METABOOKSKIMMER.expanded .ellipsis .elision,
 #METABOOKSKIMMER.expanded .ellipsis .delision {
-  display: none;}
+    display: none;}
 
 /* This is the twisty control */
 #METABOOKSKIMMER span.expander {
@@ -802,7 +802,7 @@ body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER {
     padding-left: 0px;}
 #METABOOKSKIMMER div.metabookcard.gloss div.metabookcardbody img.glosspic,
 #METABOOKSKIMMER div.metabookcard.gloss div.metabookcardbody .sourcepic {
-  position: absolute; top: 0px; left: 0px; margin-top: 0px;}
+    position: absolute; top: 0px; left: 0px; margin-top: 0px;}
 
 
 #METABOOKHUD.overtoc #METABOOKHEAD {
@@ -830,7 +830,7 @@ body.hudup #METABOOKHUD.help div.helphud { display: block;}
     display: block;}
 
 #METABOOKHUD.refinesearch #METABOOKSEARCH.norefiners
-   div.completions#METABOOKSEARCHCLOUD { display: none;}
+div.completions#METABOOKSEARCHCLOUD { display: none;}
 #METABOOKHUD.refinesearch div.metabookslice#METABOOKSEARCHRESULTS { display: none;}
 #METABOOKHUD.expandsearch div.metabookslice#METABOOKSEARCHRESULTS { display: none;}
 #METABOOKHUD.searchresults div.metabookslice#METABOOKSEARCHRESULTS { display: block;}
@@ -950,7 +950,7 @@ body img.metabookskimbutton.flash  {
     -khtml-opacity: 0.90;
     -moz-opacity: 0.90;
     -o-opacity: 0.90;}
-    
+
 body img.metabookpagebutton {
     width: 50px; height: 100px;
     position: absolute; bottom: 50%; opacity: 0.15;
@@ -1174,9 +1174,9 @@ body._NOUSER form.sbooksapp { padding-top: 0px;}
 .mbwithuser, .mbnouser, .mbdisconn, .mbwithconn { display: none; }
 
 body._USER tr.mbwithuser, body._NOUSER tr.mbnouser {
-   display: table-row; }
+    display: table-row; }
 body._USER tbody.mbwithuser, body._NOUSER tbody.mbnouser {
-  display: table-row-group; }
+    display: table-row-group; }
 body._USER._CONN tbody.mbwithconn { display: table-row-group; }
 body._USER._CONN tr.mbwithconn { display: table-row; }
 body._USER._DISCONN tbody.mbdisconn { display: table-row-group; }

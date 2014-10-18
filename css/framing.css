@@ -140,25 +140,25 @@ body.mbCOVER #METABOOKHUD, body.hudup.mbCOVER #METABOOKHUD {
     visibility: hidden; z-index: -50; pointer-events: none;}
 
 #METABOOKFRAME > #METABOOKMEDIA {
-  top: 0px; left: 0px; height: 0px; width: 0px;}
+    top: 0px; left: 0px; height: 0px; width: 0px;}
 
 #METABOOKFRAME #METABOOKCLOSEMEDIA {
-  z-index: 100; opacity: 0.5; display: none;
-  background-image:
-   url(https://s3.amazonaws.com/beingmeta/static/g/metabook/redx.svgz);
-  top: 0px;  right: 0px;}
+    z-index: 100; opacity: 0.5; display: none;
+    background-image:
+    url(https://s3.amazonaws.com/beingmeta/static/g/metabook/redx.svgz);
+    top: 0px;  right: 0px;}
 
 #METABOOKMEDIA > img, #METABOOKMEDIA > video, #METABOOKMEDIA > audio { }
 
 @media (orientation: landscape) {
-  #METABOOKFRAME > #METABOOKCLOSEMEDIA { width: 15%; height: auto; }
-  #METABOOKMEDIA > img, #METABOOKMEDIA > video, #METABOOKMEDIA > audio {
-    min-height: 100%; width: auto;}
+    #METABOOKFRAME > #METABOOKCLOSEMEDIA { width: 15%; height: auto; }
+    #METABOOKMEDIA > img, #METABOOKMEDIA > video, #METABOOKMEDIA > audio {
+        min-height: 100%; width: auto;}
 }
 @media (orientation: portrait) {
-  #METABOOKFRAME > #METABOOKCLOSEMEDIA { height: 10%; width: auto; }
-  #METABOOKMEDIA > img, #METABOOKMEDIA > video, #METABOOKMEDIA > audio {
-    min-width: 100%; height: auto;}
+    #METABOOKFRAME > #METABOOKCLOSEMEDIA { height: 10%; width: auto; }
+    #METABOOKMEDIA > img, #METABOOKMEDIA > video, #METABOOKMEDIA > audio {
+        min-width: 100%; height: auto;}
 }
 
 /* METABOOKBODY is where all of the content lives, whether broken into

@@ -50,23 +50,23 @@ div.completions.noinput .cloudtoggle {
 .cloud.showall .showmore {display: none;}
 
 .cloud span.sep { 
-  font-size: 200%; font-weight: bold; 
-  color: purple; vertical-align: middle;}
+    font-size: 200%; font-weight: bold; 
+    color: purple; vertical-align: middle;}
 .completion.cloudroot {
     cursor: default; opacity: 0.25;}
 #METABOOKHUD .cloud .sectname, #METABOOKHUD .qtags .sectname {
-  white-space: nowrap;
-  font-weight: normal; font-style: italic;
-  background-color: ivory; color: purple;
-  padding: 0px; padding-left: 3px; padding-right: 3px; 
-  margin: 0px; margin-left: 3px; margin-right: 3px; 
-  -o-border-radius: 6px; 
-  -webkit-border-radius: 6px; 
-  -moz-border-radius: 6px; 
-  border-radius: 6px;}
+    white-space: nowrap;
+    font-weight: normal; font-style: italic;
+    background-color: ivory; color: purple;
+    padding: 0px; padding-left: 3px; padding-right: 3px; 
+    margin: 0px; margin-left: 3px; margin-right: 3px; 
+    -o-border-radius: 6px; 
+    -webkit-border-radius: 6px; 
+    -moz-border-radius: 6px; 
+    border-radius: 6px;}
 .cloud .sectname .name,
 #METABOOKHUD .qtags span.sectname .name {
-  font-size: 80%;}
+    font-size: 80%;}
 
 .cloud.showall.noinput span.completion.rawterm.cue,
 .cloud.showall.noinput span.completion.rootform.cue,
@@ -75,9 +75,9 @@ div.completions.noinput .cloudtoggle {
 .cloud.showall.noinput span.completion.singleton.prime {
     display: inline;}
 #METABOOKHUD #METABOOKALLTAGS.completions.noinput span.completion.sectname.cue {
-      display: none;}
+    display: none;}
 #METABOOKHUD #METABOOKALLTAGS.completions.noinput.showall span.completion.sectname.cue {
-      display: inline;}
+    display: inline;}
 
 .cloud.showall.noinput span.completion.singleton.dterm,
 .cloud.showall.noinput span.completion.doubleton.dterm {
@@ -86,10 +86,10 @@ div.completions.noinput .cloudtoggle {
 .cloud .completion.prime { 
     font-weight: bold;}
 .cloud .completion .sectname { 
-  white-space: nowrap;}
+    white-space: nowrap;}
 
 .cloud .variation { 
-  font-size: 70%; color: purple; font-style: italic;}
+    font-size: 70%; color: purple; font-style: italic;}
 .cloud .dterm {
     padding-right: 0.35em; padding-left: 0.35em; 
     color: darkblue; background-color: gold; border: solid yellow 2px;}
@@ -162,13 +162,13 @@ div.completions.noinput .cloudtoggle {
 .cloud a.completion[displayed] { display: inline;}
 .cloud span.completion[displayed] { display: inline;}
 .cloud .completion[displayed] span.variation[displayed] { 
-   display: inline; }
+    display: inline; }
 .cloud a.completion.displayed { display: inline;}
 .cloud span.completion.displayed { display: inline;}
 .cloud a.completion.displayed span.variation.displayed { 
-   display: inline; }
+    display: inline; }
 .cloud .completion.displayed span.variation.displayed { 
-   display: inline; }
+    display: inline; }
 
 .cloud.iblocktags.noinput a.completion.cue,
 .cloud.iblocktags.noinput span.completion.cue,
@@ -181,8 +181,8 @@ div.completions.noinput .cloudtoggle {
 .cloud.iblocktags span.completion.displayed,
 .cloud.iblocktags a.completion.displayed span.variation.displayed,
 .cloud.iblocktags .completion.displayed span.variation.displayed { 
-   display: inline-block; line-height: 100%;
-   vertical-align: top; margin-bottom: 2px;}
+    display: inline-block; line-height: 100%;
+    vertical-align: top; margin-bottom: 2px;}
 
 .cloud .completion.tapholdtarget {
     border-color: blue;}
@@ -198,13 +198,13 @@ div.completions.noinput .cloudtoggle {
 .cloud span.completion.displayed,
 .cloud a.completion.displayed span.variation.displayed,
 .cloud .completion.displayed span.variation.displayed { 
-   display: inline-block; line-height: 100%;
-   margin: 2px; margin-left: 0.5ex;}
+    display: inline-block; line-height: 100%;
+    margin: 2px; margin-left: 0.5ex;}
 
 #METABOOKHUD #METABOOKALLTAGS.completions.cloud.noinput.showall
-  span.completion.sectname.cue { 
-   display: inline-block; line-height: 100%;
-   margin: 2px; margin-left: 0.5ex;}
+span.completion.sectname.cue { 
+    display: inline-block; line-height: 100%;
+    margin: 2px; margin-left: 0.5ex;}
 
 /* Emacs local variables
    ;;;  Local variables: ***

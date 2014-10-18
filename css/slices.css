@@ -42,7 +42,7 @@ div.metabookslice .idthread > .metabookcard:first-child .idhead {
     display: block;}
 
 div.metabookslice .metabookcard div.detail { 
-  display: none; color: ivory; clear: both;}
+    display: none; color: ivory; clear: both;}
 div.metabookslice .showdetail div.detail { display: block;}
 div.metabookslice div.xrefs { display: none;}
 div.metabookslice .showxrefs div.xrefs { display: block;}
@@ -112,10 +112,10 @@ div.metabooksources div.button.source {
     width: 100%; min-height: 10px;}
 
 div.tochead { 
-  position: relative; /* width: 100%; */
-  background-color: silver; color: blue;
-  border-top: solid lightblue 2px; border-bottom: solid lightblue 2px;
-  text-align: left; vertical-align: middle;}
+    position: relative; /* width: 100%; */
+    background-color: silver; color: blue;
+    border-top: solid lightblue 2px; border-bottom: solid lightblue 2px;
+    text-align: left; vertical-align: middle;}
 div.tochead span.spacer, div.idhead span.spacer {
     font-size: 125%; font-weight: bold; font-style: italic;}
 div.tochead .paratext {
@@ -141,11 +141,11 @@ div.tochead a:hover { z-index: 10; color: darkblue;}
 div.tochead hr[about] { cursor: crosshair;}
 
 div.idhead { 
-  position: relative; white-space: nowrap; /* width: 100%; */
-  background-color: silver; color: black;
-  text-align: left; vertical-align: middle;
-  border-bottom: solid purple 2px;
-  overflow: hidden;}
+    position: relative; white-space: nowrap; /* width: 100%; */
+    background-color: silver; color: black;
+    text-align: left; vertical-align: middle;
+    border-bottom: solid purple 2px;
+    overflow: hidden;}
 div.idhead hr {
     color: lightblue; background-color: lightblue;
     border: 0px; padding: 0px; margin: 0px; min-width: 3px;
@@ -174,7 +174,7 @@ div.metabookslice div.metabookcard.slicenewhead div.tochead { display: block; }
 div.metabookslice div.metabookcard.slicenewpassage div.idhead { display: block; }
 
 #METABOOKPOINTGLOSSES div.metabookslice div.metabookcard.gloss.slicenewpassage
-  div.metabookcardbody,
+div.metabookcardbody,
 #METABOOKSKIMMER div.metabookcard div.metabookcardbody {
     border-top: 0px; padding-left: 1em; padding-top: 0.25ex;}
 #METABOOKSKIMMER div.metabookcard div.idhead {

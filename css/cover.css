@@ -127,7 +127,7 @@ div.loginbox form > span {
     text-align: center;
     font-size: 1.5em;}
 #METABOOKCOVER div.userbox a, #METABOOKCOVER div.userbox a:visited {
-    color: silver;}
+                                  color: silver;}
 #METABOOKCOVER div.userbox a.sbookslogo em { color: cornflowerblue; }
 #METABOOKCOVER div.userbox span.sbooks em { color: silver;}
 #METABOOKCOVER div.userbox a.sbooks em { color: steelblue;}
@@ -212,10 +212,10 @@ body._USER._CONN .control[data-mode='login'] { display: none;}
 #METABOOKTITLEPAGE.sbooktitlepage > .title,
 .metabookfullpage.sbooktitlepage > .title,
 .sbookfullpage.sbooktitlepage > .title {
-   position: absolute; box-sizing: border-box;
-   top: 0px; height: 40%;
-   margin: 0px; padding-top: 1ex;
-   width: 100%; left: 0px; right: 0px;}
+    position: absolute; box-sizing: border-box;
+    top: 0px; height: 40%;
+    margin: 0px; padding-top: 1ex;
+    width: 100%; left: 0px; right: 0px;}
 #METABOOKTITLEPAGE.sbooktitlepage > .credits,
 #METABOOKTITLEPAGE.sbooktitlepage > .creators,
 #METABOOKTITLEPAGE.sbooktitlepage > .byline,
@@ -225,15 +225,15 @@ body._USER._CONN .control[data-mode='login'] { display: none;}
 .sbookfullpage.sbooktitlepage > .credits,
 .sbookfullpage.sbooktitlepage > .creators,
 .sbookfullpage.sbooktitlepage > .byline {
-   position: absolute;  box-sizing: border-box;
-   top: 50%; height: 30%;
-   margin: 0px; padding-bottom: 1em;
-   width: 100%; left: 0px; right: 0px;}
+    position: absolute;  box-sizing: border-box;
+    top: 50%; height: 30%;
+    margin: 0px; padding-bottom: 1em;
+    width: 100%; left: 0px; right: 0px;}
 #METABOOKTITLEPAGE.sbooktitlepage > .publisher,
 .metabookfullpage.sbooktitlepage > .publisher {
-   position: absolute; box-sizing: border-box;
-   bottom: 0px; max-height: 10%; 
-   width: 100%; left: 0px; right: 0px;}
+    position: absolute; box-sizing: border-box;
+    bottom: 0px; max-height: 10%; 
+    width: 100%; left: 0px; right: 0px;}
 .metabookfullpage.sbooktitlepage .title { height: 40%; }
 .metabookfullpage.sbooktitlepage .credits { height: 30%; }
 
@@ -320,14 +320,14 @@ body._TOUCH #METABOOKSETTINGS table.settings {  font-size: 1.25em; }
 body._NOUSER #METABOOKSETTINGS h1 a.logout {display:none;}
 
 #METABOOKSETTINGS div.setting {
-     clear: both; padding: 3px; margin-bottom: 5px; min-height: 20px;}
+    clear: both; padding: 3px; margin-bottom: 5px; min-height: 20px;}
 #METABOOKSETTINGS div.setting span.checkspan {
-     font-size: 125%; color: orange;}
+    font-size: 125%; color: orange;}
 #METABOOKSETTINGS div.setting span.checkspan input[type='CHECKBOX'] {
-      width: 16px; height: 16px; color: orange; background-color: orange;
-      vertical-align: bottom;}
+    width: 16px; height: 16px; color: orange; background-color: orange;
+    vertical-align: bottom;}
 #METABOOKSETTINGS div.setting div.explanation { 
-      font-style: italic; clear: both; margin-left: 3em;}
+    font-style: italic; clear: both; margin-left: 3em;}
 #METABOOKSETTINGS table.settings {
     width: 98%; margin-left: auto; margin-right: auto; vertical-align: top;}
 #METABOOKSETTINGS table.settings .metabookhighlightsetting {
@@ -356,7 +356,7 @@ table.settings .checkspan.ischecked {
         white-space: normal; font-size: 80%; max-width: 8ex;}
     #METABOOKSETTINGS .button, #METABOOKSETTINGS button {
         font-size: 85%;}
-    }
+}
 
 #METABOOKSETTINGS table.settings .smallbutton {
     cursor: pointer;
@@ -442,9 +442,9 @@ body._TOUCH #METABOOKCONSOLELOG {
 #METABOOKCOVERMESSAGE {
     text-align: center;}
 #METABOOKCOVER > .sbookslogo, #METABOOKCOVER > .publisherlogo {
-  position: absolute; top: 0px; z-index: 200;
-  color: silver; font-size: 2em;
-  display: none; }
+    position: absolute; top: 0px; z-index: 200;
+    color: silver; font-size: 2em;
+    display: none; }
 #METABOOKCOVER > .sbookslogo {left: 0px;}
 #METABOOKCOVER > .publisherlogo {right: 0px;}
 

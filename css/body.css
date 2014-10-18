@@ -87,16 +87,16 @@ body.sbook { font-size: 62.5%; line-height: inherit;}
     font-size: 130%;}
 
 @media (lightlevel: dim OR lightlevel: washed) {
-  #METABOOKBODY { background-color: #ffffff; color: #111; }
-  #METABOOKBODY.metabookcontrasthigh { background-color: #ffffff; color: #111; }
-  #METABOOKBODY.metabookcontrastmedium { background-color: #ffffff; color: #444; }
-  #METABOOKBODY.metabookcontrastlow  { background-color: #e5e0d4; color: #333; }}
+    #METABOOKBODY { background-color: #ffffff; color: #111; }
+    #METABOOKBODY.metabookcontrasthigh { background-color: #ffffff; color: #111; }
+    #METABOOKBODY.metabookcontrastmedium { background-color: #ffffff; color: #444; }
+    #METABOOKBODY.metabookcontrastlow  { background-color: #e5e0d4; color: #333; }}
 
 @media (lightlevel: bright) {
-  #METABOOKBODY { background-color: #ffffff; color: #444; }
-  #METABOOKBODY.metabookcontrasthigh { background-color: #ffffff; color: #111; }
-  #METABOOKBODY.metabookcontrastmedium { background-color: #ffffff; color: #444; }
-  #METABOOKBODY.metabookcontrastlow  { background-color: #e5e0d4; color: #333; }}
+    #METABOOKBODY { background-color: #ffffff; color: #444; }
+    #METABOOKBODY.metabookcontrasthigh { background-color: #ffffff; color: #111; }
+    #METABOOKBODY.metabookcontrastmedium { background-color: #ffffff; color: #444; }
+    #METABOOKBODY.metabookcontrastlow  { background-color: #e5e0d4; color: #333; }}
 
 #METABOOKBODY.metabookcontrasthigh { background-color: #ffffff; color: #111; }
 #METABOOKBODY.metabookcontrastmedium { background-color: #ffffff; color: #444; }

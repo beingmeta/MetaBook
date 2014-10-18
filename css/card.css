@@ -47,11 +47,11 @@ div.metabookcard > hr {
     border: 0px; padding: 0px; margin: 0px;}
 
 .metabookcard a.ref {
-  display: block; font-weight: normal;}
+    display: block; font-weight: normal;}
 .metabookcard a.ref span.title {
-  font-family: sans,sans-serif;}
+    font-family: sans,sans-serif;}
 .metabookcard a.ref span.uri {
-  font-family: courier,fixed;}
+    font-family: courier,fixed;}
 .metabookcard span.oldterm {
     color: blue; background-color: yellow;
     padding: 2px; border: solid blue 1px;
@@ -71,11 +71,11 @@ div.metabookcard > hr {
     -moz-border-radius-bottomright: 2px;}
 #METABOOKHUD .metabookcard span.oldterm {color: blue; }
 .metabookcard span.user { 
-  color: green; font-size: 125%; font-style: italic;}
+    color: green; font-size: 125%; font-style: italic;}
 .metabookcard span.outlet { color: green;}
 .metabookcard span.overlay { 
-  color: green; font-size: 125%; font-style: normal;
-  font-variant: small-caps;}
+    color: green; font-size: 125%; font-style: normal;
+    font-variant: small-caps;}
 .metabookcard span.links:before { content: " //"; }
 .metabookcard span.audience:before { content: " //"; }
 .metabookcard .private {
@@ -83,11 +83,11 @@ div.metabookcard > hr {
     padding-right: 3px; padding-left: 3px;
     font-weight: bold; font-variant: small-caps;}
 .metabookcard .links a {
-  color: blue; text-decoration: underline;
-  white-space: nowrap;}
+    color: blue; text-decoration: underline;
+    white-space: nowrap;}
 .metabookcard .links img { height: 2ex; width: auto; vertical-align: baseline;}
 .metabookcard span.tribe { 
-  color: darkblue; font-weight: bold; font-style: italic;}
+    color: darkblue; font-weight: bold; font-style: italic;}
 .metabookcard span.audience { font-weight: normal; }
 .metabookcard span.audience .outlet,
 .metabookcard span.audience .tribe {
@@ -99,7 +99,7 @@ div.metabookcard > hr {
 
 .metabookcardbody { padding-top: 6px;}
 .metabookcardbody:before, .metabookcard .metabookcardbody:after {
-    content: " "; display: table;}
+                              content: " "; display: table;}
 .metabookcardbody:after { clear: both; }
 
 .metabookcard .fdjtclearfloats { margin-bottom: 3px;}
@@ -110,11 +110,11 @@ div.metabookcard > hr {
     border-top: solid purple 1px;}
 .metabookcard span.controller { cursor: pointer;}
 .metabookcard .info { 
-  float: right;}
+    float: right;}
 .metabookcard div.info { 
-  float: right; width: 40px;}
+    float: right; width: 40px;}
 .metabookcard .info span.score {
-  color: gold; display: none;}
+    color: gold; display: none;}
 .metabookcard span.tags { font-size: 80%; vertical-align: top;}
 .metabookcard span.tags img.tagicon { height: 3ex; width: auto;}
 .metabookcard span.tags span { vertical-align: top;}
@@ -176,9 +176,9 @@ div.metabookcard > hr {
 .metabookcard .tool > span, .metabookcard .tool > a, .metabookcard .tool > img {
     float: right; }
 .metabookcard .tool span.label {
-  font-weight: bold; color: blue;
-  padding-right: 1ex; padding-left: 1ex; padding-bottom: 1ex; 
-  display: none;}
+    font-weight: bold; color: blue;
+    padding-right: 1ex; padding-left: 1ex; padding-bottom: 1ex; 
+    display: none;}
 .metabookcard .tool img {
     height: 40px; width: 40px; opacity: 0.3; clear: right;
     /* This makes it overlap the date, tightening things up generally */
@@ -195,8 +195,8 @@ div.metabookcard > hr {
     clear: none;}
 .metabookcard .age:hover {text-decoration: underline;} 
 .metabookcard a.deletebutton { 
-  color: orange; text-decoration: none;
-  padding-right: 3px;}
+    color: orange; text-decoration: none;
+    padding-right: 3px;}
 .metabookcard .glossinfo img.delete { 
     padding-right: 3px;
     cursor: pointer;}

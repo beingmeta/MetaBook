@@ -255,8 +255,8 @@ body.sbooknopage div.metabookmargin  { display: none;}
 
 body div.metabookmargin#METABOOKPAGEHEAD,
 body div.metabookmargin#METABOOKPAGEFOOT {
-  left: 0px; right: 0px; width: 100%; height: 20px; z-index: 75;
-  text-align: center;}
+    left: 0px; right: 0px; width: 100%; height: 20px; z-index: 75;
+    text-align: center;}
 body div.metabookmargin#METABOOKPAGEHEAD { top: 0px; }
 body div.metabookmargin#METABOOKPAGEFOOT { bottom: 0px; vertical-align: bottom;}
 body._SCROLL #METABOOKPAGEFOOT, body._SCROLL #METABOOKPAGEHEAD { display: none;}
@@ -432,7 +432,7 @@ div.sbooksection.metabooknewtarget > *:first-child {
 
 /* Don't color the body
    (actually, the body should probably never be a target, but when it is...)
-   */
+*/
 body.metabooktarget { color: inherit;}
 
 /* body.mbSKIMMING .metabooktarget {outline: dotted steelblue 2px;} */
@@ -462,7 +462,7 @@ body.hudup .metabooktarget .glossmark.hover > img {
 body._NOUSER a.logout {display: none;}
 body._NOUSER #SBOOKLOGOUT { display: none;}
 body._NOUSER #METABOOKHUD div.hud#METABOOKSOURCES img.button.login {
-  display: block;}
+    display: block;}
 
 .mbwithuser, .mbdisconn, .mbwithconn, .mbneedlogin { display: none;}
 body._USER .mbnouser { display: none;}
@@ -591,7 +591,7 @@ div.codexpage .sbookpage .sbookinfo {
     -khtml-opacity: 1;
     -moz-opacity: 1;
     -o-opacity: 1;}
-    
+
 .sbookfullpage, .sbookcover, .sbooktitlepage, .sbookpage {
     margin-left: auto; margin-right: auto;
     page-break-before: always;
@@ -766,7 +766,7 @@ body #METABOOKBODY #CODEXPAGE .codexpage .metabookdup {
     margin-bottom: 0px;}
 body #METABOOKBODY #CODEXPAGE .codexpage p.metabookdup,
 body #METABOOKBODY #CODEXPAGE .codexpage p.metabookdupend {
-  text-indent: 0px;}
+    text-indent: 0px;}
 body #METABOOKBODY #CODEXPAGE .codexpage .metabookdupend {
     padding-top: 0px;
     border-top-width: 0px;
@@ -851,7 +851,7 @@ div.startupmessage.running {
 
 div.fdjtdialog div.choices button, div.fdjtdialog .countdown,
 div.fdjtdialog .closebutton {
-  font-size: 125%;}
+    font-size: 125%;}
 
 /* Logotypes */
 
@@ -865,13 +865,13 @@ div.fdjtdialog .closebutton {
 
 .beingmeta, .bmlogo { }
 span.bmm {
- color: rgb(255,0,0);}
+    color: rgb(255,0,0);}
 span.bme {
- color: rgb(228,100,17);}
+    color: rgb(228,100,17);}
 span.bmt {
- color: green;}
+    color: green;}
 span.bma {
- color: rgb(0,0,255);}
+    color: rgb(0,0,255);}
 
 .metabook { font-family: Times,serif;}
 .metabook > span {

@@ -166,9 +166,9 @@ body.mbSHOWHELP #METABOOKHUD.statictoc #METABOOKSTATICTOCHELP.helpbox {
     display: block;}
 
 body.mbSHOWHELP.mbSKIMMING #METABOOKHUD.searchresults
-  #METABOOKSEARCHRESULTSHELP.helpbox,
+#METABOOKSEARCHRESULTSHELP.helpbox,
 body.mbSHOWHELP.mbSKIMMING #METABOOKHUD.allglosses
-  #METABOOKALLGLOSSESHELP.helpbox {
+    #METABOOKALLGLOSSESHELP.helpbox {
     display: none;}
 
 /* Goto page and goto loc always display their help. */
@@ -202,7 +202,7 @@ div.helpbox p {
     display: block; text-align: left;
     margin-left: 2em; margin-right: 2em; text-indent: -1em;
     max-width: inherit; min-width: inherit; width: auto;
-    */
+   */
 }
 
 div.helpbox h3, div.helpbox h2 { margin-top: 0px;}
@@ -428,7 +428,7 @@ div.metabookhelp div.glossbarbox {
 
 @media screen and (max-width: 800px) {
     #METABOOKHUD .helphud { font-size: 0.7em; }
-    }
+}
 
 /* Emacs local variables
 ;;;  Local variables: ***
