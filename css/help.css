@@ -347,9 +347,9 @@ div.metabookhelp img.narrowimage { display: none;}
 div#METABOOKHELP table.textual { font-size: 120%;}
 div.metabookhelp table.textual td {padding-left: 3px;}
 div.metabookhelp .glossbarbox {
-    display: inline-block; float: left; text-align: right;
+    display: inline-block; float: right; text-align: right;
     padding-right: 2px; border-right: solid blue 3px; margin-right: 4px;
-    font-size: 80%;}
+    max-width: 3px; width: 3px; height: 2em;}
 
 #METABOOKHUD div.metabookhelp.hudpanel {
     position: absolute; text-align: left;
