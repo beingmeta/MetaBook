@@ -115,6 +115,11 @@ span { font-size: inherit; }
 
 .metabookbody .titlepage, .metabookbody .sbooktitlepage { text-align: center;}
 
+.sbooktitlepage > .title { font-size: 200%; }
+.sbooktitlepage > .credits { font-size: 150%; }
+.sbooktitlepage > .pubinfo, .sbooktitlepage > .publisher {
+  font-size: 80%; }
+
 .sbooktitlepage .title { margin-bottom: 1em; }
 .sbooktitlepage .credits {
     margin-top: 1em; margin-bottom: 1em; }
@@ -125,6 +130,24 @@ span { font-size: inherit; }
     margin-top: 0px; margin-bottom: 0.5ex;}
 .sbooktitlepage .credits .lifespan {
     white-space: nowrap; font-size: 0.9em;}
+
+.codexpage .sbooktitlepage > .title {
+   position: absolute; top: 0px; left: 0px; right: 0px;
+   margin-top: 0px; margin-bottom: 0px; padding-bottom: 1em;
+   box-sizing: border-box; max-height: 40%;}
+.codexpage .sbooktitlepage > .credits {
+   position: absolute; top: 45%; left: 0px; right: 0px;
+   margin-top: 0px; margin-bottom: 0px; padding-bottom: 1em;
+   box-sizing: border-box; max-height: 30%;}
+.codexpage .sbooktitlepage > .pubinfo,
+.codexpage .sbooktitlepage > .publisher {
+   position: absolute; bottom: 0px; left: 0px; right: 0px;
+   margin-top: 0px; margin-bottom: 0px; padding-top: 0.5em;
+   box-sizing: border-box; max-height: 20%;}
+
+.sbookcoverimage {
+   max-width: 100%; max-height: 100%;
+   display: block; margin-left: auto; margin-right: auto;}
 
 body.metabookpagesizedefault #CODEXPAGE {}
 body.metabookpagesizefull #CODEXPAGE {

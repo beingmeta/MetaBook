@@ -29,16 +29,12 @@
         font-size: 75%;}
     #METABOOKHUD div.metabookhelp.hudpanel {
         left: 5px; right: 5px; top: 60px; bottom: 60px;}
-    #METABOOKHUD div.helphud.topcenter { 
-        top: 50px; width: auto; left: 60px; right: 60px;} 
     #METABOOKHUD div.helphud.rightmiddle,
     #METABOOKHUD div.helphud.leftmiddle {
         display: none;}
     #METABOOKHUD div.helphud.botright,
     #METABOOKHUD div.helphud.botleft {
         bottom: 3px; }
-    #METABOOKHUD div.helphud.botcenter { 
-        bottom: 100px; width: auto; left: 60px; right: 60px;} 
     div.helpbox blockquote {
         margin-left: 2px; margin-right: 2px;}
     div.helpbox blockquote p {
@@ -82,6 +78,11 @@
         height: 35%; }
     #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER3.metabooksectmarker {
         height: 20%; }
+
+    #METABOOKHUD div.helphud.topcenter { 
+        top: 50px; width: auto; left: 60px; right: 60px;} 
+    #METABOOKHUD div.helphud.botcenter { 
+        bottom: 100px; width: auto; left: 60px; right: 60px;} 
 
     #METABOOKFOOT .hudbutton { bottom: 30px;}
     #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT {

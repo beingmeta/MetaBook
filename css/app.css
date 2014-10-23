@@ -873,10 +873,9 @@ span.bmt {
 span.bma {
     color: rgb(0,0,255);}
 
-.metabook { font-family: Times,serif;}
+.metabook { }
 .metabook > span {
-    font-family: Arial,Verdana,Helvetica,sans-serif;
-    font-style: oblique; font-size: 80%; font-weight: bold;}
+    font-style: oblique; font-size: 100%; font-weight: bold;}
 
 .mupub { font-variant: small-caps;}
 .mupub em, .mupub i {
