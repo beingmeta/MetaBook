@@ -381,6 +381,7 @@ metaBook.setMode=
         function showCover(){
             if (metaBook._setup)
                 fdjtState.dropLocal("metabook.opened("+metaBook.docuri+")");
+            setHUD(false);
             addClass(document.body,"mbCOVER");}
         metaBook.showCover=showCover;
         function hideCover(){
