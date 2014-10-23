@@ -600,7 +600,7 @@ div.codexpage .sbookpage .sbookinfo {
 img.sbookfullpage, img.sbookcover {
     margin-left: auto; margin-right: auto;
     display: block;}
-@media (max-device-width: 500px) {
+@media (max-width: 500px) {
  .sbookfullpage, .sbookcover, .sbooktitlepage,
  .sbookpage, .sbookstandalone, .codexfullpage {
    page-break-inside: auto;}}
