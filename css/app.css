@@ -592,7 +592,7 @@ div.codexpage .sbookpage .sbookinfo {
     -moz-opacity: 1;
     -o-opacity: 1;}
 
-.sbookfullpage, .sbookcover, .sbooktitlepage, .sbookpage {
+.sbookfullpage, .sbookcover, .sbooktitlepage, .sbookpage, .sbookstandalone {
     margin-left: auto; margin-right: auto;
     page-break-before: always;
     page-break-after: always;
