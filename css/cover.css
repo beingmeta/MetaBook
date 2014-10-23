@@ -114,8 +114,9 @@ body._USER #METABOOKCOVER div.userbox {
     color: gold;}
 
 #METABOOKCOVER div.loginbox {
+    white-space: nowrap;
     margin: 0px; padding: 0px;
-    height: 0px; overflow: hidden;}
+    height: 0px; overflow: auto;}
 #METABOOKCOVER div.loginbox button { padding: 1px;}
 #METABOOKCOVER div.loginbox button > img { height: 1.5em; width: auto;}
 div.loginbox form > button, div.loginbox form > input[TYPE="TEXT"],
