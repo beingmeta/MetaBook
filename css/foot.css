@@ -46,7 +46,7 @@ body.mbPREVIEW #METABOOKFOOT #METABOOKPAGEBAR span#METABOOKPAGENOTEXT {
     -khtml-opacity: 0.01;
     -moz-opacity: 0.01;
     -o-opacity: 0.01;}
-#METABOOKFOOT #METABOOKPAGELEAP:hover {
+body._MOUSE #METABOOKFOOT #METABOOKPAGELEAP:hover {
     opacity: 0.4;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
     filter: alpha(opacity=40);
@@ -194,6 +194,11 @@ body._TOUCH.mbPREVIEW #METABOOKFOOT #METABOOKPAGEBAR .metabookpagespans span.pre
 #METABOOKHUD #METABOOKSHOWTEXT span.cancelchanges {
     display: none;}
 #METABOOKHUD.addgloss #METABOOKSHOWTEXT { color: red; }
+#METABOOKSHOWTEXT > span > span {
+    background-image: url(/static/g/metabook/upbar_faded.svgz);
+    background-repeat: no-repeat;
+    background-size: 50% auto;
+    background-position: center;}
 
 #METABOOKHUD.addgloss #METABOOKSHOWTEXT span.justreading { display: none;}
 

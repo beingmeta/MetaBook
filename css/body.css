@@ -80,7 +80,7 @@ body.sbook { font-size: 62.5%; line-height: inherit;}
 #METABOOKBODY.metabookfamilyserif h3, #METABOOKBODY.metabookfamilyserif h4 {
     font-family: Arial,Verdana,Helvetica,sans-serif;}    
 
-#METABOOKBODY a:hover, #METABOOKBODY a:active { color: blue; }
+body._MOUSE #METABOOKBODY a:hover, #METABOOKBODY a:active { color: blue; }
 
 #METABOOKBODY.metabookbodysizexlarge p, #METABOOKBODY.metabookbodysizexlarge li,
 #METABOOKBODY.metabookbodysizexlarge dt, #METABOOKBODY.metabookbodysizexlarge dd {

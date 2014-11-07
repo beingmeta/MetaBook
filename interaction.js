@@ -2598,6 +2598,7 @@
          hud: {click: handleXTarget, tap: handleXTarget},
          "#METABOOKSTARTPAGE": {click: metaBook.UI.dropHUD},
          "#METABOOKTOPBAR": {tap: raiseHUD},
+         "#METABOOKTOOLTAB": {tap: raiseHUD, release: raiseHUD},
          "#METABOOKSHOWCOVER": {
              tap: showcover_tapped, release: showcover_released},
          "#METABOOKHUDHELP": {click: metaBook.UI.dropHUD},
@@ -2746,6 +2747,7 @@
          // "#METABOOKFRAME": {touchstart: noDefault,touchmove: noDefault,touchend: noDefault},
          "#METABOOKSTARTPAGE": {touchend: metaBook.UI.dropHUD},
          "#METABOOKTOPBAR": {tap: raiseHUD},
+         "#METABOOKTOOLTAB": {tap: raiseHUD, release: raiseHUD},
          "#METABOOKSHOWCOVER": {
              tap: showcover_tapped, release: showcover_released},
          "#METABOOKSOURCES": {

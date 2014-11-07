@@ -193,7 +193,7 @@ div.metabookcard > hr {
     color: rgb(18, 141, 238); font-weight: bold;
     vertical-align: top; padding-right: 0.5em; padding-left: 0.4ex;
     clear: none;}
-.metabookcard .age:hover {text-decoration: underline;} 
+body._MOUSE .metabookcard .age:hover {text-decoration: underline;} 
 .metabookcard a.deletebutton { 
     color: orange; text-decoration: none;
     padding-right: 3px;}

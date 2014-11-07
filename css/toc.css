@@ -133,7 +133,7 @@ div.metabooktoc div.sub a.sectname.cohi { background-color: gold; }
 
 div.metabooktoc a.metabooktitle.cohi {
     background-color: gold; opacity: 0.6;}
-div.metabooktoc div.spans:hover a.metabooktitle.cohi {
+body._MOUSE div.metabooktoc div.spans:hover a.metabooktitle.cohi {
     background-color: transparent; opacity: 1;}
 
 #METABOOKHUD div.metabooktoc div.head { display: none;}
@@ -369,20 +369,21 @@ div.spanbar div.metabookhudspan a.brick.metabooklivehead {
 
 #METABOOKHUD #METABOOKTOC a.metabooktitle,
 #METABOOKHUD #METABOOKTOC a.metabooktitle:visited,
-#METABOOKHUD #METABOOKTOC a.metabooktitle:hover {
+body._MOUSE #METABOOKHUD #METABOOKTOC a.metabooktitle:hover {
     z-index: 100; color: blue;}
 #METABOOKHUD #METABOOKTOC a.metabookpreviewtitle,
 #METABOOKHUD #METABOOKTOC a.metabookpreviewtitle:visited,
-#METABOOKHUD #METABOOKTOC a.metabookpreviewtitle:hover {
+body._MOUSE #METABOOKHUD #METABOOKTOC a.metabookpreviewtitle:hover {
     z-index: 100; color: black;}
 
 div.metabooktoc a.brick {
     color: transparent; font-weight: bold;
     background-color: rgba(0,0,0,0.1);}
-#METABOOKHUD #METABOOKTOC a.brick:visited, #METABOOKHUD #METABOOKTOC a.brick:hover {
-                                               color: transparent;}
+#METABOOKHUD #METABOOKTOC a.brick:visited,
+body._MOUSE #METABOOKHUD #METABOOKTOC a.brick:hover {
+    color: transparent;}
 #METABOOKHUD #METABOOKTOC a.brick.metabooklivehead { }
-#METABOOKHUD #METABOOKTOC a:hover { text-decoration: none;}
+body._MOUSE #METABOOKHUD #METABOOKTOC a:hover { text-decoration: none;}
 
 @media (max-device-width: 500px) {
     #METABOOKHUD div.metabooktoc {

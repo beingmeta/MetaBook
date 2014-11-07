@@ -90,7 +90,7 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
 @media (max-width: 650px) {
     #METABOOKCOVERCONTROLS > span.control { font-size: 1.5em;}}
 
-#METABOOKCOVERCONTROLS > span.control:hover {
+body._MOUSE #METABOOKCOVERCONTROLS > span.control:hover {
     text-decoration: underline;}
 
 #METABOOKFRAME._ANIMATE #METABOOKCOVER div.loginbox,
