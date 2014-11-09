@@ -705,8 +705,7 @@ var metaBook={
         if ((id)&&(typeof id === "string")&&(id[0]==="#"))
             id=id.slice(1);
         if (!(metabook_docinfo)) metabook_docinfo=metaBook.docinfo;
-        var elt=((metabook_docinfo)&&(info=metabook_docinfo[id])&&
-                 (info.elt)&&(info.elt.id===id)&&(info.elt));
+        var elt=((metabook_docinfo)&&(info=metabook_docinfo[id])&&(info.elt));
         if (elt) return elt;
         else if ((elt=document.getElementById(id))) return elt;
         else if ((elt=document.getElementsByName(id))) {
