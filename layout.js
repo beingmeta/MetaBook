@@ -489,7 +489,7 @@ metaBook.Paginate=
             function setPageInfo(page,layout){
                 var pages=layout.pages, pagenum=layout.pagenum;
                 var topnode=getPageTop(page);
-                var topid=topnode.metabookbaseid||topnode.id;
+                var topid=topnode.codexbaseid||topnode.id;
                 var curloc=false;
                 if (topnode) {
                     var topstart=mbID(topid);
@@ -525,7 +525,7 @@ metaBook.Paginate=
                 var last=false;
                 if (hasClass(node,"codexpage")) {}
                 else if (((node.id)&&(docinfo[node.id]))||
-                         ((node.metabookbaseid)&&(docinfo[node.metabookbaseid]))) {
+                         ((node.codexbaseid)&&(docinfo[node.codexbaseid]))) {
                     if (hasContent(node,true)) last=node;}
                 else {}
                 var children=node.childNodes;
@@ -539,7 +539,7 @@ metaBook.Paginate=
                 return last;}
             function getPageLastID(node,id) {
                 if (hasClass(node,"codexpage")) {}
-                else if ((node.id)&&(!(node.metabookbaseid))&&
+                else if ((node.id)&&(!(node.codexbaseid))&&
                          (metaBook.docinfo[node.id]))
                     id=node.id;
                 if (node.nodeType!==1) return id;
@@ -555,7 +555,7 @@ metaBook.Paginate=
             function getDupNode(under,id){
                 var children;
                 if (under.nodeType!==1) return false;
-                else if (under.metabookbaseid===id) return under;
+                else if (under.codexbaseid===id) return under;
                 if (!(children=under.childNodes))
                     return false;
                 else if (!(children.length)) return false;

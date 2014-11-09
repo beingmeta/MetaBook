@@ -165,7 +165,7 @@
             response=true;
         else {}
         var passage=((gloss)?(mbID(gloss.frag)):(arg));
-        var passageid=((passage.metabookbaseid)||(passage.id));
+        var passageid=((passage.codexbaseid)||(passage.id));
         var formid=((gloss)?
                     ((response)?
                      ("METABOOKRESPONDGLOSS_"+gloss._id):
@@ -192,7 +192,7 @@
     metaBook.getGlossForm=getGlossForm;
     
     function setupGlossForm(form,passage,gloss,response){
-        var passageid=((passage.metabookbaseid)||(passage.id));
+        var passageid=((passage.codexbaseid)||(passage.id));
         var info=metaBook.docinfo[passageid];
         if (form.getAttribute("sbooksetup")) return false;
         if (!(info)) return false;

@@ -2569,7 +2569,7 @@ metaBook.Startup=
                     {label: "stop syncing",
                      title: "stop syncing this book on this device",
                      handler: function(){
-                         setConfig("locsync",false);}});
+                         setConfig("locsync",false,true);}});
             if (mB.Trace.state)
                 fdjtLog("resolveXState choices=%j",choices);
             if (choices.length)

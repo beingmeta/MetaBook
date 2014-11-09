@@ -221,7 +221,7 @@
     var MetaBookSlice=metaBook.Slice;
 
     function showGlossmark(target,point) {
-        var id=target.metabookbaseid||target.id;
+        var id=target.codexbaseid||target.id;
         if (!(id)) return;
         var dups=metaBook.getDups(target.id);
         var glossids=metaBook.glossdb.find('frag',id), glosses=[];

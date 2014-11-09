@@ -628,7 +628,7 @@
                 addClass(completion,"softcue");}}}
     function setCloudCuesFromTarget(cloud,target){
         var tags=[];
-        var targetid=((target.metabookbaseid)||(target.id)||(target.frag));
+        var targetid=((target.codexbaseid)||(target.id)||(target.frag));
         var info=metaBook.docinfo[targetid];
         var glosses=metaBook.glossdb.find('frag',targetid);
         var knodule=metaBook.knodule;

@@ -518,7 +518,7 @@ var metaBook={
             return (target.getAttributeNS('sbookid','http://sbooks.net/'))||
             (target.getAttributeNS('sbookid'))||
             (target.getAttributeNS('data-sbookid'))||
-            (target.metabookbaseid)||(target.id);
+            (target.codexbaseid)||(target.id);
         else return target.id;};
 
     /* A Kludge For iOS */
@@ -585,7 +585,7 @@ var metaBook={
     
     function getHead(target){
         /* First, find some relevant docinfo */
-        var targetid=(target.metabookbaseid)||(target.id);
+        var targetid=(target.codexbaseid)||(target.id);
         if ((targetid)&&(metaBook.docinfo[targetid]))
             target=metaBook.docinfo[targetid];
         else if (targetid) {
@@ -598,7 +598,7 @@ var metaBook={
             var scan=target.firstChild; var scanid=false;
             var next=target.nextNode;
             while ((scan)&&(scan!==next)) {
-                if ((scan.id)||(scan.metabookbaseid)) break;
+                if ((scan.id)||(scan.codexbaseid)) break;
                 if ((scan.nodeType===3)&&
                     (!(fdjtString.isEmpty(scan.nodeValue)))) break;
                 scan=fdjtDOM.forward(scan);}
@@ -607,7 +607,7 @@ var metaBook={
                 target=metaBook.docinfo[scanid];
             else {
                 while (target)
-                    if ((targetid=((target.metabookbaseid)||(target.id)))&&
+                    if ((targetid=((target.codexbaseid)||(target.id)))&&
                         (metaBook.docinfo[targetid])) {
                         target=metaBook.docinfo[targetid]; break;}
                 else target=target.parentNode;}}
@@ -654,7 +654,7 @@ var metaBook={
                 if (d) return [mbID(id)].concat(d);
                 else return [mbID(id)];}
             else return [mbID(id)];}
-        else return getDups(id.metabookbaseid||id.id);}
+        else return getDups(id.codexbaseid||id.id);}
     metaBook.getDups=getDups;
 
     function getTarget(scan,closest){
@@ -667,8 +667,8 @@ var metaBook={
             if (scan.metabookui) return false;
             else if ((scan===metaBook.docroot)||(scan===document.body))
                 return target;
-            else if ((id=(scan.metabookbaseid||scan.id))&&(metaBook.docinfo[id])) {
-                if ((!(scan.metabookbaseid))&&(id.search("METABOOKTMP")===0)) {}
+            else if ((id=(scan.codexbaseid||scan.id))&&(metaBook.docinfo[id])) {
+                if ((!(scan.codexbaseid))&&(id.search("METABOOKTMP")===0)) {}
                 else if ((target)&&(id.search("WSN_")===0)) {}
                 else if (id.search("WSN_")===0) wsn_target=scan;
                 else if ((targetids)&&(id.search(targetids)!==0)) {}
@@ -720,7 +720,7 @@ var metaBook={
     metaBook.getTitle=function(target,tryhard) {
         var targetid;
         return target.sbooktitle||
-            (((targetid=((target.metabookbaseid)||(target.id)))&&
+            (((targetid=((target.codexbaseid)||(target.id)))&&
               (metaBook.docinfo[targetid]))?
              (notEmpty(metaBook.docinfo[targetid].title)):
              (notEmpty(target.title)))||
@@ -739,8 +739,8 @@ var metaBook={
                         metaBook.glossdb.probe(arg)||
                         RefDB.resolve(arg));
             else if (arg._id) return arg;
-            else if (arg.metabookbaseid)
-                return metaBook.docinfo[arg.metabookbaseid];
+            else if (arg.codexbaseid)
+                return metaBook.docinfo[arg.codexbaseid];
             else if (arg.id) return metaBook.docinfo[arg.id];
             else return false;}
         else return false;}
@@ -770,7 +770,7 @@ var metaBook={
         else if (typeof head === "string") 
             head=getHead(mbID(head))||metaBook.content;
         else {}
-        var headid=head.metabookbaseid||head.id;
+        var headid=head.codexbaseid||head.id;
         var headinfo=metaBook.docinfo[headid];
         while ((headinfo)&&(!(headinfo.level))) {
             headinfo=headinfo.head;
@@ -856,7 +856,7 @@ var metaBook={
         if (mB.Trace.target) metaBook.trace("metaBook.setTarget",target);
         if (target===metaBook.target) return;
         else if ((metaBook.target)&&
-                 (metaBook.target.id===target.metabookbaseid))
+                 (metaBook.target.id===target.codexbaseid))
             return;
         if (metaBook.target) {
             var old_target=metaBook.target, oldid=old_target.id;
@@ -871,10 +871,10 @@ var metaBook={
         if (!(target)) {
             if (metaBook.UI.setTarget) metaBook.UI.setTarget(false);
             return;}
-        else if ((inUI(target))||(!(target.id||target.metabookbaseid)))
+        else if ((inUI(target))||(!(target.id||target.codexbaseid)))
             return;
         else {}
-        var targetid=target.metabookbaseid||target.id;
+        var targetid=target.codexbaseid||target.id;
         var primary=((targetid)&&(mbID(targetid)))||target;
         var targets=getDups(targetid);
         addClass(target,"metabooktarget");
@@ -986,7 +986,7 @@ var metaBook={
     metaBook.inUI=inUI;
 
     function setHashID(target){
-        var targetid=target.metabookbaseid||target.id;
+        var targetid=target.codexbaseid||target.id;
         if ((!(targetid))||(window.location.hash===targetid)||
             ((window.location.hash[0]==='#')&&
              (window.location.hash.slice(1)===targetid)))
@@ -1153,6 +1153,16 @@ var metaBook={
         metaBook.xstate=false;
     } metaBook.clearState=clearState;
 
+    function resetState(){
+        var uri=metaBook.docuri;
+        var state=metaBook.state;
+        if (state.location) state.maxloc=location;
+        state.reset=true;
+        var statestring=JSON.stringify(state);
+        saveLocal("metabook.state("+uri+")",statestring);
+        syncState(true);}
+    metaBook.resetState=resetState;
+
     var last_sync=false;
     // Post the current state and update synced state from what's
     // returned
@@ -1195,7 +1205,8 @@ var metaBook={
                     sync_uri=sync_uri+
                     "&LOCATION="+encodeURIComponent(state.location);
                 if (state.changed) sync_uri=sync_uri+
-                    "&CHANGED="+encodeURIComponent(state.changed);}
+                    "&CHANGED="+encodeURIComponent(state.changed);
+                if (state.reset) sync_uri=sync_uri+"&RESET=true";}
             var req=new XMLHttpRequest();
             syncing=state;
             req.onreadystatechange=freshState;
@@ -1288,7 +1299,7 @@ var metaBook={
         var counter=0; var lim=200;
         var forward=fdjtDOM.forward;
         while ((elt)&&(counter<lim)) {
-            eltid=elt.metabookbaseid||elt.id;
+            eltid=elt.codexbaseid||elt.id;
             if ((eltid)&&(metaBook.docinfo[eltid])) break;
             else {counter++; elt=forward(elt);}}
         if ((eltid)&&(metaBook.docinfo[eltid])) {
@@ -1361,7 +1372,7 @@ var metaBook={
                           true);
             else saveState({location: metaBook.location},true);
             return;}
-        var targetid=target.metabookbaseid||target.id;
+        var targetid=target.codexbaseid||target.id;
         if (mB.Trace.nav)
             fdjtLog("metaBook.GoTo%s() #%o@P%o/L%o %o",
                     ((caller)?("/"+caller):""),targetid,pageno,
