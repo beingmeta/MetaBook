@@ -341,9 +341,9 @@ body._NOUSER #METABOOKSETTINGS h1 a.logout {display:none;}
 #METABOOKSETTINGS table.settings tr.buttons td {
     text-align: right;}
 #METABOOKSETTINGS table.settings th.buttons button {
-    min-width: 6em; text-align: left;}
+    min-width: 6em; text-align: right;}
 #METABOOKSETTINGS table.settings th.buttons button img {
-    height: 1em; width: auto;}
+    height: 1em; width: auto; float: left;}
 
 table.settings .checkspan.ischecked {
     font-weight: normal; color: rgb(0,61,111); font-size: 100%;}

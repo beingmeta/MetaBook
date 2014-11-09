@@ -1837,7 +1837,7 @@
                    200);
         if (metaBook.mode==="statictoc") {
             var head=metaBook.head;
-            var headid=head.metabookbaseid||head.id;
+            var headid=head.codexbaseid||head.id;
             var headinfo=metaBook.docinfo[headid];
             if (Trace.nav) 
                 fdjtLog("skimForward/toc() head=%o info=%o n=%o h=%o",
@@ -1899,7 +1899,7 @@
                    200);
         if (metaBook.mode==="statictoc") {
             var head=metaBook.head;
-            var headid=head.metabookbaseid||head.id;
+            var headid=head.codexbaseid||head.id;
             var headinfo=metaBook.docinfo[headid];
             if (Trace.nav) 
                 fdjtLog("skimBackward/toc() head=%o info=%o p=%o h=%o",
@@ -2543,6 +2543,8 @@
         evt=evt||window.event; metaBook.submitGloss();}
     function refreshLayout(evt){
         evt=evt||window.event; cancel(evt); metaBook.refreshLayout();}
+    function resetState(evt){
+        evt=evt||window.event; cancel(evt); metaBook.resetState();}
     function refreshOffline(evt){
         evt=evt||window.event; cancel(evt); metaBook.refreshOffline();}
     function clearOffline(evt){
@@ -2686,6 +2688,7 @@
          "#METABOOKSETTINGSTABLE": {},
          "#METABOOKREFRESHOFFLINE": {click: refreshOffline},
          "#METABOOKREFRESHLAYOUT": {click: refreshLayout},
+         "#METABOOKRESETSYNC": {click: resetState},
          ".clearoffline": {click: clearOffline},
          ".metabookclearmode": {click: clearMode},
          "#METABOOKGOTOPAGEHELP": {click: clearMode},
@@ -2858,6 +2861,7 @@
          "#METABOOKSETTINGSTABLE": {},
          "#METABOOKREFRESHOFFLINE": {touchstart: cancel, touchend: refreshOffline},
          "#METABOOKREFRESHLAYOUT": {touchstart: cancel, touchend: refreshLayout},
+         "#METABOOKRESETSYNC": {touchstart: cancel, touchend: resetState},
          ".clearoffline": {touchstart: cancel, touchend: clearOffline},
          ".metabookclearmode": {touchstart: cancel, touchend: clearMode},
          "#METABOOKGOTOPAGEHELP": {touchstart: cancel, touchend: clearMode},
