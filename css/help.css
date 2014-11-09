@@ -373,7 +373,7 @@ div.metabookhelp .glossbarbox {
 #METABOOKAPPHELP table, .metabookhelp p {
     margin-left: auto; margin-right: auto;
     margin-top: 0.5ex; margin-bottom: 1ex;
-    max-width: 40em;}
+    max-width: 40em; clear: both;}
 .metabookhelp p img.floatleft, .metabookhelp p img.floatright {
   max-width: 20%; max-height: 3em; width: auto; height: auto;}
 
