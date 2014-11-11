@@ -121,13 +121,12 @@ body._TOUCH #METABOOKFRAME > #METABOOKHUD > #METABOOKFOOT {
     margin: 0px; border: 0px; padding: 0px;
     background-color: black; opacity: 1.0;
     text-align: center;
-    font-size: 1.5em;
     z-index: 100;}
 body.mbCOVER #METABOOKFRAME > #METABOOKCOVER { pointer-events: all; }
 
-#METABOOKFRAME.metabookuifontlarge #METABOOKCOVER { font-size: 2em; }
-#METABOOKFRAME.metabookuifontnormal #METABOOKCOVER { font-size: 1.5em; }
-#METABOOKFRAME.metabookuifontsmall #METABOOKCOVER { font-size: 1em; }
+#METABOOKFRAME.metabookuifontlarge #METABOOKCOVER { font-size: 1.5em; }
+#METABOOKFRAME.metabookuifontnormal #METABOOKCOVER { font-size: 1em; }
+#METABOOKFRAME.metabookuifontsmall #METABOOKCOVER { font-size: 0.66em; }
 
 #METABOOKFRAME.metabookuifontlarge #METABOOKCOVER > #METABOOKCOVERCONTROLS {
     font-size: 0.8em; }

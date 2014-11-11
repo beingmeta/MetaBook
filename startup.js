@@ -205,8 +205,7 @@ metaBook.Startup=
         metaBook.setConfig=setConfig;
         metaBook.resetConfig=function(){setConfig(saved_config);};
 
-        function saveConfig(config,toserver){
-            if (typeof toserver === "undefined") toserver=true;
+        function saveConfig(config){
             if (mB.Trace.config) {
                 fdjtLog("saveConfig %o",config);
                 fdjtLog("saved_config=%o",saved_config);}
@@ -220,29 +219,8 @@ metaBook.Startup=
                     (!(getQuery(setting)))) {
                     saved[setting]=config[setting];}}
             if (mB.Trace.config) fdjtLog("Saving config %o",saved);
-            saveLocal("metabook.config("+metaBook.docuri+")",JSON.stringify(saved));
-            if ((toserver)&&(navigator.onLine)) {
-                var req=new XMLHttpRequest();
-                req.onreadystatechange=function(evt){
-                    if ((req.readyState===4)&&
-                        (req.status>=200)&&(req.status<300)) {
-                        metaBook.setConnected(true);
-                        saved_config=JSON.parse(req.responseText);}
-                    else if ((req.readyState===4)&&(navigator.onLine))
-                        metaBook.setConnected(false);
-                    else {}
-                    if (mB.Trace.state)
-                        fdjtLog("configSave(callback) %o ready=%o status=%o %j",
-                                evt,req.readyState,
-                                ((req.readyState===4)&&(req.status)),
-                                saved_config);};
-                var uri="https://config.sbooks.net/config?"+
-                    encodeURIComponent(JSON.stringify(saved));
-                try {
-                    req.open("GET",uri,true);
-                    req.withCredentials=true;
-                    req.send(); }
-                catch (ex) {}}
+            saveLocal("metabook.config("+metaBook.docuri+")",
+                      JSON.stringify(saved));
             fdjtDOM.dropClass("METABOOKSETTINGS","changed");
             saved_config=saved;}
         metaBook.saveConfig=saveConfig;
@@ -250,7 +228,8 @@ metaBook.Startup=
         function initConfig(){
             var setting, started=fdjtTime(); // changed=false;
             var config=getLocal("metabook.config("+metaBook.docuri+")",true)||
-                fdjtState.getSession("metabook.config("+metaBook.docuri+")",true);
+                fdjtState.getSession("metabook.config("+metaBook.docuri+")",
+                                     true);
             metaBook.postconfig=[];
             if (config) {
                 for (setting in config) {
@@ -301,6 +280,11 @@ metaBook.Startup=
                 setConfig(name,elt.checked||false,save);
             else setConfig(name,elt.value,save);}
         metaBook.updateConfig=updateConfig;
+
+        function metabookPropConfig(name,value){
+            metaBook[name]=value;}
+        metaBook.propConfig=metabookPropConfig;
+        metaBook.addConfig("forcelayout",metabookPropConfig);
 
         metaBook.addConfig("keyboardhelp",function(name,value){
             metaBook.keyboardhelp=value;
@@ -1446,14 +1430,14 @@ metaBook.Startup=
                 else {
                     var info=getBookInfo();
                     titlepage=fdjtDOM(
-                        "div#METABOOKTITLEPAGE",
-                        fdjtDOM("DIV.title",info.title),
-                        fdjtDOM("DIV.credits",
+                        "div#METABOOKTITLEPAGE.sbooktitlepage",
+                        fdjtDOM("DIV.title.adjustfont",info.title),
+                        fdjtDOM("DIV.credits.adjustfont",
                                 ((info.byline)?(fdjtDOM("DIV.byline",info.byline)):
                                  ((info.authors)&&(info.authors.length))?
                                  (fdjtDOM("DIV.author",info.authors[0])):
                                  (false))),
-                        fdjtDOM("DIV.pubinfo"));}}
+                        fdjtDOM("DIV.pubinfo.adjustfont"));}}
             if (fdjtID("METABOOKTITLEPAGEHOLDER")) {
                 fdjtDOM.replace(fdjtID("METABOOKTITLEPAGEHOLDER"),titlepage);
                 titlepage.id="METABOOKTITLEPAGE";}
@@ -1776,10 +1760,8 @@ metaBook.Startup=
             if (mB.Trace.startup>2) fdjtLog("Starting initBody");
 
             body.setAttribute("tabindex",1);
-            /* -- Sets 1em to equal 10px -- */ 
-            body.style.fontSize="62.5%";
-            /* -- Remove any original width constraints -- */
-            body.style.width="inherit";
+            /* Remove explicit constraints */
+            body.style.fontSize=""; body.style.width="";
 
             // Save those DOM elements in a handy place
             metaBook.content=content;
@@ -2911,6 +2893,7 @@ metaBook.Startup=
 
         return metaBookStartup;})();
 metaBook.Setup=metaBook.StartupHandler;
+//fdjt.DOM.noautotweakfonts="Handled by metaBook";
 /*
 sbookStartup=metaBook.StartupHandler;
 sbook={Start: metaBook.Startup,

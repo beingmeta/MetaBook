@@ -44,17 +44,17 @@ body.sbook { font-size: 62.5%; line-height: inherit;}
     -webkit-box-sizing: border-box;}
 
 #METABOOKBODY {
-    font-size: 2em;}
+    font-size: 1.5em;}
 #METABOOKBODY.metabookbodysizexlarge {
     font-size: 2.5em;}
 #METABOOKBODY.metabookbodysizelarge {
-    font-size: 2.5em;}
-#METABOOKBODY.metabookbodysizenormal {
     font-size: 2em;}
-#METABOOKBODY.metabookbodysizesmall {
+#METABOOKBODY.metabookbodysizenormal {
     font-size: 1.5em;}
+#METABOOKBODY.metabookbodysizesmall {
+    font-size: 1em;}
 #METABOOKBODY.metabookbodysizetiny {
-    font-size: 0.9em;}
+    font-size: 0.8em;}
 .metabookbody.metabooklinespacingsingle {
     line-height: 100%;}
 .metabookbody.metabooklinespacingdouble {
