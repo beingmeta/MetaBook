@@ -636,7 +636,7 @@ img.closebutton, img.metabookpagebutton, img.metabookskimbutton, img.hudbutton {
     box-sizing: border-box; -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     background-color: rgba(0,0,0,0.5); color: white;
-    font-size: 1.25em; width: 7em;
+    font-size: 1.2em; margin-top: 0.7ex; width: 7em;
     padding:  0px 1em 0px 1em;
     border: solid transparent 2px;
     border-radius: 1ex;

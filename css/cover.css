@@ -455,10 +455,9 @@ body._TOUCH #METABOOKCONSOLELOG {
     width: 100%;}
 #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE {
     display: inline-block; width: 7em;  box-sizing: border-box;
-    margin-left: auto; margin-right: auto;
-    font-size: 1.5em; color: white; background-color: gray;
-    margin-top: 0.7ex; padding:  0px 1em 0px 1em;
-    border: solid transparent 4px;
+    margin-top: 0.7ex; margin-left: auto; margin-right: auto;
+    padding:  0px 1em 0px 1em; border: solid transparent 4px;
+    background-color: gray; color: white; font-size: 1.2em; 
     font-variant: small-caps; border-radius: 1ex; }
 body._MOUSE #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE:hover {
     border-color: blue; border-style: dotted;}
