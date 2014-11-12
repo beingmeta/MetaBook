@@ -590,6 +590,11 @@
             if (metaBook.mode!=="addgloss")
                 metaBook.setMode("addgloss",false);
             return;}
+        // If the HUD is up, bring it down, but don't start a gloss
+        if (metaBook.hudup) {
+            fdjtUI.cancel(evt);
+            metaBook.setHUD(false);
+            return;}
         var selecting=metaBook.UI.selectText(passage);
         if ((metaBook.TapHold.page)&&(metaBook.TapHold.page.abort))
             metaBook.TapHold.page.abort();
