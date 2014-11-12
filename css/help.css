@@ -233,7 +233,7 @@ div.helpbox blockquote p {
 #METABOOKHUD .helphud {
     position: absolute; background-color: ivory; z-index: 100;
     border: solid black 1px; padding: 3px; border-radius: 6px;
-    font-family: sans,sans-serif;
+    font-family: sans,sans-serif; font-size: initial;
     border-radius: 6px; -o-border-radius: 6px; 
     -moz-border-radius: 6px; -webkit-border-radius: 6px; 
     display: none;}
@@ -305,8 +305,10 @@ div.metabookhelp td {
     color: rgba(0,0,0,0.75);}
 
 div.metabookhelp h1 {
-    margin-left: 5%; margin-right: 5%;
-    margin-top: 3px; padding-top: 0px;}
+    margin-left: 5% !important;
+    margin-right: 5% !important;
+    margin-top: 3px !important;
+    padding-top: 0px !important;}
 
 div.metabookhelp .action {
     color: darkblue;}
@@ -377,6 +379,22 @@ div.metabookhelp .glossbarbox {
 .metabookhelp p img.floatleft, .metabookhelp p img.floatright {
   max-width: 20%; max-height: 3em; width: auto; height: auto;}
 
+.metabookhelp p { color: rgb(60,60,60); }
+.metabookhelp p strong {
+    color: black; font-weight: normal; }
+.metabookhelp p strong em { font-weight: normal; }
+.metabookhelp p dfn { color: black; white-space: nowrap;}
+.metabookhelp p dfn:before { content: "“"; }
+.metabookhelp p dfn:after { content: "”"; }
+.metabookhelp p.subpara {
+    color: rgb(0,0,0); font-size: 85%;
+    margin: 0px; margin-left: 2em;}
+.metabookhelp p.tightbottom {
+    margin-bottom: 0px;}
+.metabookhelp span.subpara {
+    display: block; color: rgb(0,0,0);
+    font-size: 85%; line-height: 120%;
+    margin: 0px; margin-left: 5%;}
 
 #METABOOKHUD #METABOOKKEYBOARDHELPBOX.hudpanel {
     position: absolute; text-align: center;
