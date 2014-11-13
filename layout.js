@@ -785,18 +785,20 @@ metaBook.Paginate=
                 var prec=Math.round(Math.log(max_loc/40)/Math.log(10))-2;
                 if (prec<0) prec=0;
                 locoff=fdjtDOM(
-                    "span.locoff#METABOOKLOCPCT",
-                    fdjtString.precString(pct,prec)+"%");
+                    "span.metabookloc#METABOOKLOCPCT",
+                    ((prec===0)?(Math.floor(pct)):
+                     (fdjtString.precString(pct,prec)))+"%");
                 locoff.title=location+"/"+max_loc;}
-            else locoff=fdjtDOM("span.locoff#METABOOKLOCPCT");
+            else locoff=fdjtDOM("span.metabookloc#METABOOKLOCPCT");
             var pageno_text=fdjtDOM(
                 "span#METABOOKPAGENOTEXT.metabookpageno",pagenum,"/",npages);
             fdjtDOM.replace("METABOOKPAGENOTEXT",pageno_text);
             fdjtDOM.replace("METABOOKLOCPCT",locoff);
+            pageno_text.title="select to change page number";
             locoff.title=
                 ((locoff.title)||"")+
                 ((locoff.title)?("; "):(""))+
-                "click to jump to a percentage location in the book";
+                " select to change %";
             if (update_progress) {
                 var page_progress=fdjtID("METABOOKPAGEPROGRESS");
                 if (page_progress) page_progress.style.width=
