@@ -31,7 +31,10 @@
 
 @charset "UTF-8";
 
-#METABOOKCOVER {}
+#METABOOKCOVER {
+    font-size: 2em;
+    font-size: 2rem;
+    font-size: 1.5vw; }
 
 body.mbSTARTUP #METABOOKCOVER, body._WORKING #METABOOKCOVER,
 body.mbLAYOUT #METABOOKCOVER {
@@ -59,7 +62,7 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
 
 #METABOOKCOVER >  #METABOOKCOVERMESSAGE {
     position: absolute; white-space: nowrap;
-    font-size: 1.5em; font-style: italic; opacity: 1.0;
+    font-style: italic; opacity: 1.0;
     font-family: Arial,Verdana,Helvetica,sans-serif;
     width: 80%; left: 10%; right: 10%; border: 0px;
     height: 75px; top: 0px; bottom: auto;
@@ -457,8 +460,10 @@ body._TOUCH #METABOOKCONSOLELOG {
     display: inline-block; width: 7em;  box-sizing: border-box;
     margin-top: 0.7ex; margin-left: auto; margin-right: auto;
     padding:  0px 1em 0px 1em; border: solid transparent 4px;
-    background-color: gray; color: white; font-size: 1.2em; 
-    font-variant: small-caps; border-radius: 1ex; }
+    background-color: gray; color: white;
+    font-size: 2em; font-size: 2vw;
+    font-weight: bold; font-variant: small-caps;
+    border-radius: 1ex; }
 body._MOUSE #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE:hover {
     border-color: blue; border-style: dotted;}
 #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE.tapholdtarget {

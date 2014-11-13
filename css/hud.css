@@ -12,16 +12,14 @@
 
 /* Size rules */
 
-#METABOOKHUD { font-size: 1.4em; }
+#METABOOKHUD {
+    font-size: 1.4em;
+    font-size: 1.1vw;}
 #METABOOKFRAME.metabookuifontlarge #METABOOKHUD { font-size: 2.5em; }
 #METABOOKFRAME.metabookuifontnormal #METABOOKHUD { font-size: 2em; }
 #METABOOKFRAME.metabookuifontsmall #METABOOKHUD { font-size: 1em; }
 
 #METABOOKHUD .metabookhelp, #METABOOKHUD .helpbox { font-size: 80%;}
-#METABOOKHUD #METABOOKRIBBON,
-#METABOOKHUD #METABOOKHEAD,
-#METABOOKHUD #METABOOKFOOT {
-    font-size: 80%;}
 #METABOOKHUD .metabookslice { font-size: 90%;}
 #METABOOKHUD .metabookslice .tochead, #METABOOKHUD .metabookslice .idhead {
     font-size: 80%;}
@@ -636,12 +634,13 @@ img.closebutton, img.metabookpagebutton, img.metabookskimbutton, img.hudbutton {
     box-sizing: border-box; -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     background-color: rgba(0,0,0,0.5); color: white;
-    font-size: 1.2em; margin-top: 0.7ex; width: 7em;
+    margin-top: 0.7ex; width: 7em;
     padding:  0px 1em 0px 1em;
-    border: solid transparent 2px;
+    border: solid transparent 4px;
     border-radius: 1ex;
     cursor: pointer;
-    font-variant: small-caps; font-weight: normal;
+    font-size: 2em; font-size: 2vw;
+    font-variant: small-caps; font-weight: bold;
     display: none;}
 #METABOOKTOPBAR.tapholding #METABOOKSHOWCOVER {
     font-size: 1em; display: block;
