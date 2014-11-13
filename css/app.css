@@ -465,6 +465,15 @@ body._MOUSE.hudup .metabooktarget .glossmark.hover > img {
     -moz-opacity: 0.90;
     -o-opacity: 0.90;}
 
+body._TOUCH .metabooktarget > .glossmark > img {
+    opacity: 0.59;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=59)";
+    filter: alpha(opacity=59);
+    -webkit-opacity: 0.59;
+    -khtml-opacity: 0.59;
+    -moz-opacity: 0.59;
+    -o-opacity: 0.59;}
+
 /* Not logged in conditionalization */
 
 body._NOUSER a.logout {display: none;}
@@ -858,11 +867,6 @@ div.startupmessage.running {
     -moz-opacity: 1.00;
     -o-opacity: 1.00;}
 
-
-/* Dialog styling */
-
-div.fdjtdialog div.choices button {
-    font-size: 60%;}
 
 /* Logotypes */
 

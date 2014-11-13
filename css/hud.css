@@ -12,9 +12,7 @@
 
 /* Size rules */
 
-#METABOOKHUD {
-    font-size: 1.4em;
-    font-size: 1.1vw;}
+#METABOOKHUD { font-size: 2em; }
 #METABOOKFRAME.metabookuifontlarge #METABOOKHUD { font-size: 2.5em; }
 #METABOOKFRAME.metabookuifontnormal #METABOOKHUD { font-size: 2em; }
 #METABOOKFRAME.metabookuifontsmall #METABOOKHUD { font-size: 1em; }
@@ -65,6 +63,13 @@ body._FULLHEIGHT.hudup #METABOOKHEAD {
     background-color: transparent;}
 body.hudup #METABOOKHEAD .hudpanel {
     background-color: rgba(255,255,240,0.6);}
+
+body._TOUCH.hudup #METABOOKFRAME > #METABOOKHUD > div,
+body._TOUCH #METABOOKFRAME > #METABOOKHUD.addgloss > div,
+body._TOUCH.mbSKIMMING #METABOOKFRAME > #METABOOKHUD > #METABOOKSKIMMER {
+    pointer-events: all;}
+body._TOUCH.hudup #METABOOKFRAME > #METABOOKHUD > div.helphud {
+    background-color: ivory;}
 
 #METABOOKHEAD, #METABOOKSKIMMER {top: 0px; border-top: 0px;}
 #METABOOKFOOT {bottom: 0px; border-bottom: 0px;}
@@ -516,9 +521,11 @@ body.mbSKIMMING #METABOOKHUD img.hudbutton {
     -khtml-opacity: 0.80;
     -moz-opacity: 0.80;
     -o-opacity: 0.80;}
-#METABOOKHUD img.hudbutton {
+#METABOOKHUD .hudbutton {
     transition-property: width, height, opacity;
     transition-duration: 1s;
+    -moz-transition-property: width, height, opacity;
+    -moz-transition-duration: 1s;
     -webkit-transition-property: width, height, opacity;
     -webkit-transition-duration: 1s;}
 
@@ -634,16 +641,24 @@ img.closebutton, img.metabookpagebutton, img.metabookskimbutton, img.hudbutton {
     box-sizing: border-box; -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     background-color: rgba(0,0,0,0.5); color: white;
-    margin-top: 0.7ex; width: 7em;
+    font-size: 30px; margin-top: 0.5ex; width: 7em;
     padding:  0px 1em 0px 1em;
     border: solid transparent 4px;
     border-radius: 1ex;
     cursor: pointer;
-    font-size: 2em; font-size: 2vw;
-    font-variant: small-caps; font-weight: bold;
-    display: none;}
+    font-variant: small-caps; font-weight: bold;}
+#METABOOKSHOWCOVER {}
+#METABOOKSHOWCOVER {
+    pointer-events: none;
+    opacity: 0.00;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=00)";
+    filter: alpha(opacity=00);
+    -webkit-opacity: 0.00;
+    -khtml-opacity: 0.00;
+    -moz-opacity: 0.00;
+    -o-opacity: 0.00;}
 #METABOOKTOPBAR.tapholding #METABOOKSHOWCOVER {
-    font-size: 1em; display: block;
+    display: block; pointer-events: all;
     opacity: 0.60;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
     filter: alpha(opacity=60);
@@ -1233,7 +1248,7 @@ img.metabookclosehud#METABOOKSTOPSKIM {
 body.mbSKIMMING #METABOOKHUD img.metabookclosehud#METABOOKSTOPSKIM {
     z-index: 500; display: block;}
 
-/* Full height/width rules
+/* Full height/width rules */
 
 body._FULLHEIGHT #METABOOKHEAD {display: none;}
 body._FULLHEIGHT #METABOOKFOOT {}

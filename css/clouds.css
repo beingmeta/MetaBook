@@ -92,7 +92,8 @@ div.completions.noinput .cloudtoggle {
     font-size: 70%; color: purple; font-style: italic;}
 .cloud .dterm {
     padding-right: 0.35em; padding-left: 0.35em; 
-    color: darkblue; background-color: gold; border: solid yellow 2px;}
+    color: darkblue; background-color: gold;
+    border: solid yellow 2px;}
 .cloud .dterm sup, .cloud .dterm sup {
     padding-left: 0.5ex;}
 

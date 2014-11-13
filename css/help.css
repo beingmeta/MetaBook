@@ -461,10 +461,6 @@ div.metabookhelp .glossbarbox {
     font-family: verdana,helvetica,sans,sans-serif;
     font-size: 120%; font-weight: bold;}
 
-@media screen and (max-width: 800px) {
-    #METABOOKHUD .helphud { font-size: 0.7em; }
-}
-
 /* Emacs local variables
 ;;;  Local variables: ***
 ;;;  compile-command: "cd ../..; make" ***

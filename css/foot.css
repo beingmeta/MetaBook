@@ -175,7 +175,7 @@ body._TOUCH.mbPREVIEW #METABOOKFOOT #METABOOKPAGEBAR
     position: absolute; z-index: 500; opacity: 1.0;
     bottom: 5px; left: 100px; right: 100px;
     text-align: center;
-    font-size: 2em; font-size: 2vw; font-weight: bold;
+    font-size: 32px; font-weight: bold;
     padding: 0px;
     cursor: pointer;
     display: none;}

@@ -21,7 +21,8 @@ div.metabooktoc > div.spanbar {
 
 div.metabooktoc div.head { min-height: 24px;}
 @media (pointer: coarse) {
-    #METABOOKSTATICTOC div.metabooktoc div.head { min-height: 30px;}
+    #METABOOKSTATICTOC div.metabooktoc div.head {
+        min-height: 30px; font-size: 150%;}
 }
 
 div.metabooktoc div.head .progressbar, div.metabooktoc div.head .sizebar { 
@@ -95,7 +96,7 @@ div.metabooktoc.metabookcurhead div.sub { display: block;}
 
 #METABOOKHEARTBODY #METABOOKSTATICTOC {
     margin-left: 0.1em; margin-right: 0.1em;
-    font-size: 2em;}
+    font-size: 1.5em;}
 #METABOOKHEARTBODY #METABOOKSTATICTOC div.metabooktoc {
     display: block; font-size: 90%; text-align: left;}
 #METABOOKHEARTBODY #METABOOKSTATICTOC div.metabooktoc img { display: none;}

@@ -31,10 +31,7 @@
 
 @charset "UTF-8";
 
-#METABOOKCOVER {
-    font-size: 2em;
-    font-size: 2rem;
-    font-size: 1.5vw; }
+#METABOOKCOVER {font-size: 2em;}
 
 body.mbSTARTUP #METABOOKCOVER, body._WORKING #METABOOKCOVER,
 body.mbLAYOUT #METABOOKCOVER {
@@ -62,14 +59,13 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
 
 #METABOOKCOVER >  #METABOOKCOVERMESSAGE {
     position: absolute; white-space: nowrap;
-    font-style: italic; opacity: 1.0;
-    font-family: Arial,Verdana,Helvetica,sans-serif;
-    width: 80%; left: 10%; right: 10%; border: 0px;
-    height: 75px; top: 0px; bottom: auto;
+    font-family: Arial,Verdana,Helvetica,sans-serif; 
+    font-style: italic; font-size: 30px;
+    width: 80%; left: 10%; right: 10%; border: 0px; 
+    top: 0px; bottom: auto;
     text-align: center; overflow: visible; 
     background-color: black; color: silver;
-    cursor: pointer; display: block;
-    display: block;
+    cursor: pointer; display: block; opacity: 1.0;
     z-index: 50;}
 
 #METABOOKCOVER > #METABOOKCOVERCONTROLS {
@@ -457,12 +453,14 @@ body._TOUCH #METABOOKCONSOLELOG {
     box-sizing: border-box;
     width: 100%;}
 #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE {
-    display: inline-block; width: 7em;  box-sizing: border-box;
-    margin-top: 0.7ex; margin-left: auto; margin-right: auto;
+    display: inline-block;
+    box-sizing: border-box; -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    margin-top: 0.5ex; width: 7em;
+    margin-left: auto; margin-right: auto;
     padding:  0px 1em 0px 1em; border: solid transparent 4px;
     background-color: gray; color: white;
-    font-size: 2em; font-size: 2vw;
-    font-weight: bold; font-variant: small-caps;
+    font-variant: small-caps; font-weight: bold;
     border-radius: 1ex; }
 body._MOUSE #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE:hover {
     border-color: blue; border-style: dotted;}
