@@ -154,15 +154,13 @@
   <div class="helphud rightmiddle">
     next page
   </div>
-  <div id="METABOOKFOOT" data-touchable="span.metabookpagespan,span.metabookpageno,span.locoff,img.hudbutton">
+  <div id="METABOOKFOOT" data-touchable="span.metabookpagespan,span.metabookpageno,span.metabookloc,img.hudbutton">
     <div id="METABOOKSHOWTEXT">
-      <span class="adjustfont" data-maxfont="110%">
-        <span>
-          <span class="justreading">back to book</span>
-          <span class="stopskimming">stop skimming</span>
-          <span class="cancelgloss">cancel gloss</span>
-          <span class="cancelchanges">discard changes</span>
-        </span>
+      <span>
+        <span class="justreading">hide tools</span>
+        <span class="stopskimming">stop skimming</span>
+        <span class="cancelgloss">cancel gloss</span>
+        <span class="cancelchanges">discard changes</span>
       </span>
     </div>
     <div class="helphud botcenter">
@@ -178,18 +176,20 @@
         <div id="METABOOKLAYOUTADJUST">Updating layout</div>
         <hr class="metabooklayoutindicator" id="METABOOKLAYOUTINDICATOR"/>
           <span id="METABOOKPAGENOTEXT">p/n</span>
-        <span class="locoff" id="METABOOKLOCPCT">??.??%</span>
+        <span class="metabookloc" id="METABOOKLOCPCT">??.??%</span>
         <div id="METABOOKGOTOLOC" class="metabookgoto">
-          <input type="text" name="GOTOLOC" value="" placeholder="loc"
-            title="Enter a percent (<= 100) or an immediate location (> 100)"
-            id="METABOOKLOCINPUT"
-            onkeypress="metaBook.UI.goto_keypress(event);"/>%
+          <span class="gototext">
+            <input type="text" name="GOTOLOC" value="" placeholder="loc"
+                   title="Enter a percent (<= 100) or an immediate location (> 100)"
+                   id="METABOOKLOCINPUT"
+                   onkeypress="metaBook.UI.goto_keypress(event);"/>%</span>
         </div>
         <div id="METABOOKGOTOPAGE" class="metabookgoto">
-          <input type="text" name="GOTOPAGE" value=""
-            id="METABOOKPAGEINPUT" placeholder="page"
-            onkeypress="metaBook.UI.goto_keypress(event);"/>/
-          <span id="METABOOKGOTOPAGEMAX"></span>
+          <span class="gototext">
+            <input type="text" name="GOTOPAGE" value=""
+                   id="METABOOKPAGEINPUT" placeholder="page"
+                   onkeypress="metaBook.UI.goto_keypress(event);"/>/
+            <span id="METABOOKGOTOPAGEMAX"></span></span>
         </div>
       </div>
       <div class="metabookpageprogress" id="METABOOKPAGEPROGRESS"></div>
