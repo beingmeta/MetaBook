@@ -1969,7 +1969,7 @@
             return;}
         fdjtUI.cancel(evt);
         if (metaBook.hudup) {metaBook.setMode(false); return;}
-        metaBook.toggleMode("gotopage");}
+        metaBook.setMode("gotopage",true);}
     function enterLocation(evt) {
         evt=evt||window.event;
         if ((metaBook.hudup)||(metaBook.mode)||(metaBook.cxthelp)) {
@@ -1978,7 +1978,7 @@
             return;}
         fdjtUI.cancel(evt);
         if (metaBook.hudup) {metaBook.setMode(false); return;}
-        metaBook.toggleMode("gotoloc");}
+        metaBook.setMode("gotoloc",true);}
     function enterPercentage(evt) {
         evt=evt||window.event;
         if ((metaBook.hudup)||(metaBook.mode)||(metaBook.cxthelp)) {
@@ -1987,7 +1987,7 @@
             return;}
         fdjtUI.cancel(evt);
         if (metaBook.hudup) {metaBook.setMode(false); return;}
-        metaBook.toggleMode("gotoloc");}
+        metaBook.setMode("gotoloc",true);}
     
     /* Other handlers */
 
