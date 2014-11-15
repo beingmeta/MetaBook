@@ -943,15 +943,6 @@ body.hudup #METABOOKHUD #METABOOKSKIMMER.sbookatstart img[alt="beginning"] {disp
 #METABOOKHUD #METABOOKSKIMMER div.idhead,
 #METABOOKHUD #METABOOKPOINTGLOSSES div.idhead {
     height: 0px;}
-/* Hide button, show label in the SKIM node, suppressed
-   for now */
-/*
-#METABOOKHUD #METABOOKSKIMMER #METABOOKSKIM img.button { display: none;}
-#METABOOKHUD #METABOOKSKIMMER #METABOOKSKIM .tool span.label { display: inline;}
-#METABOOKHUD #METABOOKSKIMMER.expanded #METABOOKSKIM .tool span.label { display: none;}
-#METABOOKHUD #METABOOKSKIMMER.expanded #METABOOKSKIM img.button {
-    display: inline;}
-*/
 
 #METABOOKSKIMMER._highlights .metabookcard .excerpt { display: none; }
 

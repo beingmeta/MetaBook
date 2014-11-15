@@ -113,11 +113,6 @@ p { line-height: 1.2;}
 body span { font-size: inherit; }
 span { font-size: inherit; }
 
-/*
-#METABOOKBODY .tapholdtarget {outline: dotted blue 1px;}
-#METABOOKBODY .tapholdtarget .tapholdtarget {outline: none;}
-*/
-
 .metabookbody .titlepage, .metabookbody .sbooktitlepage {
     text-align: center;}
 

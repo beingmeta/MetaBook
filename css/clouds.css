@@ -110,22 +110,6 @@ div.completions.noinput .cloudtoggle {
 
 /* Special rules */
 
-/*
-#METABOOKALLTAGS.showall.noinput span.completion.sectname,
-#METABOOKALLTAGS.showall.noinput span.completion.rawterm,
-#METABOOKALLTAGS.showall.noinput span.completion.rootform,
-#METABOOKALLTAGS.showall.noinput span.completion.singleton,
-#METABOOKALLTAGS.showall.noinput span.completion.doubleton {
-    display: none;}
-
-.searchcloud.showall.noinput span.completion.sectname,
-.searchcloud.showall.noinput span.completion.rawterm,
-.searchcloud.showall.noinput span.completion.rootform,
-.searchcloud.showall.noinput span.completion.singleton,
-.searchcloud.showall.noinput span.completion.doubleton {
-    display: none;}
-*/
-
 .cloud span.dterm {
     padding-top: 0.1ex; padding-bottom: 0.1ex;}
 .cloud span.dterm.longterm {

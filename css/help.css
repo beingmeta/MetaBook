@@ -202,13 +202,7 @@ body.mbSHOWHELP.mbPREVIEW #METABOOKHUD #METABOOKHUDHELP {
 body.mbSHOWHELP #METABOOKHUD.openglossmark #METABOOKPOINTGLOSSES {
     opacity: 0;}
 
-div.helpbox p {
-    /*
-    display: block; text-align: left;
-    margin-left: 2em; margin-right: 2em; text-indent: -1em;
-    max-width: inherit; min-width: inherit; width: auto;
-   */
-}
+div.helpbox p {}
 
 div.helpbox h3, div.helpbox h2 { margin-top: 0px;}
 div.helpbox .clicktarget { color: lightblue; }

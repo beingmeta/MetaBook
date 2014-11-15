@@ -184,10 +184,6 @@ body._MOUSE div.metabooktoc div.spans:hover a.metabooktitle.cohi {
 #METABOOKTOC div.spanbar div.spans { font-size: 30px;}
 #METABOOKTOC div.spanbar div.spans a.metabooktitle {
     white-space: nowrap; height: 36px;}
-/*
-#METABOOKTOC div.spanbar div.spans a.metabooktitle:before {
-    content: "·"; color: red;}
-*/
 
 div.spanbar div.progressbox { 
     margin: 0px; padding: 0px; border: 0px; vertical-align: top;
@@ -218,18 +214,6 @@ div.metabookhudspan a.brick.cohi {
     -khtml-opacity: 0.50;
     -moz-opacity: 0.50;
     -o-opacity: 0.50;}
-
-/*
-#METABOOKTOC div.metabooktoc {
-    border-bottom-left-radius: 6px;
-    -webkit-border-bottom-left-radius: 6px; 
-    -moz-border-radius-bottomleft: 6px;
-    -o-border-radius-bottomleft: 6px; 
-    border-bottom-right-radius: 6px;
-    -webkit-border-bottom-right-radius: 6px; 
-    -moz-border-radius-bottomright: 6px;
-    -o-border-radius-bottomright: 6px;}
-*/
 
 #METABOOKTOC div.metabooktoc div.metabooktoc {
     border-bottom-left-radius: 0px;

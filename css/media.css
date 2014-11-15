@@ -144,13 +144,13 @@
         margin-left: 0px; margin-right: 0px;}
 }
 
-body._TOUCH .checkspan input[TYPE="CHECKBOX"], body._TOUCH .checkspan input[TYPE="RADIO"] {
+body._TOUCH .checkspan input[TYPE="CHECKBOX"],
+body._TOUCH .checkspan input[TYPE="RADIO"] {
     height: 1em; width: 1em;}}
 
-
-                              /* Emacs local variables
-;;;  Local variables: ***
-;;;  compile-command: "cd ../..; make" ***
-;;;  indent-tabs-mode: nil ***
-;;;  End: ***
-                             */
+/* Emacs local variables
+   ;;;  Local variables: ***
+   ;;;  compile-command: "cd ../..; make" ***
+   ;;;  indent-tabs-mode: nil ***
+   ;;;  End: ***
+   */
