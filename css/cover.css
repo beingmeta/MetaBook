@@ -83,11 +83,9 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
     width: 90%; height: auto; clear: both;}
 
 #METABOOKCOVERCONTROLS > span.control {
-    font-size: 1.8em; color: silver; white-space: nowrap;
+    color: silver; white-space: nowrap;
     padding-left: 0.5ex; padding-right: 0.5ex; padding-bottom: 0.5ex;
     cursor: pointer;}
-@media (max-width: 650px) {
-    #METABOOKCOVERCONTROLS > span.control { font-size: 1.5em;}}
 
 body._MOUSE #METABOOKCOVERCONTROLS > span.control:hover {
     text-decoration: underline;}
@@ -100,7 +98,7 @@ body._MOUSE #METABOOKCOVERCONTROLS > span.control:hover {
     -o-transition-property: height; -o-transition-duration: 2s;}
 #METABOOKCOVER div.loginbox, #METABOOKCOVER div.userbox {
     position: absolute; left: 0px; right: 0px; bottom: 0px; top: auto;
-    z-index: 50; font-size: 1.5em; color: gold;
+    z-index: 50; color: gold;
     opacity: 1.0;}
 #METABOOKCOVER #METABOOKCOVERCONTROLS div.userbox,
 #METABOOKCOVER #METABOOKCOVERCONTROLS div.loginbox {
