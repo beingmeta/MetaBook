@@ -47,7 +47,7 @@
 
 body {
     /* -- Sets 1em to equal 10px -- */ 
-    font-size: 62.5%;
+    font-size: 62.5% !important;
     /* Don't set line-height here, it will get inherited funny */
     line-height: inherit;
     /* Override any width definition on body itself */

@@ -95,10 +95,11 @@ div.metabooktoc.metabookcurhead div.head { }
 div.metabooktoc.metabookcurhead div.sub { display: block;}
 
 #METABOOKHEARTBODY #METABOOKSTATICTOC {
-    margin-left: 0.1em; margin-right: 0.1em;
-    font-size: 1.5em;}
+    margin-left: 0.1em; margin-right: 0.1em;}
 #METABOOKHEARTBODY #METABOOKSTATICTOC div.metabooktoc {
-    display: block; font-size: 90%; text-align: left;}
+    display: block;
+    font-size: 90%; /* Applied recursively */
+    text-align: left;}
 #METABOOKHEARTBODY #METABOOKSTATICTOC div.metabooktoc img { display: none;}
 #METABOOKHUD #METABOOKHEARTBODY #METABOOKSTATICTOC div.metabooktoc div.head {
     margin-left: 0px; margin-right: 0px;
