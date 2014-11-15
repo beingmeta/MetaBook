@@ -122,10 +122,9 @@ div.loginbox form > span {
 
 #METABOOKCOVER > div.userbox {
     background-color: black; color: gold;
-    text-align: center;
-    font-size: 1.5em;}
+    text-align: center;}
 #METABOOKCOVER div.userbox a, #METABOOKCOVER div.userbox a:visited {
-                                  color: silver;}
+    color: silver;}
 #METABOOKCOVER div.userbox a.sbookslogo em { color: cornflowerblue; }
 #METABOOKCOVER div.userbox span.sbooks em { color: silver;}
 #METABOOKCOVER div.userbox a.sbooks em { color: steelblue;}

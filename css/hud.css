@@ -628,6 +628,7 @@ img.closebutton, img.metabookpagebutton, img.metabookskimbutton, img.hudbutton {
     margin: 0px; padding: 2px; padding-top: 0px;
     border: solid transparent 2px; border-top: 0px;
     cursor: pointer; background-size: cover; background-repeat: no-repeat;
+    vertical-align: top;
     opacity: 0.15;}
 ._MOUSE #METABOOKTOOLTAB:hover, #METABOOKTOOLTAB.tapholding {
     background-color: rgba(192,192,192,0.75);
