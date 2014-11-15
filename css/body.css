@@ -44,17 +44,17 @@ body.sbook { font-size: 62.5%; line-height: inherit;}
     -webkit-box-sizing: border-box;}
 
 #METABOOKBODY {
-    font-size: 1.5em;}
-#METABOOKBODY.metabookbodysizexlarge {
-    font-size: 2.5em;}
-#METABOOKBODY.metabookbodysizelarge {
     font-size: 2em;}
+#METABOOKBODY.metabookbodysizexlarge {
+    font-size: 3em;}
+#METABOOKBODY.metabookbodysizelarge {
+    font-size: 2.5em;}
 #METABOOKBODY.metabookbodysizenormal {
-    font-size: 1.5em;}
+    font-size: 2em;}
 #METABOOKBODY.metabookbodysizesmall {
-    font-size: 1em;}
+    font-size: 1.2em;}
 #METABOOKBODY.metabookbodysizetiny {
-    font-size: 0.8em;}
+    font-size: 0.9em;}
 .metabookbody.metabooklinespacingsingle {
     line-height: 100%;}
 .metabookbody.metabooklinespacingdouble {
@@ -82,25 +82,30 @@ body.sbook { font-size: 62.5%; line-height: inherit;}
 
 body._MOUSE #METABOOKBODY a:hover, #METABOOKBODY a:active { color: blue; }
 
-#METABOOKBODY.metabookbodysizexlarge p, #METABOOKBODY.metabookbodysizexlarge li,
-#METABOOKBODY.metabookbodysizexlarge dt, #METABOOKBODY.metabookbodysizexlarge dd {
-    font-size: 130%;}
-
 @media (lightlevel: dim OR lightlevel: washed) {
     #METABOOKBODY { background-color: #ffffff; color: #111; }
-    #METABOOKBODY.metabookcontrasthigh { background-color: #ffffff; color: #111; }
-    #METABOOKBODY.metabookcontrastmedium { background-color: #ffffff; color: #444; }
-    #METABOOKBODY.metabookcontrastlow  { background-color: #e5e0d4; color: #333; }}
+    #METABOOKBODY.metabookcontrasthigh {
+        background-color: #ffffff; color: #111; }
+    #METABOOKBODY.metabookcontrastmedium {
+        background-color: #ffffff; color: #444; }
+    #METABOOKBODY.metabookcontrastlow  {
+        background-color: #e5e0d4; color: #333; }}
 
 @media (lightlevel: bright) {
     #METABOOKBODY { background-color: #ffffff; color: #444; }
-    #METABOOKBODY.metabookcontrasthigh { background-color: #ffffff; color: #111; }
-    #METABOOKBODY.metabookcontrastmedium { background-color: #ffffff; color: #444; }
-    #METABOOKBODY.metabookcontrastlow  { background-color: #e5e0d4; color: #333; }}
+    #METABOOKBODY.metabookcontrasthigh {
+        background-color: #ffffff; color: #111; }
+    #METABOOKBODY.metabookcontrastmedium {
+        background-color: #ffffff; color: #444; }
+    #METABOOKBODY.metabookcontrastlow  {
+        background-color: #e5e0d4; color: #333; }}
 
-#METABOOKBODY.metabookcontrasthigh { background-color: #ffffff; color: #111; }
-#METABOOKBODY.metabookcontrastmedium { background-color: #ffffff; color: #444; }
-#METABOOKBODY.metabookcontrastlow  { background-color: #e5e0d4; color: #333; }
+#METABOOKBODY.metabookcontrasthigh {
+    background-color: #ffffff; color: #111; }
+#METABOOKBODY.metabookcontrastmedium {
+    background-color: #ffffff; color: #444; }
+#METABOOKBODY.metabookcontrastlow {
+    background-color: #e5e0d4; color: #333; }
 
 p { line-height: 1.2;}
 #METABOOKPAGES .codexpage.metabookcoversize p { line-height: 1.05;}
@@ -113,7 +118,8 @@ span { font-size: inherit; }
 #METABOOKBODY .tapholdtarget .tapholdtarget {outline: none;}
 */
 
-.metabookbody .titlepage, .metabookbody .sbooktitlepage { text-align: center;}
+.metabookbody .titlepage, .metabookbody .sbooktitlepage {
+    text-align: center;}
 
 .sbooktitlepage > .title { font-size: 200%; }
 .sbooktitlepage > .credits { font-size: 150%; }
