@@ -709,14 +709,31 @@ metaBook.Paginate=
             return args;}
         CodexLayout.getLayoutArgs=getLayoutArgs;
 
-        function sizemetaBookPage(){
+        function sizeCodexPage(){
             var page=metaBook.page, geom=getGeometry(page);
+            var page_height=geom.height, view_height=fdjtDOM.viewHeight();
             var page_width=geom.width, view_width=fdjtDOM.viewWidth();
             var page_margin=(view_width-page_width)/2;
+            var page_vmargin=(view_height-page_height)/2;
             if (page_margin!==50) {
                 page.style.left=page_margin+'px';
                 page.style.right=page_margin+'px';}
-            else page.style.left=page.style.right='';}
+            else page.style.left=page.style.right='';
+            if (page_vmargin!==50) {
+                page.style.top=(page_vmargin/2)+'px';
+                page.style.bottom=(page_vmargin+(page_vmargin/2))+'px';}
+            else page.style.top=page.style.bottom='';
+            if ((geom.top<10)||((view_height-(geom.height+geom.top))<25))
+                metaBook.fullheight=true;
+            else metaBook.fullheight=false;
+            if ((geom.left<10)||((view_width-(geom.width+geom.left))<25))
+                metaBook.fullwidth=true;
+            else metaBook.fullwidth=false;
+            if (metaBook.fullwidth) addClass(document.body,"_FULLWIDTH");
+            else dropClass(document.body,"_FULLWIDTH");
+            if (metaBook.fullheight) addClass(document.body,"_FULLHEIGHT");
+            else dropClass(document.body,"_FULLHEIGHT");}
+        metaBook.sizeCodexPage=sizeCodexPage;
         
         function scaleLayout(flag){
             // This adjusts to a resize by just scaling (using CSS
@@ -733,9 +750,9 @@ metaBook.Paginate=
                 cheaprule.style.top="";}
             if (!(flag)) {
                 dropClass(document.body,"_SCALEDLAYOUT");
-                sizemetaBookPage();
+                sizeCodexPage();
                 return;}
-            else sizemetaBookPage();
+            else sizeCodexPage();
             var layout=metaBook.layout;
             var geom=getGeometry(fdjtID("CODEXPAGE"),false,true);
             var width=geom.width, height=geom.inner_height;
