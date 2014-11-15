@@ -67,11 +67,13 @@ body {
     position: fixed; top: 0px; bottom: 0px; left: 0px; right: 0px;
     width: 100%; height: 100%; line-height: initial;
     font-family: Arial,Verdana,Helvetica,sans-serif;
-    box-sizing: border-box;
+    box-sizing: border-box; -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box; -o-box-sizing: border-box;
     pointer-events: none;
     z-index: 1;}
 #METABOOKFRAME > div, #METABOOKFRAME > div > div, #METABOOKFRAME > div > a {
-    box-sizing: border-box;}
+    box-sizing: border-box; -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box; -o-box-sizing: border-box;}
 body.hudup #METABOOKFRAME, body.mbCOVER #METABOOKFRAME,
 body.mbSKIMMING #METABOOKFRAME, body.openhud #METABOOKFRAME,
 body.mbMEDIA #METABOOKFRAME {
@@ -98,11 +100,14 @@ body.mbSHOWHELP #METABOOKFRAME, body.mbMEDIA #METABOOKFRAME {
     pointer-events: all;}
 body._TOUCH #METABOOKFRAME > #METABOOKHUD > div {
     pointer-events: none;}
+body.mbSHOWHELP._TOUCH #METABOOKFRAME > #METABOOKHUD > div.metabookhelp {
+    pointer-events: all;}
+body.mbSHOWHELP._TOUCH #METABOOKBODY {
+    pointer-events: none;}
 
 body._TOUCH #METABOOKFRAME > #METABOOKHUD > #METABOOKTOPBAR,
 body._TOUCH #METABOOKFRAME > #METABOOKHUD > #METABOOKFOOT {
     pointer-events: all;}
-
 
 /* The COVER contains the usual wrapping elements for the book
    (coverpage, title, blurbs, etc) and also contains elements which

@@ -2761,8 +2761,6 @@
          "#METABOOKSOURCES": {
              touchstart: cancel,
              touchend: metaBook.UI.handlers.sources_ontap},
-         "#METABOOKHUDHELP": {touchend: metaBook.UI.dropHUD},
-         ".helphud": {touchend: metaBook.UI.dropHUD},
          "#METABOOKPAGEFOOT": {},
          "#METABOOKPAGEBAR": {tap: pagebar_tap,
                             hold: pagebar_hold,
@@ -2804,12 +2802,12 @@
              metaBook.skimForward(evt); cancel(evt);}},
          "#METABOOKPREVSKIM": {touchstart: function(evt){
              metaBook.skimBackward(evt); cancel(evt);}},
+         "#METABOOKHELP": {tap: toggleHelp, swipe: cancel},
          "#METABOOKHELPBUTTON": {
              tap: toggleHelp,
              hold: function(evt){setHelp(true); cancel(evt);},
              release: function(evt){setHelp(false); cancel(evt);},
              slip: function(evt){setHelp(false); cancel(evt);}},
-         "#METABOOKHELP": {touchstart: toggleHelp},
          "#METABOOKNOTETEXT": {touchend: jumpToNote,click: cancel},
          "#METABOOKSHOWTEXT": {
              touchstart: back_to_reading,

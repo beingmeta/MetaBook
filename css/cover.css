@@ -71,23 +71,24 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
 #METABOOKCOVER > #METABOOKCOVERCONTROLS {
     box-sizing: border-box; -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box; 
-    position: absolute;
-    height: 60px; bottom: 40px; top: auto;
-    width: 94%; left: 3%; right: 3%; 
+    position: absolute; height: 60px; bottom: 40px; top: auto;
+    width: 94%; left: 3%; right: 3%;
+    font-size: 1em; font-size: 1.5rem; font-size: 4vw;
     padding-left: 1ex; padding-right: 1ex;
     font-family: Arial,Verdana,Helvetica,sans-serif;
-    opacity: 1; display: block;}
+    opacity: 1; overflow: hidden; display: block;}
 #METABOOKCOVERCONTROLS > .username {
     float: left; vertical-align: top;}
-#METABOOKCOVERCONTROLS > .control > img {
+#METABOOKCOVERCONTROLS > .control > img,
+#METABOOKCOVERCONTROLS .control > img {
     width: 90%; height: auto; clear: both;}
 
-#METABOOKCOVERCONTROLS > span.control {
+#METABOOKCOVERCONTROLS span.control {
     color: silver; white-space: nowrap;
     padding-left: 0.5ex; padding-right: 0.5ex; padding-bottom: 0.5ex;
     cursor: pointer;}
 
-body._MOUSE #METABOOKCOVERCONTROLS > span.control:hover {
+body._MOUSE #METABOOKCOVERCONTROLS span.control:hover {
     text-decoration: underline;}
 
 #METABOOKFRAME._ANIMATE #METABOOKCOVER div.loginbox,
@@ -98,7 +99,8 @@ body._MOUSE #METABOOKCOVERCONTROLS > span.control:hover {
     -o-transition-property: height; -o-transition-duration: 2s;}
 #METABOOKCOVER div.loginbox, #METABOOKCOVER div.userbox {
     position: absolute; left: 0px; right: 0px; bottom: 0px; top: auto;
-    z-index: 50; color: gold;
+    z-index: 50; color: gold; overflow: hidden;
+    border-top: solid gold 1px; padding-top: 1px;
     opacity: 1.0;}
 #METABOOKCOVER #METABOOKCOVERCONTROLS div.userbox,
 #METABOOKCOVER #METABOOKCOVERCONTROLS div.loginbox {
@@ -501,6 +503,9 @@ body.mbBUSY #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE {
     #METABOOKCOVER div.loginbox {font-size: 1em;}
     #METABOOKCOVER div.loginbox input[TYPE="TEXT"] { width: 7em; }
     #METABOOKCOVER div.loginbox button > img { height: 1em; }
+
+    #METABOOKSETTINGS { padding: 1ex; }
+    #METABOOKSETTINGS h1 { font-size: 1.5em;}
 }
 
 @media (pointer: coarse) {

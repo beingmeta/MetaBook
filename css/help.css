@@ -455,12 +455,20 @@ div.metabookhelp .glossbarbox {
 }
 
 @media screen and (max-width: 500px) {
+    body.mbSHOWHELP #METABOOKHUD div.helphud { display: none; }
     #METABOOKHUD div.helphud.topcenter { 
         top: 50px; width: auto; left: 60px; right: 60px;} 
     #METABOOKHUD div.helphud.botcenter { 
         bottom: 100px; width: auto; left: 60px; right: 60px;}
     body.mbPREVIEW.mbPAGEPREVIEW #METABOOKPAGEBARHELP,
-    body.mbPREVIEW #METABOOKSEETHRUHELP { display: none; }
+    body.mbPREVIEW #METABOOKSEETHRUHELP {
+        left: 0px; right: 0px; width: 100%;
+        padding: 3px; font-size: 14px;}
+    div.helpbox h1 { font-size: 12px; }
+    div.helpbox blockquote p {
+        margin-top: 3px; margin-bottom: 3px;
+        margin-left: 1ex; margin-right: 0.5ex; text-indent: -1ex;}
+
 }
 
 /* Emacs local variables

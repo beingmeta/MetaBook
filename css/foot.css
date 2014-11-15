@@ -257,6 +257,17 @@ body.hudup.mbSHOWHELP #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT {
     #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT {
         bottom: 30px; left: auto; right: auto; width: 100%;}
 
+    body.mbSHOWHELP #METABOOKFOOT .hudbutton,
+    #METABOOKHUD.openheart #METABOOKFOOT .hudbutton {
+        bottom: 0px;}
+    body.mbSHOWHELP #METABOOKFOOT #METABOOKSHOWTEXT,
+    #METABOOKHUD.openheart #METABOOKFOOT #METABOOKSHOWTEXT {
+        bottom: 5px;}
+
+    body.mbSHOWHELP #METABOOKHUD #METABOOKFOOT #METABOOKPAGEBAR,
+    #METABOOKHUD.openheart #METABOOKFOOT #METABOOKPAGEBAR {
+        display: none;}
+
     body.hudup #METABOOKFOOT #METABOOKPAGEBAR { opacity: 0.9; }
     #METABOOKHEARTBODY #METABOOKSTATICTOC {
         margin-left: 2px; margin-right: 2px;}
