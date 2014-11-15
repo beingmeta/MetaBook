@@ -1870,7 +1870,7 @@ metaBook.Startup=
             // The (-2) is for the two pixel wide border on the right side of
             //  the glossmark
             var page_margin=view_width-inner_width;
-            var glossmark_offset=page_margin+(-2)+
+            var glossmark_offset=(page_margin/2)+(-2)+
                 geom.right_border+geom.right_padding+
                 fakepage_geom.right_border+fakepage_geom.right_padding;
             fdjtDOM.remove(fakepage);
