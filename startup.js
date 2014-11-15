@@ -413,6 +413,7 @@ metaBook.Startup=
             metaBook.setConfig(metaBook.getConfig());
 
             var adjstart=fdjt.Time();
+            fdjtDOM.tweakFonts(fdjtID("METABOOKCOVER"));
             fdjtDOM.tweakFonts(fdjtID("METABOOKHUD"));
             if (mB.Trace.startup>2)
                 fdjtLog("Adjusted HUD fonts in %fsecs",
