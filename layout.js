@@ -713,21 +713,21 @@ metaBook.Paginate=
             var page=metaBook.page, geom=getGeometry(page);
             var page_height=geom.height, view_height=fdjtDOM.viewHeight();
             var page_width=geom.width, view_width=fdjtDOM.viewWidth();
-            var page_margin=(view_width-page_width)/2;
-            var page_vmargin=(view_height-page_height)/2;
-            if (page_margin!==50) {
-                page.style.left=page_margin+'px';
-                page.style.right=page_margin+'px';}
+            var page_hmargin=(view_width-page_width);
+            var page_vmargin=(view_height-page_height);
+            /*
+            if (page_hmargin!==50) {
+                page.style.left=page_hmargin/2+'px';
+                page.style.right=page_hmargin/2+'px';}
             else page.style.left=page.style.right='';
             if (page_vmargin!==50) {
                 page.style.top=(page_vmargin/2)+'px';
                 page.style.bottom=(page_vmargin+(page_vmargin/2))+'px';}
             else page.style.top=page.style.bottom='';
-            if ((geom.top<10)||((view_height-(geom.height+geom.top))<25))
-                metaBook.fullheight=true;
+            */
+            if (page_vmargin<80) metaBook.fullheight=true;
             else metaBook.fullheight=false;
-            if ((geom.left<10)||((view_width-(geom.width+geom.left))<25))
-                metaBook.fullwidth=true;
+            if (page_hmargin<80) metaBook.fullwidth=true;
             else metaBook.fullwidth=false;
             if (metaBook.fullwidth) addClass(document.body,"_FULLWIDTH");
             else dropClass(document.body,"_FULLWIDTH");
