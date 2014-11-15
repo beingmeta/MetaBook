@@ -322,9 +322,6 @@ div.metabookhelp img.narrowimage, div.metabookhelp img.wideimage {
     clear: both; max-width:90%; margin-left: 5%; height: auto;}
 
 div.metabookhelp img.narrowimage { display: none;}
-@media (max-width: 700) {
-    div.metabookhelp img.narrowimage { display: inline;}
-    div.metabookhelp img.wideimage { display: none;}}
 
 div#METABOOKHELP table.textual { font-size: 120%;}
 div.metabookhelp table.textual td {padding-left: 3px;}
@@ -337,7 +334,9 @@ div.metabookhelp .glossbarbox {
     position: absolute; text-align: left;
     top: 50px; bottom: 80px; left: 80px; right: 80px; 
     height: auto; width: auto;
-    padding: 1ex; padding-top: 0px; padding-right: 0.5ex;
+    padding: 0px;
+    padding-right: 1ex; padding-right: 2vw;
+    padding-left: 1ex; padding-left: 2vw;
     font-family: helvetica,sans,sans-serif;
     background-color: lightgray; color: black;
     border-radius: 1ex; -webkit-border-radius: 1ex;
@@ -436,6 +435,33 @@ div.metabookhelp .glossbarbox {
 #METABOOKHUD #METABOOKKEYBOARDHELP kbd {
     font-family: verdana,helvetica,sans,sans-serif;
     font-size: 120%; font-weight: bold;}
+
+@media screen and (max-width: 640px) {
+    div.metabookhelp img.narrowimage { display: inline;}
+    div.metabookhelp img.wideimage { display: none;}
+        #METABOOKHUD div.metabookhelp.hudpanel {
+        left: 5px; right: 5px; top: 60px; bottom: 60px;}
+    #METABOOKHUD div.helphud.rightmiddle,
+    #METABOOKHUD div.helphud.leftmiddle {
+        display: none;}
+    #METABOOKHUD div.helphud.botright,
+    #METABOOKHUD div.helphud.botleft {
+        bottom: 3px; }
+    div.helpbox blockquote {
+        margin-left: 2px; margin-right: 2px;}
+    div.helpbox blockquote p {
+        margin-right: 0px; margin-left: 1ex; text-indent: -1ex;}
+    div.helpbox.atfoot { left: 55px; right: 55px;}
+}
+
+@media screen and (max-width: 500px) {
+    #METABOOKHUD div.helphud.topcenter { 
+        top: 50px; width: auto; left: 60px; right: 60px;} 
+    #METABOOKHUD div.helphud.botcenter { 
+        bottom: 100px; width: auto; left: 60px; right: 60px;}
+    body.mbPREVIEW.mbPAGEPREVIEW #METABOOKPAGEBARHELP,
+    body.mbPREVIEW #METABOOKSEETHRUHELP { display: none; }
+}
 
 /* Emacs local variables
 ;;;  Local variables: ***

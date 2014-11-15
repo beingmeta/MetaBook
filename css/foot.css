@@ -231,6 +231,37 @@ body.hudup.mbSHOWHELP #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT {
 #METABOOKHUD.gotoloc #METABOOKFOOT #METABOOKSHOWTEXT {
     display: none;}
 
+/* Media rules */
+
+@media screen and (max-width: 640px) {
+    body._TOUCH.mbPREVIEW #METABOOKFOOT #METABOOKPAGEBAR { 
+        height: 80px;}
+    body._TOUCH.mbPREVIEW #METABOOKFOOT .hudbutton { display: none; }
+    #METABOOKFOOT #METABOOKPAGEBAR div.textfoot {
+        height: initial;}
+}
+@media screen and (max-width: 500px) {
+    #METABOOKFOOT #METABOOKPAGEBAR {
+        margin-left: 2px; margin-right: 2px;
+        left: 0px; right: 0px;}
+    #METABOOKFOOT #METABOOKPAGEBAR .metabooksectmarker { 
+        border: solid blue 1px; opacity: 0.3; }
+    #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER1.metabooksectmarker {
+        height: 60%;}
+    #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER2.metabooksectmarker {
+        height: 35%; }
+    #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER3.metabooksectmarker {
+        height: 20%; }
+
+    #METABOOKFOOT .hudbutton { bottom: 30px;}
+    #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT {
+        bottom: 30px; left: auto; right: auto; width: 100%;}
+
+    body.hudup #METABOOKFOOT #METABOOKPAGEBAR { opacity: 0.9; }
+    #METABOOKHEARTBODY #METABOOKSTATICTOC {
+        margin-left: 2px; margin-right: 2px;}
+}
+
 /* Emacs local variables
 ;;;  Local variables: ***
 ;;;  compile-command: "cd ../..; make" ***

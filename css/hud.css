@@ -1223,7 +1223,7 @@ body._FULLHEIGHT.hudup #METABOOKFOOT {
 body._FULLHEIGHT #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT {
     left: auto; right: auto; width: 100%;}
 
-@media (max-width: 700px) {
+@media screen and (max-width: 640px) {
     .hudup #METABOOKHUD img.hudbutton {
         width: 50px; height: 50px;}
     .hudup #METABOOKHUD #METABOOKSHOWCOVER img {
@@ -1235,6 +1235,16 @@ body._FULLHEIGHT #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT {
     ._TOUCH #METABOOKHUD #METABOOKFOOT.tapholding img.hudbutton.tapholdtarget,
     ._TOUCH #METABOOKHUD #METABOOKTOPBAR.tapholding img.hudbutton.tapholdtarget {
         width: 50px; height: 50px;}
+
+    #METABOOKHEART {
+        border-radius: 1ex;
+        left: 5px; right: 5px;}
+    #METABOOKHEARTBODY {
+        border-radius: 1ex; padding-bottom: 0px;
+        margin-bottom: 2px; margin-top: 2px;
+        left: 5px; right: 5px;}
+    #METABOOKHUD.openheart #METABOOKHEART {
+        top: 60px; bottom: 60px;}
 
     #METABOOKHUD.refinesearch #METABOOKRIBBON,
     #METABOOKHUD.expandsearch #METABOOKRIBBON,
@@ -1256,14 +1266,38 @@ body._FULLHEIGHT #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT {
     #METABOOKHUD.expandsearch.emptysearch #METABOOKHEARTBODY {
         top: 24px;}
 
+    #METABOOKSKIMMER {
+        border-width: 2px;
+        border-bottom-left-radius: 1ex;
+        border-bottom-right-radius: 1ex;
+        padding-bottom: 0px;
+        left: 5px; right: 5px; }
+    img.metabookclosehud#METABOOKSTOPSKIM {
+        bottom: 50px; top: auto;}
+}
+@media screen and (max-width: 500px) {
+    #METABOOKHUD.openhead #METABOOKHEAD {
+        left: 5px; right: 5px;}
+    body.mbSKIMMING .hudbutton,
+    body.hudup.mbSKIMMING .hudbutton, 
+    body.mbSKIMMING #METABOOKSHOWTEXT,
+    body.hudup.mbSKIMMING #METABOOKSHOWTEXT {
+        display: none; }
+    #METABOOKHUD.openhead img.hudbutton[alt="toc"],
+    #METABOOKHUD.openhead img.hudbutton[alt="search"],
+    #METABOOKHUD.openhead img.hudbutton[alt="searchresults"] {
+        display: none;}
+    
+    #METABOOKHUD #METABOOKPOINTGLOSSES.hudpanel {
+        max-width: 90%; min-width: inherit; left: 5px; right: 10px; }
+}
+@media (max-width: 700px) {
     #METABOOKHUD.openhead #METABOOKHEAD,
     #METABOOKHUD.openheart #METABOOKHEART,
     #METABOOKHUD.openfoot #METABOOKFOOT,
     #METABOOKPOINTGLOSSES {
         box-shadow: none; -webkit-box-shadow: none;
-        -moz-box-shadow: none; -o-box-shadow: none;}
-
-}
+        -moz-box-shadow: none; -o-box-shadow: none;}}
 
 /* Emacs local variables
 ;;;  Local variables: ***

@@ -145,13 +145,11 @@ body.mbCOVER #METABOOKHUD, body.hudup.mbCOVER #METABOOKHUD {
 @media (orientation: landscape) {
     #METABOOKFRAME > #METABOOKCLOSEMEDIA { width: 15%; height: auto; }
     #METABOOKMEDIA > img, #METABOOKMEDIA > video, #METABOOKMEDIA > audio {
-        min-height: 100%; width: auto;}
-}
+        min-height: 100%; width: auto;}}
 @media (orientation: portrait) {
     #METABOOKFRAME > #METABOOKCLOSEMEDIA { height: 10%; width: auto; }
     #METABOOKMEDIA > img, #METABOOKMEDIA > video, #METABOOKMEDIA > audio {
-        min-width: 100%; height: auto;}
-}
+        min-width: 100%; height: auto;}}
 
 /* METABOOKBODY is where all of the content lives, whether broken into
    pages or not. */

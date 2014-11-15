@@ -15,8 +15,6 @@ div.metabookslice input[TYPE="TEXT"], div.metabookslice textarea { cursor: text;
 div.metabookslice div.metabookcard { margin-left: 20px;}
 div.metabookslice.sourced div.metabookcard { display: none;}
 div.metabookslice.sourced div.metabookcard.sourced { display: block;}
-@media (pointer: coarse) and (max-width: 650px) {
-    div.metabookslice div.metabookcard { font-size: 120%; }}
 
 div.metabookslice.sourced div.metabookthread { display: none;}
 div.metabookslice.sourced div.metabookthread > div { display: none;}
@@ -189,6 +187,9 @@ div.metabookcardbody,
     -webkit-transition-duration: 0.3s;
     -o-transition-duration: 0.3s;
     -moz-duration: 0.3s;}
+
+@media (pointer: coarse) and (max-width: 650px) {
+    div.metabookslice div.metabookcard { font-size: 120%; }}
 
 /* Emacs local variables
 ;;;  Local variables: ***

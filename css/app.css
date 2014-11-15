@@ -293,6 +293,10 @@ body._TOUCH span.fortouch { display: inline;}
 body._TOUCH div.fortouch { display: block;}
 body._TOUCH p.fortouch { display: block;}
 body._TOUCH li.fortouch { display: list-item;}
+/* Make checkboxes bigger */
+body._TOUCH .checkspan input[TYPE="CHECKBOX"],
+body._TOUCH .checkspan input[TYPE="RADIO"] {
+    height: 1em; width: 1em;}}
 
 body._MOUSE._USESVG img.fortouch.svg,
 body._TOUCH._USESVG img.notouch.svg {
@@ -605,10 +609,6 @@ body._MOUSE .gutenberg:hover {
 img.sbookfullpage, img.sbookcover {
     margin-left: auto; margin-right: auto;
     display: block;}
-@media (max-width: 500px) {
- .sbookfullpage, .sbookcover, .sbooktitlepage,
- .sbookpage, .sbookstandalone, .codexfullpage {
-   page-break-inside: auto;}}
 
 .sbooktitlepage {text-align: center;}
 .sbooktitlepage .titleblock {
@@ -895,6 +895,11 @@ span.bma {
     #CODEXPAGE {top: 10px; bottom: 20px;}}
 @media screen and (max-height: 300px) {
     #CODEXPAGE {top: 5px; bottom: 15px;}}
+@media (max-width: 500px) {
+ .sbookfullpage, .sbookcover, .sbooktitlepage,
+ .sbookpage, .sbookstandalone, .codexfullpage {
+   page-break-inside: auto;}}
+
 
 /* Emacs local variables
 ;;;  Local variables: ***

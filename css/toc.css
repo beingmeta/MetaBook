@@ -20,11 +20,6 @@ div.metabooktoc > div.spanbar {
     padding-left: 0px; padding-right: 0px;}                             
 
 div.metabooktoc div.head { min-height: 24px;}
-@media (pointer: coarse) {
-    #METABOOKSTATICTOC div.metabooktoc div.head {
-        min-height: 30px; font-size: 150%;}
-}
-
 div.metabooktoc div.head .progressbar, div.metabooktoc div.head .sizebar { 
     padding: 0px; margin: 0px; 
     position: absolute;  left: 0px; height: 100%;
@@ -371,10 +366,17 @@ body._MOUSE #METABOOKHUD #METABOOKTOC a.brick:hover {
 #METABOOKHUD #METABOOKTOC a.brick.metabooklivehead { }
 body._MOUSE #METABOOKHUD #METABOOKTOC a:hover { text-decoration: none;}
 
-@media (max-device-width: 500px) {
+@media (pointer: coarse) {
+    #METABOOKSTATICTOC div.metabooktoc div.head {
+        min-height: 30px; font-size: 150%;}}
+@media screen and (max-width: 640px) {
+    #METABOOKHEARTBODY #METABOOKSTATICTOC {
+        margin-left: 0.2em; margin-right: 0.2em;}}
+@media screen and (max-device-width: 500px) {
+    #METABOOKHEARTBODY #METABOOKSTATICTOC {
+        margin-left: 2px; margin-right: 2px;}
     #METABOOKHUD div.metabooktoc {
-        padding-left:0.5ex; padding-right: 2px;}
-}
+        padding-left:0.5ex; padding-right: 2px;}}
 
 /* Emacs local variables
 ;;;  Local variables: ***

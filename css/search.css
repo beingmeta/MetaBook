@@ -36,11 +36,6 @@ div.searchbox div.input input[type='TEXT'] {
     background-image:
     url(https://s3.amazonaws.com/beingmeta/static/g/metabook/tagicon.svgz);}
 
-@media (pointer: coarse) {
-    div.searchbox div.query div.input input[type='TEXT'] {font-size: 250%;}}
-@media (pointer: coarse) and (max-width: 640px) {
-    div.searchbox div.query { margin-left: 1em; }}
-
 div.searchbox div.query span.dterm {
     padding-right: 0.35em; padding-left: 1ex;
     padding-top: 0px; padding-bottom: 0px;
@@ -107,6 +102,18 @@ body._ANIMATE .qtags {
     -webkit-transition-property: font-size; -webkit-transition-duration: 0.5s;
     -moz-transition-property: font-size; -moz-transition-duration: 0.5s;
     -o-transition-property: font-size; -o-transition-duration: 0.5s;}
+
+@media (pointer: coarse) {
+    div.searchbox div.query div.input input[type='TEXT'] {font-size: 250%;}}
+@media (pointer: coarse) and (max-width: 640px) {
+    div.searchbox div.query { margin-left: 1em; }}
+
+@media screen and (max-width: 640px) {
+    div.searchbox div.query { font-size: 12px; }
+    div.searchbox div.query .metabookclearsearch {
+        width: 10%; height: auto;}
+    div.searchbox div.query div.input {
+        width: auto; margin-right: 10%;}}
 
 /* Emacs local variables
 ;;;  Local variables: ***

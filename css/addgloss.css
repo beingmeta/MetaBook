@@ -187,10 +187,7 @@ div.metabookglossform .glossetc .glossdate {
 
 div.metabookglossform form .glossexposure {
     float: right; font-size: 1.5ex;}
-@media (pointer: coarse) {
-    div.metabookglossform form .glossetc { font-size: 2ex; }
-    div.metabookglossform form .glossexposure { font-size: 1em; }
-}
+
 div.metabookglossform form .glossexposure .checkspan {
     float: right; margin-right: 1ex; margin-top: 2px;
     font-variant: smallcaps; vertical-align: top;}
@@ -554,11 +551,7 @@ div.metabookglossform form div.addglossmenu > img {
     display: none; }
 div.metabookglossform form div.addglossmenu > img.held {
     background-color: lightgreen; border-color: green;}
-@media (pointer: coarse) {
-    div.metabookglossform form div.addglossmenu > img.held {
-        width: 80px; height: 80px; margin-left: -20px;}
-    div.metabookglossform form div.addglossmenu > img.held.menutop {
-        width: 40px; height: 40px; margin-left: 0px;}}
+
 body._TOUCH div.metabookglossform form div.addglossmenu > img.held {
     width: 80px; height: 80px; margin-left: -20px;}
 body._TOUCH div.metabookglossform form div.addglossmenu > img.held.menutop {
@@ -636,6 +629,20 @@ div.metabookglossform.submitclose form > div {
     -o-transition-property: opacity; -o-transition-duration: 3s;}
 div.metabookglossform.submitclose form > div.messageoverlay {
     opacity: 0.9;}
+
+@media (pointer: coarse) {
+    div.metabookglossform form .glossetc { font-size: 2ex; }
+    div.metabookglossform form .glossexposure { font-size: 1em; }
+
+    div.metabookglossform form div.addglossmenu > img.held {
+        width: 80px; height: 80px; margin-left: -20px;}
+    div.metabookglossform form div.addglossmenu > img.held.menutop {
+        width: 40px; height: 40px; margin-left: 0px;}}
+
+@media screen and (max-width: 500px) {
+    #METABOOKHUD.addgloss img.hudbutton[alt="toc"],
+    #METABOOKHUD.addgloss img.hudbutton[alt="search"] {
+        display: none;}}
 
 /* Emacs local variables
 ;;;  Local variables: ***

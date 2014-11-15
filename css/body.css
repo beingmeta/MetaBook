@@ -80,24 +80,6 @@
 
 body._MOUSE #METABOOKBODY a:hover, #METABOOKBODY a:active { color: blue; }
 
-@media (lightlevel: dim OR lightlevel: washed) {
-    #METABOOKBODY { background-color: #ffffff; color: #111; }
-    #METABOOKBODY.metabookcontrasthigh {
-        background-color: #ffffff; color: #111; }
-    #METABOOKBODY.metabookcontrastmedium {
-        background-color: #ffffff; color: #444; }
-    #METABOOKBODY.metabookcontrastlow  {
-        background-color: #e5e0d4; color: #333; }}
-
-@media (lightlevel: bright) {
-    #METABOOKBODY { background-color: #ffffff; color: #444; }
-    #METABOOKBODY.metabookcontrasthigh {
-        background-color: #ffffff; color: #111; }
-    #METABOOKBODY.metabookcontrastmedium {
-        background-color: #ffffff; color: #444; }
-    #METABOOKBODY.metabookcontrastlow  {
-        background-color: #e5e0d4; color: #333; }}
-
 #METABOOKBODY.metabookcontrasthigh {
     background-color: #ffffff; color: #111; }
 #METABOOKBODY.metabookcontrastmedium {
@@ -167,6 +149,35 @@ body.metabookpagesizefullheight #CODEXPAGE {
     height: 98%; top: 1%; bottom: 1%;}
 body.metabookpagesizefullwidth #CODEXPAGE {
     width: 98%; left: 1%; right: 1%;}
+
+@media screen and (max-width: 640px) {
+    #CODEXPAGE { left: 1.5em; right: 1.5em;}
+    body._BYPAGE .glossmark {margin-right: 0em;}}
+
+/* Handheld media rules */
+
+@media handheld and (orientation: landscape) {
+    #METABOOKFOOT #METABOOKPAGEBAR {
+        margin-left: 0px; margin-right: 0px;}}
+    #CODEXPAGE {height: 98%; top: 1%; bottom: 1%;}}
+
+@media (lightlevel: dim OR lightlevel: washed) {
+    #METABOOKBODY { background-color: #ffffff; color: #111; }
+    #METABOOKBODY.metabookcontrasthigh {
+        background-color: #ffffff; color: #111; }
+    #METABOOKBODY.metabookcontrastmedium {
+        background-color: #ffffff; color: #444; }
+    #METABOOKBODY.metabookcontrastlow  {
+        background-color: #e5e0d4; color: #333; }}
+
+@media (lightlevel: bright) {
+    #METABOOKBODY { background-color: #ffffff; color: #444; }
+    #METABOOKBODY.metabookcontrasthigh {
+        background-color: #ffffff; color: #111; }
+    #METABOOKBODY.metabookcontrastmedium {
+        background-color: #ffffff; color: #444; }
+    #METABOOKBODY.metabookcontrastlow  {
+        background-color: #e5e0d4; color: #333; }}
 
 /* Emacs local variables
 ;;;  Local variables: ***
