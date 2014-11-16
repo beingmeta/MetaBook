@@ -139,7 +139,7 @@ span { font-size: inherit; }
 
 div.codexpage img {
     max-height: 90% !important; max-width: 90% !important;
-    width: auto !important; height: auto !important;}
+    width: auto; height: auto;}
 
 @media screen and (max-width: 640px) {
     #CODEXPAGE { left: 1.5em; right: 1.5em;}
