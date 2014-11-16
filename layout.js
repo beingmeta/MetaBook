@@ -722,10 +722,6 @@ metaBook.Paginate=
                 page.style.left=page_hmargin/2+'px';
                 page.style.right=page_hmargin/2+'px';}
             else page.style.left=page.style.right='';
-            if (page_vmargin!==50) {
-                page.style.top=(page_vmargin/2)+'px';
-                page.style.bottom=(page_vmargin+(page_vmargin/2))+'px';}
-            else page.style.top=page.style.bottom='';
             if (page_vmargin<80) metaBook.fullheight=true;
             else metaBook.fullheight=false;
             if (page_hmargin<80) metaBook.fullwidth=true;
