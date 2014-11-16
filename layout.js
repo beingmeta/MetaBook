@@ -715,7 +715,9 @@ metaBook.Paginate=
             var page_width=geom.width, view_width=fdjtDOM.viewWidth();
             var page_hmargin=(view_width-page_width);
             var page_vmargin=(view_height-page_height);
-            /*
+            // Set explicit left and right (and top and bottom) to
+            // ensure that the page is centered (sometimes not on
+            // Safari)
             if (page_hmargin!==50) {
                 page.style.left=page_hmargin/2+'px';
                 page.style.right=page_hmargin/2+'px';}
@@ -724,7 +726,6 @@ metaBook.Paginate=
                 page.style.top=(page_vmargin/2)+'px';
                 page.style.bottom=(page_vmargin+(page_vmargin/2))+'px';}
             else page.style.top=page.style.bottom='';
-            */
             if (page_vmargin<80) metaBook.fullheight=true;
             else metaBook.fullheight=false;
             if (page_hmargin<80) metaBook.fullwidth=true;
