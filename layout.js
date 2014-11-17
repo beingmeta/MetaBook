@@ -273,7 +273,7 @@ metaBook.Paginate=
                 
                 // Do the adjust font bit.  We rely on metaBook.content
                 //  having the same width as metaBook.page
-                fdjt.DOM.tweakFonts(content);
+                fdjt.DOM.adjustFonts(content);
                 
                 // Now reset the width
                 metaBook.content.style.width=saved_width;
@@ -345,7 +345,7 @@ metaBook.Paginate=
 
         CodexLayout.prototype.onresize=function(){
             if (metaBook.bypage) metaBook.Paginate("resize");
-            else fdjt.DOM.tweakFonts(metaBook.content);};
+            else fdjt.DOM.adjustFonts(metaBook.content);};
         
         metaBook.addConfig(
             "layout",
@@ -382,7 +382,7 @@ metaBook.Paginate=
                         metaBook.layout=false;}
                     dropClass(document.body,"_BYPAGE");
                     addClass(document.body,"_SCROLL");
-                    fdjt.DOM.tweakFonts(metaBook.content);}});
+                    fdjt.DOM.adjustFonts(metaBook.content);}});
 
         function updateLayoutProperty(name,val){
             // This updates layout properties

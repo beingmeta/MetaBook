@@ -259,7 +259,7 @@ metaBook.setMode=
         function resizeHUD(){
             var view_height=fdjtDOM.viewHeight();
             fdjtID("METABOOKHEARTBODY").style.maxHeight=(view_height-100)+'px';
-            fdjt.DOM.tweakFonts(metaBook.HUD);}
+            fdjt.DOM.adjustFonts(metaBook.HUD);}
         metaBook.resizeHUD=resizeHUD;
 
         /* Various UI methods */

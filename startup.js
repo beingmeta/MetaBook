@@ -413,8 +413,8 @@ metaBook.Startup=
             metaBook.setConfig(metaBook.getConfig());
 
             var adjstart=fdjt.Time();
-            fdjtDOM.tweakFonts(fdjtID("METABOOKCOVER"));
-            fdjtDOM.tweakFonts(fdjtID("METABOOKHUD"));
+            fdjtDOM.adjustFonts(fdjtID("METABOOKCOVER"));
+            fdjtDOM.adjustFonts(fdjtID("METABOOKHUD"));
             if (mB.Trace.startup>2)
                 fdjtLog("Adjusted HUD fonts in %fsecs",
                         ((fdjt.Time()-adjstart)/1000));
@@ -1423,9 +1423,12 @@ metaBook.Startup=
 
             var titlepage=fdjtID("METABOOKTITLEPAGE");
             if (!(titlepage)) {
-                titlepage=fdjtID("SBOOKSTITLEPAGE")||fdjtID("TITLEPAGE");
+                titlepage=fdjtID("SBOOKSTITLEPAGE")||
+                    fdjtID("SBOOKTITLEPAGE")||
+                    fdjtID("TITLEPAGE");
                 if (titlepage) {
                     titlepage=titlepage.cloneNode(true);
+                    fdjtDOM.dropClass(titlepage,/\bcodex[A-Za-z0-9]+\b/);
                     fdjtDOM.stripIDs(titlepage);
                     titlepage.setAttribute("style","");}
                 else {
@@ -1448,7 +1451,7 @@ metaBook.Startup=
                 titlepage.setAttribute("style","");
                 titlepage.style.opacity=0.0; titlepage.style.display="block";
                 titlepage.style.overflow="visible";
-                fdjtDOM.tweakFont(titlepage);
+                fdjtDOM.adjustFontSize(titlepage);
                 titlepage.style.opacity=""; titlepage.style.display="";
                 titlepage.style.overflow="";}
             if ((fdjtID("METABOOKTITLEPAGE"))&&(fdjtID("METABOOKTITLEPAGEHOLDER")))
@@ -1568,7 +1571,8 @@ metaBook.Startup=
 
             metaBook.showCover();
 
-            fdjtDOM.tweakFonts(cover);
+            fdjtDOM.adjustFonts(cover);
+            fdjtDOM.adjustFontSize(fdjt.ID("METABOOKTITLEPAGE"));
 
             // Make the cover hidden by default
             metaBook.CSS.hidecover=fdjtDOM.addCSSRule(

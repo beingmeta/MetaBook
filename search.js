@@ -160,7 +160,7 @@
         // Tweak font size for qtags
         newtags.setAttribute("data-maxfont","120%");
         newtags.setAttribute("data-min","60%");
-        fdjt.DOM.tweakFont(newtags);
+        fdjt.DOM.adjustFonts(newtags);
         /*
             fdjt.UI.adjustFont.tweakUntil(
             function(){
