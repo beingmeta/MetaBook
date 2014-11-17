@@ -171,8 +171,6 @@ div.metabookslice div.metabookcard div.idhead { display: none; }
 div.metabookslice div.metabookcard.slicenewhead div.tochead { display: block; }
 div.metabookslice div.metabookcard.slicenewpassage div.idhead { display: block; }
 
-#METABOOKPOINTGLOSSES div.metabookslice div.metabookcard.gloss.slicenewpassage
-div.metabookcardbody,
 #METABOOKSKIMMER div.metabookcard div.metabookcardbody {
     border-top: 0px; padding-left: 1em; padding-top: 0.25ex;}
 #METABOOKSKIMMER div.metabookcard div.idhead {

@@ -457,14 +457,24 @@ body._MOUSE.hudup .metabooktarget .glossmark.hover > img {
     -moz-opacity: 0.90;
     -o-opacity: 0.90;}
 
+body._TOUCH.hudup .metabooktarget > .glossmark > img,
+body._TOUCH.openhud .metabooktarget > .glossmark > img {
+    opacity: 0.80;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+    filter: alpha(opacity=80);
+    -webkit-opacity: 0.80;
+    -khtml-opacity: 0.80;
+    -moz-opacity: 0.80;
+    -o-opacity: 0.80;}
+
 body._TOUCH .metabooktarget > .glossmark > img {
-    opacity: 0.59;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=59)";
-    filter: alpha(opacity=59);
-    -webkit-opacity: 0.59;
-    -khtml-opacity: 0.59;
-    -moz-opacity: 0.59;
-    -o-opacity: 0.59;}
+    opacity: 0.10;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
+    filter: alpha(opacity=10);
+    -webkit-opacity: 0.10;
+    -khtml-opacity: 0.10;
+    -moz-opacity: 0.10;
+    -o-opacity: 0.10;}
 
 /* Not logged in conditionalization */
 
