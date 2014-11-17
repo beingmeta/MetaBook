@@ -1271,31 +1271,36 @@ metaBook.Startup=
                 i++;}
             // These are all meta class definitions, which is why
             //  they don't have regular schema prefixes
-            var ignore=((getMeta("sbookignore"))||[]).concat(
-                ((getMeta("SBOOKS.ignore"))||[]));
-            if (ignore.length) metaBook.ignore=new fdjtDOM.Selector(ignore);
+            var ignore=(getMeta("sbookignore",true)).concat(
+                (getMeta("SBOOKS.ignore",true)));
+            if (ignore.length)
+                metaBook.ignore=new fdjtDOM.Selector(ignore);
             var notoc=
-                ((getMeta("sbooknotoc"))||[]).concat(
-                    ((getMeta("SBOOKS.notoc"))||[])).concat(
-                        ((getMeta("SBOOKS.nothead"))||[])).concat(
-                            ((getMeta("sbooknothead"))||[]));
-            if (notoc.length) metaBook.notoc=new fdjtDOM.Selector(notoc);
-            var terminal=((getMeta("sbookterminal"))||[]).concat(
-                ((getMeta("SBOOKS.terminal"))||[]));
-            if (terminal.length) metaBook.terminals=new fdjtDOM.Selector(terminal.length);
+                getMeta("sbooknotoc",true).concat(
+                    getMeta("SBOOKS.notoc",true)).concat(
+                        getMeta("SBOOKS.nothead",true)).concat(
+                            getMeta("sbooknothead"));
+            if (notoc.length)
+                metaBook.notoc=new fdjtDOM.Selector(notoc);
+            var terminal=getMeta("sbookterminal",true).concat(
+                getMeta("SBOOKS.terminal",true));
+            if (terminal.length)
+                metaBook.terminals=new fdjtDOM.Selector(terminal.length);
             var focus=
-                ((getMeta("sbookfocus"))||[]).concat(
-                    ((getMeta("SBOOKS.focus"))||[])).concat(
-                        ((getMeta("sbooktarget"))||[])).concat(
-                            ((getMeta("SBOOKS.target"))||[])).concat(
-                                ((getMeta("SBOOKS.idify"))||[]));
-            if (focus.length) metaBook.focus=new fdjtDOM.Selector(focus);
+                getMeta("sbookfocus",true).concat(
+                    getMeta("SBOOKS.focus",true)).concat(
+                        getMeta("sbooktarget",true)).concat(
+                            getMeta("SBOOKS.target",true)).concat(
+                                getMeta("SBOOKS.idify",true));
+            if (focus.length)
+                metaBook.focus=new fdjtDOM.Selector(focus);
             var nofocus=
-                ((getMeta("sbooknofocus"))||[]).concat(
-                    ((getMeta("SBOOKS.nofocus"))||[])).concat(
-                        ((getMeta("sbooknotarget"))||[])).concat(
-                            ((getMeta("SBOOKS.notarget"))||[]));
-            if (nofocus.length) metaBook.nofocus=new fdjtDOM.Selector(nofocus);}
+                getMeta("sbooknofocus",true).concat(
+                    getMeta("SBOOKS.nofocus",true)).concat(
+                        getMeta("sbooknotarget",true)).concat(
+                            getMeta("SBOOKS.notarget",true));
+            if (nofocus.length)
+                metaBook.nofocus=new fdjtDOM.Selector(nofocus);}
 
         function applyMetaClass(name){
             var meta=getMeta(name,true);

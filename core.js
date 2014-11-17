@@ -701,19 +701,23 @@ var metaBook={
 
     var metabook_docinfo=false;
     function mbID(id){
-        var info;
+        var info, elts;
         if ((id)&&(typeof id === "string")&&(id[0]==="#"))
             id=id.slice(1);
         if (!(metabook_docinfo)) metabook_docinfo=metaBook.docinfo;
         var elt=((metabook_docinfo)&&(info=metabook_docinfo[id])&&(info.elt));
         if ((elt)&&(elt.id)) return elt;
         else if ((elt=document.getElementById(id))) return elt;
-        else if ((elt=document.getElementsByName(id))) {
-            if (elt.length===1)  return elt[0];
-            else if (elt.length>1) return false;}
-        else {}
-        elt=fdjtDOM.$("[data-tocid='"+id+"']");
-        if (elt.length===1) return elt[0];
+        else {
+            elts=document.getElementsByName(id);
+            if (elts.length===1)  return elts[0];
+            else if (elts.length>1) return false;}
+        elts=fdjtDOM.$("[data-tocid='"+id+"']");
+        if (elts.length===1) return elts[0];
+        else if (elts.length) {
+            elts=fdjtDOM.$(".codexdupstart[data-tocid='"+id+"']");
+            if (elts.length===1) return elts[0];
+            else return false;}
         else return false;}
     metaBook.ID=mbID;
 
