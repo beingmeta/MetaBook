@@ -1865,18 +1865,19 @@ metaBook.Startup=
             // Get geometry
             metaBook.sizeCodexPage();
             var geom=getGeometry(page,page.offsetParent,true);
-            var fakepage=fdjtDOM("DIV.codexpage");
+            var fakepage=fdjtDOM("DIV.codexpage.curpage");
             page.appendChild(fakepage);
             // There might be a better way to get the .codexpage settings,
             //  but this seems to work.
             var fakepage_geom=getGeometry(fakepage,page,true);
-            var inner_width=geom.inner_width, inner_height=geom.inner_height;
+            var inner_width=geom.inner_width;
+            var inner_height=geom.inner_height;
             // The (-2) is for the two pixel wide border on the right side of
             //  the glossmark
             var page_margin=view_width-inner_width;
-            var glossmark_offset=(page_margin/2)+(-2)+
-                geom.right_border+geom.right_padding+
-                fakepage_geom.right_border+fakepage_geom.right_padding;
+            var glossmark_offset=Math.floor(page_margin/2)+(-3)+
+                fakepage_geom.right_border+
+                geom.right_padding+geom.right_border;
             fdjtDOM.remove(fakepage);
             // var glossmark_offset=page_margin;
             // The 2 here is for the right border of the glossmark,
