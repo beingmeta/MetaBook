@@ -622,7 +622,10 @@ img.closebutton, img.metabookpagebutton, img.metabookskimbutton, img.hudbutton {
 #METABOOKHUD.about #METABOOKHEARTBODY .tabcontent {
     margin-top: 0px;}
 
-#METABOOKTOPCENTER { display: inline-block; text-align: center;}
+#METABOOKTOPCENTER {
+    display: inline-block; text-align: center;
+    pointer-events: none;
+    max-height: 100%;}
 
 #METABOOKTOOLTAB {
     box-sizing: content-box; -webkit-box-sizing: content-box;
@@ -663,8 +666,9 @@ img.closebutton, img.metabookpagebutton, img.metabookskimbutton, img.hudbutton {
     -khtml-opacity: 0.00;
     -moz-opacity: 0.00;
     -o-opacity: 0.00;}
+.hudup #METABOOKSHOWCOVER, #METABOOKTOPBAR.tapholding #METABOOKSHOWCOVER {
+    display: block; pointer-events: all;}
 #METABOOKTOPBAR.tapholding #METABOOKSHOWCOVER {
-    display: block; pointer-events: all;
     opacity: 0.60;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
     filter: alpha(opacity=60);
@@ -672,6 +676,15 @@ img.closebutton, img.metabookpagebutton, img.metabookskimbutton, img.hudbutton {
     -khtml-opacity: 0.60;
     -moz-opacity: 0.60;
     -o-opacity: 0.60;}
+.hudup #METABOOKSHOWCOVER {
+    opacity: 1.00;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: alpha(opacity=100);
+    -webkit-opacity: 1.00;
+    -khtml-opacity: 1.00;
+    -moz-opacity: 1.00;
+    -o-opacity: 1.00;}
+
 .hudup #METABOOKSHOWCOVER { display: block; }
 #METABOOKSHOWCOVER.tapholdtarget { border-color: blue; }
 #METABOOKFRAME._ANIMATE #METABOOKSHOWCOVER {
@@ -681,17 +694,7 @@ img.closebutton, img.metabookpagebutton, img.metabookskimbutton, img.hudbutton {
     -webkit-transition-property: -webkit-opacity; 
     transition-duration: 1.0s; -o-transition-duration: 1.0s;
     -webkit-transition-duration: 1.0s; -moz-transition-duration: 1.0s;}
-#METABOOKSHOWCOVER {
-    opacity: 0.00;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=00)";
-    filter: alpha(opacity=00);
-    -webkit-opacity: 0.00;
-    -khtml-opacity: 0.00;
-    -moz-opacity: 0.00;
-    -o-opacity: 0.00;}
 #METABOOKSHOWCOVER { pointer-events: none;}
-.hudup #METABOOKSHOWCOVER { pointer-events: all;}
-body.hudup #METABOOKSHOWCOVER {opacity: 1.0;}
 body.mbPREVIEW #METABOOKSHOWCOVER, 
 body.mbPREVIEW.hudup #METABOOKSHOWCOVER,
 body.hudup #METABOOKHUD.openhead #METABOOKSHOWCOVER {
