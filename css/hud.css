@@ -514,9 +514,7 @@ div.completions.hudpanel .normal { line-height: 250%;}
     -khtml-opacity: 0.99;
     -moz-opacity: 0.99;
     -o-opacity: 0.99;}
-#METABOOKHUD .hudbutton.tapholdtarget {
-    border-color: blue; opacity: 0.99;}
-._MOUSE #METABOOKHUD img.hudbutton:hover {
+#METABOOKHUD .hudbutton.tapholdtarget, ._MOUSE #METABOOKHUD .hudbutton:hover {
     border-color: blue; border-style: dotted; opacity: 0.99;}
 body.mbSKIMMING #METABOOKHUD img.hudbutton {
     opacity: 0.80;
@@ -632,18 +630,15 @@ img.closebutton, img.metabookpagebutton, img.metabookskimbutton, img.hudbutton {
     -moz-box-sizing: content-box;
     display: inline-block; height: 16px; width: 64px; 
     margin: 0px; padding: 2px; padding-top: 0px;
-    border: solid transparent 2px; border-top: 0px;
-    cursor: pointer; background-size: cover; background-repeat: no-repeat;
+    border: solid transparent 1px; border-top: 0px;
+    cursor: pointer;
+    background-size: contain; background-repeat: no-repeat;
     vertical-align: top;
     opacity: 0.15;}
-._MOUSE #METABOOKTOOLTAB:hover, #METABOOKTOOLTAB.tapholding {
-    background-color: rgba(192,192,192,0.75);
-    opacity: 0.75;}
-#METABOOKTOOLTAB.tapholdtarget { border-color: blue; }
 #METABOOKTOOLTAB {
     background-image: url(/static/g/metabook/downbar.svgz);}
-.hudup #METABOOKTOOLTAB { display: none;}
-.mbcover #METABOOKTOOLTAB { display: none;}
+.hudup #METABOOKTOOLTAB, .mbcover #METABOOKTOOLTAB { display: none;}
+#METABOOKTOPBAR.tapholding #METABOOKTOOLTAB { display: none; }
 
 #METABOOKSHOWCOVER {
     white-space: nowrap;
@@ -655,7 +650,15 @@ img.closebutton, img.metabookpagebutton, img.metabookskimbutton, img.hudbutton {
     border: solid transparent 2px;
     border-radius: 1ex;
     cursor: pointer;
-    font-variant: small-caps; font-weight: bold;}
+    font-variant: small-caps; font-weight: bold;
+    display: none;}
+body._MOUSE #METABOOKTOOLTAB:hover {
+    background-color: rgba(192,192,192,0.75);
+    opacity: 0.75;}
+body._MOUSE #METABOOKTOP #METABOOKSHOWCOVER.hudbutton:hover { display: none;}
+body._MOUSE #METABOOKTOP.tapholding #METABOOKSHOWCOVER.hudbutton:hover {
+    display: block;}
+
 #METABOOKSHOWCOVER {}
 #METABOOKSHOWCOVER {
     pointer-events: none;
@@ -704,9 +707,6 @@ body.hudup #METABOOKSHOWCOVER, #METABOOKTOPBAR.tapholding #METABOOKSHOWCOVER,
 body._MOUSE #METABOOKTOPBAR:hover #METABOOKSHOWCOVER {
     pointer-events: all; }
 
-body._MOUSE #METABOOKSHOWCOVER:hover {
-    border: solid blue 2px;}
-
 #METABOOKSHOWCOVER img {
     height: 1.2em; width: auto;
     float: left;}
@@ -743,7 +743,7 @@ body.hudup #METABOOKHUD .hudbutton {
     -khtml-opacity: 0.60;
     -moz-opacity: 0.60;
     -o-opacity: 0.60;}
-body.hudup._MOUSE #METABOOKHUD img.hudbutton:hover,
+body.hudup._MOUSE #METABOOKHUD .hudbutton:hover,
 body.hudup._FULLHEIGHT #METABOOKHUD .hudbutton {
     opacity: 0.95;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=95)";
