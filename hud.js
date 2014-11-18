@@ -265,8 +265,9 @@ metaBook.setMode=
         /* Various UI methods */
         function addGloss2UI(item){
             if (!(item.frag)) {
-                fdjtLog.warn("Warning: skipping gloss %o with no fragment identifier",
-                             item.uuid);}
+                fdjtLog.warn(
+                    "Warning: skipping gloss %o with no fragment identifier",
+                    item.uuid);}
             else if (mbID(item.frag)) {
                 var addGlossmark=metaBook.UI.addGlossmark;
                 allglosses.addCards(item);
