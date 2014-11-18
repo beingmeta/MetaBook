@@ -2535,7 +2535,7 @@
         evt=evt||window.event;
         metaBook.setHUD(true);
         fdjt.UI.cancel(evt);
-        fdjt.UI.cancel(evt);return false;}
+        return false;}
     metaBook.raiseHUD=raiseHUD;
     function lowerHUD(evt){
         evt=evt||window.event;
@@ -2605,7 +2605,11 @@
          hud: {click: handleXTarget, tap: handleXTarget},
          "#METABOOKSTARTPAGE": {click: metaBook.UI.dropHUD},
          "#METABOOKTOPBAR": {tap: raiseHUD},
-         "#METABOOKTOOLTAB": {tap: raiseHUD, release: raiseHUD},
+         //"#METABOOKTOOLTAB": {tap: raiseHUD, release: raiseHUD},
+         "#METABOOKTOOLTAB": {
+             mousedown: raiseHUD,
+             mousemove: cancel,
+             mouseup: cancel},
          "#METABOOKSHOWCOVER": {
              tap: showcover_tapped, release: showcover_released},
          "#METABOOKHUDHELP": {click: metaBook.UI.dropHUD},
@@ -2755,7 +2759,10 @@
          // "#METABOOKFRAME": {touchstart: noDefault,touchmove: noDefault,touchend: noDefault},
          "#METABOOKSTARTPAGE": {touchend: metaBook.UI.dropHUD},
          "#METABOOKTOPBAR": {tap: raiseHUD},
-         "#METABOOKTOOLTAB": {tap: raiseHUD, release: raiseHUD},
+         //"#METABOOKTOOLTAB": {tap: raiseHUD, release: raiseHUD},
+         "#METABOOKTOOLTAB": {touchstart: raiseHUD,
+                              touchmove: cancel,
+                              touchend: cancel},
          "#METABOOKSHOWCOVER": {
              tap: showcover_tapped, release: showcover_released},
          "#METABOOKSOURCES": {
