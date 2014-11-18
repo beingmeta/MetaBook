@@ -93,12 +93,13 @@ p { line-height: 1.2;}
 body span { font-size: inherit; }
 span { font-size: inherit; }
 
-.metabookbody .titlepage, .metabookbody .sbooktitlepage {
+.metabookbody .titlepage, .metabookbody .sbooktitlepage,
+#METABOOKTITLEPAGE.sbooktitlepage {
     text-align: center;}
 
-.sbooktitlepage > .title { font-size: 200%; }
-.sbooktitlepage > .credits { font-size: 150%; }
-.sbooktitlepage > .pubinfo, .sbooktitlepage > .publisher {
+.sbooktitlepage .title { font-size: 200%; }
+.sbooktitlepage .credits { font-size: 150%; }
+.sbooktitlepage .pubinfo, .sbooktitlepage > .publisher {
   font-size: 80%; }
 
 .sbooktitlepage .title { margin-bottom: 1em; }
