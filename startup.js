@@ -1423,9 +1423,15 @@ metaBook.Startup=
                 coverpage.style.overflow="";}
             if (fdjtID("METABOOKBOOKCOVERHOLDER"))
                 fdjtDOM.remove("METABOOKBOOKCOVERHOLDER");
-            if ((!(fdjtID("METABOOKBOOKCOVER")))&&(fdjtID("METABOOKCOVERCONTROLS")))
-                fdjtDOM.addClass("METABOOKCOVERCONTROLS","nobookcover");
-
+            if (fdjtID("METABOOKCOVERCONTROLS")) {
+                if (!(fdjtID("METABOOKBOOKCOVER")))
+                    fdjtDOM.addClass("METABOOKCOVERCONTROLS","nobookcover");
+                if ((fdjtID("METABOOKABOUTBOOK"))&&
+                    (fdjtDOM.hasContent(fdjtID("METABOOKABOUTBOOK"))))
+                    fdjtDOM.addClass("METABOOKCOVERCONTROLS","haveaboutpage");
+                if ((fdjtID("METABOOKCREDITSPAGE"))&&
+                    (fdjtDOM.hasContent(fdjtID("METABOOKCREDITSPAGE"))))
+                    fdjtDOM.addClass("METABOOKCOVERCONTROLS","havecreditspage");}
             var titlepage=fdjtID("METABOOKTITLEPAGE");
             if (!(titlepage)) {
                 titlepage=fdjtID("SBOOKSTITLEPAGE")||
@@ -1440,13 +1446,15 @@ metaBook.Startup=
                     var info=getBookInfo();
                     titlepage=fdjtDOM(
                         "div#METABOOKTITLEPAGE.sbooktitlepage",
-                        fdjtDOM("DIV.title.adjustfont",info.title),
-                        fdjtDOM("DIV.credits.adjustfont",
+                        fdjtDOM("DIV.title",info.title),
+                        fdjtDOM("DIV.credits",
                                 ((info.byline)?(fdjtDOM("DIV.byline",info.byline)):
                                  ((info.authors)&&(info.authors.length))?
                                  (fdjtDOM("DIV.author",info.authors[0])):
                                  (false))),
-                        fdjtDOM("DIV.pubinfo.adjustfont"));}}
+                        fdjtDOM("DIV.pubinfo",
+                                ((info.publisher)&&
+                                 (fdjtDOM("P",info.publisher)))));}}
             if (fdjtID("METABOOKTITLEPAGEHOLDER")) {
                 fdjtDOM.replace(fdjtID("METABOOKTITLEPAGEHOLDER"),titlepage);
                 titlepage.id="METABOOKTITLEPAGE";}
@@ -1459,7 +1467,8 @@ metaBook.Startup=
                 fdjtDOM.adjustFontSize(titlepage);
                 titlepage.style.opacity=""; titlepage.style.display="";
                 titlepage.style.overflow="";}
-            if ((fdjtID("METABOOKTITLEPAGE"))&&(fdjtID("METABOOKTITLEPAGEHOLDER")))
+            if ((fdjtID("METABOOKTITLEPAGE"))&&
+                (fdjtID("METABOOKTITLEPAGEHOLDER")))
                 fdjtDOM.remove("METABOOKTITLEPAGEHOLDER");
             
             var creditspage=fdjtID("METABOOKCREDITSPAGE");
