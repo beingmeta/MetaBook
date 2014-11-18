@@ -447,7 +447,7 @@ body._ANIMATE .glossmark > img {
     -webkit-transition-duration: 0.5s;}
 
 .metabooktarget > .glossmark {
-    border-right-color: steelblue;}
+    border-right: double steelblue;}
 
 body._MOUSE.hudup .metabooktarget .glossmark:hover > img,
 body._MOUSE.hudup .metabooktarget .glossmark.hover > img {
