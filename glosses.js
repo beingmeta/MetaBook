@@ -1191,7 +1191,7 @@
         fdjtUI.cancel(evt);}
 
     function cancelGloss(arg){
-        var evt=arg||event||null;
+        var evt=arg||window.event||null;
         var target=((!arg)?(fdjtID("METABOOKLIVEGLOSS")):
                     (arg.nodeType)?(arg):(fdjtUI.T(arg)));
         var glossform=(target)&&
