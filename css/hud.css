@@ -650,9 +650,9 @@ img.closebutton, img.metabookpagebutton, img.metabookskimbutton, img.hudbutton {
     box-sizing: border-box; -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     background-color: rgba(0,0,0,0.5); color: white;
-    font-size: 30px; margin-top: 0.5ex; width: 7em;
+    font-size: 30px; margin-top: 0.2ex; width: 7em;
     padding:  0px 1em 0px 1em;
-    border: solid transparent 4px;
+    border: solid transparent 2px;
     border-radius: 1ex;
     cursor: pointer;
     font-variant: small-caps; font-weight: bold;}

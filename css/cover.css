@@ -41,6 +41,19 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
 #METABOOKHUD.openglossmark, body.mbSHOWHELP #METABOOKHUD {
     z-index: 100; }
 
+#METABOOKCOVER .fdjtfontwrapper {
+    transition-property: font-size; transition-duration: 4s;
+    -webkit-transition-property: font-size; -webkit-transition-duration: 4s;
+    -moz-transition-property: font-size; -webkit-moz-duration: 4s;
+    -o-transition-property: font-size; -o-moz-duration: 4s;}
+#METABOOKCOVER .fdjtfontwrapper {
+    backface-visibility: hidden;
+    perspective: 1000;
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    -webkit-transform: translateZ(0);}
+
 #METABOOKCOVER > div {
     position: absolute;
     top: 75px; left: 50px; right: 50px;
@@ -163,7 +176,7 @@ body._USER #METABOOKCOVER div.userbox {
     color: gold;}
 
 .control[data-mode='console'], .control[data-mode='aboutsbooks'],
-.control[data-mode='creditspage'] {
+.control[data-mode='creditspage'], .control[data-mode='aboutbook'] {
     display: none;}
 body._SHOWCONSOLE span.control[data-mode='console'] { display: inline;}
 span.control[data-mode='layers'] .whenloggedin { display: none;}
@@ -177,6 +190,8 @@ body._USER._CONN .control[data-mode='login'] { display: none;}
     display: none;}
 
 #METABOOKCOVERCONTROLS.havecreditspage .control[data-mode='creditspage'] {
+    display: inline;}
+#METABOOKCOVERCONTROLS.haveaboutpage .control[data-mode='aboutbook'] {
     display: inline;}
 
 #METABOOKTITLEPAGE, #METABOOKABOUTBOOK, #METABOOKBOOKCREDITS,
@@ -383,7 +398,7 @@ body._TOUCH #METABOOKCONSOLELOG {
     display: inline-block;
     box-sizing: border-box; -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
-    margin-top: 0.5ex; width: 7em;
+    margin-top: 0.2ex; width: 7em;
     margin-left: auto; margin-right: auto;
     padding:  0px 1em 0px 1em; border: solid transparent 4px;
     background-color: gray; color: white;
