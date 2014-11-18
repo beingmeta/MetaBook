@@ -329,7 +329,8 @@ div.locbar hr {
     border-right: solid rgba(0,0,255,0.70) 3px;
     width: 0px; overflow: visible;
     width: 54px; height: 50px;
-    box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;
+    box-sizing: border-box; -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
     z-index: 50;}
 #CODEXPAGE .glossmark {margin-right: -50px;}
 body._NARROW div.fdjtselecting .glossmark {
@@ -435,8 +436,6 @@ div.sbooksection.metabooknewtarget > *:first-child {
 */
 body.metabooktarget { color: inherit;}
 
-/* body.mbSKIMMING .metabooktarget {outline: dotted steelblue 2px;} */
-
 body._ANIMATE .glossmark > img {
     transition-property: opacity;
     transition-duration: 0.5s;
@@ -446,6 +445,9 @@ body._ANIMATE .glossmark > img {
     -moz-transition-duration: 0.5s;
     -webkit-transition-property: opacity;
     -webkit-transition-duration: 0.5s;}
+
+.metabooktarget > .glossmark {
+    border-right-color: steelblue;}
 
 body._MOUSE.hudup .metabooktarget .glossmark:hover > img,
 body._MOUSE.hudup .metabooktarget .glossmark.hover > img {
@@ -466,15 +468,6 @@ body._TOUCH.openhud .metabooktarget > .glossmark > img {
     -khtml-opacity: 0.80;
     -moz-opacity: 0.80;
     -o-opacity: 0.80;}
-
-body._TOUCH .metabooktarget > .glossmark > img {
-    opacity: 0.10;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
-    filter: alpha(opacity=10);
-    -webkit-opacity: 0.10;
-    -khtml-opacity: 0.10;
-    -moz-opacity: 0.10;
-    -o-opacity: 0.10;}
 
 /* Not logged in conditionalization */
 
