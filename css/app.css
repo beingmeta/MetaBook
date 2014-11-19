@@ -878,6 +878,7 @@ span.bma {
 .metabook { }
 .metabook > span {
     font-style: oblique; font-size: 100%; font-weight: bold;}
+.metabook > sub {font-style: italic; color: red; font-size: 60%;}
 
 .mupub { font-variant: small-caps;}
 .mupub em, .mupub i {
