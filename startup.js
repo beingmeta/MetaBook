@@ -869,6 +869,11 @@ metaBook.Startup=
             fdjtLog("Startup done");
             metaBook.displaySync();
             fdjtDOM.dropClass(document.body,"mbSTARTUP");
+            var rmsg=fdjtID("METABOOKREADYMESSAGE");
+            if (!(fdjtID("METABOOKOPENTAB"))) {
+                rmsg.innerHTML="Open";
+                rmsg.id="METABOOKOPENTAB";}
+            else rmsg.style.display='none';
             if (mode) {}
             else if (getQuery("startmode"))
                 mode=getQuery("startmode");
@@ -1381,9 +1386,9 @@ metaBook.Startup=
                 fdjtID("METABOOKSETTINGS").removeAttribute("style");
             if (fdjtID("METABOOKAPPHELP"))
                 fdjtID("METABOOKAPPHELP").removeAttribute("style");
-            if (fdjtID("METABOOKLOADINGMESSAGE")) 
-                fdjtID("METABOOKLOADINGMESSAGE").removeAttribute("style");
-            if (fdjtID("METABOOKOPENTAB")) 
+            if (fdjtID("METABOOKREADYMESSAGE")) 
+                fdjtID("METABOOKREADYMESSAGE").removeAttribute("style");
+            if (fdjtID("METABOOKOPENTAB"))  
                 fdjtID("METABOOKOPENTAB").removeAttribute("style");
             if (fdjtID("METABOOKBUSYMESSAGE"))
                 fdjtID("METABOOKBUSYMESSAGE").removeAttribute("style");

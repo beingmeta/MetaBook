@@ -173,7 +173,7 @@ body._TOUCH.mbPREVIEW #METABOOKFOOT #METABOOKPAGEBAR
 
 #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT {
     position: absolute; z-index: 500; opacity: 1.0;
-    bottom: 5px; left: 100px; right: 100px;
+    bottom: 30px; left: 100px; right: 100px;
     text-align: center;
     font-size: 32px; font-weight: bold;
     padding: 0px;

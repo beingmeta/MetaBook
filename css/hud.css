@@ -644,14 +644,14 @@ img.closebutton, img.metabookpagebutton, img.metabookskimbutton, img.hudbutton {
     white-space: nowrap;
     box-sizing: border-box; -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
-    background-color: rgba(0,0,0,0.5); color: white;
     width: 7em; font-size: 30px; 
-    margin-top: 0px; margin-left: auto; margin-right: auto;
+    margin: 0px; margin-left: auto; margin-right: auto;
     padding:  0px 1em 0px 1em;
     border: solid transparent 2px; border-top: 0px;
+    background-color: gray; color: white;
+    font-variant: small-caps; font-weight: bold;
     border-bottom-left-radius: 1ex; border-bottom-right-radius: 1ex;
     cursor: pointer;
-    font-variant: small-caps; font-weight: bold;
     display: none;}
 body._MOUSE #METABOOKTOOLTAB:hover {
     background-color: rgba(192,192,192,0.75);
