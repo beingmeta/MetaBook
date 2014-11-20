@@ -869,6 +869,7 @@ metaBook.Startup=
             fdjtLog("Startup done");
             metaBook.displaySync();
             fdjtDOM.dropClass(document.body,"mbSTARTUP");
+            fdjtDOM.addClass(document.body,"mbREADY");
             var rmsg=fdjtID("METABOOKREADYMESSAGE");
             if (!(fdjtID("METABOOKOPENTAB"))) {
                 rmsg.innerHTML="Open";
