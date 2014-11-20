@@ -78,6 +78,9 @@ metaBook.Startup=
         var dropClass=fdjtDOM.dropClass;
         var getChildren=fdjtDOM.getChildren;
         var getGeometry=fdjtDOM.getGeometry;
+        var hasContent=fdjtDOM.hasContent;
+
+        function hasAnyContent(n){return hasContent(n,true);}
 
         var mB=metaBook;
         var fixStaticRefs=metaBook.fixStaticRefs;
@@ -1427,17 +1430,6 @@ metaBook.Startup=
                 fdjtDOM.scaleToFit(coverpage,1.0);
                 coverpage.style.opacity=""; coverpage.style.display="";
                 coverpage.style.overflow="";}
-            if (fdjtID("METABOOKBOOKCOVERHOLDER"))
-                fdjtDOM.remove("METABOOKBOOKCOVERHOLDER");
-            if (fdjtID("METABOOKCOVERCONTROLS")) {
-                if (!(fdjtID("METABOOKBOOKCOVER")))
-                    fdjtDOM.addClass("METABOOKCOVERCONTROLS","nobookcover");
-                if ((fdjtID("METABOOKABOUTBOOK"))&&
-                    (fdjtDOM.hasContent(fdjtID("METABOOKABOUTBOOK"))))
-                    fdjtDOM.addClass("METABOOKCOVERCONTROLS","haveaboutpage");
-                if ((fdjtID("METABOOKCREDITSPAGE"))&&
-                    (fdjtDOM.hasContent(fdjtID("METABOOKCREDITSPAGE"))))
-                    fdjtDOM.addClass("METABOOKCOVERCONTROLS","havecreditspage");}
             var titlepage=fdjtID("METABOOKTITLEPAGE");
             if (!(titlepage)) {
                 titlepage=fdjtID("SBOOKSTITLEPAGE")||
@@ -1579,6 +1571,19 @@ metaBook.Startup=
                 fdjtDOM.replace(fdjtID("METABOOKABOUTBOOKHOLDER"),about);
             else cover.appendChild(about);
             
+            if (fdjtID("METABOOKBOOKCOVERHOLDER"))
+                fdjtDOM.remove("METABOOKBOOKCOVERHOLDER");
+            var cc=fdjtID("METABOOKCOVERCONTROLS");
+            if (cc) {
+                if (!(fdjtID("METABOOKBOOKCOVER")))
+                    addClass(cc,"nobookcover");
+                if ((fdjtID("METABOOKABOUTBOOK"))&&
+                    (hasAnyContent(fdjtID("METABOOKABOUTBOOK"),true)))
+                    addClass(cc,"haveaboutpage");
+                if ((fdjtID("METABOOKCREDITSPAGE"))&&
+                    (hasAnyContent(fdjtID("METABOOKCREDITSPAGE"),true)))
+                    addClass(cc,"havecreditspage");}
+
             if (metaBook.touch)
                 fdjtDOM.addListener(cover,"touchstart",cover_clicked);
             else fdjtDOM.addListener(cover,"click",cover_clicked);
