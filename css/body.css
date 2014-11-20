@@ -149,7 +149,7 @@ div.codexpage img {
     #CODEXPAGE {top: 25px; left: 25px; right: 25px;}}
 @media screen and (min-width: 350px) and (max-width: 500px) {
     #CODEXPAGE {top: 10px; left: 10px; right: 10px;}}
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 350px) {
     #CODEXPAGE {top: 5px; left: 5px; right: 5px;}}
 
 @media screen and (min-height: 300px) and (max-height: 500px) {
