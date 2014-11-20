@@ -405,13 +405,16 @@ body._MOUSE #METABOOKOPENTAB:hover, #METABOOKOPENTAB.tapholdtarget {
     border-color: blue; border-style: dotted;}
 #METABOOKCOVERMESSAGE > div#METABOOKOPENTAB {
     width: 7em;}
+body._TOUCH div#METABOOKOPENTAB { font-size: 36px;}
+body._TOUCH #METABOOKCOVERMESSAGE > div#METABOOKOPENTAB {
+    width: 5em; }
 
+body.mbREADY #METABOOKCOVERMESSAGE > #METABOOKOPENTAB {
+    display: block;}
 body.mbLAYOUT #METABOOKCOVERMESSAGE > #METABOOKOPENTAB,
 body.mbSTARTUP #METABOOKCOVERMESSAGE > #METABOOKOPENTAB,
 body.mbBUSY #METABOOKCOVERMESSAGE > #METABOOKOPENTAB {
     display: none;}
-body #METABOOKCOVERMESSAGE > #METABOOKOPENTAB {
-    display: inline-block;}
 
 #METABOOKCOVERMESSAGE > div {
     color: silver; display: none;

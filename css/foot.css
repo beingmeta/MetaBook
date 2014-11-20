@@ -114,12 +114,14 @@ body.mbPREVIEW #METABOOKFOOT #METABOOKPAGEBAR .metabookpagespans span.current {
     -khtml-opacity: 1.00;
     -moz-opacity: 1.00;
     -o-opacity: 1.00;}
-body.mbPREVIEW #METABOOKFOOT #METABOOKPAGEBAR .metabookpagespans span.preview {
+body.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR
+  .metabookpagespans span.preview {
     background-color: gold; overflow: visible;
     visibility: visible; opacity: 1.0; z-index: 100;
     font-size: 200%; height: 150%; width: 1.5em;
     pointer-events: none;}
-body.mbPREVIEW #METABOOKFOOT #METABOOKPAGEBAR .metabookpagespans span.current {
+body.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR
+  .metabookpagespans span.current {
     font-size: 200%; height: 75%;}
 
 #METABOOKFOOT #METABOOKPAGEBAR #METABOOKPAGEPROGRESS {
@@ -144,9 +146,9 @@ body.mbPREVIEW #METABOOKFOOT #METABOOKPAGEBAR .metabookpagespans span.current {
 #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER3.metabooksectmarker {
     height: 50%; background-color: rgba(0,0,255,0.1); }
 
-body._TOUCH.mbPREVIEW #METABOOKFOOT #METABOOKPAGEBAR {
+body._TOUCH.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR {
     height: 150px;}
-body._TOUCH.mbPREVIEW #METABOOKFOOT #METABOOKPAGEBAR
+body._TOUCH.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR
   .metabookpagespans span.preview  {
     height: 100%;}
 
@@ -233,9 +235,9 @@ body.hudup.mbSHOWHELP #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT {
 /* Media rules */
 
 @media screen and (max-width: 640px) {
-    body._TOUCH.mbPREVIEW #METABOOKFOOT #METABOOKPAGEBAR { 
+    body._TOUCH.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR { 
         height: 80px;}
-    body._TOUCH.mbPREVIEW #METABOOKFOOT .hudbutton { display: none; }
+    body._TOUCH.mbPAGEPREVIEW #METABOOKFOOT .hudbutton { display: none; }
     #METABOOKFOOT #METABOOKPAGEBAR div.textfoot {
         height: initial;}
 }
