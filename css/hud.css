@@ -1227,8 +1227,6 @@ body._FULLHEIGHT #METABOOKSHOWCOVER {
 body._FULLHEIGHT.hudup #METABOOKFOOT {
     padding-top: 2px;
     border-radius: 0px;}
-body._FULLHEIGHT #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT {
-    left: auto; right: auto; width: 100%;}
 
 @media screen and (max-width: 640px) {
     .hudup #METABOOKHUD img.hudbutton {

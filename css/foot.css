@@ -173,12 +173,12 @@ body._TOUCH.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR
 
 /* SHOWTEXT rules */
 
-#METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT {
+#METABOOKFOOT #METABOOKSHOWTEXT {
     position: absolute; z-index: 500; opacity: 1.0;
     bottom: 30px; left: 100px; right: 100px;
     text-align: center;
     font-size: 32px; font-weight: bold;
-    padding: 0px;
+    padding: 0px; white-space: nowrap;
     cursor: pointer;
     display: none;}
 #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT.tapholdtarget {
@@ -234,6 +234,11 @@ body.hudup.mbSHOWHELP #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT {
 
 /* Media rules */
 
+body._FULLHEIGHT #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT {
+    left: 60px; right: 60px;}
+body._FULLHEIGHT #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT > span > span {
+    padding-left: 0.5ex; padding-right: 0.5ex;}
+
 @media screen and (max-width: 640px) {
     body._TOUCH.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR { 
         height: 80px;}
@@ -255,11 +260,9 @@ body.hudup.mbSHOWHELP #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT {
         height: 20%; }
 
     #METABOOKFOOT .hudbutton { bottom: 30px;}
-    #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT {
-        bottom: 30px; left: auto; right: auto; width: 100%;}
-
-    #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT > span > span {
-        padding-left: 1ex; padding-right: 1ex;}
+    body.hudup #METABOOKFOOT .hudbutton { bottom: 0px;}
+    body.hudup #METABOOKFOOT #METABOOKSHOWTEXT { bottom: 3px;}
+    body.hudup #METABOOKFOOT #METABOOKPAGEBAR { display: none;}
 
     body.mbSHOWHELP #METABOOKFOOT .hudbutton,
     #METABOOKHUD.openheart #METABOOKFOOT .hudbutton {
