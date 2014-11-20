@@ -2623,12 +2623,13 @@ metaBook.Startup=
                 if (!(tag instanceof KNode)) return;
                 var elt=addTag2Cloud(tag,empty_cloud,metaBook.knodule,
                                      metaBook.tagweights,tagfreqs,false);
-                var sectag=(tag._id[0]==="\u00a7");
-                if (!(sectag)) {
-                    if (tag instanceof KNode) addClass(elt,"cue");
-                    if ((tag instanceof KNode)||
-                        ((tagfreqs[tag]>4)&&(tagfreqs[tag]<(max_freq/2))))
-                        addTag2Cloud(tag,gloss_cloud);}},
+                // Ignore section name tags
+                if (tag._id[0]==="\u00a7") return;
+                var freq=tagfreqs.get(tag);
+                if ((tag.prime)||((freq>4)&&(freq<(max_freq/2)))||
+                    (tag._db!==metaBook.knodule)) {
+                    addClass(elt,"cue");
+                    addTag2Cloud(tag,gloss_cloud);}},
                              searchtags,addtags_progress,addtags_done,
                              200,20);}
         
