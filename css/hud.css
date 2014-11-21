@@ -4,7 +4,6 @@
 
 @charset "UTF-8";
 
-#METABOOKHUD a { text-decoration: none;}
 #METABOOKHUD a img { border: transparent;}
 ._MOUSE #METABOOKHUD a:hover img { border: inherit;}
 ._MOUSE #METABOOKHUD a:hover { text-decoration: underline;}

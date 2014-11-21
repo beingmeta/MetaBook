@@ -657,6 +657,11 @@ body._MOUSE #METABOOKBODY a[rel='footnote']:hover,
 body._MOUSE #METABOOKBODY a[rel='endnote']:hover {
     text-decoration: overline;}
 
+a[href] { color: blue; text-decoration: none;}
+body._MOUSE a[href]:hover { 
+    color: steelblue; text-decoration: underline;}
+a[href].sbookextlink { text-decoration: underline;}
+
 /* Block elements */
 
 #METABOOKBODY #SBOOKDETAILS,
