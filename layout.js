@@ -126,18 +126,18 @@ metaBook.Paginate=
                                 metaBook.curpage||"?",
                                 "/",pagenum," (",fpct,"%)"));
                     layoutMessage(fdjtString(
-                        "Laid out %d %dx%d pages (%d%%)",
+                        "Formatted %d %dx%d pages (%d%%)",
                         pagenum,info.width,info.height,fpct),
                                   pct);
                     if (tracelevel)
-                        fdjtLog("Laid out %d %dx%d pages (%d%%) in %s",
+                        fdjtLog("Formatted %d %dx%d pages (%d%%) in %s",
                                 pagenum,info.width,info.height,fpct,howlong);}
                 else {
                     layoutMessage(fdjtString(
-                        "Laid out %d %dx%d pages in %s",
+                        "Formatted %d %dx%d pages in %s",
                         info.pagenum,info.width,info.height,howlong));
                     if (tracelevel)
-                        fdjtLog("Laid out %d pages in %s",
+                        fdjtLog("Formatted %d pages in %s",
                                 info.pagenum,howlong);}}}
 
         function Paginate(why,init){
