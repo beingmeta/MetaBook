@@ -1852,7 +1852,7 @@ metaBook.Startup=
                 fdjtDOM("div#METABOOKPAGES");
             var page=metaBook.page=fdjtDOM(
                 "div#CODEXPAGE",
-                fdjtDOM("div#METABOOKPAGINATING","Laid out ",
+                fdjtDOM("div#METABOOKPAGINATING","Formatted ",
                         fdjtDOM("span#METABOOKPAGEPROGRESS",""),
                         " pages"),
                 pages);
