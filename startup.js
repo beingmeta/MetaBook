@@ -78,6 +78,9 @@ metaBook.Startup=
         var dropClass=fdjtDOM.dropClass;
         var getChildren=fdjtDOM.getChildren;
         var getGeometry=fdjtDOM.getGeometry;
+        var hasContent=fdjtDOM.hasContent;
+
+        function hasAnyContent(n){return hasContent(n,true);}
 
         var mB=metaBook;
         var fixStaticRefs=metaBook.fixStaticRefs;
@@ -869,6 +872,12 @@ metaBook.Startup=
             fdjtLog("Startup done");
             metaBook.displaySync();
             fdjtDOM.dropClass(document.body,"mbSTARTUP");
+            fdjtDOM.addClass(document.body,"mbREADY");
+            var rmsg=fdjtID("METABOOKREADYMESSAGE");
+            if (!(fdjtID("METABOOKOPENTAB"))) {
+                rmsg.innerHTML="Open";
+                rmsg.id="METABOOKOPENTAB";}
+            else rmsg.style.display='none';
             if (mode) {}
             else if (getQuery("startmode"))
                 mode=getQuery("startmode");
@@ -1381,9 +1390,9 @@ metaBook.Startup=
                 fdjtID("METABOOKSETTINGS").removeAttribute("style");
             if (fdjtID("METABOOKAPPHELP"))
                 fdjtID("METABOOKAPPHELP").removeAttribute("style");
-            if (fdjtID("METABOOKLOADINGMESSAGE")) 
-                fdjtID("METABOOKLOADINGMESSAGE").removeAttribute("style");
-            if (fdjtID("METABOOKOPENTAB")) 
+            if (fdjtID("METABOOKREADYMESSAGE")) 
+                fdjtID("METABOOKREADYMESSAGE").removeAttribute("style");
+            if (fdjtID("METABOOKOPENTAB"))  
                 fdjtID("METABOOKOPENTAB").removeAttribute("style");
             if (fdjtID("METABOOKBUSYMESSAGE"))
                 fdjtID("METABOOKBUSYMESSAGE").removeAttribute("style");
@@ -1421,17 +1430,6 @@ metaBook.Startup=
                 fdjtDOM.scaleToFit(coverpage,1.0);
                 coverpage.style.opacity=""; coverpage.style.display="";
                 coverpage.style.overflow="";}
-            if (fdjtID("METABOOKBOOKCOVERHOLDER"))
-                fdjtDOM.remove("METABOOKBOOKCOVERHOLDER");
-            if (fdjtID("METABOOKCOVERCONTROLS")) {
-                if (!(fdjtID("METABOOKBOOKCOVER")))
-                    fdjtDOM.addClass("METABOOKCOVERCONTROLS","nobookcover");
-                if ((fdjtID("METABOOKABOUTBOOK"))&&
-                    (fdjtDOM.hasContent(fdjtID("METABOOKABOUTBOOK"))))
-                    fdjtDOM.addClass("METABOOKCOVERCONTROLS","haveaboutpage");
-                if ((fdjtID("METABOOKCREDITSPAGE"))&&
-                    (fdjtDOM.hasContent(fdjtID("METABOOKCREDITSPAGE"))))
-                    fdjtDOM.addClass("METABOOKCOVERCONTROLS","havecreditspage");}
             var titlepage=fdjtID("METABOOKTITLEPAGE");
             if (!(titlepage)) {
                 titlepage=fdjtID("SBOOKSTITLEPAGE")||
@@ -1573,6 +1571,19 @@ metaBook.Startup=
                 fdjtDOM.replace(fdjtID("METABOOKABOUTBOOKHOLDER"),about);
             else cover.appendChild(about);
             
+            if (fdjtID("METABOOKBOOKCOVERHOLDER"))
+                fdjtDOM.remove("METABOOKBOOKCOVERHOLDER");
+            var cc=fdjtID("METABOOKCOVERCONTROLS");
+            if (cc) {
+                if (!(fdjtID("METABOOKBOOKCOVER")))
+                    addClass(cc,"nobookcover");
+                if ((fdjtID("METABOOKABOUTBOOK"))&&
+                    (hasAnyContent(fdjtID("METABOOKABOUTBOOK"),true)))
+                    addClass(cc,"haveaboutpage");
+                if ((fdjtID("METABOOKCREDITSPAGE"))&&
+                    (hasAnyContent(fdjtID("METABOOKCREDITSPAGE"),true)))
+                    addClass(cc,"havecreditspage");}
+
             if (metaBook.touch)
                 fdjtDOM.addListener(cover,"touchstart",cover_clicked);
             else fdjtDOM.addListener(cover,"click",cover_clicked);
@@ -2612,12 +2623,13 @@ metaBook.Startup=
                 if (!(tag instanceof KNode)) return;
                 var elt=addTag2Cloud(tag,empty_cloud,metaBook.knodule,
                                      metaBook.tagweights,tagfreqs,false);
-                var sectag=(tag._id[0]==="\u00a7");
-                if (!(sectag)) {
-                    if (tag instanceof KNode) addClass(elt,"cue");
-                    if ((tag instanceof KNode)||
-                        ((tagfreqs[tag]>4)&&(tagfreqs[tag]<(max_freq/2))))
-                        addTag2Cloud(tag,gloss_cloud);}},
+                // Ignore section name tags
+                if (tag._id[0]==="\u00a7") return;
+                var freq=tagfreqs.get(tag);
+                if ((tag.prime)||((freq>4)&&(freq<(max_freq/2)))||
+                    (tag._db!==metaBook.knodule)) {
+                    addClass(elt,"cue");
+                    addTag2Cloud(tag,gloss_cloud);}},
                              searchtags,addtags_progress,addtags_done,
                              200,20);}
         

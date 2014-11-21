@@ -878,6 +878,7 @@ span.bma {
 .metabook { }
 .metabook > span {
     font-style: oblique; font-size: 100%; font-weight: bold;}
+.metabook > sub {font-style: italic; color: red; font-size: 60%;}
 
 .mupub { font-variant: small-caps;}
 .mupub em, .mupub i {
@@ -887,17 +888,6 @@ span.bma {
 
 /* Media rules */
 
-@media screen and (min-width: 500px) and (max-width: 700px) {
-    #CODEXPAGE {top: 25px; left: 25px; right: 25px;}}
-@media screen and (min-width: 350px) and (max-width: 500px) {
-    #CODEXPAGE {top: 20px; left: 10px; right: 10px;}}
-@media screen and (max-width: 300px) {
-    #CODEXPAGE {top: 10px; left: 5px; right: 5px;}}
-
-@media screen and (min-height: 300px) and (max-height: 500px) {
-    #CODEXPAGE {top: 10px; bottom: 20px;}}
-@media screen and (max-height: 300px) {
-    #CODEXPAGE {top: 5px; bottom: 15px;}}
 @media (max-width: 500px) {
  .sbookfullpage, .sbookcover, .sbooktitlepage,
  .sbookpage, .sbookstandalone, .codexfullpage {

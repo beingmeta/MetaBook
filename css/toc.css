@@ -375,7 +375,6 @@ body._MOUSE #METABOOKHUD #METABOOKTOC a:hover { text-decoration: none;}
 @media screen and (max-width: 500px) {
     #METABOOKHEARTBODY #METABOOKSTATICTOC {
         margin-left: 2px; margin-right: 2px;}
-    #METABOOKHEARTBODY { font-size: 60%;}
     #METABOOKHUD div.metabooktoc {
         padding-left:0.5ex; padding-right: 2px;}}
 

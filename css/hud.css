@@ -628,7 +628,7 @@ img.closebutton, img.metabookpagebutton, img.metabookskimbutton, img.hudbutton {
 #METABOOKTOOLTAB {
     box-sizing: content-box; -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
-    display: inline-block; height: 16px; width: 64px; 
+    display: inline-block; height: 32px; width: 64px; 
     margin: 0px; padding: 2px; padding-top: 0px;
     border: solid transparent 1px; border-top: 0px;
     cursor: pointer;
@@ -639,26 +639,29 @@ img.closebutton, img.metabookpagebutton, img.metabookskimbutton, img.hudbutton {
     background-image: url(/static/g/metabook/downbar.svgz);}
 .hudup #METABOOKTOOLTAB, .mbcover #METABOOKTOOLTAB { display: none;}
 #METABOOKTOPBAR.tapholding #METABOOKTOOLTAB { display: none; }
+body._MOUSE #METABOOKTOOLTAB:hover {
+    background-color: rgba(192,192,192,0.75);
+    opacity: 0.75;}
 
 #METABOOKSHOWCOVER {
     white-space: nowrap;
     box-sizing: border-box; -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
-    background-color: rgba(0,0,0,0.5); color: white;
     width: 7em; font-size: 30px; 
-    margin-top: 0px; margin-left: auto; margin-right: auto;
+    margin: 0px; margin-left: auto; margin-right: auto;
     padding:  0px 1em 0px 1em;
     border: solid transparent 2px; border-top: 0px;
+    background-color: gray; color: white;
+    font-variant: small-caps; font-weight: bold;
     border-bottom-left-radius: 1ex; border-bottom-right-radius: 1ex;
     cursor: pointer;
-    font-variant: small-caps; font-weight: bold;
     display: none;}
-body._MOUSE #METABOOKTOOLTAB:hover {
-    background-color: rgba(192,192,192,0.75);
-    opacity: 0.75;}
 body._MOUSE #METABOOKTOP #METABOOKSHOWCOVER.hudbutton:hover { display: none;}
 body._MOUSE #METABOOKTOP.tapholding #METABOOKSHOWCOVER.hudbutton:hover {
     display: block;}
+body._TOUCH div#METABOOKSHOWCOVER {
+    font-size: 36px; width: 5em; opacity: 0.4;}
+
 
 #METABOOKSHOWCOVER {}
 #METABOOKSHOWCOVER {
@@ -1224,8 +1227,6 @@ body._FULLHEIGHT #METABOOKSHOWCOVER {
 body._FULLHEIGHT.hudup #METABOOKFOOT {
     padding-top: 2px;
     border-radius: 0px;}
-body._FULLHEIGHT #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT {
-    left: auto; right: auto; width: 100%;}
 
 @media screen and (max-width: 640px) {
     .hudup #METABOOKHUD img.hudbutton {
@@ -1236,9 +1237,11 @@ body._FULLHEIGHT #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT {
         height: 55px; max-height: 55px;}
 
     #METABOOKHUD #METABOOKTOPBAR.tapholding img.hudbutton,
-    ._TOUCH #METABOOKHUD #METABOOKFOOT.tapholding img.hudbutton.tapholdtarget,
-    ._TOUCH #METABOOKHUD #METABOOKTOPBAR.tapholding img.hudbutton.tapholdtarget {
-        width: 50px; height: 50px;}
+    ._TOUCH #METABOOKHUD #METABOOKFOOT.tapholding
+       img.hudbutton.tapholdtarget,
+    ._TOUCH #METABOOKHUD #METABOOKTOPBAR.tapholding
+       img.hudbutton.tapholdtarget {
+           width: 50px; height: 50px;}
 
     #METABOOKHEART {
         border-radius: 1ex;
@@ -1292,8 +1295,11 @@ body._FULLHEIGHT #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT {
     #METABOOKHUD.openhead img.hudbutton[alt="searchresults"] {
         display: none;}
     
+    #METABOOKHEARTBODY { font-size: 60%;}
     #METABOOKHUD #METABOOKPOINTGLOSSES.hudpanel {
-        max-width: 90%; min-width: inherit; left: 5px; right: 10px; }
+        max-width: 90%; min-width: inherit;
+        left: 5px; right: 10px;
+        font-size: 60%;}
 }
 @media (max-width: 700px) {
     #METABOOKHUD.openhead #METABOOKHEAD,

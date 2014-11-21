@@ -1620,6 +1620,8 @@ var metaBook={
     fdjtString.entities.sBooks="<span class='sbooks'><em>s</em>Books</span>";
     fdjtString.entities.sBook="<span class='sbooks'><em>s</em>Book</span>";
     fdjtString.entities.metaBook=
+        "<span class='metabook'><span class='bmm'>m<span class='bme'>e<span class='bmt'>t<span class='bma'>a</span></span></span></span>Book<sub>β</sub></span>";
+    fdjtString.entities.metaBook=
         "<span class='metabook'><span class='bmm'>m<span class='bme'>e<span class='bmt'>t<span class='bma'>a</span></span></span></span>Book</span>";
 
 })();

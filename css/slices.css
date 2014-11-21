@@ -187,7 +187,8 @@ div.metabookslice div.metabookcard.slicenewpassage div.idhead { display: block; 
     -moz-duration: 0.3s;}
 
 @media (pointer: coarse) and (max-width: 650px) {
-    div.metabookslice div.metabookcard { font-size: 120%; }}
+    div.metabookslice div.metabookcard { font-size: 120%; }
+}
 
 /* Emacs local variables
 ;;;  Local variables: ***
