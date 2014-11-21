@@ -127,7 +127,7 @@ span { font-size: inherit; }
 
 /* Image/float placement rules */
 
-p .floatright, p .floatleft { max-width: 30%; float: left; }
+p .floatright, p .floatleft { max-width: 30%; }
 p .floatright img, p .floatleft img, p img.floatright, p img.floatleft {
     max-width: 100%; height: auto; }
 p .floatright img, p img.floatright {
