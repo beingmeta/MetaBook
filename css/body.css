@@ -78,7 +78,10 @@
 #METABOOKBODY.metabookfamilyserif h3, #METABOOKBODY.metabookfamilyserif h4 {
     font-family: Arial,Verdana,Helvetica,sans-serif;}    
 
-body._MOUSE #METABOOKBODY a:hover, #METABOOKBODY a:active { color: blue; }
+body._MOUSE #METABOOKBODY a[href]:hover, #METABOOKBODY a[href]:active { color: blue; }
+#METABOOKBODY a[href] { text-decoration: none;}
+body._MOUSE #METABOOKBODY a[href]:hover { text-decoration: underline;}
+#METABOOKBODY a[href].sbookextlink { text-decoration: underline;}
 
 #METABOOKBODY.metabookcontrasthigh {
     background-color: #ffffff; color: #111; }
