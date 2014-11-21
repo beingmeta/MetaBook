@@ -2607,9 +2607,9 @@
          "#METABOOKTOPBAR": {tap: raiseHUD},
          //"#METABOOKTOOLTAB": {tap: raiseHUD, release: raiseHUD},
          "#METABOOKTOOLTAB": {
-             mousedown: raiseHUD,
+             mousedown: cancel,
              mousemove: cancel,
-             mouseup: cancel},
+             mouseup: raiseHUD},
          "#METABOOKSHOWCOVER": {
              tap: showcover_tapped, release: showcover_released},
          "#METABOOKHUDHELP": {click: metaBook.UI.dropHUD},
@@ -2760,9 +2760,10 @@
          "#METABOOKSTARTPAGE": {touchend: metaBook.UI.dropHUD},
          "#METABOOKTOPBAR": {tap: raiseHUD},
          //"#METABOOKTOOLTAB": {tap: raiseHUD, release: raiseHUD},
-         "#METABOOKTOOLTAB": {touchstart: raiseHUD,
-                              touchmove: cancel,
-                              touchend: cancel},
+         "#METABOOKTOOLTAB": {
+             touchstart: cancel,
+             touchmove: cancel,
+             touchend: raiseHUD},
          "#METABOOKSHOWCOVER": {
              tap: showcover_tapped, release: showcover_released},
          "#METABOOKSOURCES": {
