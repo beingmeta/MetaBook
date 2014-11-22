@@ -86,7 +86,7 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
     position: absolute; height: 60px; bottom: 40px; top: auto;
     width: 94%; left: 3%; right: 3%;
     font-size: 1em; font-size: 1.5rem; font-size: 4vw;
-    padding-left: 1ex; padding-right: 1ex;
+    padding-left: 1ex; padding-right: 1ex; line-height: 1.1;
     opacity: 1; overflow: hidden; display: block;}
 #METABOOKCOVERCONTROLS > .username {
     float: left; vertical-align: top;}

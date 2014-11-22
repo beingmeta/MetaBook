@@ -65,7 +65,7 @@ body {
    an extra load on some devices (such as iOS). */
 #METABOOKFRAME {
     position: fixed; top: 0px; bottom: 0px; left: 0px; right: 0px;
-    width: 100%; height: 100%; line-height: initial;
+    width: 100%; height: 100%; line-height: normal;
     box-sizing: border-box; -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box; -o-box-sizing: border-box;
     pointer-events: none;
