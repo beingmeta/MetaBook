@@ -1,0 +1,144 @@
+/* -*- Mode: CSS; character-encoding: utf-8; -*- */
+
+/* Copyright (C) 2009-2014 beingmeta, inc.
+   This file implements a Javascript/DHTML web application for reading
+    large structured documents (sBooks).
+
+   For more information on sbooks, visit www.sbooks.net
+   For more information on knodules, visit www.knodules.net
+   For more information about beingmeta, visit www.beingmeta.com
+
+   This library uses the FDJT (www.fdjt.org) toolkit.
+
+   This program comes with absolutely NO WARRANTY, including implied
+   warranties of merchantability or fitness for any particular
+   purpose.
+
+    Use and redistribution (especially embedding in other
+      CC licensed content) is permitted under the terms of the
+      Creative Commons "Attribution-NonCommercial" license:
+
+          http://creativecommons.org/licenses/by-nc/3.0/ 
+
+    Other uses may be allowed based on prior agreement with
+      beingmeta, inc.  Inquiries can be addressed to:
+
+       licensing@biz.beingmeta.com
+
+   Enjoy!
+
+*/
+
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'SourceCodePro';
+    src: url("fonts/Adobe/SourceCodePro-Regular.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;}
+@font-face {
+    font-family: 'SourceCodePro';
+    src: url("fonts/Adobe/SourceCodePro-Medium.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;}
+@font-face {
+    font-family: 'SourceCodePro';
+    src: url("fonts/Adobe/SourceCodePro-Light.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;}
+@font-face {
+    font-family: 'SourceCodePro';
+    src: url("fonts/Adobe/SourceCodePro-ExtraLight.ttf") format("truetype");
+    font-weight: 100;
+    font-style: normal;}
+@font-face {
+    font-family: 'SourceCodePro';
+    src: url("fonts/Adobe/SourceCodePro-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;}
+@font-face {
+    font-family: 'SourceCodePro';
+    src: url("fonts/Adobe/SourceCodePro-Semibold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;}
+@font-face {
+    font-family: 'SourceCodePro';
+    src: url("fonts/Adobe/SourceCodePro-Black.ttf") format("truetype");
+    font-weight: 800;
+    font-style: normal;}
+
+@font-face {
+    font-family: 'SourceSansPro';
+    src: url("fonts/Adobe/SourceSansPro-Regular.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;}
+@font-face {
+    font-family: 'SourceSansPro';
+    src: url("fonts/Adobe/SourceSansPro-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;}
+@font-face {
+    font-family: 'SourceSansPro';
+    src: url("fonts/Adobe/SourceSansPro-It.ttf") format("truetype");
+    font-weight: 500;
+    font-style: italic;}
+@font-face {
+    font-family: 'SourceSansPro';
+    src: url("fonts/Adobe/SourceSansPro-BoldIt.ttf") format("truetype");
+    font-weight: 700;
+    font-style: italic;}
+@font-face {
+    font-family: 'SourceSansPro';
+    src: url("fonts/Adobe/SourceSansPro-Light.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;}
+@font-face {
+    font-family: 'SourceSansPro';
+    src: url("fonts/Adobe/SourceSansPro-LightIt.ttf") format("truetype");
+    font-weight: 300;
+    font-style: italic;}
+@font-face {
+    font-family: 'SourceSansPro';
+    src: url("fonts/Adobe/SourceSansPro-Semibold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;}
+@font-face {
+    font-family: 'SourceSansPro';
+    src: url("fonts/Adobe/SourceSansPro-SemiboldIt.ttf") format("truetype");
+    font-weight: 600;
+    font-style: italic;}
+@font-face {
+    font-family: 'SourceSansPro';
+    src: url("fonts/Adobe/SourceSansPro-Black.ttf") format("truetype");
+    font-weight: 800;
+    font-style: normal;}
+@font-face {
+    font-family: 'SourceSansPro';
+    src: url("fonts/Adobe/SourceSansPro-BlackIt.ttf") format("truetype");
+    font-weight: 800;
+    font-style: italic;}
+@font-face {
+    font-family: 'SourceSansPro';
+    src: url("fonts/Adobe/SourceSansPro-ExtraLight.ttf") format("truetype");
+    font-weight: 200;
+    font-style: normal;}
+@font-face {
+    font-family: 'SourceSansPro';
+    src: url("fonts/Adobe/SourceSansPro-ExtraLightIt.ttf") format("truetype");
+    font-weight: 200;
+    font-style: italic;}
+
+
+@import url(http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic&subset=latin,cyrillic-ext,latin-ext,greek-ext,greek,devanagari,vietnamese);
+@import url(http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic&subset=latin,greek,cyrillic,latin-ext,cyrillic-ext);
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic&subset=latin,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic&subset=latin,greek,cyrillic,latin-ext,cyrillic-ext);
+@import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic&subset=latin,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,400italic,600italic,700italic);
+@import url(http://fonts.googleapis.com/css?family=Vollkorn:400italic,700italic,400,700);
+@import url(http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic&subset=latin,cyrillic,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Old+Standard+TT:400,400italic,700);
+@import url(http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic);
+@import url(http://fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic,700italic&subset=latin,cyrillic-ext,greek-ext,vietnamese,greek,latin-ext,cyrillic);
+@import url(http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic);
+@import url(http://fonts.googleapis.com/css?family=Libre+Baskerville:400,700,400italic&subset=latin,latin-ext);

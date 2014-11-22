@@ -19,7 +19,7 @@ div.metabooktoc > div.spanbar {
     margin-left: 0px; margin-right: 0px;
     padding-left: 0px; padding-right: 0px;}                             
 
-div.metabooktoc div.head { min-height: 24px;}
+div.metabooktoc div.head { min-height: 1.3em;}
 div.metabooktoc div.head .progressbar, div.metabooktoc div.head .sizebar { 
     padding: 0px; margin: 0px; 
     position: absolute;  left: 0px; height: 100%;

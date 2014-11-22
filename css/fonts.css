@@ -60,13 +60,16 @@
 @import url(open_sans_serif.css)
 
 #METABOOKFRAME, #METABOOKPAGINATING {
-    font-family: "Open Sans", Verdana, Arial, Helvetica, sans-serif, sans;}
+    font-family: "Open Sans", Tahoma, Verdana,
+                 Arial, Helvetica, sans-serif, sans;}
 
 #METABOOKBODY,
 #METABOOKBODY.metabookfamilyserif,
 #METABOOKFRAME #METABOOKABOUT,
 span.excerpt {
-    font-family: Palantino, Georgia, "Times New Roman", "TimesNewRoman", Times;}
+    font-family: Utopia, "Palatino Linotype", Palatino,
+                 Georgia, Charter, Garamond,
+                 "Times New Roman", "TimesNewRoman", Times;}
 
 #METABOOKBODY.metabookfamilydefault {
     font-family: inherit;}
