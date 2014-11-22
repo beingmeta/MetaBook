@@ -407,7 +407,7 @@ body.mbSTARTUP div#METABOOKOPENTAB { display: none; }
 body._MOUSE #METABOOKOPENTAB:hover, #METABOOKOPENTAB.tapholdtarget {
     border-color: blue; border-style: dotted;}
 #METABOOKCOVERMESSAGE > div#METABOOKOPENTAB {
-    width: 7em;}
+    width: 7em; color: white;}
 body._TOUCH div#METABOOKOPENTAB { font-size: 36px;}
 body._TOUCH #METABOOKCOVERMESSAGE > div#METABOOKOPENTAB {
     width: 5em; }
