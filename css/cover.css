@@ -72,7 +72,6 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
 
 #METABOOKCOVER >  #METABOOKCOVERMESSAGE {
     position: absolute; white-space: nowrap;
-    font-family: Arial,Verdana,Helvetica,sans-serif; 
     font-style: italic; font-size: 30px;
     width: 80%; left: 10%; right: 10%; border: 0px; 
     top: 0px; bottom: auto;
@@ -88,7 +87,6 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
     width: 94%; left: 3%; right: 3%;
     font-size: 1em; font-size: 1.5rem; font-size: 4vw;
     padding-left: 1ex; padding-right: 1ex;
-    font-family: Arial,Verdana,Helvetica,sans-serif;
     opacity: 1; overflow: hidden; display: block;}
 #METABOOKCOVERCONTROLS > .username {
     float: left; vertical-align: top;}
@@ -313,7 +311,7 @@ table.settings .checkspan.ischecked {
 
 #METABOOKSETTINGS .button {
     font-size: 125%; cursor: pointer;
-    font-family: verdana,helvetica,sans,sans-serif; font-weight: bold;
+    font-weight: bold;
     color: white; background-color: silver;
     margin-left: 6px; padding: 4px; border: solid black 2px;
     border-radius: 5px;

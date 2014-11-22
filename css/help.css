@@ -218,10 +218,11 @@ div.helpbox blockquote p {
 
 #METABOOKHUD .helphud {
     position: absolute; background-color: ivory; z-index: 100;
+
     border: solid black 1px; padding: 3px; border-radius: 6px;
-    font-family: sans,sans-serif; font-size: initial;
     border-radius: 6px; -o-border-radius: 6px; 
     -moz-border-radius: 6px; -webkit-border-radius: 6px; 
+    font-size: initial;
     display: none;}
 #METABOOKHUD .helphud.topleft {top: 3px; left: 60px; text-align: right;}
 #METABOOKHUD .helphud.topright {top: 3px; right: 60px; text-align: left;}
@@ -337,7 +338,6 @@ div.metabookhelp .glossbarbox {
     padding: 0px;
     padding-right: 1ex; padding-right: 2vw;
     padding-left: 1ex; padding-left: 2vw;
-    font-family: helvetica,sans,sans-serif;
     background-color: lightgray; color: black;
     border-radius: 1ex; -webkit-border-radius: 1ex;
     -moz-border-radius: 1ex; -o-border-radius: 1ex;
@@ -382,8 +382,7 @@ div.metabookhelp .glossbarbox {
 #METABOOKHUD #METABOOKKEYBOARDHELPBOX.hudpanel {
     position: absolute; text-align: center;
     top: 150px; left: 75px; right: 75px;
-    font-size: 120%; font-family: helvetica,sans,sans-serif;
-    background-color: lightgray; color: black; 
+    font-size: 120%; background-color: lightgray; color: black; 
     border-radius: 1ex; -webkit-border-radius: 1ex;
     -moz-border-radius: 1ex; -o-border-radius: 1ex;
     border: solid gray 4px;
@@ -436,7 +435,6 @@ div.metabookhelp .glossbarbox {
     -o-opacity: 0.80;}
 
 #METABOOKHUD #METABOOKKEYBOARDHELP kbd {
-    font-family: verdana,helvetica,sans,sans-serif;
     font-size: 120%; font-weight: bold;}
 
 @media screen and (max-width: 640px) {

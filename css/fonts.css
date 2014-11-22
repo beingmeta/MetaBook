@@ -1,0 +1,193 @@
+/* -*- Mode: CSS; character-encoding: utf-8; -*- */
+
+/* Copyright (C) 2009-2014 beingmeta, inc.
+   This file implements a Javascript/DHTML web application for reading
+    large structured documents (sBooks).
+
+   For more information on sbooks, visit www.sbooks.net
+   For more information on knodules, visit www.knodules.net
+   For more information about beingmeta, visit www.beingmeta.com
+
+   This library uses the FDJT (www.fdjt.org) toolkit.
+
+   This program comes with absolutely NO WARRANTY, including implied
+   warranties of merchantability or fitness for any particular
+   purpose.
+
+    Use and redistribution (especially embedding in other
+      CC licensed content) is permitted under the terms of the
+      Creative Commons "Attribution-NonCommercial" license:
+
+          http://creativecommons.org/licenses/by-nc/3.0/ 
+
+    Other uses may be allowed based on prior agreement with
+      beingmeta, inc.  Inquiries can be addressed to:
+
+       licensing@biz.beingmeta.com
+
+   Enjoy!
+
+*/
+
+@charset "UTF-8";
+
+@font-face {
+    font-family: "OpenDyslexic",
+    src: url("fonts/OpenDyslexic/OpenDyslexic-Regular.otf");
+    font-weight: normal;
+    font-style: normal;}
+@font-face {
+    font-family: "OpenDyslexic",
+    src: url("fonts/OpenDyslexic/OpenDyslexic-Bold.otf");
+    font-weight: 600;
+    font-style: normal;}
+@font-face {
+    font-family: "OpenDyslexic",
+    src: url("fonts/OpenDyslexic/OpenDyslexic-Italic.otf");
+    font-weight: normal;
+    font-style: italic;}
+@font-face {
+    font-family: "OpenDyslexic",
+    src: url("fonts/OpenDyslexic/OpenDyslexic-BoldItalic.otf");
+    font-weight: 600;
+    font-style: italic;}
+@font-face {
+    font-family: "OpenDyslexicFixed",
+    src: url("fonts/OpenDyslexic/OpenDyslexicMono-Regular.otf");
+    font-weight: normal;
+    font-style: normal;}
+
+
+/*
+@font-face {
+    font-family: 'SourceCodePro';
+    src: url("fonts/Adobe/SourceCodePro-Regular.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;}
+@font-face {
+    font-family: 'SourceCodePro';
+    src: url("fonts/Adobe/SourceCodePro-Medium.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;}
+@font-face {
+    font-family: 'SourceCodePro';
+    src: url("fonts/Adobe/SourceCodePro-Light.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;}
+@font-face {
+    font-family: 'SourceCodePro';
+    src: url("fonts/Adobe/SourceCodePro-ExtraLight.ttf") format("truetype");
+    font-weight: 100;
+    font-style: normal;}
+@font-face {
+    font-family: 'SourceCodePro';
+    src: url("fonts/Adobe/SourceCodePro-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;}
+@font-face {
+    font-family: 'SourceCodePro';
+    src: url("fonts/Adobe/SourceCodePro-Semibold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;}
+@font-face {
+    font-family: 'SourceCodePro';
+    src: url("fonts/Adobe/SourceCodePro-Black.ttf") format("truetype");
+    font-weight: 800;
+    font-style: normal;}
+
+@font-face {
+    font-family: 'SourceSansPro';
+    src: url("fonts/Adobe/SourceSansPro-Regular.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;}
+@font-face {
+    font-family: 'SourceSansPro';
+    src: url("fonts/Adobe/SourceSansPro-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;}
+@font-face {
+    font-family: 'SourceSansPro';
+    src: url("fonts/Adobe/SourceSansPro-It.ttf") format("truetype");
+    font-weight: 500;
+    font-style: italic;}
+@font-face {
+    font-family: 'SourceSansPro';
+    src: url("fonts/Adobe/SourceSansPro-BoldIt.ttf") format("truetype");
+    font-weight: 700;
+    font-style: italic;}
+@font-face {
+    font-family: 'SourceSansPro';
+    src: url("fonts/Adobe/SourceSansPro-Light.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;}
+@font-face {
+    font-family: 'SourceSansPro';
+    src: url("fonts/Adobe/SourceSansPro-LightIt.ttf") format("truetype");
+    font-weight: 300;
+    font-style: italic;}
+@font-face {
+    font-family: 'SourceSansPro';
+    src: url("fonts/Adobe/SourceSansPro-Semibold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;}
+@font-face {
+    font-family: 'SourceSansPro';
+    src: url("fonts/Adobe/SourceSansPro-SemiboldIt.ttf") format("truetype");
+    font-weight: 600;
+    font-style: italic;}
+@font-face {
+    font-family: 'SourceSansPro';
+    src: url("fonts/Adobe/SourceSansPro-Black.ttf") format("truetype");
+    font-weight: 800;
+    font-style: normal;}
+@font-face {
+    font-family: 'SourceSansPro';
+    src: url("fonts/Adobe/SourceSansPro-BlackIt.ttf") format("truetype");
+    font-weight: 800;
+    font-style: italic;}
+@font-face {
+    font-family: 'SourceSansPro';
+    src: url("fonts/Adobe/SourceSansPro-ExtraLight.ttf") format("truetype");
+    font-weight: 200;
+    font-style: normal;}
+@font-face {
+    font-family: 'SourceSansPro';
+    src: url("fonts/Adobe/SourceSansPro-ExtraLightIt.ttf") format("truetype");
+    font-weight: 200;
+    font-style: italic;}
+*/
+
+#METABOOKFRAME, #METABOOKPAGINATING {
+    font-family: Verdana, Arial, Helvetica, sans-serif, sans;}
+#METABOOKBODY,
+#METABOOKBODY.metabookfamilyserif,
+#METABOOKFRAME #METABOOKABOUT,
+
+span.excerpt {
+    font-family: Palantino, Georgia, "Times New Roman", "TimesNewRoman", Times;}
+
+#METABOOKBODY.metabookfamilydefault {
+    font-family: inherit;}
+#METABOOKBODY.metabookfamilydyslexic {
+    font-family: "OpenDyslexic", serif;}
+#METABOOKBODY.metabookfamilyserif {
+    font-family: Georgia,Palatino,"Times New Roman","TimesNewRoman",Times,serif;}
+#METABOOKBODY.metabookfamilysans {
+    font-family: Arial,Verdana,Helvetica,sans-serif;}
+
+#METABOOKBODY h1, #METABOOKBODY h2, #METABOOKBODY h3, #METABOOKBODY h4,
+#METABOOKBODY.metabookfamilyserif h1, #METABOOKBODY.metabookfamilyserif h2,
+#METABOOKBODY.metabookfamilyserif h3, #METABOOKBODY.metabookfamilyserif h4 {
+    font-family: Verdana, Arial, Helvetica, sans-serif, sans;}
+
+#METABOOKFRAME #METABOOKCONSOLE,
+span.uri {
+  font-family: "Courier New", "Lucia Console", Courier, fixed;}
+
+/* Emacs local variables
+;;;  Local variables: ***
+;;;  compile-command: "cd ../..; make" ***
+;;;  indent-tabs-mode: nil ***
+;;;  End: ***
+*/
+

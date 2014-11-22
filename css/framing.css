@@ -66,7 +66,6 @@ body {
 #METABOOKFRAME {
     position: fixed; top: 0px; bottom: 0px; left: 0px; right: 0px;
     width: 100%; height: 100%; line-height: initial;
-    font-family: Arial,Verdana,Helvetica,sans-serif;
     box-sizing: border-box; -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box; -o-box-sizing: border-box;
     pointer-events: none;

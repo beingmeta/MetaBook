@@ -64,21 +64,12 @@
 .metabookbody.metabookjustify p, .metabookbody.metabookjustify li {
     text-align: justify;}
 
-#METABOOKBODY.metabookfamilydefault {
-    font-family: inherit;}
-#METABOOKBODY.metabookfamilyserif {
-    font-family: Georgia,Palatino,"Times New Roman",Times,serif;}
-#METABOOKBODY.metabookfamilysans {
-    font-family: Arial,Verdana,Helvetica,sans-serif;}
-
 #METABOOKBODY h1, #METABOOKBODY h2, #METABOOKBODY h3, #METABOOKBODY h4 {
-    font-family: Arial,Verdana,Helvetica,sans-serif;
     page-break-after: avoid;}
-#METABOOKBODY.metabookfamilyserif h1, #METABOOKBODY.metabookfamilyserif h2,
-#METABOOKBODY.metabookfamilyserif h3, #METABOOKBODY.metabookfamilyserif h4 {
-    font-family: Arial,Verdana,Helvetica,sans-serif;}    
 
-body._MOUSE #METABOOKBODY a[href]:hover, #METABOOKBODY a[href]:active { color: blue; }
+body._MOUSE #METABOOKBODY a[href]:hover,
+#METABOOKBODY a[href]:active {
+    color: blue; }
 
 #METABOOKBODY.metabookcontrasthigh {
     background-color: #ffffff; color: #111; }

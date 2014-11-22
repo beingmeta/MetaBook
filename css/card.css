@@ -48,8 +48,7 @@ div.metabookcard > hr {
 
 .metabookcard a.ref {
     display: block; font-weight: normal;}
-.metabookcard a.ref span.title {
-    font-family: sans,sans-serif;}
+.metabookcard a.ref span.title {}
 .metabookcard a.ref span.uri {
     font-family: courier,fixed;}
 .metabookcard span.oldterm {
@@ -202,7 +201,8 @@ body._MOUSE .metabookcard .age:hover {text-decoration: underline;}
     cursor: pointer;}
 .metabookcard a.headref {
     float: right; clear: right; 
-    font-family: times,serif; font-style: italic; font-size: 80%;
+    font-family: times,serif;
+    font-style: italic; font-size: 80%;
     white-space: nowrap; padding: 2px; padding-top: 0px;
     color: lightblue;}
 

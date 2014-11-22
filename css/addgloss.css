@@ -399,11 +399,11 @@ img[alt="glossdelete"] {
     display: none;}
 
 div.metabookglossform form .checkspan {
-    padding-left: 2px; padding-right: 2px;
-    font-family: sans,sans-serif;}
+    padding-left: 2px; padding-right: 2px;}
 
-div.metabookglossform form span.source:before, .completions span.source:before {
-                                                   content: '@'; color: darkblue;}
+div.metabookglossform form span.source:before,
+.completions span.source:before {
+    content: '@'; color: darkblue;}
 
 div.metabookglossform .button.savebutton,
 div.metabookglossform .button.replybutton,

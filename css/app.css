@@ -165,7 +165,6 @@ body._BYPAGE #CODEXPAGE #CODEXCONTENT .metabookpagebreak {
 
 #METABOOKPAGINATING {
     position: absolute;
-    font-family: Arial,Verdana,Helvetica,sans-serif;
     font-size: 200%; font-weight: bold;
     height: 3em; text-align: center;
     top: 5em; left: 10%; right: 10%;
@@ -202,11 +201,9 @@ span.excerpt span.content { font-size: 80%; display: none;}
 .showexcerpt span.excerpt span.content { display: inline;}
 .showexcerpt span.excerpt span.ellipsis { display: none;}
 span.excerpt.ellipsis span.elision, span.excerpt.ellipsis span.delision {
-    color: purple; font-family: Arial,Verdana,Helvetica,sans-serif;
-    font-style: italic;}
+    color: purple; font-style: italic;}
 span.note.ellipsis span.elision, span.note.ellipsis span.delision {
-    color: purple; font-family: Arial,Verdana,Helvetica,sans-serif;
-    font-style: italic;}
+    color: purple; font-style: italic;}
 
 /* Define some rules inside of the HUD */
 
