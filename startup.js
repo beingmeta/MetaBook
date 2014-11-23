@@ -2092,6 +2092,10 @@ metaBook.Startup=
                 clearOffline();
                 window.location=window.location.href;
                 return;}
+            else if ((info.userinfo)&&(metaBook.user)) {
+                metaBook.user.importValue(info.userinfo);
+                metaBook.user.save();
+                setupUI4User();}
             if (info.mycopyid) {
                 if ((metaBook.mycopyid)&&
                     (info.mycopid!==metaBook.mycopyid))
@@ -2171,7 +2175,8 @@ metaBook.Startup=
                     fdjtLog("Response (%dms) from %s",fdjtTime()-start,source||metaBook.server);
                 else fdjtLog("Response from %s",source||metaBook.server);}
             updating=false; loadInfo(data);
-            if ((!(user))&&(metaBook.user)) userSetup();}
+            if ((!(user))&&(metaBook.user)) userSetup();
+            else if (metaBook._ui_setup) setupUI4User();}
         metaBook.updatedInfo=updatedInfo;
         function updateInfo(callback,jsonp){
             var user=metaBook.user; var start=fdjtTime();
@@ -2320,7 +2325,6 @@ metaBook.Startup=
         function setupUI4User(){
             var i=0, lim;
             var startui=fdjtTime();
-            if (metaBook._user_ui_setup) return;
             if (!(metaBook.user)) {
                 fdjtDOM.addClass(document.body,"_NOUSER");
                 return;}
