@@ -42,11 +42,6 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
     z-index: 100; }
 
 #METABOOKCOVER .fdjtfontwrapper {
-    transition-property: font-size; transition-duration: 4s;
-    -webkit-transition-property: font-size; -webkit-transition-duration: 4s;
-    -moz-transition-property: font-size; -webkit-moz-duration: 4s;
-    -o-transition-property: font-size; -o-moz-duration: 4s;}
-#METABOOKCOVER .fdjtfontwrapper {
     backface-visibility: hidden;
     perspective: 1000;
     transform: translateZ(0);
@@ -84,10 +79,10 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
     box-sizing: border-box; -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box; 
     position: absolute; height: 60px; bottom: 40px; top: auto;
-    width: 94%; left: 3%; right: 3%; border-width: 0px;
+    width: 100%; left: 0px; right: 0px; border-width: 0px;
     /* font-size: 1em; font-size: 1.5rem; font-size: 4vw; */
-    padding-left: 1ex; padding-right: 1ex; line-height: 1.1;
-    opacity: 1; overflow: hidden; display: block;}
+    padding-left: 1em; padding-right: 1em; line-height: 1.1;
+    opacity: 1; overflow: hidden; z-index: 50; display: block;}
 #METABOOKCOVERCONTROLS > .username {
     float: left; vertical-align: top;}
 #METABOOKCOVERCONTROLS > .control > img,
@@ -113,9 +108,6 @@ body._MOUSE #METABOOKCOVERCONTROLS span.control:hover {
     z-index: 50; color: gold; overflow: hidden;
     border-top: solid gold 1px; padding-top: 1px;
     opacity: 1.0;}
-#METABOOKCOVER #METABOOKCOVERCONTROLS div.userbox,
-#METABOOKCOVER #METABOOKCOVERCONTROLS div.loginbox {
-    bottom: -40px;}
 
 body._NOUSER #METABOOKCOVER div.loginbox,
 body._USER #METABOOKCOVER div.userbox {
@@ -406,7 +398,7 @@ body._MOUSE #METABOOKOPENTAB:hover, #METABOOKOPENTAB.tapholdtarget {
     border-color: blue; border-style: dotted;}
 #METABOOKCOVERMESSAGE > div#METABOOKOPENTAB {
     width: 7em; color: white;}
-body._TOUCH div#METABOOKOPENTAB { font-size: 36px;}
+body._TOUCH #METABOOKCOVERMESSAGE > div#METABOOKOPENTAB { font-size: 36px;}
 body._TOUCH #METABOOKCOVERMESSAGE > div#METABOOKOPENTAB {
     width: 5em; }
 

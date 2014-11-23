@@ -86,6 +86,7 @@
     "use strict";
 
     var mB=metaBook;
+    var Trace=metaBook.Trace;
     var fdjtString=fdjt.String;
     var fdjtTime=fdjt.Time;
     var fdjtLog=fdjt.Log;
@@ -94,7 +95,6 @@
     var RefDB=fdjt.RefDB;
     var fdjtID=fdjt.ID;
     var mbID=metaBook.ID;
-    var Trace=mB.Trace;
 
     // Imports (kind of )
     var addClass=fdjtDOM.addClass;

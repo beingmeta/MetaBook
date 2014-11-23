@@ -53,6 +53,7 @@ metaBook.Paginate=
         "use strict";
 
         var mB=metaBook;
+        var Trace=metaBook.Trace;
         var fdjtString=fdjt.String;
         var fdjtState=fdjt.State;
         var fdjtHash=fdjt.Hash;
@@ -154,7 +155,7 @@ metaBook.Paginate=
             var spacing=metaBook.bodyspacing;
             var size=metaBook.bodysize||"normal";
             var family=metaBook.bodyfamily||"serif";
-            if ((!(metaBook.layout))&&(mB.Trace.startup))
+            if ((!(metaBook.layout))&&(Trace.startup))
                 fdjtLog("Page layout requires %dx%d %s %s pages",
                         width,height,size,family);
             if (metaBook.layout) {
@@ -199,7 +200,7 @@ metaBook.Paginate=
                 dropClass(document.body,"mbLAYOUT");
                 metaBook.layout=layout;
                 metaBook.pagecount=layout.pages.length;
-                if (mB.Trace.startup)
+                if (Trace.startup)
                     fdjtLog("Restored %d-page layout %s, adding glosses",
                             layout.pages.length,layout_id);
                 var lostids=layout.lostids, moved_ids=lostids._all_ids;
@@ -216,7 +217,7 @@ metaBook.Paginate=
                             addClass(nodes,"glossed");
                             var k=0, klim=nodes.length; while (k<klim) {
                                 addGlossmark(nodes[k++],gloss);}}}}
-                if (mB.Trace.startup)
+                if (Trace.startup)
                     fdjtLog("Finished adding glossmarks to saved layout");
                 setupPagebar();
                 if (metaBook.layoutdone) {
@@ -330,11 +331,11 @@ metaBook.Paginate=
             if ((metaBook.cache_layout_thresh)&&
                 (!((metaBook.forcelayout)))&&
                 (!(forced))) {
-                if (mB.Trace.layout)
+                if (Trace.layout)
                     fdjtLog("Fetching layout %s",layout_id);
                 CodexLayout.fetchLayout(layout_id,function(content){
                     if (content) {
-                        if (mB.Trace.layout)
+                        if (Trace.layout)
                             fdjtLog("Got layout %s",layout_id);
                         recordLayout(layout_id,metaBook.sourceid);
                         restore_layout(content,layout_id);}
@@ -612,7 +613,7 @@ metaBook.Paginate=
                       // timeslice: false,timeskip: false,
                       container: container,origin: origin,
                       pagerule: metaBook.CSS.pagerule,
-                      tracelevel: mB.Trace.layout,
+                      tracelevel: Trace.layout,
                       layout_id: layout_id,
                       pagefn: setPageInfo,
                       logfn: fdjtLog};
@@ -925,7 +926,7 @@ metaBook.Paginate=
                 var pagenum=parseInt(page.getAttribute("data-pagenum"),10);
                 var dirclass=false;
                 if (savestate) metaBook.clearStateDialog();
-                if (mB.Trace.flips)
+                if (Trace.flips)
                     fdjtLog("GoToPage/%s Flipping to %o (%d) for %o",
                             caller,page,pagenum,spec);
                 if (!(curpage)) {
@@ -998,7 +999,7 @@ metaBook.Paginate=
             if (previewing) dropClass(previewing,"previewpage");
             dropClass(getChildren(metaBook.pages,".previewpage"),
                       "previewpage");
-            if ((mB.Trace.flips)||(mB.Trace.gestures))
+            if ((Trace.flips)||(Trace.gestures))
                 fdjtLog("startPagePreview/%s to %o (%d) for %o",
                         caller||"nocaller",page,pagenum,spec);
             if (curpage) addClass(curpage,"hidepage");
@@ -1009,7 +1010,7 @@ metaBook.Paginate=
         metaBook.startPagePreview=startPagePreview;
         function stopPagePreview(caller,target){
             var pagenum=parseInt(curpage.getAttribute("data-pagenum"),10);
-            if ((mB.Trace.flips)||(mB.Trace.gestures))
+            if ((Trace.flips)||(Trace.gestures))
                 fdjtLog("stopPagePreview/%s from %o to %o (%d)",
                         caller||"nocaller",previewing,curpage,pagenum);
             var newpage=false;

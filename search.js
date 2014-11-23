@@ -50,6 +50,7 @@
 (function(){
     "use strict";
     var mB=metaBook;
+    var Trace=metaBook.Trace;
     var fdjtString=fdjt.String;
     var fdjtLog=fdjt.Log;
     var fdjtDOM=fdjt.DOM;
@@ -77,7 +78,7 @@
     metaBook.getQuery=function(){return metaBook.query;};
     
     function setQuery(query){
-        if (mB.Trace.search) log("Setting working query to %o",query);
+        if (Trace.search) log("Setting working query to %o",query);
         var qstring=query.getString();
         if (qstring!==metaBook.qstring) {
             metaBook.query=query;
@@ -112,12 +113,12 @@
         box.setAttribute("qstring",qstring);
         query.execute();
         query.getCoTags();
-        if (mB.Trace.search>1)
+        if (Trace.search>1)
             log("Setting query for %o to %o: %o/%o (%o)",
                 box,query.tags,
                 query.results.length,query.cotags.length,
                 qstring);
-        else if (mB.Trace.search)
+        else if (Trace.search)
             log("Setting query for %o to %o: %d results/%d refiners (%o)",
                 box,query.tags,
                 query.results.length,query.cotags.length,
@@ -182,7 +183,7 @@
             metaBook.empty_cloud.complete("");}
         else {
             if (cloudid) completions.id=cloudid;
-            if (mB.Trace.search>1)
+            if (Trace.search>1)
                 log("Setting search cloud for %o to %o",box,completions.dom);
             cloudid=cloud.id;
             addClass(completions.dom,"hudpanel");
