@@ -1626,6 +1626,8 @@ var metaBook={
 
 })();
 
+fdjt.DOM.noautofontadjust=true;
+
 /* Adding qricons */
 
 /*
