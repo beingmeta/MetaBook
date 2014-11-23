@@ -243,19 +243,17 @@ body._FULLHEIGHT #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT > span > span {
     body._TOUCH.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR { 
         height: 80px;}
     body._TOUCH.mbPAGEPREVIEW #METABOOKFOOT .hudbutton { display: none; }
-    #METABOOKFOOT #METABOOKPAGEBAR div.textfoot {
-        height: initial;}
 }
 @media screen and (max-width: 500px) {
     #METABOOKFOOT #METABOOKPAGEBAR {
         margin-left: 2px; margin-right: 2px;
         left: 0px; right: 0px;}
     #METABOOKFOOT #METABOOKPAGEBAR .metabooksectmarker { 
-        border: solid blue 1px; opacity: 0.3; }
+        border: solid blue 1px; border-bottom: 0px; opacity: 0.7; }
     #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER1.metabooksectmarker {
         height: 60%;}
     #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER2.metabooksectmarker {
-        height: 35%; }
+        height: 45%; }
     #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER3.metabooksectmarker {
         height: 20%; }
 
