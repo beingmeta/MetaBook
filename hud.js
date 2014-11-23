@@ -897,7 +897,7 @@ metaBook.setMode=
             metaBook.setConfig(settings);};
 
         metaBook.UI.settingsSave=function(evt){
-            if (typeof evt === "undefined") evt=event;
+            if (typeof evt === "undefined") evt=window.event;
             if (evt) fdjt.UI.cancel(evt);
             var settings=getSettings();
             metaBook.setConfig(settings);
@@ -908,7 +908,7 @@ metaBook.setMode=
                                     "Your settings have been saved."));};
 
         metaBook.UI.settingsReset=function(evt){
-            if (typeof evt === "undefined") evt=event;
+            if (typeof evt === "undefined") evt=window.event;
             if (evt) fdjt.UI.cancel(evt);
             metaBook.resetConfig();
             fdjtDOM.dropClass("METABOOKSETTINGS","changed");
@@ -917,7 +917,7 @@ metaBook.setMode=
                                     "Your settings have been reset."));};
 
         metaBook.UI.settingsOK=function(evt){
-            if (typeof evt === "undefined") evt=event;
+            if (typeof evt === "undefined") evt=window.event;
             if (evt) fdjt.UI.cancel(evt);
             var settings=getSettings();
             metaBook.setConfig(settings);
@@ -927,7 +927,7 @@ metaBook.setMode=
                                     "Your settings have been saved."));};
         
         metaBook.UI.settingsCancel=function(evt){
-            if (typeof evt === "undefined") evt=event;
+            if (typeof evt === "undefined") evt=window.event;
             if (evt) fdjt.UI.cancel(evt);
             metaBook.setConfig(metaBook.getConfig());
             fdjtDOM.replace("METABOOKSETTINGSMESSAGE",
