@@ -1732,7 +1732,7 @@
     var last_motion=false;
 
     function forward(evt){
-        if (!(evt)) evt=event||false;
+        if (!(evt)) evt=window.event||false;
         if (evt) fdjtUI.cancel(evt);
         if (Trace.nav)
             fdjtLog("Forward e=%o h=%o t=%o",evt,metaBook.head,metaBook.target);
@@ -1741,7 +1741,7 @@
         else pageForward(evt);}
     metaBook.Forward=forward;
     function backward(evt){
-        if (!(evt)) evt=event||false;
+        if (!(evt)) evt=window.event||false;
         if (evt) fdjtUI.cancel(evt);
         if (Trace.nav)
             fdjtLog("Backward e=%o h=%o t=%o",evt,metaBook.head,metaBook.target);
@@ -2555,15 +2555,15 @@
     function clearOffline(evt){
         evt=evt||window.event; cancel(evt); metaBook.clearOffline();}
     function consolefn(evt){
-        evt=evt||window.event; metaBook.consolefn();}
+        evt=evt||window.event; metaBook.consolefn(evt);}
     function saveSettings(evt){
-        evt=evt||window.event; metaBook.UI.settingsSave();}
+        evt=evt||window.event; metaBook.UI.settingsSave(evt);}
     function applySettings(evt){
-        evt=evt||window.event; metaBook.UI.settingsOK();}
+        evt=evt||window.event; metaBook.UI.settingsOK(evt);}
     function resetSettings(evt){
-        evt=evt||window.event; metaBook.UI.settingsReset();}
+        evt=evt||window.event; metaBook.UI.settingsReset(evt);}
     function updateSettings(evt){
-        evt=evt||window.event; metaBook.UI.settingsUpdate();}
+        evt=evt||window.event; metaBook.UI.settingsUpdate(evt);}
 
     function glossetc_touch(evt){
         var target=fdjtUI.T(evt);
