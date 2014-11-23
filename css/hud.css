@@ -626,7 +626,7 @@ img.closebutton, img.metabookpagebutton, img.metabookskimbutton, img.hudbutton {
 #METABOOKTOOLTAB {
     box-sizing: content-box; -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
-    display: inline-block; height: 32px; width: 64px; 
+    display: inline-block; height: 24px; width: 64px; 
     margin: 0px; padding: 2px; padding-top: 0px;
     border: solid transparent 1px; border-top: 0px;
     cursor: pointer;

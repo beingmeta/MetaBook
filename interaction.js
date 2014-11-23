@@ -2605,7 +2605,6 @@
          hud: {click: handleXTarget, tap: handleXTarget},
          "#METABOOKSTARTPAGE": {click: metaBook.UI.dropHUD},
          "#METABOOKTOPBAR": {tap: raiseHUD},
-         //"#METABOOKTOOLTAB": {tap: raiseHUD, release: raiseHUD},
          "#METABOOKTOOLTAB": {
              mousedown: cancel,
              mousemove: cancel,
