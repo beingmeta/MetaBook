@@ -366,9 +366,9 @@ body._MOUSE #METABOOKHUD #METABOOKTOC a.brick:hover {
 #METABOOKHUD #METABOOKTOC a.brick.metabooklivehead { }
 body._MOUSE #METABOOKHUD #METABOOKTOC a:hover { text-decoration: none;}
 
-@media (pointer: coarse) {
-    #METABOOKSTATICTOC div.metabooktoc div.head {
-        min-height: 30px; font-size: 150%;}}
+body._TOUCH #METABOOKSTATICTOC div.metabooktoc div.head {
+    font-size: 150%;}
+
 @media screen and (max-width: 640px) {
     #METABOOKHEARTBODY #METABOOKSTATICTOC {
         margin-left: 0.2em; margin-right: 0.2em;}}
