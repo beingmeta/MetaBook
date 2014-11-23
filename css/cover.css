@@ -33,6 +33,10 @@
 
 #METABOOKCOVER {font-size: 2em;}
 
+#METABOOKCOVER div, #METABOOKCOVER form, #METABOOKCOVER img {
+    box-sizing: border-box; -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;}
+
 body.mbSTARTUP #METABOOKCOVER, body._WORKING #METABOOKCOVER,
 body.mbLAYOUT #METABOOKCOVER {
     pointer: progress;}
@@ -104,26 +108,52 @@ body._MOUSE #METABOOKCOVERCONTROLS span.control:hover {
     -moz-transition-property: height; -moz-transition-duration: 2s;
     -o-transition-property: height; -o-transition-duration: 2s;}
 #METABOOKCOVER div.loginbox, #METABOOKCOVER div.userbox {
-    position: absolute; left: 0px; right: 0px; bottom: 0px; top: auto;
+    position: absolute;
+    left: 0px; right: 0px; top: auto; bottom: 0px !important; 
+    box-sizing: border-box; -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box; 
     z-index: 50; color: gold; overflow: hidden;
-    border-top: solid gold 1px; padding-top: 1px;
-    opacity: 1.0;}
+    border-top: solid gold 1px;
+    opacity: 1.0;
+    height: 0px;}
+#METABOOKCOVER div.userbox {padding-top: 1px;}
+#METABOOKCOVER div.loginbox {
+    height: 70px; border-top: solid black 1px; padding-bottom: 2px;}
+#METABOOKCOVER div.loginmessage {
+    height: 30px; text-align: center;
+    background: gray;
+    background: linear-gradient(to top,gray,black);
+    background: -webkit-gradient(to top,gray,black);
+    background: -moz-linear-gradient(top,gray,black);}
+#METABOOKCOVER div.loginmessage span.sbooks em { color: cornflowerblue; }
+#METABOOKCOVER div.loginbox form {
+    height: 40px; text-align: right;
+    padding-top: 3px; padding-bottom: 3px; 
+    padding-left: 0.5ex; padding-right: 0.5ex;
+    border-top: solid 1px gold;}
+#METABOOKCOVER div.loginbox form input[NAME="LOGIN"] {
+    max-width: 50%; float: left;} 
+#METABOOKCOVER div.loginbox form select {display: none;}
 
 body._NOUSER #METABOOKCOVER div.loginbox,
 body._USER #METABOOKCOVER div.userbox {
-    display: block; height: initial;
-    vertical-align: top;
+    display: block; vertical-align: top;
     color: gold;}
+body._NOUSER #METABOOKCOVER div.loginbox {height: 70px;}
+body._USER #METABOOKCOVER div.userbox {height: 40px;}
+body._NOUSER #METABOOKCOVER > #METABOOKCOVERCONTROLS {
+    bottom: 70px;}
+body._NOUSER #METABOOKCOVER > div { bottom: 130px; }
 
 #METABOOKCOVER div.loginbox {
     white-space: nowrap;
     margin: 0px; padding: 0px;
-    height: 0px; overflow: auto;}
+    height: 0px;}
 #METABOOKCOVER div.loginbox button { padding: 1px;}
-#METABOOKCOVER div.loginbox button > img { height: 1.5em; width: auto;}
+#METABOOKCOVER div.loginbox button > img { height: 100%; width: auto;}
 div.loginbox form > button, div.loginbox form > input[TYPE="TEXT"],
 div.loginbox form > span {
-    vertical-align: top;}
+    height: 1.5em; vertical-align: top;}
 
 #METABOOKCOVER > div.userbox {
     background-color: black; color: gold;
@@ -169,6 +199,7 @@ body._USER #METABOOKCOVER div.userbox {
 .control[data-mode='creditspage'], .control[data-mode='aboutbook'] {
     display: none;}
 body._SHOWCONSOLE span.control[data-mode='console'] { display: inline;}
+body._NOUSER span.control[data-mode='layers'] { display: none;}
 span.control[data-mode='layers'] .whenloggedin { display: none;}
 body._USER span.control[data-mode='layers'] .whenloggedin {
     display: inline;}
@@ -478,8 +509,6 @@ body.mbBUSY #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE {
     #METABOOKCOVER > #METABOOKCOVERCONTROLS { height: 80px; }
 
     #METABOOKCOVER div.loginbox {font-size: 1em;}
-    #METABOOKCOVER div.loginbox input[TYPE="TEXT"] { width: 7em; }
-    #METABOOKCOVER div.loginbox button > img { height: 1em; }
 
     #METABOOKSETTINGS { padding: 1ex; }
     #METABOOKSETTINGS h1 { font-size: 1.5em;}
@@ -487,7 +516,11 @@ body.mbBUSY #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE {
 
 @media (pointer: coarse) {
     #METABOOKSETTINGS h1 .button { font-size: 80%;}}
-
+@media (max-width: 650px) {
+    #METABOOKCOVER div.loginbox button { display: none;}
+    #METABOOKCOVER div.loginbox form select {
+        margin-left: 1em;
+        display: inline-block;}}
 
 /* Emacs local variables
 ;;;  Local variables: ***
