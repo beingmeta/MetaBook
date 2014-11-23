@@ -74,6 +74,7 @@ metaBook.Startup=
         var getCookie=fdjtState.getCookie;
         var getMeta=fdjtDOM.getMeta;
         var getLink=fdjtDOM.getLink;
+        var hasClass=fdjtDOM.hasClass;
         var addClass=fdjtDOM.addClass;
         var dropClass=fdjtDOM.dropClass;
         var getChildren=fdjtDOM.getChildren;
@@ -416,7 +417,7 @@ metaBook.Startup=
             metaBook.setConfig(metaBook.getConfig());
 
             var adjstart=fdjt.Time();
-            fdjtDOM.adjustFonts(fdjtID("METABOOKCOVER"));
+            metaBook.resizeCover(fdjtID("METABOOKCOVER"));
             fdjtDOM.adjustFonts(fdjtID("METABOOKHUD"));
             if (mB.Trace.startup>2)
                 fdjtLog("Adjusted HUD fonts in %fsecs",
@@ -1458,13 +1459,6 @@ metaBook.Startup=
                 titlepage.id="METABOOKTITLEPAGE";}
             else if (hasParent(titlepage,cover)) {}
             else cover.appendChild(titlepage);
-            if (titlepage) {
-                titlepage.setAttribute("style","");
-                titlepage.style.opacity=0.0; titlepage.style.display="block";
-                titlepage.style.overflow="visible";
-                fdjtDOM.adjustFontSize(titlepage);
-                titlepage.style.opacity=""; titlepage.style.display="";
-                titlepage.style.overflow="";}
             if ((fdjtID("METABOOKTITLEPAGE"))&&
                 (fdjtID("METABOOKTITLEPAGEHOLDER")))
                 fdjtDOM.remove("METABOOKTITLEPAGEHOLDER");
@@ -1596,15 +1590,30 @@ metaBook.Startup=
 
             metaBook.showCover();
 
-            fdjtDOM.adjustFonts(cover);
-            fdjtDOM.adjustFontSize(fdjt.ID("METABOOKTITLEPAGE"));
-
             // Make the cover hidden by default
             metaBook.CSS.hidecover=fdjtDOM.addCSSRule(
                 "#METABOOKCOVER","opacity: 0.0; z-index: -10; pointer-events: none; height: 0px; width: 0px;");
             if (mB.Trace.startup>1)
                 fdjtLog("Cover setup done in %dms",fdjtTime()-started);
             return cover;}
+
+        function resizeCover(cover){
+            if (!(cover)) cover=fdjt.ID("METABOOKCOVER");
+            var style=cover.style, display=style.display, zindex=style.zIndex;
+            var opacity=style.opacity, viz=style.visibility;
+            var restore=0;
+            if (!(cover.offsetHeight)) {
+                restore=1; style.zIndex=-500; style.visibility='hidden';
+                style.opacity=0; style.display='block';}
+            fdjtDOM.adjustFonts(cover);
+            var covertitle=fdjtID("METABOOKTITLEPAGE");
+            if ((covertitle)&&
+                (!(hasClass(covertitle,/\b(adjustfont|fdjtadjustfont)\b/))))
+                fdjtDOM.adjustFontSize(covertitle);
+            if (restore) {
+                style.zIndex=zindex; style.display=display;
+                style.opacity=opacity; style.visibility=viz;}}
+        metaBook.resizeCover=resizeCover;
 
         var coverids={"bookcover": "METABOOKBOOKCOVER",
                       "titlepage": "METABOOKTITLEPAGE",
@@ -1988,6 +1997,7 @@ metaBook.Startup=
             if (resizing) {
                 clearTimeout(resizing); resizing=false;}
             metaBook.resizeHUD();
+            metaBook.resizeCover();
             metaBook.scaleLayout(false);
             if (!(layout)) return;
             if ((window.outerWidth===outer_width)&&

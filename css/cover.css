@@ -84,8 +84,8 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
     box-sizing: border-box; -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box; 
     position: absolute; height: 60px; bottom: 40px; top: auto;
-    width: 94%; left: 3%; right: 3%;
-    font-size: 1em; font-size: 1.5rem; font-size: 4vw;
+    width: 94%; left: 3%; right: 3%; border-width: 0px;
+    /* font-size: 1em; font-size: 1.5rem; font-size: 4vw; */
     padding-left: 1ex; padding-right: 1ex; line-height: 1.1;
     opacity: 1; overflow: hidden; display: block;}
 #METABOOKCOVERCONTROLS > .username {
@@ -468,6 +468,10 @@ body.mbBUSY #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE {
     #METABOOKCOVER div.userbox a.sbooks { display: none;}
     #METABOOKCOVER div.userbox a.metabookusername { float: right;}
 }
+/*
+  @media screen and (min-width: 500px) {
+    #METABOOKCOVERCONTROLS { white-space: nowrap; }}
+*/
 @media screen and (max-width: 500px) {
     #METABOOKCOVER > div { bottom: 120px; }
     #METABOOKCOVERMESSAGE > div { font-size: 0.7em;}
