@@ -168,8 +168,8 @@ body._USER #METABOOKCOVER div.userbox {
 
 #METABOOKCOVER div.userbox a.sbookslogo { display: none;}
 
-#METABOOKCOVER.bookcover > #METABOOKBOOKCOVER,
-#METABOOKCOVER.bookcover > #METABOOKBOOKCOVERHOLDER,
+#METABOOKCOVER.coverpage > #METABOOKCOVERPAGE,
+#METABOOKCOVER.bookcover > #METABOOKCOVERPAGE,
 #METABOOKCOVER.titlepage > #METABOOKTITLEPAGE,
 #METABOOKCOVER.titlepage > #METABOOKTITLEPAGEHOLDER,
 #METABOOKCOVER.bookcredits > #METABOOKBOOKCREDITS,
@@ -180,7 +180,9 @@ body._USER #METABOOKCOVER div.userbox {
 #METABOOKCOVER.aboutsbooks > #METABOOKABOUTSBOOKS,
 #METABOOKCOVER.console > #METABOOKCONSOLE,
 #METABOOKCOVER.settings > #METABOOKSETTINGS, 
-#METABOOKCOVER.layers > #METABOOKLAYERS {
+#METABOOKCOVER.layers > #METABOOKLAYERS,
+#METABOOKCOVER.bookcover > #METABOOKCOVERPAGE, /* Legacy */
+#METABOOKCOVER.bookcover > #METABOOKBOOKCOVER {
     opacity: 1.0; z-index: 20; display: block;}
 
 #METABOOKCOVER.bookcover .control[data-mode='bookcover'],
@@ -234,7 +236,7 @@ body._USER._CONN .control[data-mode='login'] { display: none;}
 
 /* The book cover */
 
-#METABOOKBOOKCOVER img {
+#METABOOKCOVERPAGE img {
     max-width: 95%; height: 95%; width: auto;}
 
 /* Help */

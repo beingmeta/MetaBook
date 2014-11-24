@@ -2506,7 +2506,7 @@
         if (!((evt.shiftKey)||((evt.touches)&&(evt.touches.length>=2)))) {
             var opened=metaBook.readLocal("metabook.opened("+metaBook.docuri+")",true);
             if ((opened)&&((opened-fdjtTime())>(60*10*1000))) {
-                if (fdjtID("METABOOKBOOKCOVERHOLDER"))
+                if (fdjtID("METABOOKCOVERHOLDER"))
                     fdjtID("METABOOKCOVER").className="bookcover";
                 else fdjtID("METABOOKCOVER").className="titlepage";}}
         metaBook.clearStateDialog();

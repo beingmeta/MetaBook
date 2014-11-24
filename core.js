@@ -1613,7 +1613,8 @@ var metaBook={
     function fixStaticRefs(string){
         return fillIn(expand(string).replace(
                 /http(s)?:\/\/static.beingmeta.com\//g,metaBook.root),
-                      {bmg:metaBook.root+"g/"});}
+                      {bmg: metaBook.root+"g/",
+                       coverimage: metaBook.coverimage});}
     metaBook.fixStaticRefs=fixStaticRefs;
     
     fdjtString.entities.beingmeta=

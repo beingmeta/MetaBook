@@ -1380,7 +1380,7 @@ metaBook.Startup=
         // Cover setup
         function setupCover(){
             var frame=fdjtID("METABOOKFRAME"), started=fdjtTime();
-            var cover=fdjtDOM("div#METABOOKNEWCOVER.metabookcover");
+            var cover=fdjtDOM("div#METABOOKCOVER.metabookcover");
             var existing_cover=fdjtID("METABOOKCOVER");
             if (Trace.startup>2) fdjtLog("Setting up cover");
             if (!(frame)) {
@@ -1389,34 +1389,33 @@ metaBook.Startup=
             metaBook.Frame=frame;
             cover.innerHTML=fixStaticRefs(metaBook.HTML.cover);
             
-            var coverpage=fdjtID("METABOOKCOVERPAGE");
-            if (coverpage) 
+            var coverpage=fdjtID("METABOOKCOVERPAGE")||
+                fdjtID("METABOOKBOOKCOVER")||
+                fdjtID("METABOOKCOVERHOLDER")||
+                fdjtID("METABOOKBOOKCOVERHOLDER");
+            if (coverpage) {
                 coverpage=coverpage.cloneNode(true);
+                coverpage.id="METABOOKCOVERPAGE";
+                coverpage.removeAttribute("style");}
             else if (fdjtID("SBOOKCOVERPAGE")) {
                 coverpage=fdjtID("SBOOKCOVERPAGE").cloneNode(true);
+                coverpage.removeAttribute("style");
                 fdjtDOM.stripIDs(coverpage);}
             else if (metaBook.coverimage) {
                 var coverimage=fdjtDOM.Image(metaBook.covermage);
-                coverpage=fdjtDOM("div#METABOOKBOOKCOVER",coverimage);}
+                coverpage=fdjtDOM("div#METABOOKCOVERPAGE",coverimage);}
             else {}
             if (coverpage) {
-                cover.setAttribute("data-defaultclass","bookcover");
-                cover.className="bookcover";
-                if (fdjtID("METABOOKBOOKCOVERHOLDER")) 
-                    fdjtDOM.replace(fdjtID("METABOOKBOOKCOVERHOLDER"),
-                                    coverpage);
-                else cover.appendChild(coverpage);}
-            else {
-                cover.setAttribute("data-defaultclass","titlepage");
-                cover.className="titlepage";}
-            var curcover=cover.getElementById("METABOOKCOVERPAGE");
-            if (curcover)
-                curcover.parentNode.replaceChild(coverpage,curcover);
-            else cover.appendChild(coverpage);
+                cover.setAttribute("data-defaultclass","coverpage");
+                addClass(cover,"coverpage");
+                addToCover(cover,coverpage);}
 
-            var titlepage=fdjtID("METABOOKTITLEPAGE");
-            if (titlepage)
+            var titlepage=fdjtID("METABOOKTITLEPAGE")||
+                fdjtID("METABOOKTITLEPAGEHOLDER");
+            if (titlepage) {
                 titlepage=titlepage.cloneNode(true);
+                titlepage.removeAttribute("style");
+                titlepage.id="METABOOKTITLEPAGE";}
             else {
                 titlepage=fdjtID("SBOOKSTITLEPAGE")||
                     fdjtID("SBOOKTITLEPAGE")||
@@ -1440,11 +1439,7 @@ metaBook.Startup=
                         fdjtDOM("DIV.pubinfo",
                                 ((info.publisher)&&
                                  (fdjtDOM("P",info.publisher)))));}}
-            var curtitle=cover.getElementById("METABOOKTITLEPAGE");
-            if (curtitle)
-                curtitle.parentNode.replaceChild(titlepage,curtitle);
-            else cover.appendChild(titlepage);
-
+            if (titlepage) addToCover(cover,titlepage);
 
             var creditspage=fdjtID("METABOOKCREDITSPAGE");
             if (creditspage)
@@ -1461,59 +1456,41 @@ metaBook.Startup=
                     curcredits.parentNode.replaceChild(creditspage,curcredits);
                 else cover.appendChild(creditspage);}
             else creditspage=false;
+            if (creditspage) addToCover(cover,creditspage);
             
             var aboutpage=fdjtID("METABOOKABOUTPAGE");
-            if (aboutpage)
+            if (aboutpage) {
                 aboutpage=aboutpage.cloneNode(true);
+                aboutpage.removeAttribute("style");}
             else {
-                if (fdjtID("SBOOKSABOUTPAGE")) {
-                    aboutpage=fdjtID("SBOOKSTITLEPAGE").cloneNode(true);
-                    fdjtDOM.stripIDs(aboutpage);
-                    aboutpage.id="METABOOKABOUTPAGE";
-                    aboutpage.removeAttribute("style");}
-                else {
-                    var about_book=fdjtID("SBOOKSABOUTBOOK");
-                    var about_author=fdjtID("SBOOKSABOUTAUTHORS")||
-                        fdjtID("SBOOKSABOUTAUTHOR");
-                    if ((about_book)||(about_author))
-                        aboutpage=fdjtDOM(
-                            "div#METABOOKABOUTPAGE.metabookaboutpage",
-                            "\n",about_book,"\n",about_author,"\n");}}
-            if ((aboutpage)&&(hasAnyContent(aboutpage))) {
-                var curabout=cover.getElementById("METABOOKABOUTPAGE");
-                if (curabout)
-                    curabout.parentNode.replaceChild(aboutpage,curabout);
-                else cover.appendChild(aboutpage);}
-            else aboutpage=false;
+                var about_book=fdjtID("SBOOKSABOUTPAGE");
+                var about_author=fdjtID("SBOOKSABOUTAUTHORS")||
+                    fdjtID("SBOOKSABOUTAUTHOR");
+                if ((about_book)||(about_author))
+                    aboutpage=fdjtDOM(
+                        "div#METABOOKABOUTPAGE.metabookaboutpage",
+                        "\n",about_book,"\n",about_author,"\n");}
+            if (aboutpage) addToCover(cover,aboutpage);
             
             var settings=fdjtDOM("div#METABOOKSETTINGS");
             settings.innerHTML=fixStaticRefs(metaBook.HTML.settings);
             metaBook.DOM.settings=settings;
-            var cursettings=cover.getElementById("METABOOKSETTINGSPAGE");
-            if (cursettings)
-                cursettings.parentNode.replaceChild(settings,cursettings);
-            else cover.appendChild(settings);
+            if (settings) addToCover(cover,settings);
             
-            var cover_help=fdjtDOM("div#METABOOKAPPHELP");
+            var cover_help=fdjtDOM("div#METABOOKAPPHELP.metabookhelp");
             cover_help.innerHTML=fixStaticRefs(metaBook.HTML.help);
-            var curhelp=cover.getElementById("METABOOKAPPHELP");
-            if (curhelp)
-                curhelp.parentNode.replaceChild(cover_help,curhelp);
-            else cover.appendChild(cover_help);
+            if (cover_help) addToCover(cover,cover_help);
             
             var console=metaBook.DOM.console=fdjtDOM("div#METABOOKCONSOLE");
             if (Trace.startup>2) fdjtLog("Setting up console %o",console);
-            console.innerHTML=metaBook.HTML.console;
+            console.innerHTML=fixStaticRefs(metaBook.HTML.console);
             metaBook.DOM.input_console=input_console=
                 fdjtDOM.getChild(console,"TEXTAREA");
             metaBook.DOM.input_button=input_button=
                 fdjtDOM.getChild(console,"span.button");
             input_button.onclick=consolebutton_click;
             input_console.onkeypress=consoleinput_keypress;
-            var curconsole=cover.getElementById("METABOOKCONSOLE");
-            if (curconsole)
-                curconsole.parentNode.replaceChild(console,curconsole);
-            else cover.appendChild(console);
+            if (console) addToCover(cover,console);
             
             var layers=fdjtDOM("div#METABOOKLAYERS");
             var sbooksapp=fdjtDOM("iframe#SBOOKSAPP");
@@ -1521,10 +1498,7 @@ metaBook.Startup=
             sbooksapp.setAttribute("scrolling","auto");
             layers.appendChild(sbooksapp);
             metaBook.DOM.sbooksapp=sbooksapp;
-            var curlayers=cover.getElementById("METABOOKLAYERS");
-            if (curlayers)
-                curlayers.parentNode.replaceChild(layers,curlayers);
-            else cover.appendChild(layers);
+            if (layers) addToCover(cover,layers);
             
             var cc=fdjtID("METABOOKCOVERCONTROLS");
             if (cc) {
@@ -1559,6 +1533,17 @@ metaBook.Startup=
             return cover;}
         metaBook.setupCover=setupCover;
 
+        var toArray=fdjtDOM.toArray;
+        function addToCover(cover,item){
+            var children=toArray(cover.childNodes);
+            var i=0, lim=children.length; while (i<lim) {
+                var child=children[i++];
+                if ((child.nodeType===1)&&
+                    ((child.id===item.id)||(child.id===(item.id+"HOLDER")))) {
+                    cover.replaceChild(item,child);
+                    return;}}
+            cover.appendChild(item);}
+
         function resizeCover(cover){
             if (!(cover)) cover=fdjt.ID("METABOOKCOVER");
             var style=cover.style, display=style.display, zindex=style.zIndex;
@@ -1577,7 +1562,7 @@ metaBook.Startup=
                 style.opacity=opacity; style.visibility=viz;}}
         metaBook.resizeCover=resizeCover;
 
-        var coverids={"bookcover": "METABOOKBOOKCOVER",
+        var coverids={"bookcover": "METABOOKCOVERPAGE",
                       "titlepage": "METABOOKTITLEPAGE",
                       "bookcredits": "METABOOKCREDITSPAGE",
                       "aboutbook": "METABOOKABOUTBOOK",
@@ -1817,11 +1802,11 @@ metaBook.Startup=
             var skimright=document.createDocumentFragment();
             var holder=fdjtDOM("div");
             holder.innerHTML=fixStaticRefs(metaBook.HTML.pageleft);
-            var nodes=fdjtDOM.toArray(holder.childNodes);
+            var nodes=toArray(holder.childNodes);
             var i=0, lim=nodes.length;
             while (i<lim) skimleft.appendChild(nodes[i++]);
             holder.innerHTML=fixStaticRefs(metaBook.HTML.pageright);
-            nodes=fdjtDOM.toArray(holder.childNodes); i=0; lim=nodes.length;
+            nodes=toArray(holder.childNodes); i=0; lim=nodes.length;
             while (i<lim) skimright.appendChild(nodes[i++]);
 
             fdjtDOM.prepend(document.body,skimleft,skimright);
