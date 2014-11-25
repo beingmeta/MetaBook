@@ -1472,8 +1472,10 @@ metaBook.Startup=
                 blurb.removeAttribute("style");}
             else {
                 var about_book=fdjtID("SBOOKABOUTPAGE")||
+                    fdjtID("SBOOKABOUTBOOK")||
                     fdjtID("SBOOKSABOUTPAGE");
                 var about_author=fdjtID("SBOOKABOUTAUTHOR")||
+                    fdjtID("SBOOKABOUTORIGIN")||
                     fdjtID("SBOOKAUTHORPAGE")||
                     fdjtID("SBOOKABOUTAUTHORS")||
                     fdjtID("SBOOKSABOUTAUTHORS")||
@@ -1528,6 +1530,8 @@ metaBook.Startup=
                 metaBook.scrollers.console=setupScroller(console);
                 metaBook.scrollers.settings=setupScroller(settings);}
             
+            stripExplicitStyles(cover);
+
             if ((existing_cover)&&(existing_cover.parentNode===frame))
                 frame.replaceChild(cover,existing_cover);
             else {
@@ -1555,6 +1559,16 @@ metaBook.Startup=
                     cover.replaceChild(item,child);
                     return;}}
             cover.appendChild(item);}
+
+        function stripExplicitStyles(root){
+            if ((root.id)&&(root.id.search("METABOOK")===0))
+                root.removeAttribute("style");
+            if (root.childNodes) {
+                var children=root.childNodes;
+                var i=0, lim=children.length;
+                while (i<lim) {
+                    var child=children[i++];
+                    if (child.nodeType===1) stripExplicitStyles(child);}}}
 
         function resizeCover(cover){
             if (!(cover)) cover=fdjt.ID("METABOOKCOVER");
