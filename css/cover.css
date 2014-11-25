@@ -444,7 +444,7 @@ div#METABOOKOPENTAB {
     width: 7em; font-size: 30px;
     margin: 0px; margin-left: auto; margin-right: auto;
     padding:  0px 1em 0px 1em; 
-    border: solid transparent 2px; border-top: 0px;
+    border: solid transparent 1px; border-top: 0px;
     background-color: gray; color: white;
     font-variant: small-caps; font-weight: bold;
     border-bottom-left-radius: 1ex; border-bottom-right-radius: 1ex;
@@ -457,6 +457,8 @@ body._MOUSE #METABOOKOPENTAB:hover, #METABOOKOPENTAB.tapholdtarget {
 body._TOUCH #METABOOKCOVERMESSAGE > div#METABOOKOPENTAB { font-size: 36px;}
 body._TOUCH #METABOOKCOVERMESSAGE > div#METABOOKOPENTAB {
     width: 5em; }
+body._MOUSE div#METABOOKOPENTAB:hover { 
+    border: solid blue 1px;}
 
 body.mbREADY #METABOOKCOVERMESSAGE > #METABOOKOPENTAB {
     display: block;}
