@@ -1496,7 +1496,9 @@ metaBook.Startup=
                 infopage=fdjtID("SBOOKSINFOPAGE").cloneNode(true);
                 fdjtDOM.stripIDs(infopage); infopage.id="METABOOKINFOPAGE";
                 fdjtDOM.replace(fdjtID("METABOOKINFOPAGEHOLDER"),infopage);}
-            else fdjtID("METABOOKINFOPAGEHOLDER").id="METABOOKINFOPAGE";
+            else if (fdjtID("METABOOKINFOPAGEHOLDER"))
+                fdjtID("METABOOKINFOPAGEHOLDER").id="METABOOKINFOPAGE";
+            else {}
             if (infopage) {
                 infopage.style.opacity=0.0; infopage.style.display="block";
                 infopage.style.overflow="visible";
