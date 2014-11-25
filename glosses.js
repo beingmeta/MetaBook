@@ -61,7 +61,7 @@
     var fdjtID=fdjt.ID;
     var mB=metaBook;
     var mbID=mB.ID;
-    var Trace=mB.Trace;
+    var Trace=metaBook.Trace;
 
     var addClass=fdjtDOM.addClass;
     var hasClass=fdjtDOM.hasClass;

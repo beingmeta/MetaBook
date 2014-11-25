@@ -61,6 +61,7 @@ metaBook.setMode=
         var mbID=metaBook.ID;
         
         var mB=metaBook;
+        var Trace=metaBook.Trace;
 
         // Helpful dimensions
         // Whether to call displaySync on mode changes
@@ -86,7 +87,7 @@ metaBook.setMode=
             var started=fdjtTime();
             var messages=fdjtDOM("div#METABOOKSTARTUPMESSAGES.startupmessages");
             messages.innerHTML=fixStaticRefs(metaBook.HTML.messages);
-            if (mB.Trace.startup>2) fdjtLog("Initializing HUD layout");
+            if (Trace.startup>2) fdjtLog("Initializing HUD layout");
             metaBook.HUD=metaBookHUD=hud=fdjtDOM("div#METABOOKHUD");
             metaBook.Media=metaBookMedia=media=fdjtDOM("div#METABOOKMEDIA");
             hud.metabookui=true; media.metabookui=true;
@@ -94,7 +95,7 @@ metaBook.setMode=
             fdjtDOM.append(messages);
             if (fdjtID("METABOOKFRAME")) frame=fdjtID("METABOOKFRAME");
             else {
-                frame=fdjtDOM("#METABOOKFRAME");
+                frame=fdjtDOM("div#METABOOKFRAME");
                 fdjtDOM.prepend(document.body,frame);}
             frame.appendChild(messages); frame.appendChild(hud);
             frame.appendChild(media);
@@ -133,12 +134,13 @@ metaBook.setMode=
 
             metaBook.UI.addHandlers(hud,"hud");
 
-            if (mB.Trace.startup>2) fdjtLog("Done with HUD initialization");
+            if (Trace.startup>1)
+                fdjtLog("Created basic HUD in %dms",fdjtTime()-started);
 
             if (!(metaBook.svg)) {
                 var images=fdjtDOM.getChildren(hud,"img");
                 var i=0; var lim=images.length;
-                if (mB.Trace.startup) fdjtLog("Switching images to SVG");
+                if (Trace.startup) fdjtLog("Switching images to SVG");
                 while (i<lim) {
                     var img=images[i++];
                     if ((img.src)&&
@@ -155,7 +157,7 @@ metaBook.setMode=
             
             // Initialize gloss UI
             metaBook.DOM.allglosses=fdjtID("METABOOKALLGLOSSES");
-            if ((mB.Trace.startup>2)&&(metaBook.DOM.allglosses))
+            if ((Trace.startup>2)&&(metaBook.DOM.allglosses))
                 fdjtLog("Setting up gloss UI %o",allglosses);
 
             metaBook.glosses=allglosses=new metaBook.Slice(metaBook.DOM.allglosses);
@@ -169,7 +171,7 @@ metaBook.setMode=
             
             function messageHandler(evt){
                 var origin=evt.origin;
-                if (mB.Trace.messages)
+                if (Trace.messages)
                     fdjtLog("Got a message from %s with payload %s",
                             origin,evt.data);
                 if (origin.search(/https:\/\/[^\/]+.sbooks.net/)!==0) {
@@ -193,7 +195,7 @@ metaBook.setMode=
             var appframe=sbooksapp;
             var appwindow=((appframe)&&(appframe.contentWindow));
             if (appwindow.postMessage) {
-                if (mB.Trace.messages)
+                if (Trace.messages)
                     fdjtLog("Setting up message listener");
                 fdjtDOM.addListener(window,"message",messageHandler);}
             
@@ -210,8 +212,6 @@ metaBook.setMode=
             
             var help=metaBook.DOM.help=fdjtID("METABOOKHELP");
             help.innerHTML=fixStaticRefs(metaBook.HTML.help);
-
-            resizeHUD();
 
             metaBook.scrollers={};
 
@@ -252,7 +252,7 @@ metaBook.setMode=
 
             fdjtDOM.setupCustomInputs(fdjtID("METABOOKHUD"));
 
-            if (mB.Trace.startup>1)
+            if (Trace.startup>1)
                 fdjtLog("Initialized basic HUD in %dms",fdjtTime()-started);}
         metaBook.initHUD=initHUD;
         
@@ -344,7 +344,7 @@ metaBook.setMode=
 
         function setHUD(flag,clearmode){
             if (typeof clearmode === 'undefined') clearmode=true;
-            if ((mB.Trace.gestures)||(mB.Trace.mode))
+            if ((Trace.gestures)||(Trace.mode))
                 fdjtLog("setHUD %o mode=%o hudup=%o bc=%o hc=%o",
                         flag,metaBook.mode,metaBook.hudup,
                         document.body.className,
@@ -429,7 +429,7 @@ metaBook.setMode=
                 mode=metaBook.last_mode;
             if (mode==='none') mode=false;
             if (mode==='heart') mode=metaBook.heart_mode||"about";
-            if (mB.Trace.mode)
+            if (Trace.mode)
                 fdjtLog("setMode %o, cur=%o dbc=%o",
                         mode,metaBook.mode,document.body.className);
             if ((mode!==metaBook.mode)&&(metaBook.previewing))
@@ -566,7 +566,7 @@ metaBook.setMode=
         metaBook.scrollSlices=scrollSlices;
 
         function changeMode(mode){      
-            if (mB.Trace.mode)
+            if (Trace.mode)
                 fdjtLog("changeMode %o, cur=%o dbc=%o",
                         mode,metaBook.mode,document.body.className);
             fdjtDOM.dropClass(metaBookHUD,metaBookModes);
@@ -620,7 +620,7 @@ metaBook.setMode=
             //  needs to catch up with CSS
             if ((metaBook.scrolling)&&(metaBook.iscroll)) {
                 var scroller=fdjtID(metaBook.scrolling);
-                if (mB.Trace.iscroll)
+                if (Trace.iscroll)
                     fdjtLog("Updating scroller for #%s s=%o",
                             metaBook.scrolling,scroller);
                 setTimeout(function(){updateScroller(scroller);},
@@ -643,7 +643,7 @@ metaBook.setMode=
         function updateScroller(elt){
             /* jshint newcap: false */
             if (!(metaBook.iscroll)) return;
-            if ((elt)&&(mB.Trace.scrolling))
+            if ((elt)&&(Trace.scrolling))
                 fdjtLog("Updating scroller for %o",elt);
             if (metaBook.heartscroller) metaBook.heartscroller.refresh();
             else {
@@ -718,7 +718,7 @@ metaBook.setMode=
             var i=0, lim=0;
             if (typeof dir !== "number") dir=0;
             addClass(document.body,"mbSKIMMING"); setHUD(false,false);
-            if (mB.Trace.mode)
+            if (Trace.mode)
                 fdjtLog("metaBookSkim() %o (src=%o) mode=%o scn=%o/%o dir=%o",
                         elt,src,metaBook.mode,metaBook.skimming,metaBook.target,
                         dir);

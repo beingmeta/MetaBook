@@ -50,6 +50,7 @@
 (function(){
     "use strict";
     var mB=metaBook;
+    var Trace=metaBook.Trace;
     var fdjtLog=fdjt.Log;
     var fdjtDOM=fdjt.DOM;
     var fdjtUI=fdjt.UI;
@@ -129,7 +130,7 @@
         sizeCloud(completions,scores,roots);
 
         var end=new Date();
-        if (mB.Trace.clouds)
+        if (Trace.clouds)
             fdjtLog("Made cloud for %d tags in %f seconds",
                     tags.length,(end.getTime()-start.getTime())/1000);
 
@@ -514,7 +515,7 @@
         var vscores=new Array(values.length);
         var i=0, lim=values.length;
         var min_score=Infinity, max_score=-1;
-        if (mB.Trace.clouds)
+        if (Trace.clouds)
             fdjtLog("Sizing %d tags in cloud %o with roots %o",
                     values.length,cloud.dom,roots);
         while (i<lim) {
@@ -532,7 +533,7 @@
                 if (score>max_score) max_score=score;}
             else vscores[i]=false;
             i++;}
-        if (mB.Trace.clouds)
+        if (Trace.clouds)
             fdjtLog("Sizing %d tags in %o with scores in [%o,%o]",
                     values.length,cloud.dom,min_score,max_score);
         cloud.dom.style.display='none';
@@ -553,16 +554,16 @@
                 elt.style.fontSize=Math.round(fsize)+"%";
             else elt.style.fontSize="200%";
             i++;}
-        if (mB.Trace.clouds)
+        if (Trace.clouds)
             fdjtLog("Finished computing sizes for %o using scores [%o,%o]",
                     cloud.dom,min_score,max_score);
         cloud.dom.style.display='';
         dropClass(cloud.dom,"working");
-        if (mB.Trace.clouds)
+        if (Trace.clouds)
             fdjtLog("Rendered new cloud %o using scores [%o,%o]",
                     cloud.dom,min_score,max_score);
         if (cloud.dom.parentNode) adjustCloudFont(cloud);
-        if (mB.Trace.clouds)
+        if (Trace.clouds)
             fdjtLog("Finished sizing tags in %o using scores [%o,%o]",
                     cloud.dom,min_score,max_score);}
     metaBook.sizeCloud=sizeCloud;
@@ -572,10 +573,10 @@
         var target=fdjtDOM.T(evt);
         var completion=getParent(target,".completion");
         if (hasClass(completion,"cloudroot")) {
-            if (mB.Trace.gestures)
+            if (Trace.gestures)
                 log("cloud tap on cloudroot %o",completion);
             return;}
-        if (mB.Trace.gestures) log("cloud tap on %o",completion);
+        if (Trace.gestures) log("cloud tap on %o",completion);
         var completions=getParent(target,".completions");
         if (completion) {
             var cinfo=metaBook.query.cloud;
@@ -656,7 +657,7 @@
         var pct=100;
         dom.style.fontSize="";
         var ih=dom.scrollHeight, oh=parent.clientHeight;
-        if (mB.Trace.clouds)
+        if (Trace.clouds)
             fdjtLog("Adjusting cloud %o: %o/%o",dom,ih,oh);
         if ((oh===0)||(ih===0)) return;
         if ((ih<oh)&&(ih>(oh*0.8))) return;
@@ -667,7 +668,7 @@
                 pct=(round(sqrt(oh/ih)*(pct/100)*100));
             else pct=(round((oh/ih)*(pct/100)*100));
             dom.style.fontSize=pct+"%";
-            if (mB.Trace.clouds)
+            if (Trace.clouds)
                 fdjtLog("Adjusted cloud %o: %o/%o to %o%%",dom,ih,oh,pct);}}
     metaBook.adjustCloudFont=adjustCloudFont;
     Completions.prototype.adjustCloudFont=function(){

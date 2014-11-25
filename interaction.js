@@ -86,6 +86,7 @@
     "use strict";
 
     var mB=metaBook;
+    var Trace=mB.Trace;
     var fdjtString=fdjt.String;
     var fdjtTime=fdjt.Time;
     var fdjtLog=fdjt.Log;
@@ -94,7 +95,6 @@
     var RefDB=fdjt.RefDB;
     var fdjtID=fdjt.ID;
     var mbID=metaBook.ID;
-    var Trace=mB.Trace;
 
     // Imports (kind of )
     var addClass=fdjtDOM.addClass;
@@ -2506,7 +2506,7 @@
         if (!((evt.shiftKey)||((evt.touches)&&(evt.touches.length>=2)))) {
             var opened=metaBook.readLocal("metabook.opened("+metaBook.docuri+")",true);
             if ((opened)&&((opened-fdjtTime())>(60*10*1000))) {
-                if (fdjtID("METABOOKBOOKCOVERHOLDER"))
+                if (fdjtID("METABOOKCOVERHOLDER"))
                     fdjtID("METABOOKCOVER").className="bookcover";
                 else fdjtID("METABOOKCOVER").className="titlepage";}}
         metaBook.clearStateDialog();
@@ -2605,7 +2605,6 @@
          hud: {click: handleXTarget, tap: handleXTarget},
          "#METABOOKSTARTPAGE": {click: metaBook.UI.dropHUD},
          "#METABOOKTOPBAR": {tap: raiseHUD},
-         //"#METABOOKTOOLTAB": {tap: raiseHUD, release: raiseHUD},
          "#METABOOKTOOLTAB": {
              mousedown: cancel,
              mousemove: cancel,

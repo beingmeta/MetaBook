@@ -67,7 +67,10 @@ body.hudup #METABOOKFOOT #METABOOKPAGELEAP {
 /* Page spans */
 
 #METABOOKFOOT #METABOOKPAGEBAR div.textfoot {
-    position: absolute; bottom: 0px; height: 50%; width: 100%;
+    position: absolute; bottom: 0px;
+    box-sizing: border-box; -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box; -o-box-sizing: border-box;
+    width: 100%; height: 50%;
     border-top: solid black 1px; z-index: 50;
     pointer-events: none;}
 #METABOOKFOOT #METABOOKPAGEBAR div.textfoot > span {
@@ -127,7 +130,7 @@ body.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR
 #METABOOKFOOT #METABOOKPAGEBAR #METABOOKPAGEPROGRESS {
     box-sizing: content-box; border-right: solid darkblue 2px;
     position: absolute; bottom: 0px; left: 0px;
-    width: 33%; height: 50%;
+    width: 33%; height: 50%; 
     background-color: rgba(162,181,205,0.8);
     pointer-events: none;
     z-index: 15;}
@@ -140,11 +143,11 @@ body.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR
     pointer-events: none;
     z-index: 45;}
 #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER1.metabooksectmarker {
-    height: 80%;}
+    height: 70%;}
 #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER2.metabooksectmarker {
-    height: 65%; background-color: rgba(0,0,255,0.2); }
+    height: 40%; background-color: rgba(0,0,255,0.2); }
 #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER3.metabooksectmarker {
-    height: 50%; background-color: rgba(0,0,255,0.1); }
+    height: 25%; background-color: rgba(0,0,255,0.1); }
 
 body._TOUCH.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR {
     height: 150px;}
@@ -243,19 +246,17 @@ body._FULLHEIGHT #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT > span > span {
     body._TOUCH.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR { 
         height: 80px;}
     body._TOUCH.mbPAGEPREVIEW #METABOOKFOOT .hudbutton { display: none; }
-    #METABOOKFOOT #METABOOKPAGEBAR div.textfoot {
-        height: initial;}
 }
 @media screen and (max-width: 500px) {
     #METABOOKFOOT #METABOOKPAGEBAR {
         margin-left: 2px; margin-right: 2px;
         left: 0px; right: 0px;}
     #METABOOKFOOT #METABOOKPAGEBAR .metabooksectmarker { 
-        border: solid blue 1px; opacity: 0.3; }
+        border: solid blue 1px; border-bottom: 0px; opacity: 0.7; }
     #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER1.metabooksectmarker {
         height: 60%;}
     #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER2.metabooksectmarker {
-        height: 35%; }
+        height: 45%; }
     #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER3.metabooksectmarker {
         height: 20%; }
 

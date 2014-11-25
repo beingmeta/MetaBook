@@ -185,20 +185,21 @@ var metaBook={
     var setLocal=fdjtState.setLocal;
     
     var mB=metaBook;
+    var Trace=metaBook.Trace;
 
     metaBook.tagweights=new ObjectMap();
     metaBook.tagscores=new ObjectMap();
 
     function hasLocal(key){
-        if (metaBook.persist) return fdjtState.existsLocal(key);
+        if (mB.persist) return fdjtState.existsLocal(key);
         else return fdjtState.existsSession(key);}
     metaBook.hasLocal=hasLocal;
     function saveLocal(key,value,unparse){
-        if (metaBook.persist) setLocal(key,value,unparse);
+        if (mB.persist) setLocal(key,value,unparse);
         else fdjtState.setSession(key,value,unparse);}
     metaBook.saveLocal=saveLocal;
     function readLocal(key,parse){
-        if (metaBook.persist) return getLocal(key,parse)||
+        if (mB.persist) return getLocal(key,parse)||
             fdjtState.getSession(key,parse);
         else return fdjtState.getSession(key,parse)||getLocal(key,parse);}
     metaBook.readLocal=readLocal;
@@ -212,7 +213,7 @@ var metaBook={
         };
     
     function initDB() {
-        if (mB.Trace.start>1) fdjtLog("Initializing DB");
+        if (Trace.start>1) fdjtLog("Initializing DB");
         var refuri=(metaBook.refuri||document.location.href);
         if (refuri.indexOf('#')>0) refuri=refuri.slice(0,refuri.indexOf('#'));
 
@@ -294,7 +295,7 @@ var metaBook={
                                     addTags(item.replyto,tags,fragslot);}
                             if (info) addTags(info,tags,fragslot,maker_knodule);}}}},
                                  "initgloss");
-            if ((metaBook.user)&&(metaBook.persist)&&(metaBook.cacheglosses))
+            if ((metaBook.user)&&(mB.persist)&&(metaBook.cacheglosses))
                 metaBook.glossdb.storage=window.localStorage;}
         
         function Gloss(){return Ref.apply(this,arguments);}
@@ -345,7 +346,7 @@ var metaBook={
             var saveprops=metaBook.saveprops, uri=metaBook.docuri;
             if (value) {
                 if (metaBook.user) {
-                    var storage=((metaBook.persist)?(window.localStorage):
+                    var storage=((mB.persist)?(window.localStorage):
                                  (window.sessionStorage));
                     if (!(metaBook.sourcedb.storage)) metaBook.sourcedb.storage=storage;
                     if (!metaBook.glossdb.storage) metaBook.glossdb.storage=storage;
@@ -415,7 +416,7 @@ var metaBook={
             else if (arguments.length===0) return this;
             else {
                 var query=Knodule.TagQuery.call(this,tags);
-                if (mB.Trace.search) query.log={};
+                if (Trace.search) query.log={};
                 return query;}}
         Query.prototype=new Knodule.TagQuery();
         Query.prototype.dbs=[metaBook.glossdb,metaBook.docdb];
@@ -425,7 +426,7 @@ var metaBook={
 
         metaBook.query=metaBook.empty_query=new Query([]);
 
-        if (mB.Trace.start>1) fdjtLog("Initialized DB");}
+        if (Trace.start>1) fdjtLog("Initialized DB");}
     metaBook.initDB=initDB;
 
     function getMakerKnodule(arg){
@@ -780,13 +781,13 @@ var metaBook={
             headinfo=headinfo.head;
             headid=headinfo.frag;
             head=mbID(headid);}
-        if (mB.Trace.nav)
+        if (Trace.nav)
             fdjtLog("metaBook.setHead #%s",headid);
         if (head===metaBook.head) {
-            if (mB.Trace.target) fdjtLog("Redundant SetHead");
+            if (Trace.target) fdjtLog("Redundant SetHead");
             return;}
         else if (headinfo) {
-            if (mB.Trace.target)
+            if (Trace.target)
                 metaBook.trace("metaBook.setHead",head);
             metaBook.TOC.setHead(headinfo);
             window.title=headinfo.title+" ("+document.title+")";
@@ -796,7 +797,7 @@ var metaBook={
             metaBook.head=mbID(headid);
             metaBook.TOC.setHead(headinfo);}
         else {
-            if (mB.Trace.target)
+            if (Trace.target)
                 metaBook.trace("metaBook.setFalseHead",head);
             metaBook.TOC.setHead(headinfo);
             metaBook.head=false;}}
@@ -804,7 +805,7 @@ var metaBook={
 
     function setLocation(location,force){
         if ((!(force)) && (metaBook.location===location)) return;
-        if (mB.Trace.toc)
+        if (Trace.toc)
             fdjtLog("Setting location to %o",location);
         var info=metaBook.Info(metaBook.head);
         while (info) {
@@ -819,7 +820,7 @@ var metaBook={
                 bar=fdjtDOM.getFirstChild(tocelt,".progressbar");}
             if (statictocelt) {
                 appbar=fdjtDOM.getFirstChild(statictocelt,".progressbar");}
-            if (mB.Trace.toc)
+            if (Trace.toc)
                 fdjtLog("For tocbar %o/%o loc=%o start=%o end=%o progress=%o",
                         bar,appbar,location,start,end,progress);
             if ((progress>=0) && (progress<=100)) {
@@ -831,7 +832,7 @@ var metaBook={
             var spanbar=spanbars[i++];
             var width=spanbar.ends-spanbar.starts;
             var ratio=(location-spanbar.starts)/width;
-            if (mB.Trace.toc)
+            if (Trace.toc)
                 fdjtLog("ratio for spanbar %o[%d] is %o [%o,%o,%o]",
                         spanbar,spanbar.childNodes[0].childNodes.length,
                         ratio,spanbar.starts,location,spanbar.ends);
@@ -857,7 +858,7 @@ var metaBook={
     metaBook.location2pct=location2pct;
 
     function setTarget(target){
-        if (mB.Trace.target) metaBook.trace("metaBook.setTarget",target);
+        if (Trace.target) metaBook.trace("metaBook.setTarget",target);
         if (target===metaBook.target) return;
         else if ((metaBook.target)&&
                  (metaBook.target.id===target.codexbaseid))
@@ -1088,11 +1089,11 @@ var metaBook={
         if ((!(title))&&(frag)&&(metaBook.docinfo[frag])) {
             state.title=title=metaBook.docinfo[frag].title||
                 metaBook.docinfo[frag].head.title;}
-        if (mB.Trace.state) fdjtLog("Setting state to %j",state);
+        if (Trace.state) fdjtLog("Setting state to %j",state);
         if ((state.maxloc)&&(state.maxloc<state.location))
             state.maxloc=state.location;
         else if (!(state.maxloc)) state.maxloc=state.location;
-        if (mB.Trace.state)
+        if (Trace.state)
             fdjtLog("saveState skiphist=? force=? state=%j",
                     skiphist,force,state);
         metaBook.state=state;
@@ -1109,7 +1110,7 @@ var metaBook={
 
     // This sets the browser history from a particular state
     function setHistory(state,hash,title){
-        if (mB.Trace.state) {
+        if (Trace.state) {
             if (title)
                 fdjtLog("setHistory %s (%s) state=%j",hash,title,state);
             else fdjtLog("setHistory %s state=%j",hash,state);}
@@ -1123,14 +1124,14 @@ var metaBook={
         if ((!(hash))&&(state.location)&&
             (typeof state.location === "number"))
             hash="SBOOKLOC"+state.location;
-        if (mB.Trace.state)
+        if (Trace.state)
             fdjtLog("Pushing history %j %s (%s) '%s'",
                     state,href,title);
         window.history.pushState(state,title,href+"#"+hash);
     }
 
     function restoreState(state,reason,savehist){
-        if (mB.Trace.state) fdjtLog("Restoring (%s) state %j",reason,state);
+        if (Trace.state) fdjtLog("Restoring (%s) state %j",reason,state);
         if (state.location)
             metaBook.GoTo(state.location,reason||"restoreState",
                        ((state.target)&&(mbID(state.target))),
@@ -1174,18 +1175,18 @@ var metaBook={
         if ((syncing)||(!(metaBook.locsync))) return;
         if ((!(force))&&(last_sync)&&
             ((fdjtTime.tick()-last_sync)<metaBook.sync_interval)) {
-            if (mB.Trace.state)
+            if (Trace.state)
                 fdjtLog("Skipping state sync because it's too soon");
             return;}
         if ((!(force))&&(metaBook.state)&&(last_sync)&&
             ((!(fdjtDOM.isHidden))||(document[fdjtDOM.isHidden]))&&
             ((fdjtTime.tick()-last_sync)<(5*metaBook.sync_interval))) {
-            if (mB.Trace.state)
+            if (Trace.state)
                 fdjtLog("Skipping state sync because page is hidden");
             return;}
         if ((metaBook.locsync)&&(navigator.onLine)) {
             var uri=metaBook.docuri;
-            var traced=(mB.Trace.state)||(mB.Trace.network);
+            var traced=(Trace.state)||(Trace.network);
             var state=metaBook.state;
             var refuri=((metaBook.target)&&(metaBook.getRefURI(metaBook.target)))||
                 (metaBook.refuri);
@@ -1236,7 +1237,7 @@ var metaBook={
 
     function freshState(evt){
         var req=fdjtUI.T(evt);
-        var traced=(mB.Trace.state)||(mB.Trace.network);
+        var traced=(Trace.state)||(Trace.network);
         if (req.readyState===4) {
             if ((req.status>=200)&&(req.status<300)) {
                 var xstate=JSON.parse(req.responseText);
@@ -1377,7 +1378,7 @@ var metaBook={
             else saveState({location: metaBook.location},true);
             return;}
         var targetid=target.codexbaseid||target.id;
-        if (mB.Trace.nav)
+        if (Trace.nav)
             fdjtLog("metaBook.GoTo%s() #%o@P%o/L%o %o",
                     ((caller)?("/"+caller):""),targetid,pageno,
                     ((info)&&(info.starts_at)),target);
@@ -1479,7 +1480,7 @@ var metaBook={
             else preview_elt=elt;
             if (!(oldscroll)) oldscroll={x: 0,y: yoff};
             var offinfo=fdjtDOM.getGeometry(elt,metaBook.content);
-            if (mB.Trace.flips)
+            if (Trace.flips)
                 fdjtLog("startScrollPreview/%s to %d for %o",
                         caller||"nocaller",offinfo.top-100,elt);
             // metaBook.content.style.top=(-offinfo.top)+"px";
@@ -1487,7 +1488,7 @@ var metaBook={
             if (use_top<0) use_top=0;
             window.scrollTo(0,use_top);}
         else if (oldscroll) {
-            if (mB.Trace.flips)
+            if (Trace.flips)
                 fdjtLog("stopScrollPreview/%s to %j from %d,%d(%o)",
                         caller||"nocaller",oldscroll,xoff,yoff,
                         preview_elt);
@@ -1495,7 +1496,7 @@ var metaBook={
             window.scrollTo(oldscroll.x,oldscroll.y);
             oldscroll=false;}
         else {
-            if (mB.Trace.flips)
+            if (Trace.flips)
                 fdjtLog("stopScrollPreview/%s to %j from %d,%d(%o)",
                         caller||"nocaller",oldscroll,xoff,yoff,
                         preview_elt);
@@ -1510,7 +1511,7 @@ var metaBook={
 
     function startPreview(spec,caller){
         var target=((spec.nodeType)?(spec):(mbID(spec)));
-        if (mB.Trace.flips)
+        if (Trace.flips)
             fdjtLog("startPreview %o (%s)",target,caller);
         if (target===metaBook.previewing) {}
         else if (metaBook.layout instanceof fdjt.CodexLayout) {
@@ -1529,7 +1530,7 @@ var metaBook={
         clearPreview();
         if ((jumpto)&&(!(jumpto.nodeType)))
             jumpto=metaBook.previewTarget||metaBook.previewing;
-        if (mB.Trace.flips)
+        if (Trace.flips)
             fdjtLog("stopPreview/%s jump to %o, pt=%o, p=%o",
                     caller||"nocaller",jumpto,
                     metaBook.previewTarget,metaBook.previewing);
@@ -1612,7 +1613,8 @@ var metaBook={
     function fixStaticRefs(string){
         return fillIn(expand(string).replace(
                 /http(s)?:\/\/static.beingmeta.com\//g,metaBook.root),
-                      {bmg:metaBook.root+"g/"});}
+                      {bmg: metaBook.root+"g/",
+                       coverimage: metaBook.coverimage});}
     metaBook.fixStaticRefs=fixStaticRefs;
     
     fdjtString.entities.beingmeta=
@@ -1625,6 +1627,8 @@ var metaBook={
         "<span class='metabook'><span class='bmm'>m<span class='bme'>e<span class='bmt'>t<span class='bma'>a</span></span></span></span>Book</span>";
 
 })();
+
+fdjt.DOM.noautofontadjust=true;
 
 /* Adding qricons */
 

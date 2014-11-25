@@ -56,6 +56,7 @@ metaBook.DOMScan=(function(){
     var RefDB=fdjt.RefDB;
     var Ref=RefDB.Ref;
     var mB=metaBook;
+    var Trace=metaBook.Trace;
 
     var getLevel=metaBook.getTOCLevel;
 
@@ -78,7 +79,7 @@ metaBook.DOMScan=(function(){
         docinfo._heads=allheads;
         docinfo._ids=allids;
         if (!(root.id)) root.id="SBOOKROOT";
-        if ((mB.Trace.startup>1)||(mB.Trace.domscan)) {
+        if ((Trace.startup>1)||(Trace.domscan)) {
             if (root.id) 
                 fdjtLog("Scanning %s#%s for structure and metadata",
                         root.tagName,root.id);
@@ -176,7 +177,7 @@ metaBook.DOMScan=(function(){
                 (docinfo[headid]=new ScanInfo(headid,scanstate));
             scanstate.headcount++;
             allheads.push(headid);
-            if (mB.Trace.domscan>1)
+            if (Trace.domscan>1)
                 fdjtLog("Scanning head item %o under %o at level %d w/id=#%s ",
                         head,curhead,level,headid);
             /* Iniitalize the headinfo */
@@ -214,7 +215,7 @@ metaBook.DOMScan=(function(){
                 /* Climb the stack of headers, closing off entries and setting up
                    prev/next pointers where needed. */
                 while (scaninfo) {
-                    if (mB.Trace.domscan>2)
+                    if (Trace.domscan>2)
                         fdjtLog("Finding head@%d: scan=%o, info=%j, sbook_head=%o, cmp=%o",
                                 scanlevel,scan||false,scaninfo,(scanlevel<level));
                     if (scanlevel<level) break;
@@ -226,7 +227,7 @@ metaBook.DOMScan=(function(){
                     scaninfo=scaninfo.head;
                     scan=scaninfo.elt||document.getElementById(scaninfo.frag);
                     scanlevel=((scaninfo)?(scaninfo.level):(0));}
-                if (mB.Trace.domscan>2)
+                if (Trace.domscan>2)
                     fdjtLog("Found parent: up=%o, upinfo=%o, atlevel=%d, sbook_head=%o",
                             scan||false,scaninfo,scaninfo.level,scaninfo.head);
                 /* We've found the enclosing head for this head, so we
@@ -244,7 +245,7 @@ metaBook.DOMScan=(function(){
             if (supinfo) newheads.push(supinfo);
             headinfo.heads=newheads;
             headinfo.indexRef('heads',newheads);
-            if (mB.Trace.domscan>2)
+            if (Trace.domscan>2)
                 fdjtLog("@%d: Found head=%o, headinfo=%o, sbook_head=%o",
                         scanstate.location,head,headinfo,headinfo.head);
             /* Update the toc state */
@@ -281,7 +282,7 @@ metaBook.DOMScan=(function(){
                 return;
             if ((child.metabookui)||((id)&&(id.search("METABOOK")===0))) return;
 
-            if (mB.Trace.domscan>3)
+            if (Trace.domscan>3)
                 fdjtLog("Scanning %o level=%o, loc=%o, head=%o: %j",
                         child,curlevel,location,curhead,curinfo);
 
@@ -436,7 +437,7 @@ metaBook.DOMScan=(function(){
             scaninfo.ends_at=scanstate.location;
             scaninfo=scaninfo.head;}
         var done=new Date();
-        if ((mB.Trace.startup)||(mB.Trace.domscan))
+        if ((Trace.startup)||(Trace.domscan))
             fdjtLog('Gathered metadata in %f secs over %d heads, %d nodes',
                     (done.getTime()-start.getTime())/1000,
                     scanstate.headcount,scanstate.eltcount);

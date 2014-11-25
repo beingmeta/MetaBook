@@ -33,6 +33,30 @@
 
 #METABOOKCOVER {font-size: 2em;}
 
+#METABOOKCOVER div, #METABOOKCOVER form, #METABOOKCOVER img {
+    box-sizing: border-box; -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;}
+
+#METABOOKCOVERPAGE, #METABOOKTITLEPAGE, #METABOOKBLURB,
+#METABOOKSETTINGS, #METABOOKCONSOLE, #METABOOKAPPHELP {
+    display: none;}
+
+#METABOOKSPLASHPAGE {
+    postion: fixed; width: 100%; height: 100%;
+    top: 0px; bottom: 0px; left: 0px; right: 0px;
+    background-color: black; color: ivory;
+    text-align: center;
+    opacity: 1.0;}
+#METABOOKSPLASHPAGE {
+    transition-property: opacity; transition-duration: 3s;
+    -webkit-transition-property: -webkit-opacity; -webkit-transition-duration: 3s;
+    -moz-transition-property: -moz-opacity; -moz-transition-duration: 3s;
+    -o-transition-property: opacity; -o-transition-duration: 3s;}
+#METABOOKSPLASHPAGE.startupdone { display: none; }
+
+body.mbREADY #METABOOKSPLASHPAGE {
+    opacity: 0.0; pointer-events: none;}
+
 body.mbSTARTUP #METABOOKCOVER, body._WORKING #METABOOKCOVER,
 body.mbLAYOUT #METABOOKCOVER {
     pointer: progress;}
@@ -41,11 +65,6 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
 #METABOOKHUD.openglossmark, body.mbSHOWHELP #METABOOKHUD {
     z-index: 100; }
 
-#METABOOKCOVER .fdjtfontwrapper {
-    transition-property: font-size; transition-duration: 4s;
-    -webkit-transition-property: font-size; -webkit-transition-duration: 4s;
-    -moz-transition-property: font-size; -webkit-moz-duration: 4s;
-    -o-transition-property: font-size; -o-moz-duration: 4s;}
 #METABOOKCOVER .fdjtfontwrapper {
     backface-visibility: hidden;
     perspective: 1000;
@@ -84,10 +103,10 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
     box-sizing: border-box; -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box; 
     position: absolute; height: 60px; bottom: 40px; top: auto;
-    width: 94%; left: 3%; right: 3%;
-    font-size: 1em; font-size: 1.5rem; font-size: 4vw;
-    padding-left: 1ex; padding-right: 1ex; line-height: 1.1;
-    opacity: 1; overflow: hidden; display: block;}
+    width: 100%; left: 0px; right: 0px; border-width: 0px;
+    /* font-size: 1em; font-size: 1.5rem; font-size: 4vw; */
+    padding-left: 1em; padding-right: 1em; line-height: 1.1;
+    opacity: 1; overflow: hidden; z-index: 50; display: block;}
 #METABOOKCOVERCONTROLS > .username {
     float: left; vertical-align: top;}
 #METABOOKCOVERCONTROLS > .control > img,
@@ -109,29 +128,52 @@ body._MOUSE #METABOOKCOVERCONTROLS span.control:hover {
     -moz-transition-property: height; -moz-transition-duration: 2s;
     -o-transition-property: height; -o-transition-duration: 2s;}
 #METABOOKCOVER div.loginbox, #METABOOKCOVER div.userbox {
-    position: absolute; left: 0px; right: 0px; bottom: 0px; top: auto;
+    position: absolute;
+    left: 0px; right: 0px; top: auto; bottom: 0px !important; 
+    box-sizing: border-box; -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box; 
     z-index: 50; color: gold; overflow: hidden;
-    border-top: solid gold 1px; padding-top: 1px;
-    opacity: 1.0;}
-#METABOOKCOVER #METABOOKCOVERCONTROLS div.userbox,
-#METABOOKCOVER #METABOOKCOVERCONTROLS div.loginbox {
-    bottom: -40px;}
+    border-top: solid gold 1px;
+    opacity: 1.0;
+    height: 0px;}
+#METABOOKCOVER div.userbox {padding-top: 1px;}
+#METABOOKCOVER div.loginbox {
+    height: 70px; border-top: solid black 1px; padding-bottom: 2px;}
+#METABOOKCOVER div.loginmessage {
+    height: 30px; text-align: center;
+    background: gray;
+    background: linear-gradient(to top,gray,black);
+    background: -webkit-gradient(to top,gray,black);
+    background: -moz-linear-gradient(top,gray,black);}
+#METABOOKCOVER div.loginmessage span.sbooks em { color: cornflowerblue; }
+#METABOOKCOVER div.loginbox form {
+    height: 40px; text-align: right;
+    padding-top: 3px; padding-bottom: 3px; 
+    padding-left: 0.5ex; padding-right: 0.5ex;
+    border-top: solid 1px gold;}
+#METABOOKCOVER div.loginbox form input[NAME="LOGIN"] {
+    max-width: 50%; float: left;} 
+#METABOOKCOVER div.loginbox form select {display: none;}
 
 body._NOUSER #METABOOKCOVER div.loginbox,
 body._USER #METABOOKCOVER div.userbox {
-    display: block; height: initial;
-    vertical-align: top;
+    display: block; vertical-align: top;
     color: gold;}
+body._NOUSER #METABOOKCOVER div.loginbox {height: 70px;}
+body._USER #METABOOKCOVER div.userbox {height: 40px;}
+body._NOUSER #METABOOKCOVER > #METABOOKCOVERCONTROLS {
+    bottom: 70px;}
+body._NOUSER #METABOOKCOVER > div { bottom: 130px; }
 
 #METABOOKCOVER div.loginbox {
     white-space: nowrap;
     margin: 0px; padding: 0px;
-    height: 0px; overflow: auto;}
+    height: 0px;}
 #METABOOKCOVER div.loginbox button { padding: 1px;}
-#METABOOKCOVER div.loginbox button > img { height: 1.5em; width: auto;}
+#METABOOKCOVER div.loginbox button > img { height: 100%; width: auto;}
 div.loginbox form > button, div.loginbox form > input[TYPE="TEXT"],
 div.loginbox form > span {
-    vertical-align: top;}
+    height: 1.5em; vertical-align: top;}
 
 #METABOOKCOVER > div.userbox {
     background-color: black; color: gold;
@@ -146,19 +188,23 @@ body._USER #METABOOKCOVER div.userbox {
 
 #METABOOKCOVER div.userbox a.sbookslogo { display: none;}
 
-#METABOOKCOVER.bookcover > #METABOOKBOOKCOVER,
-#METABOOKCOVER.bookcover > #METABOOKBOOKCOVERHOLDER,
-#METABOOKCOVER.titlepage > #METABOOKTITLEPAGE,
-#METABOOKCOVER.titlepage > #METABOOKTITLEPAGEHOLDER,
-#METABOOKCOVER.bookcredits > #METABOOKBOOKCREDITS,
-#METABOOKCOVER.bookcredits > #METABOOKBOOKCREDITSHOLDER,
-#METABOOKCOVER.aboutbook > #METABOOKABOUTBOOK,
-#METABOOKCOVER.aboutbook > #METABOOKABOUTBOOKHOLDER,
-#METABOOKCOVER.help > #METABOOKAPPHELP,
-#METABOOKCOVER.aboutsbooks > #METABOOKABOUTSBOOKS,
-#METABOOKCOVER.console > #METABOOKCONSOLE,
-#METABOOKCOVER.settings > #METABOOKSETTINGS, 
-#METABOOKCOVER.layers > #METABOOKLAYERS {
+#METABOOKCOVER.coverpage > div#METABOOKCOVERPAGE,
+#METABOOKCOVER.bookcover > div#METABOOKCOVERPAGE,
+#METABOOKCOVER.titlepage > div#METABOOKTITLEPAGE,
+#METABOOKCOVER.titlepage > div#METABOOKTITLEPAGEHOLDER,
+#METABOOKCOVER.bookcredits > div#METABOOKBOOKCREDITS,
+#METABOOKCOVER.bookcredits > div#METABOOKBOOKCREDITSHOLDER,
+#METABOOKCOVER.blurb > div#METABOOKBLURB,
+#METABOOKCOVER.aboutbook > div#METABOOKABOUTBOOKHOLDER,
+#METABOOKCOVER.help > div#METABOOKAPPHELP,
+#METABOOKCOVER.aboutsbooks > div#METABOOKABOUTSBOOKS,
+#METABOOKCOVER.console > div#METABOOKCONSOLE,
+#METABOOKCOVER.settings > div#METABOOKSETTINGS, 
+#METABOOKCOVER.layers > div#METABOOKLAYERS,
+#METABOOKCOVER.bookcover > div#METABOOKCOVERPAGE, /* Legacy */
+#METABOOKCOVER.bookcover > div#METABOOKBOOKCOVER,
+#METABOOKCOVER.aboutbook > div#METABOOKBLURB,
+#METABOOKCOVER.aboutbook > div#METABOOKABOUTBOOK {
     opacity: 1.0; z-index: 20; display: block;}
 
 #METABOOKCOVER.bookcover .control[data-mode='bookcover'],
@@ -177,6 +223,7 @@ body._USER #METABOOKCOVER div.userbox {
 .control[data-mode='creditspage'], .control[data-mode='aboutbook'] {
     display: none;}
 body._SHOWCONSOLE span.control[data-mode='console'] { display: inline;}
+body._NOUSER span.control[data-mode='layers'] { display: none;}
 span.control[data-mode='layers'] .whenloggedin { display: none;}
 body._USER span.control[data-mode='layers'] .whenloggedin {
     display: inline;}
@@ -189,16 +236,17 @@ body._USER._CONN .control[data-mode='login'] { display: none;}
 
 #METABOOKCOVERCONTROLS.havecreditspage .control[data-mode='creditspage'] {
     display: inline;}
-#METABOOKCOVERCONTROLS.haveaboutpage .control[data-mode='aboutbook'] {
+#METABOOKCOVERCONTROLS.haveblurb .control[data-mode='blurb'],
+#METABOOKCOVERCONTROLS.haveblurb .control[data-mode='aboutbook'] {
     display: inline;}
 
 #METABOOKTITLEPAGE, #METABOOKABOUTBOOK, #METABOOKBOOKCREDITS,
-#METABOOKABOUTSBOOKS, #METABOOKAPPHELP {
+#METABOOKABOUTSBOOKS, #METABOOKBLURB, #METABOOKAPPHELP {
     padding-top: 1ex; padding-bottom: 1ex;
     margin-left: auto; margin-right: auto;
     background-color: ivory;}
 #METABOOKABOUTBOOK, #METABOOKAPPHELP, #METABOOKABOUTSBOOKS,
-#METABOOKBOOKCREDITS {
+#METABOOKBOOKCREDITS, #METABOOKBLURB {
     padding-left: 2em; padding-right: 2em; text-align: left;
     -webkit-overflow-scrolling: touch;
     overflow: auto;}
@@ -211,7 +259,7 @@ body._USER._CONN .control[data-mode='login'] { display: none;}
 
 /* The book cover */
 
-#METABOOKBOOKCOVER img {
+#METABOOKCOVERPAGE img {
     max-width: 95%; height: 95%; width: auto;}
 
 /* Help */
@@ -221,18 +269,20 @@ body._USER._CONN .control[data-mode='login'] { display: none;}
     padding-left: 1.5em; padding-left: 3vw;
     padding-right: 1.5em; padding-right: 3vw;}
 
-#METABOOKABOUTBOOK, #ABOUTSBOOKS {
+#METABOOKBLURB, #ABOUTSBOOKS {
     background-color: ivory;
     font-size: 80%;}
 #METABOOKCONSOLE, #METABOOKSETTINGS {
     background-color: ivory;
     -webkit-overflow-scrolling: touch;
     overflow: auto;}
-#METABOOKABOUTBOOK h1, #ABOUTSBOOKS h1 {
+#METABOOKBLURB h1, #ABOUTSBOOKS h1 {
     font-size: 120%;}
-#METABOOKABOUTBOOK p .floatright, #ABOUTSBOOKS p .floatright {
+#METABOOKBLURB > div {
+    max-width: 40em; margin-left: auto; margin-right: auto;}
+#METABOOKBLURB p .floatright, #ABOUTSBOOKS p .floatright {
     max-width: 30%; float: right;}
-#METABOOKABOUTBOOK p .floatright img, #ABOUTSBOOKS p .floatright img {
+#METABOOKBLURB p .floatright img, #ABOUTSBOOKS p .floatright img {
     max-width: 100%; height: auto; }
 body._SHOWCONSOLE .control[alt='Console'] {display: none;}
 
@@ -396,7 +446,7 @@ div#METABOOKOPENTAB {
     width: 7em; font-size: 30px;
     margin: 0px; margin-left: auto; margin-right: auto;
     padding:  0px 1em 0px 1em; 
-    border: solid transparent 2px; border-top: 0px;
+    border: solid transparent 1px; border-top: 0px;
     background-color: gray; color: white;
     font-variant: small-caps; font-weight: bold;
     border-bottom-left-radius: 1ex; border-bottom-right-radius: 1ex;
@@ -406,9 +456,11 @@ body._MOUSE #METABOOKOPENTAB:hover, #METABOOKOPENTAB.tapholdtarget {
     border-color: blue; border-style: dotted;}
 #METABOOKCOVERMESSAGE > div#METABOOKOPENTAB {
     width: 7em; color: white;}
-body._TOUCH div#METABOOKOPENTAB { font-size: 36px;}
+body._TOUCH #METABOOKCOVERMESSAGE > div#METABOOKOPENTAB { font-size: 36px;}
 body._TOUCH #METABOOKCOVERMESSAGE > div#METABOOKOPENTAB {
     width: 5em; }
+body._MOUSE div#METABOOKOPENTAB:hover { 
+    border: solid blue 1px;}
 
 body.mbREADY #METABOOKCOVERMESSAGE > #METABOOKOPENTAB {
     display: block;}
@@ -468,6 +520,10 @@ body.mbBUSY #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE {
     #METABOOKCOVER div.userbox a.sbooks { display: none;}
     #METABOOKCOVER div.userbox a.metabookusername { float: right;}
 }
+/*
+  @media screen and (min-width: 500px) {
+    #METABOOKCOVERCONTROLS { white-space: nowrap; }}
+*/
 @media screen and (max-width: 500px) {
     #METABOOKCOVER > div { bottom: 120px; }
     #METABOOKCOVERMESSAGE > div { font-size: 0.7em;}
@@ -482,8 +538,6 @@ body.mbBUSY #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE {
     #METABOOKCOVER > #METABOOKCOVERCONTROLS { height: 80px; }
 
     #METABOOKCOVER div.loginbox {font-size: 1em;}
-    #METABOOKCOVER div.loginbox input[TYPE="TEXT"] { width: 7em; }
-    #METABOOKCOVER div.loginbox button > img { height: 1em; }
 
     #METABOOKSETTINGS { padding: 1ex; }
     #METABOOKSETTINGS h1 { font-size: 1.5em;}
@@ -491,7 +545,11 @@ body.mbBUSY #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE {
 
 @media (pointer: coarse) {
     #METABOOKSETTINGS h1 .button { font-size: 80%;}}
-
+@media (max-width: 650px) {
+    #METABOOKCOVER div.loginbox button { display: none;}
+    #METABOOKCOVER div.loginbox form select {
+        margin-left: 1em;
+        display: inline-block;}}
 
 /* Emacs local variables
 ;;;  Local variables: ***
