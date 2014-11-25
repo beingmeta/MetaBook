@@ -86,7 +86,7 @@
     "use strict";
 
     var mB=metaBook;
-    var Trace=metaBook.Trace;
+    var Trace=mB.Trace;
     var fdjtString=fdjt.String;
     var fdjtTime=fdjt.Time;
     var fdjtLog=fdjt.Log;
