@@ -269,18 +269,20 @@ body._USER._CONN .control[data-mode='login'] { display: none;}
     padding-left: 1.5em; padding-left: 3vw;
     padding-right: 1.5em; padding-right: 3vw;}
 
-#METABOOKABOUTBOOK, #ABOUTSBOOKS {
+#METABOOKBLURB, #ABOUTSBOOKS {
     background-color: ivory;
     font-size: 80%;}
 #METABOOKCONSOLE, #METABOOKSETTINGS {
     background-color: ivory;
     -webkit-overflow-scrolling: touch;
     overflow: auto;}
-#METABOOKABOUTBOOK h1, #ABOUTSBOOKS h1 {
+#METABOOKBLURB h1, #ABOUTSBOOKS h1 {
     font-size: 120%;}
-#METABOOKABOUTBOOK p .floatright, #ABOUTSBOOKS p .floatright {
+#METABOOKBLURB > div {
+    max-width: 40em; margin-left: auto; margin-right: auto;}
+#METABOOKBLURB p .floatright, #ABOUTSBOOKS p .floatright {
     max-width: 30%; float: right;}
-#METABOOKABOUTBOOK p .floatright img, #ABOUTSBOOKS p .floatright img {
+#METABOOKBLURB p .floatright img, #ABOUTSBOOKS p .floatright img {
     max-width: 100%; height: auto; }
 body._SHOWCONSOLE .control[alt='Console'] {display: none;}
 

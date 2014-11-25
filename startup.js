@@ -1404,7 +1404,8 @@ metaBook.Startup=
             else if (fdjtID("SBOOKCOVERPAGE")) {
                 coverpage=fdjtID("SBOOKCOVERPAGE").cloneNode(true);
                 coverpage.removeAttribute("style");
-                fdjtDOM.stripIDs(coverpage);}
+                fdjtDOM.stripIDs(coverpage);
+                coverpage.id="METABOOKCOVERPAGE";}
             else if (metaBook.coverimage) {
                 var coverimage=fdjtDOM.Image(metaBook.covermage);
                 coverpage=fdjtDOM("div#METABOOKCOVERPAGE",coverimage);}
@@ -1416,7 +1417,7 @@ metaBook.Startup=
 
             var titlepage=fdjtID("METABOOKTITLEPAGE")||
                 fdjtID("METABOOKTITLEPAGEHOLDER");
-            if (titlepage) {
+            if ((titlepage)&&(hasAnyContent(titlepage))) {
                 titlepage=titlepage.cloneNode(true);
                 titlepage.removeAttribute("style");
                 titlepage.id="METABOOKTITLEPAGE";}
@@ -1428,8 +1429,10 @@ metaBook.Startup=
                     titlepage=titlepage.cloneNode(true);
                     fdjtDOM.dropClass(
                         titlepage,/\b(codex|metabook)[A-Za-z0-9]+\b/);
+                    fdjtDOM.addClass(titlepage,"sbooktitlepage");
                     fdjtDOM.stripIDs(titlepage);
-                    titlepage.setAttribute("style","");}
+                    titlepage.setAttribute("style","");
+                    titlepage.id="METABOOKTITLEPAGE";}
                 else {
                     var info=getBookInfo();
                     titlepage=fdjtDOM(
