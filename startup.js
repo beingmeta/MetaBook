@@ -1463,14 +1463,18 @@ metaBook.Startup=
             if (creditspage) addToCover(cover,creditspage);
             
             var blurb=fdjtID("METABOOKBLURB")||fdjtID("METABOOKABOUTPAGE");
-            if (blurb) {
+            if ((blurb)&&(hasAnyContent(blurb))) {
                 blurb=blurb.cloneNode(true);
                 blurb.id="METABOOKBLURB";
                 blurb.removeAttribute("style");}
             else {
-                var about_book=fdjtID("SBOOKABOUTPAGE")||fdjtID("SBOOKSABOUTPAGE");
-                var about_author=fdjtID("SBOOKABOUTAUTHOR")||fdjtID("SBOOKABOUTAUTHORS")||
-                    fdjtID("SBOOKSABOUTAUTHORS")||fdjtID("SBOOKSABOUTAUTHOR");
+                var about_book=fdjtID("SBOOKABOUTPAGE")||
+                    fdjtID("SBOOKSABOUTPAGE");
+                var about_author=fdjtID("SBOOKABOUTAUTHOR")||
+                    fdjtID("SBOOKAUTHORPAGE")||
+                    fdjtID("SBOOKABOUTAUTHORS")||
+                    fdjtID("SBOOKSABOUTAUTHORS")||
+                    fdjtID("SBOOKSABOUTAUTHOR");
                 if ((about_book)||(about_author))
                     blurb=fdjtDOM(
                         "div#METABOOKBLURB.metabookblurb",
