@@ -117,11 +117,13 @@
     <input TYPE="HIDDEN" NAME="FRESHLOGIN" VALUE="yes"/>
     <input TYPE="HIDDEN" NAME="LOGINFORM" VALUE="yes"/>
     <input TYPE="TEXT" NAME="LOGIN" VALUE=""
-           PLACEHOLDER="login email/cell"
+           PLACEHOLDER="email/cell login"
            ONKEYPRESS="fdjt.UI.submitOnEnter(event);"
+           AUTOCOMPLETE="off"
            tabindex="9"/>
     <span>or use</span>
     <select NAME="AUTHORITY">
+      <option value="" selected="SELECTED">Using account</option>
       <option value=":FACEBOOK">Facebook</option>
       <option value=":TWITTER">Twitter</option>
       <option value=":YAHOO">Yahoo!</option>

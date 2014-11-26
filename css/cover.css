@@ -128,7 +128,7 @@ body._MOUSE #METABOOKCOVERCONTROLS span.control:hover {
     -moz-transition-property: height; -moz-transition-duration: 2s;
     -o-transition-property: height; -o-transition-duration: 2s;}
 #METABOOKCOVER div.loginbox, #METABOOKCOVER div.userbox {
-    position: absolute;
+    position: absolute; vertical-align: top;
     left: 0px; right: 0px; top: auto; bottom: 0px !important; 
     box-sizing: border-box; -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box; 
@@ -147,10 +147,15 @@ body._MOUSE #METABOOKCOVERCONTROLS span.control:hover {
     background: -moz-linear-gradient(top,gray,black);}
 #METABOOKCOVER div.loginmessage span.sbooks em { color: cornflowerblue; }
 #METABOOKCOVER div.loginbox form {
-    height: 40px; text-align: right;
+    height: 40px; text-align: right; vertical-align: top;
     padding-top: 3px; padding-bottom: 3px; 
     padding-left: 0.5ex; padding-right: 0.5ex;
     border-top: solid 1px gold;}
+#METABOOKCOVER div.loginbox form input,
+#METABOOKCOVER div.loginbox form button,
+#METABOOKCOVER div.loginbox form select {
+    vertical-align: top; margin-top: 0px;}
+
 #METABOOKCOVER div.loginbox form input[NAME="LOGIN"] {
     max-width: 50%; float: left;} 
 #METABOOKCOVER div.loginbox form select {display: none;}
@@ -172,7 +177,7 @@ body._NOUSER #METABOOKCOVER > div { bottom: 130px; }
 #METABOOKCOVER div.loginbox button { padding: 1px;}
 #METABOOKCOVER div.loginbox button > img { height: 100%; width: auto;}
 div.loginbox form > button, div.loginbox form > input[TYPE="TEXT"],
-div.loginbox form > span {
+div.loginbox form > span, div.loginbox form > select {
     height: 1.5em; vertical-align: top;}
 
 #METABOOKCOVER > div.userbox {
@@ -530,10 +535,6 @@ body.mbBUSY #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE {
     #METABOOKCOVER div.userbox a.sbooks { display: none;}
     #METABOOKCOVER div.userbox a.metabookusername { float: right;}
 }
-/*
-  @media screen and (min-width: 500px) {
-    #METABOOKCOVERCONTROLS { white-space: nowrap; }}
-*/
 @media screen and (max-width: 500px) {
     #METABOOKCOVER > div { bottom: 120px; }
     #METABOOKCOVERMESSAGE > div { font-size: 0.7em;}
@@ -555,10 +556,14 @@ body.mbBUSY #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE {
 
 @media (pointer: coarse) {
     #METABOOKSETTINGS h1 .button { font-size: 80%;}}
-@media (max-width: 650px) {
-    #METABOOKCOVER div.loginbox button { display: none;}
+@media screen and (max-width: 650px) {
+    #METABOOKCOVER div.loginbox form button { display: none;}
+    #METABOOKCOVER div.loginbox form > span { display: none;}
     #METABOOKCOVER div.loginbox form select {
-        margin-left: 1em;
+        width: 48%; font-size: 16px; font-size: 1rem;
+        display: inline-block;}
+    #METABOOKCOVER div.loginbox form input[TYPE="TEXT"] {
+        width: 48%; font-size: 16px; font-size: 1rem;
         display: inline-block;}}
 
 /* Emacs local variables
