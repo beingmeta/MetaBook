@@ -390,7 +390,7 @@ var metaBook={
                 clearLocal("metabook.etc("+uri+")");
                 // We don't currently clear sources when doing book
                 // specific clearing because they might be shared
-                // between books
+                // between books.  This is a bug.
                 metaBook.glossdb.clearOffline(function(){
                     clearLocal("metabook.sync("+uri+")");});}}
         metaBook.clearOffline=clearOffline;
