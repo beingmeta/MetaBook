@@ -1476,7 +1476,26 @@ metaBook.Startup=
             var settings=fdjtDOM("div#METABOOKSETTINGS");
             settings.innerHTML=fixStaticRefs(metaBook.HTML.settings);
             metaBook.DOM.settings=settings;
+            if (settings) {
+                var metabookinfo=fdjt.DOM.getChildren(settings,".metabookinfo");
+                if ((metabookinfo)&&(metabookinfo.length))
+                    metabookinfo=metabookinfo[0];
+                else {
+                    metabookinfo=fdjtDOM("div#METABOOKINFO.metabookinfo");
+                    fdjtDOM(settings,"\n",metabookinfo);}
+                metabookinfo.innerHTML=
+                    "<p>"+metaBook.docref+"#"+metaBook.sourceid+" "+
+                    ((metaBook.sourcetime)?(" ("+metaBook.sourcetime+")"):(""))+
+                    ((metaBook.bookbuild)?
+                     ("<br/>Built: "+(metaBook.bookbuild)):"")+
+                    "</p>\n"+
+                    "<p>metaBook version "+metaBook.version+" built on "+
+                    metaBook.buildhost+", "+metaBook.buildtime+"</p>\n"+
+                    "<p>Program &amp; Interface are "+
+                    "<span style='font-size: 120%;'>©</span>"+
+                    " beingmeta, inc 2008-2014</p>\n";}
             if (settings) addToCover(cover,settings);
+
             
             var cover_help=fdjtDOM("div#METABOOKAPPHELP.metabookhelp");
             cover_help.innerHTML=fixStaticRefs(metaBook.HTML.help);
