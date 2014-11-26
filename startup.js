@@ -406,13 +406,14 @@ metaBook.Startup=
             // Execute any FDJT initializations
             fdjt.Init();
 
-            bookSetup();
-            deviceSetup();
-            appSetup();
+            setupBook();
+            setupDevice();
+            setupApp();
             metaBook._ui_setup=fdjtTime();
             showMessage();
             if (metaBook._user_setup) setupUI4User();
-            contentSetup();
+            setupContent();
+            metaBook.setupGestures();
 
             // Reapply config settings to update the HUD UI
             metaBook.setConfig(metaBook.getConfig());
@@ -491,7 +492,7 @@ metaBook.Startup=
             // Get the settings for scanning the document structure
             getScanSettings();}
 
-        function appSetup() {
+        function setupApp() {
 
             var body=document.body;
             var started=fdjtTime();
@@ -570,14 +571,12 @@ metaBook.Startup=
             if (Trace.startup>1)
                 fdjtLog("Image setup took %dms",fdjtTime()-started);}
         
-        function contentSetup(){
+        function setupContent(){
             var started=fdjtTime();
             // Modifies the DOM in various ways
             initBody();
             // Size the content
             sizeContent();
-            // Setup the UI components for the body and HUD
-            metaBook.setupGestures();
             if (Trace.gestures)
                 fdjtLog("Content setup in %dms",fdjtTime()-started);}
 
@@ -698,20 +697,7 @@ metaBook.Startup=
             // This is all of the startup that we need to do synchronously
             syncStartup();
 
-            // Set sizes
-            setTimeout(function(){
-                if (Trace.startup>1)
-                    fdjtLog("Resizing UI (HUD and COVER)");
-
-                var adjstart=fdjt.Time();
-
-                metaBook.resizeCover(fdjtID("METABOOKCOVER"));
-                metaBook.resizeHUD(fdjtID("METABOOKHUD"));
-                
-                if (Trace.startup)
-                    fdjtLog("Resized UI in %fsecs",
-                            ((fdjt.Time()-adjstart)/1000));},
-                       50);
+            resizeUI();
 
             // The rest of the stuff we timeslice
             fdjtTime.timeslice
@@ -893,7 +879,8 @@ metaBook.Startup=
             else initLocation();
             window.onpopstate=function onpopstate(evt){
                 if (evt.state) metaBook.restoreState(evt.state,"popstate");};
-            fdjtLog("Startup done");
+            fdjtLog("metaBook startup done");
+            resizeUI(); // Just in case
             metaBook.displaySync();
             fdjtDOM.dropClass(document.body,"mbSTARTUP");
             fdjtDOM.addClass(document.body,"mbREADY");
@@ -1053,7 +1040,7 @@ metaBook.Startup=
                     false;}
             if (metaBook.persist) saveLocal("metabook.refuris",refuris,true);}
 
-        function deviceSetup(){
+        function setupDevice(){
             var useragent=navigator.userAgent;
             var device=fdjtDevice;
             var body=document.body;
@@ -1108,12 +1095,12 @@ metaBook.Startup=
             device.string=device.string+" "+
                 ((metaBook.iscroll)?("iScroll"):("nativescroll"));
             if (Trace.startup>1) {
-                fdjtLog("deviceSetup done in %dms: %s/%dx%d %s",
+                fdjtLog("setupDevice done in %dms: %s/%dx%d %s",
                         fdjtTime()-started,
                         metaBook.ui,fdjtDOM.viewWidth(),fdjtDOM.viewHeight(),
                         device.string);}}
 
-        function bookSetup(){
+        function setupBook(){
             if (metaBook.bookinfo) return;
             if (Trace.startup>2) fdjtLog("Book setup");
             var bookinfo=metaBook.bookinfo={}; var started=fdjtTime();
@@ -1157,10 +1144,10 @@ metaBook.Startup=
             bookinfo.converted=fdjtID("SBOOKS.converted")||
                 getMeta("SBOOKS.converted");
             if (Trace.startup>1)
-                fdjtLog("bookSetup done in %dms",fdjtTime()-started);}
+                fdjtLog("setupBook done in %dms",fdjtTime()-started);}
         function getBookInfo(){
             if (metaBook.bookinfo) return metaBook.bookinfo;
-            else {bookSetup(); return metaBook.bookinfo;}}
+            else {setupBook(); return metaBook.bookinfo;}}
         metaBook.getBookInfo=getBookInfo;
         
         function initUserOffline(){
@@ -1588,6 +1575,15 @@ metaBook.Startup=
                 style.opacity=opacity; style.visibility=viz;}}
         metaBook.resizeCover=resizeCover;
 
+        function resizeUI(){
+            setTimeout(function(){
+                var adjstart=fdjt.Time();
+                metaBook.resizeCover(fdjtID("METABOOKCOVER"));
+                metaBook.resizeHUD(fdjtID("METABOOKHUD"));
+                fdjtLog("Resized UI in %fsecs",
+                        ((fdjt.Time()-adjstart)/1000));},
+                       100);}
+
         var coverids={"bookcover": "METABOOKCOVERPAGE",
                       "titlepage": "METABOOKTITLEPAGE",
                       "bookcredits": "METABOOKCREDITSPAGE",
@@ -1677,6 +1673,23 @@ metaBook.Startup=
             // Save those DOM elements in a handy place
             metaBook.content=content;
 
+            var wikiref_pat=/^http(s)?:\/\/([a-z]+.)?wikipedia.org\//;
+
+            // Mark all external anchors and set their targets
+            var anchors=document.getElementsByTagName("A");
+            var ai=0, alimit=anchors.length; while (ai<alimit) {
+                var a=anchors[ai++], href=a.href;
+                if ((href)&&(href.search(/^[a-zA-Z]+:/)===0)) {
+                    var aclass=a.className, extclass="extref";
+                    if (href.search(wikiref_pat)===0) {
+                        if (!(a.title)) a.title="From Wikipedia";
+                        else if (a.title.search(/wikipedia/i)>=0) {}
+                        else a.title="Wikipedia: "+a.title;
+                        extclass=extclass+" wikiref";}
+                    if (aclass) a.className=aclass+" "+extclass;
+                    else a.className=extclass;
+                    a.target="_blank";}}
+
             // Move all the notes together
             var notesblock=fdjtID("SBOOKNOTES")||
                 fdjtDOM("div.sbookbackmatter#SBOOKNOTES");
@@ -1705,10 +1718,10 @@ metaBook.Startup=
                 body,"a[rel='sbooknote'],a[rel='footnote'],a[rel='endnote']");
             i=0; lim=notelinks.length; while (i<lim) {
                 var ref=notelinks[i++];
-                var href=ref.href;
-                if (!(fdjtDOM.hasText(ref))) ref.innerHTML="Note";
-                if ((href)&&(href[0]==="#")) {
-                    addClass(fdjt.ID(href.slice(1)),"sbooknote");}}
+                var nref=ref.href;
+                if (!(fdjtDOM.hasText(nref))) nref.innerHTML="Note";
+                if ((nref)&&(nref[0]==="#")) {
+                    addClass(fdjt.ID(nref.slice(1)),"sbooknote");}}
             
             if (!(init_content)) {
                 var children=[], childnodes=body.childNodes;
@@ -2759,11 +2772,11 @@ metaBook.Startup=
         
         function handle_inline_tags(info){
             if (info.atags) addTags(info,info.atags);
-            if (info.sectag)
+            if (info.sectag) {
                 addTags(info,info.sectag,"tags",metaBook.knodule);
-            var knode=metaBook.knodule.ref(info.sectag);
-            metaBook.tagweights.set(
-                knode,metaBook.docdb.find('head',info).length);}
+                var knode=metaBook.knodule.ref(info.sectag);
+                metaBook.tagweights.set(
+                    knode,metaBook.docdb.find('head',info).length);}}
         
         /* Setting up the clouds */
         
