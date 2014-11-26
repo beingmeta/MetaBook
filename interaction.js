@@ -1700,17 +1700,17 @@
 
     /* Various actions */
 
-    function clearOfflineAction(evt){
+    function wipeBook(evt){
         evt=evt||window.event;
         fdjtUI.cancel(evt);
         metaBook.clearOffline(true);
+        metaBook.clearLayouts();
         // We change this here, so we don't save what's cached in
         //  memory now, but it doesn't change the saved setting (so we
         //  might still be persisting).
         metaBook.nocache=true;
         fdjtUI.alertFor(5,"Cleared locally stored glosses and other information");
         return false;}
-    metaBook.UI.clearOfflineAction=clearOfflineAction;
 
     function forceSyncAction(evt){
         evt=evt||window.event;
@@ -2692,6 +2692,7 @@
          "#METABOOKCONSOLEBUTTON": {click: consolefn},
          "#METABOOKSAVESETTINGS": {click: saveSettings},
          "#METABOOKAPPLYSETTINGS": {click: applySettings},
+         // "#METABOOKWIPE": {click: wipeBook},
          "#METABOOKRESETSETTINGS": {click: resetSettings},
          "#METABOOKSETTINGSTABLE": {},
          "#METABOOKREFRESHOFFLINE": {click: refreshOffline},
@@ -2865,6 +2866,7 @@
          "#METABOOKAPPLYSETTINGS": {
              touchstart: cancel,
              touchend: updateSettings},
+         // "#METABOOKWIPE": {touchstart: cancel, touchend: wipeBook},
          "#METABOOKRESETSETTINGS": {
              touchstart: cancel,
              touchend: resetSettings},

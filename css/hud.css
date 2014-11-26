@@ -635,7 +635,7 @@ img.closebutton, img.metabookpagebutton, img.metabookskimbutton, img.hudbutton {
     vertical-align: top;
     opacity: 0.15;}
 body._ANIMATE #METABOOKTOOLTAB {
-    transition-property: background-color, background-position;
+    transition-property: background-color;
     transition-duration: 0.2s;}
 #METABOOKTOOLTAB {
     background-image: url(/static/g/metabook/downbar.svgz);}
@@ -644,7 +644,6 @@ body._ANIMATE #METABOOKTOOLTAB {
 body._MOUSE #METABOOKHUD #METABOOKTOOLTAB.hudbutton:hover {
     border: 0px;
     background-color: rgba(192,192,192,0.75);
-    background-position: bottom center;
     opacity: 0.75;}
 
 #METABOOKSHOWCOVER {

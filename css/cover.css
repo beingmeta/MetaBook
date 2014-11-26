@@ -77,7 +77,7 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
     position: absolute;
     top: 75px; left: 50px; right: 50px;
     bottom: 100px; height: auto; width: auto;
-    border: solid black 3px; /* border-radius: 1ex; */
+    border: solid black 3px; border-radius: 1em;
     opacity: 0.0; overflow: auto; z-index: -50;
     display: none;}
 #METABOOKFRAME._ANIMATE #METABOOKCOVER > div {
@@ -276,7 +276,8 @@ body._USER._CONN .control[data-mode='login'] { display: none;}
     background-color: ivory;
     -webkit-overflow-scrolling: touch;
     overflow: auto;}
-#METABOOKBLURB h1, #ABOUTSBOOKS h1 {
+#METABOOKBLURB h1, #ABOUTSBOOKS h1, #METABOOKBLURB h2, #ABOUTSBOOKS h2 {
+    text-align: left;
     font-size: 120%;}
 #METABOOKBLURB > div {
     max-width: 40em; margin-left: auto; margin-right: auto;}
@@ -341,10 +342,19 @@ body._NOUSER #METABOOKSETTINGS h1 a.logout {display:none;}
     width: 100%;}
 #METABOOKSETTINGS table.settings tr.buttons td {
     text-align: right;}
+#METABOOKSETTINGS table.settings td button.floatright,
 #METABOOKSETTINGS table.settings th.buttons button {
-    min-width: 6em; text-align: right;}
+    min-width: 7em; border-width: 4px; text-align: right;}
 #METABOOKSETTINGS table.settings th.buttons button img {
     height: 1em; width: auto; float: left;}
+#METABOOKSETTINGS table.settings th.buttons button.refresh,
+#METABOOKSETTINGS table.settings td button.floatright.refresh
+{
+    background-image: url(/static/g/metabook/refresh.svgz);
+    background-position: left center; background-repeat: no-repeat;
+    background-size: contain;
+}
+table.settings .checkspan.disabled { opacity: 0.75;}
 
 table.settings .checkspan.ischecked {
     font-weight: normal; color: rgb(0,61,111); font-size: 100%;}
