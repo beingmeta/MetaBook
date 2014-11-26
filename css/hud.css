@@ -678,22 +678,6 @@ body._TOUCH div#METABOOKSHOWCOVER {
     -o-opacity: 0.00;}
 .hudup #METABOOKSHOWCOVER, #METABOOKTOPBAR.tapholding #METABOOKSHOWCOVER {
     display: block; pointer-events: all;}
-#METABOOKTOPBAR.tapholding #METABOOKSHOWCOVER {
-    opacity: 0.60;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
-    filter: alpha(opacity=60);
-    -webkit-opacity: 0.60;
-    -khtml-opacity: 0.60;
-    -moz-opacity: 0.60;
-    -o-opacity: 0.60;}
-.hudup #METABOOKSHOWCOVER {
-    opacity: 1.00;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-    filter: alpha(opacity=100);
-    -webkit-opacity: 1.00;
-    -khtml-opacity: 1.00;
-    -moz-opacity: 1.00;
-    -o-opacity: 1.00;}
 
 .hudup #METABOOKSHOWCOVER { display: block; }
 #METABOOKSHOWCOVER.tapholdtarget { border-color: blue; }
@@ -751,7 +735,8 @@ body.hudup #METABOOKHUD .hudbutton {
     -moz-opacity: 0.60;
     -o-opacity: 0.60;}
 body.hudup._MOUSE #METABOOKHUD .hudbutton:hover,
-body.hudup._FULLHEIGHT #METABOOKHUD .hudbutton {
+body.hudup #METABOOKHUD .tapholding .hudbutton,
+body.hudup #METABOOKHUD .hudbutton.tapholding {
     opacity: 0.95;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=95)";
     filter: alpha(opacity=95);
@@ -759,6 +744,17 @@ body.hudup._FULLHEIGHT #METABOOKHUD .hudbutton {
     -khtml-opacity: 0.95;
     -moz-opacity: 0.95;
     -o-opacity: 0.95;}
+
+body.hudup._MOUSE._FULLHEIGHT #METABOOKHUD .hudbutton:hover,
+body.hudup._FULLHEIGHT #METABOOKHUD .tapholding .hudbutton,
+body.hudup._FULLHEIGHT #METABOOKHUD .hudbutton.tapholding {
+    opacity: 0.70;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+    filter: alpha(opacity=70);
+    -webkit-opacity: 0.70;
+    -khtml-opacity: 0.70;
+    -moz-opacity: 0.70;
+    -o-opacity: 0.70;}
 
 body.hudup #CODEXPAGE p, body.hudup #CODEXPAGE div { cursor: pointer;}
 
