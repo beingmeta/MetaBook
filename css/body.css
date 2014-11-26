@@ -88,22 +88,6 @@ span { font-size: inherit; }
 #METABOOKTITLEPAGE.sbooktitlepage {
     text-align: center;}
 
-.sbooktitlepage .title { font-size: 200%; }
-.sbooktitlepage .credits { font-size: 150%; }
-.sbooktitlepage .pubinfo, .sbooktitlepage > .publisher {
-  font-size: 80%; }
-
-.sbooktitlepage .title { margin-bottom: 1em; }
-.sbooktitlepage .credits {
-    margin-top: 1em; margin-bottom: 1em; }
-
-.sbooktitlepage .title h1, .sbooktitlepage .credits h1,
-.sbooktitlepage .title h2, .sbooktitlepage .credits h2,
-.sbooktitlepage .title h3, .sbooktitlepage .credits h3 {
-    margin-top: 0px; margin-bottom: 0.5ex;}
-.sbooktitlepage .credits .lifespan {
-    white-space: nowrap; font-size: 0.9em;}
-
 .codexpage .sbookcover, .codexpage .sbookcoverpage,
 .codexpage .sbooktitlepage, .codexpage .sbookfullpage {
    page-break-before: always; page-break-after: always;
@@ -115,6 +99,116 @@ span { font-size: inherit; }
 .codexpage.codexworkpage .sbooktitlepage,
 .codexpage.codexworkpage .sbookfullpage {
     height: inherit; width: inherit;}
+
+/* Titlepage rules */
+
+.sbooktitlepage {
+  padding: 1em; margin: 0px;
+  font-family: helvetica,sans,sans-serif;
+  text-align: center;
+  page-break-inside: avoid;
+  page-break-before: always;
+  page-break-after: always;
+  overflow: hidden;}
+.sbooktitlepage > * {
+  page-break-inside: avoid;}
+.sbooktitlepage > div { line-height: 1.0;}
+
+.sbooktitlepage > h1, .sbooktitlepage > .fdjtadjustfont > h1 {
+    font-size: 2em;}
+.sbooktitlepage > h2, .sbooktitlepage > .fdjtadjustfont > h2 {
+    font-size: 1.2em;}
+
+.sbooktitlepage .title h1, .sbooktitlepage .credits h1,
+.sbooktitlepage .title h2, .sbooktitlepage .credits h2,
+.sbooktitlepage .title h3, .sbooktitlepage .credits h3 {
+    margin-top: 0px; margin-bottom: 0.5ex;}
+.sbooktitlepage .credits .lifespan {
+    white-space: nowrap; font-size: 0.9em;}
+
+.sbooktitlepage > p, .sbooktitlepage > blockquote > p {
+    width: 30em; max-width: 70%; font-size: 125%;
+    margin-left: auto; margin-right: auto;
+    clear: both;}
+
+.sbooktitlepage > img {
+    display: block; clear: both;
+    margin-left: auto; margin-right: auto;
+    margin-top: 1em; margin-bottom: 1em;}
+.sbooktitlepage .title, .sbooktitlepage .credits,
+.sbooktitlepage .author, .sbooktitlepage .byline,
+.sbooktitlepage .editor {
+    margin-top: 0px; margin-bottom: 1em;
+    display: block; clear: both;}
+.sbooktitlepage .credits .author, .sbooktitlepage .credits .byline,
+.sbooktitlepage .credits .editor, .sbooktitlepage .credits .contributor {
+    margin-bottom: initial;}
+.sbooktitlepage .credits .contributor { font-size: 0.8em;}
+.sbooktitlepage .credits .name { white-space: nowrap;}
+
+.sbooktitlepage .connector {
+    font-size: 50%; margin-top: 1ex; margin-bottom: 1ex;}
+
+.sbooktitlepage .title {
+    font-size: 2em; font-weight: bold;
+    margin-bottom: 1.5em;}
+.sbooktitlepage .title .subtitle,
+.sbooktitlepage .title .translation,
+.sbooktitlepage .title .originaltitle {
+    font-size: 50%; font-weight: normal;
+    margin-top: 1.5em; margin-bottom: 0px;}
+
+.sbooktitlepage .credits, .sbooktitlepage .author, .sbooktitlepage .byline {
+    font-size: 1.5em; font-style: italic;
+    margin-top: 1em; margin-bottom: 1.5em; }
+
+.sbooktitlepage .sbookbibinfo, .sbooktitlepage .bibinfo,
+.sbooktitlepage .pubinfo { 
+    text-align: left; display: inline-block; font-size: 0.8em;
+    min-width: 70%; max-width: 60em;
+    padding: 1ex; padding-bottom: 0px; margin-bottom: 0px;
+    margin-left: auto; margin-right: auto;
+    page-break-inside: avoid;
+    clear: both;}
+
+.sbooktitlepage .publisher { 
+    font-size: 1em; text-align: center;
+    margin-top: 0.5em; margin-bottom: 0px; }
+
+.sbooktitlepage .sbookbibinfo p, .sbooktitlepage .bibinfo p,
+.sbooktitlepage .pubinfo p {
+    margin-right: 2em; margin-left: 3em; text-indent: -2em;
+    text-align: left; margin-bottom: 0px; margin-top: 0px;}
+
+.sbooktitlepage .sbookbibinfo span.bibdate,
+.sbooktitlepage .pubinfo span.bibdate,
+.sbooktitlepage .bibinfo span.bibdate {
+    float: right; padding-left: 2em;
+    color: crimson;}
+
+.sbooktitlepage .dedication, .sbooktitlepage .epigraph { 
+    text-align: left;
+    font-style: normal; font-weight: normal;
+    margin-left: auto; margin-right: auto;
+    page-break-inside: avoid;
+    margin-top: 1em; margin-bottom: 1ex;
+    margin-left: auto; margin-right: auto;
+    max-width: 70%;}
+.sbooktitlepage .dedication p, .sbooktitlepage .epigraph p {
+    margin: 0px; padding: 0px;}
+.sbooktitlepage .dedication.leftalign p,
+.sbooktitlepage .epigraph.leftalign p {
+    margin-left: 5em; text-indent: -5em;}
+
+.sbooktitlepage .dedication, .sbooktitlepage .epigraph { 
+    text-align: left; font-size: 1em;
+    font-style: normal; font-weight: normal;
+    margin-left: auto; margin-right: auto;
+    page-break-inside: avoid;
+    margin-top: 1em;
+    max-width: 70%;}
+
+.codexbibpage { text-align: left;}
 
 /* Image/float placement rules */
 
@@ -133,6 +227,33 @@ p .floatleft img, p img.floatleft {
 div.codexpage img {
     max-height: 90% !important; max-width: 90% !important;
     width: auto; height: auto;}
+
+/* Anchor display */
+
+a[href].sbookextlink, a[href].sbextref, a[href].extlink, a[href].extref {
+    text-decoration: underline;}
+
+.wikicon { float: right; }
+a[href].wikicon, a[href].wikiref.wikicon {
+    display: inline-block;
+    color: transparent; overflow: hidden; text-decoration: none;
+    max-height: 1.5em; max-width: 1.5em; height: 1.5em; width: 1.5em; 
+    padding: 1px; border: solid transparent 1px;
+    background-image: url(/static/g/sbooks/wikipedia.svgz);
+    background-position: center; background-repeat: no-repeat;
+    background-size: contain;}
+a[href].wikicon:hover, body._MOUSE a[href].wikicon:hover {
+    color: transparent; text-deocration: none;}
+body._MOUSE a[href].wikicon:hover,
+body._MOUSE a[href].wikicon.tapholding {
+    background-color: rgba(0,0,255,0.2);
+    border-color: blue;}
+
+a[href].wikiref, a[href].sbwikiref {
+    white-space: nowrap; padding-right: 1em;
+    background-image: url(/static/g/sbooks/wikipedia.svgz);
+    background-position: bottom right; background-repeat: no-repeat;
+    background-size: 1em;}
 
 /* Custom media rules */
 
