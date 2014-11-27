@@ -257,7 +257,8 @@ a[href].wikiref, a[href].sbwikiref {
     background-position: bottom right; background-repeat: no-repeat;
     background-size: 1em;}
 body._NOSVG a[href].wikiref, body._NOSVG a[href].sbwikiref {
-    background-image: url(g/sbooks/wikipedia64w.png);
+    background-image: url(g/sbooks/wikipedia64w.png);}
+
 /* Custom media rules */
 
 @media screen and (min-width: 500px) and (max-width: 700px) {
