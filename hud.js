@@ -630,7 +630,7 @@ metaBook.setMode=
             // mode
             if (metabook_mode_foci[mode]) {
                 var input=fdjtID(metabook_mode_foci[mode]);
-                if (input) {
+                if ((input)&&(!(metaBook.touch))) {
                     setTimeout(function(){
                         metaBook.setFocus(input);},
                                50);}}
