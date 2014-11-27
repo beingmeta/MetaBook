@@ -70,7 +70,8 @@ div.resultinfo.noresults span { display: none;}
 
 #METABOOKHUD div.resultinfo {
     text-align: left; min-height: 1ex; max-height: 100%;
-    margin-bottom: 1ex; padding-right: 1em;}
+    margin-bottom: 1ex; padding-right: 1em;
+    font-size: 1.5em;}
 #METABOOKHUD div.resultinfo span.resultcount,
 #METABOOKHUD div.resultinfo span.refinecount,
 #METABOOKHUD div.resultinfo span.showalltags {

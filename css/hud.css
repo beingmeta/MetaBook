@@ -278,9 +278,6 @@ body.hudup #METABOOKHUD.openheart #METABOOKHEART,
 #METABOOKHUD.glossaddoutlet #METABOOKRIBBON {
     border-bottom: solid blue 2px;
     height: 35px;}
-#METABOOKHUD.refinesearch.emptysearch #METABOOKRIBBON,
-#METABOOKHUD.expandsearch.emptysearch #METABOOKRIBBON {
-    height: 20px;}
 #METABOOKHUD.refinesearch #METABOOKHEARTBODY,
 #METABOOKHUD.expandsearch #METABOOKHEARTBODY,
 #METABOOKHUD.searchresults #METABOOKHEARTBODY,
@@ -288,9 +285,6 @@ body.hudup #METABOOKHUD.openheart #METABOOKHEART,
 #METABOOKHUD.glossaddoutlet #METABOOKHEARTBODY {
     top: 37px; margin-top: 0px;
     border-radius: 0px;}
-#METABOOKHUD.refinesearch.emptysearch #METABOOKHEARTBODY,
-#METABOOKHUD.expandsearch.emptysearch #METABOOKHEARTBODY {
-    top: 22px;}
 
 #METABOOKHUD.addgloss.glossaddtag #METABOOKHEARTBODY,
 #METABOOKHUD.addgloss.glosstagging #METABOOKHEARTBODY,
@@ -420,16 +414,23 @@ body.mbSKIMMING #METABOOKHUD.searchresults #METABOOKSEARCH {
 #METABOOKHUD.showaside #METABOOKASIDE.hudpanel,
 #METABOOKHUD.statictoc #METABOOKSTATICTOC.hudpanel,
 #METABOOKHUD.about #METABOOKABOUTBOOK.hudpanel,
-#METABOOKHUD.addgloss.glossaddtag #METABOOKHEARTBODY #METABOOKGLOSSCLOUD.hudpanel,
-#METABOOKHUD.addgloss.glosstagging #METABOOKHEARTBODY #METABOOKGLOSSCLOUD.hudpanel,
-#METABOOKHUD.addgloss.glosstagoutlet #METABOOKHEARTBODY #METABOOKSHARECLOUD.hudpanel,
-#METABOOKHUD.addgloss.glossaddoutlet #METABOOKHEARTBODY #METABOOKSHARECLOUD.hudpanel,
-#METABOOKHUD.addgloss.glossattach #METABOOKHEARTBODY #METABOOKGLOSSATTACH.hudpanel,
-#METABOOKHUD.addgloss.glosseditdetail #METABOOKHEARTBODY #METABOOKGLOSSEDITDETAIL.hudpanel,
+#METABOOKHUD.addgloss.glossaddtag #METABOOKHEARTBODY
+   #METABOOKGLOSSCLOUD.hudpanel,
+#METABOOKHUD.addgloss.glosstagging #METABOOKHEARTBODY
+   #METABOOKGLOSSCLOUD.hudpanel,
+#METABOOKHUD.addgloss.glosstagoutlet #METABOOKHEARTBODY
+   #METABOOKSHARECLOUD.hudpanel,
+#METABOOKHUD.addgloss.glossaddoutlet #METABOOKHEARTBODY
+   #METABOOKSHARECLOUD.hudpanel,
+#METABOOKHUD.addgloss.glossattach #METABOOKHEARTBODY
+   #METABOOKGLOSSATTACH.hudpanel,
+#METABOOKHUD.addgloss.glosseditdetail #METABOOKHEARTBODY
+   #METABOOKGLOSSEDITDETAIL.hudpanel,
 #METABOOKHUD.glossdetail #METABOOKHEARTBODY #METABOOKGLOSSDETAIL.hudpanel,
 #METABOOKHUD.refinesearch #METABOOKHEARTBODY #METABOOKSEARCHCLOUD.hudpanel,
 #METABOOKHUD.expandsearch #METABOOKHEARTBODY #METABOOKALLTAGS.hudpanel,
-#METABOOKHUD.refinesearch.emptysearch #METABOOKHEARTBODY #METABOOKALLTAGS.hudpanel,
+#METABOOKHUD.refinesearch.emptysearch #METABOOKHEARTBODY
+   #METABOOKALLTAGS.hudpanel,
 #METABOOKHUD.searchresults #METABOOKHEARTBODY #METABOOKSEARCHRESULTS.hudpanel,
 #METABOOKHUD.login #METABOOKLOGIN.hudpanel {
     position: static; display: block;
@@ -442,7 +443,8 @@ body.mbSKIMMING #METABOOKHUD.searchresults #METABOOKSEARCH {
     -o-opacity: 0.98;}
 
 #METABOOKHUD.refinesearch #METABOOKHEARTBODY #METABOOKALLTAGS.hudpanel,
-#METABOOKHUD.refinesearch.emptysearch #METABOOKHEARTBODY #METABOOKSEARCHCLOUD.hudpanel {
+#METABOOKHUD.refinesearch.emptysearch #METABOOKHEARTBODY
+    #METABOOKSEARCHCLOUD.hudpanel {
     display: none;}
 
 #METABOOKHUD #METABOOKHEARTBODY #METABOOKSEARCHCLOUD,
@@ -1266,9 +1268,6 @@ body._FULLHEIGHT.hudup #METABOOKFOOT {
     #METABOOKHUD.glossaddtag #METABOOKRIBBON,
     #METABOOKHUD.glossaddoutlet #METABOOKRIBBON {
         height: 60px;}
-    #METABOOKHUD.refinesearch.emptysearch #METABOOKRIBBON,
-    #METABOOKHUD.expandsearch.emptysearch #METABOOKRIBBON {
-        height: 22px;}
 
     #METABOOKHUD.refinesearch #METABOOKHEARTBODY,
     #METABOOKHUD.expandsearch #METABOOKHEARTBODY,
@@ -1276,9 +1275,6 @@ body._FULLHEIGHT.hudup #METABOOKFOOT {
     #METABOOKHUD.glossaddtag #METABOOKHEARTBODY,
     #METABOOKHUD.glossaddoutlet #METABOOKHEARTBODY {
         top: 62px;}
-    #METABOOKHUD.refinesearch.emptysearch #METABOOKHEARTBODY,
-    #METABOOKHUD.expandsearch.emptysearch #METABOOKHEARTBODY {
-        top: 24px;}
 
     #METABOOKSKIMMER {
         border-width: 2px;
