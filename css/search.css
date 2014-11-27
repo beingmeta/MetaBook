@@ -116,6 +116,9 @@ body._ANIMATE .qtags {
     div.searchbox div.query div.input {
         width: auto; margin-right: 10%;}}
 
+@media screen and (max-width: 500px) {
+    #METABOOKHUD div.resultinfo { font-size: 1rem; }}
+
 /* Emacs local variables
 ;;;  Local variables: ***
 ;;;  compile-command: "cd ../..; make" ***

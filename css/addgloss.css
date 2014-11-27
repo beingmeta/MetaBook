@@ -117,7 +117,7 @@ div.metabookglossform.focused form span.inputhelp { display: inline;}
 
 div.metabookglossform form div.textbox textarea,
 div.metabookglossform form div.textbox input[TYPE='TEXT'] {
-    overflow: hidden; font-size: 15px;
+    overflow: hidden; font-size: 16px; font-size: 1rem;
     border: solid darkblue 1px;
     margin: 0px; padding-left: 3px;
     width: 99%; max-width: 99%; 
@@ -636,8 +636,8 @@ div.metabookglossform.submitclose form > div.messageoverlay {
     opacity: 0.9;}
 
 @media (pointer: coarse) {
-    div.metabookglossform form .glossetc { font-size: 2ex; }
-    div.metabookglossform form .glossexposure { font-size: 1em; }
+    div.metabookglossform form .glossetc { font-size: 1.2rem; }
+    div.metabookglossform form .glossexposure { font-size: 1rem; }
 
     div.metabookglossform form div.addglossmenu > img.held {
         width: 80px; height: 80px; margin-left: -20px;}
