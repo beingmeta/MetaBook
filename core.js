@@ -1100,7 +1100,7 @@ var metaBook={
         var statestring=JSON.stringify(state);
         var uri=metaBook.docuri;
         saveLocal("metabook.state("+uri+")",statestring);
-        if ((!(syncing))&&(metaBook.locsync)&&
+        if ((!(syncing))&&(metaBook.locsync)&&(metaBook.user)&&
             ((!(metaBook.xstate))||(state.changed>metaBook.xstate.changed)))
             syncState(true);
         if ((!(skiphist))&&(frag)&&
@@ -1173,6 +1173,7 @@ var metaBook={
     // returned
     function syncState(force){
         if ((syncing)||(!(metaBook.locsync))) return;
+        if (!(metaBook.user)) return;
         if ((!(force))&&(last_sync)&&
             ((fdjtTime.tick()-last_sync)<metaBook.sync_interval)) {
             if (Trace.state)
