@@ -210,6 +210,8 @@ body._TOUCH.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR
     background-repeat: no-repeat;
     background-size: 50% auto;
     background-position: top center;}
+body._NOSVG #METABOOKSHOWTEXT > span > span {
+    background-image: url(g/metabook/upbar_faded64h.png);}
 
 #METABOOKHUD.addgloss #METABOOKSHOWTEXT span.justreading { display: none;}
 

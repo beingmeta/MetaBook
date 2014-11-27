@@ -29,12 +29,12 @@ div.searchbox .metabookclearsearch.tapholdtarget {
 
 div.searchbox div.input input[type='TEXT'] {
     background-position: right top;
-    background-image:
-    url(https://s3.amazonaws.com/beingmeta/static/g/metabook/tagicon.svgz);
+    background-image: url(g/metabook/tagicon.svgz);
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: contain;}
     background-image:
-    url(https://s3.amazonaws.com/beingmeta/static/g/metabook/tagicon.svgz);}
+body._NOSVG div.searchbox div.input input[type='TEXT'] {
+    background-image: url(g/metabook/tagicon32x32.png);}
 
 div.searchbox div.query span.dterm {
     padding-right: 0.35em; padding-left: 1ex;

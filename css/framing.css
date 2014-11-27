@@ -140,9 +140,10 @@ body.mbCOVER #METABOOKHUD, body.hudup.mbCOVER #METABOOKHUD {
 
 #METABOOKFRAME #METABOOKCLOSEMEDIA {
     z-index: 100; opacity: 0.5; display: none;
-    background-image:
-    url(https://s3.amazonaws.com/beingmeta/static/g/metabook/redx.svgz);
+    background-image: url(g/metabook/redx.svgz);
     top: 0px;  right: 0px;}
+body._NOSVG #METABOOKFRAME #METABOOKCLOSEMEDIA {
+    background-image: url(g/metabook/redx100x100.png);}
 
 #METABOOKMEDIA > img, #METABOOKMEDIA > video, #METABOOKMEDIA > audio { }
 

@@ -163,20 +163,19 @@ div.metabookglossform.glossreply form .showmode.add {
     display: none;}
 
 div.metabookglossform form textarea[name='NOTE'] {
-    background-image:
-    url(https://s3.amazonaws.com/beingmeta/static/g/metabook/remark.svgz);}
+    background-image: url(g/metabook/remark.svgz);}
 body._NOSVG div.metabookglossform form textarea[name='NOTE'] {
-    background-image:
-    url(https://s3.amazonaws.com/beingmeta/static/g/metabook/remark24x24.png);}
+    background-image: url(g/metabook/remark24x24.png);}
 div.metabookglossform div.textbox input[name='TAG'] {
-    background-image:
-    url(https://s3.amazonaws.com/beingmeta/static/g/metabook/tagicon24x24.png);}
+    background-image: url(g/metabook/tagicon.svgz);}
+body._NOSVG div.metabookglossform div.textbox input[name='TAG'] {
+    background-image: url(g/metabook/tagicon24x24.png);}
 div.metabookglossform div.textbox input[name='LINK'] {
-    background-image:
-    url(https://s3.amazonaws.com/beingmeta/static/g/metabook/diaglink24x24.png);}
+    background-image: url(g/metabook/diaglink24x24.png);}
 div.metabookglossform div.textbox input[name='OUTLET'] {
-    background-image:
-    url(https://s3.amazonaws.com/beingmeta/static/g/metabook/sbookspeople24x24.png);}
+    background-image: url(g/metabook/sbookspeople.svgz);}
+body._NOSVG div.metabookglossform div.textbox input[name='OUTLET'] {
+    background-image: url(g/metabook/sbookspeople24x24.png);}
 
 div.metabookglossform form .glossetc .glossdate {
     padding: 0px; padding-bottom: 1ex; padding-left: 1ex;
@@ -434,11 +433,13 @@ div.metabookglossform.submitting td.button img {
     -khtml-transition-property: height; -khtml-transition-duration: 2s;
     -webkit-transition-property: height; -webkit-transition-duration: 2s;}
 div.metabookglossform div.textbox input[type="TEXT"][name='TAG'] {
-    background-image:
-    url(https://s3.amazonaws.com/beingmeta/static/g/metabook/tagicon16x16.png);}
+    background-image: url(g/metabook/tagicon.svgz);}
 div.metabookglossform div.textbox input[type="TEXT"][name='LINK'] {
-    background-image:
-    url(https://s3.amazonaws.com/beingmeta/static/g/metabook/diaglink16x16.png);}
+    background-image: url(g/metabook/diaglink.svgz);}
+body._NOSVG div.metabookglossform div.textbox input[type="TEXT"][name='TAG'] {
+    background-image: url(g/metabook/tagicon16x16.png);}
+body._NOSVG div.metabookglossform div.textbox input[type="TEXT"][name='LINK'] {
+    background-image: url(g/metabook/diaglink16x16.png);}
 
 div.glossetc, div.glossetc img, div.glossetc span, div.glossetc input {
     margin-top: 0px;}
@@ -532,11 +533,15 @@ body.hudup #METABOOKHUD.addgloss.glossattach #METABOOKGLOSSATTACH {
     font-size: 20px;
     width: 90%;}
 #METABOOKRIBBON div.inputbox#METABOOKGLOSSTAGINPUT input[TYPE="TEXT"] {
-    background-image:
-    url(https://s3.amazonaws.com/beingmeta/static/g/metabook/tagicon64x64.png);}
+    background-image: url(g/metabook/tagicon.svgz);}
 #METABOOKRIBBON div.inputbox#METABOOKGLOSSOUTLETINPUT input[TYPE="TEXT"] {
-    background-image:
-    url(https://s3.amazonaws.com/beingmeta/static/g/metabook/sbookspeople64x64.png);}
+    background-image: url(g/metabook/sbookspeople.svgz);}
+body._NOSVG #METABOOKRIBBON div.inputbox#METABOOKGLOSSTAGINPUT
+  input[TYPE="TEXT"] {
+    background-image: url(g/metabook/tagicon64x64.png);}
+body._NOSVG #METABOOKRIBBON div.inputbox#METABOOKGLOSSOUTLETINPUT
+  input[TYPE="TEXT"] {
+    background-image: url(g/metabook/sbookspeople64x64.png);}
 
 /* New menu stuff */
 

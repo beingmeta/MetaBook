@@ -638,7 +638,9 @@ body._ANIMATE #METABOOKTOOLTAB {
     transition-property: background-color;
     transition-duration: 0.2s;}
 #METABOOKTOOLTAB {
-    background-image: url(/static/g/metabook/downbar.svgz);}
+    background-image: url(g/metabook/downbar.svgz);}
+body._NOSVG #METABOOKTOOLTAB {
+    background-image: url(g/metabook/downbar128w.png);}
 .hudup #METABOOKTOOLTAB, .mbcover #METABOOKTOOLTAB { display: none;}
 #METABOOKTOPBAR.tapholding #METABOOKTOOLTAB { display: none; }
 body._MOUSE #METABOOKHUD #METABOOKTOOLTAB.hudbutton:hover {
