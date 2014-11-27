@@ -849,6 +849,12 @@ body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER {
     border-top-width: 0px; border-bottom-width: 0px;}
 #METABOOKPOINTGLOSSES div.tochead { display: none; }
 
+#METABOOKSKIMMER div.metabookcardbody {font-size: 75%;}
+#METABOOKSKIMMER.expanded div.metabookcardbody {font-size: 100%;}
+#METABOOKSKIMMER div.metabookcardbody img.button { display: none;}
+#METABOOKSKIMMER.expanded div.metabookcardbody img.button {
+    display: inline-block;}
+
 #METABOOKSKIMMER div.metabookcard.gloss > div.tochead,
 #METABOOKSKIMMER div.metabookcard.gloss div.metabookcardbody {
     margin-left: 50px;}

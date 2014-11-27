@@ -1954,7 +1954,8 @@
         if (getParent(target,".tochead")) {
             var anchor=getParent(target,".tocref");
             var href=(anchor)&&(anchor.getAttribute("data-tocref"));
-            metaBook.GoTOC(href);}
+            if (href) metaBook.GoTOC(href);
+            else toggleClass("METABOOKSKIMMER","expanded");}
         else toggleClass("METABOOKSKIMMER","expanded");
         fdjtUI.cancel(evt);
         return;}

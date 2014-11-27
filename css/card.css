@@ -96,7 +96,7 @@ div.metabookcard > hr {
 .metabookcard .audience .outlet:before {
     content: "→ "; font-weight: bold;}
 
-.metabookcardbody { padding-top: 6px;}
+.metabookcardbody {padding-top: 6px;}
 .metabookcardbody:before, .metabookcard .metabookcardbody:after {
                               content: " "; display: table;}
 .metabookcardbody:after { clear: both; }

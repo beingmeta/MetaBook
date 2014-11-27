@@ -276,13 +276,25 @@ div.metabookhelp h3 span.metabooktogglehelp,
 div.helpbox h1 span.metabooktogglehelp,
 div.helpbox h2 span.metabooktogglehelp,
 div.helpbox h3 span.metabooktogglehelp {
-    float: right;
-    font-variant: small-caps; font-size: 75%;
-    font-weight: bold; font-style: italic;
-    background-color: aliceblue; color: black;
-    margin-left: 1ex; padding-left: 1ex; padding-right: 1ex;
-    border: solid black 2px; border-radius: 1ex;}
+    float: right; cursor: pointer;
+    font-weight: bold; font-style: italic; overflow: hidden;
+    background-color: transparent; color: transparent;
+    height: 1.5em; width: 1.5em; border: 0px; border-radius: 0px;
+    margin-left: 1ex;}
 #METABOOKCOVER span.metabooktogglehelp { display: none; }
+div.metabookhelp h1 span.metabooktogglehelp,
+div.metabookhelp h2 span.metabooktogglehelp,
+div.metabookhelp h3 span.metabooktogglehelp,
+div.helpbox h1 span.metabooktogglehelp,
+div.helpbox h2 span.metabooktogglehelp,
+div.helpbox h3 span.metabooktogglehelp {
+    background-position: center center;
+    background-size: contain; background-repeat: no-repeat;
+    background-image: url(g/metabook/hide_help.svgz);}
+span.metabooktogglehelp {
+    background-image: url(g/metabook/hide_help.svgz);}
+body.NOSVG span.metabooktogglehelp {
+    background-image: url(g/metabook/hide_help64x64.png);}
 
 div.metabookhelp td {
     color: rgba(0,0,0,0.75);}
