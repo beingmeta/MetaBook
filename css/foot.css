@@ -143,11 +143,11 @@ body.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR
     pointer-events: none;
     z-index: 45;}
 #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER1.metabooksectmarker {
-    height: 70%;}
+    height: 75%;}
 #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER2.metabooksectmarker {
-    height: 40%; background-color: rgba(0,0,255,0.2); }
+    height: 60%; background-color: rgba(0,0,255,0.2); }
 #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER3.metabooksectmarker {
-    height: 25%; background-color: rgba(0,0,255,0.1); }
+    height: 30%; background-color: rgba(0,0,255,0.1); }
 
 body._TOUCH.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR {
     height: 150px;}
