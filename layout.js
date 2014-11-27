@@ -53,7 +53,7 @@ metaBook.Paginate=
         "use strict";
 
         var mB=metaBook;
-        var Trace=metaBook.Trace;
+        var Trace=mB.Trace;
         var fdjtString=fdjt.String;
         var fdjtState=fdjt.State;
         var fdjtHash=fdjt.Hash;

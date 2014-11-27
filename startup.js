@@ -1469,11 +1469,12 @@ metaBook.Startup=
                     fdjtID("SBOOKSABOUTAUTHOR");
                 if ((about_book)||(about_author))
                     blurb=fdjtDOM(
-                        "div#METABOOKBLURB.metabookblurb",
+                        "div#METABOOKBLURB.metabookblurb.scrolling",
                         "\n",about_book,"\n",about_author,"\n");}
             if (blurb) addToCover(cover,blurb);
             
-            var settings=fdjtDOM("div#METABOOKSETTINGS");
+            var settings=fdjtDOM(
+                "div#METABOOKSETTINGS.metabooksettings.scrolling");
             settings.innerHTML=fixStaticRefs(metaBook.HTML.settings);
             metaBook.DOM.settings=settings;
             if (settings) {
@@ -1497,11 +1498,13 @@ metaBook.Startup=
             if (settings) addToCover(cover,settings);
 
             
-            var cover_help=fdjtDOM("div#METABOOKAPPHELP.metabookhelp");
+            var cover_help=fdjtDOM(
+                "div#METABOOKAPPHELP.metabookhelp.scrolling");
             cover_help.innerHTML=fixStaticRefs(metaBook.HTML.help);
             if (cover_help) addToCover(cover,cover_help);
             
-            var console=metaBook.DOM.console=fdjtDOM("div#METABOOKCONSOLE");
+            var console=metaBook.DOM.console=
+                fdjtDOM("div#METABOOKCONSOLE.metabookconsole.scrolling");
             if (Trace.startup>2) fdjtLog("Setting up console %o",console);
             console.innerHTML=fixStaticRefs(metaBook.HTML.console);
             metaBook.DOM.input_console=input_console=
@@ -1578,13 +1581,19 @@ metaBook.Startup=
 
         function resizeCover(cover){
             if (!(cover)) cover=fdjt.ID("METABOOKCOVER");
+            fdjtLog("Resizing cover %o",cover);
             var style=cover.style, display=style.display, zindex=style.zIndex;
             var opacity=style.opacity, viz=style.visibility;
             var restore=0;
             if (!(cover.offsetHeight)) {
                 restore=1; style.zIndex=-500; style.visibility='hidden';
                 style.opacity=0; style.display='block';}
-            fdjtDOM.adjustFonts(cover);
+            var controls=fdjtID("METABOOKCOVERCONTROLS");
+            var userbox=fdjtID("METABOOKUSERBOX");
+            fdjtDOM.adjustFontSize(controls);
+            fdjtDOM.adjustFontSize(userbox);
+            // fdjt.DOM.resetFontSize(controls);
+            // fdjt.DOM.resetFontSize(userbox);            
             var covertitle=fdjtID("METABOOKTITLEPAGE");
             if ((covertitle)&&
                 (!(hasClass(covertitle,/\b(adjustfont|fdjtadjustfont)\b/))))
@@ -1633,15 +1642,6 @@ metaBook.Startup=
                 else if (scan.getAttribute("data-mode")) break;
                 else scan=scan.parentNode;}
             var mode=scan.getAttribute("data-mode");
-            // No longer have cover buttons be toggles
-            /* 
-               if ((mode)&&(cover.className===mode)) {
-               if (cover.getAttribute("data-defaultclass"))
-               cover.className=cover.getAttribute("data-defaultclass");
-               else cover.className="bookcover";
-               fdjt.UI.cancel(evt);
-               return;}
-            */
             if ((mode==="layers")&&
                 (!(fdjtID("SBOOKSAPP").src))&&
                 (!(metaBook.appinit)))

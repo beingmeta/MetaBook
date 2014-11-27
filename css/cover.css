@@ -75,11 +75,18 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
 
 #METABOOKCOVER > div {
     position: absolute;
-    top: 75px; left: 50px; right: 50px;
-    bottom: 100px; height: auto; width: auto;
-    border: solid black 3px; border-radius: 1em;
-    opacity: 0.0; overflow: auto; z-index: -50;
+    top: 75px; bottom: 125px; left: 50px; right: 50px; 
+    height: auto; width: auto; overflow: hidden;
+    z-index: -50; opacity: 0.0;
+    border-radius: 1em; -webkit-border-radius: 1em;
+    -moz-border-radius: 1em; -o-border-radius: 1em;
+    border: solid black 3px; 
     display: none;}
+#METABOOKCOVER > div.controls {
+    border-radius: 0px; -webkit-border-radius: 0px;
+    -moz-border-radius: 0px; -o-border-radius: 0px;}
+#METABOOKCOVER > div.scrolling {
+    overflow-y: auto;}
 #METABOOKFRAME._ANIMATE #METABOOKCOVER > div {
     transition-property: opacity; transition-duration: 1s;
     -webkit-transition-property: opacity; -webkit-transition-duration: 1s;
@@ -107,38 +114,37 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
     /* font-size: 1em; font-size: 1.5rem; font-size: 4vw; */
     padding-left: 1em; padding-right: 1em; line-height: 1.1;
     opacity: 1; overflow: hidden; z-index: 50; display: block;}
-#METABOOKCOVERCONTROLS > .username {
-    float: left; vertical-align: top;}
 #METABOOKCOVERCONTROLS > .control > img,
 #METABOOKCOVERCONTROLS .control > img {
     width: 90%; height: auto; clear: both;}
-
 #METABOOKCOVERCONTROLS span.control {
     color: silver; white-space: nowrap;
     padding-left: 0.5ex; padding-right: 0.5ex; padding-bottom: 0.5ex;
     cursor: pointer;}
-
 body._MOUSE #METABOOKCOVERCONTROLS span.control:hover {
     text-decoration: underline;}
 
-#METABOOKFRAME._ANIMATE #METABOOKCOVER div.loginbox,
-#METABOOKFRAME._ANIMATE #METABOOKCOVER div.userbox { 
-    transition-property: height; transition-duration: 2s;
-    -webkit-transition-property: height; -webkit-transition-duration: 2s;
-    -moz-transition-property: height; -moz-transition-duration: 2s;
-    -o-transition-property: height; -o-transition-duration: 2s;}
-#METABOOKCOVER div.loginbox, #METABOOKCOVER div.userbox {
+#METABOOKCOVER > div.loginbox, #METABOOKCOVER > div.userbox {
     position: absolute; vertical-align: top;
-    left: 0px; right: 0px; top: auto; bottom: 0px !important; 
     box-sizing: border-box; -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box; 
+    bottom: 0px !important; top: auto !important; left: 0px; right: 0px; 
     z-index: 50; color: gold; overflow: hidden;
-    border-top: solid gold 1px;
-    opacity: 1.0;
-    height: 0px;}
-#METABOOKCOVER div.userbox {padding-top: 1px;}
-#METABOOKCOVER div.loginbox {
-    height: 70px; border-top: solid black 1px; padding-bottom: 2px;}
+    border-top: solid gold 1px; 
+    opacity: 1.0;}
+#METABOOKCOVER > div.loginbox {
+    border-top: solid black 1px;
+    padding-bottom: 2px;}
+#METABOOKCOVER > div.userbox {
+    padding-top: 0px;}
+
+body._NOUSER #METABOOKCOVER > div {
+    top: 65px; bottom: 150px; }
+body._USER #METABOOKCOVER > div.userbox {
+    height: 40px; padding-top: 1px; display: block;}
+body._NOUSER #METABOOKCOVER > div.loginbox {
+    height: 70px; display: block;}
+
 #METABOOKCOVER div.loginmessage {
     height: 30px; text-align: center;
     background: gray;
@@ -146,6 +152,7 @@ body._MOUSE #METABOOKCOVERCONTROLS span.control:hover {
     background: -webkit-gradient(to top,gray,black);
     background: -moz-linear-gradient(top,gray,black);}
 #METABOOKCOVER div.loginmessage span.sbooks em { color: cornflowerblue; }
+
 #METABOOKCOVER div.loginbox form {
     height: 40px; text-align: right; vertical-align: top;
     padding-top: 3px; padding-bottom: 3px; 
@@ -160,15 +167,8 @@ body._MOUSE #METABOOKCOVERCONTROLS span.control:hover {
     max-width: 50%; float: left;} 
 #METABOOKCOVER div.loginbox form select {display: none;}
 
-body._NOUSER #METABOOKCOVER div.loginbox,
-body._USER #METABOOKCOVER div.userbox {
-    display: block; vertical-align: top;
-    color: gold;}
-body._NOUSER #METABOOKCOVER div.loginbox {height: 70px;}
-body._USER #METABOOKCOVER div.userbox {height: 40px;}
 body._NOUSER #METABOOKCOVER > #METABOOKCOVERCONTROLS {
     bottom: 70px;}
-body._NOUSER #METABOOKCOVER > div { bottom: 130px; }
 
 #METABOOKCOVER div.loginbox {
     white-space: nowrap;
@@ -212,7 +212,8 @@ body._USER #METABOOKCOVER div.userbox {
 #METABOOKCOVER.aboutbook > div#METABOOKABOUTBOOK {
     opacity: 1.0; z-index: 20; display: block;}
 
-#METABOOKCOVER.bookcover .control[data-mode='bookcover'],
+#METABOOKCOVER.bookcover .control[data-mode='coverpage'],
+#METABOOKCOVER.coverpage .control[data-mode='coverpage'],
 #METABOOKCOVER.titlepage .control[data-mode='titlepage'],
 #METABOOKCOVER.layers .control[data-mode='layers'],
 #METABOOKCOVER.aboutbook .control[data-mode='aboutbook'],
@@ -507,6 +508,7 @@ body.mbBUSY #METABOOKCOVERMESSAGE > #METABOOKBUSYMESSAGE {
 body.mbLAYOUT #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE,
 body.mbBUSY #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE {
     display: none;}
+#METABOOKLAYOUTMESSAGE div.message { font-size: 4vw;}
 
 #METABOOKREADYMESSAGE { padding-bottom: 1ex; }
 
@@ -537,6 +539,7 @@ body.mbBUSY #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE {
 }
 @media screen and (max-width: 500px) {
     #METABOOKCOVER > div { bottom: 120px; }
+    body._NOUSER #METABOOKCOVER > div { bottom: 150px; }
     #METABOOKCOVERMESSAGE > div { font-size: 0.7em;}
     #METABOOKCOVERMESSAGE > div#METABOOKOPENTAB { font-size: 30px;}
     #METABOOKCOVERMESSAGE > div#METABOOKREADYMESSAGE { font-size: 30px;}
@@ -560,11 +563,15 @@ body.mbBUSY #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE {
     #METABOOKCOVER div.loginbox form button { display: none;}
     #METABOOKCOVER div.loginbox form > span { display: none;}
     #METABOOKCOVER div.loginbox form select {
+        position: absolute; right: 0px;
         width: 48%; font-size: 16px; font-size: 1rem;
         display: inline-block;}
     #METABOOKCOVER div.loginbox form input[TYPE="TEXT"] {
+        position: absolute; left: 0px;
         width: 48%; font-size: 16px; font-size: 1rem;
-        display: inline-block;}}
+        display: inline-block;}
+    #METABOOKCOVER div.loginbox form input[TYPE="TEXT"]:focus {
+        width: 100%; max-width: 100%; z-index: 100;}}
 
 /* Emacs local variables
 ;;;  Local variables: ***
