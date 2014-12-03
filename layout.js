@@ -204,7 +204,7 @@ metaBook.Paginate=
                     fdjtLog("Restored %d-page layout %s, adding glosses",
                             layout.pages.length,layout_id);
                 var lostids=layout.lostids, moved_ids=lostids._all_ids;
-                var i=0, lim=moved_ids.length;
+                var pages=layout.pages, i=0, lim=moved_ids.length;
                 while (i<lim) {
                     var addGlossmark=metaBook.UI.addGlossmark;
                     var id=moved_ids[i++];
@@ -219,6 +219,14 @@ metaBook.Paginate=
                                 addGlossmark(nodes[k++],gloss);}}}}
                 if (Trace.startup)
                     fdjtLog("Finished adding glossmarks to saved layout");
+                i=0; lim=pages.length; while (i<lim) {
+                    var page=pages[i++];
+                    var pageref=page.getAttribute("data-staticpageref");
+                    if (pageref) {
+                        var pagemap=layout.pagemap;
+                        if (!(pagemap)) layout.pagemap=pagemap={};
+                        layout.laststaticref=pageref;
+                        pagemap[pageref]=page;}}
                 setupPagebar();
                 if (metaBook.layoutdone) {
                     var fn=metaBook.layoutdone;
@@ -495,7 +503,8 @@ metaBook.Paginate=
                 var topid=topnode.codexbaseid||topnode.id;
                 var prevpage=
                     (((pagenum)&&(pagenum>1))&&(pages[pagenum-2]));
-                var staticref=getChild(page,".staticpageref,.sbookstaticpageref");
+                var staticref=getChild(
+                    page,".staticpageref,.sbookstaticpageref");
                 var curloc=false;
                 if (staticref) {
                     var pageref=staticref.getAttribute("data-pageref");
@@ -879,10 +888,12 @@ metaBook.Paginate=
                         marker3.style.width=(100*(span3.width/npages))+"%";
                         marker3.style.display='block';                    }
                     else marker3.style.display='none';}}
+            var handlers=metaBook.UI.handlers[metaBook.ui];
+            fdjtDOM.addListeners(locoff,handlers["#METABOOKLOCPCT"]);
             fdjtDOM.addListeners(
-                locoff,metaBook.UI.handlers[metaBook.ui]["#METABOOKLOCPCT"]);
-            fdjtDOM.addListeners(
-                pageno_text,metaBook.UI.handlers[metaBook.ui]["#METABOOKPAGENOTEXT"]);}
+                pageno_text,handlers["#METABOOKPAGENOTEXT"]);
+            if (pageref_text) fdjtDOM.addListeners(
+                pageref_text,handlers["#METABOOKPAGEREFTEXT"]);}
         metaBook.updatePageDisplay=updatePageDisplay;
         
         function getPageSpan(headinfo) {

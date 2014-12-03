@@ -185,13 +185,15 @@ div.metabookglossform .glossetc .glossdate {
     font-size: 80%; font-variant: small-caps; color: purple;}
 
 div.metabookglossform form .glossexposure {
+    float: right; font-size: 1ex;}
+body._TOUCH div.metabookglossform form .glossexposure {
     float: right; font-size: 1.5ex;}
 
 div.metabookglossform form .glossexposure .checkspan {
     float: right; margin-right: 1ex; margin-top: 2px;
     font-variant: smallcaps; vertical-align: top;}
 div.metabookglossform form .glossexposure .checkspan span {
-    vertical-align: top;}
+    vertical-align: middle;}
 div.metabookglossform.private .checkspan.postgloss {
     display: none;}
 

@@ -166,10 +166,13 @@ body.mbSHOWHELP.mbSKIMMING #METABOOKHUD.allglosses
 
 /* Goto page and goto loc always display their help. */
 #METABOOKHUD.gotopage #METABOOKHUDHELP,
-#METABOOKHUD.gotoloc #METABOOKHUDHELP {
+#METABOOKHUD.gotoloc #METABOOKHUDHELP,
+#METABOOKHUD.gotoref #METABOOKHUDHELP {
     text-align: center; display: block;}
+#METABOOKHUD.gotopage #METABOOKGOTOREFHELP.helpbox,
 #METABOOKHUD.gotopage #METABOOKGOTOPAGEHELP.helpbox,
-#METABOOKHUD.gotoloc #METABOOKGOTOLOCHELP.helpbox {
+#METABOOKHUD.gotoloc #METABOOKGOTOLOCHELP.helpbox,
+#METABOOKHUD.gotoref #METABOOKGOTOREFHELP.helpbox {
     border-color: black; z-index: 260; opacity: 0.9; 
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
     filter: alpha(opacity=90);

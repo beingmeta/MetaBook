@@ -172,12 +172,15 @@ body._TOUCH.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR
 #METABOOKHUD .metabookgoto input {
     width: 4em; text-align: right; padding-right: 2px;}
 #METABOOKHUD.gotoloc  .metabookgoto#METABOOKGOTOLOC,
-#METABOOKHUD.gotopage .metabookgoto#METABOOKGOTOPAGE {
+#METABOOKHUD.gotopage .metabookgoto#METABOOKGOTOPAGE,
+#METABOOKHUD.gotoref .metabookgoto#METABOOKGOTOREF {
     display: inline; opacity: 1.0;}
 #METABOOKHUD  .metabookgoto#METABOOKGOTOLOC {
     right: auto; left: auto; padding-left: 1ex; padding-right: 1ex;}
 #METABOOKHUD  .metabookgoto#METABOOKGOTOPAGE {
     right: 40%; left: 40%;}
+#METABOOKHUD  .metabookgoto#METABOOKGOTOREF {
+    left: 0px;}
 
 /* SHOWTEXT rules */
 

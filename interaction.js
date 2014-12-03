@@ -639,6 +639,62 @@
             if (metaBook.mode!=="addgloss")
                 metaBook.setMode("addgloss",false);
             return;}
+        var choices=[
+            {label: "Add Gloss",
+             handler: function(){startGloss(passage);},
+             isdefault: true}];
+        if (window.ClipboardEvent) {
+            choices.push({label: "Copy link",
+                          handler: function(){copyURI(passage);}});
+            choices.push({label: "Copy content",
+                          handler: function(){copyContent(passage);}});}
+        addOptions(passage,choices);
+        if (choices.length===1) {
+            fdjtUI.cancel(evt);
+            startGloss(passage);
+            return;}
+        fdjtUI.cancel(evt);
+        choices.push(
+            {label: "Cancel",
+             handler: function(){
+                 metaBook.cancelGloss();
+                 saving_dialog=false;}});
+        var max=0, i=0, lim=choices.length;
+        while (i<lim) {
+            var ch=choices[i++];
+            var len=ch.label.length;
+            if (len>max) max=len;}
+        var spec={choices: choices,
+                  spec: "div.fdjtdialog",
+                  style: "width: "+(max*0.8)+"em"};
+        fdjtUI.choose(spec);}
+
+    function addOptions(passage,choices){
+        var scan=passage; while (scan) {
+            var link=passage.getAttribute("data-xref");
+            if (link) {
+                var space=link.indexOf(' ');
+                var label=((space>0)?(link.slice(space+1)):(link));
+                var href=((space>0)?(link.slice(0,space)):(link));
+                href=href.replace("{{ID}}",passage.id);
+                var opt={label: label, handler: makeOpener(href)};
+                choices.push(opt);}
+            scan=scan.parentNode;}}
+            
+    function makeOpener(url){
+        return function (){window.open(url);};}
+    function copyURI(passage){
+        var CE=window.ClipboardEvent;
+        var evt = new CE('copy',{ dataType: 'text/plain', 
+                                  data: metaBook.refuri+"#"+passage.id } );
+        document.dispatchEvent(evt);}
+    function copyContent(passage){
+        var CE=window.ClipboardEvent;
+        var evt = new CE('copy',{ dataType: 'text/html', 
+                                  data: passage.innerHTML } );
+        document.dispatchEvent(evt);}
+
+    function startGloss(passage){
         var selecting=metaBook.UI.selectText(passage);
         if ((metaBook.TapHold.page)&&(metaBook.TapHold.page.abort))
             metaBook.TapHold.page.abort();
@@ -648,7 +704,7 @@
         selectors.push(selecting);
         selectors[passage.id]=selecting;
         fdjtUI.TapHold.clear();
-        startAddGloss(passage,false,evt);}
+        startAddGloss(passage,false,false);}
 
     var body_tapstart=false;
     function body_touchstart(evt){
@@ -1295,25 +1351,21 @@
         else if (ch===13) fdjtUI.cancel(evt);
         if (ch===13) {
             if (target.name==='GOTOPAGE') {
-                if (target.value[0]==='(') {
-                    var pagemap=metaBook.layout.pagemap;
-                    var parsed=/\(([0-9]+)/.exec(target.value);
-                    if ((parsed)&&(parsed.length>1)&&(pagemap)&&
-                        (pagemap[parsed[1]])) 
-                        metaBook.GoToPage(pagemap[parsed[1]]);
-                    fdjtLog("GoTo failed");}
-                else {
-                    var num=parseInt(target.value,10);
-                    if (typeof num === 'number') {
-                        handled=true; metaBook.GoToPage(num);}
-                    else {}}}
+                var num=parseInt(target.value,10);
+                if (typeof num === 'number') {
+                    handled=true; metaBook.GoToPage(num);}
+                else {}}
+            else if (target.name==='GOTOREF') {
+                var pagemap=metaBook.layout.pagemap;
+                var page=pagemap[target.value];
+                if (page) {
+                    metaBook.GoToPage(page); handled=true;}}
             else if (target.name==='GOTOLOC') {
                 var locstring=target.value;
                 var loc=parseFloat(locstring);
                 if ((typeof loc === 'number')&&(loc>=0)&&(loc<=100)) {
                     loc=Math.floor((loc/100)*metaBook.ends_at)+1;
-                    metaBook.JumpTo(loc); handled=true;}
-                else {metaBook.JumpTo(Math.floor(loc)); handled=true;}}
+                    metaBook.JumpTo(loc); handled=true;}}
             else {}
             if (handled) {
                 target.value="";
@@ -1984,6 +2036,15 @@
         fdjtUI.cancel(evt);
         if (metaBook.hudup) {metaBook.setMode(false); return;}
         metaBook.setMode("gotopage",true);}
+    function enterPageRef(evt) {
+        evt=evt||window.event;
+        if ((metaBook.hudup)||(metaBook.mode)||(metaBook.cxthelp)) {
+            fdjtUI.cancel(evt);
+            metaBook.setMode(false);
+            return;}
+        fdjtUI.cancel(evt);
+        if (metaBook.hudup) {metaBook.setMode(false); return;}
+        metaBook.setMode("gotoref",true);}
     function enterLocation(evt) {
         evt=evt||window.event;
         if ((metaBook.hudup)||(metaBook.mode)||(metaBook.cxthelp)) {
@@ -2628,11 +2689,13 @@
          "#METABOOKHUDHELP": {click: metaBook.UI.dropHUD},
          ".helphud": {click: metaBook.UI.dropHUD},
          ".metabookheart": {tap: flyleaf_tap},
-         "#METABOOKPAGEBAR": {tap: pagebar_tap,
-                            hold: pagebar_hold,
-                            release: pagebar_release,
-                            slip: pagebar_slip,
-                            click: cancel},
+         "#METABOOKPAGEBAR": {
+             tap: pagebar_tap,
+             hold: pagebar_hold,
+             release: pagebar_release,
+             slip: pagebar_slip,
+             click: cancel},
+         "#METABOOKPAGEREFTEXT": {tap: enterPageRef},
          "#METABOOKPAGENOTEXT": {tap: enterPageNum},
          "#METABOOKLOCPCT": {tap: enterPercentage},
          "#METABOOKLOCOFF": {tap: enterLocation},
@@ -2714,6 +2777,7 @@
          "#METABOOKRESETSYNC": {click: resetState},
          ".clearoffline": {click: clearOffline},
          ".metabookclearmode": {click: clearMode},
+         "#METABOOKGOTOREFHELP": {click: clearMode},
          "#METABOOKGOTOPAGEHELP": {click: clearMode},
          "#METABOOKGOTOLOCHELP": {click: clearMode},
          ".metabookshowsearch": {click: function(evt){
@@ -2769,8 +2833,6 @@
                    touchtoo: slice_touchtoo,
                    touchmove: preview_touchmove_nodefault,
                    slip: slice_slipped},
-         // "#METABOOKHEARTBODY": {touchstart: heart_touched},
-         // "#METABOOKFRAME": {touchstart: noDefault,touchmove: noDefault,touchend: noDefault},
          "#METABOOKSTARTPAGE": {touchend: metaBook.UI.dropHUD},
          "#METABOOKTOPBAR": {tap: raiseHUD},
          //"#METABOOKTOOLTAB": {tap: raiseHUD, release: raiseHUD},
@@ -2790,6 +2852,7 @@
                             slip: pagebar_slip,
                             touchtoo: pagebar_touchtoo,
                             click: cancel},
+         "#METABOOKPAGEREFTEXT": {tap: enterPageRef},
          "#METABOOKPAGENOTEXT": {tap: enterPageNum},
          "#METABOOKLOCPCT": {tap: enterPercentage},
          "#METABOOKLOCOFF": {tap: enterLocation},
@@ -2800,7 +2863,8 @@
          "#METABOOKPAGEHEAD": {touchstart: head_tap},
          "#METABOOKTABS": {touchstart: head_tap},
          "#METABOOKHEAD": {touchend: head_tap},
-         "#METABOOKFOOT": {tap: foot_tap,touchstart: noDefault,touchmove: noDefault},
+         "#METABOOKFOOT": {
+             tap: foot_tap,touchstart: noDefault,touchmove: noDefault},
          "#METABOOKTAGINPUT": {keydown: addtag_keydown},
          "#METABOOKOUTLETINPUT": {keydown: addoutlet_keydown},
          "#METABOOKATTACHFORM": {submit: attach_submit},
@@ -2835,7 +2899,8 @@
              touchstart: back_to_reading,
              touchmove: cancel,
              touchend: cancel},
-         "#METABOOKGLOSSDETAIL": {touchend: metaBook.UI.dropHUD,click: cancel},
+         "#METABOOKGLOSSDETAIL": {
+             touchend: metaBook.UI.dropHUD,click: cancel},
          ".hudmodebutton": {
              tap: hudmodebutton,hold: hudmodebutton,release: hudmodebutton,
              slip: hudmodebutton},
@@ -2871,12 +2936,17 @@
              touchend: toggleHelp},
         
          "#METABOOKCONSOLETEXTINPUT": {
-             touchstart: function(){fdjt.ID('METABOOKCONSOLETEXTINPUT').focus();},
-             focus: function(){fdjt.DOM.addClass('METABOOKCONSOLEINPUT','ontop');},
-             blur: function(){fdjt.DOM.dropClass('METABOOKCONSOLEINPUT','ontop');}},
+             touchstart: function(){
+                 fdjt.ID('METABOOKCONSOLETEXTINPUT').focus();},
+             focus: function(){
+                 fdjt.DOM.addClass('METABOOKCONSOLEINPUT','ontop');},
+             blur: function(){
+                 fdjt.DOM.dropClass('METABOOKCONSOLEINPUT','ontop');}},
 
-         "#METABOOKCONSOLEBUTTON": {touchstart: cancel, touchend: consolefn},
-         "#METABOOKSAVESETTINGS": {touchstart: cancel, touchend: saveSettings},
+         "#METABOOKCONSOLEBUTTON": {
+             touchstart: cancel, touchend: consolefn},
+         "#METABOOKSAVESETTINGS": {
+             touchstart: cancel, touchend: saveSettings},
          "#METABOOKAPPLYSETTINGS": {
              touchstart: cancel,
              touchend: updateSettings},
@@ -2885,11 +2955,14 @@
              touchstart: cancel,
              touchend: resetSettings},
          "#METABOOKSETTINGSTABLE": {},
-         "#METABOOKREFRESHOFFLINE": {touchstart: cancel, touchend: refreshOffline},
-         "#METABOOKREFRESHLAYOUT": {touchstart: cancel, touchend: refreshLayout},
+         "#METABOOKREFRESHOFFLINE": {
+             touchstart: cancel, touchend: refreshOffline},
+         "#METABOOKREFRESHLAYOUT": {
+             touchstart: cancel, touchend: refreshLayout},
          "#METABOOKRESETSYNC": {touchstart: cancel, touchend: resetState},
          ".clearoffline": {touchstart: cancel, touchend: clearOffline},
          ".metabookclearmode": {touchstart: cancel, touchend: clearMode},
+         "#METABOOKGOTOREFHELP": {touchstart: cancel, touchend: clearMode},
          "#METABOOKGOTOPAGEHELP": {touchstart: cancel, touchend: clearMode},
          "#METABOOKGOTOLOCHELP": {touchstart: cancel, touchend: clearMode},
          ".metabookshowsearch": {
