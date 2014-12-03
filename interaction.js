@@ -1295,10 +1295,18 @@
         else if (ch===13) fdjtUI.cancel(evt);
         if (ch===13) {
             if (target.name==='GOTOPAGE') {
-                var num=parseInt(target.value,10);
-                if (typeof num === 'number') {
-                    handled=true; metaBook.GoToPage(num);}
-                else {}}
+                if (target.value[0]==='(') {
+                    var pagemap=metaBook.layout.pagemap;
+                    var parsed=/\(([0-9]+)/.exec(target.value);
+                    if ((parsed)&&(parsed.length>1)&&(pagemap)&&
+                        (pagemap[parsed[1]])) 
+                        metaBook.GoToPage(pagemap[parsed[1]]);
+                    fdjtLog("GoTo failed");}
+                else {
+                    var num=parseInt(target.value,10);
+                    if (typeof num === 'number') {
+                        handled=true; metaBook.GoToPage(num);}
+                    else {}}}
             else if (target.name==='GOTOLOC') {
                 var locstring=target.value;
                 var loc=parseFloat(locstring);
@@ -1760,9 +1768,11 @@
 
     function pageForward(evt){
         evt=evt||window.event;
+        dropClass(document.body,/\bmb(PAGE)?PREVIEW/g);
         var now=fdjtTime();
         if ((last_motion)&&((now-last_motion)<100)) return;
         else last_motion=now;
+        dropClass(document.body,/\bmb(PAGE)?PREVIEW/g);
         if (metaBook.readsound)
             fdjtDOM.playAudio("METABOOKPAGEORWARDAUDIO");
         if ((Trace.gestures)||(Trace.flips))
@@ -1784,6 +1794,7 @@
 
     function pageBackward(evt){
         var now=fdjtTime();
+        dropClass(document.body,/\bmb(PAGE)?PREVIEW/g);
         if ((last_motion)&&((now-last_motion)<100)) return;
         else last_motion=now;
         evt=evt||window.event;
@@ -1807,6 +1818,7 @@
 
     function skimForward(evt){
         var now=fdjtTime();
+        dropClass(document.body,/\bmb(PAGE)?PREVIEW/g);
         if ((last_motion)&&((now-last_motion)<100)) return;
         else last_motion=now;
         evt=evt||window.event;
@@ -1872,6 +1884,7 @@
 
     function skimBackward(evt){
         var now=fdjtTime();
+        dropClass(document.body,/\bmb(PAGE)?PREVIEW/g);
         if ((last_motion)&&((now-last_motion)<100)) return;
         else last_motion=now;
         if (metaBook.uisound)
