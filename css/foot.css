@@ -30,6 +30,8 @@ body.mbPREVIEW #METABOOKFOOT #METABOOKPAGEBAR span#METABOOKPAGENOTEXT {
     pointer-events: none;}
 #METABOOKFOOT span#METABOOKPAGENO span#METABOOKPAGENOTEXT {
     cursor: text;}
+#METABOOKFOOT .metabookpageno .static {
+    font-style: italic; padding-left: 1em;}
 #METABOOKFOOT #METABOOKPAGEBAR div.progressbar {
     background-color: gray; border: solid black 1px; border-top-width: 0px;
     z-index: 50; height: 100%; position: absolute; opacity: 0.5; 

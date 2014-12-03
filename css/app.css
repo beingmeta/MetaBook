@@ -893,6 +893,14 @@ span.bma {
     font-variant: normal;
     color: blue; }
 
+/* Rules for page references */
+
+.staticpageref {
+    position: absolute; right: 0px; 
+    font-size: 8px; font-size: 0.8rem;
+    font-weight: normal; font-style: normal;
+    display: none;}
+
 /* Media rules */
 
 @media (max-width: 500px) {

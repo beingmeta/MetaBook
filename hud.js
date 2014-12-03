@@ -61,7 +61,7 @@ metaBook.setMode=
         var mbID=metaBook.ID;
         
         var mB=metaBook;
-        var Trace=metaBook.Trace;
+        var Trace=mB.Trace;
 
         // Helpful dimensions
         // Whether to call displaySync on mode changes

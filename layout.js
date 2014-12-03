@@ -486,12 +486,30 @@ metaBook.Paginate=
 
             var docinfo=metaBook.docinfo;
             var goneto=false;
+            var getChild=fdjtDOM.getChild;
+            var stripMarkup=fdjtString.stripMarkup;
 
             function setPageInfo(page,layout){
                 var pages=layout.pages, pagenum=layout.pagenum;
                 var topnode=getPageTop(page);
                 var topid=topnode.codexbaseid||topnode.id;
+                var prevpage=
+                    (((pagenum)&&(pagenum>1))&&(pages[pagenum-2]));
+                var staticref=getChild(page,".staticpageref,.sbookstaticpageref");
                 var curloc=false;
+                if (staticref) {
+                    var pageref=staticref.getAttribute("data-pageref");
+                    if (!(pageref)) pageref=stripMarkup(staticref.innerHTML);
+                    if (pageref) {
+                        if (!(layout.pagemap)) layout.pagemap={};
+                        page.setAttribute("data-staticpageref",pageref);
+                        if (!(layout.pagemap[pageref]))
+                            layout.laststaticref=pageref;
+                            layout.pagemap[pageref]=page;}}
+                else if (prevpage) {
+                    var prevref=prevpage.getAttribute("data-staticpageref");
+                    if (prevref)
+                        page.setAttribute("data-staticpageref",prevref);}
                 if (topnode) {
                     var topstart=mbID(topid);
                     var locoff=((topstart===topnode)?(0):
@@ -501,8 +519,7 @@ metaBook.Paginate=
                     if (topid) page.setAttribute("data-topid",topid);
                     page.setAttribute("data-sbookloc",curloc);}
                 else {
-                    if ((pagenum)&&(pagenum>1)) {
-                        var prevpage=pages[pagenum-2];
+                    if (prevpage) {
                         var lastid=getPageLastID(prevpage);
                         var lastinfo=((lastid)&&(docinfo[lastid]));
                         if (lastinfo) {
@@ -782,10 +799,11 @@ metaBook.Paginate=
         
         /* Updating the page display */
 
-        function updatePageDisplay(pagenum,location,classname) {
+        function updatePageDisplay(pagenum,staticref,location,classname) {
             var update_progress=(!(classname));
             if (!(classname)) classname="current";
             var npages=metaBook.pagecount;
+            var staticmax=metaBook.layout.laststaticref;
             var page_elt=fdjt.ID("METABOOKPAGESPAN"+pagenum);
             var cur=getChildren("METABOOKPAGEBAR","."+classname);
             if (cur[0]!==page_elt) {
@@ -805,8 +823,14 @@ metaBook.Paginate=
                      (fdjtString.precString(pct,prec)))+"%");
                 locoff.title=location+"/"+max_loc;}
             else locoff=fdjtDOM("span.metabookloc#METABOOKLOCPCT");
+            var static_elt=((staticref)&&(staticmax)&&
+                            (fdjtDOM("span.static",
+                                     "("+staticref+"/"+staticmax+")")));
             var pageno_text=fdjtDOM(
-                "span#METABOOKPAGENOTEXT.metabookpageno",pagenum,"/",npages);
+                "span#METABOOKPAGENOTEXT.metabookpageno",
+                pagenum,"/",npages," ",static_elt);
+            if (static_elt) static_elt.title=
+                "Reference page number (from some print version)"; 
             fdjtDOM.replace("METABOOKPAGENOTEXT",pageno_text);
             fdjtDOM.replace("METABOOKLOCPCT",locoff);
             pageno_text.title="select to change page number";
@@ -929,9 +953,12 @@ metaBook.Paginate=
                 if (Trace.flips)
                     fdjtLog("GoToPage/%s Flipping to %o (%d) for %o",
                             caller,page,pagenum,spec);
+                // Clean up any inconsistent curpage settings
                 if (!(curpage)) {
-                    var curpages=metaBook.pages.getElementsByClassName('curpage');
-                    if (curpages.length) dropClass(toArray(curpages),"curpage");
+                    var curpages=metaBook.pages.getElementsByClassName(
+                        'curpage');
+                    if (curpages.length)
+                        dropClass(toArray(curpages),"curpage");
                     addClass(page,"curpage");}
                 else {
                     var curpagestring=curpage.getAttribute("data-pagenum");
@@ -963,19 +990,24 @@ metaBook.Paginate=
                     var locval=page.getAttribute("data-sbookloc");
                     var location=((locval)&&(parseInt(locval,10)));
                     if (location) metaBook.setLocation(location);}
-                updatePageDisplay(pagenum,metaBook.location);
+                var staticref=page.getAttribute("data-staticpageref");
+                updatePageDisplay(pagenum,staticref,metaBook.location);
                 curpage=page; metaBook.curpage=pagenum;
                 var curnode=mbID(page.getAttribute("data-topid"));
                 if (savestate) {
                     metaBook.point=curnode;
-                    if (!((metaBook.hudup)||(metaBook.mode))) metaBook.skimming=false;
+                    if (!((metaBook.hudup)||(metaBook.mode)))
+                        metaBook.skimming=false;
                     metaBook.setHead(curnode);}
                 if ((savestate)&&(page)) {
+                    var loc=page.getAttribute("data-sbookloc");
+                    var pageno=page.getAttribute("data-pagenum");
                     metaBook.saveState(
-                        {location: atoi(page.getAttribute("data-sbookloc"),10),
-                         page: atoi(page.getAttribute("data-pagenum"),10),
+                        {location: atoi(loc,10),
+                         page: atoi(pageno,10),
                          target: ((curnode)&&
-                                  ((curnode.getAttribute("data-baseid"))||(curnode.id)))},
+                                  ((curnode.getAttribute("data-baseid"))||
+                                   (curnode.id)))},
                         skiphist);}
                 var glossed=fdjtDOM.$(".glossed",page);
                 if (glossed) {
@@ -1006,7 +1038,8 @@ metaBook.Paginate=
             addClass(page,"previewpage");
             metaBook.previewing=previewing=page;
             addClass(document.body,"mbPREVIEW");
-            updatePageDisplay(pagenum,pageloc,"preview");}
+            var staticref=page.getAttribute("data-staticpageref");
+            updatePageDisplay(pagenum,staticref,pageloc,"preview");}
         metaBook.startPagePreview=startPagePreview;
         function stopPagePreview(caller,target){
             var pagenum=parseInt(curpage.getAttribute("data-pagenum"),10);
@@ -1037,9 +1070,12 @@ metaBook.Paginate=
             if (newpage) {
                 var newnum=parseInt(newpage.getAttribute("data-pagenum"),10);
                 var newloc=metaBook.getLocInfo(target);
-                updatePageDisplay(newnum,((newloc)&&(newloc.starts_at)),
-                                  "current");}
-            else updatePageDisplay(pagenum,metaBook.location,"current");
+                updatePageDisplay(
+                    newnum,newpage.getAttribute("data-staticpageref"),
+                    ((newloc)&&(newloc.starts_at)),"current");}
+            else updatePageDisplay(
+                pagenum,curpage.getAttribute("data-staticpageref"),
+                metaBook.location,"current");
             if (typeof newpage === "number") metaBook.GoToPage(newpage);}
         metaBook.stopPagePreview=stopPagePreview;
         
