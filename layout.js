@@ -823,17 +823,19 @@ metaBook.Paginate=
                      (fdjtString.precString(pct,prec)))+"%");
                 locoff.title=location+"/"+max_loc;}
             else locoff=fdjtDOM("span.metabookloc#METABOOKLOCPCT");
-            var static_elt=((staticref)&&(staticmax)&&
-                            (fdjtDOM("span.static",
-                                     "("+staticref+"/"+staticmax+")")));
             var pageno_text=fdjtDOM(
-                "span#METABOOKPAGENOTEXT.metabookpageno",
-                pagenum,"/",npages," ",static_elt);
-            if (static_elt) static_elt.title=
-                "Reference page number (from some print version)"; 
-            fdjtDOM.replace("METABOOKPAGENOTEXT",pageno_text);
-            fdjtDOM.replace("METABOOKLOCPCT",locoff);
+                "span#METABOOKPAGENOTEXT.metabookpageno",pagenum,"/",npages);
             pageno_text.title="select to change page number";
+            fdjtDOM.replace("METABOOKPAGENOTEXT",pageno_text);
+            var pageref_text=
+                ((staticref)&&(staticmax)&&
+                 (fdjtDOM("span#METABOOKPAGEREFTEXT.metabookpageno",
+                          staticref+"/"+staticmax)));
+            if (pageref_text) {
+                pageref_text.title=
+                    "Reference page number (from some print version)"; 
+                fdjtDOM.replace("METABOOKPAGEREFTEXT",pageref_text);}
+            fdjtDOM.replace("METABOOKLOCPCT",locoff);
             locoff.title=
                 ((locoff.title)||"")+
                 ((locoff.title)?("; "):(""))+
