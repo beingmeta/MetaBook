@@ -50,7 +50,7 @@ div.searchbox input[type='TEXT'][name='QTEXT'] {
     background-repeat: no-repeat;
     background-size: contain;}
 body._NOSVG div.searchbox input[type='TEXT'][name='QTEXT'] {
-    background-image: url(g/metabook/tagicon32x32.png);}
+    background-image: url(g/metabook/tagicon64x64.png);}
 
 div.searchbox div.query span.dterm {
     padding-right: 0.35em; padding-left: 1ex;

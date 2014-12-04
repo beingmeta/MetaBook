@@ -862,7 +862,7 @@ metaBook.Paginate=
                     while ((span3)&&(span2)&&(span1.width<=1)) {
                         var nextspan=(head3.head)&&(getPageSpan(head3.head));
                         if (!(nextspan)) break;
-                        head1=head2; head2=head3; head3=head2.head;
+                        head1=head2; head2=head3; head3=head3.head;
                         span1=span2; span2=span3; span3=nextspan;}
                     var marker1=fdjtID("METABOOKSECTMARKER1");
                     var marker2=fdjtID("METABOOKSECTMARKER2");
