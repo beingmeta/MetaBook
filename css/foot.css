@@ -29,10 +29,12 @@ span#METABOOKLOCPCT, span#METABOOKPAGENOTEXT, span#METABOOKPAGEREFTEXT {
 body.mbPREVIEW #METABOOKFOOT #METABOOKPAGEBAR span#METABOOKLOCPCT,
 body.mbPREVIEW #METABOOKFOOT #METABOOKPAGEBAR span#METABOOKPAGENOTEXT {
     pointer-events: none;}
+#METABOOKFOOT #METABOOKPAGEREFTEXT {display: none;}
+body.mbPAGEREFS #METABOOKFOOT #METABOOKPAGEREFTEXT {display: inline-block;}
 #METABOOKFOOT #METABOOKPAGEREFTEXT.metabookpageno {
     font-style: italic; float: left;}
 #METABOOKFOOT #METABOOKPAGEREFTEXT.metabookpageno:before {
-    content: '(p#'; font-style: normal;}
+    content: '('; font-style: normal;}
 #METABOOKFOOT #METABOOKPAGEREFTEXT.metabookpageno:after {
     content: ')'; font-style: normal;}
 #METABOOKFOOT #METABOOKPAGEBAR div.progressbar {
