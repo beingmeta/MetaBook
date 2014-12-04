@@ -452,7 +452,6 @@ metaBook.Slice=(function () {
         if (!(head)) head=metaBook.getHead(target);
         var basespan=fdjtDOM("span");
         basespan.title='this location in the structure of the book';
-        var title=metaBook.getTitle(target,true);
         var info=metaBook.docinfo[target.id];
         if (head) {
             var text=sumText(head);
