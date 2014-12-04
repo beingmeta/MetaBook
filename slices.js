@@ -454,14 +454,6 @@ metaBook.Slice=(function () {
         basespan.title='this location in the structure of the book';
         var title=metaBook.getTitle(target,true);
         var info=metaBook.docinfo[target.id];
-        if (target!==head) {
-            var paratext=
-                fdjtDOM("span.paratext.tocref",
-                        fdjtDOM("span.spacer","\u00B6"),
-                        sumText(target));
-            paratext.setAttribute("data-tocref",target.id);
-            paratext.title='(click to jump to this passage) '+title;
-            fdjtDOM(basespan,paratext," ");}
         if (head) {
             var text=sumText(head);
             var headtext=

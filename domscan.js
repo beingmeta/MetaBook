@@ -49,14 +49,14 @@
 metaBook.DOMScan=(function(){
     "use strict";
 
+    var mB=metaBook;
+    var Trace=mB.Trace;
     var fdjtString=fdjt.String;
     var fdjtTime=fdjt.Time;
     var fdjtLog=fdjt.Log;
     var fdjtDOM=fdjt.DOM;
     var RefDB=fdjt.RefDB;
     var Ref=RefDB.Ref;
-    var mB=metaBook;
-    var Trace=metaBook.Trace;
 
     var getLevel=metaBook.getTOCLevel;
 
@@ -144,15 +144,18 @@ metaBook.DOMScan=(function(){
                 return s+head.nodeValue;
             else if (head.nodeType!==1) return s;
             else {
-                var children=head.childNodes;
-                var i=0; var len=children.length;
-                while (i<len) {
-                    var child=children[i++];
-                    if (child.nodeType===3) s=s+child.nodeValue;
-                    else if (child.nodeType===1)
-                        s=gatherText(child,s);
-                    else {}}
-                return s;}}
+                var style=getStyle(head), position=style.position;
+                if ((position==="")||(position==="static")) {
+                    var children=head.childNodes;
+                    var i=0; var len=children.length;
+                    while (i<len) {
+                        var child=children[i++];
+                        if (child.nodeType===3) s=s+child.nodeValue;
+                        else if (child.nodeType===1)
+                            s=gatherText(child,s);
+                        else {}}
+                    return s;}
+                else return s;}}
 
         function textWidth(elt){
             if (elt.nodeType===3) return elt.nodeValue.length;

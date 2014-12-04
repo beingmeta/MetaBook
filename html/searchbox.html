@@ -1,20 +1,18 @@
 <div class='query'>
+  <input id="METABOOKSEARCHINPUT"
+         type="TEXT" class="autoprompt searchinput"
+         name="QTEXT" value="" isempty="yes" autocomplete="off"
+         onfocus="metaBook.UI.handlers.search_focus(event);"
+         onblur="metaBook.UI.handlers.search_blur(event);"
+         onkeydown="metaBook.UI.handlers.search_keyup(event);"
+         completeopts="anywhere cloud" enterchars=";" maxcomplete="45"
+         placeholder="type or tap tags or terms"
+         completions="METABOOKSEARCHCLOUD"
+         results="METABOOKSEARCHRESULTS"
+         info="METABOOKSEARCHINFO"/>
   <img class="metabookclearsearch" alt="X" title="clear search"
        svg="{{bmg}}metabook/redx.svgz"
        src="{{bmg}}metabook/redx64x64.png"/>
-  <div class="input">
-    <input id="METABOOKSEARCHINPUT"
-           type="TEXT" class="autoprompt searchinput"
-           name="QTEXT" value="" isempty="yes" autocomplete="off"
-           onfocus="metaBook.UI.handlers.search_focus(event);"
-           onblur="metaBook.UI.handlers.search_blur(event);"
-           onkeydown="metaBook.UI.handlers.search_keyup(event);"
-           completeopts="anywhere cloud" enterchars=";" maxcomplete="45"
-           placeholder="type or tap tags or terms"
-           completions="METABOOKSEARCHCLOUD"
-           results="METABOOKSEARCHRESULTS"
-           info="METABOOKSEARCHINFO"/>
-  </div>
 </div>
 <!--
     /* Emacs local variables

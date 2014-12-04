@@ -32,7 +32,7 @@ body.mbPREVIEW #METABOOKFOOT #METABOOKPAGEBAR span#METABOOKPAGENOTEXT {
 #METABOOKFOOT #METABOOKPAGEREFTEXT.metabookpageno {
     font-style: italic; float: left;}
 #METABOOKFOOT #METABOOKPAGEREFTEXT.metabookpageno:before {
-    content: '(='; font-style: normal;}
+    content: '(p#'; font-style: normal;}
 #METABOOKFOOT #METABOOKPAGEREFTEXT.metabookpageno:after {
     content: ')'; font-style: normal;}
 #METABOOKFOOT #METABOOKPAGEBAR div.progressbar {

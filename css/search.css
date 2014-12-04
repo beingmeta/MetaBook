@@ -10,30 +10,46 @@
 div.searchbox { text-align: center;}
 
 div.searchbox div.query {
-    margin-left: 2em; text-align: left; margin-top: 2px;
-    box-sizing: border-box;
-    font-size: 16px;}
+    text-align: left; 
+    box-sizing: border-box; -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box; -o-box-sizing: border-box;
+    width: 100%; max-height: 100%;
+    padding-top: 2px; padding-bottom: 3px;
+    display: flex;}
 #METABOOKHUD.emptysearch  #METABOOKSEARCHLABEL {
     display: none;}
 
 div.searchbox .metabookclearsearch {
-    box-sizing: border-box;
-    float: right;}
-div.searchbox .metabookclearsearch {
-    box-sizing: border-box;
+    box-sizing: border-box; -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box; -o-box-sizing: border-box;
     border: solid transparent 2px;
-    width: 2.5em; height: auto;
-    padding: 0.5ex; padding-top: 0px;}
+    height: 1em; width: auto; padding-left: 1vw;
+    flex-grow: 0;}
 div.searchbox .metabookclearsearch.tapholdtarget {
     border-color: blue;}
 
-div.searchbox div.input input[type='TEXT'] {
+div.searchbox input[type='TEXT'] {
+    flex-grow: 1; font-size: 1.5rem;}
+div.searchbox input[type='TEXT'] {
+    border-radius: 0.5ex; -webkit-border-radius: 0.5ex;
+    -o-border-radius: 0.5ex; -moz-border-radius: 0.5ex;
+    border-top-width: 0px;
+    border-top-left-radius: 0px;
+    -webkit-border-top-left-radius: 0px; 
+    -moz-border-radius-topleft: 0px;
+    -o-border-radius-topleft: 0px; 
+    border-top-right-radius: 0px;
+    -webkit-border-top-right-radius: 0px; 
+    -moz-border-radius-topright: 0px;
+    -o-border-radius-topright: 0px;}
+
+
+div.searchbox input[type='TEXT'][name='QTEXT'] {
     background-position: right top;
     background-image: url(g/metabook/tagicon.svgz);
     background-repeat: no-repeat;
     background-size: contain;}
-    background-image:
-body._NOSVG div.searchbox div.input input[type='TEXT'] {
+body._NOSVG div.searchbox input[type='TEXT'][name='QTEXT'] {
     background-image: url(g/metabook/tagicon32x32.png);}
 
 div.searchbox div.query span.dterm {
@@ -70,16 +86,25 @@ div.resultinfo.noresults span { display: none;}
 
 #METABOOKHUD div.resultinfo {
     text-align: left; min-height: 1ex; max-height: 100%;
-    margin-bottom: 1ex; padding-right: 1em;
-    font-size: 1.5em;}
+    margin-bottom: 1ex; padding-right: 1ex;
+    font-size: 1.25em;
+    display: flex-box;}
+#METABOOKHUD div.resultinfo span.stats {
+    flex-grow: 0; font-size: 2.5vw;}
+#METABOOKHUD div.resultinfo span.qtags {
+    display: flex; flex-grow: 1; }
 #METABOOKHUD div.resultinfo span.resultcount,
 #METABOOKHUD div.resultinfo span.refinecount,
 #METABOOKHUD div.resultinfo span.showalltags {
-    cursor: pointer; text-decoration: underline;}
+    cursor: pointer; background-color: white;
+    padding-left: 1ex; padding-right: 1ex;
+    border-bottom-left-radius: 0.5ex;
+    border-bottom-right-radius: 0.5ex;
+    border: outset black 2px;}
 #METABOOKHUD.refinesearch div.resultinfo span.refinecount, 
 #METABOOKHUD.expandsearch div.resultinfo span.showalltags,
 #METABOOKHUD.searchresults div.resultinfo span.resultcount {
-    font-weight: bold; text-decoration: none; cursor: default;}
+    font-weight: bold; background-color: silver; cursor: default;}
 
 #METABOOKHUD #METABOOKSEARCHINFO {
     height: 100%; display: none;}
@@ -89,10 +114,9 @@ div.resultinfo.noresults span { display: none;}
     display: block;}
 #METABOOKSEARCHINFO .qtags {
     box-sizing: border-box;
-    padding-top: 7px; padding-right: 7px;
-    margin-left: 10px; margin-bottom: 0px;
-    display: inline-block;
-    vertical-align: top;
+    padding-top: 0.25ex; padding-right: 1ex;
+    margin-left: 1em; margin-bottom: 0px;
+    height: 100%; vertical-align: top;
     clear: left;}
 .qtags span.variations { display: none; }
 .qtags span.elided { display: inline; }

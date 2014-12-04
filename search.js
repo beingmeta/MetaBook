@@ -50,7 +50,7 @@
 (function(){
     "use strict";
     var mB=metaBook;
-    var Trace=metaBook.Trace;
+    var Trace=mB.Trace;
     var fdjtString=fdjt.String;
     var fdjtLog=fdjt.Log;
     var fdjtDOM=fdjt.DOM;
@@ -161,15 +161,7 @@
         // Tweak font size for qtags
         newtags.setAttribute("data-maxfont","120%");
         newtags.setAttribute("data-min","60%");
-        fdjt.DOM.adjustFonts(newtags);
-        /*
-            fdjt.UI.adjustFont.tweakUntil(
-            function(){
-                if (info.scrollHeight<=info.clientHeight)
-                    return 0;
-                else return 1;},
-            newtags,{maxpct: 120,minpct: 60},[5,1]);
-        */
+        fdjt.DOM.adjustFontSize(newtags);
         // Update the search cloud
         var n_refiners=((query.cotags)&&(query.cotags.length))||0;
         var completions=metaBook.queryCloud(query);
