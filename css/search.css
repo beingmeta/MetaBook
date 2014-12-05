@@ -14,7 +14,10 @@ div.searchbox div.query {
     box-sizing: border-box; -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box; -o-box-sizing: border-box;
     width: 100%; max-height: 100%;
-    padding-top: 2px; padding-bottom: 3px;
+    padding-top: 2px; padding-bottom: 3px;}
+div.searchbox div.query {
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;}
 #METABOOKHUD.emptysearch  #METABOOKSEARCHLABEL {
     display: none;}
@@ -24,12 +27,13 @@ div.searchbox .metabookclearsearch {
     -moz-box-sizing: border-box; -o-box-sizing: border-box;
     border: solid transparent 2px;
     height: 1em; width: auto; padding-left: 1vw;
-    flex-grow: 0;}
+    flex-grow: 0; -webkit-flex-grow: 0; -moz-flex-grow: 0;}
 div.searchbox .metabookclearsearch.tapholdtarget {
     border-color: blue;}
 
 div.searchbox input[type='TEXT'] {
-    flex-grow: 1; font-size: 1.5rem;}
+    flex-grow: 1; -webkit-flex-grow: 1; -moz-flex-grow: 1;
+    font-size: 1.5rem;}
 div.searchbox input[type='TEXT'] {
     border-radius: 0.5ex; -webkit-border-radius: 0.5ex;
     -o-border-radius: 0.5ex; -moz-border-radius: 0.5ex;
@@ -87,12 +91,20 @@ div.resultinfo.noresults span { display: none;}
 #METABOOKHUD div.resultinfo {
     text-align: left; min-height: 1ex; max-height: 100%;
     margin-bottom: 1ex; padding-right: 1ex;
-    font-size: 1.25em;
-    display: flex-box;}
+    font-size: 1.25em;}
+#METABOOKHUD div.resultinfo {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;}
 #METABOOKHUD div.resultinfo span.stats {
-    flex-grow: 0; font-size: 2.5vw;}
+    -webkit-flex-grow: 0; -moz-flex-grow: 0; -ms-flexbox-grow: 0;
+    flex-grow: 0;
+    font-size: 2.5vw;}
 #METABOOKHUD div.resultinfo span.qtags {
-    display: flex; flex-grow: 1; }
+    display: -webkit-flex; display: -ms-flexbox;
+    display: -moz-flex; display: flex;
+    -webkit-flex-grow: 1; -moz-flex-grow: 1; -ms-flexbox-grow: 1;
+    flex-grow: 1;}
 #METABOOKHUD div.resultinfo span.resultcount,
 #METABOOKHUD div.resultinfo span.refinecount,
 #METABOOKHUD div.resultinfo span.showalltags {
