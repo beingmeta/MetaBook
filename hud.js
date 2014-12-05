@@ -88,8 +88,10 @@ metaBook.setMode=
             var messages=fdjtDOM("div#METABOOKSTARTUPMESSAGES.startupmessages");
             messages.innerHTML=fixStaticRefs(metaBook.HTML.messages);
             if (Trace.startup>2) fdjtLog("Initializing HUD layout");
-            metaBook.HUD=metaBookHUD=hud=fdjtDOM("div#METABOOKHUD");
-            metaBook.Media=metaBookMedia=media=fdjtDOM("div#METABOOKMEDIA");
+            metaBook.HUD=metaBookHUD=hud=
+                fdjtDOM("div#METABOOKHUD.metabookhud");
+            metaBook.Media=metaBookMedia=media=
+                fdjtDOM("div#METABOOKMEDIA.metabookmedia");
             hud.metabookui=true; media.metabookui=true;
             hud.innerHTML=fixStaticRefs(metaBook.HTML.hud);
             fdjtDOM.append(messages);
@@ -97,6 +99,7 @@ metaBook.setMode=
             else {
                 frame=fdjtDOM("div#METABOOKFRAME");
                 fdjtDOM.prepend(document.body,frame);}
+            addClass(frame,"metabookframe");
             frame.appendChild(messages); frame.appendChild(hud);
             frame.appendChild(media);
             metaBook.Frame=frame;

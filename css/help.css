@@ -364,6 +364,7 @@ div.metabookhelp .glossbarbox {
     -khtml-opacity: 0.98;
     -moz-opacity: 0.98;
     -o-opacity: 0.98;}
+#METABOOKHUD #METABOOKHELP.hudpanel { overflow: auto;}
 
 #METABOOKCOVER div.metabookhelp#METABOOKAPPHELP,
 #METABOOKHUD div.metabookhelp#METABOOKHELP {

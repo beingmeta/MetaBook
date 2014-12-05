@@ -89,6 +89,12 @@ body.openhud #METABOOKFRAME, body.mbSKIMMING #METABOOKFRAME,
 body.mbSHOWHELP #METABOOKFRAME, body.mbMEDIA #METABOOKFRAME {
     z-index: 50;}
 
+/* Override simple stylesheet definitions in the metaBook frame */
+
+.metabookframe img, .metabookframe picture, .metabookframe figure,
+.metabookframe object, .metabookframe video, .metabookframe audio {
+    max-width: initial; max-height: initial;}
+
 /* The HUD is where all of the active interface elements for reading
    appear.  */
 #METABOOKHUD {
@@ -187,8 +193,6 @@ body._NOSVG #METABOOKFRAME #METABOOKCLOSEMEDIA {
    away, if we move the z-index down, though it might/can cause display
    issues. */
 body.hudup._DEBUG #METABOOKHUD {z-index: 0;}
-
-#METABOOKHUD #METABOOKHELP.hudpanel { overflow: auto;}
 
 /* Emacs local variables
 ;;;  Local variables: ***
