@@ -89,21 +89,23 @@ div.metabooktoc div.sub {
 div.metabooktoc.metabookcurhead div.head { }
 div.metabooktoc.metabookcurhead div.sub { display: block;}
 
-#METABOOKHEARTBODY #METABOOKSTATICTOC {
+#METABOOKSTATICTOC {
     margin-left: 0.1em; margin-right: 0.1em;}
-#METABOOKHEARTBODY #METABOOKSTATICTOC div.metabooktoc {
+#METABOOKSTATICTOC div.metabooktoc {
     display: block;
     font-size: 90%; /* Applied recursively */
     text-align: left;}
-#METABOOKHEARTBODY #METABOOKSTATICTOC div.metabooktoc img { display: none;}
-#METABOOKHUD #METABOOKHEARTBODY #METABOOKSTATICTOC div.metabooktoc div.head {
+#METABOOKSTATICTOC div.metabooktoc img { display: none;}
+#METABOOKSTATICTOC div.metabooktoc div.head {
     margin-left: 0px; margin-right: 0px;
     padding-left: 0px; padding-right: 0px;
     display: block; font-weight: bold;}
-#METABOOKHUD #METABOOKHEARTBODY #METABOOKSTATICTOC div.metabooktocleaf > div.head {
+#METABOOKSTATICTOC div.metabooktoc div.head {
+    white-space: nowrap; text-overflow: ellipsis;}
+#METABOOKSTATICTOC div.metabooktocleaf > div.head {
     display: block; font-weight: normal;}
-#METABOOKHUD #METABOOKHEARTBODY #METABOOKSTATICTOC div.progressbox { display: none;}
-#METABOOKHUD #METABOOKHEARTBODY #METABOOKSTATICTOC div.metabooklivehead > div.head {
+#METABOOKSTATICTOC div.progressbox { display: none;}
+#METABOOKSTATICTOC div.metabooklivehead > div.head {
     color: blue;}
 #METABOOKHUD #METABOOKHEARTBODY #METABOOKSTATICTOC
 div.metabooklivehead > div.spanbar div.progressbox {
@@ -116,9 +118,9 @@ div.metabooklivehead > div.spanbar div.progressbox {
 #METABOOKSTATICTOC > div.metabooktoc { margin-left: 0.5ex; margin-right: 0.5ex;}
 #METABOOKSTATICTOC div.spanbar { display: none; }
 
-#METABOOKHUD #METABOOKHEARTBODY #METABOOKSTATICTOC div.spanbar div.spans {
+#METABOOKSTATICTOC div.spanbar div.spans {
     left: 0px;}
-#METABOOKHUD #METABOOKHEARTBODY #METABOOKSTATICTOC div.head.metabooklivehead {
+#METABOOKSTATICTOC div.head.metabooklivehead {
     border-bottom: solid red 1px;}
 
 div.metabooktoc .sectname.cohi {
@@ -187,12 +189,14 @@ div.spanbar div.progressbox {
     position: absolute; z-index: 100; }
 
 #METABOOKTOC div.metabooktoc.metabookcurhead > div.spanbar { }
-body.mbPREVIEW #METABOOKTOC div.metabooktoc.metabookcurhead > div.spanbar div.metabookhudspan {
+body.mbPREVIEW #METABOOKTOC div.metabooktoc.metabookcurhead
+   > div.spanbar div.metabookhudspan {
     height: 18px;}
-#METABOOKTOC div.metabooktoc.metabookcurhead > div.spanbar div.spans a.metabooktitle {
+#METABOOKTOC div.metabooktoc.metabookcurhead
+   > div.spanbar div.spans a.metabooktitle {
     display: none;}
 #METABOOKTOC div.metabooktoc.metabookcurhead div.spanbar
-div.metabookhudspan a.brick.cohi {
+   div.metabookhudspan a.brick.cohi {
     background-color: gold;
     opacity: 0.5;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
@@ -201,7 +205,8 @@ div.metabookhudspan a.brick.cohi {
     -khtml-opacity: 0.50;
     -moz-opacity: 0.50;
     -o-opacity: 0.50;}
-#METABOOKTOC div.metabooktoc div.spanbar div.metabookhudspan.metabookheld a.brick {
+#METABOOKTOC div.metabooktoc div.spanbar
+   div.metabookhudspan.metabookheld a.brick {
     background-color: gold;
     opacity: 0.5;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
@@ -314,7 +319,8 @@ body.mbPREVIEW #METABOOKHUD div.metabooktoc.metabooklivehead > div.head {
     -khtml-opacity: 0.10;
     -moz-opacity: 0.10;
     -o-opacity: 0.10;}
-body.mbPREVIEW #METABOOKHUD div.metabooktoc.metabooklivehead.metabookcurhead > div.head {
+body.mbPREVIEW #METABOOKHUD div.metabooktoc.metabooklivehead.metabookcurhead
+    > div.head {
     opacity: 0.40;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
     filter: alpha(opacity=40);
