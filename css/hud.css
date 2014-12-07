@@ -301,7 +301,8 @@ body.hudup #METABOOKHUD.openheart #METABOOKHEART,
 body.hudup #METABOOKHUD.openheart.allglosses #METABOOKHEARTBODY div.hudpanel,
 body.hudup #METABOOKHUD.openheart.searchresults
      #METABOOKHEARTBODY div.hudpanel {
-    padding-bottom: 40px; border-bottom: double black 12px;
+    padding-bottom: 0px; 
+    border-bottom: double black 12px;
     margin-bottom: 20px;}
 body.hudup #METABOOKHUD.openheart #METABOOKHEARTBODY div.hudpanel,
 #METABOOKHUD.addgloss.glossaddtag #METABOOKHEARTBODY div.hudpanel,
@@ -1267,7 +1268,7 @@ body._FULLHEIGHT.hudup #METABOOKFOOT {
         margin-bottom: 2px; margin-top: 2px;
         left: 5px; right: 5px;}
     #METABOOKHUD.openheart #METABOOKHEART {
-        top: 60px; bottom: 60px;}
+        top: 52px; bottom: 60px;}
 
     #METABOOKHUD.refinesearch #METABOOKRIBBON,
     #METABOOKHUD.expandsearch #METABOOKRIBBON,
