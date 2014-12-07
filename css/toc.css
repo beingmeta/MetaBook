@@ -99,11 +99,13 @@ div.metabooktoc.metabookcurhead div.sub { display: block;}
 #METABOOKSTATICTOC div.metabooktoc div.head {
     margin-left: 0px; margin-right: 0px;
     padding-left: 0px; padding-right: 0px;
-    display: block; font-weight: bold;}
+    font-weight: bold;}
+#METABOOKHUD #METABOOKSTATICTOC div.metabooktoc div.head {
+    display: block;}
 #METABOOKSTATICTOC div.metabooktoc div.head {
     white-space: nowrap; text-overflow: ellipsis;}
 #METABOOKSTATICTOC div.metabooktocleaf > div.head {
-    display: block; font-weight: normal;}
+    font-weight: normal;}
 #METABOOKSTATICTOC div.progressbox { display: none;}
 #METABOOKSTATICTOC div.metabooklivehead > div.head {
     color: blue;}
@@ -377,12 +379,14 @@ body._TOUCH #METABOOKSTATICTOC div.metabooktoc div.head {
 
 @media screen and (max-width: 640px) {
     #METABOOKHEARTBODY #METABOOKSTATICTOC {
-        margin-left: 0.2em; margin-right: 0.2em;}}
+        margin-left: 0.2em; margin-right: 0.2em;}
+    #METABOOKHUD div.metabooktoc {
+        padding-left:0.2ex; padding-right: 2px;}}
 @media screen and (max-width: 500px) {
     #METABOOKHEARTBODY #METABOOKSTATICTOC {
         margin-left: 2px; margin-right: 2px;}
     #METABOOKHUD div.metabooktoc {
-        padding-left:0.5ex; padding-right: 2px;}}
+        padding-left: 1ex; padding-right: 0.5ex;}}
 
 
 /* Emacs local variables
