@@ -154,7 +154,7 @@ body._ANIMATE .qtags {
     div.searchbox div.query div.input {
         width: auto; margin-right: 10%;}
     #METABOOKHUD div.resultinfo span.stats { font-size: 2.5vw; }}
-    div.resultinfo .stats > span > br { display: none; }}
+    div.resultinfo .stats > span > br { display: initial; }}
 
 @media screen and (max-width: 500px) {
     #METABOOKHUD div.resultinfo { font-size: 1rem; }}
