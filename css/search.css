@@ -99,7 +99,7 @@ div.resultinfo.noresults span { display: none;}
 #METABOOKHUD div.resultinfo span.stats {
     -webkit-flex-grow: 0; -moz-flex-grow: 0; -ms-flexbox-grow: 0;
     flex-grow: 0;
-    font-size: 2.5vw;}
+    font-size: 3vw;}
 #METABOOKHUD div.resultinfo span.qtags {
     display: -webkit-flex; display: -ms-flexbox;
     display: -moz-flex; display: flex;

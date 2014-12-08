@@ -190,7 +190,7 @@ body._TOUCH.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR
 
 #METABOOKFOOT #METABOOKSHOWTEXT {
     position: absolute; z-index: 500; opacity: 1.0;
-    bottom: 30px; left: 100px; right: 100px;
+    bottom: 0px; left: 100px; right: 100px;
     text-align: center;
     font-size: 32px; font-weight: bold;
     padding: 0px; white-space: nowrap;
@@ -239,7 +239,7 @@ body.mbSKIMMING #METABOOKHUD #METABOOKSHOWTEXT span.stopskimming { display: inli
 body.hudup #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT,
 body.openhud #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT,
 body.mbSKIMMING #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT {
-    display: block;}
+    /* display: block; */}
 body.hudup.mbPREVIEW #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT,
 body.hudup.mbSHOWHELP #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT {
     display: none;}
