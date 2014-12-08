@@ -131,6 +131,8 @@ div.metabooktoc .sectname { color: darkblue; cursor: crosshair;}
 div.metabooktoc div.sub a.sectname { 
     color: darkblue; font-size: 80%; white-space: nowrap;}
 div.metabooktoc div.sub a.sectname.cohi { background-color: gold; }
+div.metabooktoc a.sectname.tapholdtarget {
+    background-color: gold;}
 
 div.metabooktoc a.metabooktitle.cohi {
     background-color: gold; opacity: 0.6;}
@@ -375,7 +377,7 @@ body._MOUSE #METABOOKHUD #METABOOKTOC a.brick:hover {
 body._MOUSE #METABOOKHUD #METABOOKTOC a:hover { text-decoration: none;}
 
 body._TOUCH #METABOOKSTATICTOC div.metabooktoc div.head {
-    font-size: 150%;}
+    font-size: 120%;}
 
 @media screen and (max-width: 640px) {
     #METABOOKHEARTBODY #METABOOKSTATICTOC {
