@@ -123,7 +123,7 @@ div.metabookglossform form div.textbox input[TYPE='TEXT'] {
     width: 99%; max-width: 99%; 
     background-position: right top;
     background-position-x: right; background-position-y: top;
-    background-size: 1em 1em;
+    background-size: contain;
     background-repeat: no-repeat;
     box-sizing: border-box;}
 
