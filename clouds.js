@@ -50,7 +50,7 @@
 (function(){
     "use strict";
     var mB=metaBook;
-    var Trace=metaBook.Trace;
+    var Trace=mB.Trace;
     var fdjtLog=fdjt.Log;
     var fdjtDOM=fdjt.DOM;
     var fdjtUI=fdjt.UI;
@@ -263,12 +263,15 @@
             // Section names as tags
             if ((tag instanceof KNode)&&(qid[0]==="\u00A7")) {
                 var sectname=tag._id.slice(1), showname;
-                /* if (sectname.length>20)
+                if (sectname.length>40)
                     showname=fdjtDOM(
-                        "span.name.ellipsis",sectname.slice(0,20),
+                        "span.name.ellipsis",sectname.slice(0,17),
                         fdjtDOM("span.elision","\u2026"),
-                        fdjtDOM("span.elided",sectname.slice(20)));
-                else showname=fdjtDOM("span.name",sectname); */
+                        fdjtDOM("span.elided",
+                                sectname.slice(sectname.length-17)));
+                else if (sectname.length>25)
+                    showname=fdjtDOM("span.name.longname",sectname);
+                else showname=fdjtDOM("span.name",sectname);
                 showname=fdjtDOM("span.name",sectname);
                 entry=fdjtDOM("span.completion.sectname","\u00A7",showname);
                 entry.setAttribute("data-key",sectname);

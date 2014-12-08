@@ -142,8 +142,6 @@ body._ANIMATE .qtags {
 
 @media (pointer: coarse) {
     div.searchbox div.query div.input input[type='TEXT'] {font-size: 250%;}}
-@media (pointer: coarse) and (max-width: 640px) {
-    div.searchbox div.query { margin-left: 1em; }}
 
 @media screen and (max-width: 640px) {
     div.searchbox div.query { font-size: 12px; }

@@ -67,6 +67,11 @@ div.completions.noinput .cloudtoggle {
 .cloud .sectname .name,
 #METABOOKHUD .qtags span.sectname .name {
     font-size: 80%;}
+.cloud .sectname .name.ellipsis,
+.cloud .sectname .name.longname,
+#METABOOKHUD .qtags span.sectname .name.ellipsis,
+#METABOOKHUD .qtags span.sectname .name.longname {
+    font-size: 60%;}
 
 .cloud.showall.noinput span.completion.rawterm.cue,
 .cloud.showall.noinput span.completion.rootform.cue,
@@ -74,9 +79,11 @@ div.completions.noinput .cloudtoggle {
 .cloud.showall.noinput span.completion.doubleton.cue,
 .cloud.showall.noinput span.completion.singleton.prime {
     display: inline;}
-#METABOOKHUD #METABOOKALLTAGS.completions.noinput span.completion.sectname.cue {
+#METABOOKHUD #METABOOKALLTAGS.completions.noinput
+   span.completion.sectname.cue {
     display: none;}
-#METABOOKHUD #METABOOKALLTAGS.completions.noinput.showall span.completion.sectname.cue {
+#METABOOKHUD #METABOOKALLTAGS.completions.noinput.showall
+   span.completion.sectname.cue {
     display: inline;}
 
 .cloud.showall.noinput span.completion.singleton.dterm,
