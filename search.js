@@ -146,14 +146,15 @@
         while (i<lim) {
             var tag=elts[i];
             if (typeof tag === 'string') tag=kbref(tag)||tag;
-            fdjtDOM(newtags,((i>0)&&("\u00a0\u00B7 ")),metaBook.cloudEntry(tag));
+            fdjtDOM(newtags,((i>0)&&("\u00a0\u00B7 ")),
+                    metaBook.cloudEntry(tag));
             i++;}
         if (qtags.id) newtags.id=qtags.id;
         fdjtDOM.replace(qtags,newtags);
         // Update the results display
         if (query.results.length) {
             resultcount.innerHTML=query.results.length+
-                " result"+((query.results.length===1)?"":"s");
+                " <br/>result"+((query.results.length===1)?"":"s");
             fdjtDOM.dropClass([box,info],"noresults");}
         else {
             resultcount.innerHTML="no results";
@@ -165,8 +166,8 @@
         // Update the search cloud
         var n_refiners=((query.cotags)&&(query.cotags.length))||0;
         var completions=metaBook.queryCloud(query);
-        refinecount.innerHTML=n_refiners+
-            ((n_refiners===1)?(" co-tag"):(" co-tags"));
+        refinecount.innerHTML=n_refiners+" <br/>"+
+            ((n_refiners===1)?("co-tag"):("co-tags"));
         fdjtDOM.dropClass(box,"norefiners");
         if (query.tags.length===0) {
             fdjtDOM.replace(

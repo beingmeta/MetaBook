@@ -47,7 +47,6 @@ div.searchbox input[type='TEXT'] {
     -moz-border-radius-topright: 0px;
     -o-border-radius-topright: 0px;}
 
-
 div.searchbox input[type='TEXT'][name='QTEXT'] {
     background-position: right top;
     background-image: url(g/metabook/tagicon.svgz);
@@ -76,6 +75,14 @@ div.searchbox div.input input[type='TEXT'] {
 
 div.resultinfo .noresults, div.resultinfo .noquery, div.resultinfo .stats {
     float: right; padding-right: 0px;}
+div.resultinfo .stats > span {
+    display: inline-block; text-align: center;
+    cursor: pointer; background-color: white;
+    padding-left: 1ex; padding-right: 1ex;
+    border-bottom-left-radius: 0.5ex;
+    border-bottom-right-radius: 0.5ex;
+    border: outset black 2px; border-top: 0px;}
+div.resultinfo .stats > span > br { display: none; }
 
 div.resultinfo .noresults { display: none;}
 div.resultinfo.noresults .noresults { display: block;}
@@ -99,20 +106,13 @@ div.resultinfo.noresults span { display: none;}
 #METABOOKHUD div.resultinfo span.stats {
     -webkit-flex-grow: 0; -moz-flex-grow: 0; -ms-flexbox-grow: 0;
     flex-grow: 0;
-    font-size: 3vw;}
+    font-size: 2vw;}
 #METABOOKHUD div.resultinfo span.qtags {
     display: -webkit-flex; display: -ms-flexbox;
     display: -moz-flex; display: flex;
     -webkit-flex-grow: 1; -moz-flex-grow: 1; -ms-flexbox-grow: 1;
     flex-grow: 1;}
-#METABOOKHUD div.resultinfo span.resultcount,
-#METABOOKHUD div.resultinfo span.refinecount,
-#METABOOKHUD div.resultinfo span.showalltags {
-    cursor: pointer; background-color: white;
-    padding-left: 1ex; padding-right: 1ex;
-    border-bottom-left-radius: 0.5ex;
-    border-bottom-right-radius: 0.5ex;
-    border: outset black 2px;}
+
 #METABOOKHUD.refinesearch div.resultinfo span.refinecount, 
 #METABOOKHUD.expandsearch div.resultinfo span.showalltags,
 #METABOOKHUD.searchresults div.resultinfo span.resultcount {
@@ -141,14 +141,20 @@ body._ANIMATE .qtags {
     -o-transition-property: font-size; -o-transition-duration: 0.5s;}
 
 @media (pointer: coarse) {
-    div.searchbox div.query div.input input[type='TEXT'] {font-size: 250%;}}
+    div.searchbox div.query div.input input[type='TEXT'] {
+        font-size: 250%;}}
+
+@media screen and (min-width: 1000px) {
+    #METABOOKHUD div.resultinfo span.stats { font-size: 1.5vw; }}
 
 @media screen and (max-width: 640px) {
     div.searchbox div.query { font-size: 12px; }
     div.searchbox div.query .metabookclearsearch {
         width: 10%; height: auto;}
     div.searchbox div.query div.input {
-        width: auto; margin-right: 10%;}}
+        width: auto; margin-right: 10%;}
+    #METABOOKHUD div.resultinfo span.stats { font-size: 2.5vw; }}
+    div.resultinfo .stats > span > br { display: none; }}
 
 @media screen and (max-width: 500px) {
     #METABOOKHUD div.resultinfo { font-size: 1rem; }}
