@@ -31,35 +31,10 @@
 
 @charset "UTF-8";
 
-@font-face {
-    font-family: 'OpenDyslexic';
-    src: url('fonts/open_dyslexic/OpenDyslexic-Regular.otf');
-    font-weight: normal;
-    font-style: normal;}
-@font-face {
-    font-family: 'OpenDyslexic';
-    src: url('fonts/open_dyslexic/OpenDyslexic-Bold.otf');
-    font-weight: 700;
-    font-style: normal;}
-@font-face {
-    font-family: 'OpenDyslexic';
-    src: url('fonts/open_dyslexic/OpenDyslexic-Italic.otf');
-    font-weight: normal;
-    font-style: italic;}
-@font-face {
-    font-family: 'OpenDyslexic';
-    src: url('fonts/open_dyslexic/OpenDyslexic-BoldItalic.otf');
-    font-weight: 700;
-    font-style: italic;}
-@font-face {
-    font-family: 'OpenDyslexicFixed';
-    src: url('fonts/open_dyslexic/OpenDyslexicMono-Regular.otf');
-    font-weight: normal;
-    font-style: normal;}
-
 #METABOOKFRAME, #METABOOKPAGINATING {
-    /* font-family: 'Open Sans', Tahoma, Verdana,
-       Arial, Helvetica, sans-serif, sans; */
+    font-family: 'Open Sans', Tahoma, Verdana,
+                 Arial, Helvetica, sans-serif, sans;}
+.wf-inactive #METABOOKFRAME, .wf-inactive #METABOOKPAGINATING {
     font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif, sans;}
 
 #METABOOKBODY,
@@ -72,8 +47,11 @@ span.excerpt {
 
 #METABOOKBODY.metabookbodyfamilydefault {
     font-family: inherit;}
-#METABOOKBODY.metabookbodyfamilydyslexical {
-    font-family: 'OpenDyslexic', serif;}
+#METABOOKBODY.metabookbodyfamilydyslexical, .dyslexical {
+    font-family: 'Open Dyslexic', serif;}
+.wf-inactive #METABOOKBODY.metabookbodyfamilydyslexical,
+.wf-inactive .dyslexical {
+    font-family: serif;}
 #METABOOKBODY.metabookbodyfamilyserif {
     font-family: Georgia,Palatino,'Times New Roman','TimesNewRoman',Times,serif;}
 #METABOOKBODY.metabookbodyfamilysans {
