@@ -675,7 +675,7 @@ body._MOUSE #METABOOKTOP #METABOOKSHOWCOVER.hudbutton:hover { display: none;}
 body._MOUSE #METABOOKTOP.tapholding #METABOOKSHOWCOVER.hudbutton:hover {
     display: block;}
 body._TOUCH div#METABOOKSHOWCOVER {
-    font-size: 36px; width: 5em; opacity: 0.4;}
+    font-size: 32px; width: 5em; opacity: 0.4;}
 
 
 #METABOOKSHOWCOVER {}

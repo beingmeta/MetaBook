@@ -488,7 +488,7 @@ body._MOUSE #METABOOKOPENTAB:hover, #METABOOKOPENTAB.tapholdtarget {
     border-color: blue; border-style: dotted;}
 #METABOOKCOVERMESSAGE > div#METABOOKOPENTAB {
     width: 7em; color: white;}
-body._TOUCH #METABOOKCOVERMESSAGE > div#METABOOKOPENTAB { font-size: 36px;}
+body._TOUCH #METABOOKCOVERMESSAGE > div#METABOOKOPENTAB { font-size: 32px;}
 body._TOUCH #METABOOKCOVERMESSAGE > div#METABOOKOPENTAB {
     width: 5em; }
 body._MOUSE div#METABOOKOPENTAB:hover { 
