@@ -58,8 +58,9 @@
     font-style: normal;}
 
 #METABOOKFRAME, #METABOOKPAGINATING {
-    font-family: 'Open Sans', Tahoma, Verdana,
-                 Arial, Helvetica, sans-serif, sans;}
+    /* font-family: 'Open Sans', Tahoma, Verdana,
+       Arial, Helvetica, sans-serif, sans; */
+    font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif, sans;}
 
 #METABOOKBODY,
 #METABOOKBODY.metabookfamilyserif,
