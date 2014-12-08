@@ -149,19 +149,12 @@ body._ANIMATE #METABOOKSKIMMER.transanimate {
     left: 60px; right: 60px; width: auto;}
 body.hudup #METABOOKHEAD {display: block;}
 #METABOOKHUD.openhead #METABOOKHEAD {
-    box-shadow: 0.5em 0.5em 0.5em #cccccc;
-    -webkit-box-shadow: 0.5em 0.5em 0.5em #cccccc;
-    -moz-box-shadow: 0.5em 0.5em 0.5em #cccccc;
-    -o-box-shadow: 0.5em 0.5em 0.5em #cccccc;
     border-color: transparent;
     height: auto;}
 body.hudup #METABOOKHUD.openhead #METABOOKHEAD {
     border-color: rgba(0, 0, 255, 0.52);
     background-color: rgba(255, 255, 240, 0.52);}
 body.hudup #METABOOKHUD.openhead.overtoc #METABOOKHEAD {
-    box-shadow: none; -webkit-box-shadow: none;
-    -moz-box-shadow: none; -o-box-shadow: none;
-    background-color: rgba(255,255,255,0.75);
     border-color: transparent;}
 
 #METABOOKFRAME > #METABOOKHUD.openhead > #METABOOKTOPBAR {
@@ -185,10 +178,6 @@ body.hudup #METABOOKHUD #METABOOKFOOT { height: 50px;}
 #METABOOKHUD.openfoot #METABOOKFOOT
 {
     background-color: ivory; border-color: darkblue;
-    box-shadow: 0.5em 0.5em 0.5em #cccccc;
-    -webkit-box-shadow: 0.5em 0.5em 0.5em #cccccc;
-    -moz-box-shadow: 0.5em 0.5em 0.5em #cccccc;
-    -o-box-shadow: 0.5em 0.5em 0.5em #cccccc;
     height: 50px;}
 
 #METABOOKHUD.openhead #METABOOKHEAD {max-height: 50%;}
@@ -335,11 +324,6 @@ body._ISCROLL #METABOOKHUD.addgloss.glossattach #METABOOKHEARTBODY #METABOOKHEAR
 
 #METABOOKHEARTBODY div.hudpanel > h1:first-child { margin-top: 0px;}
 
-#METABOOKHUD.openheart #METABOOKHEART {
-    box-shadow: 1em 1em 1em #cccccc;
-    -webkit-box-shadow: 1em 1em 1em #cccccc;
-    -moz-box-shadow: 1em 1em 1em #cccccc;
-    -o-box-shadow: 1em 1em 1em #cccccc;}
 #METABOOKHUD.addgloss.glossaddtag #METABOOKHEART,
 #METABOOKHUD.addgloss.glosstagging #METABOOKHEART,
 #METABOOKHUD.addgloss.glosstagoutlet #METABOOKHEART,
