@@ -2212,6 +2212,7 @@
         else preview_timer=setTimeout(function(){
             var pagebar=fdjtID("METABOOKPAGEBAR");
             pagebar.title=""; preview_timer=false;
+            dropClass(target,"preview");
             metaBook.stopPagePreview("pagebar_slip/timeout");},
                                       400);
         previewing_page=false;}

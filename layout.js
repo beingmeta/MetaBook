@@ -1086,6 +1086,7 @@ metaBook.Paginate=
                       "previewpage");
             metaBook.previewing=previewing=false;
             dropClass(document.body,"mbPREVIEW");
+            dropClass(document.body,"mbPAGEPREVIEW");
             if (newpage) {
                 var newnum=parseInt(newpage.getAttribute("data-pagenum"),10);
                 var newloc=metaBook.getLocInfo(target);
