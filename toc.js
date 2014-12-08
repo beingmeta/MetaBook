@@ -98,10 +98,16 @@ metaBook.TOC=
             toc.sbook_end=headinfo.ends_at;
             var hhinfo=headinfo.head;
             if ((sizebar)&&(hhinfo)) {
-                var hstart=hhinfo.starts_at, hend=hhinfo.ends_at, hlen=hend-hstart;
-                sizebar.style.width=((100*(headinfo.ends_at-headinfo.starts_at))/hlen)+"%";
-                sizebar.style.left=((100*(headinfo.starts_at-hstart))/hlen)+"%";
-                progressbar.style.left=((100*(headinfo.starts_at-hstart))/hlen)+"%";}
+                var hstart=hhinfo.starts_at, hend=hhinfo.ends_at;
+                var hlen=hend-hstart;
+                sizebar.style.width=
+                    ((100*(headinfo.ends_at-headinfo.starts_at))/hlen)+"%";
+                sizebar.style.left=
+                    ((100*(headinfo.starts_at-hstart))/hlen)+"%";
+                progressbar.style.left=
+                    ((100*(headinfo.starts_at-hstart))/hlen)+"%";}
+            else if (sizebar) sizebar.style.width="100%";
+            else {}
             fdjtDOM.addClass(toc,"toc"+depth);
             toc.id=(prefix||"METABOOKTOC4")+headinfo.frag;
             if ((!(sub))||(!(sub.length))) {
@@ -232,7 +238,13 @@ metaBook.TOC=
             var toshow=[]; var base_info=head;
             while (head) {
                 var tocelt=document.getElementById(prefix+head.frag);
+                var pbar=fdjt.DOM.getChild(tocelt,".progressbar");
                 if (tocelt) toshow.push(tocelt);
+                if ((pbar)&&(metaBook.location)&&(head.ends_at)) {
+                    var loc=metaBook.location, len=head.ends_at-head.starts_at;
+                    var pct=(len)&&(loc)&&(100*(loc/len));
+                    if ((pct)&&(pct>=0)&&(pct<=100))
+                        pbar.style.left=pct+"%";}
                 head=head.head;}
             var n=toshow.length-1;
             if ((base_info.sub)&&(base_info.sub.length))
@@ -255,7 +267,8 @@ metaBook.TOC=
             while (i<lim) livetitles[i++].style.fontSize='';
             var tocs=fdjtDOM.$(".toc0");
             // Update current location in ToCs
-            i=0; lim=tocs.length; while (i<lim) { updateTOC(headinfo,tocs[i++]);}
+            i=0; lim=tocs.length; while (i<lim) {
+                updateTOC(headinfo,tocs[i++]);}
             if (!(headinfo)) {
                 addClass(tocs,"metabooklivehead");
                 addClass(tocs,"metabookcurhead");

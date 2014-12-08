@@ -1013,11 +1013,11 @@ metaBook.Paginate=
                 updatePageDisplay(pagenum,staticref,metaBook.location);
                 curpage=page; metaBook.curpage=pagenum;
                 var curnode=mbID(page.getAttribute("data-topid"));
+                if (curnode) metaBook.setHead(curnode);
                 if (savestate) {
                     metaBook.point=curnode;
                     if (!((metaBook.hudup)||(metaBook.mode)))
-                        metaBook.skimming=false;
-                    metaBook.setHead(curnode);}
+                        metaBook.skimming=false;}
                 if ((savestate)&&(page)) {
                     var loc=page.getAttribute("data-sbookloc");
                     var pageno=page.getAttribute("data-pagenum");
