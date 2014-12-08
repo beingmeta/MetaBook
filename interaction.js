@@ -798,7 +798,8 @@
         if (adx>(ady*2)) {
             // Horizontal swipe
             if (dx<-(metaBook.minswipe||10)) {
-                if (hasClass(document.body,"mbSKIMMING"))
+                if ((evt.ntouches>1)&&
+                    (hasClass(document.body,"mbSKIMMING")))
                     metaBook.skimForward(evt);
                 else if (evt.ntouches>1) {
                     if (!(headinfo)) metaBook.Forward(evt);
@@ -811,19 +812,10 @@
                     else metaBook.Forward(evt);}
                 else metaBook.Forward(evt);}
             else if (dx>(metaBook.minswipe||10)) {
-                if (hasClass(document.body,"mbSKIMMING"))
+                if ((evt.ntouches>1)&&
+                    (hasClass(document.body,"mbSKIMMING")))
                     metaBook.skimBackward(evt);
-                else if (evt.ntouches>1) {
-                    if (!(headinfo)) metaBook.Forward(evt);
-                    else if (headinfo.prev)
-                        metaBook.GoTo(headinfo.prev.frag,"doubleswipe");
-                    else {
-                        var scan=headinfo.head;
-                        while (scan) {
-                            if (scan.prev)
-                                return metaBook.GoTo(scan.prev.frag,"doubleswipe");
-                            else scan=scan.head;}
-                        metaBook.Backward(evt);}}
+                else if (evt.ntouches>1) window.history.back();
                 else metaBook.Backward(evt);}}
         else if (ady>(adx*2)) {
             // Vertical swipe
