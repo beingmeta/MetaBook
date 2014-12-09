@@ -125,13 +125,14 @@ metaBook.Startup=
             {layout: 'bypage',forcelayout: false,
              bodysize: 'normal',bodyfamily: 'serif',
              justify: false,linespacing: 'normal',
-             uisize: 'normal',showconsole: false,
+             uisize: 'normal',uidyslexical: false,
              animatecontent: true,animatehud: true,
              hidesplash: false,keyboardhelp: true,
              holdmsecs: 150,wandermsecs: 1500,
              syncinterval: 60,glossupdate: 5*60,
              locsync: 15, cacheglosses: true,
              soundeffects: false, buzzeffects: false,
+             showconsole: false,
              controlc: false};
         var current_config={};
         var saved_config={};

@@ -845,7 +845,12 @@ metaBook.setMode=
         
         metaBook.addConfig("uisize",function(name,value){
             fdjtDOM.swapClass(
-                metaBook.Frame,/metabookuifont\w+/,"metabookuifont"+value);});
+                metaBook.Frame,/metabookuifont\w+/g,"metabookuifont"+value);});
+        metaBook.addConfig("uidyslexical",function(name,value){
+            if ((value)&&(typeof value === 'string')&&(/yes|on|t/i.exec(value)))
+                fdjtDOM.addClass(document.body,"_DYSLEXICAL");
+            else fdjtDOM.dropClass(document.body,"_DYSLEXICAL");
+            fdjt.DOM.adjustFonts(metaBook.HUD);});
         metaBook.addConfig("animatecontent",function(name,value){
             if (metaBook.dontanimate) {}
             else if (value) addClass(document.body,"_ANIMATE");
@@ -872,6 +877,10 @@ metaBook.setMode=
             var uisize=fdjtDOM.getInputValues(settings,"METABOOKUISIZE");
             if ((uisize)&&(uisize.length))
                 result.uisize=uisize[0];
+            var dyslexical=fdjtDOM.getInputValues(settings,"METABOOKUIDYSLEXICAL");
+            if ((dyslexical)&&(dyslexical.length))
+                result.uidyslexical=dyslexical[0];
+            else result.uidyslexical=false;
             var hidesplash=fdjtDOM.getInputValues(settings,"METABOOKHIDESPLASH");
             result.hidesplash=((hidesplash)&&(hidesplash.length))||false;
             var showconsole=fdjtDOM.getInputValues(settings,"METABOOKSHOWCONSOLE");

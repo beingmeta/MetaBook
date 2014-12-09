@@ -31,10 +31,15 @@
 
 @charset "UTF-8";
 
-#METABOOKFRAME, .wf-inactive #METABOOKPAGINATING {
-    font-family: Arial, Helvetica, sans-serif, sans;}
-.wf-active #METABOOKFRAME, .wf-active #METABOOKPAGINATING {
+#METABOOKFRAME, #METABOOKPAGINATING {
     font-family: 'Open Sans', Arial, Helvetica, sans-serif, sans;}
+body._DYSLEXICAL #METABOOKFRAME, body._DYSLEXICAL .fdjtdialog {
+    font-family: 'Open Dyslexic', serif;}
+
+/*
+#METABOOKFRAME, #METABOOKPAGINATING {
+    font-family: Arial, Helvetica, sans-serif, sans;}
+*/
 
 #METABOOKBODY,
 #METABOOKBODY.metabookfamilyserif,
@@ -58,14 +63,12 @@ span.excerpt {
 #METABOOKBODY.metabookfamilyserif h3, #METABOOKBODY.metabookfamilyserif h4 {
     font-family: Verdana, Arial, Helvetica, sans-serif, sans;}
 
-.wf-active #METABOOKBODY.metabookbodyfamilydyslexical, .wf-active .dyslexical {
-    font-family: 'Open Dyslexic', serif;}
 #METABOOKBODY.metabookbodyfamilydyslexical, .dyslexical {
-    font-family: serif;}
-.wf-active #METABOOKBODY.metabookfamilydyslexical h1,
-.wf-active #METABOOKBODY.metabookfamilydyslexical h2,
-.wf-active #METABOOKBODY.metabookfamilydyslexical h3,
-.wf-active #METABOOKBODY.metabookfamilydyslexical h4 {
+    font-family: 'Open Dyslexic', serif;}
+#METABOOKBODY.metabookfamilydyslexical h1,
+#METABOOKBODY.metabookfamilydyslexical h2,
+#METABOOKBODY.metabookfamilydyslexical h3,
+#METABOOKBODY.metabookfamilydyslexical h4 {
     font-family: 'OpenDyslexic', serif;}
 
 #METABOOKFRAME #METABOOKCONSOLE,
