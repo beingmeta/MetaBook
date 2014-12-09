@@ -1,6 +1,6 @@
 /* -*- Mode: Javascript; Character-encoding: utf-8; -*- */
 
-/* ###################### metabook/core.js ###################### */
+/* ###################### metabook/loadfonts.js ###################### */
 
 /* Copyright (C) 2009-2014 beingmeta, inc.
    This file implements a Javascript/DHTML web application for reading
@@ -36,8 +36,8 @@ if (typeof WebFontConfig === "undefined") {
     WebFontConfig={
 	custom: {
 	    families: ["Open Sans","Open Dyslexic"],
-	    urls: [metaBook.root+"fonts/opensans.css",
-		   metaBook.root+"fonts/opensans.css"]}};
+	    urls: [metaBook.root+"fonts/open_sans.css",
+		   metaBook.root+"fonts/open_dyslexic.css"]}};
     (function() {
 	var wf = document.createElement('script');
 	wf.src = (metaBook.root)+"fonts/loader/webfontloader.js";
