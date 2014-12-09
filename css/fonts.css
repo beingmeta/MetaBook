@@ -35,6 +35,8 @@
     font-family: 'Open Sans', Arial, Helvetica, sans-serif, sans;}
 body._DYSLEXICAL #METABOOKFRAME, body._DYSLEXICAL .fdjtdialog {
     font-family: 'Open Dyslexic', serif;}
+.wf-inactive #METABOOKFRAME, .wf-inactive #METABOOKPAGINATING {
+    font-family: Arial, Helvetica, sans-serif, sans;}
 
 /*
 #METABOOKFRAME, #METABOOKPAGINATING {
