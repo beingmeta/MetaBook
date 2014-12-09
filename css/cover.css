@@ -221,7 +221,7 @@ body._USER #METABOOKCOVER div.userbox {
 #METABOOKCOVER.help .control[data-mode='help'],
 #METABOOKCOVER.console .control[data-mode='console'],
 #METABOOKCOVER.login .control[data-mode='login'] {
-    outline-color: transparent;
+    outline-color: transparent; outline-width: 0px;
     display: inline;
     color: gold;}
 
