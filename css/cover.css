@@ -120,8 +120,10 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
 #METABOOKCOVERCONTROLS span.control {
     color: silver; white-space: nowrap;
     padding-left: 0.5ex; padding-right: 0.5ex; padding-bottom: 0.5ex;
+    outline-width: 0px;
     cursor: pointer;}
-body._MOUSE #METABOOKCOVERCONTROLS span.control:hover {
+body._MOUSE #METABOOKCOVERCONTROLS span.control:hover,
+#METABOOKCOVERCONTROLS span.control:focus {
     text-decoration: underline;}
 
 #METABOOKCOVER > div.loginbox, #METABOOKCOVER > div.userbox {
