@@ -32,11 +32,13 @@ body.mbPREVIEW #METABOOKFOOT #METABOOKPAGEBAR span#METABOOKPAGENOTEXT {
 #METABOOKFOOT #METABOOKPAGEREFTEXT {display: none;}
 body.mbPAGEREFS #METABOOKFOOT #METABOOKPAGEREFTEXT {display: inline-block;}
 #METABOOKFOOT #METABOOKPAGEREFTEXT.metabookpageno {
-    font-style: italic; float: left;}
+    font-style: italic; font-size: 85%; float: left;}
+/*
 #METABOOKFOOT #METABOOKPAGEREFTEXT.metabookpageno:before {
-    content: '('; font-style: normal;}
+    content: '《'; font-style: normal; font-weight: bold;}
 #METABOOKFOOT #METABOOKPAGEREFTEXT.metabookpageno:after {
-    content: ')'; font-style: normal;}
+    content: '》'; font-style: normal; font-weight: bold;}
+*/
 #METABOOKFOOT #METABOOKPAGEBAR div.progressbar {
     background-color: gray; border: solid black 1px; border-top-width: 0px;
     z-index: 50; height: 100%; position: absolute; opacity: 0.5; 

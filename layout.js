@@ -833,7 +833,7 @@ metaBook.Paginate=
             var pageref_text=
                 ((staticref)&&(staticmax)&&
                  (fdjtDOM("span#METABOOKPAGEREFTEXT.metabookpageno",
-                          staticref+"/"+staticmax)));
+                          staticref+"("+staticmax+")")));
             if (pageref_text) {
                 pageref_text.title=
                     "Reference page number (from some print version)"; 
