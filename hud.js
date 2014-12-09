@@ -338,9 +338,11 @@ metaBook.setMode=
                 else scan=scan.sub[0];}
             var toc_div=metaBook.TOC(scan,0,false,"METABOOKSTATICTOC4");
             var div=fdjtDOM(eltspec||"div#METABOOKSTATICTOC",toc_div);
+            var istouch=metaBook.touch;
             metaBook.UI.addHandlers(div,"toc");
             div.title=
-                "Tap a section to jump there directly; press and hold to see (glimpse) it temporarily; while glimpsing, tap (or press a key) to jump to where you're looking.";
+                ((istouch)?("Tap"):("Click on"))+
+                " a section to go to its start; press and hold to simply preview it.";
             return div;}
 
         /* HUD animation */
