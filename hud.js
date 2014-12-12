@@ -846,11 +846,22 @@ metaBook.setMode=
         metaBook.addConfig("uisize",function(name,value){
             fdjtDOM.swapClass(
                 metaBook.Frame,/metabookuifont\w+/g,"metabookuifont"+value);});
-        metaBook.addConfig("uidyslexical",function(name,value){
-            if ((value)&&(typeof value === 'string')&&(/yes|on|t/i.exec(value)))
-                fdjtDOM.addClass(document.body,"_DYSLEXICAL");
-            else fdjtDOM.dropClass(document.body,"_DYSLEXICAL");
-            fdjt.DOM.adjustFonts(metaBook.HUD);});
+        metaBook.addConfig("dyslexical",function(name,value){
+            if ((value)&&(typeof value === 'string')&&(/yes|on|t/i.exec(value))) {
+                if (hasClass(document.body,"_DYSLEXICAL")) return;
+                else {
+                     metaBook.dyslexical=true;
+                    addClass(document.body,"_DYSLEXICAL");}}
+            else if (!(hasClass(document.body,"_DYSLEXICAL")))
+                return;
+            else {
+                metaBook.dyslexical=true;
+                fdjtDOM.dropClass(document.body,"_DYSLEXICAL");}
+            setTimeout(function(){
+                if (metaBook.HUD) resizeHUD();
+                metaBook.resizeCover();
+                if (metaBook.layout) metaBook.Paginate("typechange");},
+                      10);});
         metaBook.addConfig("animatecontent",function(name,value){
             if (metaBook.dontanimate) {}
             else if (value) addClass(document.body,"_ANIMATE");
@@ -871,16 +882,21 @@ metaBook.setMode=
             var bodysize=fdjtDOM.getInputValues(settings,"METABOOKBODYSIZE");
             if ((bodysize)&&(bodysize.length))
                 result.bodysize=bodysize[0];
+            /*
             var bodyfamily=fdjtDOM.getInputValues(settings,"METABOOKBODYFAMILY");
             if ((bodyfamily)&&(bodyfamily.length))
                 result.bodyfamily=bodyfamily[0];
+            */
             var uisize=fdjtDOM.getInputValues(settings,"METABOOKUISIZE");
             if ((uisize)&&(uisize.length))
                 result.uisize=uisize[0];
-            var dyslexical=fdjtDOM.getInputValues(settings,"METABOOKUIDYSLEXICAL");
+            var contrast=fdjtDOM.getInputValues(settings,"METABOOKBODYCONTRAST");
+            if ((contrast)&&(contrast.length))
+                result.bodycontrast=contrast[0];
+            var dyslexical=fdjtDOM.getInputValues(settings,"METABOOKDYSLEXICAL");
             if ((dyslexical)&&(dyslexical.length))
-                result.uidyslexical=dyslexical[0];
-            else result.uidyslexical=false;
+                result.dyslexical=dyslexical[0];
+            else result.dyslexical=false;
             var hidesplash=fdjtDOM.getInputValues(settings,"METABOOKHIDESPLASH");
             result.hidesplash=((hidesplash)&&(hidesplash.length))||false;
             var showconsole=fdjtDOM.getInputValues(settings,"METABOOKSHOWCONSOLE");

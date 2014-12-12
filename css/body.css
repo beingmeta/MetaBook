@@ -35,6 +35,8 @@
 
 #METABOOKBODY {text-align: left;}
 
+/* This is typically a placeholder for the actual content of the book
+   used as the source for layout. */
 #METABOOKBODY #CODEXCONTENT {
     margin-left: 3em; margin-right: 3em;}
 

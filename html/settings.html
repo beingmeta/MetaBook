@@ -43,6 +43,10 @@
     </tbody>
     <tr class="padding"></tr>
     <tbody id="METABOOKFONTSETTINGS">
+      <tr class="checkspan">
+        <th><input TYPE="CHECKBOX" NAME="METABOOKDYSLEXICAL" VALUE="yes"/></th>
+        <td>Use <a href="http://opendyslexic.org/" title="The Open Dyslexic font size">
+            Open Dyslexic</a> and other styling to maximize readability</td></tr>
       <tr><th>Body text</th>
         <td>
           <button id="METABOOKREFRESHLAYOUT" class="refresh floatright"
@@ -58,17 +62,18 @@
             <input TYPE="RADIO" NAME="METABOOKBODYSIZE" VALUE="small"/>small</span>
           <span class="checkspan">
             <input TYPE="RADIO" NAME="METABOOKBODYSIZE" VALUE="tiny"/>tiny</span>
+          <!--
           <br/>
           <span class="checkspan">
             <input TYPE="RADIO" NAME="METABOOKBODYFAMILY" VALUE="serif"/>serif</span
 >
           <span class="checkspan">
             <input TYPE="RADIO" NAME="METABOOKBODYFAMILY" VALUE="sans"/>sans-serif</span>
-          <span class="checkspan dyslexical">
-            <input TYPE="RADIO" NAME="METABOOKBODYFAMILY" VALUE="dyslexical"/>dyslexical</span>
+          -->
           <br/>
           <span class="checkspan">
-            <input TYPE="CHECKBOX" NAME="METABOOKJUSTIFY" VALUE="true"/>justify</span>
+            <input TYPE="CHECKBOX" NAME="METABOOKJUSTIFY" VALUE="true"/>
+            justify paragraphs</span>
           <!--
           <span class="checkspan">
             <input TYPE="RADIO" NAME="linespacing" VALUE="single"/>single</span>
@@ -78,6 +83,15 @@
             <input TYPE="RADIO" NAME="linespacing" VALUE="onefive"/>1.5</span>
           -->
       </td></tr>
+      <tr><th>Body contrast</th>
+        <td>
+          <span class="checkspan">
+            <input TYPE="RADIO" NAME="METABOOKBODYCONTRAST" VALUE="high"/>high</span>
+          <span class="checkspan">
+            <input TYPE="RADIO" NAME="METABOOKBODYCONTRAST" VALUE="medium"/>medium</span>
+          <span class="checkspan">
+            <input TYPE="RADIO" NAME="METABOOKBODYCONTRAST" VALUE="low"/>low</span>
+      </td></tr>
       <tr><th>Interface font</th>
         <td colspan="2">
           <span class="checkspan">
@@ -86,9 +100,6 @@
             <input TYPE="RADIO" NAME="METABOOKUISIZE" VALUE="normal"/>normal</span>
           <span class="checkspan">
             <input TYPE="RADIO" NAME="METABOOKUISIZE" VALUE="small"/>small</span>
-          ·
-          <span class="checkspan dyslexical">
-            <input TYPE="CHECKBOX" NAME="METABOOKUIDYSLEXICAL" VALUE="yes"/>dyslexical</span>
       </td></tr>
     </tbody>
     <tr class="padding"></tr>

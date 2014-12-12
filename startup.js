@@ -76,6 +76,7 @@ metaBook.Startup=
         var getLink=fdjtDOM.getLink;
         var hasClass=fdjtDOM.hasClass;
         var addClass=fdjtDOM.addClass;
+        var swapClass=fdjtDOM.swapClass;
         var dropClass=fdjtDOM.dropClass;
         var getChildren=fdjtDOM.getChildren;
         var getGeometry=fdjtDOM.getGeometry;
@@ -124,8 +125,9 @@ metaBook.Startup=
         var default_config=
             {layout: 'bypage',forcelayout: false,
              bodysize: 'normal',bodyfamily: 'serif',
-             justify: false,linespacing: 'normal',
-             uisize: 'normal',uidyslexical: false,
+             bodycontrast: 'high', justify: false,
+             linespacing: 'normal',
+             uisize: 'normal',dyslexical: false,
              animatecontent: true,animatehud: true,
              hidesplash: false,keyboardhelp: true,
              holdmsecs: 150,wandermsecs: 1500,
@@ -1582,6 +1584,7 @@ metaBook.Startup=
 
         function resizeCover(cover){
             if (!(cover)) cover=fdjt.ID("METABOOKCOVER");
+            if (!(cover)) return;
             fdjtLog("Resizing cover %o",cover);
             var style=cover.style, display=style.display, zindex=style.zIndex;
             var opacity=style.opacity, viz=style.visibility;
@@ -1676,6 +1679,14 @@ metaBook.Startup=
             metaBook.uisound=(value)&&(true);});
         metaBook. addConfig("readsound",function(name,value){
             metaBook.readsound=(value)&&(true);});
+        metaBook.addConfig("bodycontrast",function(name,value){
+            var mbody=fdjt.ID("METABOOKBODY");
+            if (!(value))
+                dropClass(mbody,/\bmetabookcontrast[a-z]+\b/g);
+            else swapClass(mbody,/\bmetabookcontrast[a-z]+\b/g,
+                          "metabookcontrast"+value);});
+                
+
 
         /* Initializing the body and content */
 
@@ -1776,6 +1787,8 @@ metaBook.Startup=
                 var cxbody=metaBook.body=
                     fdjtDOM("div#METABOOKBODY.metabookbody",content,page);
                 if (metaBook.justify) addClass(cxbody,"metabookjustify");
+                if (metaBook.bodycontrast)
+                    addClass(cxbody,"metabookcontrast"+metaBook.bodycontrast);
                 if (metaBook.bodysize)
                     addClass(cxbody,"metabookbodysize"+metaBook.bodysize);
                 if (metaBook.bodyfamily)
