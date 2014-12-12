@@ -201,8 +201,9 @@ body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER.expanded {
     -moz-border-radius: 1ex; -webkit-border-radius: 1ex;
     display: none;}
 #METABOOKHEART {
-    /* background-color: steelblue; */
+    background-color: white;
     background-color: ivory;
+    background-color: whitesmoke;
     border-color: rgba(70, 130, 180, 0.54);}
 #METABOOKHUD.openheart #METABOOKHEART {
     top: 75px; bottom: 50px;}

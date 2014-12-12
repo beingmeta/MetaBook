@@ -141,7 +141,7 @@ body.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR
 
 #METABOOKFOOT #METABOOKPAGEBAR #METABOOKPAGEPROGRESS {
     box-sizing: content-box; border-right: solid darkblue 2px;
-    position: absolute; bottom: 0px; left: 0px;
+    position: absolute; bottom: 2px; left: 0px;
     width: 33%; height: 50%; 
     background-color: rgba(162,181,205,0.8);
     pointer-events: none;

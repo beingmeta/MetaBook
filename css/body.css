@@ -75,10 +75,10 @@ body._MOUSE #METABOOKBODY a[href]:hover,
 #METABOOKBODY a[href]:active {
     color: blue; }
 
-#METABOOKBODY.metabookcontrasthigh {
+#METABOOKBODY {
     background-color: #ffffff; color: #111; }
-#METABOOKBODY.metabookcontrastmedium {
-    background-color: #ffffff; color: #444; }
+#METABOOKBODY.metabookcontrasthigh { color: #111; }
+#METABOOKBODY.metabookcontrastmedium { color: #444; }
 #METABOOKBODY.metabookcontrastlow {
     background-color: #e5e0d4; color: #333; }
 
