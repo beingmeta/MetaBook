@@ -239,7 +239,10 @@ body._USER span.control[data-mode='layers'] .notloggedin {
     display: none;}
 body._USER._CONN .control[data-mode='login'] { display: none;}
 
-#METABOOKCOVERCONTROLS.nobookcover .control[data-mode='bookcover'] {
+#METABOOKCOVERCONTROLS.nobookcover .control[data-mode='bookcover'],
+#METABOOKCOVERCONTROLS.nobookcover .control[data-mode='bookcover'],
+#METABOOKCOVERCONTROLS.nocoverpage .control[data-mode='coverpage'],
+#METABOOKCOVERCONTROLS.nocoverpage .control[data-mode='coverpage'] {
     display: none;}
 
 #METABOOKCOVERCONTROLS.havecreditspage .control[data-mode='creditspage'] {

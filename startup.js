@@ -1381,30 +1381,30 @@ metaBook.Startup=
             metaBook.Frame=frame;
             cover.innerHTML=fixStaticRefs(metaBook.HTML.cover);
             
-            var coverpage=fdjtID("METABOOKCOVERPAGE")||
-                fdjtID("METABOOKBOOKCOVER")||
-                fdjtID("METABOOKCOVERHOLDER")||
-                fdjtID("METABOOKBOOKCOVERHOLDER");
+            var coverpage=fdjtID("METABOOKCOVERPAGE");
             if (coverpage) {
+                if (!(hasAnyContent(coverpage))) {
+                    coverpage.removeAttribute("style");
+                    coverpage=false;}}
+            else if ((coverpage=fdjtID("SBOOKCOVERPAGE"))) {
                 coverpage=coverpage.cloneNode(true);
-                coverpage.id="METABOOKCOVERPAGE";
-                coverpage.removeAttribute("style");}
-            else if (fdjtID("SBOOKCOVERPAGE")) {
-                coverpage=fdjtID("SBOOKCOVERPAGE").cloneNode(true);
                 coverpage.removeAttribute("style");
                 fdjtDOM.stripIDs(coverpage);
                 coverpage.id="METABOOKCOVERPAGE";}
             else if (metaBook.coverimage) {
                 var coverimage=fdjtDOM.Image(metaBook.covermage);
                 coverpage=fdjtDOM("div#METABOOKCOVERPAGE",coverimage);}
-            else {}
+            else coverpage=false;
             if (coverpage) {
                 cover.setAttribute("data-defaultclass","coverpage");
                 addClass(cover,"coverpage");
                 addToCover(cover,coverpage);}
-
-            var titlepage=fdjtID("METABOOKTITLEPAGE")||
-                fdjtID("METABOOKTITLEPAGEHOLDER");
+            else {
+                var controls=fdjt.DOM.getChild(cover,"#METABOOKCOVERCONTROLS");
+                cover.setAttribute("data-defaultclass","titlepage");
+                addClass(cover,"titlepage");
+                addClass(controls,"nocoverpage");}
+            var titlepage=fdjtID("METABOOKTITLEPAGE");
             if ((titlepage)&&(hasAnyContent(titlepage))) {
                 titlepage=titlepage.cloneNode(true);
                 titlepage.removeAttribute("style");
