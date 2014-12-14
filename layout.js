@@ -934,6 +934,8 @@ metaBook.Paginate=
                 var pageref=page.getAttribute("data-staticpageref");
                 if (pageref) {
                     var pagemap=layout.pagemap;
+                    var pagerefmax=fdjt.ID("METABOOKGOTOPAGEREFMAX");
+                    if (pagerefmax) pagerefmax.innerHTML=""+pageref;
                     if (!(pagemap)) layout.pagemap=pagemap={};
                     layout.laststaticref=pageref;
                     pagemap[pageref]=page;}

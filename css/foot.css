@@ -33,7 +33,8 @@ body.mbPREVIEW #METABOOKFOOT #METABOOKPAGEBAR span#METABOOKPAGEREFTEXT {
 #METABOOKFOOT #METABOOKPAGEREFTEXT {display: none;}
 body.mbPAGEREFS #METABOOKFOOT #METABOOKPAGEREFTEXT {display: inline-block;}
 #METABOOKFOOT #METABOOKPAGEREFTEXT.metabookpageno {
-    font-style: italic; font-size: 85%; float: left;}
+    position: absolute; left: 3px;
+    font-style: italic; font-size: 85%;}
 /*
 #METABOOKFOOT #METABOOKPAGEREFTEXT.metabookpageno:before {
     content: '《'; font-style: normal; font-weight: bold;}
