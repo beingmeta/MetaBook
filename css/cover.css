@@ -98,7 +98,7 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
 
 #METABOOKCOVER >  #METABOOKCOVERMESSAGE {
     position: absolute; white-space: nowrap;
-    font-style: italic; font-size: 30px;
+    font-style: italic; font-size: 24px; font-size: 2rem;
     width: 80%; left: 10%; right: 10%; border: 0px; 
     top: 0px; bottom: auto;
     text-align: center; overflow: visible; 
@@ -111,7 +111,6 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
     -webkit-box-sizing: border-box; 
     position: absolute; height: 60px; bottom: 40px; top: auto;
     width: 100%; left: 0px; right: 0px; border-width: 0px;
-    /* font-size: 1em; font-size: 1.5rem; font-size: 4vw; */
     padding-left: 1em; padding-right: 1em; line-height: 1.1;
     opacity: 1; overflow: hidden; z-index: 50; display: block;}
 #METABOOKCOVERCONTROLS > .control > img,
@@ -530,7 +529,8 @@ body.mbBUSY #METABOOKCOVERMESSAGE > #METABOOKBUSYMESSAGE {
 body.mbLAYOUT #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE,
 body.mbBUSY #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE {
     display: none;}
-#METABOOKLAYOUTMESSAGE div.message { font-size: 4vw;}
+#METABOOKLAYOUTMESSAGE div.message {
+    font-size: 24px; font-size: 1.8rem;}
 
 #METABOOKREADYMESSAGE { padding-bottom: 1ex; }
 
