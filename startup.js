@@ -1607,14 +1607,19 @@ metaBook.Startup=
                 style.opacity=opacity; style.visibility=viz;}}
         metaBook.resizeCover=resizeCover;
 
-        function resizeUI(){
+        function resizeUI(wait){
+            if (!(wait)) wait=100;
             setTimeout(function(){
                 var adjstart=fdjt.Time();
-                metaBook.resizeCover(fdjtID("METABOOKCOVER"));
-                metaBook.resizeHUD(fdjtID("METABOOKHUD"));
-                fdjtLog("Resized UI in %fsecs",
-                        ((fdjt.Time()-adjstart)/1000));},
+                var hud=fdjtID("METABOOKHUD");
+                var cover=fdjtID("METABOOKCOVER");
+                if (cover) metaBook.resizeCover(cover);
+                if (hud) metaBook.resizeHUD(hud);
+                if ((hud)||(cover))
+                    fdjtLog("Resized UI in %fsecs",
+                            ((fdjt.Time()-adjstart)/1000));},
                        100);}
+        metaBook.resizeUI=resizeUI;
 
         var coverids={"bookcover": "METABOOKCOVERPAGE",
                       "titlepage": "METABOOKTITLEPAGE",
@@ -1775,12 +1780,7 @@ metaBook.Startup=
 
             var pages=metaBook.pages=fdjtID("METABOOKPAGES")||
                 fdjtDOM("div#METABOOKPAGES");
-            var page=metaBook.page=fdjtDOM(
-                "div#CODEXPAGE",
-                fdjtDOM("div#METABOOKPAGINATING","Formatted ",
-                        fdjtDOM("span#METABOOKPAGEPROGRESS",""),
-                        " pages"),
-                pages);
+            var page=metaBook.page=fdjtDOM("div#CODEXPAGE",pages);
             
             metaBook.body=fdjtID("METABOOKBODY");
             if (!(metaBook.body)) {
@@ -1914,8 +1914,7 @@ metaBook.Startup=
             var layout=metaBook.layout;
             if (resizing) {
                 clearTimeout(resizing); resizing=false;}
-            metaBook.resizeHUD();
-            metaBook.resizeCover();
+            metaBook.resizeUI();
             metaBook.scaleLayout(false);
             if (!(layout)) return;
             if ((window.outerWidth===outer_width)&&
@@ -1984,6 +1983,16 @@ metaBook.Startup=
             else if (color==="transparent") return false;
             else if (color.search(/rgba/)>=0) return false;
             else return color;}
+
+        /* Enable Open Sans */
+        var open_sans_stack=
+            "'Open Sans',Verdana, Tahoma, Arial, Helvetica, sans-serif, sans";
+        function enableOpenSans(){
+            var frame=fdjt.ID("METABOOKFRAME");
+            if (!(frame)) return;
+            frame.style.fontFamily=open_sans_stack;
+            metaBook.resizeUI();}
+        metaBook.enableOpenSans=enableOpenSans;
 
         /* Loading meta info (user, glosses, etc) */
 

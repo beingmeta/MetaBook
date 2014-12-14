@@ -31,17 +31,13 @@
 
 @charset "UTF-8";
 
-#METABOOKFRAME, #METABOOKPAGINATING {
-    font-family: 'Open Sans', Arial, Helvetica, sans-serif, sans;}
+#METABOOKFRAME {
+    /* font-family: 'Open Sans', Arial, Helvetica, sans-serif, sans; */
+    font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif, sans;}
 body._DYSLEXICAL #METABOOKFRAME, body._DYSLEXICAL .fdjtdialog {
     font-family: 'Open Dyslexic', serif;}
-.wf-inactive #METABOOKFRAME, .wf-inactive #METABOOKPAGINATING {
+.wf-inactive #METABOOKFRAME {
     font-family: Arial, Helvetica, sans-serif, sans;}
-
-/*
-#METABOOKFRAME, #METABOOKPAGINATING {
-    font-family: Arial, Helvetica, sans-serif, sans;}
-*/
 
 #METABOOKBODY, #METABOOKFRAME #METABOOKABOUT, span.excerpt {
     font-family: Utopia, 'Palatino Linotype', Palatino,

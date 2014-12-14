@@ -858,8 +858,7 @@ metaBook.setMode=
                 metaBook.dyslexical=true;
                 fdjtDOM.dropClass(document.body,"_DYSLEXICAL");}
             setTimeout(function(){
-                if (metaBook.HUD) resizeHUD();
-                metaBook.resizeCover();
+                metaBook.resizeUI();
                 if (metaBook.layout) metaBook.Paginate("typechange");},
                       10);});
         metaBook.addConfig("animatecontent",function(name,value){

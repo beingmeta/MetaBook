@@ -106,14 +106,6 @@ body.mbSKIMMING #CODEXPAGE .codexpage {
     top: 0px; bottom:0px; left: 0px; right: 0px;
     padding: 0px; margin: 0px; border: 0px;
     overflow: visible;}
-#CODEXPAGE #CODEXPAGE.metabookpaginating #METABOOKPAGES {
-    opacity: 0.35;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=35)";
-    filter: alpha(opacity=35);
-    -webkit-opacity: 0.35;
-    -khtml-opacity: 0.35;
-    -moz-opacity: 0.35;
-    -o-opacity: 0.35;}
 
 body._BYPAGE {
     margin-top: 0px; margin-bottom: 0px;
@@ -162,28 +154,6 @@ body._BYPAGE #CODEXPAGE #CODEXCONTENT .metabookpagebreak {
     position: absolute; z-index: -100;
     top: 60px; left: 60px; right: 60px;
     display: none;}
-
-#METABOOKPAGINATING {
-    position: absolute;
-    font-size: 200%; font-weight: bold;
-    height: 3em; text-align: center;
-    top: 5em; left: 10%; right: 10%;
-    background-color: silver;
-    border: solid black 3px;
-    border-radius: 18px;
-    -o-border-radius: 18px;
-    -moz-border-radius: 18px;
-    -webkit-border-radius: 18px;
-    display: none;}
-
-.metabookpaginating #METABOOKPAGINATING {
-    display: block; opacity: 0.98;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=98)";
-    filter: alpha(opacity=98);
-    -webkit-opacity: 0.98;
-    -khtml-opacity: 0.98;
-    -moz-opacity: 0.98;
-    -o-opacity: 0.98;}
 
 body._ANIMATE body.metabookfixed div.codexpage {
     transition-property: opacity; transition-duration: 0.5s;
@@ -786,8 +756,6 @@ body #METABOOKBODY #CODEXPAGE .codexpage .metabookdupend {
     padding-top: 0px;
     border-top-width: 0px;
     margin-top: 0px;}
-
-#CODEXPAGE.metabookpaginating div.codexpage { visibility: hidden;}
 
 img.metabookcoverpage {
     display: block;
