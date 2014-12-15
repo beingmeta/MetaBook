@@ -75,14 +75,18 @@ body {
     -moz-box-sizing: border-box; -o-box-sizing: border-box;}
 body.hudup #METABOOKFRAME, body.mbCOVER #METABOOKFRAME,
 body.mbSKIMMING #METABOOKFRAME, body.openhud #METABOOKFRAME,
-body.mbMEDIA #METABOOKFRAME {
-    display: block;}
 body.hudup #METABOOKHUD, body.mbSKIMMING #METABOOKHUD,
 body.openhud #METABOOKHUD, body.mbCOVER #METABOOKCOVER,
-body.mbMEDIA #METABOOKMEDIA, body.mbMEDIA #METABOOKCLOSEMEDIA {
+body.mbMEDIA #METABOOKFRAME > #METABOOKMEDIA {
     top: 0px; bottom: 0px; left: 0px; right: 0px;
     height: 100%; width: 100%;
+    pointer-events: all;
     display: block;}
+body.mbMEDIA #METABOOKCLOSEMEDIA {
+    pointer-events: all; display: block;}
+body.mbMEDIA #METABOOKBODY, body.mbMEDIA #METABOOKCOVER, 
+body.mbMEDIA #METABOOKHUD { 
+    display: none;}
 
 body.hudup #METABOOKFRAME, body.mbCOVER #METABOOKFRAME,
 body.openhud #METABOOKFRAME, body.mbSKIMMING #METABOOKFRAME,
@@ -144,21 +148,29 @@ body.mbCOVER #METABOOKHUD, body.hudup.mbCOVER #METABOOKHUD {
 #METABOOKFRAME > #METABOOKMEDIA {
     top: 0px; left: 0px; height: 0px; width: 0px;}
 
-#METABOOKFRAME #METABOOKCLOSEMEDIA {
-    z-index: 100; opacity: 0.5; display: none;
+#METABOOKMEDIA > * {
+    display: block; 
+    margin-left: auto; margin-right: auto;
+    margin-top: auto; margin-bottom: auto;
+    max-width: 100%; max-height: 100%;
+    width: auto; height: auto;}
+#METABOOKCLOSEMEDIA {
+    position: absolute;
+    top: 4px; top: 1vmax; right: 4px; right: 1vmax;
+    width: 50px; width: 10vmax; height: 50px; height: 10vmax; 
+    z-index: 100; opacity: 0.5;
+    background-repeat: no-repeat; background-size: contain;
     background-image: url(g/metabook/redx.svgz);
-    top: 0px;  right: 0px;}
+    display: none;}
 body._NOSVG #METABOOKFRAME #METABOOKCLOSEMEDIA {
     background-image: url(g/metabook/redx100x100.png);}
 
 #METABOOKMEDIA > img, #METABOOKMEDIA > video, #METABOOKMEDIA > audio { }
 
 @media (orientation: landscape) {
-    #METABOOKFRAME > #METABOOKCLOSEMEDIA { width: 15%; height: auto; }
     #METABOOKMEDIA > img, #METABOOKMEDIA > video, #METABOOKMEDIA > audio {
         min-height: 100%; width: auto;}}
 @media (orientation: portrait) {
-    #METABOOKFRAME > #METABOOKCLOSEMEDIA { height: 10%; width: auto; }
     #METABOOKMEDIA > img, #METABOOKMEDIA > video, #METABOOKMEDIA > audio {
         min-width: 100%; height: auto;}}
 

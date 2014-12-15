@@ -102,6 +102,7 @@ metaBook.setMode=
             addClass(frame,"metabookframe");
             frame.appendChild(messages); frame.appendChild(hud);
             frame.appendChild(media);
+            frame.appendChild(fdjtDOM("div#METABOOKCLOSEMEDIA"));
             metaBook.Frame=frame;
             // Fill in the HUD help
             var hudhelp=fdjtID("METABOOKHUDHELP");
@@ -997,6 +998,23 @@ metaBook.setMode=
                                    5000);},
                            5000);}
         metaBook.keyboardHelp=keyboardHelp;
+
+        /* Full page media mode */
+
+        function showMedia(node){
+            var media=fdjt.ID("METABOOKMEDIA");
+            var copy=node.cloneNode();
+            fdjtDOM.stripIDs(copy);
+            copy.setAttribute("style","");
+            media.innerHTML="";
+            media.appendChild(copy);
+            addClass(document.body,"mbMEDIA");}
+        metaBook.showMedia=showMedia;
+
+        function closeMedia(evt){
+            dropClass(document.body,"mbMEDIA");
+            if (evt) fdjt.UI.cancel(evt);}
+        metaBook.closeMedia=closeMedia;
 
         /* Showing a particular gloss */
 

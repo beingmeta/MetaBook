@@ -630,6 +630,10 @@
                     evt,passage,((passage)&&(passage.parentNode)),
                     document.body.className,metaBook.HUD.className,
                     target,metaBook.glosstarget);
+        if (hasParent(target,"IMG,AUDIO,VIDEO,OBJECT")) {
+            metaBook.showMedia(getParent(target,"IMG,AUDIO,VIDEO,OBJECT"));
+            fdjt.UI.cancel(evt);
+            return;}
         if (metaBook.glosstarget) {
             if (hasParent(target,metaBook.glosstarget)) {
                 metaBook.setMode("addgloss",false);}
@@ -1797,11 +1801,6 @@
     function preview_touchmove_nodefault(evt){
         if (metaBook.previewing) fdjtUI.noDefault(evt);}
 
-    function stopPageTurner(){
-        if (metaBook.page_turner) {
-            clearInterval(metaBook.page_turner);
-            metaBook.page_turner=false;}}
-
     function pageForward(evt){
         evt=evt||window.event;
         dropClass(document.body,/\bmb(PAGE)?PREVIEW/g);
@@ -2638,10 +2637,11 @@
             keyup: onkeyup,
             keydown: onkeydown,
             keypress: onkeypress,
-            mouseup: global_mouseup,
-            click: default_tap,
             focus: metabookfocus,
             blur: metabookblur},
+         "#METABOOKBODY": {
+             mouseup: global_mouseup,
+             click: default_tap},
          content: {tap: body_tapped,
                    taptap: body_taptap,
                    hold: body_held,
@@ -2782,7 +2782,9 @@
              click: function(evt){
                  evt=evt||window.event;
                  metaBook.UI.handlers.everyone_ontap(evt);
-                 fdjt.UI.cancel(event);}}});
+                 fdjt.UI.cancel(event);}},
+         "#METABOOKCLOSEMEDIA": {
+             click: metaBook.closeMedia}});
 
     fdjt.DOM.defListeners(
         metaBook.UI.handlers.touch,
@@ -2790,9 +2792,6 @@
             keyup: onkeyup,
             keydown: onkeydown,
             keypress: onkeypress,
-            // touchstart: default_tap,
-            // touchmove: noDefault,
-            touchend: stopPageTurner,
             touchmove: preview_touchmove_nodefault,
             focus: metabookfocus,
             blur: metabookblur},
@@ -2974,7 +2973,9 @@
              touchend: function(evt){
                  evt=evt||window.event;
                  metaBook.UI.handlers.everyone_ontap(evt);
-                 fdjt.UI.cancel(event);}}});
+                 fdjt.UI.cancel(event);}},
+         "#METABOOKCLOSEMEDIA": {
+             click: metaBook.closeMedia}});
     
 })();
 
