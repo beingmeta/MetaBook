@@ -63,6 +63,8 @@ metaBook.setMode=
         var mB=metaBook;
         var Trace=mB.Trace;
 
+        var IScroll=window.IScroll;
+
         // Helpful dimensions
         // Whether to call displaySync on mode changes
         var display_sync=false;
@@ -102,7 +104,13 @@ metaBook.setMode=
             addClass(frame,"metabookframe");
             frame.appendChild(messages); frame.appendChild(hud);
             frame.appendChild(media);
-            frame.appendChild(fdjtDOM("div#METABOOKCLOSEMEDIA"));
+            frame.appendChild(
+                fdjtDOM("div#METABOOKMEDIACONTROLS",
+                        fdjtDOM("div#METABOOKMEDIACLOSE"),
+                        fdjtDOM("div#METABOOKMEDIAHELP"),
+                        fdjtDOM("div#METABOOKMEDIAHELPTEXT",
+                                "Drag to pan, use two fingers to zoom")));
+
             metaBook.Frame=frame;
             // Fill in the HUD help
             var hudhelp=fdjtID("METABOOKHUDHELP");
@@ -660,7 +668,7 @@ metaBook.setMode=
                     contents=fdjtDOM("div#METABOOKHEARTCONTENT");
                     fdjtDOM(contents,fdjtDOM.Array(heart.childNodes));
                     fdjtDOM(heart,contents);}
-                metaBook.heartscroller=new iScroll(heart);
+                metaBook.heartscroller=new IScroll(heart);
                 metaBook.heartscroller.refresh();}}
         metaBook.UI.updateScroller=updateScroller;
 
@@ -1008,7 +1016,19 @@ metaBook.setMode=
             copy.setAttribute("style","");
             media.innerHTML="";
             media.appendChild(copy);
-            addClass(document.body,"mbMEDIA");}
+            addClass(document.body,"mbMEDIA");
+            if (metaBook.mediascroll) metaBook.mediascroll.destroy();
+            metaBook.mediascroll=
+                new IScroll(media,{zoom: true,
+                                   scrollX: true,
+                                   scrollY: true,
+                                   keyBindings: true,
+                                   mouseWheel: true,
+                                   scrollbars: true,
+                                   zoomMin: 0.2,
+                                   zoomMax: 5,
+                                   wheelAction: 'zoom'
+                                  });}
         metaBook.showMedia=showMedia;
 
         function closeMedia(evt){

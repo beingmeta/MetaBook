@@ -1369,7 +1369,7 @@ metaBook.Startup=
                 cnodes.push(children[i++]);
             i=0; while (i<lim) c.appendChild(cnodes[i++]);
             div.appendChild(c);
-            return new iScroll(div);}
+            return new IScroll(div);}
 
         // Cover setup
         function setupCover(){

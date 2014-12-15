@@ -1203,6 +1203,7 @@
              if (metaBook.previewing) {
                  metaBook.stopPreview("escape_key");
                  fdjtUI.TapHold.clear();}
+             dropClass(document.body,"mbMEDIA");
              if (metaBook.mode==="addgloss") metaBook.cancelGloss();
              if (metaBook.mode) {
                  metaBook.last_mode=metaBook.mode;
@@ -1215,6 +1216,8 @@
                   (target.tagName==="INPUT")||
                   (target.tagName==="BUTTON"))
              return;
+        else if (hasClass(document.body,"mbMEDIA"))
+            return;
         else if ((metaBook.controlc)&&(evt.ctrlKey)&&((kc===99)||(kc===67))) {
             if (metaBook.previewing) metaBook.stopPreview("onkeydown",true);
             fdjtUI.TapHold.clear();
@@ -2642,6 +2645,7 @@
          "#METABOOKBODY": {
              mouseup: global_mouseup,
              click: default_tap},
+         "#METABOOKMEDIA": {mousemove: noDefault},
          content: {tap: body_tapped,
                    taptap: body_taptap,
                    hold: body_held,
@@ -2783,8 +2787,10 @@
                  evt=evt||window.event;
                  metaBook.UI.handlers.everyone_ontap(evt);
                  fdjt.UI.cancel(event);}},
-         "#METABOOKCLOSEMEDIA": {
-             click: metaBook.closeMedia}});
+         "#METABOOKMEDIACLOSE": {
+             click: metaBook.closeMedia},
+         "#METABOOKMEDIAHELP": {
+             click: toggleHelp}});
 
     fdjt.DOM.defListeners(
         metaBook.UI.handlers.touch,
@@ -2817,6 +2823,7 @@
                    touchtoo: slice_touchtoo,
                    touchmove: preview_touchmove_nodefault,
                    slip: slice_slipped},
+         "#METABOOKMEDIA": {touchmove: noDefault},
          "#METABOOKSTARTPAGE": {touchend: metaBook.UI.dropHUD},
          "#METABOOKTOPBAR": {tap: raiseHUD},
          //"#METABOOKTOOLTAB": {tap: raiseHUD, release: raiseHUD},
@@ -2974,8 +2981,10 @@
                  evt=evt||window.event;
                  metaBook.UI.handlers.everyone_ontap(evt);
                  fdjt.UI.cancel(event);}},
-         "#METABOOKCLOSEMEDIA": {
-             click: metaBook.closeMedia}});
+         "#METABOOKMEDIACLOSE": {
+             click: metaBook.closeMedia},
+         "#METABOOKMEDIAHELP": {
+             click: toggleHelp}});
     
 })();
 
