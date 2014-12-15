@@ -160,12 +160,14 @@ body.hudup #METABOOKHUD.openhead.overtoc #METABOOKHEAD {
 #METABOOKFRAME > #METABOOKHUD.openhead > #METABOOKTOPBAR {
     z-index: -20; opacity: 0.7;}
 
-body.hudup #METABOOKHUD.openhead #METABOOKHEAD .hudpanel {
-    position: absolute; width: 100%; height: 100%;
+#METABOOKHUD #METABOOKHEAD .hudpanel {
+    position: static; width: 100%; 
     box-sizing: border-box; -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box; -o-box-sizing: border-box;
-    padding-top: 2px; padding-bottom: 4px;
-    padding-left: 10px; padding-right: 10px;}
+    padding-top: 2px; padding-bottom: 4px;}
+
+body.hudup #METABOOKHUD.openhead #METABOOKHEAD .hudpanel {
+    height: 100%;}
 #METABOOKHUD.openglossmark #METABOOKSKIMMER,
 body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER,
 #METABOOKHUD.allglosses #METABOOKSKIMMER {
@@ -390,7 +392,7 @@ body.hudup #METABOOKHUD div.hudpanel {
 #METABOOKHUD.refinesearch #METABOOKSEARCH,
 #METABOOKHUD.expandsearch #METABOOKSEARCH,
 #METABOOKHUD.searchresults #METABOOKSEARCH {
-    position: static; display: block; opacity: 0.98;
+    display: block; opacity: 0.98;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=98)";
     filter: alpha(opacity=98);
     -webkit-opacity: 0.98;
@@ -1082,6 +1084,8 @@ body.mbSKIMMING.mbSKIMSTART.mbSKIMEND img.metabookskimbutton#METABOOKPREVSKIM {
 #METABOOKHUD #METABOOKSOURCES.hudpanel {
     overflow-y: hidden; overflow-x: auto; white-space: nowrap;
     padding-top: 2px;}
+#METABOOKHUD #METABOOKHEAD #METABOOKSOURCES.hudpanel {
+    position: absolute;}
 
 /* Buttons */
 

@@ -10,8 +10,7 @@ div.metabookglossformbody { position: relative; }
 
 #METABOOKADDGLOSS div.metabookglossform {
     box-sizing: border-box;
-    border: solid green 2px; border-top: 0px;
-    min-height: 55px;}
+    border: solid green 2px; border-top: 0px;}
 #METABOOKADDGLOSS div.metabookglossform.private {
     border-color: red;}
 #METABOOKADDGLOSS div.metabookglossform.modified {
@@ -20,7 +19,6 @@ body.hudup #METABOOKADDGLOSS div.metabookglossform {
     border-color: transparent;}
 
 #METABOOKADDGLOSS div.metabookglossform.focused {
-    max-height: inherit;
     background-color: ivory;}
 
 div.metabookglossform form div.textbox,
@@ -41,6 +39,9 @@ div.metabookglossform form div.textbox input[type="TEXT"] {
 div.metabookglossform.focused form div.textbox textarea,
 div.metabookglossform.focused form div.textbox input[type="TEXT"] {
     max-height: inherit;}
+body.hudup div.metabookglossform form div.glossetc,
+body div.metabookglossform.focused form div.glossetc {
+    min-height: 1.5ex;}
 
 #METABOOKADDGLOSS div.metabookglossform {
     border-radius: 1ex; -webkit-border-radius: 1ex;
@@ -56,7 +57,7 @@ div.metabookglossform.focused form div.textbox input[type="TEXT"] {
     -o-border-radius-topright: 0px;}
 #METABOOKADDGLOSS div.metabookglossform {
     background-color: ivory;
-    padding-bottom: 1ex;}
+    padding-bottom: 0.5ex;}
 
 div.metabookglossform { display: none;}
 div.metabookglossform#METABOOKADDGLOSSPROTOTYPE { display: none;}
