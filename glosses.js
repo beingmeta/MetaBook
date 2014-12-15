@@ -1266,7 +1266,8 @@
         // Now save it to the in-memory database
         var glossdata=
             {refuri: json.refuri,frag: json.frag,
-             maker: json.user,_id: json.uuid,uuid: json.uuid,
+             _id: json.uuid,uuid: json.uuid,
+             maker: json.user||metaBook.user,
              qid: json.uuid,gloss: json.uuid,
              created: ((json.created)||(fdjtTime()))};
         glossdata.tstamp=fdjtTime.tick();
@@ -1279,7 +1280,9 @@
             glossdata.details=json.details;
         if ((json.tags)&&(json.tags.length>0)) glossdata.tags=json.tags;
         if ((json.xrefs)&&(json.xrefs.length>0)) glossdata.xrefs=json.xrefs;
-        metaBook.glossdb.Import(glossdata,false,false,true);
+        metaBook.glossdb.Import(
+            glossdata,false,RefDB.REFLOAD|RefDB.REFSTRINGS|RefDB.REFINDEX,
+            true);
         if (evt) fdjtUI.cancel(evt);
         dropClass(form.parentNode,"submitting");
         /* Turn off the target lock */
