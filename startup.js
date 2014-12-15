@@ -1870,18 +1870,17 @@ metaBook.Startup=
                 fdjtDOM("div#SBOOKBOTTOMLEADING.leading.bottom"," ");
             topleading.metabookui=true; bottomleading.metabookui=true;
             
-            var skimleft=document.createDocumentFragment();
-            var skimright=document.createDocumentFragment();
+            var controls=fdjtDOM("div#METABOOKPAGECONTROLS");
             var holder=fdjtDOM("div");
             holder.innerHTML=fixStaticRefs(metaBook.HTML.pageleft);
             var nodes=toArray(holder.childNodes);
             var i=0, lim=nodes.length;
-            while (i<lim) skimleft.appendChild(nodes[i++]);
+            while (i<lim) controls.appendChild(nodes[i++]);
             holder.innerHTML=fixStaticRefs(metaBook.HTML.pageright);
             nodes=toArray(holder.childNodes); i=0; lim=nodes.length;
-            while (i<lim) skimright.appendChild(nodes[i++]);
+            while (i<lim) controls.appendChild(nodes[i++]);
 
-            fdjtDOM.prepend(document.body,skimleft,skimright);
+            fdjtDOM.prepend(document.body,controls);
 
             window.scrollTo(0,0);
             
