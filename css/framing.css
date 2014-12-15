@@ -80,11 +80,13 @@ body.openhud #METABOOKHUD, body.mbCOVER #METABOOKCOVER,
 body.mbMEDIA #METABOOKFRAME > #METABOOKMEDIA {
     top: 0px; bottom: 0px; left: 0px; right: 0px;
     height: 100%; width: 100%;
-    pointer-events: all;
     display: block;}
 body.mbMEDIA #METABOOKBODY, body.mbMEDIA #METABOOKCOVER, 
 body.mbMEDIA #METABOOKHUD { 
     display: none;}
+
+body.mbMEDIA #METABOOKFRAME > #METABOOKMEDIA {
+    pointer-events: all;}
 
 body.hudup #METABOOKFRAME, body.mbCOVER #METABOOKFRAME,
 body.openhud #METABOOKFRAME, body.mbSKIMMING #METABOOKFRAME,
@@ -172,7 +174,7 @@ body.mbSHOWHELP #METABOOKMEDIAHELP {
 #METABOOKMEDIAHELPTEXT {
     position: absolute;
     width: 60%; left: 20%; height: 80%; top: 10%; z-index: 500;
-    font-size: 4em; font-weight: bold; padding: 1em;
+    font-size: 2em; font-weight: bold; padding: 1em;
     background: gray; opacity: 0.9;
     text-align: center;
     display: none;}
