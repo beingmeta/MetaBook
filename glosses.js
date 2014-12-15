@@ -377,6 +377,12 @@
         return form;}
     metaBook.setGlossTarget=setGlossTarget;
 
+    function glossModified(arg){
+        var target=((arg.nodeType)?(arg):(fdjtUI.T(arg)));
+        var form=getParent(target,"FORM");
+        var div=getParent(form,".metabookglossform");
+        if (div) addClass(div,"modified");}
+
     function setSelecting(selecting){
         if (metaBook.selecting===selecting) return;
         else if (metaBook.selecting) {
@@ -571,15 +577,16 @@
     
     function setExcerpt(form,excerpt,off) {
         var wrapper=getParent(form,".metabookglossform");
-        var excerpt_span=getChild(form,'.excerpt');
+        var excerpt_span=getChild(form,'.excerpt'), changed=false;
         var input=getInput(form,'EXCERPT'), exoff=getInput(form,'EXOFF');
         if ((!(excerpt))||(fdjtString.isEmpty(excerpt))) {
+            if (input.value) changed=true;
             input.value=""; exoff.value="";
             input.disabled=exoff.disabled=true;
             if (excerpt_span) excerpt_span.innerHTML="";}
         else {
             input.disabled=exoff.disabled=false;
-            input.value=excerpt;
+            input.value=excerpt; changed=true;
             if (typeof off === "number") exoff.value=off;
             else {exoff.value="";exoff.disabled=true;}
             if (excerpt_span) excerpt_span.innerHTML=
@@ -588,7 +595,7 @@
             fdjtLog("setExcerpt %o form=%o excerpt=%o off=%o",
                     wrapper,form,excerpt,off);
         updateForm(form);
-        addClass(wrapper,"modified");
+        if (changed) addClass(wrapper,"modified");
         return;}
     metaBook.setExcerpt=setExcerpt;
 
@@ -768,10 +775,13 @@
         var text=target.value, pos=target.selectionStart||0;
         var ch=evt.charCode, charstring=String.fromCharCode(ch);
         var taginfo=findTag(text,pos,true);
+
         if ((Trace.glossing)||(Trace.gestures>2))
             fdjtLog("glossinput_onkeypress '%o' %o text=%o pos=%o taginfo=%o",
                     ch,evt,text,pos,taginfo);
-        if (ch!==13) addClass(getParent(form,".metabookglossform"),"focused");
+        if (ch!==13) {
+            addClass(getParent(form,".metabookglossform"),"focused");
+            addClass(getParent(form,".metabookglossform"),"modified");}
         if (ch===13) {
             if (taginfo) {
                 // Remove tag text
@@ -853,6 +863,7 @@
             else {}}
         else if ((ch===8)||(ch===46)||((ch>=35)&&(ch<=40))) {
             // These may change content, so we update the completion state
+            glossModified(evt);
             if (glossinput_timer) clearTimeout(glossinput_timer);
             glossinput_timer=setTimeout(function(){
                 glosstag_complete(target);},150);}}

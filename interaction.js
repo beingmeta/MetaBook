@@ -339,7 +339,10 @@
                 metaBook.setMode("addgloss",false);}
             else if (saving_dialog) {}
             else {
-                saveGlossDialog();
+                if ((metaBook.glossform)&&
+                    (hasClass(metaBook.glossform,"modified")))
+                    saveGlossDialog();
+                else metaBook.cancelGloss();
                 fdjtUI.cancel(evt);
                 return;}}
 
@@ -406,7 +409,8 @@
                  metaBook.cancelGloss();
                  saving_dialog=false;}}];
         var spec={choices: choices,
-                  timeout: (metaBook.save_gloss_timeout||metaBook.choice_timeout||7),
+                  timeout: (metaBook.save_gloss_timeout||
+                            metaBook.choice_timeout||7),
                   spec: "div.fdjtdialog.fdjtconfirm.savegloss"};
         saving_dialog=fdjtUI.choose(spec,msg);
         return saving_dialog;}
