@@ -1101,7 +1101,8 @@
         if (!((hasParent(form,".glossedit"))||
               (hasParent(form,".glossreply"))))
             // Only save defaults if adding a new gloss
-            saveGlossDefaults(form,getChild("METABOOKADDGLOSSPROTOTYPE","FORM"));
+            saveGlossDefaults(
+                form,getChild("METABOOKADDGLOSSPROTOTYPE","FORM"));
         var uuidelt=getInput(form,"UUID");
         if (!((uuidelt)&&(uuidelt.value)&&(uuidelt.value.length>5))) {
             fdjtLog.warn('missing UUID');
@@ -1122,9 +1123,12 @@
                 choices.push({label: "Login",
                               isdefault: true,
                               handler: function(){
-                                  setTimeout(function(){metaBook.setMode("login");},0);
-                                  var resubmit=function(){submitGloss(arg,keep);};
-                                  if (metaBook._onconnect) metaBook._onconnect.push(resubmit);
+                                  setTimeout(function()
+                                             {metaBook.setMode("login");},0);
+                                  var resubmit=function(){
+                                      submitGloss(form,keep);};
+                                  if (metaBook._onconnect)
+                                      metaBook._onconnect.push(resubmit);
                                   else metaBook._onconnect=[resubmit];
                                   login_message=true;}});
             if ((metaBook.user)&&(metaBook.persist)) 
@@ -1136,8 +1140,8 @@
                                       metaBook.setConfig("cacheglosses",true);
                                   login_message=true;
                                   if (!((navigator.onLine)&&(metaBook.connected)))
-                                      queueGloss(arg,false,keep);
-                                  else submitGloss(arg,keep);}});
+                                      queueGloss(form,false,keep);
+                                  else submitGloss(form,keep);}});
             else {
                 choices.push({label: "Cache",
                               isdefault: ((!(navigator.onLine))&&
@@ -1146,7 +1150,7 @@
                                   if (metaBook.nocache)
                                       metaBook.setConfig("cacheglosses",true,true);
                                   login_message=true;
-                                  queueGloss(arg,false,keep);}});
+                                  queueGloss(form,false,keep);}});
                 if (metaBook.nocache)
                     choices.push({label: "Lose",
                                   isdefault:((!(navigator.onLine))&&
