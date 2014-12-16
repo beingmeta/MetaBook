@@ -1587,13 +1587,14 @@ metaBook.Startup=
         function resizeCover(cover){
             if (!(cover)) cover=fdjt.ID("METABOOKCOVER");
             if (!(cover)) return;
-            fdjtLog("Resizing cover %o",cover);
-            var style=cover.style, display=style.display, zindex=style.zIndex;
-            var opacity=style.opacity, viz=style.visibility;
+            var frame=fdjt.ID("METABOOKFRAME");
+            var style=cover.style, framestyle=frame.style;
             var restore=0;
             if (!(cover.offsetHeight)) {
                 restore=1; style.zIndex=-500; style.visibility='hidden';
-                style.opacity=0; style.display='block';}
+                style.opacity=0; style.display='block';
+                style.height='100%'; style.width='100%';
+                framestyle.display='block';}
             var controls=fdjtID("METABOOKCOVERCONTROLS");
             var userbox=fdjtID("METABOOKUSERBOX");
             fdjtDOM.adjustFontSize(controls);
@@ -1605,8 +1606,9 @@ metaBook.Startup=
                 (!(hasClass(covertitle,/\b(adjustfont|fdjtadjustfont)\b/))))
                 fdjtDOM.adjustFontSize(covertitle);
             if (restore) {
-                style.zIndex=zindex; style.display=display;
-                style.opacity=opacity; style.visibility=viz;}}
+                style.zIndex=''; style.display='';
+                style.opacity=''; style.visibility='';
+                framestyle.display='';}}
         metaBook.resizeCover=resizeCover;
 
         function resizeUI(wait){
