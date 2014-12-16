@@ -98,6 +98,9 @@ body.mbSHOWHELP #METABOOKFRAME, body.mbMEDIA #METABOOKFRAME {
 .metabookframe img, .metabookframe picture, .metabookframe figure,
 .metabookframe object, .metabookframe video, .metabookframe audio {
     max-width: initial; max-height: initial;}
+.metabookframe h1 { font-size: 2em; margin: 0.67em 0; color: black; }
+.metabookframe h2 { font-size: 1.5em; margin: 0.5em 0; color: black; }
+.metabookframe h3 { font-size: 1.4em; margin: 0.4em 0; color: black; }
 
 /* The HUD is where all of the active interface elements for reading
    appear.  */

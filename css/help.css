@@ -115,7 +115,7 @@ div.helpbox.atfoot {
 #METABOOKHUD div.helpbox {
     border-color: black; z-index: 250;}
 body.mbSHOWHELP #METABOOKHUD .helphud,
-body.mbSHOWHELP #METABOOKHUD > div.metabookhelp {display: block;}
+body.mbSHOWHELP #METABOOKHUD div.metabookhelp {display: block;}
 body.mbSHOWHELP #METABOOKHUD .hudbutton {
     opacity: 0.5;}
 body.mbSHOWHELP #METABOOKHUD.addgloss div.metabookhelp, 

@@ -186,8 +186,6 @@ div.metabookglossform .glossetc .glossdate {
     font-size: 80%; font-variant: small-caps; color: purple;}
 
 div.metabookglossform form .glossexposure {
-    float: right; font-size: 1ex;}
-body._TOUCH div.metabookglossform form .glossexposure {
     float: right; font-size: 1.5ex;}
 
 div.metabookglossform form .glossexposure .checkspan {

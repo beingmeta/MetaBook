@@ -383,10 +383,10 @@ body._TOUCH #METABOOKSTATICTOC div.metabooktoc div.head {
     #METABOOKHEARTBODY #METABOOKSTATICTOC {
         margin-left: 0.2em; margin-right: 0.2em;}
     #METABOOKHUD div.metabooktoc {
-        padding-left:0.2ex; padding-right: 2px;}}
+        padding-left: 1.5ex; padding-right: 2px;}}
 @media screen and (max-width: 500px) {
     #METABOOKHEARTBODY #METABOOKSTATICTOC {
-        margin-left: 2px; margin-right: 2px;}
+        margin-left: 1ex; margin-right: 2px;}
     #METABOOKHUD div.metabooktoc {
         padding-left: 1ex; padding-right: 0.5ex;}}
 
