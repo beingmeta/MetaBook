@@ -213,6 +213,11 @@ p { line-height: 1.2;}
 
 .codexbibpage { text-align: left;}
 
+/* Hide these body elements which are moved to the metaBook cover */
+#METABOOKBODY #SBOOKABOUTBOOK, #METABOOKBODY #SBOOKABOUTORIGIN,
+#METABOOKBODY #SBOOKABOUTAUTHOR, #METABOOKBODY #SBOOKABOUTPUBLISHER {
+    display: none;}
+
 /* Image/float placement rules */
 
 p .floatright, p .floatleft { max-width: 30%; }

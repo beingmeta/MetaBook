@@ -1464,17 +1464,19 @@ metaBook.Startup=
             else {
                 var about_book=fdjtID("SBOOKABOUTPAGE")||
                     fdjtID("SBOOKABOUTBOOK")||
-                    fdjtID("SBOOKSABOUTPAGE");
+                    fdjtID("SBOOKSABOUTPAGE")||
+                    fdjtID("SBOOKSABOUTBOOK");
                 var about_author=fdjtID("SBOOKABOUTAUTHOR")||
                     fdjtID("SBOOKABOUTORIGIN")||
                     fdjtID("SBOOKAUTHORPAGE")||
+                    fdjtID("SBOOKSAUTHORPAGE")||
                     fdjtID("SBOOKABOUTAUTHORS")||
                     fdjtID("SBOOKSABOUTAUTHORS")||
                     fdjtID("SBOOKSABOUTAUTHOR");
-                if ((about_book)||(about_author))
+                if ((about_book)||(about_author)) {
                     blurb=fdjtDOM(
                         "div#METABOOKBLURB.metabookblurb.scrolling",
-                        "\n",about_book,"\n",about_author,"\n");
+                        "\n",about_book,"\n",about_author,"\n");}
                 else blurb=false;}
             if (blurb) addToCover(cover,blurb);
             
@@ -1625,10 +1627,10 @@ metaBook.Startup=
                        100);}
         metaBook.resizeUI=resizeUI;
 
-        var coverids={"bookcover": "METABOOKCOVERPAGE",
+        var coverids={"coverpage": "METABOOKCOVERPAGE",
                       "titlepage": "METABOOKTITLEPAGE",
-                      "bookcredits": "METABOOKCREDITSPAGE",
-                      "aboutbook": "METABOOKABOUTBOOK",
+                      "creditspage": "METABOOKCREDITSPAGE",
+                      "blurb": "METABOOKBLURB",
                       "help": "METABOOKAPPHELP",
                       "settings": "METABOOKSETTINGS",
                       "layers": "METABOOKLAYERS"};
@@ -1661,7 +1663,8 @@ metaBook.Startup=
                 metaBook.initIFrameApp();
 
             var curclass=cover.className;
-            var cur=((curclass)&&(coverids[curclass])&&(fdjtID(coverids[curclass])));
+            var cur=((curclass)&&(coverids[curclass])&&
+                     (fdjtID(coverids[curclass])));
             var nxt=((mode)&&(coverids[mode])&&(fdjtID(coverids[mode])));
             if ((cur)&&(nxt)) {
                 cur.style.display='block';
