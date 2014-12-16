@@ -1725,10 +1725,12 @@ metaBook.Startup=
                 if ((href)&&(href.search(/^[a-zA-Z]+:/)===0)) {
                     var aclass=a.className, extclass="extref";
                     if (href.search(wikiref_pat)===0) {
-                        if (!(a.title)) a.title="From Wikipedia";
-                        else if (a.title.search(/wikipedia/i)>=0) {}
-                        else a.title="Wikipedia: "+a.title;
-                        extclass=extclass+" wikiref";}
+                        var text=fdjt.DOM.textify(a);
+                        if (!(fdjtString.isEmpty(text))) {
+                            if (!(a.title)) a.title="From Wikipedia";
+                            else if (a.title.search(/wikipedia/i)>=0) {}
+                            else a.title="Wikipedia: "+a.title;
+                            extclass=extclass+" wikiref";}}
                     if (aclass) a.className=aclass+" "+extclass;
                     else a.className=extclass;
                     a.target="_blank";}}
