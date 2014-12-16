@@ -106,13 +106,17 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
     cursor: pointer; display: block; opacity: 1.0;
     z-index: 50;}
 
+#METABOOKCOVERCONTROLS {
+    white-space: nowrap;}
+
 #METABOOKCOVER > #METABOOKCOVERCONTROLS {
     box-sizing: border-box; -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box; 
     position: absolute; height: 60px; bottom: 40px; top: auto;
     width: 100%; left: 0px; right: 0px; border-width: 0px;
     padding-left: 1em; padding-right: 1em; line-height: 1.1;
-    opacity: 1; overflow: hidden; z-index: 50; display: block;}
+    opacity: 1; overflow: hidden; z-index: 50; 
+    display: block;}
 #METABOOKCOVERCONTROLS > .control > img,
 #METABOOKCOVERCONTROLS .control > img {
     width: 90%; height: auto; clear: both;}
