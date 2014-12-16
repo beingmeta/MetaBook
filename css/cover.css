@@ -227,7 +227,7 @@ body._USER #METABOOKCOVER div.userbox {
     color: gold;}
 
 .control[data-mode='console'], .control[data-mode='aboutsbooks'],
-.control[data-mode='creditspage'], .control[data-mode='aboutbook'] {
+.control[data-mode='aboutbook'] {
     display: none;}
 body._SHOWCONSOLE span.control[data-mode='console'] { display: inline;}
 body._NOUSER span.control[data-mode='layers'] { display: none;}
@@ -239,16 +239,10 @@ body._USER span.control[data-mode='layers'] .notloggedin {
 body._USER._CONN .control[data-mode='login'] { display: none;}
 
 #METABOOKCOVERCONTROLS.nobookcover .control[data-mode='bookcover'],
-#METABOOKCOVERCONTROLS.nobookcover .control[data-mode='bookcover'],
 #METABOOKCOVERCONTROLS.nocoverpage .control[data-mode='coverpage'],
-#METABOOKCOVERCONTROLS.nocoverpage .control[data-mode='coverpage'] {
+#METABOOKCOVERCONTROLS.noblurb .control[data-mode='blurb'],
+#METABOOKCOVERCONTROLS.nocredits .control[data-mode='creditspage'] {
     display: none;}
-
-#METABOOKCOVERCONTROLS.havecreditspage .control[data-mode='creditspage'] {
-    display: inline;}
-#METABOOKCOVERCONTROLS.haveblurb .control[data-mode='blurb'],
-#METABOOKCOVERCONTROLS.haveblurb .control[data-mode='aboutbook'] {
-    display: inline;}
 
 #METABOOKTITLEPAGE, #METABOOKABOUTBOOK, #METABOOKBOOKCREDITS,
 #METABOOKABOUTSBOOKS, #METABOOKBLURB, #METABOOKAPPHELP {
@@ -480,7 +474,7 @@ div#METABOOKOPENTAB {
     white-space: nowrap;
     box-sizing: border-box; -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box; -o-box-sizing: border-box;
-    width: 7em; font-size: 32px; font-style: normal;
+    width: 7em; font-size: 36px; font-style: normal;
     margin: 0px; margin-left: auto; margin-right: auto;
     padding:  0px 1em 0px 1em; 
     border: solid transparent 2px; border-top: 0px;
@@ -493,11 +487,9 @@ body._MOUSE #METABOOKOPENTAB:hover, #METABOOKOPENTAB.tapholdtarget {
     border-color: blue; border-style: dotted;}
 #METABOOKCOVERMESSAGE > div#METABOOKOPENTAB {
     width: 7em; color: white;}
-body._TOUCH #METABOOKCOVERMESSAGE > div#METABOOKOPENTAB { font-size: 32px;}
+body._TOUCH #METABOOKCOVERMESSAGE > div#METABOOKOPENTAB { font-size: 36px;}
 body._TOUCH #METABOOKCOVERMESSAGE > div#METABOOKOPENTAB {
     width: 5em; }
-body._MOUSE div#METABOOKOPENTAB:hover { 
-    border: solid blue 1px;}
 
 body.mbREADY #METABOOKCOVERMESSAGE > #METABOOKOPENTAB {
     display: block;}
@@ -520,7 +512,7 @@ body.mbBUSY #METABOOKCOVERMESSAGE > #METABOOKOPENTAB {
     margin-left: auto; margin-right: auto;
     padding:  0px 1em 0px 1em; border: solid transparent 4px;
     background-color: gray; color: white;
-    font-size: 30px; font-variant: small-caps; font-weight: bold;
+    font-size: 36px; font-variant: small-caps; font-weight: bold;
     border-radius: 1ex; }
 body.mbLAYOUT #METABOOKCOVERMESSAGE > #METABOOKLAYOUTMESSAGE,
 body #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE,

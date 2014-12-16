@@ -85,9 +85,6 @@ body._MOUSE #METABOOKBODY a[href]:hover,
 p { line-height: 1.2;}
 #METABOOKPAGES .codexpage.metabookcoversize p { line-height: 1.05;}
 
-body span { font-size: inherit; }
-span { font-size: inherit; }
-
 .metabookbody .titlepage, .metabookbody .sbooktitlepage,
 #METABOOKTITLEPAGE.sbooktitlepage {
     text-align: center;}

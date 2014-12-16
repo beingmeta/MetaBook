@@ -63,6 +63,7 @@ metaBook.Startup=
         var RefDB=fdjt.RefDB, Ref=fdjt.Ref;
         
         var CodexLayout=fdjt.CodexLayout;
+        var IScroll=window.IScroll;
 
         var https_root="https://s3.amazonaws.com/beingmeta/static/";
 
@@ -1473,7 +1474,8 @@ metaBook.Startup=
                 if ((about_book)||(about_author))
                     blurb=fdjtDOM(
                         "div#METABOOKBLURB.metabookblurb.scrolling",
-                        "\n",about_book,"\n",about_author,"\n");}
+                        "\n",about_book,"\n",about_author,"\n");
+                else blurb=false;}
             if (blurb) addToCover(cover,blurb);
             
             var settings=fdjtDOM(
@@ -1526,11 +1528,11 @@ metaBook.Startup=
             metaBook.DOM.sbooksapp=sbooksapp;
             if (layers) addToCover(cover,layers);
             
-            var cc=fdjtID("METABOOKCOVERCONTROLS");
+            var cc=getChildren(cover,"#METABOOKCOVERCONTROLS");
             if (cc) {
                 if (!(coverpage)) addClass(cc,"nobookcover");
-                if (creditspage) addClass(cc,"havecreditspage");
-                if (blurb) addClass(cc,"haveblurb");}
+                if (!(creditspage)) addClass(cc,"nocredits");
+                if (!(blurb)) addClass(cc,"noblurb");}
             
             if (metaBook.touch)
                 fdjtDOM.addListener(cover,"touchstart",cover_clicked);
