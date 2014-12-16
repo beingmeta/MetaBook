@@ -1,62 +1,63 @@
-  <div id="METABOOKTOPBAR">
-    <img svg="{{bmg}}metabook/tocicon.svgz"
-      src="{{bmg}}metabook/tocicon50x50.png"
-      alt="toc" title="navigate sections"
-      class="hudbutton hudmodebutton topleft"
-      id="METABOOKTOCBUTTON"
-      hudmode="statictoc"/>
-    <div id="METABOOKTOPCENTER">
-      <div id="METABOOKTOOLTAB" class="hudbutton"
-           title="Open the meta layer for navigation, search, etc.">
+<div id="METABOOKTOPBAR">
+  <img svg="{{bmg}}metabook/tocicon.svgz"
+       src="{{bmg}}metabook/tocicon50x50.png"
+       alt="toc" title="navigate sections"
+       class="hudbutton hudmodebutton topleft"
+       id="METABOOKTOCBUTTON"
+       hudmode="statictoc"/>
+  <div id="METABOOKTOPCENTER">
+    <div id="METABOOKTOOLTAB" class="hudbutton"
+         title="Open the meta layer for navigation, search, etc.">
       &nbsp;</div>
-      <div class="hudbutton" id="METABOOKSHOWCOVER">
-        <span class="text">Cover</span></div>
-    </div>
-    <img svg="{{bmg}}metabook/tagsearch.svgz"
-         src="{{bmg}}metabook/tagsearch50x50.png"
-         alt="search" title="search tags"
-         class="hudbutton hudmodebutton topright"
-         hudmode="search"/>
+    <div class="hudbutton" id="METABOOKSHOWCOVER">
+      <span class="text">Cover</span></div>
   </div>
-  <div id="METABOOKHEAD">
-    <div id="METABOOKTOC" class="hudpanel"></div>
-    <div id="METABOOKSEARCH" class="searchbox hudpanel notags">
-      <!-- This content comes from searchbox.html -->
+  <img svg="{{bmg}}metabook/tagsearch.svgz"
+       src="{{bmg}}metabook/tagsearch50x50.png"
+       alt="search" title="search tags"
+       class="hudbutton hudmodebutton topright"
+       hudmode="search"/>
+</div>
+<div id="METABOOKHEAD">
+  <div id="METABOOKTOC" class="hudpanel"></div>
+  <div id="METABOOKSEARCH" class="searchbox hudpanel notags">
+    <!-- This content comes from searchbox.html -->
+  </div>
+  <div id="METABOOKNOTETEXT" class="hudpanel"
+       title="tap/click to jump to the note">
+    <!-- This displays the text for a "note" -->
+  </div>
+  <div id="METABOOKGLOSS" class="hudpanel">
+    <div class="editbar">
+      <span class="deletebutton">Delete</span>
+      <span class="deletebutton">Edit</span>
+      <span class="deletebutton">Reply</span>
     </div>
-    <div id="METABOOKNOTETEXT" class="hudpanel"
-      title="tap/click to jump to the note">
-      <!-- This displays the text for a "note" -->
-    </div>
-    <div id="METABOOKGLOSS" class="hudpanel">
-      <div class="editbar">
-        <span class="deletebutton">Delete</span>
-        <span class="deletebutton">Edit</span>
-        <span class="deletebutton">Reply</span>
-      </div>
-      <div id="METABOOKTARGETGLOSS">
-        <!-- This is generated on demand -->
-      </div>
-    </div>
-    <div id="METABOOKSOURCES" class="hudpanel metabooksources">
-      <img svg="{{bmg}}metabook/sbookspeople.svgz"
-        src="{{bmg}}metabook/sbookspeople50x50.png"
-        class="button everyone selected"
-        alt="show all" title="show all glosses"/>
-    </div>
-    <div id="METABOOKADDGLOSS" class="metabookaddgloss hudpanel">
-      <div id="METABOOKGLOSSFORMS">
-        <div class="metabookglossform" id="METABOOKADDGLOSSPROTOTYPE">
-          <!-- This content comes from addgloss.html -->
-        </div>
-        <!-- This is populated with copies of the prototype DIV -->
-      </div>
+    <div id="METABOOKTARGETGLOSS">
+      <!-- This is generated on demand -->
     </div>
   </div>
-  <div id="METABOOKSKIMMER">
-    <span class="metabookskiminfo" id="METABOOKSKIMINFO">
-      skim info</span>
-    <div id="METABOOKSKIM"></div>
+  <div id="METABOOKSOURCES" class="hudpanel metabooksources">
+    <img svg="{{bmg}}metabook/sbookspeople.svgz"
+         src="{{bmg}}metabook/sbookspeople50x50.png"
+         class="button everyone selected"
+         alt="show all" title="show all glosses"/>
   </div>
+  <div id="METABOOKADDGLOSS" class="metabookaddgloss hudpanel">
+    <div id="METABOOKGLOSSFORMS">
+      <div class="metabookglossform" id="METABOOKADDGLOSSPROTOTYPE">
+        <!-- This content comes from addgloss.html -->
+      </div>
+      <!-- This is populated with copies of the prototype DIV -->
+    </div>
+  </div>
+</div>
+<div id="METABOOKSKIMMER">
+  <span class="metabookskiminfo" id="METABOOKSKIMINFO">
+    skim info</span>
+  <div id="METABOOKSKIM"></div>
+</div>
+<div id="METABOOKTOPHELPCONTENT">
   <div id="METABOOKSLICEHELP" class="hudpanel">
     Press to see the context, tap to start skimming
   </div>
@@ -69,9 +70,9 @@
   </div>
   <div id="METABOOKPAGEBARHELP" class="metabookhelp helpbox">
     <p><span class="action">Release</span> <span class="fortouch
-        action">or tap the text</span>
+                                                        action">or tap the text</span>
       to <span class="result">settle</span> here.  <span class="action
-        notouch">Press any key</span> <span class="notouch">or</span>
+                                                                notouch">Press any key</span> <span class="notouch">or</span>
       <span class="notouch action">move the pointer away</span>
       <span class="action fortouch">Move your finger away</span>
       to <span class="result">return</span> to where you were.</p>
@@ -84,40 +85,42 @@
       to <em>settle here</em>.</p>
   </div>
 </div>
-  <div id="METABOOKHEART">
-    <div id="METABOOKRIBBON">
-      <div class="inputbox" ID="METABOOKGLOSSTAGINPUT">
-        <input TYPE="TEXT" NAME="TAG" VALUE=""
-          placeholder="Type or define a tag, with completion"
-          autocomplete="off"
-          ID="METABOOKTAGINPUT"/>
-      </div>
-      <div class="inputbox" ID="METABOOKGLOSSOUTLETINPUT">
-        <input TYPE="TEXT" NAME="OUTLET" VALUE=""
-          placeholder="Type a group or individual name"
-          autocomplete="off"
-          ID="METABOOKOUTLETINPUT"/>
-      </div>
-      <div class="resultinfo notags noresults" id="METABOOKSEARCHINFO">
-        <span class="noresults">No results</span>
-        <span class="noquery">Add tags to see or refine results</span>
-        <span class="stats">
-          <span class="resultcount metabookshowsearch"></span>
-          <span class="refinecount metabookrefinesearch"></span>
-          <span class="showalltags metabookexpandsearch">all<br/>tags</span>
-        </span>
-        <span id="METABOOKSEARCHTAGS" class="qtags"></span>
-      </div>
+</div>
+<div id="METABOOKHEART">
+  <div id="METABOOKRIBBON">
+    <div class="inputbox" ID="METABOOKGLOSSTAGINPUT">
+      <input TYPE="TEXT" NAME="TAG" VALUE=""
+             placeholder="Type or define a tag, with completion"
+             autocomplete="off"
+             ID="METABOOKTAGINPUT"/>
     </div>
-    <div id="METABOOKHEARTBODY"></div>
+    <div class="inputbox" ID="METABOOKGLOSSOUTLETINPUT">
+      <input TYPE="TEXT" NAME="OUTLET" VALUE=""
+             placeholder="Type a group or individual name"
+             autocomplete="off"
+             ID="METABOOKOUTLETINPUT"/>
+    </div>
+    <div class="resultinfo notags noresults" id="METABOOKSEARCHINFO">
+      <span class="noresults">No results</span>
+      <span class="noquery">Add tags to see or refine results</span>
+      <span class="stats">
+        <span class="resultcount metabookshowsearch"></span>
+        <span class="refinecount metabookrefinesearch"></span>
+        <span class="showalltags metabookexpandsearch">all<br/>tags</span>
+      </span>
+      <span id="METABOOKSEARCHTAGS" class="qtags"></span>
+    </div>
   </div>
-  <div id="METABOOKPOINTGLOSSES" class="hudpanel">
-    <!-- This is populated when a glosspoint is tapped.
-    It contains the glosses for a particular passage. -->
-  </div>
+  <div id="METABOOKHEARTBODY"></div>
+</div>
+<div id="METABOOKPOINTGLOSSES" class="hudpanel">
+  <!-- This is populated when a glosspoint is tapped.
+       It contains the glosses for a particular passage. -->
+</div>
+<div id="METABOOKHELPCONTENT">
   <div id="METABOOKHELP" class="hudpanel metabookhelp">
     <!-- This is the help text for reading the book as a whole (it get's
-    displayed for help when there isn't an active reader mode) -->
+         displayed for help when there isn't an active reader mode) -->
     <div id="METABOOKAPPHELP"></div>
   </div>
   <div id="METABOOKHUDHELP"></div>
@@ -127,8 +130,8 @@
     <div id="METABOOKKEYBOARDHELP"></div>
     <div class="checkspan">
       <input TYPE="CHECKBOX" NAME="METABOOKKEYBOARDHELP" VALUE="yes"
-        CHECKED>
-        Show keyboard help
+             CHECKED>
+      Show keyboard help
     </div>
   </div>
   <div class="helphud topcenter">
@@ -137,10 +140,10 @@
   </div>
   <div class="helphud topleft" data-hudmode="toc">
     <span class="nobreak"><span class="arrow">&#x2190;</span>navigate</span><br/>
-      <span class="nobreak">outline</span></div>
+    <span class="nobreak">outline</span></div>
   <div class="helphud topright" data-hudmode="search">
     <span class="nobreak"><span class="arrow">&#x2192;</span>search</span><br/>
-      for&nbsp;tags
+    for&nbsp;tags
   </div>
   <div class="helphud leftmiddle">
     back page
@@ -148,129 +151,132 @@
   <div class="helphud rightmiddle">
     next page
   </div>
-  <div id="METABOOKFOOT" data-touchable="span.metabookpagespan,span.metabookpageno,span.metabookloc,img.hudbutton">
-    <div id="METABOOKSHOWTEXT">
-      <span>
-        <span class="justreading">close tools</span>
-        <span class="stopskimming">stop skimming</span>
-        <span class="cancelgloss">cancel gloss</span>
-        <span class="cancelchanges">discard changes</span>
-      </span>
-    </div>
-    <div class="helphud botcenter">
-      <span style="font-size: 200%; font-weight: bold; position: absolute; left: 2px; bottom: 2px;">
-        &#x2193;</span> this bar shows where you are in the book:
-      <span class="fortouch">tap</span><span class="notouch">click</span>
-      to jump, press to preview,
-      or <span style="white-space: nowrap;"><span class="fortouch">tap</span>
-        <span class="notouch">click</span> numbers to change them</span>
-    </div>
-    <div id="METABOOKPAGEBAR">
-      <div class="textfoot">
-        <div id="METABOOKLAYOUTADJUST">Updating layout</div>
-        <hr class="metabooklayoutindicator" id="METABOOKLAYOUTINDICATOR"/>
-        <span id="METABOOKPAGEREFTEXT" class="metabookpageno"></span>
-        <span id="METABOOKPAGENOTEXT" class="metabookpageno">p/n</span>
-        <span class="metabookloc" id="METABOOKLOCPCT">??.??%</span>
-        <div id="METABOOKGOTOLOC" class="metabookgoto">
-          <span class="gototext">
-            <input type="text" name="GOTOLOC" value="" placeholder="loc"
-                   title="Enter a percent (<= 100) or an immediate location (> 100)"
-                   id="METABOOKLOCINPUT"
-                   onkeypress="metaBook.UI.goto_keypress(event);"/>%</span>
-        </div>
-        <div id="METABOOKGOTOPAGE" class="metabookgoto">
-          <span class="gototext">
-            <input type="text" name="GOTOPAGE" value=""
-                   id="METABOOKPAGEINPUT" placeholder="page#"
-                   onkeypress="metaBook.UI.goto_keypress(event);"/>/
-            <span id="METABOOKGOTOPAGEMAX"></span></span>
-        </div>
-        <div id="METABOOKGOTOREF" class="metabookgoto">
-          <span class="gototext">
-            <input type="text" name="GOTOREF" value=""
-                   id="METABOOKREFINPUT" placeholder="pg ref#"
-                   onkeypress="metaBook.UI.goto_keypress(event);"/>/
-            <span id="METABOOKGOTOPAGEREFMAX"></span></span>
-        </div>
-      </div>
-      <div class="metabookpageprogress" id="METABOOKPAGEPROGRESS"></div>
-      <div class="metabooksectmarker" id="METABOOKSECTMARKER1"></div>
-      <div class="metabooksectmarker" id="METABOOKSECTMARKER2"></div>
-      <div class="metabooksectmarker" id="METABOOKSECTMARKER3"></div>
-      <div class="metabookpagespans" id="METABOOKPAGESPANS">
-      </div>
-    </div>
-    <img svg="{{bmg}}metabook/allglosses.svgz"
-      src="{{bmg}}metabook/allglosses50x50.png"
-      alt="allglosses" title="show all glosses"
-      class="hudbutton hudmodebutton botright"
-      id="METABOOKALLGLOSSESBUTTON"
-      hudmode="allglosses"/>
-      <img svg="{{bmg}}metabook/tagsearch.svgz"
-        src="{{bmg}}metabook/tagsearch50x50.png"
-        alt="searchresults" title="show searchresults"
-        class="hudbutton hudmodebutton botright"
-        hudmode="searchresults"/>
-        <img svg="{{bmg}}metabook/gloss_save_titled.svgz"
-          src="{{bmg}}metabook/gloss_save_titled50x50.png"
-          alt="save gloss" title="save gloss"
-          class="hudbutton botright"/>
-          <img svg="{{bmg}}metabook/help.svgz"
-            src="{{bmg}}metabook/help50x50.png"
-            alt="help" title="show contextual help"
-            class="hudbutton hudmodebutton botleft"
-            id="METABOOKHELPBUTTON"
-            hudmode="help"/>
-            <div class="helphud botright" data-hudmode="toc">
-              <span class="nobreak">browse</span><br/>
-                <span class="nobreak">glosses<span class="arrow">&#x2192;</span></span></div>
-            <div class="helphud botleft">
-              <span class="nobreak">toggle</span><br/>
-                <span class="nobreak"><span class="arrow">&#x2190;</span>help</span></div>
+</div>
+<div id="METABOOKFOOT" data-touchable="span.metabookpagespan,span.metabookpageno,span.metabookloc,img.hudbutton">
+  <div id="METABOOKSHOWTEXT">
+    <span>
+      <span class="justreading">close tools</span>
+      <span class="stopskimming">stop skimming</span>
+      <span class="cancelgloss">cancel gloss</span>
+      <span class="cancelchanges">discard changes</span>
+    </span>
   </div>
+  <div class="helphud botcenter">
+    <span style="font-size: 200%; font-weight: bold; position: absolute; left: 2px; bottom: 2px;">
+      &#x2193;</span> this bar shows where you are in the book:
+    <span class="fortouch">tap</span><span class="notouch">click</span>
+    to jump, press to preview,
+    or <span style="white-space: nowrap;"><span class="fortouch">tap</span>
+      <span class="notouch">click</span> numbers to change them</span>
+  </div>
+  <div id="METABOOKPAGEBAR">
+    <div class="textfoot">
+      <div id="METABOOKLAYOUTADJUST">Updating layout</div>
+      <hr class="metabooklayoutindicator" id="METABOOKLAYOUTINDICATOR"/>
+      <span id="METABOOKPAGEREFTEXT" class="metabookpageno"></span>
+      <span id="METABOOKPAGENOTEXT" class="metabookpageno">p/n</span>
+      <span class="metabookloc" id="METABOOKLOCPCT">??.??%</span>
+      <div id="METABOOKGOTOLOC" class="metabookgoto">
+        <span class="gototext">
+          <input type="text" name="GOTOLOC" value="" placeholder="loc"
+                 title="Enter a percent (<= 100) or an immediate location (> 100)"
+                 id="METABOOKLOCINPUT"
+                 onkeypress="metaBook.UI.goto_keypress(event);"/>%</span>
+      </div>
+      <div id="METABOOKGOTOPAGE" class="metabookgoto">
+        <span class="gototext">
+          <input type="text" name="GOTOPAGE" value=""
+                 id="METABOOKPAGEINPUT" placeholder="page#"
+                 onkeypress="metaBook.UI.goto_keypress(event);"/>/
+          <span id="METABOOKGOTOPAGEMAX"></span></span>
+      </div>
+      <div id="METABOOKGOTOREF" class="metabookgoto">
+        <span class="gototext">
+          <input type="text" name="GOTOREF" value=""
+                 id="METABOOKREFINPUT" placeholder="pg ref#"
+                 onkeypress="metaBook.UI.goto_keypress(event);"/>/
+          <span id="METABOOKGOTOPAGEREFMAX"></span></span>
+      </div>
+    </div>
+    <div class="metabookpageprogress" id="METABOOKPAGEPROGRESS"></div>
+    <div class="metabooksectmarker" id="METABOOKSECTMARKER1"></div>
+    <div class="metabooksectmarker" id="METABOOKSECTMARKER2"></div>
+    <div class="metabooksectmarker" id="METABOOKSECTMARKER3"></div>
+    <div class="metabookpagespans" id="METABOOKPAGESPANS">
+    </div>
+  </div>
+  <img svg="{{bmg}}metabook/allglosses.svgz"
+       src="{{bmg}}metabook/allglosses50x50.png"
+       alt="allglosses" title="show all glosses"
+       class="hudbutton hudmodebutton botright"
+       id="METABOOKALLGLOSSESBUTTON"
+       hudmode="allglosses"/>
+  <img svg="{{bmg}}metabook/tagsearch.svgz"
+       src="{{bmg}}metabook/tagsearch50x50.png"
+       alt="searchresults" title="show searchresults"
+       class="hudbutton hudmodebutton botright"
+       hudmode="searchresults"/>
+  <img svg="{{bmg}}metabook/gloss_save_titled.svgz"
+       src="{{bmg}}metabook/gloss_save_titled50x50.png"
+       alt="save gloss" title="save gloss"
+       class="hudbutton botright"/>
+  <img svg="{{bmg}}metabook/help.svgz"
+       src="{{bmg}}metabook/help50x50.png"
+       alt="help" title="show contextual help"
+       class="hudbutton hudmodebutton botleft"
+       id="METABOOKHELPBUTTON"
+       hudmode="help"/>
+  <div class="helphud botright" data-hudmode="toc">
+    <span class="nobreak">browse</span><br/>
+    <span class="nobreak">glosses<span class="arrow">&#x2192;</span></span></div>
+  <div class="helphud botleft">
+    <span class="nobreak">toggle</span><br/>
+    <span class="nobreak"><span class="arrow">&#x2190;</span>help</span></div>
+</div>
+<div id="METABOOKAUDIO">
   <audio id="METABOOKPAGEFORWARDAUDIO" volume="0.5" preload="auto">
     <source src="{{bmg}}metabook/pageforward.wav" type="audio/wave"/>
-      <source src="{{bmg}}metabook/pageforward.ogg" type="audio/ogg"/>
+    <source src="{{bmg}}metabook/pageforward.ogg" type="audio/ogg"/>
   </audio>
   <audio id="METABOOKPAGEBACKWARDAUDIO" volume="0.5" preload="auto">
     <source src="{{bmg}}metabook/pagebackward.wav" type="audio/wave"/>
-      <source src="{{bmg}}metabook/pagebackward.ogg" type="audio/ogg"/>
+    <source src="{{bmg}}metabook/pagebackward.ogg" type="audio/ogg"/>
   </audio>
   <audio id="METABOOKSKIMFORWARDAUDIO" volume="0.5" preload="auto">
     <source src="{{bmg}}metabook/skimforward.wav" type="audio/wave"/>
-      <source src="{{bmg}}metabook/skimforward.ogg" type="audio/ogg"/>
+    <source src="{{bmg}}metabook/skimforward.ogg" type="audio/ogg"/>
   </audio>
   <audio id="METABOOKSKIMBACKWARDAUDIO" volume="0.5" preload="auto">
     <source src="{{bmg}}metabook/skimbackward.wav" type="audio/wave"/>
-      <source src="{{bmg}}metabook/skimbackward.ogg" type="audio/ogg"/>
+    <source src="{{bmg}}metabook/skimbackward.ogg" type="audio/ogg"/>
   </audio>
   <audio id="METABOOKSKIMSTOPAUDIO" volume="0.5" preload="auto">
     <source src="{{bmg}}metabook/skimstop.wav" type="audio/wave"/>
-      <source src="{{bmg}}metabook/skimstop.ogg" type="audio/ogg"/>
+    <source src="{{bmg}}metabook/skimstop.ogg" type="audio/ogg"/>
   </audio>
   <audio id="METABOOKTEXTSELECTAUDIO" volume="0.5" preload="auto">
     <source src="{{bmg}}metabook/selecting.wav" type="audio/wave"/>
-      <source src="{{bmg}}metabook/selecting.ogg" type="audio/ogg"/>
+    <source src="{{bmg}}metabook/selecting.ogg" type="audio/ogg"/>
   </audio>
   <audio id="METABOOKRAISEHUDAUDIO" volume="0.5" preload="auto">
     <source src="{{bmg}}metabook/raisehud.wav" type="audio/wave"/>
-      <source src="{{bmg}}metabook/raisehud.ogg" type="audio/ogg"/>
+    <source src="{{bmg}}metabook/raisehud.ogg" type="audio/ogg"/>
   </audio>
   <audio id="METABOOKDROPHUDAUDIO" volume="0.5" preload="auto">
     <source src="{{bmg}}metabook/drophud.wav" type="audio/wave"/>
-      <source src="{{bmg}}metabook/drophud.ogg" type="audio/ogg"/>
+    <source src="{{bmg}}metabook/drophud.ogg" type="audio/ogg"/>
   </audio>
   <audio id="METABOOKGLOSSEDAUDIO" volume="0.5" preload="auto">
     <source src="{{bmg}}metabook/glossed.wav" type="audio/wave"/>
-      <source src="{{bmg}}metabook/glossed.ogg" type="audio/ogg"/>
+    <source src="{{bmg}}metabook/glossed.ogg" type="audio/ogg"/>
   </audio>
-  <!--
-  /* Emacs local variables
-  ;;;  Local variables: ***
-  ;;;  compile-command: "cd ../..; make" ***
-  ;;;  indent-tabs-mode: nil ***
-  ;;;  End: ***
-  */
+</div>
+<!--
+    /* Emacs local variables
+    ;;;  Local variables: ***
+    ;;;  compile-command: "cd ../..; make" ***
+    ;;;  indent-tabs-mode: nil ***
+    ;;;  End: ***
+    */
   --
-  >
+    >

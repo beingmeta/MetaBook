@@ -33,7 +33,7 @@ div.searchbox .metabookclearsearch.tapholdtarget {
 
 div.searchbox input[type='TEXT'] {
     flex-grow: 1; -webkit-flex-grow: 1; -moz-flex-grow: 1;
-    font-size: 1.5rem;}
+    font-size: 1.5rem; margin-left: 1ex;}
 div.searchbox input[type='TEXT'] {
     border-radius: 0.5ex; -webkit-border-radius: 0.5ex;
     -o-border-radius: 0.5ex; -moz-border-radius: 0.5ex;
