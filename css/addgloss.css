@@ -11,19 +11,20 @@ div.metabookglossformbody { position: relative; }
 #METABOOKADDGLOSS div.metabookglossform {
     box-sizing: border-box;
     border-top: 0px;}
+/*
 #METABOOKADDGLOSS div.metabookglossform.private {
     border-color: red;}
 #METABOOKADDGLOSS div.metabookglossform.modified {
     border-style: dotted;}
 body.hudup #METABOOKADDGLOSS div.metabookglossform {
     border-color: transparent;}
-
+*/
 div.metabookglossform form div.textbox,
 div.metabookglossform form div.glossetc {
     max-height: 90%;
     clear: left; text-align: left;
     margin-left: 0.5em; margin-right: 60px;
-    padding-right: 3px; padding-top: 1px;
+    padding-right: 3px; padding-top: 3px;
     box-sizing: border-box; -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;}
 div.metabookglossform.focused form div.textbox,
@@ -31,7 +32,7 @@ div.metabookglossform.focused form div.glossetc {
     max-height: inherit;}
 div.metabookglossform form div.textbox { margin-top: 2px;}
 div.metabookglossform form div.glossetc {
-    overflow: hidden;}
+    font-size: 0.6em; overflow: hidden;}
 div.metabookglossform form div.textbox textarea,
 div.metabookglossform form div.textbox input[type="TEXT"] {
     min-height: 1.5em; max-height: 3em; padding: 2px;}
@@ -175,17 +176,14 @@ body._NOSVG div.metabookglossform div.textbox input[name='OUTLET'] {
     background-image: url(g/metabook/sbookspeople24x24.png);}
 
 div.metabookglossform .glossetc .glossdate {
-    font-size: 13px; font-size: 2vw; 
-    font-variant: small-caps; color: purple;
+    font-size: 1.1em; font-variant: small-caps; color: purple;
     padding: 0px; padding-left: 1ex; float: right;
     display: none;}
 div.metabookglossform.focused form .glossetc .glossdate {
-    padding-bottom: 1ex; font-size: 16px; font-size: 3vw;}
+    padding-bottom: 1ex;}
 
 div.metabookglossform .glossetc .glossexposure {
-    float: right; font-size: 10px; font-size: 1.5vw;}
-div.metabookglossform.focused .glossetc .glossexposure {
-    float: right; font-size: 14px; font-size: 2vw;}
+    font-size: 1.1em; float: right;}
 
 div.metabookglossform form .glossexposure .checkspan {
     float: right; margin-right: 1ex; margin-top: 2px;
