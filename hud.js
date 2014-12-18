@@ -526,9 +526,7 @@ metaBook.setMode=
                     // addgloss has submodes which may specify the
                     //  open heart configuration
                     addClass(metaBookHUD,"openhead");
-                    if (metaBookHUD.className.search(metabookHeartModes)<0)
-                        dropClass(metaBookHUD,"openheart");
-                    else addClass(metaBookHUD,"openheart");}
+                    dropClass(metaBookHUD,"openheart");}
                 else {
                     if (mode.search(metabookHeartModes)<0) {
                         dropClass(metaBookHUD,"openheart");}
