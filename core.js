@@ -1135,7 +1135,10 @@ var metaBook={
         if (Trace.state)
             fdjtLog("Pushing history %j %s (%s) '%s'",
                     state,href,title);
-        window.history.pushState(state,title,href+"#"+hash);}
+        if ((window.history.state.target!==state.target)||
+            (window.history.state.location!==state.location)) {
+            window.history.pushState(state,title,href+"#"+hash);}
+    }
 
     function restoreState(state,reason,savehist){
         if (Trace.state) fdjtLog("Restoring (%s) state %j",reason,state);
