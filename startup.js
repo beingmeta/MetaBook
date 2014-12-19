@@ -82,6 +82,7 @@ metaBook.Startup=
         var getChildren=fdjtDOM.getChildren;
         var getGeometry=fdjtDOM.getGeometry;
         var hasContent=fdjtDOM.hasContent;
+        var isEmpty=fdjtString.isEmpty;
 
         function hasAnyContent(n){return hasContent(n,true);}
 
@@ -266,7 +267,7 @@ metaBook.Startup=
             // if (changed) fdjtDOM.addClass("METABOOKSETTINGS","changed");
             
             var devicename=current_config.devicename;
-            if ((devicename)&&(!(fdjtString.isEmpty(devicename))))
+            if ((devicename)&&(!(isEmpty(devicename))))
                 metaBook.deviceName=devicename;
             if (Trace.startup>1)
                 fdjtLog("initConfig took %dms",fdjtTime()-started);}
@@ -300,7 +301,7 @@ metaBook.Startup=
                 document.getElementsByName("METABOOKKEYBOARDHELP"),
                 value);});
         metaBook.addConfig("devicename",function(name,value){
-            if (fdjtString.isEmpty(value)) metaBook.deviceName=false;
+            if (isEmpty(value)) metaBook.deviceName=false;
             else metaBook.deviceName=value;});
 
         metaBook.addConfig("holdmsecs",function(name,value){
@@ -1726,7 +1727,7 @@ metaBook.Startup=
                     var aclass=a.className, extclass="extref";
                     if (href.search(wikiref_pat)===0) {
                         var text=fdjt.DOM.textify(a);
-                        if (!(fdjtString.isEmpty(text))) {
+                        if (!(isEmpty(text))) {
                             if (!(a.title)) a.title="From Wikipedia";
                             else if (a.title.search(/wikipedia/i)>=0) {}
                             else a.title="Wikipedia: "+a.title;
@@ -2552,6 +2553,12 @@ metaBook.Startup=
             var addTag2Cloud=metaBook.addTag2Cloud;
             var empty_cloud=metaBook.empty_cloud;
             var gloss_cloud=metaBook.gloss_cloud;
+            var taglist=metaBook.taglist||fdjt.ID("METABOOKTAGLIST");
+            if (!(taglist)) {
+                taglist=metaBook.taglist=fdjt.DOM("datalist#METABOOKTAGLIST");
+                document.body.appendChild(taglist);}
+            var knodeToOption=Knodule.knodeToOption;
+
             cloud_setup_start=fdjtTime();
             metaBook.empty_query.results=
                 [].concat(metaBook.glossdb.allrefs).concat(metaBook.docdb.allrefs);
@@ -2570,11 +2577,16 @@ metaBook.Startup=
                     fdjtDOM("div.cloudprogress","Cloud Shaping in Progress"));
             addClass(gloss_cloud.dom,"working");
             fdjtTime.slowmap(function(tag){
-                if (!(tag instanceof KNode)) return;
+                if (!(tag instanceof KNode)) {
+                    if ((typeof tag === "string")&&(!(isEmpty(tag)))) {
+                        var option=fdjtDOM("OPTION",tag); option.value=tag;
+                        taglist.appendChild(option);}
+                    return;}
                 var elt=addTag2Cloud(tag,empty_cloud,metaBook.knodule,
                                      metaBook.tagweights,tagfreqs,false);
                 // Ignore section name tags
                 if (tag._id[0]==="\u00a7") return;
+                taglist.appendChild(knodeToOption(tag));
                 var freq=tagfreqs.get(tag);
                 if ((tag.prime)||((freq>4)&&(freq<(max_freq/2)))||
                     (tag._db!==metaBook.knodule)) {

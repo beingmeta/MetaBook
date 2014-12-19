@@ -217,6 +217,11 @@ var metaBook={
         var refuri=(metaBook.refuri||document.location.href);
         if (refuri.indexOf('#')>0) refuri=refuri.slice(0,refuri.indexOf('#'));
 
+        var taglist=metaBook.taglist||fdjt.ID("METABOOKTAGLIST");
+        if (!(taglist)) {
+            taglist=metaBook.taglist=fdjt.DOM("datalist#METABOOKTAGLIST");
+            document.body.appendChild(taglist);}
+        
         metaBook.docdb=new RefDB(
             refuri+"#",{indices: ["frag","head","heads",
                                   "tags","tags*",
@@ -226,6 +231,8 @@ var metaBook={
                                   "^tags","~^tags","*^tags","**^tags",
                                   "^tags*","~^tags*","*^tags*","**^tags*"]});
         
+        var knodeToOption=Knodule.knodeToOption;
+
         var knodule_name=
             fdjtDOM.getMeta("SBOOKS.knodule")||
             fdjtDOM.getMeta("~KNODULE")||
@@ -283,7 +290,8 @@ var metaBook={
                         entry=addTag2Cloud(each_tag,empty_cloud);
                         if ((make_cue)&&(entry)) addClass(entry,"cue");
                         entry=addTag2Cloud(each_tag,metaBook.gloss_cloud);
-                        if ((make_cue)&&(entry)) addClass(entry,"cue");}
+                        if ((make_cue)&&(entry)) addClass(entry,"cue");
+                        taglist.appendChild(knodeToOption(each_tag));}
                     var tag_slots=["tags","*tags","**tags"];
                     var s=0, n_slots=tag_slots.length; while (s<n_slots) {
                         var tagslot=tag_slots[s++], tags=item[tagslot];
@@ -1127,8 +1135,7 @@ var metaBook={
         if (Trace.state)
             fdjtLog("Pushing history %j %s (%s) '%s'",
                     state,href,title);
-        window.history.pushState(state,title,href+"#"+hash);
-    }
+        window.history.pushState(state,title,href+"#"+hash);}
 
     function restoreState(state,reason,savehist){
         if (Trace.state) fdjtLog("Restoring (%s) state %j",reason,state);
