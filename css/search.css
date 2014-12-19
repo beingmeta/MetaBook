@@ -81,7 +81,9 @@ div.resultinfo .stats > span {
     padding-left: 1ex; padding-right: 1ex;
     border-bottom-left-radius: 0.5ex;
     border-bottom-right-radius: 0.5ex;
-    border: outset black 2px; border-top: 0px;}
+    border: outset black 2px; border-top: 0px;
+    padding-top: 2px; padding-bottom: 4px;
+    line-height: 0.9;}
 div.resultinfo .stats > span > br { display: none; }
 
 div.resultinfo .noresults { display: none;}
