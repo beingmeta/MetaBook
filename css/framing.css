@@ -161,14 +161,14 @@ body.mbMEDIA #METABOOKMEDIACONTROLS {
     position: absolute;
     top: 4px; top: 1vmax; right: 4px; right: 1vmax;
     width: 50px; width: 10vmax; height: 50px; height: 10vmax; 
-    z-index: 100; opacity: 0.5;
+    z-index: 100; opacity: 0.8;
     background-repeat: no-repeat; background-size: contain;
     background-image: url(g/metabook/redx.svgz);}
 #METABOOKMEDIAHELP {
     position: absolute;
     bottom: 4px; bottom: 1vmax; left: 4px; left: 1vmax;
     width: 50px; width: 10vmax; height: 50px; height: 10vmax; 
-    z-index: 100; opacity: 0.5;
+    z-index: 100; opacity: 0.8;
     background-repeat: no-repeat; background-size: contain;
     background-image: url(g/metabook/help.svgz);}
 body.mbSHOWHELP #METABOOKMEDIAHELP {

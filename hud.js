@@ -1009,17 +1009,23 @@ metaBook.setMode=
 
         function showMedia(node){
             var media=fdjt.ID("METABOOKMEDIA");
+            if (metaBook.zoomed===node) {
+                addClass(document.body,"mbMEDIA");
+                return;}
+            else metaBook.zoomed=node;
             var copy=node.cloneNode();
             fdjtDOM.stripIDs(copy);
             copy.setAttribute("style","");
+            if (metaBook.mediascroll) 
+                metaBook.mediascroll.destroy();
             media.innerHTML="";
             media.appendChild(copy);
             addClass(document.body,"mbMEDIA");
-            if (metaBook.mediascroll) metaBook.mediascroll.destroy();
             metaBook.mediascroll=
                 new IScroll(media,{zoom: true,
                                    scrollX: true,
                                    scrollY: true,
+                                   freeScroll: true,
                                    keyBindings: true,
                                    mouseWheel: true,
                                    scrollbars: true,
