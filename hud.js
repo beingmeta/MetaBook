@@ -78,10 +78,9 @@ metaBook.setMode=
         var fixStaticRefs=metaBook.fixStaticRefs;
 
         var metaBookHUD=false;
-        var metaBookMedia=false;
 
         // This will contain the interactive input console (for debugging)
-        var frame=false, hud=false, media=false;
+        var frame=false, hud=false;
         var allglosses=false, sbooksapp=false;
 
         function initHUD(){
@@ -92,9 +91,7 @@ metaBook.setMode=
             if (Trace.startup>2) fdjtLog("Initializing HUD layout");
             metaBook.HUD=metaBookHUD=hud=
                 fdjtDOM("div#METABOOKHUD.metabookhud");
-            metaBook.Media=metaBookMedia=media=
-                fdjtDOM("div#METABOOKMEDIA.metabookmedia");
-            hud.metabookui=true; media.metabookui=true;
+            hud.metabookui=true;
             hud.innerHTML=fixStaticRefs(metaBook.HTML.hud);
             fdjtDOM.append(messages);
             if (fdjtID("METABOOKFRAME")) frame=fdjtID("METABOOKFRAME");
@@ -103,13 +100,6 @@ metaBook.setMode=
                 fdjtDOM.prepend(document.body,frame);}
             addClass(frame,"metabookframe");
             frame.appendChild(messages); frame.appendChild(hud);
-            frame.appendChild(media);
-            frame.appendChild(
-                fdjtDOM("div#METABOOKMEDIACONTROLS",
-                        fdjtDOM("div#METABOOKMEDIACLOSE"),
-                        fdjtDOM("div#METABOOKMEDIAHELP"),
-                        fdjtDOM("div#METABOOKMEDIAHELPTEXT",
-                                "Drag to pan, use two fingers to zoom")));
 
             metaBook.Frame=frame;
             // Fill in the HUD help
@@ -1004,35 +994,6 @@ metaBook.setMode=
                                    5000);},
                            5000);}
         metaBook.keyboardHelp=keyboardHelp;
-
-        /* Full page media mode */
-
-        function showMedia(node){
-            var media=fdjt.ID("METABOOKMEDIA");
-            var copy=node.cloneNode();
-            fdjtDOM.stripIDs(copy);
-            copy.setAttribute("style","");
-            media.innerHTML="";
-            media.appendChild(copy);
-            addClass(document.body,"mbMEDIA");
-            if (metaBook.mediascroll) metaBook.mediascroll.destroy();
-            metaBook.mediascroll=
-                new IScroll(media,{zoom: true,
-                                   scrollX: true,
-                                   scrollY: true,
-                                   keyBindings: true,
-                                   mouseWheel: true,
-                                   scrollbars: true,
-                                   zoomMin: 0.2,
-                                   zoomMax: 5,
-                                   wheelAction: 'zoom'
-                                  });}
-        metaBook.showMedia=showMedia;
-
-        function closeMedia(evt){
-            dropClass(document.body,"mbMEDIA");
-            if (evt) fdjt.UI.cancel(evt);}
-        metaBook.closeMedia=closeMedia;
 
         /* Showing a particular gloss */
 

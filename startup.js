@@ -352,7 +352,7 @@ metaBook.Startup=
                     mB.version,mB.buildtime,mB.buildhost,
                     mB._setup_start.toString(),
                     mB.root||"somewhere");
-            if (fdjtID("METABOOKBODY")) metaBook.body=fdjtID("METABOOKBODY");
+            if (fdjtID("METABOOKBODY")) metaBook.Body=fdjtID("METABOOKBODY");
 
             // Get window outer dimensions (this doesn't count Chrome,
             // onscreen keyboards, etc)
@@ -513,6 +513,7 @@ metaBook.Startup=
             //  (the HUD/Heads Up Display and the cover)
             metaBook.initHUD();
             setupCover();
+            setupZoom();
 
             if (metaBook.refuri) {
                 var refuris=document.getElementsByName("REFURI");
@@ -1566,6 +1567,22 @@ metaBook.Startup=
             return cover;}
         metaBook.setupCover=setupCover;
 
+        function setupZoom(){
+            // Initialize zoom controls
+            var controls=metaBook.zoomControls=
+                fdjtDOM("div#METABOOKZOOMCONTROLS",
+                        fdjtDOM("div#METABOOKZOOMCLOSE"),
+                        fdjtDOM("div#METABOOKZOOMHELP"),
+                        fdjtDOM("div#METABOOKZOOMHELPTEXT",
+                                "Drag to pan, use two fingers to zoom"));
+
+            var zoom=metaBook.Zoom=fdjtDOM("div#METABOOKZOOM.metabookzoom");
+            zoom.metabookui=true;
+
+            metaBook.Frame.appendChild(controls);
+            metaBook.Body.appendChild(zoom);}
+        metaBook.setupZoom=setupZoom;
+        
         var toArray=fdjtDOM.toArray;
         function addToCover(cover,item){
             var children=toArray(cover.childNodes);
@@ -1698,9 +1715,7 @@ metaBook.Startup=
                 dropClass(mbody,/\bmetabookcontrast[a-z]+\b/g);
             else swapClass(mbody,/\bmetabookcontrast[a-z]+\b/g,
                           "metabookcontrast"+value);});
-                
-
-
+        
         /* Initializing the body and content */
 
         function initBody(){
@@ -1792,9 +1807,9 @@ metaBook.Startup=
                 fdjtDOM("div#METABOOKPAGES");
             var page=metaBook.page=fdjtDOM("div#CODEXPAGE",pages);
             
-            metaBook.body=fdjtID("METABOOKBODY");
-            if (!(metaBook.body)) {
-                var cxbody=metaBook.body=
+            metaBook.Body=fdjtID("METABOOKBODY");
+            if (!(metaBook.Body)) {
+                var cxbody=metaBook.Body=
                     fdjtDOM("div#METABOOKBODY.metabookbody",content,page);
                 if (metaBook.justify) addClass(cxbody,"metabookjustify");
                 if (metaBook.bodycontrast)
@@ -1806,7 +1821,8 @@ metaBook.Startup=
                 if (metaBook.bodyspacing)
                     addClass(cxbody,"metabookbodyspacing"+metaBook.bodyspacing);
                 body.appendChild(cxbody);}
-            else metaBook.body.appendChild(page);
+            else metaBook.Body.appendChild(page);
+
             // Initialize the margins
             initMargins();
             if (Trace.startup>1)

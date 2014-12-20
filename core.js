@@ -1004,7 +1004,7 @@ var metaBook={
             ((window.location.hash[0]==='#')&&
              (window.location.hash.slice(1)===targetid)))
             return;
-        if ((target===metaBook.body)||(target===document.body)) return;
+        if ((target===metaBook.Body)||(target===document.body)) return;
         if (targetid) window.location.hash=targetid;}
     metaBook.setHashID=setHashID;
 
@@ -1135,7 +1135,8 @@ var metaBook={
         if (Trace.state)
             fdjtLog("Pushing history %j %s (%s) '%s'",
                     state,href,title);
-        if ((window.history.state.target!==state.target)||
+        if ((!(window.history.state))||
+            (window.history.state.target!==state.target)||
             (window.history.state.location!==state.location)) {
             window.history.pushState(state,title,href+"#"+hash);}
     }

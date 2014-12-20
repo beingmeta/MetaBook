@@ -390,12 +390,12 @@ metaBook.Paginate=
         function updateLayoutProperty(name,val){
             // This updates layout properties
             if (val===true) 
-                fdjtDOM.addClass(metaBook.body,"metabook"+name);
+                fdjtDOM.addClass(metaBook.Body,"metabook"+name);
             else if (!(val))
                 fdjtDOM.dropClass(
-                    metaBook.body,new RegExp("metabook"+name+"\\w*"));
+                    metaBook.Body,new RegExp("metabook"+name+"\\w*"));
             else fdjtDOM.swapClass(
-                metaBook.body,new RegExp("metabook"+name+"\\w*"),
+                metaBook.Body,new RegExp("metabook"+name+"\\w*"),
                 "metabook"+name+val);
             metaBook[name]=val;
             if ((metaBook.postconfig)&&(metaBook.content)) {

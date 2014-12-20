@@ -96,6 +96,8 @@
     var fdjtID=fdjt.ID;
     var mbID=metaBook.ID;
 
+    var IScroll=window.IScroll;
+
     // Imports (kind of )
     var addClass=fdjtDOM.addClass;
     var hasClass=fdjtDOM.hasClass;
@@ -631,7 +633,7 @@
                     document.body.className,metaBook.HUD.className,
                     target,metaBook.glosstarget);
         if (hasParent(target,"IMG,AUDIO,VIDEO,OBJECT")) {
-            metaBook.showMedia(getParent(target,"IMG,AUDIO,VIDEO,OBJECT"));
+            metaBook.startZoom(getParent(target,"IMG,AUDIO,VIDEO,OBJECT"));
             fdjt.UI.cancel(evt);
             return;}
         if (metaBook.glosstarget) {
@@ -1203,7 +1205,7 @@
              if (metaBook.previewing) {
                  metaBook.stopPreview("escape_key");
                  fdjtUI.TapHold.clear();}
-             dropClass(document.body,"mbMEDIA");
+             dropClass(document.body,"mbZOOM");
              if (metaBook.mode==="addgloss") metaBook.cancelGloss();
              if (metaBook.mode) {
                  metaBook.last_mode=metaBook.mode;
@@ -1216,7 +1218,7 @@
                   (target.tagName==="INPUT")||
                   (target.tagName==="BUTTON"))
              return;
-        else if (hasClass(document.body,"mbMEDIA"))
+        else if (hasClass(document.body,"mbZOOM"))
             return;
         else if ((metaBook.controlc)&&(evt.ctrlKey)&&((kc===99)||(kc===67))) {
             if (metaBook.previewing) metaBook.stopPreview("onkeydown",true);
@@ -2189,7 +2191,7 @@
                     evt,metaBook.previewing,metaBook.previewTarget,
                     preview_start_page);
         if (!(metaBook.previewing)) return;
-        if ((rel)&&(hasParent(rel,metaBook.body)))
+        if ((rel)&&(hasParent(rel,metaBook.Body)))
             preview_timer=setTimeout(function(){
                 var pagebar=fdjtID("METABOOKPAGEBAR");
                 pagebar.title=""; preview_timer=false;
@@ -2498,6 +2500,38 @@
         clearFocus(input);}
     metaBook.UI.blur=metabookblur;
 
+    /* Full page media mode */
+    
+    function startZoom(node){
+        var zoom=fdjt.ID("METABOOKZOOM");
+        if (!(node)) return closeZoom();
+        if (metaBook.zoomscroll) {
+            metaBook.zoomscroll.destroy();
+            metaBook.zoomscroll=false;}
+        var copy=node.cloneNode();
+        fdjtDOM.stripIDs(copy);
+        copy.setAttribute("style","");
+        zoom.innerHTML="";
+        zoom.appendChild(copy);
+        addClass(document.body,"mbZOOM");
+        metaBook.zoomscroll=
+            new IScroll(zoom,{zoom: true,
+                              scrollX: true,
+                              scrollY: true,
+                              keyBindings: true,
+                              mouseWheel: true,
+                              scrollbars: true,
+                              zoomMin: 0.2,
+                              zoomMax: 5,
+                              wheelAction: 'zoom'
+                             });}
+        metaBook.startZoom=startZoom;
+
+        function closeZoom(evt){
+            dropClass(document.body,"mbZOOM");
+            if (evt) fdjt.UI.cancel(evt);}
+        metaBook.closeZoom=closeZoom;
+
     /* Rules */
 
     var noDefault=fdjt.UI.noDefault;
@@ -2645,7 +2679,7 @@
          "#METABOOKBODY": {
              mouseup: global_mouseup,
              click: default_tap},
-         "#METABOOKMEDIA": {mousemove: noDefault},
+         "#METABOOKZOOM": {mousemove: noDefault},
          content: {tap: body_tapped,
                    taptap: body_taptap,
                    hold: body_held,
@@ -2787,9 +2821,9 @@
                  evt=evt||window.event;
                  metaBook.UI.handlers.everyone_ontap(evt);
                  fdjt.UI.cancel(event);}},
-         "#METABOOKMEDIACLOSE": {
-             click: metaBook.closeMedia},
-         "#METABOOKMEDIAHELP": {
+         "#METABOOKZOOMCLOSE": {
+             click: metaBook.closeZoom},
+         "#METABOOKZOOMHELP": {
              click: toggleHelp}});
 
     fdjt.DOM.defListeners(
@@ -2823,7 +2857,7 @@
                    touchtoo: slice_touchtoo,
                    touchmove: preview_touchmove_nodefault,
                    slip: slice_slipped},
-         "#METABOOKMEDIA": {touchmove: noDefault},
+         "#METABOOKZOOM": {touchmove: noDefault},
          "#METABOOKSTARTPAGE": {touchend: metaBook.UI.dropHUD},
          "#METABOOKTOPBAR": {tap: raiseHUD},
          //"#METABOOKTOOLTAB": {tap: raiseHUD, release: raiseHUD},
@@ -2981,9 +3015,9 @@
                  evt=evt||window.event;
                  metaBook.UI.handlers.everyone_ontap(evt);
                  fdjt.UI.cancel(event);}},
-         "#METABOOKMEDIACLOSE": {
-             click: metaBook.closeMedia},
-         "#METABOOKMEDIAHELP": {
+         "#METABOOKZOOMCLOSE": {
+             click: metaBook.closeZoom},
+         "#METABOOKZOOMHELP": {
              click: toggleHelp}});
     
 })();
