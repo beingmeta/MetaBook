@@ -188,8 +188,12 @@ div.loginbox form > span, div.loginbox form > select {
 #METABOOKCOVER > div.userbox {
     background-color: black; color: gold;
     text-align: center;}
-#METABOOKCOVER div.userbox a, #METABOOKCOVER div.userbox a:visited {
-    color: silver;}
+#METABOOKCOVER div.userbox a:link,
+#METABOOKCOVER div.userbox a:active,
+#METABOOKCOVER div.userbox a:hover,
+#METABOOKCOVER div.userbox a:visited,
+#METABOOKCOVER div.userbox a {
+    color: silver; background-color: transparent;}
 #METABOOKCOVER div.userbox a.sbookslogo em { color: cornflowerblue; }
 #METABOOKCOVER div.userbox span.sbooks em { color: silver;}
 #METABOOKCOVER div.userbox a.sbooks em { color: steelblue;}
@@ -536,7 +540,6 @@ body.mbBUSY #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE {
     height: 1ex; background-color: gold;}
 
 /* Media specific rules */
-
 
 @media screen and (max-width: 750px) {
     body._TOUCH #METABOOKSETTINGS table.settings {  font-size: 1.3em; }}

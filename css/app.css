@@ -624,7 +624,7 @@ body._MOUSE #METABOOKBODY a[rel='footnote']:hover,
 body._MOUSE #METABOOKBODY a[rel='endnote']:hover {
     text-decoration: overline;}
 
-a[href] { color: blue; text-decoration: none;}
+a[href] { color: blue; background-color: transparent; text-decoration: none;}
 a.extef[href], a.sbextef[href] {
     color: blue; text-decoration: underline;}
 body._MOUSE a[href]:hover {text-decoration: underline;}
