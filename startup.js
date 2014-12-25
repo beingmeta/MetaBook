@@ -1732,25 +1732,6 @@ metaBook.Startup=
             // Save those DOM elements in a handy place
             metaBook.content=content;
 
-            var wikiref_pat=/^http(s)?:\/\/([a-z]+.)?wikipedia.org\//;
-
-            // Mark all external anchors and set their targets
-            var anchors=document.getElementsByTagName("A");
-            var ai=0, alimit=anchors.length; while (ai<alimit) {
-                var a=anchors[ai++], href=a.href;
-                if ((href)&&(href.search(/^[a-zA-Z]+:/)===0)) {
-                    var aclass=a.className, extclass="extref";
-                    if (href.search(wikiref_pat)===0) {
-                        var text=fdjt.DOM.textify(a);
-                        if (!(isEmpty(text))) {
-                            if (!(a.title)) a.title="From Wikipedia";
-                            else if (a.title.search(/wikipedia/i)>=0) {}
-                            else a.title="Wikipedia: "+a.title;
-                            extclass=extclass+" wikiref";}}
-                    if (aclass) a.className=aclass+" "+extclass;
-                    else a.className=extclass;
-                    a.target="_blank";}}
-
             // Move all the notes together
             var notesblock=fdjtID("SBOOKNOTES")||
                 fdjtDOM("div.sbookbackmatter#SBOOKNOTES");
@@ -1774,16 +1755,6 @@ metaBook.Startup=
                     fdjtDOM.append(notesblock,notable,"\n");}
                 else fdjtDOM.append(notesblock,notable,"\n");}
             
-            // Interpet links
-            var notelinks=getChildren(
-                body,"a[rel='sbooknote'],a[rel='footnote'],a[rel='endnote']");
-            i=0; lim=notelinks.length; while (i<lim) {
-                var ref=notelinks[i++];
-                var nref=ref.href;
-                if (!(fdjtDOM.hasText(nref))) nref.innerHTML="Note";
-                if ((nref)&&(nref[0]==="#")) {
-                    addClass(fdjt.ID(nref.slice(1)),"sbooknote");}}
-            
             if (!(init_content)) {
                 var children=[], childnodes=body.childNodes;
                 i=0; lim=childnodes.length;
@@ -1795,6 +1766,35 @@ metaBook.Startup=
                     else if ((child.id)&&(child.id.search("METABOOK")===0)) {}
                     else if (/(META|LINK|SCRIPT)/gi.test(child.tagName)) {}
                     else content.appendChild(child);}}
+
+            var wikiref_pat=/^http(s)?:\/\/([a-z]+.)?wikipedia.org\//;
+            // Mark all external anchors and set their targets
+            var anchors=content.getElementsByTagName("A");
+            var ai=0, alimit=anchors.length; while (ai<alimit) {
+                var a=anchors[ai++], href=a.href;
+                if ((href)&&(href.search(/^[a-zA-Z]+:/)===0)) {
+                    var aclass=a.className, extclass="extref";
+                    if (href.search(wikiref_pat)===0) {
+                        var text=fdjt.DOM.textify(a);
+                        if (!(isEmpty(text))) {
+                            if (!(a.title)) a.title="From Wikipedia";
+                            else if (a.title.search(/wikipedia/i)>=0) {}
+                            else a.title="Wikipedia: "+a.title;
+                            extclass=extclass+" wikiref";}}
+                    if (aclass) a.className=aclass+" "+extclass;
+                    else a.className=extclass;
+                    a.target="_blank";}}
+            
+            // Interpet links
+            var notelinks=getChildren(
+                content,"a[rel='sbooknote'],a[rel='footnote'],a[rel='endnote']");
+            i=0; lim=notelinks.length; while (i<lim) {
+                var ref=notelinks[i++];
+                var nref=ref.href;
+                if (!(fdjtDOM.hasText(nref))) nref.innerHTML="Note";
+                if ((nref)&&(nref[0]==="#")) {
+                    addClass(fdjt.ID(nref.slice(1)),"sbooknote");}}
+            
             // Append the notes block to the content
             if (notesblock.childNodes.length)
                 fdjtDOM.append(content,"\n",notesblock,"\n");

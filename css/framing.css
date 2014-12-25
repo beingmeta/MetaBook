@@ -73,6 +73,10 @@ body {
 #METABOOKFRAME > div, #METABOOKFRAME > div > div, #METABOOKFRAME > div > a {
     box-sizing: border-box; -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box; -o-box-sizing: border-box;}
+#METABOOKFRAME a { 
+    background-color: transparent; text-decoration: none;}
+#METABOOKCOVER a { color: lightblue; }
+
 body.hudup #METABOOKFRAME, body.mbCOVER #METABOOKFRAME,
 body.mbSKIMMING #METABOOKFRAME, body.openhud #METABOOKFRAME,
 body.hudup #METABOOKHUD, body.mbSKIMMING #METABOOKHUD,
@@ -164,14 +168,14 @@ body.mbZOOM #METABOOKZOOMCONTROLS {
     position: absolute;
     top: 4px; top: 1vmax; right: 4px; right: 1vmax;
     width: 50px; width: 10vmax; height: 50px; height: 10vmax; 
-    z-index: 100; opacity: 0.5;
+    z-index: 100; opacity: 0.8;
     background-repeat: no-repeat; background-size: contain;
     background-image: url(g/metabook/redx.svgz);}
 #METABOOKZOOMHELP {
     position: absolute;
     bottom: 4px; bottom: 1vmax; left: 4px; left: 1vmax;
     width: 50px; width: 10vmax; height: 50px; height: 10vmax; 
-    z-index: 100; opacity: 0.5;
+    z-index: 100; opacity: 0.8;
     background-repeat: no-repeat; background-size: contain;
     background-image: url(g/metabook/help.svgz);}
 body.mbSHOWHELP #METABOOKZOOMHELP {
