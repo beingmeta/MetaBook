@@ -513,6 +513,7 @@ metaBook.Startup=
             //  (the HUD/Heads Up Display and the cover)
             metaBook.initHUD();
             setupCover();
+            setupZoom();
 
             if (metaBook.refuri) {
                 var refuris=document.getElementsByName("REFURI");
@@ -1566,6 +1567,21 @@ metaBook.Startup=
             return cover;}
         metaBook.setupCover=setupCover;
 
+        function setupZoom(){
+            var zoom=metaBook.Zoom=fdjtDOM(
+                "div#METABOOKZOOM.metabookzoom.metabookcontent",
+                fdjtDOM("div#METABOOKZOOMCONTROLS",
+                        fdjtDOM("div#METABOOKZOOMCLOSE"),
+                        fdjtDOM("div#METABOOKZOOMIN"),
+                        fdjtDOM("div#METABOOKZOOMOUT"),
+                        fdjtDOM("div#METABOOKZOOMHELP"),
+                        fdjtDOM("div#METABOOKZOOMHELPTEXT",
+                                "Drag to pan, use two fingers to zoom")),
+                fdjtDOM("div#METABOOKZOOMTARGET"));
+            zoom.metabookui=true;
+            document.body.appendChild(zoom);}
+        metaBook.setupZoom=setupZoom;
+
         var toArray=fdjtDOM.toArray;
         function addToCover(cover,item){
             var children=toArray(cover.childNodes);
@@ -1699,8 +1715,6 @@ metaBook.Startup=
             else swapClass(mbody,/\bmetabookcontrast[a-z]+\b/g,
                           "metabookcontrast"+value);});
                 
-
-
         /* Initializing the body and content */
 
         function initBody(){
@@ -1709,6 +1723,9 @@ metaBook.Startup=
             var content=(init_content)||(fdjtDOM("div#CODEXCONTENT"));
             var i, lim;
             if (Trace.startup>2) fdjtLog("Starting initBody");
+
+            addClass(content,"metabookcontent");
+            addClass(content,"codexroot");
 
             body.setAttribute("tabindex",1);
             /* Remove explicit constraints */
@@ -1790,7 +1807,7 @@ metaBook.Startup=
 
             var pages=metaBook.pages=fdjtID("METABOOKPAGES")||
                 fdjtDOM("div#METABOOKPAGES");
-            var page=metaBook.page=fdjtDOM("div#CODEXPAGE",pages);
+            var page=metaBook.page=fdjtDOM("div#CODEXPAGE.metabookcontent",pages);
             
             metaBook.body=fdjtID("METABOOKBODY");
             if (!(metaBook.body)) {
