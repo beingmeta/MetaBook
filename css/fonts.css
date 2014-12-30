@@ -31,45 +31,23 @@
 
 @charset "UTF-8";
 
-#METABOOKFRAME, .wf-inactive #METABOOKPAGINATING {
+#METABOOKFRAME {
+    /* font-family: 'Open Sans', Arial, Helvetica, sans-serif, sans; */
+    font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif, sans;}
+body._DYSLEXICAL #METABOOKFRAME, body._DYSLEXICAL .fdjtdialog {
+    font-family: 'Open Dyslexic', serif;}
+.wf-inactive #METABOOKFRAME {
     font-family: Arial, Helvetica, sans-serif, sans;}
-.wf-active #METABOOKFRAME, .wf-active #METABOOKPAGINATING {
-    font-family: 'Open Sans', Arial, Helvetica, sans-serif, sans;}
 
-#METABOOKBODY,
-#METABOOKBODY.metabookfamilyserif,
-#METABOOKFRAME #METABOOKABOUT,
-span.excerpt {
+#METABOOKBODY, #METABOOKFRAME #METABOOKABOUT, span.excerpt {
     font-family: Utopia, 'Palatino Linotype', Palatino,
                  Georgia, Charter, Garamond,
                  'Times New Roman', Times;}
 
-#METABOOKBODY.metabookbodyfamilydefault {
-    font-family: inherit;}
-#METABOOKBODY.metabookbodyfamilyserif {
-    font-family: Georgia,Palatino,
-                'Times New Roman','TimesNewRoman',
-                Times,serif;}
-#METABOOKBODY.metabookbodyfamilysans {
-    font-family: Tahoma,Verdana,Arial,Verdana,Helvetica,sans-serif;}
-
-#METABOOKBODY h1, #METABOOKBODY h2, #METABOOKBODY h3, #METABOOKBODY h4,
-#METABOOKBODY.metabookfamilyserif h1, #METABOOKBODY.metabookfamilyserif h2,
-#METABOOKBODY.metabookfamilyserif h3, #METABOOKBODY.metabookfamilyserif h4 {
-    font-family: Verdana, Arial, Helvetica, sans-serif, sans;}
-
-.wf-active #METABOOKBODY.metabookbodyfamilydyslexical, .wf-active .dyslexical {
+body._DYSLEXICAL #METABOOKBODY, .dyslexical {
     font-family: 'Open Dyslexic', serif;}
-#METABOOKBODY.metabookbodyfamilydyslexical, .dyslexical {
-    font-family: serif;}
-.wf-active #METABOOKBODY.metabookfamilydyslexical h1,
-.wf-active #METABOOKBODY.metabookfamilydyslexical h2,
-.wf-active #METABOOKBODY.metabookfamilydyslexical h3,
-.wf-active #METABOOKBODY.metabookfamilydyslexical h4 {
-    font-family: 'OpenDyslexic', serif;}
 
-#METABOOKFRAME #METABOOKCONSOLE,
-span.uri {
+#METABOOKFRAME #METABOOKCONSOLE, span.uri {
   font-family: 'Courier New', 'Lucia Console', Courier, fixed;}
 
 /* Emacs local variables

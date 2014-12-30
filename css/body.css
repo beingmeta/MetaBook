@@ -33,6 +33,10 @@
 
 /* Style variants */
 
+#METABOOKBODY {text-align: left;}
+
+/* This is typically a placeholder for the actual content of the book
+   used as the source for layout. */
 #METABOOKBODY #CODEXCONTENT {
     margin-left: 3em; margin-right: 3em;}
 
@@ -71,18 +75,15 @@ body._MOUSE #METABOOKBODY a[href]:hover,
 #METABOOKBODY a[href]:active {
     color: blue; }
 
-#METABOOKBODY.metabookcontrasthigh {
+#METABOOKBODY {
     background-color: #ffffff; color: #111; }
-#METABOOKBODY.metabookcontrastmedium {
-    background-color: #ffffff; color: #444; }
+#METABOOKBODY.metabookcontrasthigh { color: #111; }
+#METABOOKBODY.metabookcontrastmedium { color: #444; }
 #METABOOKBODY.metabookcontrastlow {
     background-color: #e5e0d4; color: #333; }
 
 p { line-height: 1.2;}
 #METABOOKPAGES .codexpage.metabookcoversize p { line-height: 1.05;}
-
-body span { font-size: inherit; }
-span { font-size: inherit; }
 
 .metabookbody .titlepage, .metabookbody .sbooktitlepage,
 #METABOOKTITLEPAGE.sbooktitlepage {
@@ -92,6 +93,8 @@ span { font-size: inherit; }
 .codexpage .sbooktitlepage, .codexpage .sbookfullpage {
    page-break-before: always; page-break-after: always;
    page-break-inside: never;
+   box-sizing: border-box; -webkit-box-sizing: border-box;
+   -moz-box-sizing: border-box; -o-box-sizing: border-box;
    height: 100%; width: 100%;
    text-align: center;}
 .codexpage.codexworkpage .sbookcover,
@@ -156,7 +159,7 @@ span { font-size: inherit; }
 .sbooktitlepage .title .translation,
 .sbooktitlepage .title .originaltitle {
     font-size: 50%; font-weight: normal;
-    margin-top: 1.5em; margin-bottom: 0px;}
+    margin-top: 1ex; margin-bottom: 0px;}
 
 .sbooktitlepage .credits, .sbooktitlepage .author, .sbooktitlepage .byline {
     font-size: 1.5em; font-style: italic;
@@ -210,6 +213,11 @@ span { font-size: inherit; }
 
 .codexbibpage { text-align: left;}
 
+/* Hide these body elements which are moved to the metaBook cover */
+#METABOOKBODY #SBOOKABOUTBOOK, #METABOOKBODY #SBOOKABOUTORIGIN,
+#METABOOKBODY #SBOOKABOUTAUTHOR, #METABOOKBODY #SBOOKABOUTPUBLISHER {
+    display: none;}
+
 /* Image/float placement rules */
 
 p .floatright, p .floatleft { max-width: 30%; }
@@ -262,7 +270,7 @@ body._NOSVG a[href].wikiref, body._NOSVG a[href].sbwikiref {
 /* Custom media rules */
 
 @media screen and (min-width: 500px) and (max-width: 700px) {
-    #CODEXPAGE {left: 25px; right: 25px;}}
+    #CODEXPAGE {top: 25px; left: 25px; right: 25px;}}
 @media screen and (min-width: 350px) and (max-width: 500px) {
     #CODEXPAGE {top: 25px; left: 10px; right: 10px;}}
 @media screen and (max-width: 350px) {

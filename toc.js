@@ -241,7 +241,8 @@ metaBook.TOC=
                 var pbar=fdjt.DOM.getChild(tocelt,".progressbar");
                 if (tocelt) toshow.push(tocelt);
                 if ((pbar)&&(metaBook.location)&&(head.ends_at)) {
-                    var loc=metaBook.location, len=head.ends_at-head.starts_at;
+                    var loc=metaBook.location-head.starts_at;
+                    var len=head.ends_at-head.starts_at;
                     var pct=(len)&&(loc)&&(100*(loc/len));
                     if ((pct)&&(pct>=0)&&(pct<=100))
                         pbar.style.left=pct+"%";}

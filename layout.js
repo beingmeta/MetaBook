@@ -154,17 +154,17 @@ metaBook.Paginate=
             var justify=metaBook.justify;
             var spacing=metaBook.bodyspacing;
             var size=metaBook.bodysize||"normal";
-            var family=metaBook.bodyfamily||"serif";
+            var dyslexical=metaBook.dyslexical||false;
             if ((!(metaBook.layout))&&(Trace.startup))
-                fdjtLog("Page layout requires %dx%d %s %s pages",
-                        width,height,size,family);
+                fdjtLog("Page layout requires %dx%d %s pages",
+                        width,height,size);
             if (metaBook.layout) {
                 var current=metaBook.layout;
                 if ((!(forced))&&
                     (width===current.width)&&
                     (height===current.height)&&
                     (size===current.bodysize)&&
-                    (family===current.bodyfamily)&&
+                    (dyslexical===current.dyslexical)&&
                     ((!(spacing))||(spacing===current.bodyspacing))&&
                     (((justify)&&(current.justify))||
                      ((!justify)&&(!current.justify)))) {
@@ -182,7 +182,7 @@ metaBook.Paginate=
             // Create a new layout
             var layout_args=getLayoutArgs();
             var layout=new CodexLayout(layout_args);
-            layout.bodysize=size; layout.bodyfamily=family;
+            layout.bodysize=size; layout.dyslexical=dyslexical;
             metaBook.layout=layout;
             
             var layout_id=layout.layout_id;
@@ -412,11 +412,10 @@ metaBook.Paginate=
                 else {
                     metaBook.Paginate(name);}}}
         metaBook.addConfig("bodysize",updateLayoutProperty);
-        metaBook.addConfig("bodyfamily",updateLayoutProperty);
         metaBook.addConfig("bodyspacing",updateLayoutProperty);
         metaBook.addConfig("justify",updateLayoutProperty);
         
-        function getLayoutID(width,height,family,size,spacing,justify,source_id){
+        function getLayoutID(width,height,dyslexical,size,spacing,justify,source_id){
             var page=fdjtID("CODEXPAGE");
             var left=page.style.left, right=page.style.right;
             var layout_source=fdjt.CodexLayout.sourcehash;
@@ -425,7 +424,6 @@ metaBook.Paginate=
                 width=getGeometry(page,false,true).width;
             if (!(height))
                 height=getGeometry(fdjtID("CODEXPAGE"),false,true).inner_height;
-            if (!(family)) family=metaBook.bodyfamily||"serif";
             if (!(size)) size=metaBook.bodysize||"normal";
             if (!(source_id))
                 source_id=metaBook.sourceid||fdjtHash.hex_md5(metaBook.docuri);
@@ -433,7 +431,7 @@ metaBook.Paginate=
             if (!(spacing)) justify=metaBook.bodyspacing;
             page.style.left=left; page.style.right=right;
             return fdjtString("%dx%d-%s-%s%s%s(%s)%s",
-                              width,height,family,size,
+                              width,height,((dyslexical)?("dyslexical"):("")),size,
                               ((spacing)?("-"+spacing):("")),
                               ((justify)?("-j"):("")),
                               // Layout depends on the actual file ID,
@@ -472,14 +470,14 @@ metaBook.Paginate=
             var height=getGeometry(fdjtID("CODEXPAGE"),false,true).inner_height;
             var origin=fdjtDOM("div#CODEXCONTENT");
             var container=fdjtDOM("div.metabookpages#METABOOKPAGES");
-            var bodyfamily=metaBook.bodyfamily||"serif";
+            var dyslexical=metaBook.dyslexical||false;
             var bodysize=metaBook.bodysize||"normal";
             var sourceid=metaBook.sourceid||fdjtHash.hex_md5(metaBook.docuri);
             var justify=metaBook.justify;
             var sourcehash=fdjt.CodexLayout.sourcehash;
             var layout_id=fdjtString(
                 "%dx%d-%s-%s%s(%s)%s",
-                width,height,bodyfamily,bodysize,
+                width,height,((dyslexical)?("dyslexical"):("")),bodysize,
                 ((justify)?("-j"):("")),
                 // Layout depends on the actual file ID, if we've got
                 // one, rather than just the REFURI
@@ -936,6 +934,8 @@ metaBook.Paginate=
                 var pageref=page.getAttribute("data-staticpageref");
                 if (pageref) {
                     var pagemap=layout.pagemap;
+                    var pagerefmax=fdjt.ID("METABOOKGOTOPAGEREFMAX");
+                    if (pagerefmax) pagerefmax.innerHTML=""+pageref;
                     if (!(pagemap)) layout.pagemap=pagemap={};
                     layout.laststaticref=pageref;
                     pagemap[pageref]=page;}

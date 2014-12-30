@@ -339,7 +339,10 @@
                 metaBook.setMode("addgloss",false);}
             else if (saving_dialog) {}
             else {
-                saveGlossDialog();
+                if ((metaBook.glossform)&&
+                    (hasClass(metaBook.glossform,"modified")))
+                    saveGlossDialog();
+                else metaBook.cancelGloss();
                 fdjtUI.cancel(evt);
                 return;}}
 
@@ -406,7 +409,8 @@
                  metaBook.cancelGloss();
                  saving_dialog=false;}}];
         var spec={choices: choices,
-                  timeout: (metaBook.save_gloss_timeout||metaBook.choice_timeout||7),
+                  timeout: (metaBook.save_gloss_timeout||
+                            metaBook.choice_timeout||7),
                   spec: "div.fdjtdialog.fdjtconfirm.savegloss"};
         saving_dialog=fdjtUI.choose(spec,msg);
         return saving_dialog;}
@@ -626,6 +630,10 @@
                     evt,passage,((passage)&&(passage.parentNode)),
                     document.body.className,metaBook.HUD.className,
                     target,metaBook.glosstarget);
+        if (hasParent(target,"IMG,AUDIO,VIDEO,OBJECT")) {
+            metaBook.showMedia(getParent(target,"IMG,AUDIO,VIDEO,OBJECT"));
+            fdjt.UI.cancel(evt);
+            return;}
         if (metaBook.glosstarget) {
             if (hasParent(target,metaBook.glosstarget)) {
                 metaBook.setMode("addgloss",false);}
@@ -1195,6 +1203,7 @@
              if (metaBook.previewing) {
                  metaBook.stopPreview("escape_key");
                  fdjtUI.TapHold.clear();}
+             dropClass(document.body,"mbMEDIA");
              if (metaBook.mode==="addgloss") metaBook.cancelGloss();
              if (metaBook.mode) {
                  metaBook.last_mode=metaBook.mode;
@@ -1207,6 +1216,8 @@
                   (target.tagName==="INPUT")||
                   (target.tagName==="BUTTON"))
              return;
+        else if (hasClass(document.body,"mbMEDIA"))
+            return;
         else if ((metaBook.controlc)&&(evt.ctrlKey)&&((kc===99)||(kc===67))) {
             if (metaBook.previewing) metaBook.stopPreview("onkeydown",true);
             fdjtUI.TapHold.clear();
@@ -1792,11 +1803,6 @@
 
     function preview_touchmove_nodefault(evt){
         if (metaBook.previewing) fdjtUI.noDefault(evt);}
-
-    function stopPageTurner(){
-        if (metaBook.page_turner) {
-            clearInterval(metaBook.page_turner);
-            metaBook.page_turner=false;}}
 
     function pageForward(evt){
         evt=evt||window.event;
@@ -2634,10 +2640,12 @@
             keyup: onkeyup,
             keydown: onkeydown,
             keypress: onkeypress,
-            mouseup: global_mouseup,
-            click: default_tap,
             focus: metabookfocus,
             blur: metabookblur},
+         "#METABOOKBODY": {
+             mouseup: global_mouseup,
+             click: default_tap},
+         "#METABOOKMEDIA": {mousemove: noDefault},
          content: {tap: body_tapped,
                    taptap: body_taptap,
                    hold: body_held,
@@ -2778,7 +2786,11 @@
              click: function(evt){
                  evt=evt||window.event;
                  metaBook.UI.handlers.everyone_ontap(evt);
-                 fdjt.UI.cancel(event);}}});
+                 fdjt.UI.cancel(event);}},
+         "#METABOOKMEDIACLOSE": {
+             click: metaBook.closeMedia},
+         "#METABOOKMEDIAHELP": {
+             click: toggleHelp}});
 
     fdjt.DOM.defListeners(
         metaBook.UI.handlers.touch,
@@ -2786,9 +2798,6 @@
             keyup: onkeyup,
             keydown: onkeydown,
             keypress: onkeypress,
-            // touchstart: default_tap,
-            // touchmove: noDefault,
-            touchend: stopPageTurner,
             touchmove: preview_touchmove_nodefault,
             focus: metabookfocus,
             blur: metabookblur},
@@ -2814,6 +2823,7 @@
                    touchtoo: slice_touchtoo,
                    touchmove: preview_touchmove_nodefault,
                    slip: slice_slipped},
+         "#METABOOKMEDIA": {touchmove: noDefault},
          "#METABOOKSTARTPAGE": {touchend: metaBook.UI.dropHUD},
          "#METABOOKTOPBAR": {tap: raiseHUD},
          //"#METABOOKTOOLTAB": {tap: raiseHUD, release: raiseHUD},
@@ -2970,7 +2980,11 @@
              touchend: function(evt){
                  evt=evt||window.event;
                  metaBook.UI.handlers.everyone_ontap(evt);
-                 fdjt.UI.cancel(event);}}});
+                 fdjt.UI.cancel(event);}},
+         "#METABOOKMEDIACLOSE": {
+             click: metaBook.closeMedia},
+         "#METABOOKMEDIAHELP": {
+             click: toggleHelp}});
     
 })();
 

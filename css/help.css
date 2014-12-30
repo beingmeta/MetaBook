@@ -115,9 +115,10 @@ div.helpbox.atfoot {
 #METABOOKHUD div.helpbox {
     border-color: black; z-index: 250;}
 body.mbSHOWHELP #METABOOKHUD .helphud,
-body.mbSHOWHELP #METABOOKHUD > div.metabookhelp {display: block;}
+body.mbSHOWHELP #METABOOKHUD div.metabookhelp {display: block;}
 body.mbSHOWHELP #METABOOKHUD .hudbutton {
     opacity: 0.5;}
+body.mbSHOWHELP #METABOOKHUD.addgloss div.metabookhelp, 
 body.mbSHOWHELP.hudup #METABOOKHUD div.metabookhelp, 
 body.mbSHOWHELP.mbSHRINK #METABOOKHUD div.metabookhelp,
 body.mbSHOWHELP.mbPREVIEW #METABOOKHUD div.metabookhelp,
@@ -149,7 +150,7 @@ body.mbSHOWHELP #METABOOKHUD.expandsearch #METABOOKSEARCHINPUTHELP.helpbox,
 body.mbSHOWHELP #METABOOKHUD.searchresults #METABOOKSEARCHRESULTSHELP.helpbox,
 body.mbSHOWHELP #METABOOKHUD.allglosses #METABOOKALLGLOSSESHELP.helpbox,
 body.mbSHOWHELP #METABOOKHUD.statictoc #METABOOKSTATICTOCHELP.helpbox {
-    border-color: black; z-index: 260; display: block; opacity: 0.9; 
+    border-color: black; z-index: 500; display: block; opacity: 0.9; 
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
     filter: alpha(opacity=90);
     -webkit-opacity: 0.90;

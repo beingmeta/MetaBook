@@ -377,6 +377,12 @@
         return form;}
     metaBook.setGlossTarget=setGlossTarget;
 
+    function glossModified(arg){
+        var target=((arg.nodeType)?(arg):(fdjtUI.T(arg)));
+        var form=getParent(target,"FORM");
+        var div=getParent(form,".metabookglossform");
+        if (div) addClass(div,"modified");}
+
     function setSelecting(selecting){
         if (metaBook.selecting===selecting) return;
         else if (metaBook.selecting) {
@@ -571,15 +577,16 @@
     
     function setExcerpt(form,excerpt,off) {
         var wrapper=getParent(form,".metabookglossform");
-        var excerpt_span=getChild(form,'.excerpt');
+        var excerpt_span=getChild(form,'.excerpt'), changed=false;
         var input=getInput(form,'EXCERPT'), exoff=getInput(form,'EXOFF');
         if ((!(excerpt))||(fdjtString.isEmpty(excerpt))) {
+            if (input.value) changed=true;
             input.value=""; exoff.value="";
             input.disabled=exoff.disabled=true;
             if (excerpt_span) excerpt_span.innerHTML="";}
         else {
             input.disabled=exoff.disabled=false;
-            input.value=excerpt;
+            input.value=excerpt; changed=true;
             if (typeof off === "number") exoff.value=off;
             else {exoff.value="";exoff.disabled=true;}
             if (excerpt_span) excerpt_span.innerHTML=
@@ -588,7 +595,7 @@
             fdjtLog("setExcerpt %o form=%o excerpt=%o off=%o",
                     wrapper,form,excerpt,off);
         updateForm(form);
-        addClass(wrapper,"modified");
+        if (changed) addClass(wrapper,"modified");
         return;}
     metaBook.setExcerpt=setExcerpt;
 
@@ -768,10 +775,13 @@
         var text=target.value, pos=target.selectionStart||0;
         var ch=evt.charCode, charstring=String.fromCharCode(ch);
         var taginfo=findTag(text,pos,true);
+
         if ((Trace.glossing)||(Trace.gestures>2))
             fdjtLog("glossinput_onkeypress '%o' %o text=%o pos=%o taginfo=%o",
                     ch,evt,text,pos,taginfo);
-        if (ch!==13) addClass(getParent(form,".metabookglossform"),"focused");
+        if (ch!==13) {
+            addClass(getParent(form,".metabookglossform"),"focused");
+            addClass(getParent(form,".metabookglossform"),"modified");}
         if (ch===13) {
             if (taginfo) {
                 // Remove tag text
@@ -853,6 +863,7 @@
             else {}}
         else if ((ch===8)||(ch===46)||((ch>=35)&&(ch<=40))) {
             // These may change content, so we update the completion state
+            glossModified(evt);
             if (glossinput_timer) clearTimeout(glossinput_timer);
             glossinput_timer=setTimeout(function(){
                 glosstag_complete(target);},150);}}
@@ -1090,7 +1101,8 @@
         if (!((hasParent(form,".glossedit"))||
               (hasParent(form,".glossreply"))))
             // Only save defaults if adding a new gloss
-            saveGlossDefaults(form,getChild("METABOOKADDGLOSSPROTOTYPE","FORM"));
+            saveGlossDefaults(
+                form,getChild("METABOOKADDGLOSSPROTOTYPE","FORM"));
         var uuidelt=getInput(form,"UUID");
         if (!((uuidelt)&&(uuidelt.value)&&(uuidelt.value.length>5))) {
             fdjtLog.warn('missing UUID');
@@ -1111,9 +1123,12 @@
                 choices.push({label: "Login",
                               isdefault: true,
                               handler: function(){
-                                  setTimeout(function(){metaBook.setMode("login");},0);
-                                  var resubmit=function(){submitGloss(arg,keep);};
-                                  if (metaBook._onconnect) metaBook._onconnect.push(resubmit);
+                                  setTimeout(function()
+                                             {metaBook.setMode("login");},0);
+                                  var resubmit=function(){
+                                      submitGloss(form,keep);};
+                                  if (metaBook._onconnect)
+                                      metaBook._onconnect.push(resubmit);
                                   else metaBook._onconnect=[resubmit];
                                   login_message=true;}});
             if ((metaBook.user)&&(metaBook.persist)) 
@@ -1125,8 +1140,8 @@
                                       metaBook.setConfig("cacheglosses",true);
                                   login_message=true;
                                   if (!((navigator.onLine)&&(metaBook.connected)))
-                                      queueGloss(arg,false,keep);
-                                  else submitGloss(arg,keep);}});
+                                      queueGloss(form,false,keep);
+                                  else submitGloss(form,keep);}});
             else {
                 choices.push({label: "Cache",
                               isdefault: ((!(navigator.onLine))&&
@@ -1135,7 +1150,7 @@
                                   if (metaBook.nocache)
                                       metaBook.setConfig("cacheglosses",true,true);
                                   login_message=true;
-                                  queueGloss(arg,false,keep);}});
+                                  queueGloss(form,false,keep);}});
                 if (metaBook.nocache)
                     choices.push({label: "Lose",
                                   isdefault:((!(navigator.onLine))&&
@@ -1251,7 +1266,8 @@
         // Now save it to the in-memory database
         var glossdata=
             {refuri: json.refuri,frag: json.frag,
-             maker: json.user,_id: json.uuid,uuid: json.uuid,
+             _id: json.uuid,uuid: json.uuid,
+             maker: json.user||metaBook.user,
              qid: json.uuid,gloss: json.uuid,
              created: ((json.created)||(fdjtTime()))};
         glossdata.tstamp=fdjtTime.tick();
@@ -1264,7 +1280,9 @@
             glossdata.details=json.details;
         if ((json.tags)&&(json.tags.length>0)) glossdata.tags=json.tags;
         if ((json.xrefs)&&(json.xrefs.length>0)) glossdata.xrefs=json.xrefs;
-        metaBook.glossdb.Import(glossdata,false,false,true);
+        metaBook.glossdb.Import(
+            glossdata,false,RefDB.REFLOAD|RefDB.REFSTRINGS|RefDB.REFINDEX,
+            true);
         if (evt) fdjtUI.cancel(evt);
         dropClass(form.parentNode,"submitting");
         /* Turn off the target lock */

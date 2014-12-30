@@ -73,16 +73,24 @@ body {
 #METABOOKFRAME > div, #METABOOKFRAME > div > div, #METABOOKFRAME > div > a {
     box-sizing: border-box; -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box; -o-box-sizing: border-box;}
+#METABOOKFRAME a { 
+    background-color: transparent; text-decoration: none;}
+#METABOOKCOVER a { color: lightblue; }
+
 body.hudup #METABOOKFRAME, body.mbCOVER #METABOOKFRAME,
 body.mbSKIMMING #METABOOKFRAME, body.openhud #METABOOKFRAME,
-body.mbMEDIA #METABOOKFRAME {
-    display: block;}
 body.hudup #METABOOKHUD, body.mbSKIMMING #METABOOKHUD,
 body.openhud #METABOOKHUD, body.mbCOVER #METABOOKCOVER,
-body.mbMEDIA #METABOOKMEDIA, body.mbMEDIA #METABOOKCLOSEMEDIA {
+body.mbMEDIA #METABOOKFRAME > #METABOOKMEDIA {
     top: 0px; bottom: 0px; left: 0px; right: 0px;
     height: 100%; width: 100%;
     display: block;}
+body.mbMEDIA #METABOOKBODY, body.mbMEDIA #METABOOKCOVER, 
+body.mbMEDIA #METABOOKHUD { 
+    display: none;}
+
+body.mbMEDIA #METABOOKFRAME > #METABOOKMEDIA {
+    pointer-events: all;}
 
 body.hudup #METABOOKFRAME, body.mbCOVER #METABOOKFRAME,
 body.openhud #METABOOKFRAME, body.mbSKIMMING #METABOOKFRAME,
@@ -94,6 +102,9 @@ body.mbSHOWHELP #METABOOKFRAME, body.mbMEDIA #METABOOKFRAME {
 .metabookframe img, .metabookframe picture, .metabookframe figure,
 .metabookframe object, .metabookframe video, .metabookframe audio {
     max-width: initial; max-height: initial;}
+.metabookframe h1 { font-size: 2em; margin: 0.67em 0; color: black; }
+.metabookframe h2 { font-size: 1.5em; margin: 0.5em 0; color: black; }
+.metabookframe h3 { font-size: 1.4em; margin: 0.4em 0; color: black; }
 
 /* The HUD is where all of the active interface elements for reading
    appear.  */
@@ -141,24 +152,73 @@ body.mbCOVER #METABOOKBODY {
 body.mbCOVER #METABOOKHUD, body.hudup.mbCOVER #METABOOKHUD {
     visibility: hidden; z-index: -50; pointer-events: none;}
 
-#METABOOKFRAME > #METABOOKMEDIA {
-    top: 0px; left: 0px; height: 0px; width: 0px;}
+#METABOOKMEDIA { 
+    position: absolute;
+    top: 0px; left: 0px; height: 0px; width: 0px;
+    overflow: hidden;
+    display: none; }
+#METABOOKMEDIACONTROLS {display: none;}
+body.mbMEDIA #METABOOKMEDIACONTROLS { 
+    pointer-events: all; display: block;}
 
-#METABOOKFRAME #METABOOKCLOSEMEDIA {
-    z-index: 100; opacity: 0.5; display: none;
-    background-image: url(g/metabook/redx.svgz);
-    top: 0px;  right: 0px;}
-body._NOSVG #METABOOKFRAME #METABOOKCLOSEMEDIA {
+#METABOOKMEDIACLOSE {
+    position: absolute;
+    top: 4px; top: 1vmax; right: 4px; right: 1vmax;
+    width: 50px; width: 10vmax; height: 50px; height: 10vmax; 
+    z-index: 100; opacity: 0.8;
+    background-repeat: no-repeat; background-size: contain;
+    background-image: url(g/metabook/redx.svgz);}
+#METABOOKMEDIAHELP {
+    position: absolute;
+    bottom: 4px; bottom: 1vmax; left: 4px; left: 1vmax;
+    width: 50px; width: 10vmax; height: 50px; height: 10vmax; 
+    z-index: 100; opacity: 0.8;
+    background-repeat: no-repeat; background-size: contain;
+    background-image: url(g/metabook/help.svgz);}
+body.mbSHOWHELP #METABOOKMEDIAHELP {
+    opacity: 1.0; background-color: gray;}
+
+#METABOOKMEDIAHELPTEXT {
+    position: absolute;
+    width: 60%; left: 20%; height: 80%; top: 10%; z-index: 500;
+    font-size: 2em; font-weight: bold; padding: 1em;
+    background: gray; opacity: 0.9;
+    text-align: center;
+    display: none;}
+body.mbSHOWHELP.mbMEDIA #METABOOKMEDIAHELPTEXT { display: block; }
+
+body._NOSVG #METABOOKFRAME #METABOOKMEDIACLOSE {
     background-image: url(g/metabook/redx100x100.png);}
 
 #METABOOKMEDIA > img, #METABOOKMEDIA > video, #METABOOKMEDIA > audio { }
 
+/* For IScroll */
+#METABOOKMEDIA > * {
+    position: absolute;
+    z-index: 1;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    width: 100%;
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-text-size-adjust: none;
+    -moz-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+    -o-text-size-adjust: none;
+    text-size-adjust: none;
+}
+
 @media (orientation: landscape) {
-    #METABOOKFRAME > #METABOOKCLOSEMEDIA { width: 15%; height: auto; }
     #METABOOKMEDIA > img, #METABOOKMEDIA > video, #METABOOKMEDIA > audio {
         min-height: 100%; width: auto;}}
 @media (orientation: portrait) {
-    #METABOOKFRAME > #METABOOKCLOSEMEDIA { height: 10%; width: auto; }
     #METABOOKMEDIA > img, #METABOOKMEDIA > video, #METABOOKMEDIA > audio {
         min-width: 100%; height: auto;}}
 

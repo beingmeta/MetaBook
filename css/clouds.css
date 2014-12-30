@@ -42,6 +42,9 @@ div.completions.noinput .cloudtoggle {
     -o-border-radius: 12px; -webkit-border-radius: 12px; 
     -moz-border-radius: 12px;
     cursor: pointer;}
+.cloud .showall { display: none; }
+.cloud.noinput .showall { display: block; }
+
 ._MOUSE .cloud .showall:hover,
 .cloud .showall.tapholdtarget {
     border-color: blue;}
@@ -114,7 +117,8 @@ div.completions.noinput .cloudtoggle {
     color: rbga(0,0,0,0.8); font-weight: bold;}
 
 .cloud .nomatchmsg {
-    text-align: center; font-size: 200%; font-weight: bold;
+    text-align: center; font-size: 36px; font-size: 3rem; 
+    font-weight: bold;
     margin-top: 1em;}
 
 /* Special rules */

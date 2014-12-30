@@ -63,6 +63,8 @@ metaBook.setMode=
         var mB=metaBook;
         var Trace=mB.Trace;
 
+        var IScroll=window.IScroll;
+
         // Helpful dimensions
         // Whether to call displaySync on mode changes
         var display_sync=false;
@@ -102,6 +104,13 @@ metaBook.setMode=
             addClass(frame,"metabookframe");
             frame.appendChild(messages); frame.appendChild(hud);
             frame.appendChild(media);
+            frame.appendChild(
+                fdjtDOM("div#METABOOKMEDIACONTROLS",
+                        fdjtDOM("div#METABOOKMEDIACLOSE"),
+                        fdjtDOM("div#METABOOKMEDIAHELP"),
+                        fdjtDOM("div#METABOOKMEDIAHELPTEXT",
+                                "Drag to pan, use two fingers to zoom")));
+
             metaBook.Frame=frame;
             // Fill in the HUD help
             var hudhelp=fdjtID("METABOOKHUDHELP");
@@ -517,9 +526,7 @@ metaBook.setMode=
                     // addgloss has submodes which may specify the
                     //  open heart configuration
                     addClass(metaBookHUD,"openhead");
-                    if (metaBookHUD.className.search(metabookHeartModes)<0)
-                        dropClass(metaBookHUD,"openheart");
-                    else addClass(metaBookHUD,"openheart");}
+                    dropClass(metaBookHUD,"openheart");}
                 else {
                     if (mode.search(metabookHeartModes)<0) {
                         dropClass(metaBookHUD,"openheart");}
@@ -659,7 +666,7 @@ metaBook.setMode=
                     contents=fdjtDOM("div#METABOOKHEARTCONTENT");
                     fdjtDOM(contents,fdjtDOM.Array(heart.childNodes));
                     fdjtDOM(heart,contents);}
-                metaBook.heartscroller=new iScroll(heart);
+                metaBook.heartscroller=new IScroll(heart);
                 metaBook.heartscroller.refresh();}}
         metaBook.UI.updateScroller=updateScroller;
 
@@ -845,7 +852,22 @@ metaBook.setMode=
         
         metaBook.addConfig("uisize",function(name,value){
             fdjtDOM.swapClass(
-                metaBook.Frame,/metabookuifont\w+/,"metabookuifont"+value);});
+                metaBook.Frame,/metabookuifont\w+/g,"metabookuifont"+value);});
+        metaBook.addConfig("dyslexical",function(name,value){
+            if ((value)&&(typeof value === 'string')&&(/yes|on|t/i.exec(value))) {
+                if (hasClass(document.body,"_DYSLEXICAL")) return;
+                else {
+                     metaBook.dyslexical=true;
+                    addClass(document.body,"_DYSLEXICAL");}}
+            else if (!(hasClass(document.body,"_DYSLEXICAL")))
+                return;
+            else {
+                metaBook.dyslexical=true;
+                fdjtDOM.dropClass(document.body,"_DYSLEXICAL");}
+            setTimeout(function(){
+                metaBook.resizeUI();
+                if (metaBook.layout) metaBook.Paginate("typechange");},
+                      10);});
         metaBook.addConfig("animatecontent",function(name,value){
             if (metaBook.dontanimate) {}
             else if (value) addClass(document.body,"_ANIMATE");
@@ -866,12 +888,21 @@ metaBook.setMode=
             var bodysize=fdjtDOM.getInputValues(settings,"METABOOKBODYSIZE");
             if ((bodysize)&&(bodysize.length))
                 result.bodysize=bodysize[0];
+            /*
             var bodyfamily=fdjtDOM.getInputValues(settings,"METABOOKBODYFAMILY");
             if ((bodyfamily)&&(bodyfamily.length))
                 result.bodyfamily=bodyfamily[0];
+            */
             var uisize=fdjtDOM.getInputValues(settings,"METABOOKUISIZE");
             if ((uisize)&&(uisize.length))
                 result.uisize=uisize[0];
+            var contrast=fdjtDOM.getInputValues(settings,"METABOOKBODYCONTRAST");
+            if ((contrast)&&(contrast.length))
+                result.bodycontrast=contrast[0];
+            var dyslexical=fdjtDOM.getInputValues(settings,"METABOOKDYSLEXICAL");
+            if ((dyslexical)&&(dyslexical.length))
+                result.dyslexical=dyslexical[0];
+            else result.dyslexical=false;
             var hidesplash=fdjtDOM.getInputValues(settings,"METABOOKHIDESPLASH");
             result.hidesplash=((hidesplash)&&(hidesplash.length))||false;
             var showconsole=fdjtDOM.getInputValues(settings,"METABOOKSHOWCONSOLE");
@@ -973,6 +1004,41 @@ metaBook.setMode=
                                    5000);},
                            5000);}
         metaBook.keyboardHelp=keyboardHelp;
+
+        /* Full page media mode */
+
+        function showMedia(node){
+            var media=fdjt.ID("METABOOKMEDIA");
+            if (metaBook.zoomed===node) {
+                addClass(document.body,"mbMEDIA");
+                return;}
+            else metaBook.zoomed=node;
+            var copy=node.cloneNode();
+            fdjtDOM.stripIDs(copy);
+            copy.setAttribute("style","");
+            if (metaBook.mediascroll) 
+                metaBook.mediascroll.destroy();
+            media.innerHTML="";
+            media.appendChild(copy);
+            addClass(document.body,"mbMEDIA");
+            metaBook.mediascroll=
+                new IScroll(media,{zoom: true,
+                                   scrollX: true,
+                                   scrollY: true,
+                                   freeScroll: true,
+                                   keyBindings: true,
+                                   mouseWheel: true,
+                                   scrollbars: true,
+                                   zoomMin: 0.2,
+                                   zoomMax: 5,
+                                   wheelAction: 'zoom'
+                                  });}
+        metaBook.showMedia=showMedia;
+
+        function closeMedia(evt){
+            dropClass(document.body,"mbMEDIA");
+            if (evt) fdjt.UI.cancel(evt);}
+        metaBook.closeMedia=closeMedia;
 
         /* Showing a particular gloss */
 

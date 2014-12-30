@@ -33,7 +33,7 @@ div.searchbox .metabookclearsearch.tapholdtarget {
 
 div.searchbox input[type='TEXT'] {
     flex-grow: 1; -webkit-flex-grow: 1; -moz-flex-grow: 1;
-    font-size: 1.5rem;}
+    font-size: 1.5rem; margin-left: 1ex;}
 div.searchbox input[type='TEXT'] {
     border-radius: 0.5ex; -webkit-border-radius: 0.5ex;
     -o-border-radius: 0.5ex; -moz-border-radius: 0.5ex;
@@ -81,7 +81,9 @@ div.resultinfo .stats > span {
     padding-left: 1ex; padding-right: 1ex;
     border-bottom-left-radius: 0.5ex;
     border-bottom-right-radius: 0.5ex;
-    border: outset black 2px; border-top: 0px;}
+    border: outset black 2px; border-top: 0px;
+    padding-top: 2px; padding-bottom: 4px;
+    line-height: 0.9;}
 div.resultinfo .stats > span > br { display: none; }
 
 div.resultinfo .noresults { display: none;}
@@ -106,7 +108,7 @@ div.resultinfo.noresults span { display: none;}
 #METABOOKHUD div.resultinfo span.stats {
     -webkit-flex-grow: 0; -moz-flex-grow: 0; -ms-flexbox-grow: 0;
     flex-grow: 0;
-    font-size: 2vw;}
+    font-size: 2vmin;}
 #METABOOKHUD div.resultinfo span.qtags {
     display: -webkit-flex; display: -ms-flexbox;
     display: -moz-flex; display: flex;
@@ -145,7 +147,7 @@ body._ANIMATE .qtags {
         font-size: 250%;}}
 
 @media screen and (min-width: 1000px) {
-    #METABOOKHUD div.resultinfo span.stats { font-size: 1.5vw; }}
+    #METABOOKHUD div.resultinfo span.stats { font-size: 2vmin; }}
 
 @media screen and (max-width: 640px) {
     div.searchbox div.query { font-size: 12px; }
@@ -153,7 +155,7 @@ body._ANIMATE .qtags {
         width: 10%; height: auto;}
     div.searchbox div.query div.input {
         width: auto; margin-right: 10%;}
-    #METABOOKHUD div.resultinfo span.stats { font-size: 2.5vw; }}
+    #METABOOKHUD div.resultinfo span.stats { font-size: 2vmin; }}
     div.resultinfo .stats > span > br { display: initial; }}
 
 @media screen and (max-width: 500px) {
