@@ -82,8 +82,7 @@ body.hudup #METABOOKFRAME, body.mbCOVER #METABOOKFRAME,
 body.mbSKIMMING #METABOOKFRAME, body.openhud #METABOOKFRAME,
 body.hudup #METABOOKHUD, body.mbSKIMMING #METABOOKHUD,
 body.openhud #METABOOKHUD, body.mbCOVER #METABOOKCOVER,
-body.mbMEDIA #METABOOKFRAME > #METABOOKMEDIA,
-body.mbZOOM #METABOOKZOOM {
+body.mbMEDIA #METABOOKFRAME > #METABOOKMEDIA {
     top: 0px; bottom: 0px; left: 0px; right: 0px;
     height: 100%; width: 100%;
     display: block;}
@@ -157,28 +156,37 @@ body.mbCOVER #METABOOKBODY {
 body.mbCOVER #METABOOKHUD, body.hudup.mbCOVER #METABOOKHUD {
     visibility: hidden; z-index: -50; pointer-events: none;}
 
-#METABOOKZOOM { 
+#METABOOKZOOM, #METABOOKZOOMBOX { 
     position: absolute;
-    top: 0px; left: 0px; height: 0px; width: 0px;
-    text-align: center; vertical-align: middle;
+    top: 0px; left: 0px; bottom: 0px; right: 0px;
+    text-align: center; vertical-align: middle;}
+
+#METABOOKZOOM {
     overflow-x: scroll; overflow-y: scroll;
     display: none; }
+#METABOOKZOOMBOX {
+    transform-origin: 0px 0px;
+    -webkit-transform-origin: 0px 0px;
+    -moz-transform-origin: 0px 0px;}
+
+body.mbZOOM #METABOOKZOOM {
+    min-width: 100%; min-height: 100%;
+    height: auto; width: auto;
+    display: block;}
 #METABOOKZOOMCONTROLS { 
     position: fixed;
     top: 0px; left: 0px; height: 100%; width: 100%;
     text-align: center; vertical-align: middle;
     z-index: 100; opacity: 0.5;
     pointer-events: none;}
-#METABOOKZOOMCONTROLS > * { pointer-events: all; }
-#METABOOKZOOMTARGET {
-    transform-origin: 50% 0px;
-    -webkit-transform-origin: 50% 0px;
-    -moz-transform-origin: 50% 0px;}
+#METABOOKZOOMCONTROLS > * {
+    pointer-events: all;
+    background-color: ivory;}
 
 #METABOOKZOOMCLOSE {
     position: absolute;
     top: 4px; top: 1vmax; right: 1em; right: 1rem;
-    width: 50px; width: 5vmax; height: 50px; height: 5vmax; 
+    width: 50px; width: 8vmax; height: 50px; height: 8vmax; 
     background-repeat: no-repeat; background-size: contain;
     background-image: url(g/metabook/redx.svgz);}
 body._NOSVG #METABOOKZOOMCLOSE {
@@ -186,7 +194,7 @@ body._NOSVG #METABOOKZOOMCLOSE {
 #METABOOKZOOMHELP {
     position: absolute;
     bottom: 4px; bottom: 1vmax; left: 4px; left: 1vmax;
-    width: 50px; width: 5vmax; height: 50px; height: 5vmax; 
+    width: 50px; width: 8vmax; height: 50px; height: 8vmax; 
     background-repeat: no-repeat; background-size: contain;
     background-image: url(g/metabook/help.svgz);}
 body._NOSVG #METABOOKZOOMHELP {
@@ -195,7 +203,7 @@ body._NOSVG #METABOOKZOOMHELP {
 #METABOOKZOOMOUT {
     position: absolute;
     bottom: 4px; bottom: 1vmax; right: 1em; right: 1rem;
-    width: 50px; width: 5vmax; height: 50px; height: 5vmax; 
+    width: 50px; width: 8vmax; height: 50px; height: 8vmax; 
     background-repeat: no-repeat; background-size: contain;
     background-image: url(g/metabook/zoomout.svgz);}
 body._NOSVG #METABOOKZOOMOUT {
@@ -203,12 +211,21 @@ body._NOSVG #METABOOKZOOMOUT {
 
 #METABOOKZOOMIN {
     position: absolute;
-    bottom: 60px; bottom: 7vmax; right: 1em; right: 1rem;
-    width: 50px; width: 5vmax; height: 50px; height: 5vmax; 
+    bottom: 120px; bottom: 20vmax; right: 1em; right: 1rem;
+    width: 50px; width: 8vmax; height: 50px; height: 8vmax; 
     background-repeat: no-repeat; background-size: contain;
     background-image: url(g/metabook/zoomin.svgz);}
 body._NOSVG #METABOOKZOOMIN {
     background-image: url(g/metabook/zoomin50x50.png);}
+
+#METABOOKUNZOOM {
+    position: absolute;
+    bottom: 60px; bottom: 10vmax; right: 1em; right: 1rem;
+    width: 50px; width: 8vmax; height: 50px; height: 8vmax; 
+    background-repeat: no-repeat; background-size: contain;
+    background-image: url(g/metabook/unzoom.svgz);}
+body._NOSVG #METABOOKUNZOOM {
+    background-image: url(g/metabook/unzoom50x50.png);}
 
 body.mbSHOWHELP #METABOOKZOOMHELP {
     opacity: 1.0; background-color: gray;}

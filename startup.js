@@ -1570,14 +1570,16 @@ metaBook.Startup=
         function setupZoom(){
             var zoom=metaBook.Zoom=fdjtDOM(
                 "div#METABOOKZOOM.metabookzoom.metabookcontent",
+                fdjtDOM("div#METABOOKZOOMBOX",
+                        fdjtDOM("div#METABOOKZOOMTARGET")),
                 fdjtDOM("div#METABOOKZOOMCONTROLS",
                         fdjtDOM("div#METABOOKZOOMCLOSE"),
+                        fdjtDOM("div#METABOOKUNZOOM"),
                         fdjtDOM("div#METABOOKZOOMIN"),
                         fdjtDOM("div#METABOOKZOOMOUT"),
                         fdjtDOM("div#METABOOKZOOMHELP"),
                         fdjtDOM("div#METABOOKZOOMHELPTEXT",
-                                "Drag to pan, use two fingers to zoom")),
-                fdjtDOM("div#METABOOKZOOMTARGET"));
+                                "Drag to pan, use two fingers to zoom")));
             zoom.metabookui=true;
             document.body.appendChild(zoom);}
         metaBook.setupZoom=setupZoom;

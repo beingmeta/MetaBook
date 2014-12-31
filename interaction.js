@@ -2638,21 +2638,27 @@
 
     function zoomIn(evt){
         evt=evt||window.event;
-        var zt=fdjt.ID("METABOOKZOOMTARGET");
+        var zb=fdjt.ID("METABOOKZOOMBOX");
         var scale=metaBook.zoomscale;
         if (!(scale)) scale=metaBook.zoomscale=1.0;
         scale=scale*1.1;
         metaBook.zoomscale=scale;
-        zt.style[fdjt.DOM.transform]="scale("+scale+")";
+        zb.style[fdjt.DOM.transform]="scale("+scale+")";
         fdjt.UI.cancel(evt);}
     function zoomOut(evt){
         evt=evt||window.event;
-        var zt=fdjt.ID("METABOOKZOOMTARGET");
+        var zb=fdjt.ID("METABOOKZOOMBOX");
         var scale=metaBook.zoomscale;
         if (!(scale)) scale=metaBook.zoomscale=1.0;
         scale=scale/1.1;
         metaBook.zoomscale=scale;
-        zt.style[fdjt.DOM.transform]="scale("+scale+")";
+        zb.style[fdjt.DOM.transform]="scale("+scale+")";
+        fdjt.UI.cancel(evt);}
+    function unZoom(evt){
+        evt=evt||window.event;
+        var zb=fdjt.ID("METABOOKZOOMBOX");
+        zb.style[fdjt.DOM.transform]="";
+        metaBook.zoomscale=false;
         fdjt.UI.cancel(evt);}
 
     function saveGloss(evt){
@@ -2840,6 +2846,7 @@
          "#METABOOKZOOMHELP": {click: toggleHelp},
          "#METABOOKZOOMIN": {click: zoomIn},
          "#METABOOKZOOMOUT": {click: zoomOut},
+         "#METABOOKUNZOOM": {click: unZoom},
          "#METABOOKMEDIACLOSE": {
              click: metaBook.closeMedia},
          "#METABOOKMEDIAHELP": {
@@ -3038,6 +3045,7 @@
          "#METABOOKZOOMHELP": {click: toggleHelp},
          "#METABOOKZOOMIN": {click: zoomIn},
          "#METABOOKZOOMOUT": {click: zoomOut},
+         "#METABOOKUNZOOM": {click: unZoom},
          "#METABOOKMEDIACLOSE": {
              click: metaBook.closeMedia},
          "#METABOOKMEDIAHELP": {
