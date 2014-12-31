@@ -107,7 +107,8 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
     z-index: 50;}
 
 #METABOOKCOVERCONTROLS {
-    white-space: nowrap;}
+    white-space: nowrap;
+    font-size: 20px; font-size: 4vw;}
 
 #METABOOKCOVER > #METABOOKCOVERCONTROLS {
     box-sizing: border-box; -moz-box-sizing: border-box;
@@ -356,16 +357,16 @@ body._NOUSER #METABOOKSETTINGS h1 a.logout {display:none;}
     text-align: right;}
 #METABOOKSETTINGS table.settings td button.floatright,
 #METABOOKSETTINGS table.settings th.buttons button {
-    min-width: 7em; height: 2em;
+    min-width: 12ex; height: 2em;
     border-width: 2px; text-align: right;
+    margin-left: 0.5ex; margin-bottom: 0.2ex;
     font-weight: 600;}
 #METABOOKSETTINGS table.settings th.buttons button img {
     height: 1em; width: auto; float: left;}
 #METABOOKSETTINGS table.settings th.buttons button.refresh,
 #METABOOKSETTINGS table.settings td button.floatright.refresh,
 #METABOOKSETTINGS table.settings th.buttons button.reset,
-#METABOOKSETTINGS table.settings td button.floatright.reset
-{
+#METABOOKSETTINGS table.settings td button.floatright.reset {
     background-position: left center; background-repeat: no-repeat;
     background-size: contain;
 }
@@ -508,7 +509,7 @@ body.mbBUSY #METABOOKCOVERMESSAGE > #METABOOKOPENTAB {
 
 #METABOOKCOVERMESSAGE > div {
     color: silver; display: none;
-    padding-left: 1em; padding-right: 1em;
+    padding-left: 0px; padding-right: 0px;
     padding-top: 0px;
     box-sizing: border-box;
     width: 100%;}
@@ -530,7 +531,7 @@ body.mbLAYOUT #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE,
 body.mbBUSY #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE {
     display: none;}
 #METABOOKLAYOUTMESSAGE div.message {
-    font-size: 24px; font-size: 1.8rem;}
+    font-size: 24px; font-size: 5vmin;}
 
 #METABOOKREADYMESSAGE { padding-bottom: 1ex; }
 
@@ -570,12 +571,19 @@ body.mbBUSY #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE {
     body._TOUCH #METABOOKSETTINGS {  font-size: 0.9em; }
     body._TOUCH #METABOOKSETTINGS table.settings {  font-size: 1em; }
     
-    #METABOOKCOVER > #METABOOKCOVERCONTROLS { height: 80px; }
+    #METABOOKCOVER > #METABOOKCOVERCONTROLS {
+        height: 80px; white-space: normal; }
 
     #METABOOKCOVER div.loginbox {font-size: 1em;}
 
-    #METABOOKSETTINGS { padding: 1ex; }
-    #METABOOKSETTINGS h1 { font-size: 1.5em;}
+    #METABOOKSETTINGS {
+        padding: 1ex;
+        padding-left: 2px;
+        padding-right: 2px;}
+    #METABOOKSETTINGS h1 {
+        font-size: 1.5em;
+        margin-right: 1ex;
+        margin-left: 1ex;}
 }
 
 @media (pointer: coarse) {
@@ -594,7 +602,7 @@ body.mbBUSY #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE {
     #METABOOKCOVER div.loginbox form input[TYPE="TEXT"]:focus {
         width: 100%; max-width: 100%; z-index: 100;}
     #METABOOKSETTINGS button.floatright {
-        font-size: 16px; font-size: 1rem;}}
+        font-size: 16px; font-size: 0.8rem;}}
 
 /* Emacs local variables
 ;;;  Local variables: ***

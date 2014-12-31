@@ -85,7 +85,7 @@ body.openhud #METABOOKHUD, body.mbCOVER #METABOOKCOVER {
     height: 100%; width: 100%;
     display: block;}
 body.mbZOOM #METABOOKFRAME, body.mbZOOM #METABOOKBODY { 
-    display: none;}
+    opacity: 0.0; z-index: -500; pointer-events: none;}
 
 body.hudup #METABOOKFRAME, body.mbCOVER #METABOOKFRAME,
 body.openhud #METABOOKFRAME, body.mbSKIMMING #METABOOKFRAME,
@@ -177,7 +177,7 @@ body.mbZOOM #METABOOKZOOM {
 #METABOOKZOOMCLOSE {
     position: absolute;
     top: 4px; top: 1vmax; right: 1em; right: 1rem;
-    width: 50px; width: 8vmax; height: 50px; height: 8vmax; 
+    width: 50px; width: 8vmin; height: 50px; height: 8vmin; 
     background-repeat: no-repeat; background-size: contain;
     background-image: url(g/metabook/redx.svgz);}
 body._NOSVG #METABOOKZOOMCLOSE {
@@ -185,7 +185,7 @@ body._NOSVG #METABOOKZOOMCLOSE {
 #METABOOKZOOMHELP {
     position: absolute;
     bottom: 4px; bottom: 1vmax; left: 4px; left: 1vmax;
-    width: 50px; width: 8vmax; height: 50px; height: 8vmax; 
+    width: 50px; width: 8vmin; height: 50px; height: 8vmin; 
     background-repeat: no-repeat; background-size: contain;
     background-image: url(g/metabook/help.svgz);}
 body._NOSVG #METABOOKZOOMHELP {
@@ -194,7 +194,7 @@ body._NOSVG #METABOOKZOOMHELP {
 #METABOOKZOOMOUT {
     position: absolute;
     bottom: 4px; bottom: 1vmax; right: 1em; right: 1rem;
-    width: 50px; width: 8vmax; height: 50px; height: 8vmax; 
+    width: 50px; width: 8vmin; height: 50px; height: 8vmin; 
     background-repeat: no-repeat; background-size: contain;
     background-image: url(g/metabook/zoomout.svgz);}
 body._NOSVG #METABOOKZOOMOUT {
@@ -203,7 +203,7 @@ body._NOSVG #METABOOKZOOMOUT {
 #METABOOKZOOMIN {
     position: absolute;
     bottom: 120px; bottom: 20vmax; right: 1em; right: 1rem;
-    width: 50px; width: 8vmax; height: 50px; height: 8vmax; 
+    width: 50px; width: 8vmin; height: 50px; height: 8vmin; 
     background-repeat: no-repeat; background-size: contain;
     background-image: url(g/metabook/zoomin.svgz);}
 body._NOSVG #METABOOKZOOMIN {
@@ -212,7 +212,7 @@ body._NOSVG #METABOOKZOOMIN {
 #METABOOKUNZOOM {
     position: absolute;
     bottom: 60px; bottom: 10vmax; right: 1em; right: 1rem;
-    width: 50px; width: 8vmax; height: 50px; height: 8vmax; 
+    width: 50px; width: 8vmin; height: 50px; height: 8vmin; 
     background-repeat: no-repeat; background-size: contain;
     background-image: url(g/metabook/unzoom.svgz);}
 body._NOSVG #METABOOKUNZOOM {

@@ -1657,6 +1657,9 @@ metaBook.Startup=
         function cover_clicked(evt){
             var target=fdjtUI.T(evt);
             var cover=fdjtID("METABOOKCOVER");
+            if (metaBook.statedialog) {
+                fdjt.Dialog.close(metaBook.statedialog);
+                metaBook.statedialog=false;}
             if (fdjt.UI.isClickable(target)) return;
             if (!(hasParent(target,fdjtID("METABOOKCOVERCONTROLS")))) {
                 if (!(hasParent(target,fdjtID("METABOOKCOVERMESSAGE")))) {
