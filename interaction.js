@@ -2700,7 +2700,6 @@
          "#METABOOKBODY": {
              mouseup: global_mouseup,
              click: default_tap},
-         "#METABOOKMEDIA": {mousemove: noDefault},
          content: {tap: body_tapped,
                    taptap: body_taptap,
                    hold: body_held,
@@ -2846,11 +2845,7 @@
          "#METABOOKZOOMHELP": {click: toggleHelp},
          "#METABOOKZOOMIN": {click: zoomIn},
          "#METABOOKZOOMOUT": {click: zoomOut},
-         "#METABOOKUNZOOM": {click: unZoom},
-         "#METABOOKMEDIACLOSE": {
-             click: metaBook.closeMedia},
-         "#METABOOKMEDIAHELP": {
-             click: toggleHelp}});
+         "#METABOOKUNZOOM": {click: unZoom}});
 
     fdjt.DOM.defListeners(
         metaBook.UI.handlers.touch,
@@ -2883,7 +2878,6 @@
                    touchtoo: slice_touchtoo,
                    touchmove: preview_touchmove_nodefault,
                    slip: slice_slipped},
-         "#METABOOKMEDIA": {touchmove: noDefault},
          "#METABOOKSTARTPAGE": {touchend: metaBook.UI.dropHUD},
          "#METABOOKTOPBAR": {tap: raiseHUD},
          //"#METABOOKTOOLTAB": {tap: raiseHUD, release: raiseHUD},
@@ -3045,11 +3039,7 @@
          "#METABOOKZOOMHELP": {click: toggleHelp},
          "#METABOOKZOOMIN": {click: zoomIn},
          "#METABOOKZOOMOUT": {click: zoomOut},
-         "#METABOOKUNZOOM": {click: unZoom},
-         "#METABOOKMEDIACLOSE": {
-             click: metaBook.closeMedia},
-         "#METABOOKMEDIAHELP": {
-             click: toggleHelp}});
+         "#METABOOKUNZOOM": {click: unZoom}});
     
 })();
 
