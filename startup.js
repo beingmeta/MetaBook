@@ -90,6 +90,9 @@ metaBook.Startup=
         var Trace=metaBook.Trace;
         var fixStaticRefs=metaBook.fixStaticRefs;
 
+        var readLocal=metaBook.readLocal;
+        var saveLocal=metaBook.saveLocal;
+
         // This is the window outer dimensions, which is stable across
         // most chrome changes, especially on-screen keyboards.  We
         // track so that we can avoid resizes which shouldn't force
@@ -110,10 +113,6 @@ metaBook.Startup=
         metaBook.startupMessage=startupMessage;
 
         /* Save local */
-
-        var readLocal=metaBook.readLocal;
-        var saveLocal=metaBook.saveLocal;
-        var clearOffline=metaBook.clearOffline;
 
         /* Whether to resize by default */
         var resize_default=false;
@@ -604,7 +603,8 @@ metaBook.Startup=
 
             // If the configuration is set to not persist, but there's
             //  a sync timestamp, we should erase what's there.
-            if ((metaBook.sync)&&(!(metaBook.persist))) clearOffline();
+            if ((metaBook.sync)&&(!(metaBook.persist)))
+                metaBook.clearOffline();
 
             if (metaBook.nologin) {}
             else if ((metaBook.persist)&&(getLocal("metabook.user"))) {
@@ -2047,7 +2047,7 @@ metaBook.Startup=
                     addClass(document.body,"_NOUSER");}
                 if (info.nodeid) setNodeID(info.nodeid);}
             else if (info.wronguser) {
-                clearOffline();
+                metaBook.clearOffline();
                 window.location=window.location.href;
                 return;}
             else if ((info.userinfo)&&(metaBook.user)) {
@@ -2075,7 +2075,7 @@ metaBook.Startup=
             if ((metaBook.persist)&&(metaBook.cacheglosses)&&
                 (info)&&(info.userinfo)&&(metaBook.user)&&
                 (info.userinfo._id!==metaBook.user._id)) {
-                clearOffline();}
+                metaBook.clearOffline();}
             info.loaded=fdjtTime();
             if ((!(metaBook.localglosses))&&
                 ((getLocal("metabook.sync("+refuri+")"))||
