@@ -266,6 +266,11 @@ body._USER._CONN .control[data-mode='login'] { display: none;}
 
 /* The sBooks app for managing layers */
 
+#METABOOKCOVER > div#METABOOKLAYERS {
+    border-top-left-radius: 0px; border-top-right-radius: 0px;
+    -webkit-border-top-left-radius: 0px; -webkit-border-top-right-radius: 0px;
+    -moz-border-left-top-radius: 0px; -webkit-border-right-top-radius: 0px;}
+
 #METABOOKCOVER > #METABOOKLAYERS iframe#SBOOKSAPP {
     height: 100%; width: 100%; margin: 0px; padding: 0px;
     background-color: ivory;}
