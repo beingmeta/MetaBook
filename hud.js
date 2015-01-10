@@ -174,7 +174,7 @@ metaBook.setMode=
             function messageHandler(evt){
                 var origin=evt.origin;
                 if (Trace.messages)
-                    fdjtLog("Got a message from %s with payload %s",
+                    fdjtLog("Got a message from %s with payload %o",
                             origin,evt.data);
                 if (origin.search(/https:\/\/[^\/]+.sbooks.net/)!==0) {
                     fdjtLog.warn("Rejecting insecure message from %s",
@@ -185,9 +185,20 @@ metaBook.setMode=
                 else if (evt.data==="loggedin") {
                     if (!(metaBook.user)) {
                         metaBook.userSetup();}}
-                else if (evt.data.search("setuser=")===0) {
+                else if ((typeof evt.data === "string")&&
+                         (evt.data.search("setuser=")===0)) {
                     if (!(metaBook.user)) {
                         metaBook.userinfo=JSON.parse(evt.data.slice(8));
+                        metaBook.loginUser(metaBook.userinfo);
+                        metaBook.setMode("welcome");
+                        metaBook.userSetup();}}
+                else if (evt.data.updateglosses) {
+                    metaBook.updateInfo();}
+                else if (evt.data.addlayer) {
+                    metaBook.updateInfo();}
+                else if (evt.data.userinfo) {
+                    if (!(metaBook.user)) {
+                        metaBook.userinfo=evt.data.userinfo;
                         metaBook.loginUser(metaBook.userinfo);
                         metaBook.setMode("welcome");
                         metaBook.userSetup();}}
@@ -196,10 +207,9 @@ metaBook.setMode=
                 else {}}
             var appframe=sbooksapp;
             var appwindow=((appframe)&&(appframe.contentWindow));
-            if (appwindow.postMessage) {
-                if (Trace.messages)
-                    fdjtLog("Setting up message listener");
-                fdjtDOM.addListener(window,"message",messageHandler);}
+            if (Trace.messages)
+                fdjtLog("Setting up message listener");
+            fdjtDOM.addListener(window,"message",messageHandler);
             
             metaBook.TapHold.foot=
                 new fdjtUI.TapHold(
@@ -705,7 +715,8 @@ metaBook.setMode=
             if (document.location.hash) {
                 appuri=appuri+"&HASH="+document.location.hash.slice(1);}
 
-            fdjtID("SBOOKSAPP").src=appuri;
+            var app=fdjtID("SBOOKSAPP");
+            app.src=appuri;
             iframe_app_init=true;}
         metaBook.initIFrameApp=initIFrameApp;
 
