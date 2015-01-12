@@ -416,7 +416,7 @@ var metaBook={
             metaBook.glossdb.clearOffline(function(){
                 clearLocal("metabook.sync("+uri+")");
                 setTimeout(metaBook.updateInfo,25);});}
-             metaBook.refreshOffline=refreshOffline;
+        metaBook.refreshOffline=refreshOffline;
 
         function Query(tags,base_query){
             if (!(this instanceof Query))

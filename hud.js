@@ -196,6 +196,9 @@ metaBook.setMode=
                     metaBook.updateInfo();}
                 else if (evt.data.addlayer) {
                     metaBook.updateInfo();}
+                else if ((evt.data.droplayer)||(evt.data.hidelayer)||
+                         (evt.data.showlayer)) {
+                    metaBook.refreshOffline();}
                 else if (evt.data.userinfo) {
                     if (!(metaBook.user)) {
                         metaBook.userinfo=evt.data.userinfo;
