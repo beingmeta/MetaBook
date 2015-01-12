@@ -209,7 +209,6 @@ metaBook.setMode=
                     fdjtDOM("METABOOKINTRO",evt.data);
                 else {}}
             var appframe=sbooksapp;
-            var appwindow=((appframe)&&(appframe.contentWindow));
             if (Trace.messages)
                 fdjtLog("Setting up message listener");
             fdjtDOM.addListener(window,"message",messageHandler);
