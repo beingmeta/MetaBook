@@ -527,7 +527,7 @@ body.hudup #METABOOKHUD.addgloss.glossattach #METABOOKGLOSSATTACH {
     background-position-x: right; background-position-y: top;
     background-size: 1.2em 1.2em;
     background-repeat: no-repeat;
-    height: 1.2em; padding-bottom: 1px; padding-top: 1px;
+    height: 1.4em; padding-bottom: 0.1em; padding-top: 0.1em;
     font-size: 20px;
     width: 90%;}
 #METABOOKRIBBON div.inputbox#METABOOKGLOSSTAGINPUT input[TYPE="TEXT"] {

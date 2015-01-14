@@ -226,7 +226,8 @@ body.hudup #METABOOKHEART {
 #METABOOKHEART #METABOOKHEARTBODY {}
 
 #METABOOKHUD #METABOOKRIBBON {
-    position: absolute; top: 0px; left: 0px; right: 0px; height: 0px;
+    position: absolute;
+    top: 0px; left: 0px; right: 0px; height: 0px; z-index: 50;
     background-color: ivory;
     font-size: 50%;}
 #METABOOKHUD #METABOOKHEARTBODY {
@@ -275,7 +276,7 @@ body.hudup #METABOOKHUD.openheart #METABOOKHEART,
 #METABOOKHUD.searchresults #METABOOKHEARTBODY,
 #METABOOKHUD.glossaddtag #METABOOKHEARTBODY,
 #METABOOKHUD.glossaddoutlet #METABOOKHEARTBODY {
-    top: 5.25ex; margin-top: 0px;
+    top: 3ex; margin-top: 0px;
     border-radius: 0px;}
 
 /*
