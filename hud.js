@@ -81,7 +81,7 @@ metaBook.setMode=
 
         // This will contain the interactive input console (for debugging)
         var frame=false, hud=false;
-        var allglosses=false, sbooksapp=false;
+        var allglosses=false;
 
         function initHUD(){
             if (fdjtID("METABOOKHUD")) return;
@@ -252,16 +252,16 @@ metaBook.setMode=
             updateScroller("METABOOKALLTAGS");
             metaBook.TapHold.empty_cloud=new TapHold(metaBook.empty_cloud.dom);
             
-            var dom_share_cloud=fdjtID("METABOOKSHARECLOUD");
-            metaBook.share_cloud=
+            var dom_outlet_cloud=fdjtID("METABOOKOUTLETCLOUD");
+            metaBook.outlet_cloud=
                 new fdjtUI.Completions(
-                    dom_share_cloud,fdjtID("METABOOKTAGINPUT"),
+                    dom_outlet_cloud,fdjtID("METABOOKOUTLETINPUT"),
                     fdjtUI.FDJT_COMPLETE_OPTIONS|
                         fdjtUI.FDJT_COMPLETE_CLOUD|
                         fdjtUI.FDJT_COMPLETE_ANYWORD);
-            metaBook.DOM.share_cloud=dom_share_cloud;
-            updateScroller("METABOOKSHARECLOUD");
-            metaBook.TapHold.share_cloud=new TapHold(metaBook.share_cloud.dom);
+            metaBook.DOM.share_cloud=dom_outlet_cloud;
+            updateScroller("METABOOKOUTLETCLOUD");
+            metaBook.TapHold.outlet_cloud=new TapHold(metaBook.outlet_cloud.dom);
 
             fdjtDOM.setupCustomInputs(fdjtID("METABOOKHUD"));
 

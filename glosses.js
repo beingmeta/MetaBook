@@ -1054,7 +1054,7 @@
 
     /***** The Outlet Cloud *****/
 
-    function sharecloud_ontap(evt){
+    function outletcloud_ontap(evt){
         var target=fdjtUI.T(evt);
         var completion=getParent(target,'.completion');
         if (completion) {
@@ -1069,7 +1069,7 @@
                 if (value) addOutlet(form,completion,"EMAIL");
             else addOutlet(form,completion);}
         fdjtUI.cancel(evt);}
-    metaBook.UI.sharecloud_ontap=sharecloud_ontap;
+    metaBook.UI.outletcloud_ontap=outletcloud_ontap;
 
     /***** Saving (submitting/queueing) glosses *****/
 

@@ -2760,7 +2760,7 @@
          "#METABOOKGLOSSCLOUD": {
              tap: metaBook.UI.handlers.glosscloud_select,
              release: metaBook.UI.handlers.glosscloud_select},
-         "#METABOOKSHARECLOUD": {
+         "#METABOOKOUTLETCLOUD": {
              tap: outlet_select,release: outlet_select},
          ".searchcloud": {
              tap: metaBook.UI.handlers.searchcloud_select,
@@ -2920,7 +2920,7 @@
          "#METABOOKGLOSSCLOUD": {
              tap: metaBook.UI.handlers.glosscloud_select,
              release: metaBook.UI.handlers.glosscloud_select},
-         "#METABOOKSHARECLOUD": {
+         "#METABOOKOUTLETCLOUD": {
              tap: outlet_select,release: outlet_select},
          ".searchcloud": {
              tap: metaBook.UI.handlers.searchcloud_select,
