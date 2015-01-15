@@ -2359,6 +2359,8 @@ metaBook.Startup=
                     var friend=RefDB.resolve(friends[i++],sourcedb);
                     metaBook.addTag2Cloud(friend,metaBook.gloss_cloud);
                     metaBook.addTag2Cloud(friend,metaBook.share_cloud);}}
+            if (metaBook.outlets)
+                addOutlets2UI(metaBook.outlets);
             if (Trace.startup) {
                 var now=fdjtTime();
                 fdjtLog("setUser %s (%s), UI setup took %dms",
@@ -2874,22 +2876,23 @@ metaBook.Startup=
                     addOutlets2UI(outlets[i++]);
                 return;}
             if (!(outlet instanceof Ref)) return;
+            if (outlet._inui) return;
             var completion=fdjtDOM("span.completion.cue.source",outlet._id);
+            var htmlid="mbOUTLET"+outlet.humid;
             function init(){
-                completion.id="mbOUTLET"+outlet.humid;
+                outlet._inui=completion;
+                completion.id=htmlid;
                 completion.setAttribute("data-value",outlet._id);
                 completion.setAttribute("data-key",outlet.name);
                 completion.innerHTML=outlet.name;
                 if ((outlet.description)&&(outlet.nick))
-                    completion.title=outlet.name+": "+
-                    outlet.description;
+                    completion.title=outlet.name+": "+outlet.description;
                 else if (outlet.description)
                     completion.title=outlet.description;
                 else if (outlet.nick) completion.title=outlet.name;
                 fdjtDOM("#METABOOKSHARECLOUD",completion," ");
                 metaBook.share_cloud.addCompletion(completion);}
-            if (outlet._live) init();
-            else outlet.onLoad(init,"addoutlet2cloud");}
+            outlet.onLoad(init,"addoutlet2cloud");}
         
         /* Other setup */
         
