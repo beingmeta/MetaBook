@@ -2886,7 +2886,7 @@ metaBook.Startup=
                 else if (outlet.description)
                     completion.title=outlet.description;
                 else if (outlet.nick) completion.title=outlet.name;
-                fdjtDOM("#METABOOKOUTLETCLOUD",completion," ");
+                fdjtDOM("#METABOOKSHARECLOUD",completion," ");
                 metaBook.share_cloud.addCompletion(completion);}
             if (outlet._live) init();
             else outlet.onLoad(init,"addoutlet2cloud");}

@@ -129,14 +129,14 @@
             dropClass("METABOOKHUD",/\bgloss\w+\b/);
             dropClass("METABOOKHUD","openheart");
             return;}
-        if (mode==="addtag") input=fdjtID("METABOOKTAGINPUT");
+        if (mode==="addtag") input=fdjtID("METABOOKADDTAGINPUT");
         else if (mode==="attach") {
             var upload_glossid=fdjtID("METABOOKUPLOADGLOSSID");
             upload_glossid.value=uuid.value;
             var upload_itemid=fdjtID("METABOOKUPLOADITEMID");
             upload_itemid.value=fdjtState.getUUID();
             input=fdjtID("METABOOKATTACHURL");}
-        else if (mode==="addoutlet") input=fdjtID("METABOOKOUTLETINPUT");
+        else if (mode==="addoutlet") input=fdjtID("METABOOKADDSHAREINPUT");
         else if (mode==="editdetail") {
             input=fdjtID("METABOOKDETAILTEXT");
             fdjt.ID("METABOOKDETAILTEXT").value=detail_elt.value;}
@@ -1054,7 +1054,7 @@
 
     /***** The Outlet Cloud *****/
 
-    function outletcloud_ontap(evt){
+    function sharecloud_ontap(evt){
         var target=fdjtUI.T(evt);
         var completion=getParent(target,'.completion');
         if (completion) {
@@ -1069,7 +1069,7 @@
                 if (value) addOutlet(form,completion,"EMAIL");
             else addOutlet(form,completion);}
         fdjtUI.cancel(evt);}
-    metaBook.UI.outletcloud_ontap=outletcloud_ontap;
+    metaBook.UI.sharecloud_ontap=sharecloud_ontap;
 
     /***** Saving (submitting/queueing) glosses *****/
 

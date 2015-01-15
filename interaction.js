@@ -2750,8 +2750,8 @@
          "#METABOOKTABS": {click: head_tap},
          "#METABOOKHEAD": {click: head_tap},
          "#METABOOKPAGEFOOT": {tap: foot_tap},
-         "#METABOOKTAGINPUT": {keydown: addtag_keydown},
-         "#METABOOKOUTLETINPUT": {keydown: addoutlet_keydown},
+         "#METABOOKADDTAGINPUT": {keydown: addtag_keydown},
+         "#METABOOKADDSHAREINPUT": {keydown: addoutlet_keydown},
          "#METABOOKATTACHFORM": {submit: attach_submit},
          "#METABOOKATTACHURL": {keydown: attach_keydown},
          "#METABOOKATTACHTITLE": {keydown: attach_keydown},
@@ -2760,7 +2760,7 @@
          "#METABOOKGLOSSCLOUD": {
              tap: metaBook.UI.handlers.glosscloud_select,
              release: metaBook.UI.handlers.glosscloud_select},
-         "#METABOOKOUTLETCLOUD": {
+         "#METABOOKSHARECLOUD": {
              tap: outlet_select,release: outlet_select},
          ".searchcloud": {
              tap: metaBook.UI.handlers.searchcloud_select,
@@ -2910,8 +2910,8 @@
          "#METABOOKHEAD": {touchend: head_tap},
          "#METABOOKFOOT": {
              tap: foot_tap,touchstart: noDefault,touchmove: noDefault},
-         "#METABOOKTAGINPUT": {keydown: addtag_keydown},
-         "#METABOOKOUTLETINPUT": {keydown: addoutlet_keydown},
+         "#METABOOKADDTAGINPUT": {keydown: addtag_keydown},
+         "#METABOOKADDSHAREINPUT": {keydown: addoutlet_keydown},
          "#METABOOKATTACHFORM": {submit: attach_submit},
          "#METABOOKATTACHURL": {keydown: attach_keydown},
          "#METABOOKATTACHTITLE": {keydown: attach_keydown},
@@ -2920,7 +2920,7 @@
          "#METABOOKGLOSSCLOUD": {
              tap: metaBook.UI.handlers.glosscloud_select,
              release: metaBook.UI.handlers.glosscloud_select},
-         "#METABOOKOUTLETCLOUD": {
+         "#METABOOKSHARECLOUD": {
              tap: outlet_select,release: outlet_select},
          ".searchcloud": {
              tap: metaBook.UI.handlers.searchcloud_select,
