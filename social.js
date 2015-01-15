@@ -81,11 +81,9 @@
                     else {}}
                 var kind=info.kind;
                 if (pic) {}
-                else if (kind===':CIRCLE')
+                else if ((kind===':CIRCLE')||(info.iscircle))
                     pic=mbicon("readingcircle",64,64);
-                else if (kind===':OVERLAY')
-                    pic=mbicon("sideguide",64,64);
-                else {}
+                else pic=mbicon("sideguide",64,64);
                 if (pic)
                   icon=fdjtDOM.Image
                     (pic,".button.source",info.name|info.kind,
