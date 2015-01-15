@@ -2233,11 +2233,12 @@
 
     function outlet_select(evt){
         var target=fdjtUI.T(evt);
-        var outletspan=getParent(target,'.outlet');
+        var outletspan=getParent(target,'.outlet')||
+            getParent(target,'.source');
         if (!(outletspan)) return;
         var live=fdjtID("METABOOKLIVEGLOSS");
         var form=((live)&&(getChild(live,"form")));
-        var outlet=outletspan.value;
+        var outlet=metaBook.share_cloud.getValue(outletspan);
         metaBook.addOutlet2Form(form,outlet);
         fdjtUI.cancel(evt);}
 
