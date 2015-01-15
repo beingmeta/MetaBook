@@ -57,7 +57,9 @@
     padding-bottom: 2px; padding-top: 1px;
     border-width: 2px;}
 body.hudup #METABOOKHUD.openheart #METABOOKHEAD {
-    max-height: 100px;}
+    max-height: 100px; height: auto;}
+body.hudup #METABOOKHUD.openheart.openhead #METABOOKHEAD {
+    max-height: 100px; min-height: 60px; height: auto;}
 body._FULLHEIGHT.hudup #METABOOKHEAD {
     background-color: transparent;}
 body.hudup #METABOOKHEAD .hudpanel {
@@ -206,7 +208,9 @@ body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER.expanded {
     background-color: whitesmoke;
     border-color: rgba(70, 130, 180, 0.54);}
 #METABOOKHUD.openheart #METABOOKHEART {
-    top: 100px; bottom: 50px;}
+    top: 50px; bottom: 50px;}
+#METABOOKHUD.openhead.openheart #METABOOKHEART {
+    top: 70px;}
 body.hudup #METABOOKHEART {
     display: block; opacity: 1.0;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
@@ -270,13 +274,13 @@ body.hudup #METABOOKHUD.openheart #METABOOKHEART,
 #METABOOKHUD.glossaddtag #METABOOKRIBBON,
 #METABOOKHUD.glossaddoutlet #METABOOKRIBBON {
     border-bottom: solid blue 2px;
-    padding-top: 1ex; height: 5ex;}
+    padding-top: 0px; height: 6ex;}
 #METABOOKHUD.refinesearch #METABOOKHEARTBODY,
 #METABOOKHUD.expandsearch #METABOOKHEARTBODY,
 #METABOOKHUD.searchresults #METABOOKHEARTBODY,
 #METABOOKHUD.glossaddtag #METABOOKHEARTBODY,
 #METABOOKHUD.glossaddoutlet #METABOOKHEARTBODY {
-    top: 3ex; margin-top: 0px;
+    top: 3.1ex; margin-top: 0px;
     border-radius: 0px;}
 
 /*
@@ -1084,7 +1088,8 @@ body.mbSKIMMING.mbSKIMSTART.mbSKIMEND img.metabookskimbutton#METABOOKPREVSKIM {
 #METABOOKHUD div.hudpanel#SBOOKGLOSSES {position: absolute; right: 50px;}
 #METABOOKHUD #METABOOKSOURCES.hudpanel {
     overflow-y: hidden; overflow-x: auto; white-space: nowrap;
-    padding-top: 2px;}
+    box-sizing: content-box;
+    padding-top: 2px; padding-bottom: 8px;}
 #METABOOKHUD #METABOOKHEAD #METABOOKSOURCES.hudpanel {
     position: absolute;}
 

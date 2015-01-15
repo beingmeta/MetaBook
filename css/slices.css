@@ -92,8 +92,8 @@ div.metabookslice div.metabookcard.metabookskimpoint .fdjtclearfloats {
 
 div.metabooksources {}
 div.metabooksources img.button {
-    height: 100%; width: auto; max-width: 50px; border-radius: 10%;
-    box-sizing: border-box;}
+    height: 50px; width: auto; max-width: 50px; border-radius: 10%;
+    box-sizing: content-box;}
 div.metabooksources img.button.everyone {}
 div.metabooksources img.button.everyone.selected { background-color: silver; }
 div.metabooksources .button {

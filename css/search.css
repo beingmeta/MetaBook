@@ -14,7 +14,9 @@ div.searchbox div.query {
     box-sizing: border-box; -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box; -o-box-sizing: border-box;
     width: 100%; max-height: 100%;
-    padding-top: 2px; padding-bottom: 3px;}
+    margin-top: 0.2ex; 
+    padding-top: 2px; padding-bottom: 3px;
+    padding-left: 0.5ex; padding-right: 4px;}
 div.searchbox div.query {
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -35,17 +37,8 @@ div.searchbox input[type='TEXT'] {
     flex-grow: 1; -webkit-flex-grow: 1; -moz-flex-grow: 1;
     font-size: 1.5rem; margin-left: 1ex;}
 div.searchbox input[type='TEXT'] {
-    border-radius: 0.5ex; -webkit-border-radius: 0.5ex;
-    -o-border-radius: 0.5ex; -moz-border-radius: 0.5ex;
-    border-top-width: 0px;
-    border-top-left-radius: 0px;
-    -webkit-border-top-left-radius: 0px; 
-    -moz-border-radius-topleft: 0px;
-    -o-border-radius-topleft: 0px; 
-    border-top-right-radius: 0px;
-    -webkit-border-top-right-radius: 0px; 
-    -moz-border-radius-topright: 0px;
-    -o-border-radius-topright: 0px;}
+    border-radius: 0px; -webkit-border-radius: 0px;
+    -o-border-radius: 0px; -moz-border-radius: 0px;}
 
 div.searchbox input[type='TEXT'][name='QTEXT'] {
     background-position: right top;
@@ -128,7 +121,7 @@ div.resultinfo.noresults span { display: none;}
     display: block;}
 #METABOOKSEARCHINFO .qtags {
     box-sizing: border-box;
-    padding-top: 0.25ex; padding-right: 1ex;
+    padding-top: 0.5ex; padding-right: 1ex;
     margin-left: 1em; margin-bottom: 0px;
     height: 100%; vertical-align: top;
     clear: left;}

@@ -526,7 +526,7 @@
                 formvar.toLowerCase());
         var checkspan=fdjtUI.CheckSpan(
             spanspec,formvar||"SHARE",outlet_id,checked,
-            "→",outlet.nick||outlet.name,
+            fdjtDOM("span.arrow","↣"),outlet.nick||outlet.name,
             fdjtDOM.Image(mbicon("redx",32,32),"img.redx","x"));
         if ((outlet.nick)&&(outlet.description))
             checkspan.title=outlet.name+": "+outlet.description;
