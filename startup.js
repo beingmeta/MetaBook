@@ -2878,10 +2878,9 @@ metaBook.Startup=
             if (!(outlet instanceof Ref)) return;
             if (outlet._inui) return;
             var completion=fdjtDOM("span.completion.cue.source",outlet._id);
-            var htmlid="mbOUTLET"+outlet.humid;
             function init(){
                 outlet._inui=completion;
-                completion.id=htmlid;
+                completion.id="mbOUTLET"+outlet.humid;
                 completion.setAttribute("data-value",outlet._id);
                 completion.setAttribute("data-key",outlet.name);
                 completion.innerHTML=outlet.name;
