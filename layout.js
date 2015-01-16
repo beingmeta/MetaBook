@@ -493,6 +493,7 @@ metaBook.Paginate=
                 var pages=layout.pages, pagenum=layout.pagenum;
                 var topnode=getPageTop(page);
                 var topid=topnode.codexbaseid||topnode.id;
+                var lastid=getPageLastID(page);
                 var prevpage=
                     (((pagenum)&&(pagenum>1))&&(pages[pagenum-2]));
                 var staticref=getChild(
@@ -511,6 +512,7 @@ metaBook.Paginate=
                     var prevref=prevpage.getAttribute("data-staticpageref");
                     if (prevref)
                         page.setAttribute("data-staticpageref",prevref);}
+                if (lastid) page.setAttribute("data-lastid",lastid);
                 if (topnode) {
                     var topstart=mbID(topid);
                     var locoff=((topstart===topnode)?(0):
@@ -521,8 +523,8 @@ metaBook.Paginate=
                     page.setAttribute("data-sbookloc",curloc);}
                 else {
                     if (prevpage) {
-                        var lastid=getPageLastID(prevpage);
-                        var lastinfo=((lastid)&&(docinfo[lastid]));
+                        var prevlast=prevpage.getAttribute("data-lastid");
+                        var lastinfo=((prevlast)&&(docinfo[prevlast]));
                         if (lastinfo) {
                             curloc=lastinfo.starts_at;
                             page.setAttribute("data-sbookloc",lastinfo.ends_at);}
@@ -532,7 +534,8 @@ metaBook.Paginate=
                                 page.setAttribute("data-sbookloc",prevoff);
                             else page.setAttribute("data-sbookloc","0");}}}
                 if ((typeof curloc === "number")&&(pagenum)&&
-                    (!(metaBook.curpage))&&(metaBook.state)&&(goneto!==metaBook.state)&&
+                    (!(metaBook.curpage))&&(metaBook.state)&&
+                    (goneto!==metaBook.state)&&
                     (metaBook.state.hasOwnProperty('location'))&&
                     (curloc>=metaBook.state.location)) {
                     goneto=metaBook.state;
@@ -1012,7 +1015,8 @@ metaBook.Paginate=
                 var staticref=page.getAttribute("data-staticpageref");
                 updatePageDisplay(pagenum,staticref,metaBook.location);
                 curpage=page; metaBook.curpage=pagenum;
-                var curnode=mbID(page.getAttribute("data-topid"));
+                var curnode=mbID(page.getAttribute("data-lastid"))||
+                    mbID(page.getAttribute("data-topid"));
                 if (curnode) metaBook.setHead(curnode);
                 if (savestate) {
                     metaBook.point=curnode;
