@@ -108,7 +108,7 @@ metaBook.TOC=
                     ((100*(headinfo.starts_at-hstart))/hlen)+"%";}
             else if (sizebar) sizebar.style.width="100%";
             else {}
-            fdjtDOM.addClass(toc,"toc"+depth);
+            fdjtDOM.addClass(toc,"metabooktoc"+depth);
             toc.id=(prefix||"METABOOKTOC4")+headinfo.frag;
             if ((!(sub))||(!(sub.length))) {
                 fdjtDOM.addClass(toc,"metabooktocleaf");
@@ -266,7 +266,7 @@ metaBook.TOC=
             var livetitles=(fdjtDOM.$("a.metabooklivehead.metabooktitle"));
             var i=0; var lim=livetitles.length;
             while (i<lim) livetitles[i++].style.fontSize='';
-            var tocs=fdjtDOM.$(".toc0");
+            var tocs=fdjtDOM.$(".metabooktoc0");
             // Update current location in ToCs
             i=0; lim=tocs.length; while (i<lim) {
                 updateTOC(headinfo,tocs[i++]);}
@@ -284,7 +284,8 @@ metaBook.TOC=
                     var toc=getParent(ref,".metabooktoc");
                     var isbrick=((ref.tagName==='A')&&(ref.className)&&
                                  (ref.className.search(/\bbrick\b/)>=0));
-                    if ((level)&&(isbrick)&&(!(hasClass(toc,"toc"+(level-1)))))
+                    if ((level)&&(isbrick)&&
+                        (!(hasClass(toc,"metabooktoc"+(level-1)))))
                         continue;
                     addClass(ref,"metabooklivehead");
                     if (isbrick) addClass(ref.parentNode,"metabooklivehead");}

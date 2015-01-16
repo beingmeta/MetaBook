@@ -66,9 +66,9 @@ div.metabooktoc div.spanbar div.metabookhudspan.metabookfirstspan a.brick {
     border-left: 0px;}
 div.metabooktoc div.spanbar div.metabookhudspan.metabooklastspan a.brick {
     border-right: 0px;}
-div.metabooktoc.toc0 > div.spanbar div.metabookhudspan.metabookfirstspan a.brick {
+div.metabooktoc.metabooktoc0 > div.spanbar div.metabookhudspan.metabookfirstspan a.brick {
     border-left: 0px;}
-div.metabooktoc.toc0 > div.spanbar div.metabookhudspan.metabooklastspan a.brick {
+div.metabooktoc.metabooktoc0 > div.spanbar div.metabookhudspan.metabooklastspan a.brick {
     border-right: 0px;}
 
 div.metabooktoc div.spanbar div.metabookhudspan a.brick.metabooklivehead {
@@ -181,7 +181,7 @@ body._MOUSE div.metabooktoc div.spans:hover a.metabooktitle.cohi {
     height: 100%;}
 #METABOOKTOC div.spanbar div.progressbox {
     vertical-align: top; height: auto; top: 4px; bottom: 4px;}
-#METABOOKTOC div.toc0 > div.spanbar div.progressbox {
+#METABOOKTOC div.metabooktoc0 > div.spanbar div.progressbox {
     vertical-align: top; top: 0px;}
 #METABOOKTOC div.spanbar div.spans { font-size: 30px;}
 #METABOOKTOC div.spanbar div.spans a.metabooktitle {
@@ -268,10 +268,10 @@ div.spanbar div.metabookhudspan.current {
     padding-left: 1em; padding-right: 1em;}
 #METABOOKHUD #METABOOKTOC div.metabooktoc { 
     padding-left: 0.5em; padding-right: 0.5em;}
-#METABOOKHUD #METABOOKTOC div.metabooktoc.toc0 { 
+#METABOOKHUD #METABOOKTOC div.metabooktoc.metabooktoc0 { 
     padding-left: 0px; padding-right: 0px;
     border-right: 0px; border-left: 0px;}
-#METABOOKHUD div.metabooktoc.toc0 {
+#METABOOKHUD div.metabooktoc.metabooktoc0 {
     padding-left: 0px; padding-right: 0px;}
 
 div.spanbar { padding: 0px; margin: 0px;}
@@ -336,10 +336,10 @@ body.mbPREVIEW #METABOOKHUD div.metabooktoc.metabooklivehead.metabookcurhead
 /* The first one is special, doesn't need a top border to indicate
    hierarchy */
 
-#METABOOKTOC div.metabooktoc.toc0 > div.spanbar { height: 44px;}
-#METABOOKTOC div.metabooktoc.toc0 > div.spanbar > div.spans {
+#METABOOKTOC div.metabooktoc.metabooktoc0 > div.spanbar { height: 44px;}
+#METABOOKTOC div.metabooktoc.metabooktoc0 > div.spanbar > div.spans {
     border-top-width: 0px;}
-#METABOOKTOC div.metabooktoc.toc0 >
+#METABOOKTOC div.metabooktoc.metabooktoc0 >
 div.spanbar div.metabookhudspan a.brick.metabooklivehead {
     border-top-color: darkblue;}
 
