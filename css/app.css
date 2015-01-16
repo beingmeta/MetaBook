@@ -387,6 +387,9 @@ body._ANIMATE .metabooktarget, body.mbSHRINK .metabooktarget {
     -webkit-transition-duration: 6s;}
 body.hudup .metabooktarget, body.mbSHRINK .metabooktarget {
     cursor: pointer;}
+body.hudup .metabooktarget, body.mbSHRINK .metabooktarget,
+body.mbSKIMMING .metabooktarget {
+    outline: dotted silver 2px;}
 
 body.hudup .metabooktarget.metabooknewtarget {
     background-color: inherit; }
