@@ -365,7 +365,7 @@ body._NOUSER #METABOOKSETTINGS h1 a.logout {display:none;}
     text-align: right;}
 #METABOOKSETTINGS table.settings td button.floatright,
 #METABOOKSETTINGS table.settings th.buttons button {
-    min-width: 12ex; height: 2em;
+    min-width: 14ex; height: 2em;
     border-width: 2px; text-align: right;
     margin-left: 0.5ex; margin-bottom: 0.2ex;
     font-weight: 600;}
