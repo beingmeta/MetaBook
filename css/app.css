@@ -634,7 +634,7 @@ body._MOUSE a[href]:hover {text-decoration: underline;}
 
 body._MOUSE a[href].extref:hover, body._MOUSE a[href].sbextref:hover,
 a[href].extref.tapholding, body._MOUSE a[href].sbextref.tapholding,
-.tapholding a[href].extref, .tapholding a[href].sbextref { 
+.tapholding > a[href].extref, .tapholding > a[href].sbextref { 
     background-color: rgba(0,0,255,0.3);}
 
 /* Block elements */
