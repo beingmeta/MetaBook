@@ -616,7 +616,8 @@ details > summary , .html5details > summary {
 
 #METABOOKBODY a[rel='sbooknote'],
 #METABOOKBODY a[rel='footnote'],
-#METABOOKBODY a[rel='endnote'] {
+#METABOOKBODY a[rel='endnote'],
+#METABOOKBODY a.mbnoteref {
     font-size: 80%; vertical-align: super; margin-left: 0.5ex;
     color: darkblue; text-decoration: overline; font-variant: small-caps;
     border-radius: 1ex; -webkit-border-radius: 1ex;
@@ -626,6 +627,9 @@ body._MOUSE #METABOOKBODY a[rel='sbooknote']:hover,
 body._MOUSE #METABOOKBODY a[rel='footnote']:hover,
 body._MOUSE #METABOOKBODY a[rel='endnote']:hover {
     text-decoration: overline;}
+
+#METABOOKBODY a.mbnoteref:before {content: '[';}
+#METABOOKBODY a.mbnoteref:after {content: ']';}
 
 a[href] { color: blue; background-color: transparent; text-decoration: none;}
 body._MOUSE a[href]:hover {text-decoration: underline;}

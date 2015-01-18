@@ -1349,8 +1349,9 @@ metaBook.Startup=
             if (nofocus.length)
                 metaBook.nofocus=new fdjtDOM.Selector(nofocus);}
 
-        function applyMetaClass(name){
-            var meta=getMeta(name,true);
+        function applyMetaClass(name,metaname){
+            if (!(metaname)) metaname=name;
+            var meta=getMeta(metaname,true);
             var i=0; var lim=meta.length;
             while (i<lim) fdjtDOM.addClass(fdjtDOM.$(meta[i++]),name);}
 
@@ -1757,24 +1758,35 @@ metaBook.Startup=
             var notesblock=fdjtID("SBOOKNOTES")||
                 fdjtDOM("div.sbookbackmatter#SBOOKNOTES");
             applyMetaClass("sbooknote");
+            applyMetaClass("sbooknote","SBOOKS.note");
+            addClass(fdjtDOM.$("span[data-type='footnote']"),"sbooknote");
             var note_counter=1;
             var allnotes=getChildren(content,".sbooknote");
             i=0; lim=allnotes.length; while (i<lim) {
-                var notable=allnotes[i++];
-                if (!(notable.id)) notable.id="METABOOKNOTE"+(note_counter++);
-                var noteref=notable.id+"_REF";
-                if (!(mbID(noteref))) {
-                    var label=getChild(notable,"label")||
-                        getChild(notable,"summary")||
-                        getChild(notable,".sbooklabel")||
-                        getChild(notable,".sbooksummary")||
-                        getChild(notable,"span")||"Note";
-                    var anchor=fdjtDOM.Anchor("#"+notable.id,"A",label);
-                    anchor.rel="sbooknote";
-                    anchor.id=noteref;
-                    fdjtDOM.replace(notable,anchor);
-                    fdjtDOM.append(notesblock,notable,"\n");}
-                else fdjtDOM.append(notesblock,notable,"\n");}
+                var refid="METABOOKNOTE"+counter+"_ref";
+                var notable=allnotes[i++]; var counter=note_counter++;
+                var label_text=notable.getAttribute("data-label")||"Note";
+                var label_node=
+                    getChild(notable,"label")||
+                    getChild(notable,"summary")||
+                    getChild(notable,".sbooklabel")||
+                    getChild(notable,".sbooksummary")||
+                    getChild(notable,"span")||
+                    (""+counter);
+                var anchor=fdjtDOM.Anchor(
+                    "#"+notable.id,"A.mbnoteref",
+                    ((label_node)?(label_node.cloneNode(true)):
+                     (label_text)));
+                var backlink=fdjtDOM.Anchor(
+                    "#"+refid,"A.mbnotebackref",
+                    ((label_node)?(label_node.cloneNode(true)):
+                     (label_text)));
+                anchor.id=refid;
+                fdjtDOM.replace(notable,anchor);
+                var noteblock=fdjtDOM("div.metbooknotewrapper",
+                                      backlink,notable);
+                noteblock.id="METABOOKNOTE"+counter;
+                fdjtDOM.append(notesblock,noteblock,"\n");}
             
             if (!(init_content)) {
                 var children=[], childnodes=body.childNodes;
