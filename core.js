@@ -1548,13 +1548,15 @@ var metaBook={
         else if (metaBook.layout instanceof fdjt.CodexLayout) {
             var dups=((getTarget(target))&&(metaBook.getDups(target)));
             metaBook.startPagePreview(target,caller);
+            addClass(target,"metabookpreviewtarget");
             if (dups) addClass(dups,"metabookpreviewtarget");}
         else {
             scrollPreview(target,caller);
             addClass(target,"metabookpreviewtarget");}
         metaBook.previewing=target;
         addClass(document.body,"mbPREVIEW");
-        if (hasClass(target,"codexpage")) addClass(document.body,"mbPAGEPREVIEW");
+        if (hasClass(target,"codexpage"))
+            addClass(document.body,"mbPAGEPREVIEW");
         return target;}
     metaBook.startPreview=startPreview;
     function stopPreview(caller,jumpto){
