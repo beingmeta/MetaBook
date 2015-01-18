@@ -114,10 +114,14 @@ var metaBook={
     mycopyid: false, 
     // This is the time of the last update
     syncstamp: false,
-    // Number of milliseconds between gloss updates
-    update_interval: 5*60*1000,
-    // Number of milliseconds between location sync
-    sync_interval: 15*1000,
+    // Gloss sync settings (in milleseconds)
+    update_interval: 30*1000, // Interval between checks
+    update_timeout: 30*1000,    // Timeout on requests
+    update_pause: 30*60*1000,   // Interval to sleep on error or timeout
+    // State sync settings (in milliseconds):
+    sync_interval: 60*1000, // Interval between sync checks
+    sync_timeout: 10000,    // Timeout on requests
+    sync_pause: 15*60*1000, // Interval to sleep on error or timeout
     // Various handlers, settings, and status information for the
     // metaBook interface
     UI: {
@@ -1200,7 +1204,8 @@ var metaBook={
             var uri=metaBook.docuri;
             var traced=(Trace.state)||(Trace.network);
             var state=metaBook.state;
-            var refuri=((metaBook.target)&&(metaBook.getRefURI(metaBook.target)))||
+            var refuri=
+                ((metaBook.target)&&(metaBook.getRefURI(metaBook.target)))||
                 (metaBook.refuri);
             var sync_uri="https://sync.sbooks.net/v1/sync"+
                 "?REFURI="+encodeURIComponent(refuri)+
@@ -1227,7 +1232,9 @@ var metaBook={
             var req=new XMLHttpRequest();
             syncing=state;
             req.onreadystatechange=freshState;
+            req.ontimeout=syncTimeout;
             req.withCredentials=true;
+            req.timeout=metaBook.sync_timeout;
             if (traced) fdjtLog("syncState(call) %s",sync_uri);
             try {
                 req.open("GET",sync_uri,true);
@@ -1242,8 +1249,17 @@ var metaBook={
                         "Sync request %s returned status %d, pausing",
                         uri,req.status);}
                 metaBook.locsync=false;
-                setTimeout(function(){metaBook.locsync=true;},15*60*1000);}}
+                setTimeout(function(){metaBook.locsync=true;},
+                           metaBook.sync_pause);}}
     } metaBook.syncState=syncState;
+
+
+    function syncTimeout(evt){
+        evt=evt||window.event;
+        fdjtLog.warn("Sync request timed out, pausing");
+        metaBook.locsync=false;
+        setTimeout(function(){
+            metaBook.locsync=true;},metaBook.sync_pause);}
 
     var prompted=false;
 
@@ -1252,11 +1268,14 @@ var metaBook={
         var traced=(Trace.state)||(Trace.network);
         if (req.readyState===4) {
             if ((req.status>=200)&&(req.status<300)) {
-                var xstate=JSON.parse(req.responseText);
+                var rtext=req.responseText;
+                if (!(rtext)) return;
+                var xstate=JSON.parse(rtext);
                 var tick=fdjtTime.tick();
                 if (xstate.changed) {
                     if (traced)
-                        fdjtLog("freshState %o %j\n\t%j",evt,xstate,metaBook.state);
+                        fdjtLog("freshState %o %j\n\t%j",
+                                evt,xstate,metaBook.state);
                     if (xstate.changed>(tick+300))
                         fdjtLog.warn(
                             "Beware of oracles (future state date): %j ",

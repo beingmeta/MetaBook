@@ -313,14 +313,6 @@ metaBook.Startup=
             metaBook.taptapmsecs=value;
             fdjtUI.TapHold.default_opts.taptapthresh=value;});
 
-        metaBook.addConfig("glossupdate",function(name,value){
-            metaBook.update_interval=value;
-            if (ticktock) {
-                clearInterval(metaBook.ticktock);
-                metaBook.ticktock=ticktock=false;
-                if (value) metaBook.ticktock=ticktock=
-                    setInterval(updateInfo,value*1000);}});
-
         metaBook.addConfig("syncinterval",function(name,value){
             metaBook.sync_interval=value;
             if (metaBook.synctock) {
@@ -329,6 +321,11 @@ metaBook.Startup=
             if ((value)&&(metaBook.locsync))
                 metaBook.synctock=synctock=
                 setInterval(metaBook.syncState,value*1000);});
+        metaBook.addConfig("synctimeout",function(name,value){
+            metaBook.sync_timeout=value;});
+        metaBook.addConfig("syncpause",function(name,value){
+            metaBook.sunc_pause=value;});
+
         metaBook.addConfig("locsync",function(name,value){
             // Start or clear the sync check interval timer
             if ((!(value))&&(metaBook.synctock)) {
@@ -341,6 +338,18 @@ metaBook.Startup=
             else {}
             metaBook.locsync=value;});
         
+        metaBook.addConfig("glossupdate",function(name,value){
+            metaBook.update_interval=value;
+            if (ticktock) {
+                clearInterval(metaBook.ticktock);
+                metaBook.ticktock=ticktock=false;
+                if (value) metaBook.ticktock=ticktock=
+                    setInterval(updateInfo,value*1000);}});
+        metaBook.addConfig("updatetimeout",function(name,value){
+            metaBook.update_timeout=value;});
+        metaBook.addConfig("updatepause",function(name,value){
+            metaBook.update_pause=value;});
+
         function syncStartup(){
             // This is the startup code which is run
             //  synchronously, before the time-sliced processing
@@ -358,6 +367,10 @@ metaBook.Startup=
             outer_height=window.outerHeight;
             outer_width=window.outerWidth;
 
+            /* This was for a problem with saving documents as webapps under
+               iOS, where the webapp doesn't get the authentication cookies
+               of the saved app.  This may no longer be neccessary. */
+            /*
             if ((fdjtDevice.standalone)&&
                 (fdjtDevice.ios)&&(fdjtDevice.mobile)&&
                 (!(getLocal("metabook.user")))&&
@@ -365,6 +378,7 @@ metaBook.Startup=
                 var authkey=fdjt.State.getQuery("SBOOKS:AUTH-");
                 fdjtLog("Got auth key %s",authkey);
                 metaBook.authkey=authkey;}
+            */
 
             // Check for any trace settings passed as query arguments
             if (getQuery("cxtrace")) readTraceSettings();
@@ -652,7 +666,7 @@ metaBook.Startup=
             else {}
             if (window.navigator.onLine) {
                 if ((metaBook.user)&&(sync))
-                    fdjtLog("Requesting new (> %s (%d)) glosses on %s from %s for %s",
+                    fdjtLog("Requesting additional glosses (> %s (%d)) on %s from %s for %s",
                             fdjtTime.timeString(metaBook.sync),metaBook.sync,
                             metaBook.refuri,metaBook.server,metaBook.user._id,metaBook.user.name);
                 else if (metaBook.user)
@@ -2141,14 +2155,21 @@ metaBook.Startup=
             var uri="https://"+metaBook.server+"/v1/loadinfo.js?REFURI="+
                 encodeURIComponent(metaBook.refuri);
             var ajax_headers=((metaBook.sync)?({}):(false));
-            if (metaBook.sync) ajax_headers["If-Modified-Since"]=((new Date(metaBook.sync*1000)).toString());
+            if (metaBook.sync)
+                ajax_headers["If-Modified-Since"]=
+                ((new Date(metaBook.sync*1000)).toString());
             function gotInfo(req){
                 updating=false;
-                metaBook.authkey=false; // No longer needed, we should have our own authentication keys
+                // No longer needed, we should have our own authentication keys
+                // metaBook.authkey=false;
                 var response=JSON.parse(req.responseText);
                 if ((response.glosses)&&(response.glosses.length))
-                    fdjtLog("Received %d glosses from the server",response.glosses.length);
-                metaBook.updatedInfo(response,uri+((user)?("&SYNCUSER="+user._id):("&JUSTUSER=yes")),start);
+                    fdjtLog("Received %d glosses from the server",
+                            response.glosses.length);
+                metaBook.updatedInfo(
+                    response,
+                    uri+((user)?("&SYNCUSER="+user._id):("&JUSTUSER=yes")),
+                    start);
                 if (user) {
                     // If there was already a user, just startup
                     //  regular updates now
@@ -2167,45 +2188,54 @@ metaBook.Startup=
             function ajaxFailed(req){
                 if ((req.readyState===4)&&(req.status<500)) {
                     fdjtLog.warn(
-                        "Ajax call to %s failed on callback, falling back to JSONP",
+                        "Ajax to %s callback failed, falling back to JSONP",
                         uri);
                     updateInfoJSONP(uri+((user)?(""):("&JUSTUSER=yes")),jsonp);
                     noajax=true;}
                 else if (req.readyState===4) {
                     try {
                         fdjtLog.warn(
-                            "Ajax call to %s returned status %d %j, taking a break",
+                            "Ajax to %s returned %d %j, taking a break",
                             uri,req.status,JSON.parse(req.responseText));}
                     catch (ex) {
                         fdjtLog.warn(
-                            "Ajax call to %s returned status %d, taking a break",
+                            "Ajax to %s returned %d, taking a break",
                             uri,req.status);}
                     if (ticktock) {
                         clearInterval(metaBook.ticktock);
                         metaBook.ticktock=ticktock=false;}
-                    setTimeout(updateInfo,30*60*1000);}}
-            if ((updating)||(!(navigator.onLine))) return; else updating=true;
+                    setTimeout(updateInfo,metaBook.update_pause);}}
+            if ((updating)||(!(navigator.onLine))) return; 
+            else updating=true;
             // Get any requested glosses and add them to the call
             var i=0, lim, glosses=getQuery("GLOSS",true); {
-                i=0; lim=glosses.length; while (i<lim) uri=uri+"&GLOSS="+glosses[i++];}
+                i=0; lim=glosses.length; while (i<lim)
+                    uri=uri+"&GLOSS="+glosses[i++];}
             glosses=getHash("GLOSS"); {
-                i=0; lim=glosses.length; while (i<lim) uri=uri+"&GLOSS="+glosses[i++];}
-            if (metaBook.mycopyid) uri=uri+"&MCOPYID="+encodeURIComponent(metaBook.mycopyid);
-            if (metaBook.authkey) uri=uri+"&SBOOKS%3aAUTH-="+encodeURIComponent(metaBook.authkey);
+                i=0; lim=glosses.length; while (i<lim) 
+                    uri=uri+"&GLOSS="+glosses[i++];}
+            if (metaBook.mycopyid)
+                uri=uri+"&MCOPYID="+encodeURIComponent(metaBook.mycopyid);
+            if (metaBook.authkey)
+                uri=uri+"&SBOOKS%3aAUTH-="+encodeURIComponent(metaBook.authkey);
             if (metaBook.sync) uri=uri+"&SYNC="+(metaBook.sync+1);
             if (user) uri=uri+"&SYNCUSER="+user._id;
             if ((!(user))&&(Trace.startup))
-                fdjtLog("Requesting initial user information with %s using %s",
+                fdjtLog("Requesting initial user info with %s using %s",
                         ((noajax)?("JSONP"):("Ajax")),uri);
             if (noajax) {
                 updateInfoJSONP(uri+((user)?(""):("&JUSTUSER=yes")),jsonp);
                 return;}
-            try { fdjtAjax(gotInfo,uri+"&CALLBACK=return"+((user)?(""):("&JUSTUSER=yes")),[],
+            try { fdjtAjax(gotInfo,
+                           uri+"&CALLBACK=return"+
+                           ((user)?(""):("&JUSTUSER=yes")),
+                           [],
                            ajaxFailed,
-                           ajax_headers);}
+                           ajax_headers,
+                           metaBook.update_timeout);}
             catch (ex) {
                 fdjtLog.warn(
-                    "Ajax call to %s failed on transmission, falling back to JSONP",uri);
+                    "Ajax call to %s failed, falling back to JSONP",uri);
                 updateInfoJSONP(uri);}}
         metaBook.updateInfo=updateInfo;
         function updatedInfoJSONP(data){
