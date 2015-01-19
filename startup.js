@@ -1738,7 +1738,6 @@ metaBook.Startup=
         /* Initializing the body and content */
 
         var note_counter=1;
-        var notes=metaBook.notes={};
         
         function initBody(){
             var body=document.body, started=fdjtTime();
@@ -1784,8 +1783,12 @@ metaBook.Startup=
                      (label_text)));
                 anchor.id=refid;
                 fdjtDOM.replace(notable,anchor);
-                var noteblock=fdjtDOM("div.metabooknotebody",
-                                      backlink,toArray(notable.childNodes));
+                dropClass(notable,"sbooknote");
+                var noteblock=
+                    ((notable.tagName==='SPAN')?
+                     fdjtDOM("div.metabooknotebody",
+                             backlink,toArray(notable.childNodes)):
+                     fdjtDOM("div.metabooknotebody",backlink,notable));
                 noteblock.id=noteid;
                 fdjtDOM.append(notesblock,noteblock,"\n");}
             
