@@ -267,6 +267,9 @@ a[href].wikiref, a[href].sbwikiref {
 body._NOSVG a[href].wikiref, body._NOSVG a[href].sbwikiref {
     background-image: url(g/sbooks/wikipedia64w.png);}
 
+div.metabooknotebody { margin-left: 3em;}
+div.metabooknotebody a.mbackref { float: left; margin-left: -3em;}
+
 /* Custom media rules */
 
 @media screen and (min-width: 500px) and (max-width: 700px) {

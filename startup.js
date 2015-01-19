@@ -1737,6 +1737,9 @@ metaBook.Startup=
                 
         /* Initializing the body and content */
 
+        var note_counter=1;
+        var notes=metaBook.notes={};
+        
         function initBody(){
             var body=document.body, started=fdjtTime();
             var init_content=fdjtID("CODEXCONTENT");
@@ -1760,32 +1763,30 @@ metaBook.Startup=
             applyMetaClass("sbooknote");
             applyMetaClass("sbooknote","SBOOKS.note");
             addClass(fdjtDOM.$("span[data-type='footnote']"),"sbooknote");
-            var note_counter=1;
             var allnotes=getChildren(content,".sbooknote");
             i=0; lim=allnotes.length; while (i<lim) {
-                var refid="METABOOKNOTE"+counter+"_ref";
                 var notable=allnotes[i++]; var counter=note_counter++;
-                var label_text=notable.getAttribute("data-label")||"Note";
+                var noteid="METABOOKNOTE"+counter;
+                var refid="METABOOKNOTE"+counter+"_ref";
+                var label_text=notable.getAttribute("data-label")||(""+counter);
                 var label_node=
                     getChild(notable,"label")||
                     getChild(notable,"summary")||
                     getChild(notable,".sbooklabel")||
-                    getChild(notable,".sbooksummary")||
-                    getChild(notable,"span")||
-                    (""+counter);
+                    getChild(notable,".sbooksummary");
                 var anchor=fdjtDOM.Anchor(
-                    "#"+notable.id,"A.mbnoteref",
+                    "#"+noteid,"A.mbnoteref.sbooknoteref",
                     ((label_node)?(label_node.cloneNode(true)):
                      (label_text)));
                 var backlink=fdjtDOM.Anchor(
-                    "#"+refid,"A.mbnotebackref",
+                    "#"+refid,"A.mbackref",
                     ((label_node)?(label_node.cloneNode(true)):
                      (label_text)));
                 anchor.id=refid;
                 fdjtDOM.replace(notable,anchor);
-                var noteblock=fdjtDOM("div.metbooknotewrapper",
-                                      backlink,notable);
-                noteblock.id="METABOOKNOTE"+counter;
+                var noteblock=fdjtDOM("div.metabooknotebody",
+                                      backlink,toArray(notable.childNodes));
+                noteblock.id=noteid;
                 fdjtDOM.append(notesblock,noteblock,"\n");}
             
             if (!(init_content)) {
@@ -1804,8 +1805,11 @@ metaBook.Startup=
             // Mark all external anchors and set their targets
             var anchors=content.getElementsByTagName("A");
             var ai=0, alimit=anchors.length; while (ai<alimit) {
-                var a=anchors[ai++], href=a.href;
-                if ((href)&&(href.search(/^[a-zA-Z]+:/)===0)) {
+                // Use a.getAttribute to not automatically get the
+                // base URL added
+                var a=anchors[ai++], href=a.getAttribute("href");
+                if ((href)&&(href[0]!=="#")&&
+                    (href.search(/^[a-zA-Z][a-zA-Z][a-zA-Z]+:/)===0)) {
                     var aclass=a.className, extclass="extref";
                     if (href.search(wikiref_pat)===0) {
                         var text=fdjt.DOM.textify(a);

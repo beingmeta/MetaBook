@@ -437,8 +437,8 @@
     var MetaBookSlice=metaBook.Slice;
 
     function handle_body_click(target){
-        // Assume 3s gaps are spurious
-        if ((clicked)&&((fdjtTime()-clicked)<3000)) return true;
+        // Assume 1s gaps are spurious
+        if ((clicked)&&((fdjtTime()-clicked)<1000)) return true;
 
         // Handle various click-like operations, overriding to sBook
         //  navigation where appropriate.  Set *clicked* to the
@@ -463,6 +463,7 @@
                 var shownote=note_node.cloneNode(true);
                 fdjtDOM.stripIDs(shownote);
                 dropClass(shownote,/\bmetabook\S+/g);
+                addClass(shownote,"metabooknotebody");                
                 metaBook.DOM.noteshud.setAttribute("data-note",noteid||(href.slice(1)));
                 fdjtDOM.append(metaBook.DOM.noteshud,shownote);
                 metaBook.setMode("shownote");
@@ -558,14 +559,18 @@
 
     function jumpToNote(evt){
         evt=evt||window.event;
-        var noteshud=metaBook.DOM.noteshud;
-        var jumpto=noteshud.getAttribute("data-note");
-        if (jumpto) {
-            noteshud.removeAttribute("data-note");
-            noteshud.innerHTML="";
-            metaBook.setMode(false);
-            metaBook.GoTo(jumpto,"jumpToNote",true,true);}
-        else metaBook.setMode(false);}
+        var target=fdjt.UI.T(evt);
+        var anchor=getParent(target,"A[href]");
+        if (!(anchor)) {
+            fdjt.UI.cancel(evt);
+            var noteshud=metaBook.DOM.noteshud;
+            var jumpto=noteshud.getAttribute("data-note");
+            if (jumpto) {
+                noteshud.removeAttribute("data-note");
+                noteshud.innerHTML="";
+                metaBook.setMode(false);
+                metaBook.GoTo(jumpto,"jumpToNote",true,true);}
+            else metaBook.setMode(false);}}
     
     var selectors=[];
     var slip_timer=false;
@@ -2707,7 +2712,7 @@
                    release: body_released,
                    mousedown: body_touchstart,
                    mouseup: body_touchend,
-                   click: body_click},
+                   click: cancel},
          toc: {tap: toc_tapped,hold: toc_held,
                release: toc_released, slip: toc_slipped,
                mouseover: fdjtUI.CoHi.onmouseover,
