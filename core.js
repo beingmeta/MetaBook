@@ -1375,6 +1375,13 @@ var metaBook={
             target=((istarget)&&
                     (((istarget.nodeType)&&(istarget.id))?(istarget):
                      (resolveLocation(arg))));}
+        else if ((arg.target)&&((arg.location)||(arg.offset))) {
+            target=getTarget(arg.target);
+            if (arg.location) 
+                location=arg.location;
+            else {
+                locinfo=getLocInfo(arg.target);
+                location=locinfo.start+arg.offset;}}
         else if (arg.nodeType) {
             target=getTarget(arg);
             locinfo=getLocInfo(arg);
