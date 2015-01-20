@@ -2704,8 +2704,7 @@
             focus: metabookfocus,
             blur: metabookblur},
          "#METABOOKBODY": {
-             mouseup: global_mouseup,
-             click: default_tap},
+             mouseup: global_mouseup},
          content: {tap: body_tapped,
                    taptap: body_taptap,
                    hold: body_held,
