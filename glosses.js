@@ -359,7 +359,9 @@
         // Reset this when we actually get a gloss
         metaBook.select_target=false;
         addClass(target,"metabookglosstarget");
-        metaBook.GoTo(target,"addgloss",true);
+        if (gloss.exoff)
+            metaBook.GoTo({target: target,offset: gloss.exoff},"addgloss",true);
+        else metaBook.GoTo(target,"addgloss",true);
         metaBook.setCloudCuesFromTarget(metaBook.gloss_cloud,target);
         setGlossForm(form);
         // Clear current selection and set up new selection
