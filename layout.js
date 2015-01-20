@@ -1120,7 +1120,7 @@ metaBook.Paginate=
                 if (typeof loc !== "number") return prev;
                 else if (loc===location) return next;
                 else if (loc>location) return prev;
-                else i++;}
+                else prev=next;}
             return page;}
         metaBook.getPage=getPage;
         
