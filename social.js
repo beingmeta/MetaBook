@@ -239,7 +239,7 @@
                     var starts=range.startContainer;
                     if (!(hasClass(starts,"metabookhighlightexcerpt"))) {
                         fdjtUI.Highlight(range,"metabookhighlightexcerpt");}}}}
-        var slice=new MetaBookSlice(slicediv,glosses);
+        var slice=new MetaBookSlice(slicediv,glosses,sort_point_glosses);
         var hudwrapper=fdjtDOM("div.hudpanel#METABOOKPOINTGLOSSES",slicediv);
         if (point) {
             hudwrapper.style.display='block';
@@ -321,6 +321,19 @@
         slice.update();
         metaBook.setMode("openglossmark");}
     metaBook.showGlossmark=showGlossmark;
+
+    function sort_point_glosses(g1,g2){
+        if ((g1.location)&&(g2.location)) {
+            if (g1.location>g2.location) return -1;
+            else if (g1.location<g2.location) return 1;
+            else return 0;}
+        else if ((g1.exoff)&&(g2.exoff)) {
+            if (g1.exoff>g2.exoff) return -1;
+            else if (g1.exoff<g2.exoff) return 1;
+            else return 0;}
+        else if (g1.created>g2.created) return -1;
+        else if (g1.created<g2.created) return 1;
+        else return 0;}
 
     function clearGlossmark() {
         if (metaBook.mode==="openglossmark") metaBook.setMode(false,true);
