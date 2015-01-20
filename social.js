@@ -275,8 +275,9 @@
             if ((geom.height+15)>h/2) wh=h/2;
             else wh=geom.height+10;
             if ((!(metaBook.fullwidth))&&(wh>50))
-                hudwrapper.style.height=wh+'px';
-            slicediv.style.overflow='hidden';
+                hudwrapper.style.minHeight=wh+'px';
+            slicediv.style.overflowX='hidden';
+            slicediv.style.overflowY='auto';
             var above_point=pgeom.top-60, below_point=(h-60)-pgeom.bottom;
             var below_passage=(h-60)-tgeom.bottom;
             // If the glossmark is taller than the target, use the
@@ -305,6 +306,7 @@
             if (metaBook.fullwidth) {}
             else if (fdjtDOM.viewWidth()<300)
                 hudwrapper.style.minWidth=((fdjtDOM.viewWidth())-10)+"px";
+            else {}
             hudwrapper.style.display='';
             hudwrapper.style.opacity='';}
         else fdjtDOM.replace("METABOOKPOINTGLOSSES",hudwrapper);
