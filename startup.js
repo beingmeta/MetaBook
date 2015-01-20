@@ -1889,16 +1889,11 @@ metaBook.Startup=
             var fakepage_geom=getGeometry(fakepage,page,true);
             var inner_width=geom.inner_width;
             var inner_height=geom.inner_height;
-            // The (-2) is for the two pixel wide border on the right side of
+            // The (-3) is for the three pixel wide border on the right side of
             //  the glossmark
             var page_margin=view_width-inner_width;
-            var glossmark_offset=Math.floor(page_margin/2)+(-3)+
-                fakepage_geom.right_border+
-                geom.right_padding+geom.right_border;
+            var glossmark_offset=Math.floor(page_margin/2)+fakepage_geom.right_border;
             fdjtDOM.remove(fakepage);
-            // var glossmark_offset=page_margin;
-            // The 2 here is for the right border of the glossmark,
-            // which appears as a vertical mark on the margin.
             if (metaBook.CSS.pagerule) {
                 metaBook.CSS.pagerule.style.width=inner_width+"px";
                 metaBook.CSS.pagerule.style.height=inner_height+"px";}
