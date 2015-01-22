@@ -154,7 +154,7 @@
             addHandlers(fdjtID("METABOOKBODY"),'content');
             metaBook.TapHold.body=fdjtUI.TapHold(
                 fdjt.ID("METABOOKBODY"),
-                {override: true,noslip: true,id: "METABOOKBODY",
+                {override: false,noslip: true,id: "METABOOKBODY",
                  maxtouches: 2,taptapthresh: 350,
                  untouchable: externClickable,
                  movethresh: 10});
@@ -572,7 +572,6 @@
                 metaBook.GoTo(jumpto,"jumpToNote",true,true);}
             else metaBook.setMode(false);}}
     
-    var selectors=[];
     var slip_timer=false;
     function body_held(evt){
         evt=evt||window.event;
@@ -595,37 +594,15 @@
                 metaBook.startPreview(href.slice(1),"content/anchor_held");
                 return;}}
         if (!(passage)) return;
-        if (metaBook.glosstarget===passage) {
-            if (metaBook.mode!=="addgloss")
-                metaBook.setMode("addgloss",false);
-            return;}
         // If the HUD is up, bring it down, but don't start a gloss
         if (metaBook.hudup) {
             fdjtUI.cancel(evt);
             metaBook.setHUD(false);
             return;}
-        var selecting=metaBook.UI.selectText(passage);
         if ((metaBook.TapHold.page)&&(metaBook.TapHold.page.abort))
             metaBook.TapHold.page.abort();
         if ((metaBook.TapHold.content)&&(metaBook.TapHold.page.content))
-            metaBook.TapHold.content.abort();
-        metaBook.select_target=passage;
-        selectors.push(selecting);
-        selectors[passage.id]=selecting;
-        fdjtUI.TapHold.clear();
-        startAddGloss(passage,false,evt);
-        // This makes a selection start on the region we just created.
-        if (!(metaBook.touch)) {
-            if ((Trace.gestures)||(Trace.selecting)) 
-                fdjtLog("body_held/select_wait %o %o %o",
-                        selecting,passage,evt);
-            setTimeout(function(){
-                if ((Trace.gestures)||(Trace.selecting)) 
-                    fdjtLog("body_held/select_start %o %o %o",
-                            selecting,passage,evt);
-                selecting.startEvent(evt,1000);},
-                       0);}}
-    metaBook.getTextSelectors=function getTextSelectors(){return selectors;};
+            metaBook.TapHold.content.abort();}
 
     function body_taptap(evt){
         var target=fdjtUI.T(evt);
@@ -708,14 +685,10 @@
         document.dispatchEvent(evt);}
 
     function startGloss(passage){
-        var selecting=metaBook.UI.selectText(passage);
         if ((metaBook.TapHold.page)&&(metaBook.TapHold.page.abort))
             metaBook.TapHold.page.abort();
         if ((metaBook.TapHold.content)&&(metaBook.TapHold.page.content))
             metaBook.TapHold.content.abort();
-        metaBook.select_target=passage;
-        selectors.push(selecting);
-        selectors[passage.id]=selecting;
         fdjtUI.TapHold.clear();
         startAddGloss(passage,false,false);}
 
@@ -744,18 +717,10 @@
             if (x>(w/2)) pageForward(evt);
             else pageBackward(evt);}}
             
-    function abortSelect(except){
-        var i=0, lim=selectors.length;
-        while (i<lim) {
-            var sel=selectors[i++];
-            if (sel!==except) sel.clear();}
-        selectors=[];
-        metaBook.select_target=false;}
-
     function body_released(evt){
         evt=evt||window.event;
         if (metaBook.zoomed) return;
-        var target=fdjtUI.T(evt), children=false;
+        var target=fdjtUI.T(evt);
         if (Trace.gestures) fdjtLog("body_released %o",evt);
         if (metaBook.previewing) {
             metaBook.stopPreview("body_released");
@@ -764,12 +729,7 @@
         else if (hasParent(target,"A")) {
             fdjtUI.cancel(evt);
             return;}
-        var passage=((hasParent(target,".fdjtselecting"))&&
-                     (getTarget(target)));
-        if (!(passage)) {
-            children=getChildren(target,".fdjtselected");
-            if (children.length===0) {abortSelect(); return;}
-            target=children[0]; passage=getTarget(target);}
+        var passage=getTarget(target);
         if (Trace.gestures)
             fdjtLog("body_released %o p=%o gt=%o gf=%o",
                     evt,passage,metaBook.glosstarget,metaBook.glossform);
@@ -788,9 +748,8 @@
             metaBook.setMode("addgloss",true);
             if (evt) fdjtUI.cancel(evt);
             return;}
-        var selecting=selectors[passage.id]; abortSelect(selecting);
         var form_div=metaBook.setGlossTarget(
-            passage,((metaBook.mode==="addgloss")&&(metaBook.glossform)),selecting);
+            passage,((metaBook.mode==="addgloss")&&(metaBook.glossform)));
         var form=getChild(form_div,"form");
         if (!(form)) return;
         else if (evt) fdjtUI.cancel(evt);
@@ -1662,37 +1621,6 @@
     /* Gesture state */
 
     var n_touches=0;
-
-    /* Default click/tap */
-    function default_tap(evt){
-        var target=fdjtUI.T(evt);
-        if (metaBook.zoomed) return;
-        if (Trace.gestures)
-            fdjtLog("default_tap %o (%o) %s%s%s",evt,target,
-                    ((fdjtUI.isClickable(target))?(" clickable"):("")),
-                    (((hasParent(target,metaBook.HUD))||
-                      (hasParent(target,metaBook.uiclasses)))?
-                     (" inhud"):("")),
-                    ((metaBook.mode)?(" "+metaBook.mode):
-                     (metaBook.hudup)?(" hudup"):""));
-        if (fdjtUI.isClickable(target)) return;
-        else if ((hasParent(target,metaBook.HUD))||
-                 (hasParent(target,metaBook.uiclasses)))
-            return;
-        else if (metaBook.previewing) {
-            metaBook.stopPreview("default_tap");
-            cancel(evt);
-            return;}
-        else if (((metaBook.hudup)||(metaBook.mode))) {
-            metaBook.setMode(false);
-            cancel(evt);}
-        else if (false) {
-            var cx=evt.clientX, cy=evt.clientY;
-            var w=fdjtDOM.viewWidth(), h=fdjtDOM.viewHeight();
-            if ((cy<60)||(cy>(h-60))) return;
-            if (cx<w/3) metaBook.Backward(evt);
-            else if (cx>w/2) metaBook.Forward(evt);}
-        else {}}
 
     /* Glossmarks */
     

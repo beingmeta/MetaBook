@@ -117,7 +117,7 @@ body._SCROLL #CODEXCONTENT {
 #CODEXCONTENT > * {
     max-width: inherit;}
 
-#CODEXCONTENT, #CODEXCONTENT p, #CODEXCONTENT div {
+#CODEXCONTENT, #CODEXCONTENT p, #CODEXCONTENT div, #CODEXPAGE {
     user-select: auto;
     -o-user-select: auto;
     -moz-user-select: auto;

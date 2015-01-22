@@ -80,9 +80,7 @@
     var glossmodes=metaBook.glossmodes;
 
     var mbicon=metaBook.icon;
-
-    var getTarget=metaBook.getTarget;
-
+    
     var getGlossTags=metaBook.getGlossTags;
 
     var uri_prefix=/(http:)|(https:)|(ftp:)|(urn:)/;
@@ -312,10 +310,9 @@
     /***** Setting the gloss target ******/
 
     // The target can be either a passage or another gloss
-    function setGlossTarget(target,form,selecting){
+    function setGlossTarget(target,form){
         if (Trace.glossing)
-            fdjtLog("setGlossTarget %o form=%o selecting=%o",
-                    target,form,selecting);
+            fdjtLog("setGlossTarget %o form=%o",target,form);
         if (metaBook.glosstarget) {
             dropClass(metaBook.glosstarget,"metabookglosstarget");}
         dropClass("METABOOKHUD",/\bgloss\w+\b/);
@@ -325,7 +322,6 @@
             if (cur) cur.id="";
             metaBook.glosstarget=false;
             metaBook.glossform=false;
-            setSelecting(false);
             return;}
         var gloss=false;
         // Identify when the target is a gloss
@@ -357,7 +353,6 @@
                 return false;}}
         metaBook.glosstarget=target;
         // Reset this when we actually get a gloss
-        metaBook.select_target=false;
         addClass(target,"metabookglosstarget");
         if (gloss.exoff)
             metaBook.GoTo({target: target,offset: gloss.exoff},"addgloss",true);
@@ -365,17 +360,7 @@
         metaBook.setCloudCuesFromTarget(metaBook.gloss_cloud,target);
         setGlossForm(form);
         // Clear current selection and set up new selection
-        setSelecting(false);
         metaBook.clearHighlights(target);
-        if (selecting) setSelecting(selecting);
-        else setSelecting(selectText(target));
-        if ((gloss)&&(gloss.excerpt)&&(gloss.excerpt.length))
-            metaBook.selecting.setString(gloss.excerpt);
-        else if (selecting) 
-            updateExcerpt(form,selecting);
-        else {}
-        metaBook.selecting.onchange=function(){
-            updateExcerpt(form,this);};
         return form;}
     metaBook.setGlossTarget=setGlossTarget;
 
@@ -384,70 +369,6 @@
         var form=getParent(target,"FORM");
         var div=getParent(form,".metabookglossform");
         if (div) addClass(div,"modified");}
-
-    function setSelecting(selecting){
-        if (metaBook.selecting===selecting) return;
-        else if (metaBook.selecting) {
-            if ((Trace.selection)||(Trace.glossing))
-                fdjtLog("setSelecting, replacing %o with %o",
-                        metaBook.selecting,selecting);
-            metaBook.selecting.clear();}
-        else {}
-        metaBook.selecting=selecting;}
-    metaBook.setSelecting=setSelecting;
-
-    function updateExcerpt(form,sel){
-        var info=sel.getInfo();
-        if ((Trace.glossing)||(Trace.selection))
-            fdjtLog("Updating excerpt for %o from %o: %s",
-                    form,sel,sel.getString());
-        if (!(info)) {
-            metaBook.setExcerpt(form,false);
-            return;}
-        metaBook.setExcerpt(form,info.string,info.off);
-        var start_target=getTarget(info.start,true);
-        var new_target=((start_target)&&
-                        (!(hasParent(metaBook.glosstarget,start_target)))&&
-                        (new_target));
-        if (new_target) {
-            // When real_target is changed, we need to get a new EXOFF
-            //  value, which we should probably get by passing real_target
-            //  to a second call to getInfo (above)
-            var input=fdjtDOM.getInput(form,"FRAG");
-            input.value=new_target.id;
-            if ((sel)&&(typeof info.off === "number")) {
-                var offinput=fdjtDOM.getInput(form,"EXOFF");
-                var newoff=sel.getOffset(new_target);
-                offinput.value=newoff;}}}
-
-    function selectText(passages,opts){
-        if (passages.nodeType) passages=[passages];
-        var dups=[];
-        var i=0, lim=passages.length;
-        while (i<lim) dups=dups.concat(metaBook.getDups(passages[i++]));
-        if ((Trace.selection)||(Trace.glossing))
-            fdjtLog("selectText %o, dups=%o",passages,dups);
-        return new fdjt.UI.TextSelect(
-            dups,{ontap: gloss_selecting_ontap,
-                  onrelease: ((opts)&&(opts.onrelease)),
-                  onslip: ((opts)&&(opts.onslip)),
-                  fortouch: metaBook.touch,
-                  holdthresh: 150,
-                  movethresh: 250});}
-    metaBook.UI.selectText=selectText;
-
-    function gloss_selecting_ontap(evt){
-        evt=evt||window.event;
-        if ((Trace.selection)||(Trace.glossing)||(Trace.gestures))
-            fdjtLog("gloss_selecting_ontap %o, mode=%o, livegloss=%o",
-                    evt,metaBook.mode,fdjt.ID("METABOOKLIVEGLOSS"));
-        if (metaBook.mode!=="addgloss") 
-            metaBook.setMode("addgloss",false);
-        else if ((metaBook.modechange)&&
-                 ((fdjtTime()-metaBook.modechange)<1500)) {}
-        else metaBook.setHUD(false);
-        fdjtUI.cancel(evt);
-        return;}
 
     function setGlossForm(form){
         var cur=fdjtID("METABOOKLIVEGLOSS");
