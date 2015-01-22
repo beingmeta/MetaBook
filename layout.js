@@ -965,9 +965,14 @@ metaBook.Paginate=
             if (metaBook.previewing) metaBook.stopPreview("GoToPage",false);
             dropClass(document.body,"mbSHOWHELP");
             if (metaBook.clearGlossmark) metaBook.clearGlossmark();
-            if (metaBook.mode==="addgloss") metaBook.setMode(false,false);
             var page=(metaBook.layout)&&
                 (metaBook.layout.getPage(spec)||metaBook.layout.getPage(1));
+            if (metaBook.mode==="addgloss") {
+                var gt=metaBook.glosstarget;
+                var tdups=metaBook.getDups(gt.id); var clear=true;
+                var j=0, jlim=tdups.length; while (j<jlim) {
+                    if (fdjtDOM.hasParent(tdups[j++],page)) clear=false;}
+                if (clear) metaBook.setMode(false,false);}
             if (page) {
                 var pagenum=parseInt(page.getAttribute("data-pagenum"),10);
                 var dirclass=false;

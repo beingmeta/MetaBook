@@ -799,6 +799,8 @@ section.metabookpreviewtarget h7, div.html5section.metabookpreviewtarget h7 {
 
 .metabookuserexcerpt {
     text-shadow: 0.2ex 0.2ex rgba(255, 215, 0, 0.53);}
+.metabookaddglossexcerpt {
+    background-color: yellow;}
 
 /* Startup messages */
 

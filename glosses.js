@@ -310,7 +310,8 @@
     /***** Setting the gloss target ******/
 
     // The target can be either a passage or another gloss
-    function setGlossTarget(target,form){
+    function setGlossTarget(target,form,sel){
+        var frag=false;
         if (Trace.glossing)
             fdjtLog("setGlossTarget %o form=%o",target,form);
         if (metaBook.glosstarget) {
@@ -340,7 +341,7 @@
             form=getGlossForm(gloss,true);}
         // Handle or create the form
         if (form) {
-            var frag=fdjtDOM.getInput(form,"FRAG");
+            frag=fdjtDOM.getInput(form,"FRAG");
             if (frag.value!==target.id) {
                 setExcerpt(form,false);
                 fdjtDOM.addClass(form,"modified");
@@ -348,10 +349,17 @@
         else {
             if (gloss) form=getGlossForm(gloss);
             else form=getGlossForm(target);
+            frag=target.id;
             if (!(form)) {
                 fdjtUI.alert("There was a problem adding a gloss");
                 return false;}}
         metaBook.glosstarget=target;
+        if (sel) {
+            updateExcerpt(form,sel);
+            sel.empty();}
+        else if (gloss.excerpt) 
+            showGlossExcerpt(frag,gloss.excerpt,gloss.exoff);
+        else {}
         // Reset this when we actually get a gloss
         addClass(target,"metabookglosstarget");
         if (gloss.exoff)
@@ -369,6 +377,69 @@
         var form=getParent(target,"FORM");
         var div=getParent(form,".metabookglossform");
         if (div) addClass(div,"modified");}
+
+    /*
+    function setSelecting(selecting){
+        if (metaBook.selecting===selecting) return;
+        else if (metaBook.selecting) {
+            if ((Trace.selection)||(Trace.glossing))
+                fdjtLog("setSelecting, replacing %o with %o",
+                        metaBook.selecting,selecting);
+            metaBook.selecting.clear();}
+        else {}
+        metaBook.selecting=selecting;}
+    metaBook.setSelecting=setSelecting;
+    */
+
+    var textOff=fdjtDOM.textOff;
+
+    function updateExcerpt(form,range){
+        if ((Trace.glossing)||(Trace.selection)) {
+            if (range)
+                fdjtLog("Updating excerpt for %o from %o: %s",
+                        form,range,range.toString());
+            else fdjtLog("Clearing excerpt for %o",form);}
+        if (!(range)) {
+            metaBook.setExcerpt(form,false);
+            return;}
+        metaBook.setExcerpt(
+            form,stdspace(range.toString()),
+            range.startOffset+textOff(metaBook.glosstarget,range.startContainer));
+        var start_target=metaBook.getTarget(range.startContainer,true);
+        var new_target=((start_target)&&
+                        (!(hasParent(metaBook.glosstarget,start_target)))&&
+                        (new_target));
+        if (new_target) {
+            // When real_target is changed, we need to get a new EXOFF
+            //  value, which we should probably get by passing real_target
+            //  to a second call to getInfo (above)
+            var input=fdjtDOM.getInput(form,"FRAG");
+            input.value=new_target.id;
+            if (range) {
+                var offinput=fdjtDOM.getInput(form,"EXOFF");
+                var newoff=range.startOffset+textOff(metaBook.glosstarget,range.startContainer);
+                offinput.value=newoff;}}}
+    metaBook.updateExcerpt=updateExcerpt;
+
+    /*
+
+    function selectText(passages,opts){
+        if (passages.nodeType) passages=[passages];
+        var dups=[];
+        var i=0, lim=passages.length;
+        while (i<lim) dups=dups.concat(metaBook.getDups(passages[i++]));
+        if ((Trace.selection)||(Trace.glossing))
+            fdjtLog("selectText %o, dups=%o",passages,dups);
+        return new fdjt.UI.TextSelect(
+            dups,{ontap: gloss_selecting_ontap,
+                  onrelease: ((opts)&&(opts.onrelease)),
+                  onslip: ((opts)&&(opts.onslip)),
+                  fortouch: metaBook.touch,
+                  holdthresh: 150,
+                  movethresh: 250});}
+    metaBook.UI.selectText=selectText;
+
+    */
 
     function setGlossForm(form){
         var cur=fdjtID("METABOOKLIVEGLOSS");
@@ -393,6 +464,12 @@
         metaBook.share_cloud.complete();
         metaBook.gloss_cloud.complete();}
     metaBook.setGlossForm=setGlossForm;
+
+    function finishGlossForm(form){
+        var highlights=fdjtDOM.toArray(fdjtDOM.$(".metabookaddglossexcerpt"));
+        if ((highlights)&&(highlights.length)) 
+            dropClass(highlights,"metabookaddglossexcerpt");
+        fdjtDOM.remove(form);}
 
     function updateForm(form){
         var glossetc=getChild(form,".glossetc");
@@ -517,10 +594,23 @@
         if ((Trace.glossing)||(Trace.selecting))
             fdjtLog("setExcerpt %o form=%o excerpt=%o off=%o",
                     wrapper,form,excerpt,off);
+        var frag=fdjtDOM.getInputValue(form,'FRAG');
+        if (excerpt) showGlossExcerpt(frag,excerpt,off);
+        else showGlossExcerpt(frag,false);
+
         updateForm(form);
         if (changed) addClass(wrapper,"modified");
         return;}
     metaBook.setExcerpt=setExcerpt;
+
+    function showGlossExcerpt(frag,excerpt,off){
+        var highlights=fdjtDOM.toArray(fdjtDOM.$(".metabookaddglossexcerpt"));
+        if ((highlights)&&(highlights.length)) 
+            dropClass(highlights,"metabookaddglossexcerpt");
+        if (excerpt) {
+            var nodes=metaBook.getDups(frag);
+            var range=metaBook.findExcerpt(nodes,excerpt,off);
+            if (range) {fdjtUI.Highlight(range,"metabookaddglossexcerpt");}}}
 
     function trim_excerpt(string,lim){
         var len=string.length; if (!(lim)) lim=20; 
@@ -920,6 +1010,10 @@
         var ref=metaBook.glossdb.Import(
             // item,rules,flags
             json,false,((RefDB.REFINDEX)|(RefDB.REFSTRINGS)|(RefDB.REFLOAD)));
+        var highlights=fdjtDOM.$(".metabookuserexcerpt[data-glossid='"+ref._id+"']");
+        highlights.map(function(h){fdjt.UI.Highlight.clear(h,"metabookuserexcerpt");});
+        metaBook.addGloss2UI(ref);
+        
         var reps=document.getElementsByName(ref._id);
         var i=0, lim=reps.length;
         while (i<lim) {
@@ -933,7 +1027,7 @@
             setTimeout(function(){
                 if (hasClass(form.parentNode,"submitclose")) {
                     if ((form.parentNode)&&(form.parentNode))
-                        fdjtDOM.remove(form.parentNode);
+                        finishGlossForm(form.parentNode);
                     setGlossTarget(false);
                     metaBook.setTarget(false);
                     metaBook.setMode(false);}},
@@ -1082,7 +1176,7 @@
                                       tempGloss(form); login_message=true;}});}
             choices.push({label: "Cancel",
                           handler: function(){
-                              fdjtDOM.remove(form.parentNode);
+                              finishGlossForm(form.parentNode);
                               setGlossTarget(false);
                               metaBook.setTarget(false);
                               metaBook.setMode(false);}});
@@ -1138,7 +1232,7 @@
         metaBook.setMode(false);
         if ((arg)&&((arg.cancelable)||(arg.bubbles))) {
             fdjtUI.cancel(evt);}
-        if (glossform) fdjtDOM.remove(glossform);}
+        if (glossform) finishGlossForm(glossform);}
     metaBook.cancelGloss=cancelGloss;
 
     // We save gloss defaults on the prototype gloss form hidden in the DOM

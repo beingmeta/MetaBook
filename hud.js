@@ -300,6 +300,7 @@ metaBook.setMode=
                         metaBook.cloudEntry(tags[j++],gloss_cloud);}
                 if (item.tstamp>metaBook.syncstamp)
                     metaBook.syncstamp=item.tstamp;}}
+        metaBook.addGloss2UI=addGloss2UI;
 
         /* This is used for viewport-based browser, where the HUD moves
            to be aligned with the viewport */
