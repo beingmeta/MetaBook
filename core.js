@@ -138,6 +138,23 @@ var metaBook={
     Timeline: {},
     // Word/phrase indexing structures
     allterms: [], prefixes: {},
+    // These are functions to be called when everythings has been loaded
+    //  to initialize local references to common metaBook functions
+    inits: [],
+    default_config: {
+        layout: 'bypage',forcelayout: false,
+        bodysize: 'normal',bodyfamily: 'serif',
+        bodycontrast: 'high', justify: false,
+        linespacing: 'normal',
+        uisize: 'normal',dyslexical: false,
+        animatecontent: true,animatehud: true,
+        hidesplash: false,keyboardhelp: true,
+        holdmsecs: 150,wandermsecs: 1500,
+        syncinterval: 60,glossupdate: 5*60,
+        locsync: 15, cacheglosses: true,
+        soundeffects: false, buzzeffects: false,
+        showconsole: false,
+        controlc: false},
     // What to trace, for debugging
     Trace: {
         startup: 0,       // Whether to trace startup
@@ -172,7 +189,6 @@ var metaBook={
 
     var fdjtString=fdjt.String;
     var fdjtState=fdjt.State;
-    var fdjtTime=fdjt.Time;
     var fdjtLog=fdjt.Log;
     var fdjtDOM=fdjt.DOM;
     var fdjtUI=fdjt.UI;
@@ -182,7 +198,6 @@ var metaBook={
 
     var hasClass=fdjtDOM.hasClass;
     var addClass=fdjtDOM.addClass;
-    var dropClass=fdjtDOM.dropClass;
     var hasParent=fdjtDOM.hasParent;
 
     var getLocal=fdjtState.getLocal;
@@ -214,7 +229,7 @@ var metaBook={
 
     metaBook.focusBody=function(){
         // document.body.focus();
-        };
+    };
     
     function initDB() {
         if (Trace.start>1) fdjtLog("Initializing DB");
@@ -306,7 +321,7 @@ var metaBook={
                                 if (item.replyto!==item.thread)
                                     addTags(item.replyto,tags,fragslot);}
                             if (info) addTags(info,tags,fragslot,maker_knodule);}}}},
-                                 "initgloss");
+                                    "initgloss");
             if ((metaBook.user)&&(mB.persist)&&(metaBook.cacheglosses))
                 metaBook.glossdb.storage=window.localStorage;}
         
@@ -352,7 +367,7 @@ var metaBook={
             anonymous.name="anonymous";}
 
         metaBook.queued=((metaBook.cacheglosses)&&
-                      (getLocal("metabook.queued("+metaBook.refuri+")",true)))||[];
+                         (getLocal("metabook.queued("+metaBook.refuri+")",true)))||[];
 
         function cacheGlosses(value){
             var saveprops=metaBook.saveprops, uri=metaBook.docuri;
@@ -534,68 +549,40 @@ var metaBook={
             (target.codexbaseid)||(target.id);
         else return target.id;};
 
-    /* A Kludge For iOS */
+    function getTarget(scan,closest){
+        scan=((scan.nodeType)?(scan):(scan.target||scan.srcElement||scan));
+        var target=false, id=false, targetids=metaBook.targetids;
+        var wsn_target=false;
+        if (hasParent(scan,metaBook.HUD)) return false;
+        else if (hasParent(scan,".metabookmargin")) return false;
+        else while (scan) {
+            if (scan.metabookui) return false;
+            else if ((scan===metaBook.docroot)||(scan===document.body))
+                return target;
+            else if ((id=(scan.codexbaseid||scan.id))&&(metaBook.docinfo[id])) {
+                if ((!(scan.codexbaseid))&&(id.search("METABOOKTMP")===0)) {}
+                else if ((target)&&(id.search("WSN_")===0)) {}
+                else if (id.search("WSN_")===0) wsn_target=scan;
+                else if ((targetids)&&(id.search(targetids)!==0)) {}
+                else if (hasClass(scan,"sbooknofocus")) {}
+                else if ((metaBook.nofocus)&&(metaBook.nofocus.match(scan))) {}
+                else if (hasClass(scan,"sbookfocus")) return scan;
+                else if ((metaBook.focus)&&(metaBook.focus.match(scan)))
+                    return scan;
+                else if (closest) return scan;
+                else if ((target)&&
+                         ((scan.tagName==='SECTION')||
+                          ((scan.className)&&
+                           (scan.className.search(/\bhtml5section\b/i)>=0))))
+                    return target;
+                else if ((target)&&(!(fdjt.DOM.isVisible(scan))))
+                    return target;
+                else target=scan;}
+            else {}
+            scan=scan.parentNode;}
+        return target||wsn_target;}
+    metaBook.getTarget=getTarget;
 
-    /* This is a kludge to handle the fact that saving an iOS app
-       to the home screen loses any authentication information
-       (cookies, etc) that the original page might have had.  To
-       avoid forcing the user to login again, we store the current
-       SBOOKS:AUTH- token (the encrypted authentication token that
-       can travel in the clear) in the .search (query string) of the
-       current location.  This IS passed to the homescreen
-       standalone app, so we can use it to get a real authentication
-       token.*/
-    function iosHomeKludge(){
-        if ((!(metaBook.user))||(fdjt.device.standalone)||
-            (!(fdjt.device.mobilesafari)))
-            return;
-        var auth=fdjtState.getCookie("SBOOKS:AUTH-");
-        if (!(auth)) return;
-        var eauth=encodeURIComponent(auth);
-        var url=location.href, qmark=url.indexOf('?'), hashmark=url.indexOf('#');
-        var base=((qmark<0)?((hashmark<0)?(url):(url.slice(0,hashmark))):
-                  (url.slice(0,qmark)));
-        var query=((qmark<0)?(""):(hashmark<0)?(url.slice(qmark)):
-                   (url.slice(qmark+1,hashmark)));
-        var hash=((hashmark<0)?(""):(url.slice(hashmark)));
-        var old_query=false, new_query="SBOOKS%3aAUTH-="+eauth;
-        if (query.length<=2) query="?"+new_query;
-        else if (query.search("SBOOKS%3aAUTH-=")>=0) {
-            var auth_start=query.search("SBOOKS%3aAUTH-=");
-            var before=query.slice(0,auth_start);
-            var auth_len=query.slice(auth_start).search('&');
-            var after=((auth_len<0)?(""):(query.slice(auth_start+auth_len)));
-            old_query=((auth_len<0)?(query.slice(auth_start)):
-                       (query.slice(auth_start,auth_start+auth_len)));
-            query=before+new_query+after;}
-        else query=query+"&"+new_query;
-        if ((!(old_query))||(old_query!==new_query))
-            history.replaceState(history.state,window.title,
-                                 base+query+hash);}
-
-    var ios_kludge_timer=false;
-    function updateKludgeTimer(){
-        if (document[fdjtDOM.isHidden]) {
-            if (ios_kludge_timer) {
-                clearInterval(ios_kludge_timer);
-                ios_kludge_timer=false;}}
-        else if (ios_kludge_timer) {}
-        else ios_kludge_timer=
-            setInterval(function(){
-                if ((metaBook.user)&&(!(fdjt.device.standalone))&&
-                    (!(document[fdjtDOM.isHidden]))&&
-                    (fdjt.device.mobilesafari))
-                    iosHomeKludge();},
-                        300000);}
-    function setupKludgeTimer(){
-        updateKludgeTimer();
-        if (fdjtDOM.isHidden)
-            fdjtDOM.addListener(document,fdjtDOM.vischange,
-                                updateKludgeTimer);
-        updateKludgeTimer();}
-    if ((!(fdjt.device.standalone))&&(fdjt.device.mobilesafari))
-        fdjt.addInit(setupKludgeTimer,"setupKludgeTimer");
-    
     function getHead(target){
         /* First, find some relevant docinfo */
         var targetid=(target.codexbaseid)||(target.id);
@@ -658,51 +645,69 @@ var metaBook={
             if (!(fdjtDOM.isVisible(metaBook.target))) {
                 metaBook.setMode(false); metaBook.setMode(true);}};
 
-    function getDups(id){
-        if (!(id)) return false;
-        else if (typeof id === "string") {
-            if ((metaBook.layout)&&(metaBook.layout.dups)) {
-                var dups=metaBook.layout.dups;
-                var d=dups[id];
-                if (d) return [mbID(id)].concat(d);
-                else return [mbID(id)];}
-            else return [mbID(id)];}
-        else return getDups(id.codexbaseid||id.id);}
-    metaBook.getDups=getDups;
+    /* A Kludge For iOS */
 
-    function getTarget(scan,closest){
-        scan=((scan.nodeType)?(scan):(scan.target||scan.srcElement||scan));
-        var target=false, id=false, targetids=metaBook.targetids;
-        var wsn_target=false;
-        if (hasParent(scan,metaBook.HUD)) return false;
-        else if (hasParent(scan,".metabookmargin")) return false;
-        else while (scan) {
-            if (scan.metabookui) return false;
-            else if ((scan===metaBook.docroot)||(scan===document.body))
-                return target;
-            else if ((id=(scan.codexbaseid||scan.id))&&(metaBook.docinfo[id])) {
-                if ((!(scan.codexbaseid))&&(id.search("METABOOKTMP")===0)) {}
-                else if ((target)&&(id.search("WSN_")===0)) {}
-                else if (id.search("WSN_")===0) wsn_target=scan;
-                else if ((targetids)&&(id.search(targetids)!==0)) {}
-                else if (hasClass(scan,"sbooknofocus")) {}
-                else if ((metaBook.nofocus)&&(metaBook.nofocus.match(scan))) {}
-                else if (hasClass(scan,"sbookfocus")) return scan;
-                else if ((metaBook.focus)&&(metaBook.focus.match(scan)))
-                    return scan;
-                else if (closest) return scan;
-                else if ((target)&&
-                         ((scan.tagName==='SECTION')||
-                          ((scan.className)&&
-                           (scan.className.search(/\bhtml5section\b/i)>=0))))
-                    return target;
-                else if ((target)&&(!(fdjt.DOM.isVisible(scan))))
-                    return target;
-                else target=scan;}
-            else {}
-            scan=scan.parentNode;}
-        return target||wsn_target;}
-    metaBook.getTarget=getTarget;
+    /* This is a kludge to handle the fact that saving an iOS app
+       to the home screen loses any authentication information
+       (cookies, etc) that the original page might have had.  To
+       avoid forcing the user to login again, we store the current
+       SBOOKS:AUTH- token (the encrypted authentication token that
+       can travel in the clear) in the .search (query string) of the
+       current location.  This IS passed to the homescreen
+       standalone app, so we can use it to get a real authentication
+       token.*/
+    function iosHomeKludge(){
+        if ((!(metaBook.user))||(fdjt.device.standalone)||
+            (!(fdjt.device.mobilesafari)))
+            return;
+        var auth=fdjtState.getCookie("SBOOKS:AUTH-");
+        if (!(auth)) return;
+        var eauth=encodeURIComponent(auth);
+        var url=location.href, qmark=url.indexOf('?'), hashmark=url.indexOf('#');
+        var base=((qmark<0)?((hashmark<0)?(url):(url.slice(0,hashmark))):
+                  (url.slice(0,qmark)));
+        var query=((qmark<0)?(""):(hashmark<0)?(url.slice(qmark)):
+                   (url.slice(qmark+1,hashmark)));
+        var hash=((hashmark<0)?(""):(url.slice(hashmark)));
+        var old_query=false, new_query="SBOOKS%3aAUTH-="+eauth;
+        if (query.length<=2) query="?"+new_query;
+        else if (query.search("SBOOKS%3aAUTH-=")>=0) {
+            var auth_start=query.search("SBOOKS%3aAUTH-=");
+            var before=query.slice(0,auth_start);
+            var auth_len=query.slice(auth_start).search('&');
+            var after=((auth_len<0)?(""):(query.slice(auth_start+auth_len)));
+            old_query=((auth_len<0)?(query.slice(auth_start)):
+                       (query.slice(auth_start,auth_start+auth_len)));
+            query=before+new_query+after;}
+        else query=query+"&"+new_query;
+        if ((!(old_query))||(old_query!==new_query))
+            history.replaceState(history.state,window.title,
+                                 base+query+hash);}
+
+    var ios_kludge_timer=false;
+    function updateKludgeTimer(){
+        if (document[fdjtDOM.isHidden]) {
+            if (ios_kludge_timer) {
+                clearInterval(ios_kludge_timer);
+                ios_kludge_timer=false;}}
+        else if (ios_kludge_timer) {}
+        else ios_kludge_timer=
+            setInterval(function(){
+                if ((metaBook.user)&&(!(fdjt.device.standalone))&&
+                    (!(document[fdjtDOM.isHidden]))&&
+                    (fdjt.device.mobilesafari))
+                    iosHomeKludge();},
+                        300000);}
+    function setupKludgeTimer(){
+        updateKludgeTimer();
+        if (fdjtDOM.isHidden)
+            fdjtDOM.addListener(document,fdjtDOM.vischange,
+                                updateKludgeTimer);
+        updateKludgeTimer();}
+    if ((!(fdjt.device.standalone))&&(fdjt.device.mobilesafari))
+        fdjt.addInit(setupKludgeTimer,"setupKludgeTimer");
+    
+
     
     var isEmpty=fdjtString.isEmpty;
 
@@ -779,6 +784,164 @@ var metaBook={
                 else results.push({prefix: prefix,tag: tag});}}
         return results;}
     metaBook.getGlossTags=getGlossTags;
+
+
+    /* Tags */
+
+    function parseTag(tag,kno){
+        var slot="tags"; var usekno=kno||metaBook.knodule;
+        if (tag[0]==="~") {
+            slot="~tags"; tag=tag.slice(1);}
+        else if ((tag[0]==="*")&&(tag[1]==="*")) {
+            slot="**tags"; tag=tag.slice(2);}
+        else if (tag[0]==="*") {
+            slot="*tags"; tag=tag.slice(1);}
+        else {}
+        var knode=((tag.indexOf('|')>=0)?
+                   (usekno.handleSubjectEntry(tag)):
+                   (slot==="~tags")?
+                   (((kno)&&(kno.probe(tag)))||(tag)):
+                   (usekno.handleSubjectEntry(tag)));
+        if (slot!=="tags") return {slot: slot,tag: knode};
+        else return knode;}
+    metaBook.parseTag=parseTag;
+    
+    var knoduleAddTags=Knodule.addTags;
+    function addTags(nodes,tags,slotid,tagdb){
+        if (!(slotid)) slotid="tags";
+        if (!(tagdb)) tagdb=metaBook.knodule;
+        var docdb=metaBook.docdb;
+        if (!(nodes instanceof Array)) nodes=[nodes];
+        knoduleAddTags(nodes,tags,docdb,tagdb,slotid,metaBook.tagscores);
+        var i=0, lim=nodes.length; while (i<lim) {
+            var node=nodes[i++];
+            if (!(node.toclevel)) continue;
+            var passages=docdb.find('head',node);
+            if ((passages)&&(passages.length))
+                knoduleAddTags(passages,tags,docdb,tagdb,
+                               "^"+slotid,metaBook.tagscores);
+            var subheads=docdb.find('heads',node);
+            if ((subheads)&&(subheads.length))
+                addTags(subheads,tags,"^"+slotid,tagdb);}}
+    metaBook.addTags=addTags;
+    
+    // Assert whether we're connected and update body classes
+    //  to reflect the state. Also, run run any delayed thunks
+    //  queued for connection.
+    function setConnected(val){
+        if ((val)&&(!(metaBook.connected))) {
+            var onconnect=metaBook._onconnect;
+            metaBook._onconnect=false;
+            if ((onconnect)&&(onconnect.length)) {
+                var i=0; var lim=onconnect.length;
+                while (i<lim) (onconnect[i++])();}
+            if (fdjtState.getLocal("metabook.queued("+metaBook.refuri+")"))
+                metaBook.writeQueuedGlosses();}
+        if (((val)&&(!(metaBook.connected)))||
+            ((!(val))&&(metaBook.connected)))
+            fdjtDOM.swapClass(document.body,/\b(_|cx)(CONN|DISCONN)\b/,
+                              ((val)?("_CONN"):("_DISCONN")));
+        metaBook.connected=val;
+    } metaBook.setConnected=setConnected;
+
+
+    function getLevel(elt,rel){
+        if (elt.toclevel) {
+            if (elt.toclevel==='none') {
+                elt.toclevel=false;
+                return false;}
+            else return elt.toclevel;}
+        var attrval=
+            ((elt.getAttributeNS)&&
+             (elt.getAttributeNS('toclevel','http://sbooks.net')))||
+            (elt.getAttribute('toclevel'))||
+            (elt.getAttribute('data-toclevel'));
+        if (attrval) {
+            if (attrval==='none') return false;
+            else return parseInt(attrval,10);}
+        if (elt.className) {
+            var cname=elt.className;
+            if (cname.search(/\bsbooknotoc\b/)>=0) return 0;
+            if (cname.search(/\bsbookignore\b/)>=0) return 0;
+            var tocloc=cname.search(/\bsbook\d+(head|sect)\b/);
+            if (tocloc>=0)
+                return parseInt(cname.slice(tocloc+5),10);
+            else if ((typeof rel ==="number")&&
+                     (cname.search(/\bsbooksubhead\b/)>=0))
+                return rel+1;
+            else {}}
+        if ((metaBook.notoc)&&(metaBook.notoc.match(elt))) return 0;
+        if ((metaBook.ignore)&&(metaBook.ignore.match(elt))) return 0;
+        if ((typeof metaBook.autotoc !== 'undefined')&&(!(metaBook.autotoc)))
+            return false;
+        if ((elt.tagName==='HGROUP')||(elt.tagName==='HEADER'))
+            return getFirstTocLevel(elt,true);
+        if (elt.tagName.search(/H\d/)===0)
+            return parseInt(elt.tagName.slice(1,2),10);
+        else return false;}
+
+    function getFirstTocLevel(node,notself){
+        if (node.nodeType!==1) return false;
+        var level=((!(notself))&&(getLevel(node)));
+        if (level) return level;
+        var children=node.childNodes;
+        var i=0; var lim=children.length;
+        while (i<lim) {
+            var child=children[i++];
+            if (child.nodeType!==1) continue;
+            level=getFirstTocLevel(child);
+            if (level) return level;}
+        return false;}
+
+    metaBook.getTOCLevel=getLevel;
+    
+    function getCover(){
+        if (metaBook.cover) return metaBook.cover;
+        var cover=fdjtID("METABOOKCOVERPAGE")||
+            fdjtID("SBOOKCOVERPAGE")||
+            fdjtID("COVERPAGE");
+        if (cover) metaBook.cover=cover;
+        return cover;}
+    metaBook.getCover=getCover;
+
+    var fillIn=fdjtString.fillIn;
+    var expand=fdjtString.expandEntities;
+    function fixStaticRefs(string){
+        return fillIn(expand(string).replace(
+                /http(s)?:\/\/static.beingmeta.com\//g,metaBook.root),
+                      {bmg: metaBook.root+"g/",
+                       coverimage: metaBook.coverimage});}
+    metaBook.fixStaticRefs=fixStaticRefs;
+    
+    fdjtString.entities.beingmeta=
+        "<span class='beingmeta'>being<span class='bmm'>m<span class='bme'>e<span class='bmt'>t<span class='bma'>a</span></span></span></span></span>";
+    fdjtString.entities.sBooks="<span class='sbooks'><em>s</em>Books</span>";
+    fdjtString.entities.sBook="<span class='sbooks'><em>s</em>Book</span>";
+    fdjtString.entities.metaBook=
+        "<span class='metabook'><span class='bmm'>m<span class='bme'>e<span class='bmt'>t<span class='bma'>a</span></span></span></span>Book<sub>β</sub></span>";
+    fdjtString.entities.metaBook=
+        "<span class='metabook'><span class='bmm'>m<span class='bme'>e<span class='bmt'>t<span class='bma'>a</span></span></span></span>Book</span>";
+
+})();
+
+fdjt.DOM.noautofontadjust=true;
+
+// nav.js
+(function(){
+    "use strict";
+    var fdjtDOM=fdjt.DOM, fdjtString=fdjt.String, fdjtState=fdjt.State;
+    var fdjtLog=fdjt.Log, fdjtUI=fdjt.UI;
+    var dropClass=fdjtDOM.dropClass, addClass=fdjtDOM.addClass;
+    var hasClass=fdjtDOM.hasClass, hasParent=fdjtDOM.hasParent;
+    var mB=metaBook, mbID=mB.ID, getHead=mB.getHead, getTarget=mB.getTarget;
+    var Trace=metaBook.Trace;
+    var getDups, saveState, setHistory;
+
+    function init_local(){
+        getDups=metaBook.getDups;
+        saveState=metaBook.saveState;
+        setHistory=metaBook.setHistory;}
+    metaBook.inits.push(init_local);
 
     /* Navigation functions */
 
@@ -947,46 +1110,6 @@ var metaBook={
         if ((matches)&&(matches.length)) return matches[0];
         else return result;}
     metaBook.findExcerpt=findExcerpt;
-
-    /* Tags */
-
-    function parseTag(tag,kno){
-        var slot="tags"; var usekno=kno||metaBook.knodule;
-        if (tag[0]==="~") {
-            slot="~tags"; tag=tag.slice(1);}
-        else if ((tag[0]==="*")&&(tag[1]==="*")) {
-            slot="**tags"; tag=tag.slice(2);}
-        else if (tag[0]==="*") {
-            slot="*tags"; tag=tag.slice(1);}
-        else {}
-        var knode=((tag.indexOf('|')>=0)?
-                   (usekno.handleSubjectEntry(tag)):
-                   (slot==="~tags")?
-                   (((kno)&&(kno.probe(tag)))||(tag)):
-                   (usekno.handleSubjectEntry(tag)));
-        if (slot!=="tags") return {slot: slot,tag: knode};
-        else return knode;}
-    metaBook.parseTag=parseTag;
-    
-    var knoduleAddTags=Knodule.addTags;
-    function addTags(nodes,tags,slotid,tagdb){
-        if (!(slotid)) slotid="tags";
-        if (!(tagdb)) tagdb=metaBook.knodule;
-        var docdb=metaBook.docdb;
-        if (!(nodes instanceof Array)) nodes=[nodes];
-        knoduleAddTags(nodes,tags,docdb,tagdb,slotid,metaBook.tagscores);
-        var i=0, lim=nodes.length; while (i<lim) {
-            var node=nodes[i++];
-            if (!(node.toclevel)) continue;
-            var passages=docdb.find('head',node);
-            if ((passages)&&(passages.length))
-                knoduleAddTags(passages,tags,docdb,tagdb,
-                               "^"+slotid,metaBook.tagscores);
-            var subheads=docdb.find('heads',node);
-            if ((subheads)&&(subheads.length))
-                addTags(subheads,tags,"^"+slotid,tagdb);}}
-    metaBook.addTags=addTags;
-        
     /* Navigation */
 
     var sbookUIclasses=
@@ -1012,36 +1135,217 @@ var metaBook={
         if (targetid) window.location.hash=targetid;}
     metaBook.setHashID=setHashID;
 
-    // Assert whether we're connected and update body classes
-    //  to reflect the state. Also, run run any delayed thunks
-    //  queued for connection.
-    function setConnected(val){
-        if ((val)&&(!(metaBook.connected))) {
-            var onconnect=metaBook._onconnect;
-            metaBook._onconnect=false;
-            if ((onconnect)&&(onconnect.length)) {
-                var i=0; var lim=onconnect.length;
-                while (i<lim) (onconnect[i++])();}
-            if (fdjtState.getLocal("metabook.queued("+metaBook.refuri+")"))
-                metaBook.writeQueuedGlosses();}
-        if (((val)&&(!(metaBook.connected)))||
-            ((!(val))&&(metaBook.connected)))
-            fdjtDOM.swapClass(document.body,/\b(_|cx)(CONN|DISCONN)\b/,
-                              ((val)?("_CONN"):("_DISCONN")));
-        metaBook.connected=val;
-    } metaBook.setConnected=setConnected;
+    function getLocInfo(elt){
+        var eltid=false;
+        var counter=0; var lim=200;
+        var forward=fdjtDOM.forward;
+        while ((elt)&&(counter<lim)) {
+            eltid=elt.codexbaseid||elt.id;
+            if ((eltid)&&(metaBook.docinfo[eltid])) break;
+            else {counter++; elt=forward(elt);}}
+        if ((eltid)&&(metaBook.docinfo[eltid])) {
+            var info=metaBook.docinfo[eltid];
+            return {start: info.starts_at,end: info.ends_at,
+                    len: info.ends_at-info.starts_at};}
+        else return false;
+    } metaBook.getLocInfo=getLocInfo;
 
+    function resolveLocation(loc){
+        var allinfo=metaBook.docinfo._allinfo;
+        var i=0; var lim=allinfo.length;
+        while (i<lim) {
+            if (allinfo[i].starts_at<loc) i++;
+            else break;}
+        while (i<lim)  {
+            if (allinfo[i].starts_at>loc) break;
+            else i++;}
+        return mbID(allinfo[i-1].frag);
+    } metaBook.resolveLocation=resolveLocation;
+
+    // This moves within the document in a persistent way
+    function metabookGoTo(arg,caller,istarget,savestate,skiphist){
+        if (typeof istarget === 'undefined') istarget=true;
+        if (typeof savestate === 'undefined') savestate=true;
+        var target, location, locinfo;
+        if (savestate) metaBook.clearStateDialog();
+        if (!(arg)) {
+            fdjtLog.warn("falsy arg (%s) to metabookGoTo from %s",arg,caller);
+            return;}
+        if (typeof arg === 'string') {
+            target=mbID(arg);
+            locinfo=getLocInfo(target);
+            location=locinfo.start;}
+        else if (typeof arg === 'number') {
+            location=arg;
+            target=((istarget)&&
+                    (((istarget.nodeType)&&(istarget.id))?(istarget):
+                     (resolveLocation(arg))));}
+        else if ((arg.target)&&((arg.location)||(arg.offset))) {
+            target=getTarget(arg.target);
+            if (arg.location) 
+                location=arg.location;
+            else {
+                locinfo=getLocInfo(arg.target);
+                location=locinfo.start+arg.offset;}}
+        else if (arg.nodeType) {
+            target=getTarget(arg);
+            locinfo=getLocInfo(arg);
+            location=locinfo.start;}
+        else {
+            fdjtLog.warn("Bad metabookGoTo %o",arg);
+            return;}
+        if ((istarget)&&(istarget.nodeType)) target=istarget;
+        else if ((typeof istarget === "string")&&(mbID(istarget)))
+            target=mbID(istarget);
+        else {}
+        var info=(target)&&
+            metaBook.docinfo[target.getAttribute("data-baseid")||target.id];
+        var page=((metaBook.bypage)&&(metaBook.layout)&&
+                  (metaBook.getPage(target,location)));
+        var pageno=(page)&&(parseInt(page.getAttribute("data-pagenum"),10));
+        if (!(target)) {
+            if (metaBook.layout instanceof fdjt.CodexLayout)
+                metaBook.GoToPage(arg,caller,savestate);
+            else if (arg.nodeType) {
+                var scan=arg;
+                while (scan) {
+                    if (scan.offsetTop) break;
+                    else scan=scan.parentNode;}
+                if (scan) metaBook.content.style.offsetTop=-(scan.offsetTop);}
+            else {}
+            if (metaBook.curpage)
+                saveState({location: metaBook.location,
+                           page: metaBook.curpage,
+                           npages: metaBook.pagecount},
+                          true);
+            else saveState({location: metaBook.location},true);
+            return;}
+        var targetid=target.codexbaseid||target.id;
+        if (Trace.nav)
+            fdjtLog("metaBook.GoTo%s() #%o@P%o/L%o %o",
+                    ((caller)?("/"+caller):""),targetid,pageno,
+                    ((info)&&(info.starts_at)),target);
+        if (info) {
+            metaBook.point=target;
+            if (!((metaBook.hudup)||(metaBook.mode))) metaBook.skimming=false;}
+        setHead(target);
+        setLocation(location);
+        if ((istarget)&&(targetid)&&(!(inUI(target)))) setTarget(target);
+        if ((savestate)&&(istarget))
+            metaBook.saveState({
+                target: (target.getAttribute("data-baseid")||target.id),
+                location: location,page: pageno,npages: metaBook.pagecount},
+                               skiphist);
+        else if (savestate)
+            metaBook.saveState({location: location,page: pageno,
+                                npages: metaBook.pagecount},
+                               skiphist);
+        else if (skiphist) {}
+        else if (istarget)
+            setHistory({
+                target: (target.getAttribute("data-baseid")||target.id),
+                location: location,page: pageno,npages: metaBook.pagecount});
+        else setHistory({
+            target: (target.getAttribute("data-baseid")||target.id),
+            location: location,page: pageno,npages: metaBook.pagecount});
+        if (page)
+            metaBook.GoToPage(page,caller||"metabookGoTo",false,true);
+        else {
+            if (metaBook.previewing)
+                metaBook.stopPreview(((caller)?("goto/"+caller):("goto")),target);
+            var offinfo=fdjtDOM.getGeometry(target,metaBook.content);
+            var use_top=offinfo.top-((fdjtDOM.viewHeight()-50)/2);
+            if (use_top<0) use_top=0;
+            window.scrollTo(0,use_top);}
+        if (metaBook.clearGlossmark) metaBook.clearGlossmark();
+        if (metaBook.mode==="addgloss") metaBook.setMode(false,false);
+        metaBook.location=location;
+    } metaBook.GoTo=metabookGoTo;
+
+    function anchorFn(evt){
+        var target=fdjtUI.T(evt);
+        while (target)
+            if (target.href) break; else target=target.parentNode;
+        if ((target)&&(target.href)&&(target.href[0]==='#')) {
+            var elt=mbID(target.href.slice(1));
+            if (elt) {metaBook.GoTo(elt,"anchorFn"); fdjtUI.cancel(evt);}}}
+    metaBook.anchorFn=anchorFn;
+
+    // This jumps and disables the HUD at the same time
+    function metaBookJumpTo(target){
+        if (metaBook.hudup) metaBook.setMode(false);
+        metaBook.GoTo(target,"JumpTo");}
+    metaBook.JumpTo=metaBookJumpTo;
+
+    function getTOCHead(id){
+        var elts=fdjtDOM.$("#METABOOKSTATICTOC div.head[NAME='SBR"+id+"']");
+        return ((elts)&&(elts.length===1)&&(elts[0]));}
+
+    // This jumps and disables the HUD at the same time
+    function metaBookGoTOC(target){
+        if (target) metaBook.GoTo(target,"GoTOC");
+        metaBook.setMode("statictoc");
+        var headid=((metaBook.head)&&(metaBook.head.id));
+        var headinfo=(headid)&&(metaBook.docinfo[headid]);
+        var hhid=(headinfo)&&(headinfo.head)&&(headinfo.head.frag);
+        var tocelt=(headid)&&getTOCHead(headid);
+        var cxtelt=(hhid)&&getTOCHead(hhid);
+        if ((cxtelt)&&(tocelt)) {
+            cxtelt.scrollIntoView();
+            if (fdjtDOM.isVisible(tocelt)) return;
+            else tocelt.scrollIntoView();}
+        else if (tocelt)
+            tocelt.scrollIntoView();
+        else if (cxtelt)
+            cxtelt.scrollIntoView();
+        else {}}
+    metaBook.GoTOC=metaBookGoTOC;
+
+    // This jumps and disables the HUD at the same time
+    // We try to animate the transition
+    function metaBookSkimTo(target){
+        if (metaBook.hudup) { // Figure out what mode to go to
+            var headinfo=metaBook.docinfo[target]||metaBook.docinfo[target.id];
+            if ((headinfo)&&((!(headinfo.sub))||(headinfo.sub.length===0))) {
+                metaBook.setMode("statictoc"); metaBook.setHUD(false,false);
+                addClass(document.body,"mbSKIMMING");}}
+        metaBook.GoTo(target,"metaBookSkimTo");}
+    metaBook.Skimto=metaBookSkimTo;
+
+
+})();
+
+// syncstate.js
+(function(){
+    "use strict";
+    var fdjtDOM=fdjt.DOM, fdjtState=fdjt.State;
+    var fdjtLog=fdjt.Log, fdjtUI=fdjt.UI, fdjtTime=fdjt.Time;
+    var fdjtID=fdjt.ID;
+    var mB=metaBook, mbID=mB.ID;
+    var saveLocal=mB.saveLocal, readLocal=mB.readLocal;
+    var clearLocal=mB.clearLocal;
+    var Trace=metaBook.Trace;
+    var loc2pct=metaBook.location2pct;
+
+    var setTarget, setConnected, setConfig;
+    function init_local(){
+        setTarget=metaBook.setTarget;
+        setConnected=metaBook.setConnected;
+        setConfig=metaBook.setConfig;}
+    metaBook.inits.push(init_local);
+
+    
 
     /* Managing the reader state */
 
     /* Three aspects of the reading state are saved:
 
-       * the numeric location within the book (in characters from the
-          beginning)
-       * the most recent target ID
-       * the current page (just for messages, since page numbers aren't
-         stable
-     */
+     * the numeric location within the book (in characters from the
+     beginning)
+     * the most recent target ID
+     * the current page (just for messages, since page numbers aren't
+     stable
+    */
 
     // We keep track of the current state and the last time that state
     // was changed by a user action.  Restoring a saved state, for
@@ -1144,21 +1448,22 @@ var metaBook={
             (window.history.state.location!==state.location)) {
             window.history.pushState(state,title,href+"#"+hash);}
     }
+    metaBook.setHistory=setHistory;
 
     function restoreState(state,reason,savehist){
         if (Trace.state) fdjtLog("Restoring (%s) state %j",reason,state);
         if (state.location)
             metaBook.GoTo(state.location,reason||"restoreState",
-                       ((state.target)&&(mbID(state.target))),
-                       false,(!(savehist)));
+                          ((state.target)&&(mbID(state.target))),
+                          false,(!(savehist)));
         else if ((state.page)&&(metaBook.layout)) {
             metaBook.GoToPage(state.page,reason||"restoreState",
-                           false,(!(savehist)));
+                              false,(!(savehist)));
             if ((state.target)&&(mbID(state.target)))
                 setTarget(mbID(state.target));}
         else if (state.target) {
             metaBook.GoTo(state.target,reason||"restoreState",
-                       true,false,(!(savehist)));
+                          true,false,(!(savehist)));
             if ((state.target)&&(mbID(state.target)))
                 setTarget(mbID(state.target));}
         if (!(state.refuri)) state.refuri=metaBook.refuri;
@@ -1290,16 +1595,16 @@ var metaBook={
                         // We've already bothered the user since this
                         //  change was recorded, so we don't bother them
                         // again
-                        }
+                    }
                     else if (document[fdjtDOM.isHidden])
                         metaBook.freshstate=xstate;
                     else {
                         metaBook.xstate=xstate;
                         prompted=fdjtTime.tick();
                         metaBook.resolveXState(xstate);}}}
-                else if (traced)
-                    fdjtLog("syncState(callback/error) %o %d %s",
-                            evt,req.status,req.responseText);
+            else if (traced)
+                fdjtLog("syncState(callback/error) %o %d %s",
+                        evt,req.status,req.responseText);
             if (navigator.onLine) setConnected(true);
             syncing=false;}}
 
@@ -1330,182 +1635,124 @@ var metaBook={
         else syncState();
     } metaBook.forceSync=forceSync;
 
-    function getLocInfo(elt){
-        var eltid=false;
-        var counter=0; var lim=200;
-        var forward=fdjtDOM.forward;
-        while ((elt)&&(counter<lim)) {
-            eltid=elt.codexbaseid||elt.id;
-            if ((eltid)&&(metaBook.docinfo[eltid])) break;
-            else {counter++; elt=forward(elt);}}
-        if ((eltid)&&(metaBook.docinfo[eltid])) {
-            var info=metaBook.docinfo[eltid];
-            return {start: info.starts_at,end: info.ends_at,
-                    len: info.ends_at-info.starts_at};}
-        else return false;
-    } metaBook.getLocInfo=getLocInfo;
+    function getLoc(x){
+        var info=metaBook.getLocInfo(x);
+        return ((info)&&(info.start));}
 
-    function resolveLocation(loc){
-        var allinfo=metaBook.docinfo._allinfo;
-        var i=0; var lim=allinfo.length;
-        while (i<lim) {
-            if (allinfo[i].starts_at<loc) i++;
-            else break;}
-        while (i<lim)  {
-            if (allinfo[i].starts_at>loc) break;
-            else i++;}
-        return mbID(allinfo[i-1].frag);
-    } metaBook.resolveLocation=resolveLocation;
-
-    // This moves within the document in a persistent way
-    function metabookGoTo(arg,caller,istarget,savestate,skiphist){
-        if (typeof istarget === 'undefined') istarget=true;
-        if (typeof savestate === 'undefined') savestate=true;
-        var target, location, locinfo;
-        if (savestate) metaBook.clearStateDialog();
-        if (!(arg)) {
-            fdjtLog.warn("falsy arg (%s) to metabookGoTo from %s",arg,caller);
-            return;}
-        if (typeof arg === 'string') {
-            target=mbID(arg);
-            locinfo=getLocInfo(target);
-            location=locinfo.start;}
-        else if (typeof arg === 'number') {
-            location=arg;
-            target=((istarget)&&
-                    (((istarget.nodeType)&&(istarget.id))?(istarget):
-                     (resolveLocation(arg))));}
-        else if ((arg.target)&&((arg.location)||(arg.offset))) {
-            target=getTarget(arg.target);
-            if (arg.location) 
-                location=arg.location;
-            else {
-                locinfo=getLocInfo(arg.target);
-                location=locinfo.start+arg.offset;}}
-        else if (arg.nodeType) {
-            target=getTarget(arg);
-            locinfo=getLocInfo(arg);
-            location=locinfo.start;}
+    /* This initializes the sbook state to the initial location with the
+       document, using the hash value if there is one. */ 
+    function initLocation() {
+        var state=metaBook.state;
+        if (state) {}
         else {
-            fdjtLog.warn("Bad metabookGoTo %o",arg);
+            var target=fdjtID("METABOOKSTART")||fdjt.$1(".metabookstart")||
+                fdjtID("SBOOKSTART")||fdjt.$1(".sbookstart")||
+                fdjtID("SBOOKTITLEPAGE");
+            if (target)
+                state={location: getLoc(target),
+                       // This is the beginning of the 21st century
+                       changed: 978307200};
+            else state={location: 1,changed: 978307200};}
+        metaBook.saveState(state,true,true);}
+    metaBook.initLocation=initLocation;
+
+    function resolveXState(xstate) {
+        var state=metaBook.state;
+        if (!(metaBook.sync_interval)) return;
+        if (metaBook.statedialog) {
+            if (Trace.state)
+                fdjtLog("resolveXState dialog exists: %o",
+                        metaBook.statedialog);
             return;}
-        if ((istarget)&&(istarget.nodeType)) target=istarget;
-        else if ((typeof istarget === "string")&&(mbID(istarget)))
-            target=mbID(istarget);
+        if (Trace.state)
+            fdjtLog("resolveXState state=%j, xstate=%j",state,xstate);
+        if (!(state)) {
+            metaBook.restoreState(xstate);
+            return;}
+        else if (xstate.maxloc>state.maxloc) {
+            state.maxloc=xstate.maxloc;
+            var statestring=JSON.stringify(state);
+            var uri=metaBook.docuri;
+            saveLocal("metabook.state("+uri+")",statestring);}
         else {}
-        var info=(target)&&
-            metaBook.docinfo[target.getAttribute("data-baseid")||target.id];
-        var page=((metaBook.bypage)&&(metaBook.layout)&&
-                  (metaBook.getPage(target,location)));
-        var pageno=(page)&&(parseInt(page.getAttribute("data-pagenum"),10));
-        if (!(target)) {
-            if (metaBook.layout instanceof fdjt.CodexLayout)
-                metaBook.GoToPage(arg,caller,savestate);
-            else if (arg.nodeType) {
-                var scan=arg;
-                while (scan) {
-                    if (scan.offsetTop) break;
-                    else scan=scan.parentNode;}
-                if (scan) metaBook.content.style.offsetTop=-(scan.offsetTop);}
-            else {}
-            if (metaBook.curpage)
-                saveState({location: metaBook.location,
-                           page: metaBook.curpage,
-                           npages: metaBook.pagecount},
-                          true);
-            else saveState({location: metaBook.location},true);
+        if (state.changed>=xstate.changed) {
+            // The locally saved state is newer than the server,
+            //  so we ignore the xstate (it might get synced
+            //  separately)
             return;}
-        var targetid=target.codexbaseid||target.id;
-        if (Trace.nav)
-            fdjtLog("metaBook.GoTo%s() #%o@P%o/L%o %o",
-                    ((caller)?("/"+caller):""),targetid,pageno,
-                    ((info)&&(info.starts_at)),target);
-        if (info) {
-            metaBook.point=target;
-            if (!((metaBook.hudup)||(metaBook.mode))) metaBook.skimming=false;}
-        setHead(target);
-        setLocation(location);
-        if ((istarget)&&(targetid)&&(!(inUI(target)))) setTarget(target);
-        if ((savestate)&&(istarget))
-            metaBook.saveState({
-                target: (target.getAttribute("data-baseid")||target.id),
-                location: location,page: pageno,npages: metaBook.pagecount},
-                           skiphist);
-        else if (savestate)
-            metaBook.saveState({location: location,page: pageno,
-                             npages: metaBook.pagecount},
-                           skiphist);
-        else if (skiphist) {}
-        else if (istarget)
-            setHistory({
-                target: (target.getAttribute("data-baseid")||target.id),
-                location: location,page: pageno,npages: metaBook.pagecount});
-        else setHistory({
-            target: (target.getAttribute("data-baseid")||target.id),
-            location: location,page: pageno,npages: metaBook.pagecount});
-        if (page)
-            metaBook.GoToPage(page,caller||"metabookGoTo",false,true);
-        else {
-            if (metaBook.previewing)
-                metaBook.stopPreview(((caller)?("goto/"+caller):("goto")),target);
-            var offinfo=fdjtDOM.getGeometry(target,metaBook.content);
-            var use_top=offinfo.top-((fdjtDOM.viewHeight()-50)/2);
-            if (use_top<0) use_top=0;
-            window.scrollTo(0,use_top);}
-        if (metaBook.clearGlossmark) metaBook.clearGlossmark();
-        if (metaBook.mode==="addgloss") metaBook.setMode(false,false);
-        metaBook.location=location;
-    } metaBook.GoTo=metabookGoTo;
+        var now=fdjtTime.tick();
+        if ((now-state.changed)<(30)) {
+            // If our state changed in the past 30 seconds, don't
+            // bother changing the current state.
+            return;}
+        if (Trace.state) 
+            fdjtLog("Resolving local state %j with remote state %j",
+                    state,xstate);
+        var msg1="Start at";
+        var choices=[];
+        var latest=xstate.location, farthest=xstate.maxloc;
+        if (farthest>state.location)
+            choices.push(
+                {label: "farthest @"+loc2pct(farthest),
+                 title: "your farthest location on any device/app",
+                 isdefault: false,
+                 handler: function(){
+                     metaBook.GoTo(xstate.maxloc,"sync");
+                     state=metaBook.state; state.changed=fdjtTime.tick();
+                     metaBook.saveState(state,true,true);
+                     metaBook.hideCover();}});
+        if ((latest!==state.location)&&(latest!==farthest))
+            choices.push(
+                {label: ("latest @"+loc2pct(latest)),
+                 title: "the most recent location on any device/app",
+                 isdefault: false,
+                 handler: function(){
+                     metaBook.restoreState(xstate); state=metaBook.state;
+                     state.changed=fdjtTime.tick();
+                     metaBook.saveState(state,true,true);
+                     metaBook.hideCover();}});
+        if ((choices.length)&&(state.location!==0))
+            choices.push(
+                {label: ("current @"+loc2pct(state.location)),
+                 title: "the most recent location on this device",
+                 isdefault: true,
+                 handler: function(){
+                     state.changed=fdjtTime.tick();
+                     metaBook.saveState(state,true,true);
+                     metaBook.hideCover();}});
+        if (choices.length)
+            choices.push(
+                {label: "stop syncing",
+                 title: "stop syncing this book on this device",
+                 handler: function(){
+                     setConfig("locsync",false,true);}});
+        if (Trace.state)
+            fdjtLog("resolveXState choices=%j",choices);
+        if (choices.length)
+            metaBook.statedialog=fdjtUI.choose(
+                {choices: choices,cancel: true,timeout: 7,
+                 nodefault: true,noauto: true,
+                 onclose: function(){metaBook.statedialog=false;},
+                 spec: "div.fdjtdialog.resolvestate#METABOOKRESOLVESTATE"},
+                fdjtDOM("div",msg1));}
+    metaBook.resolveXState=resolveXState;
 
-    function anchorFn(evt){
-        var target=fdjtUI.T(evt);
-        while (target)
-            if (target.href) break; else target=target.parentNode;
-        if ((target)&&(target.href)&&(target.href[0]==='#')) {
-            var elt=mbID(target.href.slice(1));
-            if (elt) {metaBook.GoTo(elt,"anchorFn"); fdjtUI.cancel(evt);}}}
-    metaBook.anchorFn=anchorFn;
+    function clearStateDialog(){
+        if (metaBook.statedialog) {
+            fdjt.Dialog.close(metaBook.statedialog);
+            metaBook.statedialog=false;}}
+    metaBook.clearStateDialog=clearStateDialog;
+})();
 
-    // This jumps and disables the HUD at the same time
-    function metaBookJumpTo(target){
-        if (metaBook.hudup) metaBook.setMode(false);
-        metaBook.GoTo(target,"JumpTo");}
-    metaBook.JumpTo=metaBookJumpTo;
-
-    function getTOCHead(id){
-        var elts=fdjtDOM.$("#METABOOKSTATICTOC div.head[NAME='SBR"+id+"']");
-        return ((elts)&&(elts.length===1)&&(elts[0]));}
-
-    // This jumps and disables the HUD at the same time
-    function metaBookGoTOC(target){
-        if (target) metaBook.GoTo(target,"GoTOC");
-        metaBook.setMode("statictoc");
-        var headid=((metaBook.head)&&(metaBook.head.id));
-        var headinfo=(headid)&&(metaBook.docinfo[headid]);
-        var hhid=(headinfo)&&(headinfo.head)&&(headinfo.head.frag);
-        var tocelt=(headid)&&getTOCHead(headid);
-        var cxtelt=(hhid)&&getTOCHead(hhid);
-        if ((cxtelt)&&(tocelt)) {
-            cxtelt.scrollIntoView();
-            if (fdjtDOM.isVisible(tocelt)) return;
-            else tocelt.scrollIntoView();}
-        else if (tocelt)
-            tocelt.scrollIntoView();
-        else if (cxtelt)
-            cxtelt.scrollIntoView();
-        else {}}
-    metaBook.GoTOC=metaBookGoTOC;
-
-    // This jumps and disables the HUD at the same time
-    // We try to animate the transition
-    function metaBookSkimTo(target){
-        if (metaBook.hudup) { // Figure out what mode to go to
-            var headinfo=metaBook.docinfo[target]||metaBook.docinfo[target.id];
-            if ((headinfo)&&((!(headinfo.sub))||(headinfo.sub.length===0))) {
-                metaBook.setMode("statictoc"); metaBook.setHUD(false,false);
-                addClass(document.body,"mbSKIMMING");}}
-        metaBook.GoTo(target,"metaBookSkimTo");}
-    metaBook.Skimto=metaBookSkimTo;
+// preview.js
+(function(){
+    "use strict";
+    var fdjtDOM=fdjt.DOM, fdjtLog=fdjt.Log;
+    var dropClass=fdjtDOM.dropClass, addClass=fdjtDOM.addClass;
+    var hasClass=fdjtDOM.hasClass;
+    var mB=metaBook, mbID=mB.ID, getTarget=mB.getTarget;
+    var Trace=metaBook.Trace;
+    var mbGoTo=mB.GoTo;
 
     // Preview functions
     var oldscroll=false, preview_elt=false;
@@ -1585,90 +1832,9 @@ var metaBook={
         dropClass(document.body,"mbPAGEPREVIEW");
         if (jumpto) {
             if (metaBook.hudup) metaBook.setHUD(false);
-            metabookGoTo(jumpto);}
+            mbGoTo(jumpto);}
         return false;}
-    metaBook.stopPreview=stopPreview;
-
-    function getLevel(elt,rel){
-        if (elt.toclevel) {
-            if (elt.toclevel==='none') {
-                elt.toclevel=false;
-                return false;}
-            else return elt.toclevel;}
-        var attrval=
-            ((elt.getAttributeNS)&&
-             (elt.getAttributeNS('toclevel','http://sbooks.net')))||
-            (elt.getAttribute('toclevel'))||
-            (elt.getAttribute('data-toclevel'));
-        if (attrval) {
-            if (attrval==='none') return false;
-            else return parseInt(attrval,10);}
-        if (elt.className) {
-            var cname=elt.className;
-            if (cname.search(/\bsbooknotoc\b/)>=0) return 0;
-            if (cname.search(/\bsbookignore\b/)>=0) return 0;
-            var tocloc=cname.search(/\bsbook\d+(head|sect)\b/);
-            if (tocloc>=0)
-                return parseInt(cname.slice(tocloc+5),10);
-            else if ((typeof rel ==="number")&&
-                     (cname.search(/\bsbooksubhead\b/)>=0))
-                return rel+1;
-            else {}}
-        if ((metaBook.notoc)&&(metaBook.notoc.match(elt))) return 0;
-        if ((metaBook.ignore)&&(metaBook.ignore.match(elt))) return 0;
-        if ((typeof metaBook.autotoc !== 'undefined')&&(!(metaBook.autotoc)))
-            return false;
-        if ((elt.tagName==='HGROUP')||(elt.tagName==='HEADER'))
-            return getFirstTocLevel(elt,true);
-        if (elt.tagName.search(/H\d/)===0)
-            return parseInt(elt.tagName.slice(1,2),10);
-        else return false;}
-
-    function getFirstTocLevel(node,notself){
-        if (node.nodeType!==1) return false;
-        var level=((!(notself))&&(getLevel(node)));
-        if (level) return level;
-        var children=node.childNodes;
-        var i=0; var lim=children.length;
-        while (i<lim) {
-            var child=children[i++];
-            if (child.nodeType!==1) continue;
-            level=getFirstTocLevel(child);
-            if (level) return level;}
-        return false;}
-
-    metaBook.getTOCLevel=getLevel;
-    
-    function getCover(){
-        if (metaBook.cover) return metaBook.cover;
-        var cover=fdjtID("METABOOKCOVERPAGE")||
-            fdjtID("SBOOKCOVERPAGE")||
-            fdjtID("COVERPAGE");
-        if (cover) metaBook.cover=cover;
-        return cover;}
-    metaBook.getCover=getCover;
-
-    var fillIn=fdjtString.fillIn;
-    var expand=fdjtString.expandEntities;
-    function fixStaticRefs(string){
-        return fillIn(expand(string).replace(
-                /http(s)?:\/\/static.beingmeta.com\//g,metaBook.root),
-                      {bmg: metaBook.root+"g/",
-                       coverimage: metaBook.coverimage});}
-    metaBook.fixStaticRefs=fixStaticRefs;
-    
-    fdjtString.entities.beingmeta=
-        "<span class='beingmeta'>being<span class='bmm'>m<span class='bme'>e<span class='bmt'>t<span class='bma'>a</span></span></span></span></span>";
-    fdjtString.entities.sBooks="<span class='sbooks'><em>s</em>Books</span>";
-    fdjtString.entities.sBook="<span class='sbooks'><em>s</em>Book</span>";
-    fdjtString.entities.metaBook=
-        "<span class='metabook'><span class='bmm'>m<span class='bme'>e<span class='bmt'>t<span class='bma'>a</span></span></span></span>Book<sub>β</sub></span>";
-    fdjtString.entities.metaBook=
-        "<span class='metabook'><span class='bmm'>m<span class='bme'>e<span class='bmt'>t<span class='bma'>a</span></span></span></span>Book</span>";
-
-})();
-
-fdjt.DOM.noautofontadjust=true;
+    metaBook.stopPreview=stopPreview;})();
 
 /* Adding qricons */
 

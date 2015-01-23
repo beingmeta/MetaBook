@@ -327,7 +327,7 @@ metaBook.Paginate=
                                               layout_progress,rootloop);
                         else return rootloop();}}
 
-      
+                
                 rootloop();}
             
             if ((metaBook.cache_layout_thresh)&&
@@ -401,7 +401,7 @@ metaBook.Paginate=
             if ((metaBook.postconfig)&&(metaBook.content)) {
                 if (metaBook.postconfig.indexOf(metaBook.sizeContent)<0)
                     metaBook.sized=false;
-                    metaBook.postconfig.push(metaBook.sizeContent);}
+                metaBook.postconfig.push(metaBook.sizeContent);}
             else if (metaBook.content) metaBook.sizeContent();
             if (metaBook.layout) {
                 // If you're already paginated, repaginate.  Either
@@ -507,7 +507,7 @@ metaBook.Paginate=
                         page.setAttribute("data-staticpageref",pageref);
                         if (!(layout.pagemap[pageref]))
                             layout.laststaticref=pageref;
-                            layout.pagemap[pageref]=page;}}
+                        layout.pagemap[pageref]=page;}}
                 else if (prevpage) {
                     var prevref=prevpage.getAttribute("data-staticpageref");
                     if (prevref)
@@ -955,7 +955,18 @@ metaBook.Paginate=
         metaBook.setupPagebar=setupPagebar;
 
 
-        
+        function getDups(id){
+            if (!(id)) return false;
+            else if (typeof id === "string") {
+                if ((metaBook.layout)&&(metaBook.layout.dups)) {
+                    var dups=metaBook.layout.dups;
+                    var d=dups[id];
+                    if (d) return [mbID(id)].concat(d);
+                    else return [mbID(id)];}
+                else return [mbID(id)];}
+            else return getDups(id.codexbaseid||id.id);}
+        metaBook.getDups=getDups;
+
         /* Movement by pages */
         
         var curpage=false;
