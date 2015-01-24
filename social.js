@@ -21,16 +21,16 @@
    warranties of merchantability or fitness for any particular
    purpose.
 
-    Use and redistribution (especially embedding in other
-      CC licensed content) is permitted under the terms of the
-      Creative Commons "Attribution-NonCommercial" license:
+   Use and redistribution (especially embedding in other
+   CC licensed content) is permitted under the terms of the
+   Creative Commons "Attribution-NonCommercial" license:
 
-          http://creativecommons.org/licenses/by-nc/3.0/ 
+   http://creativecommons.org/licenses/by-nc/3.0/ 
 
-    Other uses may be allowed based on prior agreement with
-      beingmeta, inc.  Inquiries can be addressed to:
+   Other uses may be allowed based on prior agreement with
+   beingmeta, inc.  Inquiries can be addressed to:
 
-       licensing@beingmeta.com
+   licensing@beingmeta.com
 
    Enjoy!
 
@@ -85,12 +85,12 @@
                     pic=mbicon("readingcircle",64,64);
                 else pic=mbicon("sideguide",64,64);
                 if (pic)
-                  icon=fdjtDOM.Image
-                    (pic,".button.source",info.name|info.kind,
-                     ("click to show/hide glosses from "+info.name));
+                    icon=fdjtDOM.Image
+                (pic,".button.source",info.name|info.kind,
+                 ("click to show/hide glosses from "+info.name));
                 else {
-                  icon=fdjtDOM("div.button.source",
-                               fdjtString.getInitials(info.name));}
+                    icon=fdjtDOM("div.button.source",
+                                 fdjtString.getInitials(info.name));}
                 var title=
                     ((kind===':CIRCLE')?("the reading circle "):
                      (kind===':OVERLAY')?("the reading guide "):
@@ -345,8 +345,8 @@
 })();
 
 /* Emacs local variables
-;;;  Local variables: ***
-;;;  compile-command: "cd ..; make" ***
-;;;  indent-tabs-mode: nil ***
-;;;  End: ***
+   ;;;  Local variables: ***
+   ;;;  compile-command: "cd ..; make" ***
+   ;;;  indent-tabs-mode: nil ***
+   ;;;  End: ***
 */

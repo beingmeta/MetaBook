@@ -304,7 +304,7 @@ metaBook.TOC=
                         var cw=elt.clientWidth, sw=elt.scrollWidth;
                         if (sw>cw) elt.style.fontSize=(80*(cw/sw))+"%";}}
                 head=head.head;}}
-            
+        
         return MetaBookTOC;})();
 
 /* Emacs local variables

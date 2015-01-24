@@ -1,6 +1,6 @@
 /* -*- Mode: Javascript; Character-encoding: utf-8; -*- */
 
-/* ###################### metabook/metabook.js ###################### */
+/* ###################### metabook/root.js ###################### */
 
 /* Copyright (C) 2009-2014 beingmeta, inc.
    This file implements a Javascript/DHTML web application for reading
@@ -138,6 +138,23 @@ var metaBook={
     Timeline: {},
     // Word/phrase indexing structures
     allterms: [], prefixes: {},
+    // These are functions to be called when everythings has been loaded
+    //  to initialize local references to common metaBook functions
+    inits: [],
+    default_config: {
+        layout: 'bypage',forcelayout: false,
+        bodysize: 'normal',bodyfamily: 'serif',
+        bodycontrast: 'high', justify: false,
+        linespacing: 'normal',
+        uisize: 'normal',dyslexical: false,
+        animatecontent: true,animatehud: true,
+        hidesplash: false,keyboardhelp: true,
+        holdmsecs: 150,wandermsecs: 1500,
+        syncinterval: 60,glossupdate: 5*60,
+        locsync: 15, cacheglosses: true,
+        soundeffects: false, buzzeffects: false,
+        showconsole: false,
+        controlc: false},
     // What to trace, for debugging
     Trace: {
         startup: 0,       // Whether to trace startup

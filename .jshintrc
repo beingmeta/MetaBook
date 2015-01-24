@@ -3,7 +3,7 @@
     "globals": { "fdjt": false, "Storage": false,
 		 "indexedDB": false, "exports": false,
 		 "Knodule": false, "KNode": false,
-		 "iScroll": false},
+		 "iScroll": false, "metaBook": false},
     "strict": true,
     "eqeqeq": true,
     "noempty": false,

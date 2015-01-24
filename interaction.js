@@ -321,7 +321,7 @@
             return false;}
 
         if (hasParent(target,".glossmark")) {
-             cancel(evt);
+            cancel(evt);
             return false;}
 
         if ((metaBook.touch)&&(metaBook.textinput)) {
@@ -670,7 +670,7 @@
                 var opt={label: label, handler: makeOpener(href)};
                 choices.push(opt);}
             scan=scan.parentNode;}}
-            
+    
     function makeOpener(url){
         return function (){window.open(url);};}
     function copyURI(passage){
@@ -706,7 +706,7 @@
         var target=fdjtUI.T(evt);
         if (target.id!=="METABOOKBODY") return;
         if ((body_tapstart)&&(true) //((fdjtTime()-body_tapstart)<1000)
-            ) {
+           ) {
             if (metaBook.TapHold.body) metaBook.TapHold.body.abort();
             fdjtUI.cancel(evt);
             var x=(evt.clientX)||
@@ -716,7 +716,7 @@
             var w=fdjtDOM.viewWidth();
             if (x>(w/2)) pageForward(evt);
             else pageBackward(evt);}}
-            
+
     function body_released(evt){
         evt=evt||window.event;
         if (metaBook.zoomed) return;
@@ -868,8 +868,8 @@
             if (title.name===ref) return title;}
         return false;}
 
-   function toc_tapped(evt){
-       evt=evt||window.event;
+    function toc_tapped(evt){
+        evt=evt||window.event;
         var tap_target=fdjtUI.T(evt);
         if (metaBook.previewing) {
             // Because we're previewing, this slice is invisible, so
@@ -879,7 +879,7 @@
             metaBook.stopPreview("toc_tapped");
             fdjtUI.cancel(evt);
             return;}
-       var about=getAbout(tap_target);
+        var about=getAbout(tap_target);
         if (about) {
             var name=about.name||about.getAttribute("name");
             var ref=name.slice(3);
@@ -891,8 +891,8 @@
                         evt,about,ref,target);
             metaBook.JumpTo(target);
             fdjtUI.cancel(evt);}
-       else if (Trace.gestures) fdjtLog("toc_tapped %o noabout", evt);
-       else {}}
+        else if (Trace.gestures) fdjtLog("toc_tapped %o noabout", evt);
+        else {}}
     function toc_held(evt){
         evt=evt||window.event;
         var target=fdjtUI.T(evt), about=getAbout(target);
@@ -1170,27 +1170,27 @@
     // We use keydown to handle navigation functions and keypress
     //  to handle mode changes
     function onkeydown(evt){
-         evt=evt||window.event||null;
-         var kc=evt.keyCode;
-         var target=fdjtUI.T(evt);
-         // fdjtLog("sbook_onkeydown %o",evt);
-         if (evt.keyCode===27) { /* Escape works anywhere */
-             if (metaBook.previewing) {
-                 metaBook.stopPreview("escape_key");
-                 fdjtUI.TapHold.clear();}
-             dropClass(document.body,"mbZOOM");
-             if (metaBook.mode==="addgloss") metaBook.cancelGloss();
-             if (metaBook.mode) {
-                 metaBook.last_mode=metaBook.mode;
-                 metaBook.setMode(false);
-                 metaBook.setTarget(false);
-                 fdjtID("METABOOKSEARCHINPUT").blur();}
-             else {}
-             return;}
-         else if ((target.tagName==="TEXTAREA")||
-                  (target.tagName==="INPUT")||
-                  (target.tagName==="BUTTON"))
-             return;
+        evt=evt||window.event||null;
+        var kc=evt.keyCode;
+        var target=fdjtUI.T(evt);
+        // fdjtLog("sbook_onkeydown %o",evt);
+        if (evt.keyCode===27) { /* Escape works anywhere */
+            if (metaBook.previewing) {
+                metaBook.stopPreview("escape_key");
+                fdjtUI.TapHold.clear();}
+            dropClass(document.body,"mbZOOM");
+            if (metaBook.mode==="addgloss") metaBook.cancelGloss();
+            if (metaBook.mode) {
+                metaBook.last_mode=metaBook.mode;
+                metaBook.setMode(false);
+                metaBook.setTarget(false);
+                fdjtID("METABOOKSEARCHINPUT").blur();}
+            else {}
+            return;}
+        else if ((target.tagName==="TEXTAREA")||
+                 (target.tagName==="INPUT")||
+                 (target.tagName==="BUTTON"))
+            return;
         else if (hasClass(document.body,"mbZOOM"))
             return;
         else if ((metaBook.controlc)&&(evt.ctrlKey)&&((kc===99)||(kc===67))) {
@@ -2060,7 +2060,7 @@
         if ((Trace.gestures)||(hasClass(pagebar,"metabooktrace")))
             fdjtLog("pagebar_span_hold %o t=%o gopage: %o=>%o/%o, start=%o",
                     evt,target,previewing_page,gopage,metaBook.pagecount,
-                   preview_start_page);
+                    preview_start_page);
         if (!(preview_start_page)) preview_start_page=gopage;
         if (previewing_page===gopage) return;
         if (!(gopage)) {
@@ -2562,7 +2562,7 @@
             startAddGloss(metaBook.select_target,
                           ((evt.shiftKey)&&("addtag")),evt);
             metaBook.select_target=false;}}
-        
+    
     function raiseHUD(evt){
         evt=evt||window.event;
         metaBook.setHUD(true);
@@ -2831,11 +2831,11 @@
              touchend: metaBook.UI.handlers.sources_ontap},
          "#METABOOKPAGEFOOT": {},
          "#METABOOKPAGEBAR": {tap: pagebar_tap,
-                            hold: pagebar_hold,
-                            release: pagebar_release,
-                            slip: pagebar_slip,
-                            touchtoo: pagebar_touchtoo,
-                            click: cancel},
+                              hold: pagebar_hold,
+                              release: pagebar_release,
+                              slip: pagebar_slip,
+                              touchtoo: pagebar_touchtoo,
+                              click: cancel},
          "#METABOOKPAGEREFTEXT": {tap: enterPageRef},
          "#METABOOKPAGENOTEXT": {tap: enterPageNum},
          "#METABOOKLOCPCT": {tap: enterPercentage},
@@ -2918,7 +2918,7 @@
          ".metabooktogglehelp": {
              touchstart: cancel,
              touchend: toggleHelp},
-        
+         
          "#METABOOKCONSOLETEXTINPUT": {
              touchstart: function(){
                  fdjt.ID('METABOOKCONSOLETEXTINPUT').focus();},
