@@ -194,6 +194,9 @@ body._TOUCH .fdjtselecting .fdjtselectloupe { display: inline-block; }
 .fdjtselectstart, .fdjtselectend {
     box-shadow: 0px 0px 0.5ex 0.5ex rgba(255, 215, 0, 0.33);}
 
+#METABOOKBODY .fdjtselectwrap {
+    background-color: transparent; }
+
 /* Other default rules */
 
 .tapholdtarget { border-color: blue;}
@@ -371,8 +374,6 @@ body.hudup .metabookglossbutton {
 body.hudup .metabooktarget .metabookglossbutton { display: block;}
 body.hudup .metabooktarget.metabookglosstarget .metabookglossbutton {
     background-color: lightblue;}
-
-#METABOOKBODY div.fdjtselecting { background-color: lightyellow; }
 
 /* Displaying the sbook target */
 

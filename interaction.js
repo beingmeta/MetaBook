@@ -340,9 +340,8 @@
             else if (saving_dialog) {}
             else {
                 if ((metaBook.glossform)&&
-                    (hasClass(metaBook.glossform,"modified")))
-                    saveGlossDialog();
-                else metaBook.cancelGloss();
+                    (hasClass(metaBook.glossform,"modified"))) {
+                    metaBook.submitGloss(metaBook.glossform);}
                 fdjtUI.cancel(evt);
                 return;}}
 

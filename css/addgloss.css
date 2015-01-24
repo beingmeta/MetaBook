@@ -6,7 +6,9 @@
 
 /* Gloss form */
 
-div.metabookglossformbody { position: relative; }
+div.metabookglossformbody {
+    position: relative;
+    margin-left: 1ex;}
 
 #METABOOKADDGLOSS div.metabookglossform {
     box-sizing: border-box;
@@ -21,18 +23,16 @@ body.hudup #METABOOKADDGLOSS div.metabookglossform {
 */
 div.metabookglossform form div.textbox,
 div.metabookglossform form div.glossetc {
-    max-height: 90%;
-    clear: left; text-align: left;
-    margin-left: 0.5em; margin-right: 60px;
+    max-height: 90%; font-size: 0.6em;
+    clear: left; text-align: left; margin-right: 60px;
     padding-right: 3px; padding-top: 3px;
     box-sizing: border-box; -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;}
 div.metabookglossform.focused form div.textbox,
 div.metabookglossform.focused form div.glossetc {
     max-height: inherit;}
-div.metabookglossform form div.textbox { margin-top: 2px;}
 div.metabookglossform form div.glossetc {
-    font-size: 0.6em; overflow: hidden;}
+    overflow: hidden;}
 div.metabookglossform form div.textbox textarea,
 div.metabookglossform form div.textbox input[type="TEXT"] {
     min-height: 1.5em; max-height: 3em; padding: 2px;}
@@ -42,6 +42,12 @@ div.metabookglossform.focused form div.textbox input[type="TEXT"] {
 body.hudup div.metabookglossform form div.glossetc,
 body div.metabookglossform.focused form div.glossetc {
     min-height: 1.5ex;}
+
+body div.metabookglossform form div.glossetc {
+    display: none;}
+body.hudup div.metabookglossform form div.glossetc,
+body.hudup div.metabookglossform.focused form div.glossetc{
+    display: block;}
 
 #METABOOKADDGLOSS div.metabookglossform {
     border-radius: 1ex; -webkit-border-radius: 1ex;
@@ -76,19 +82,6 @@ div.metabookglossform div.response .respexcerpt {
 div.metabookglossform div .respdate {
     font-weight: bold; font-variant: small-caps;
     color: purple;}
-
-body.hudup div.metabookglossform form div.glossetc .modebuttons,
-body.hudup div.metabookglossform form div.glossetc .tags,
-body.hudup div.metabookglossform form div.glossetc .links,
-body.hudup div.metabookglossform form div.glossetc .sharing,
-body.hudup div.metabookglossform form div.checkspan.postgloss {
-    display: inline;}
-body div.metabookglossform.focused form div.glossetc .modebuttons,
-body div.metabookglossform.focused form div.glossetc .tags,
-body div.metabookglossform.focused form div.glossetc .links,
-body div.metabookglossform.focused form div.glossetc .sharing,
-body div.metabookglossform.focused form div.checkspan.postgloss {
-    display: inline;}
 
 div.metabookglossform form {
     padding: 0px; margin: 0px;}
@@ -176,14 +169,20 @@ body._NOSVG div.metabookglossform div.textbox input[name='OUTLET'] {
     background-image: url(g/metabook/sbookspeople24x24.png);}
 
 div.metabookglossform .glossetc .glossdate {
-    font-size: 1.1em; font-variant: small-caps; color: purple;
-    padding: 0px; padding-left: 1ex; float: right;
+    font-size: 0.8em; font-variant: small-caps; color: purple; padding: 0px;
     display: none;}
 div.metabookglossform.focused form .glossetc .glossdate {
     padding-bottom: 1ex;}
 
+div.metabookglossform .glossetc .glossdate,
 div.metabookglossform .glossetc .glossexposure {
-    font-size: 1.1em; float: right;}
+    float: right;}
+div.metabookglossform .glossetc .glossexposure,
+div.metabookglossform .glossetc .excerpt {
+    font-size: 0.5em;}
+div.metabookglossform.focused .glossetc .glossexposure,
+div.metabookglossform.focused .glossetc .excerpt {
+    font-size: 1em;}
 
 div.metabookglossform form .glossexposure .checkspan {
     float: right; margin-right: 1ex; margin-top: 2px;
@@ -195,13 +194,13 @@ div.metabookglossform.private .checkspan.postgloss {
 
 div.metabookglossform form .glossexposure, div.metabookglossform form .excerpt {
     display: none; }
-body.hudup div.metabookglossform form .glossexposure {
+body.hudup div.metabookglossform form .glossexposure,
+body.hudup div.metabookglossform form .excerpt {
     display: inline-block; }
 
 #METABOOKHUD .metabookglossform .checkspan.private {
     color: white; font-weight: bold; background-color: green;
-    width: 7em; text-align: center;}
-#METABOOKHUD .metabookglossform .checkspan.private.ischecked { font-size: 100%;}
+    text-align: center;}
 #METABOOKHUD .metabookglossform .checkspan.private input { display: none; }
 #METABOOKHUD .metabookglossform .checkspan.private.ischecked {
     background-color: red; color: white;}
@@ -400,7 +399,9 @@ div.metabookglossform.glossadd form div.addglossmenu.expanded >
 img[alt="glossdelete"] {
     display: none;}
 
-div.metabookglossform form .checkspan {
+div.metabookglossform form .checkspan.link,
+div.metabookglossform form .checkspan.outlet,
+div.metabookglossform form .checkspan.tag {
     padding-left: 1ex; padding-right: 2px;}
 
 div.metabookglossform form span.source:before,
@@ -611,7 +612,7 @@ div.metabookglossform div.messageoverlay {
     position: absolute; top: 0px; width: 100%; text-align: center;
     opacity: 0.9; z-index: 45; pointer-events: none;
     background-color: rgba(255,255,255,0.5); 
-    font-size: 2.5em; font-weight: bold;
+    font-size: 1.5em; font-weight: bold;
     display: none;}
 div.metabookglossform div.messageoverlay > div { display: none;}
 div.metabookglossform.submitting form > div.messageoverlay {
