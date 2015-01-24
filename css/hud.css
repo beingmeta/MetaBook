@@ -515,7 +515,8 @@ div.completions.hudpanel .normal { line-height: 250%;}
     -khtml-opacity: 0.99;
     -moz-opacity: 0.99;
     -o-opacity: 0.99;}
-#METABOOKHUD .hudbutton.tapholdtarget, body._MOUSE #METABOOKHUD .hudbutton:hover {
+#METABOOKHUD .hudbutton.tapholdtarget,
+body._MOUSE #METABOOKHUD .hudbutton:hover {
     border-color: blue; border-style: dotted; opacity: 0.99;}
 body.mbSKIMMING #METABOOKHUD img.hudbutton {
     opacity: 0.80;
@@ -532,6 +533,9 @@ body.mbSKIMMING #METABOOKHUD img.hudbutton {
     -moz-transition-duration: 1s;
     -webkit-transition-property: width, height, opacity;
     -webkit-transition-duration: 1s;}
+
+._TOUCH #METABOOKHUD img.hudbutton {
+    width: 65px; height: 64px;}
 
 /* .hudup #METABOOKHUD img.hudbutton { width: 75px; height: 75px;} */
 .hudup #METABOOKHUD.openheart img.hudbutton {
