@@ -738,7 +738,7 @@
                 metaBook.glossform.id="METABOOKLIVEGLOSS";
             if (metaBook.mode!=="addgloss") metaBook.setMode("addgloss");
             var sel=fdjtDOM.getSelectedRange();
-            if ((sel)&&(!(fdjt.DOM.emptyRange(sel)))) 
+            if ((sel)&&(!(fdjt.DOM.rangeIsEmpty(sel)))) 
                 metaBook.updateExcerpt(metaBook.glossform,sel);}
         else startAddGloss(passage,((evt.shiftKey)&&("addtag")),evt);}
 
