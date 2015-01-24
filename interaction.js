@@ -1395,20 +1395,27 @@
                     metaBook.setMode(false);}
                 fdjtDOM.remove(editor);}
             var renderings=fdjtDOM.Array(document.getElementsByName(glossid));
+            var i=0; var lim=renderings.length;
             if (renderings) {
-                var i=0; var lim=renderings.length;
                 while (i<lim) {
                     var rendering=renderings[i++];
                     if (rendering.id==='METABOOKSKIM')
                         fdjtDOM.replace(
                             rendering,fdjtDOM("div.metabookcard.deletedgloss"));
                     else fdjtDOM.remove(rendering);}}
-            var glossmarks=document.getElementsByName("METABOOK_GLOSSMARK_"+frag);
-            var j=0, jlim=glossmarks.length; while (j<jlim) {
-                var glossmark=glossmarks[j++];
+            var glossmarks=
+                document.getElementsByName("METABOOK_GLOSSMARK_"+frag);
+            glossmarks=fdjtDOM.Array(glossmarks);
+            i=0; lim=glossmarks.length; while (i<lim) {
+                var glossmark=glossmarks[i++];
                 var newglosses=RefDB.remove(glossmark.glosses,glossid);
                 if (newglosses.length===0) fdjtDOM.remove(glossmark);
-                else glossmark.glosses=newglosses;}}
+                else glossmark.glosses=newglosses;}
+            var highlights=fdjtDOM.$(
+                ".metabookuserexcerpt[data-glossid='"+glossid+"']");
+            highlights=fdjtDOM.Array(highlights);
+            i=0; lim=highlights.length; while (i<lim) {
+                fdjtUI.Highlight.remove(highlights[i++]);}}
         else fdjtUI.alert(response);}
 
     function delete_gloss(uuid){
@@ -2380,7 +2387,7 @@
                         {label: "Cancel"}],
                        ((modified)?
                         ("Delete this gloss?  Discard your changes?"):
-                        ("Delete this gloss or just close the box?")),
+                        ("Delete this gloss?")),
                        fdjtDOM(
                            "div.smaller",
                            "(Created ",
