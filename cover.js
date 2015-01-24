@@ -214,18 +214,17 @@
                 metabookinfo=fdjtDOM("div#METABOOKINFO.metabookinfo");
                 fdjtDOM(settings,"\n",metabookinfo);}
             metabookinfo.innerHTML=
-                "<p>"+metaBook.docref+"#"+metaBook.sourceid+" "+
+                "<p>Title "+metaBook.docref+"#"+metaBook.sourceid+" "+
                 ((metaBook.sourcetime)?(" ("+metaBook.sourcetime+")"):(""))+
                 ((metaBook.bookbuild)?
                  ("<br/>Built: "+(metaBook.bookbuild)):"")+
                 "</p>\n"+
-                "<p>metaBook version "+metaBook.version+" built on "+
+                "<p>metaBook app version "+metaBook.version+" built on "+
                 metaBook.buildhost+", "+metaBook.buildtime+"</p>\n"+
                 "<p>Program &amp; Interface are "+
                 "<span style='font-size: 120%;'>©</span>"+
-                " beingmeta, inc 2008-2014</p>\n";}
+                " beingmeta, inc 2008-2015</p>\n";}
         if (settings) addToCover(cover,settings);
-
         
         var cover_help=fdjtDOM(
             "div#METABOOKAPPHELP.metabookhelp.scrolling");
