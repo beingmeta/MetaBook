@@ -356,7 +356,7 @@
         metaBook.glosstarget=target;
         if (sel) {
             updateExcerpt(form,sel);
-            sel.empty();}
+            fdjtDOM.clearSelection(sel);}
         else if (gloss.excerpt) 
             showGlossExcerpt(frag,gloss.excerpt,gloss.exoff);
         else {}

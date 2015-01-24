@@ -195,7 +195,8 @@ div.metabookglossform.private .checkspan.postgloss {
 
 div.metabookglossform form .glossexposure, div.metabookglossform form .excerpt {
     display: none; }
-body.hudup div.metabookglossform form .glossexposure {
+body.hudup div.metabookglossform form .glossexposure,
+body.hudup div.metabookglossform form .excerpt {
     display: inline-block; }
 
 #METABOOKHUD .metabookglossform .checkspan.private {

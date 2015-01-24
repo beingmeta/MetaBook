@@ -752,7 +752,7 @@
             if (evt) fdjtUI.cancel(evt);
             return;}
         var sel=fdjtDOM.getSelectedRange();
-        if ((sel)&&(fdjtDOM.emptyRange(sel))) sel=false;
+        if ((sel)&&(fdjtDOM.rangeIsEmpty(sel))) sel=false;
         var form_div=metaBook.setGlossTarget(
             passage,((metaBook.mode==="addgloss")&&(metaBook.glossform)),
             sel);
