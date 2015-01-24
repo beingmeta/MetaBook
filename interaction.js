@@ -614,16 +614,15 @@
         fdjtUI.TapHold.clear();
         startAddGloss(passage,false,evt);
         // This makes a selection start on the region we just created.
-        if (!(metaBook.touch)) {
+        if ((Trace.gestures)||(Trace.selecting)) 
+            fdjtLog("body_held/select_wait %o %o %o",
+                    selecting,passage,evt);
+        setTimeout(function(){
             if ((Trace.gestures)||(Trace.selecting)) 
-                fdjtLog("body_held/select_wait %o %o %o",
+                fdjtLog("body_held/select_start %o %o %o",
                         selecting,passage,evt);
-            setTimeout(function(){
-                if ((Trace.gestures)||(Trace.selecting)) 
-                    fdjtLog("body_held/select_start %o %o %o",
-                            selecting,passage,evt);
-                selecting.startEvent(evt,1000);},
-                       0);}}
+            selecting.startEvent(evt,250);},
+                   0);}
     metaBook.getTextSelectors=function getTextSelectors(){return selectors;};
 
     function body_taptap(evt){
