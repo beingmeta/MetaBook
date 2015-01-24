@@ -859,7 +859,7 @@ metaBook.setMode=
             if ((value)&&(typeof value === 'string')&&(/yes|on|t/i.exec(value))) {
                 if (hasClass(document.body,"_DYSLEXICAL")) return;
                 else {
-                     metaBook.dyslexical=true;
+                    metaBook.dyslexical=true;
                     addClass(document.body,"_DYSLEXICAL");}}
             else if (!(hasClass(document.body,"_DYSLEXICAL")))
                 return;
@@ -869,7 +869,7 @@ metaBook.setMode=
             setTimeout(function(){
                 metaBook.resizeUI();
                 if (metaBook.layout) metaBook.Paginate("typechange");},
-                      10);});
+                       10);});
         metaBook.addConfig("animatecontent",function(name,value){
             if (metaBook.dontanimate) {}
             else if (value) addClass(document.body,"_ANIMATE");
@@ -891,9 +891,9 @@ metaBook.setMode=
             if ((bodysize)&&(bodysize.length))
                 result.bodysize=bodysize[0];
             /*
-            var bodyfamily=fdjtDOM.getInputValues(settings,"METABOOKBODYFAMILY");
-            if ((bodyfamily)&&(bodyfamily.length))
-                result.bodyfamily=bodyfamily[0];
+              var bodyfamily=fdjtDOM.getInputValues(settings,"METABOOKBODYFAMILY");
+              if ((bodyfamily)&&(bodyfamily.length))
+              result.bodyfamily=bodyfamily[0];
             */
             var uisize=fdjtDOM.getInputValues(settings,"METABOOKUISIZE");
             if ((uisize)&&(uisize.length))
