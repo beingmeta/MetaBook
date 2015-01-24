@@ -1008,6 +1008,12 @@
                 var new_card=metaBook.renderCard(ref);
                 if (new_card) fdjtDOM.replace(rep,new_card);}}
         ref.save();
+        if (metaBook.selecting) {
+            if (metaBook.selecting.onclear)
+                metaBook.selecting.onclear.push(function(){
+                    metaBook.addGloss2UI(ref);});
+            else metaBook.selecting.onclear=[function(){
+                metaBook.addGloss2UI(ref);}];}
         /* Turn off the target lock */
         if ((form)&&(!(keep))) {
             setTimeout(function(){
