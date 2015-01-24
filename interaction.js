@@ -2275,7 +2275,7 @@
             dropClass(menu,"expanded");
             dropClass(menu,"held");}
         else if (alt==="glossdelete") 
-            addgloss_delete(menu,form);
+            addgloss_delete(menu,form,false,true);
         else if (alt==="glosscancel") 
             addgloss_cancel(menu,form,div);
         else if (alt==="glosspush") {
@@ -2354,7 +2354,7 @@
                 dropClass(menu,"expanded");},
                                     500);}}
 
-    function addgloss_delete(menu,form,div){
+    function addgloss_delete(menu,form,div,noprompt){
         if (!(form)) form=getParent(menu,"FORM");
         if (!(div)) div=getParent(form,".metabookglossform");
         var modified=fdjtDOM.hasClass(div,"modified");
@@ -2364,6 +2364,13 @@
         var uuid=getInputValues(form,"UUID")[0];
         var gloss=metaBook.glossdb.probe(uuid);
         if ((!(gloss))||(!(gloss.created))) {
+            delete_gloss(uuid);
+            metaBook.setMode(false);
+            fdjtDOM.remove(div);
+            metaBook.setGlossTarget(false);
+            metaBook.setTarget(false);
+            return;}
+        if (noprompt) {
             delete_gloss(uuid);
             metaBook.setMode(false);
             fdjtDOM.remove(div);
