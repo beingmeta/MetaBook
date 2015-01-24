@@ -4,6 +4,8 @@
 
 @charset "UTF-8";
 
+div.metabookglosstarget {}
+
 /* Gloss form */
 
 div.metabookglossformbody {
@@ -554,11 +556,14 @@ div.metabookglossform form div.addglossmenu {
     z-index: 800;}
 
 div.metabookglossform form div.addglossmenu > img {
-    width: 40px; height: 40px; padding: 2px; margin-bottom: 4px;
+    width: 40px; height: 40px; padding: 2px; 
     box-sizing: content-box;
     display: none; }
 div.metabookglossform form div.addglossmenu > img.held {
     background-color: lightgreen; border-color: green;}
+div.metabookglossform form div.addglossmenu.expanded > img {
+    margin-bottom: 4px;}
+
 
 body._TOUCH div.metabookglossform form div.addglossmenu > img.held {
     width: 80px; height: 80px; margin-left: -20px;}
