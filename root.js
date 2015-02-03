@@ -186,7 +186,6 @@ var metaBook={
 
 fdjt.DOM.noautofontadjust=true;
 
-
 /* Emacs local variables
    ;;;  Local variables: ***
    ;;;  compile-command: "cd ..; make" ***

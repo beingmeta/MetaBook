@@ -733,14 +733,6 @@
             if (x>(w/2)) pageForward(evt);
             else pageBackward(evt);}}
 
-    function abortSelect(except){
-        var i=0, lim=selectors.length;
-        while (i<lim) {
-            var sel=selectors[i++];
-            if (sel!==except) sel.clear();}
-        selectors=[];
-        metaBook.select_target=false;}
-
     function body_released(evt){
         evt=evt||window.event;
         if (metaBook.zoomed) return;
@@ -762,7 +754,7 @@
                 metaBook.glossform.id="METABOOKLIVEGLOSS";
             if (metaBook.mode!=="addgloss") metaBook.setMode("addgloss");
             var sel=fdjtDOM.getSelectedRange();
-            if ((sel)&&(!(fdjt.DOM.emptyRange(sel)))) 
+            if ((sel)&&(!(fdjt.DOM.rangeIsEmpty(sel)))) 
                 metaBook.updateExcerpt(metaBook.glossform,sel);}
         else startAddGloss(passage,((evt.shiftKey)&&("addtag")),evt);}
 
@@ -776,7 +768,7 @@
             if (evt) fdjtUI.cancel(evt);
             return;}
         var sel=fdjtDOM.getSelectedRange();
-        if ((sel)&&(fdjtDOM.emptyRange(sel))) sel=false;
+        if ((sel)&&(fdjtDOM.rangeIsEmpty(sel))) sel=false;
         var form_div=metaBook.setGlossTarget(
             passage,((metaBook.mode==="addgloss")&&(metaBook.glossform)),
             sel);
