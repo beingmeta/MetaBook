@@ -53,13 +53,12 @@
     color: rgb(33, 106, 129); background-color: rgb(33, 106, 129);}
 
 #METABOOKHEAD {
-    min-height: 50px;
     padding-bottom: 2px; padding-top: 1px;
     border-width: 2px;}
 body.hudup #METABOOKHUD.openheart #METABOOKHEAD {
     max-height: 100px; height: auto;}
 body.hudup #METABOOKHUD.openheart.openhead #METABOOKHEAD {
-    max-height: 100px; min-height: 60px; height: auto;}
+    max-height: 100px; height: auto;}
 body._FULLHEIGHT.hudup #METABOOKHEAD {
     background-color: transparent;}
 body.hudup #METABOOKHEAD .hudpanel {
