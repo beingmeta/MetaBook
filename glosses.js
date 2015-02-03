@@ -176,7 +176,7 @@
         var proto=fdjtID("METABOOKADDGLOSSPROTOTYPE");
         if (!(div)) {
             div=proto.cloneNode(true); div.id="";
-            fdjtDOM(fdjtID("METABOOKGLOSSFORMS"),div);
+            fdjtDOM(fdjtID("METABOOKADDGLOSS"),div);
             form=getChildren(div,"form")[0];
             form.id=formid;
             form=setupGlossForm(form,passage,gloss,response||false);
@@ -591,8 +591,9 @@
             input.value=excerpt; changed=true;
             if (typeof off === "number") exoff.value=off;
             else {exoff.value="";exoff.disabled=true;}
-            if (excerpt_span) excerpt_span.innerHTML=
-                trim_excerpt(excerpt);}
+            if (excerpt_span) {
+                excerpt_span.innerHTML=trim_excerpt(excerpt);
+                excerpt_span.title=excerpt;}}
         if ((Trace.glossing)||(Trace.selecting))
             fdjtLog("setExcerpt %o form=%o excerpt=%o off=%o",
                     wrapper,form,excerpt,off);
@@ -1007,6 +1008,12 @@
                 var new_card=metaBook.renderCard(ref);
                 if (new_card) fdjtDOM.replace(rep,new_card);}}
         ref.save();
+        if (metaBook.selecting) {
+            if (metaBook.selecting.onclear)
+                metaBook.selecting.onclear.push(function(){
+                    metaBook.addGloss2UI(ref);});
+            else metaBook.selecting.onclear=[function(){
+                metaBook.addGloss2UI(ref);}];}
         /* Turn off the target lock */
         if ((form)&&(!(keep))) {
             setTimeout(function(){

@@ -174,6 +174,8 @@
         var i=0; var lim=glosses.length;
         while (i<lim) {
             var glossid=glosses[i++];
+            if (typeof glossid!=="string") glossid=glossid._id;
+            if (!(glossid)) continue;
             var gloss=glossdb.ref(glossid);
             var cur=glossmark.glosses;
             var maker=((gloss.maker)&&(sources.ref(gloss.maker)));

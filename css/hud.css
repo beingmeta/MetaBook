@@ -514,7 +514,8 @@ div.completions.hudpanel .normal { line-height: 250%;}
     -khtml-opacity: 0.99;
     -moz-opacity: 0.99;
     -o-opacity: 0.99;}
-#METABOOKHUD .hudbutton.tapholdtarget, body._MOUSE #METABOOKHUD .hudbutton:hover {
+#METABOOKHUD .hudbutton.tapholdtarget,
+body._MOUSE #METABOOKHUD .hudbutton:hover {
     border-color: blue; border-style: dotted; opacity: 0.99;}
 body.mbSKIMMING #METABOOKHUD img.hudbutton {
     opacity: 0.80;
@@ -531,6 +532,9 @@ body.mbSKIMMING #METABOOKHUD img.hudbutton {
     -moz-transition-duration: 1s;
     -webkit-transition-property: width, height, opacity;
     -webkit-transition-duration: 1s;}
+
+._TOUCH #METABOOKHUD img.hudbutton {
+    width: 65px; height: 64px;}
 
 /* .hudup #METABOOKHUD img.hudbutton { width: 75px; height: 75px;} */
 .hudup #METABOOKHUD.openheart img.hudbutton {
@@ -765,8 +769,8 @@ body.hudup #CODEXPAGE p, body.hudup #CODEXPAGE div { cursor: pointer;}
 
 #METABOOKPOINTGLOSSES div.metabookcard { margin-left: 0px;}
 #METABOOKHUD #METABOOKPOINTGLOSSES.hudpanel {
-    top: 100px; left: auto; right: 100px;
-    max-width: 40em; min-width: 20em; min-height: 20px; 
+    top: 100px; left: auto; right: 50px;
+    max-width: 80vw; min-width: 15em; min-height: 20px; 
     background-color: rgb(255,255,240);
     border: solid blue 5px; overflow: auto;
     border-radius: 1ex; -webkit-border-radius: 1ex;

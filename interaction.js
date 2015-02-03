@@ -340,9 +340,8 @@
             else if (saving_dialog) {}
             else {
                 if ((metaBook.glossform)&&
-                    (hasClass(metaBook.glossform,"modified")))
-                    saveGlossDialog();
-                else metaBook.cancelGloss();
+                    (hasClass(metaBook.glossform,"modified"))) {
+                    metaBook.submitGloss(metaBook.glossform);}
                 fdjtUI.cancel(evt);
                 return;}}
 
@@ -615,16 +614,15 @@
         fdjtUI.TapHold.clear();
         startAddGloss(passage,false,evt);
         // This makes a selection start on the region we just created.
-        if (!(metaBook.touch)) {
+        if ((Trace.gestures)||(Trace.selecting)) 
+            fdjtLog("body_held/select_wait %o %o %o",
+                    selecting,passage,evt);
+        setTimeout(function(){
             if ((Trace.gestures)||(Trace.selecting)) 
-                fdjtLog("body_held/select_wait %o %o %o",
+                fdjtLog("body_held/select_start %o %o %o",
                         selecting,passage,evt);
-            setTimeout(function(){
-                if ((Trace.gestures)||(Trace.selecting)) 
-                    fdjtLog("body_held/select_start %o %o %o",
-                            selecting,passage,evt);
-                selecting.startEvent(evt,1000);},
-                       0);}}
+            selecting.startEvent(evt,250);},
+                   0);}
     metaBook.getTextSelectors=function getTextSelectors(){return selectors;};
 
     function body_taptap(evt){
@@ -1396,20 +1394,27 @@
                     metaBook.setMode(false);}
                 fdjtDOM.remove(editor);}
             var renderings=fdjtDOM.Array(document.getElementsByName(glossid));
+            var i=0; var lim=renderings.length;
             if (renderings) {
-                var i=0; var lim=renderings.length;
                 while (i<lim) {
                     var rendering=renderings[i++];
                     if (rendering.id==='METABOOKSKIM')
                         fdjtDOM.replace(
                             rendering,fdjtDOM("div.metabookcard.deletedgloss"));
                     else fdjtDOM.remove(rendering);}}
-            var glossmarks=document.getElementsByName("METABOOK_GLOSSMARK_"+frag);
-            var j=0, jlim=glossmarks.length; while (j<jlim) {
-                var glossmark=glossmarks[j++];
+            var glossmarks=
+                document.getElementsByName("METABOOK_GLOSSMARK_"+frag);
+            glossmarks=fdjtDOM.Array(glossmarks);
+            i=0; lim=glossmarks.length; while (i<lim) {
+                var glossmark=glossmarks[i++];
                 var newglosses=RefDB.remove(glossmark.glosses,glossid);
                 if (newglosses.length===0) fdjtDOM.remove(glossmark);
-                else glossmark.glosses=newglosses;}}
+                else glossmark.glosses=newglosses;}
+            var highlights=fdjtDOM.$(
+                ".metabookuserexcerpt[data-glossid='"+glossid+"']");
+            highlights=fdjtDOM.Array(highlights);
+            i=0; lim=highlights.length; while (i<lim) {
+                fdjtUI.Highlight.remove(highlights[i++]);}}
         else fdjtUI.alert(response);}
 
     function delete_gloss(uuid){
@@ -2269,7 +2274,7 @@
             dropClass(menu,"expanded");
             dropClass(menu,"held");}
         else if (alt==="glossdelete") 
-            addgloss_delete(menu,form);
+            addgloss_delete(menu,form,false,true);
         else if (alt==="glosscancel") 
             addgloss_cancel(menu,form,div);
         else if (alt==="glosspush") {
@@ -2348,7 +2353,7 @@
                 dropClass(menu,"expanded");},
                                     500);}}
 
-    function addgloss_delete(menu,form,div){
+    function addgloss_delete(menu,form,div,noprompt){
         if (!(form)) form=getParent(menu,"FORM");
         if (!(div)) div=getParent(form,".metabookglossform");
         var modified=fdjtDOM.hasClass(div,"modified");
@@ -2358,6 +2363,13 @@
         var uuid=getInputValues(form,"UUID")[0];
         var gloss=metaBook.glossdb.probe(uuid);
         if ((!(gloss))||(!(gloss.created))) {
+            delete_gloss(uuid);
+            metaBook.setMode(false);
+            fdjtDOM.remove(div);
+            metaBook.setGlossTarget(false);
+            metaBook.setTarget(false);
+            return;}
+        if (noprompt) {
             delete_gloss(uuid);
             metaBook.setMode(false);
             fdjtDOM.remove(div);
@@ -2381,7 +2393,7 @@
                         {label: "Cancel"}],
                        ((modified)?
                         ("Delete this gloss?  Discard your changes?"):
-                        ("Delete this gloss or just close the box?")),
+                        ("Delete this gloss?")),
                        fdjtDOM(
                            "div.smaller",
                            "(Created ",
