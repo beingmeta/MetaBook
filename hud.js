@@ -289,10 +289,11 @@ metaBook.setMode=
                 var i=0, lim=nodes.length; while (i<lim) {
                     addGlossmark(nodes[i++],item);}
                 if (item.excerpt) {
-                    var range=metaBook.findExcerpt(nodes,item.excerpt,item.exoff);
+                    var range=metaBook.findExcerpt(
+                        nodes,item.excerpt,item.exoff);
                     if (range) {
                         fdjtUI.Highlight(range,"metabookuserexcerpt",
-                                         item.note,{"data-glossid":item.uuid});}}
+                                         item.note,{"data-glossid":item._id});}}
                 if (item.tags) {
                     var gloss_cloud=metaBook.gloss_cloud;
                     var tags=item.tags, j=0, n_tags=tags.length;
@@ -302,19 +303,6 @@ metaBook.setMode=
                     metaBook.syncstamp=item.tstamp;}}
         metaBook.addGloss2UI=addGloss2UI;
 
-        /* This is used for viewport-based browser, where the HUD moves
-           to be aligned with the viewport */
-        
-        function getBounds(elt){
-            var style=fdjtDOM.getStyle(elt);
-            return { top: fdjtDOM.parsePX(style.marginTop)||0+
-                     fdjtDOM.parsePX(style.borderTop)||0+
-                     fdjtDOM.parsePX(style.paddingTop)||0,
-                     bottom: fdjtDOM.parsePX(style.marginBottom)||0+
-                     fdjtDOM.parsePX(style.borderBottom)||0+
-                     fdjtDOM.parsePX(style.paddingBottom)||0};}
-        fdjtDOM.getBounds=getBounds;
-        
         /* Creating the HUD */
         
         function setupTOC(root_info){
@@ -323,7 +311,8 @@ metaBook.setMode=
             toc_button.style.visibility='';
             metaBook.DOM.toc=navhud;
             fdjtDOM.replace("METABOOKTOC",navhud);
-            var statictoc=createStaticTOC("div#METABOOKSTATICTOC.hudpanel",root_info);
+            var statictoc=createStaticTOC(
+                "div#METABOOKSTATICTOC.hudpanel",root_info);
             metaBook.Statictoc=statictoc;
             fdjtDOM.replace("METABOOKSTATICTOC",statictoc);}
         metaBook.setupTOC=setupTOC;
@@ -860,7 +849,7 @@ metaBook.setMode=
             if ((value)&&(typeof value === 'string')&&(/yes|on|t/i.exec(value))) {
                 if (hasClass(document.body,"_DYSLEXICAL")) return;
                 else {
-                     metaBook.dyslexical=true;
+                    metaBook.dyslexical=true;
                     addClass(document.body,"_DYSLEXICAL");}}
             else if (!(hasClass(document.body,"_DYSLEXICAL")))
                 return;
@@ -870,7 +859,7 @@ metaBook.setMode=
             setTimeout(function(){
                 metaBook.resizeUI();
                 if (metaBook.layout) metaBook.Paginate("typechange");},
-                      10);});
+                       10);});
         metaBook.addConfig("animatecontent",function(name,value){
             if (metaBook.dontanimate) {}
             else if (value) addClass(document.body,"_ANIMATE");
@@ -892,9 +881,9 @@ metaBook.setMode=
             if ((bodysize)&&(bodysize.length))
                 result.bodysize=bodysize[0];
             /*
-            var bodyfamily=fdjtDOM.getInputValues(settings,"METABOOKBODYFAMILY");
-            if ((bodyfamily)&&(bodyfamily.length))
-                result.bodyfamily=bodyfamily[0];
+              var bodyfamily=fdjtDOM.getInputValues(settings,"METABOOKBODYFAMILY");
+              if ((bodyfamily)&&(bodyfamily.length))
+              result.bodyfamily=bodyfamily[0];
             */
             var uisize=fdjtDOM.getInputValues(settings,"METABOOKUISIZE");
             if ((uisize)&&(uisize.length))
@@ -961,10 +950,9 @@ metaBook.setMode=
             if (evt) fdjt.UI.cancel(evt);
             var settings=getSettings();
             metaBook.setConfig(settings);
-            metaBook.saveConfig(settings);
             fdjtDOM.replace("METABOOKSETTINGSMESSAGE",
                             fdjtDOM("span.message#METABOOKSETTINGSMESSAGE",
-                                    "Your settings have been saved."));};
+                                    "Your settings have been applied."));};
         
         metaBook.UI.settingsCancel=function(evt){
             if (typeof evt === "undefined") evt=window.event;

@@ -174,7 +174,7 @@
         var proto=fdjtID("METABOOKADDGLOSSPROTOTYPE");
         if (!(div)) {
             div=proto.cloneNode(true); div.id="";
-            fdjtDOM(fdjtID("METABOOKGLOSSFORMS"),div);
+            fdjtDOM(fdjtID("METABOOKADDGLOSS"),div);
             form=getChildren(div,"form")[0];
             form.id=formid;
             form=setupGlossForm(form,passage,gloss,response||false);
@@ -589,8 +589,9 @@
             input.value=excerpt; changed=true;
             if (typeof off === "number") exoff.value=off;
             else {exoff.value="";exoff.disabled=true;}
-            if (excerpt_span) excerpt_span.innerHTML=
-                trim_excerpt(excerpt);}
+            if (excerpt_span) {
+                excerpt_span.innerHTML=trim_excerpt(excerpt);
+                excerpt_span.title=excerpt;}}
         if ((Trace.glossing)||(Trace.selecting))
             fdjtLog("setExcerpt %o form=%o excerpt=%o off=%o",
                     wrapper,form,excerpt,off);
@@ -944,7 +945,7 @@
         var isoutlet=(tagstring[0]==="@");
         var cloud=((isoutlet)?(metaBook.share_cloud):(metaBook.gloss_cloud));
         var text=(((tagstring[0]==='@')||(tagstring[0]==='#'))?
-            (tagstring.slice(1)):(tagstring));
+                  (tagstring.slice(1)):(tagstring));
         var completions=cloud.complete(text);
         var std=stdspace(text);
         if (isoutlet) {
@@ -1022,6 +1023,12 @@
                 var new_card=metaBook.renderCard(ref);
                 if (new_card) fdjtDOM.replace(rep,new_card);}}
         ref.save();
+        if (metaBook.selecting) {
+            if (metaBook.selecting.onclear)
+                metaBook.selecting.onclear.push(function(){
+                    metaBook.addGloss2UI(ref);});
+            else metaBook.selecting.onclear=[function(){
+                metaBook.addGloss2UI(ref);}];}
         /* Turn off the target lock */
         if ((form)&&(!(keep))) {
             setTimeout(function(){
@@ -1183,9 +1190,9 @@
             fdjtUI.choose(choices,
                           ((navigator.onLine)&&(!(metaBook.user))&&
                            ([fdjtDOM("p.smaller",
-                                    "This book isn't currently associated with an sBooks account, ",
-                                    "so any highlights or glosses you add will not be permanently saved ",
-                                    "until you login."),
+                                     "This book isn't currently associated with an sBooks account, ",
+                                     "so any highlights or glosses you add will not be permanently saved ",
+                                     "until you login."),
                              fdjtDOM("p.smaller",
                                      "You may either login now, cache your changes ",
                                      "on this machine until you do login, ",
@@ -1193,22 +1200,22 @@
                                      "or cancel the change you're about to make.")])),
                           (((navigator.onLine)&&(metaBook.user)&&
                             ([fdjtDOM("p.smaller",
-                                     "You aren't currently logged into your sBooks account from ",
-                                     "this machine, so any highlights or glosses you add won't ",
-                                     "be saved until you do."),
+                                      "You aren't currently logged into your sBooks account from ",
+                                      "this machine, so any highlights or glosses you add won't ",
+                                      "be saved until you do."),
                               fdjtDOM("p.smaller","In addition, you won't get updated glosses from ",
                                       "your networks or layers."),
                               fdjtDOM("p.smaller",
                                       "You may either login now, queue any changes you make until ",
-                                     "you do login, or cancel the change you were trying to make.")]))),
+                                      "you do login, or cancel the change you were trying to make.")]))),
                           ((!(navigator.onLine))&&(metaBook.nocache)&&
                            ([fdjtDOM("p.smaller",
-                                    "You are currently offline and have elected to not save ",
-                                    "highlights or glosses locally on this computer."),
+                                     "You are currently offline and have elected to not save ",
+                                     "highlights or glosses locally on this computer."),
                              fdjtDOM("p.smaller",
-                                    "You can either queue your changes by storing information locally, ",
-                                    "lose your changes when this page closes,",
-                                    "or cancel the change you were about to make.")])));
+                                     "You can either queue your changes by storing information locally, ",
+                                     "lose your changes when this page closes,",
+                                     "or cancel the change you were about to make.")])));
             return;}
         var sent=((navigator.onLine)&&(metaBook.connected)&&(metaBook.user)&&
                   (fdjt.Ajax.onsubmit(form,get_addgloss_callback(form,keep))));
