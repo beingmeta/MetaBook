@@ -103,6 +103,10 @@ div.resultinfo.noresults span { display: none;}
     -webkit-flex-grow: 0; -moz-flex-grow: 0; -ms-flexbox-grow: 0;
     flex-grow: 0;
     font-size: 2vmin;}
+#METABOOKHUD div.resultinfo span.stats {
+    transition-property: none; -webkit-transition-property: none;
+    -moz-transition-property: none; -o-transition-property: none;}
+
 #METABOOKHUD div.resultinfo span.qtags {
     display: -webkit-flex; display: -ms-flexbox;
     display: -moz-flex; display: flex;
@@ -144,7 +148,7 @@ body._ANIMATE .qtags {
     #METABOOKHUD div.resultinfo span.stats { font-size: 2vmin; }}
 
 @media screen and (max-width: 640px) {
-    #METABOOKHUD div.resultinfo span.stats { font-size: 2vmin; }}
+    #METABOOKHUD div.resultinfo span.stats { font-size: 3vmin; }}
     div.resultinfo .stats > span > br { display: initial; }}
 
 @media screen and (max-width: 500px) {

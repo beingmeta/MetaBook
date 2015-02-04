@@ -139,8 +139,12 @@
         input.value='';
         var elts=query.tags; var i=0; var lim=elts.length;
         // Update 'notags' class
-        if (elts.length) fdjtDOM.dropClass(metaBook.HUD,"emptysearch");
-        else addClass(metaBook.HUD,"emptysearch");
+        if (elts.length) {
+            fdjtDOM.dropClass(metaBook.HUD,"emptysearch");
+            fdjtDOM.dropClass("METABOOKSEARCHINFO","notags");}
+        else {
+            addClass(metaBook.HUD,"emptysearch");
+            fdjtDOM.dropClass("METABOOKSEARCHINFO","notags");}
         // Update the query tags
         var newtags=fdjtDOM("div.qtags");
         while (i<lim) {
@@ -182,8 +186,8 @@
             addClass(completions.dom,"hudpanel");
             fdjtDOM.replace(cloud,completions.dom);
             completions.dom.style.fontSize="";
-            completions.complete("");
-            metaBook.adjustCloudFont(completions);}
+            completions.complete("",function(){
+                metaBook.adjustCloudFont(completions);});}
         if (n_refiners===0) {
             addClass(box,"norefiners");
             refinecount.innerHTML="no refiners";}

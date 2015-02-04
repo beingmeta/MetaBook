@@ -864,7 +864,6 @@
             metaBook.setGlossMode(form.className);}}
     metaBook.initGlossMode=initGlossMode;
 
-    // This overrides the default_tap handler
     function body_click(evt){
         evt=evt||window.event;
         if (metaBook.zoomed) return;
@@ -1668,41 +1667,6 @@
         if (Trace.gestures) fdjtLog("dropHUD %o",evt);
         fdjtUI.cancel(evt); metaBook.setMode(false);};
 
-    /* Gesture state */
-
-    var n_touches=0;
-
-    /* Default click/tap */
-    function default_tap(evt){
-        var target=fdjtUI.T(evt);
-        if (metaBook.zoomed) return;
-        if (Trace.gestures)
-            fdjtLog("default_tap %o (%o) %s%s%s",evt,target,
-                    ((fdjtUI.isClickable(target))?(" clickable"):("")),
-                    (((hasParent(target,metaBook.HUD))||
-                      (hasParent(target,metaBook.uiclasses)))?
-                     (" inhud"):("")),
-                    ((metaBook.mode)?(" "+metaBook.mode):
-                     (metaBook.hudup)?(" hudup"):""));
-        if (fdjtUI.isClickable(target)) return;
-        else if ((hasParent(target,metaBook.HUD))||
-                 (hasParent(target,metaBook.uiclasses)))
-            return;
-        else if (metaBook.previewing) {
-            metaBook.stopPreview("default_tap");
-            cancel(evt);
-            return;}
-        else if (((metaBook.hudup)||(metaBook.mode))) {
-            metaBook.setMode(false);
-            cancel(evt);}
-        else if (false) {
-            var cx=evt.clientX, cy=evt.clientY;
-            var w=fdjtDOM.viewWidth(), h=fdjtDOM.viewHeight();
-            if ((cy<60)||(cy>(h-60))) return;
-            if (cx<w/3) metaBook.Backward(evt);
-            else if (cx>w/2) metaBook.Forward(evt);}
-        else {}}
-
     /* Glossmarks */
     
     function glossmark_tapped(evt){
@@ -1806,8 +1770,9 @@
         if (!(evt)) evt=window.event||false;
         if (evt) fdjtUI.cancel(evt);
         if (Trace.nav)
-            fdjtLog("Forward e=%o h=%o t=%o",evt,metaBook.head,metaBook.target);
-        if (((evt)&&(evt.shiftKey))||(n_touches>1))
+            fdjtLog("Forward e=%o h=%o t=%o",evt,
+                    metaBook.head,metaBook.target);
+        if ((evt)&&(evt.shiftKey))
             skimForward(evt);
         else pageForward(evt);}
     metaBook.Forward=forward;
@@ -1815,8 +1780,9 @@
         if (!(evt)) evt=window.event||false;
         if (evt) fdjtUI.cancel(evt);
         if (Trace.nav)
-            fdjtLog("Backward e=%o h=%o t=%o",evt,metaBook.head,metaBook.target);
-        if (((evt)&&(evt.shiftKey))||(n_touches>1))
+            fdjtLog("Backward e=%o h=%o t=%o",evt,
+                    metaBook.head,metaBook.target);
+        if ((evt)&&(evt.shiftKey))
             skimBackward();
         else pageBackward();}
     metaBook.Backward=backward;
