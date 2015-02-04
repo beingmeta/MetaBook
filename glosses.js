@@ -1336,7 +1336,7 @@
                         if ((pending)&&(pending.length)) {
                             var pos=pending.indexOf(glossid);
                             if (pos>=0) {
-                                pending.splice(pos,pos);
+                                pending.splice(pos,1);
                                 if (metaBook.cacheglosses)
                                     fdjtState.setLocal("metabook.queued("+metaBook.refuri+")",pending,true);
                                 metaBook.queued=pending;}}
