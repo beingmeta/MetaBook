@@ -44,9 +44,9 @@ div.metabookslice .tocthread
 div.metabookslice .idthread > .metabookcard:first-child .idhead {
     display: block;}
 
-div.metabookslice .metabookcard div.detail { 
+div.metabookslice .metabookcard div.glossbody { 
     display: none; color: ivory; clear: both;}
-div.metabookslice .showdetail div.detail { display: block;}
+div.metabookslice .showdetail div.glossbody { display: block;}
 div.metabookslice div.xrefs { display: none;}
 div.metabookslice .showxrefs div.xrefs { display: block;}
 div.metabookslice div.xrefs a { display: block;}

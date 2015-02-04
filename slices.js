@@ -88,8 +88,8 @@ metaBook.Slice=(function () {
                     ((note_len>0)&&
                      (fdjtDOM("span.note",convertNote(info.note))))," ",
                     // (fdjtUI.Ellipsis("span.note",info.note,140))
-                    ((info.detail)&&(fdjtDOM("span.detail","DETAIL")))," ",
                     ((excerpt_len>0)&&(showexcerpts(info.excerpt)))," ",
+                    ((info.detail)&&(fdjtDOM("span.glossbody","More")))," ",
                     (((info.alltags)||(info.tags))&&(showtags(info,query)))," ",
                     ((info.links)&&(showlinks(info.links)))," ",
                     ((info.attachments)&&

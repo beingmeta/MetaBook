@@ -7,7 +7,9 @@
 /* The Flyleaf */
 
 #METABOOKHUD #METABOOKHEARTBODY table {
-    width: 90%; margin-left: auto; margin-right: auto; vertical-align: top;}
+    width: 96%;
+    margin-left: auto; margin-right: auto;
+    vertical-align: top;}
 
 #METABOOKHUD #METABOOKHEARTBODY .tabcontent {
     overflow-y: hidden; overflow-x: hidden;}

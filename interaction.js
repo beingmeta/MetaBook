@@ -1032,7 +1032,7 @@
         var passage=mbID(card.getAttribute("data-passage"));
         var glossid=card.getAttribute("data-gloss");
         var gloss=((glossid)&&(metaBook.glossdb.ref(glossid)));
-        if (getParent(target,".detail")) {
+        if (getParent(target,".glossbody")) {
             var detail=((gloss)&&(gloss.detail));
             if (!(detail)) return;
             else if (detail[0]==='<')
@@ -1041,7 +1041,8 @@
                 var close=detail.indexOf('}');
                 fdjt.ID("METABOOKGLOSSDETAIL").innerHTML=
                     metaBook.md2HTML(detail.slice(close+1));}
-            else fdjt.ID("METABOOKGLOSSDETAIL").innerHTML=metaBook.md2HTML(detail);
+            else fdjt.ID("METABOOKGLOSSDETAIL").innerHTML=
+                metaBook.md2HTML(detail);
             metaBook.setMode("glossdetail");
             return fdjtUI.cancel(evt);}
         else if ((!(gloss))&&(passage)) {
@@ -1246,9 +1247,11 @@
             return false;}
         else if (metaBook.glossform) {
             var input=fdjt.DOM.getInput(metaBook.glossform,"NOTE");
-            glossform_focus(metaBook.glossform); metaBook.setFocus(input); input.focus();
+            glossform_focus(metaBook.glossform);
+            metaBook.setFocus(input); input.focus();
             var new_evt=document.createEvent("UIEvent");
-            new_evt.initUIEvent("keydown",true,true,window); new_evt.keyCode=kc;
+            new_evt.initUIEvent("keydown",true,true,window);
+            new_evt.keyCode=kc;
             input.dispatchEvent(new_evt);
             fdjtUI.cancel(evt);
             return;}
@@ -1523,13 +1526,14 @@
             gloss_cloud.complete(target.value);},
                         100);}
 
-    var attach_types=/\b(uploading|linking|dropbox|gdrive|usebox)\b/g;
+    var attach_types=/\b(uploading|linking|glossbody|image|audio|dropbox|gdrive|usebox)\b/g;
     function changeAttachment(evt){
         evt=evt||window.event;
         var target=fdjtUI.T(evt);
         var form=getParent(target,'form');
+        var newtype=target.value;
         if (target.checked)
-            fdjtDOM.swapClass(form,attach_types,target.value);
+            fdjtDOM.swapClass(form,attach_types,newtype);
         else dropClass(form,target.value);}
     metaBook.UI.changeAttachment=changeAttachment;
 
@@ -2384,12 +2388,6 @@
                              metaBook.setGlossTarget(false);
                              metaBook.setTarget(false);},
                          isdefault: true},
-                        {label: ((modified)?("Discard"):("Close")),
-                         handler: function(){
-                             metaBook.setMode(false);
-                             fdjtDOM.remove(div);
-                             metaBook.setGlossTarget(false);
-                             metaBook.setTarget(false);}},
                         {label: "Cancel"}],
                        ((modified)?
                         ("Delete this gloss?  Discard your changes?"):

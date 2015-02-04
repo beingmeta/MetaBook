@@ -9,7 +9,9 @@
 </div>
 <div id="METABOOKGLOSSEDITDETAIL" class="hudpanel">
   <!-- This is for editing the detail text for a gloss -->
-  <textarea NAME="METABOOKDETAILTEXT" ID="METABOOKDETAILTEXT" class="markdowninput"></textarea>
+  <textarea NAME="METABOOKDETAILTEXT" class="markdowninput"
+            ID="METABOOKDETAILTEXT">
+  </textarea>
 </div>
 <div id="METABOOKGLOSSATTACH" class="hudpanel">
   <form id="METABOOKATTACHFORM" target="METABOOKGLOSSCOMM"
@@ -19,8 +21,10 @@
     <table class="fdjtform">
       <input TYPE="HIDDEN" NAME="GLOSSID" VALUE="" id="METABOOKUPLOADGLOSSID"/>
       <input TYPE="HIDDEN" NAME="ITEMID" VALUE="" id="METABOOKUPLOADITEMID"/>
-      <tr class="attachtype">
-        <th class="headcell"><img src="{{bmg}}metabook/gloss_attach.svgz"/>Attach</th>
+      <tr class="attachtype"
+          onclick="fdjt.UI.CheckSpan.onclick(event);">
+        <th class="headcell">
+          Attach<img src="{{bmg}}metabook/gloss_attach.svgz"/></th>
         <td>
           <span class="checkspan ischecked">
             <input type="RADIO" NAME="ATTACHTYPE" VALUE="linking"
@@ -31,6 +35,20 @@
             <input type="RADIO" NAME="ATTACHTYPE" VALUE="uploading"
                    onchange="metaBook.UI.changeAttachment(event);"/>
             File</span>
+          <span class="checkspan">
+            <input type="RADIO" NAME="ATTACHTYPE" VALUE="glossbody"
+                   onchange="metaBook.UI.changeAttachment(event);"/>
+            Body</span>
+          <span class="checkspan disabled">
+            <input type="RADIO" NAME="ATTACHTYPE" VALUE="audio"
+                   onchange="metaBook.UI.changeAttachment(event);"
+                   disabled="DISABLED"/>
+            Audio</span>
+          <span class="checkspan disabled">
+            <input type="RADIO" NAME="ATTACHTYPE" VALUE="video"
+                   onchange="metaBook.UI.changeAttachment(event);"
+                   disabled="DISABLED"/>
+            Video</span>
         </td>
         <th class="button"></th>
       </tr>
@@ -66,12 +84,12 @@
                   Terms of Service</a>.</td>
         </tr>
       </tbody>
-      <tr class="detail">
-        <th>Detail</th>
-        <td>
-          <textarea NAME="ATTACH.DETAIL" ID="METABOOKATTACHDETAIL"></textarea>
-        </td>
-        <td></td></tr>
+      <tbody class="glossbody" id="METABOOKGLOSSBODY">
+        <tr>
+          <td colspan="3">
+            <textarea NAME="BODYTEXT" ID="METABOOKGLOSSBODYTEXT"></textarea>
+        </td></tr>
+      </tbody>
     </table>
   </form>
 </div>

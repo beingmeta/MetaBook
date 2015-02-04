@@ -111,7 +111,6 @@
                    (fdjtDOM.getChild(arg,"form"))));
         var div=getParent(form,".metabookglossform");
         var input=false;
-        var detail_elt=getInput(form,"DETAIL");
         if (!(form)) return;
         var frag=fdjtDOM.getInput(form,"FRAG");
         var uuid=fdjtDOM.getInput(form,"UUID");
@@ -122,8 +121,6 @@
                     ((uuid)&&(uuid.value)));}
         if ((toggle)&&(mode===form.className)) mode=false;
         if (mode) addClass(div,"focused");
-        if (form.className==="editdetail") {
-            detail_elt.value=fdjt.ID("METABOOKDETAILTEXT").value;}
         if (!(mode)) {
             dropClass(form,glossmodes);
             dropClass("METABOOKHUD",/\bgloss\w+\b/);
@@ -137,9 +134,6 @@
             upload_itemid.value=fdjtState.getUUID();
             input=fdjtID("METABOOKATTACHURL");}
         else if (mode==="addoutlet") input=fdjtID("METABOOKADDSHAREINPUT");
-        else if (mode==="editdetail") {
-            input=fdjtID("METABOOKDETAILTEXT");
-            fdjt.ID("METABOOKDETAILTEXT").value=detail_elt.value;}
         else {
             dropClass(form,glossmodes);
             dropClass("METABOOKHUD",/\bgloss\w+\b/);
@@ -149,7 +143,7 @@
         form.className=mode;
         swapClass("METABOOKHUD",/\bgloss\w+\b/,"gloss"+mode);
         metaBook.setHUD(true);
-        if ((mode)&&(/(editdetail|addtag|addoutlet)/.exec(mode)))
+        if ((mode)&&(/(addtag|addoutlet)/.exec(mode)))
             addClass("METABOOKHUD","openheart");
         if (input) metaBook.setFocus(input);}
     metaBook.setGlossMode=setGlossMode;
@@ -228,7 +222,7 @@
         var respondsto=getInput(form,"RE");
         var thread=getInput(form,"THREAD");
         var uuidelt=getInput(form,"UUID");
-        var detailelt=getInput(form,"DETAIL");
+        var detail_elt=getInput(form,"DETAIL");
         var response_elt=getChild(form,"div.response");
         if ((response_elt)&&(response)&&(gloss)) {
             var maker_elt=getChild(response_elt,".respmaker");
@@ -275,8 +269,7 @@
                 if (typeof urlinfo === 'string') title=urlinfo;
                 else title=urlinfo.title;
                 addLink(form,url,title);}}
-        if ((gloss)&&(gloss.detail))
-            detailelt.value=gloss.detail;
+        if (gloss) detail_elt.value=gloss.detail||"";
         if ((gloss)&&(gloss.share)) {
             var share=gloss.share;
             if (typeof share === 'string') share=[share];
@@ -458,14 +451,9 @@
             metaBook.glossform=false;
             return;}
         form.id="METABOOKLIVEGLOSS";
-        if ((metaBook.glossform)&&
-            (metaBook.glossform.className==="editdetail")) {
-            var oldform=metaBook.glossform;
-            var detail_elt=getInput(oldform,"DETAIL");
-            detail_elt.value=fdjt.ID("METABOOKDETAILTEXT").value;
-            detail_elt=getInput(form,"DETAIL");
-            fdjt.ID("METABOOKDETAILTEXT").value=detail_elt.value;}
         metaBook.glossform=form;
+        fdjt.ID("METABOOKGLOSSBODYTEXT").value=
+            fdjtDOM.getInputValue(form,"DETAIL")||"";
         var syncelt=getInput(form,"SYNC");
         syncelt.value=(metaBook.syncstamp+1);
         /* Do completions based on those input's values */
@@ -1100,12 +1088,9 @@
                      (arg.tagName==="DIV")&&(hasClass(arg,"metabookglossform"))) {
                 div=arg; form=getChild(div,"FORM");}}
         if (!(form)) return;
-        if (form.className==="editdetail") {
-            var detail_elt=getInput(form,"DETAIL");
-            if (detail_elt) {
-                detail_elt.value=
-                    fdjt.ID("METABOOKDETAILTEXT").value;
-                fdjt.ID("METABOOKDETAILTEXT").value="";}}
+        var detail_elt=getInput(form,"DETAIL");
+        var glossbodytext=fdjtID("METABOOKGLOSSBODYTEXT");
+        detail_elt.value=glossbodytext.value||"";
         addClass(div,"submitting");
         if (!((hasParent(form,".glossedit"))||
               (hasParent(form,".glossreply"))))
@@ -1285,8 +1270,8 @@
         if ((json.excerpt)&&(!(fdjtString.isEmpty(json.excerpt)))) {
             glossdata.excerpt=json.excerpt;
             glossdata.exoff=json.exoff;}
-        if ((json.details)&&(!(fdjtString.isEmpty(json.details))))
-            glossdata.details=json.details;
+        if ((json.detail)&&(!(fdjtString.isEmpty(json.detail))))
+            glossdata.detail=json.detail;
         if ((json.tags)&&(json.tags.length>0)) glossdata.tags=json.tags;
         if ((json.xrefs)&&(json.xrefs.length>0)) glossdata.xrefs=json.xrefs;
         metaBook.glossdb.Import(
@@ -1319,8 +1304,8 @@
         if ((json.excerpt)&&(!(fdjtString.isEmpty(json.excerpt)))) {
             glossdata.excerpt=json.excerpt;
             glossdata.exoff=json.exoff;}
-        if ((json.details)&&(!(fdjtString.isEmpty(json.details))))
-            glossdata.details=json.details;
+        if ((json.detail)&&(!(fdjtString.isEmpty(json.detail))))
+            glossdata.detail=json.detail;
         if ((json.tags)&&(json.tags.length>0)) glossdata.tags=json.tags;
         if ((json.xrefs)&&(json.xrefs.length>0)) glossdata.xrefs=json.xrefs;
         metaBook.glossdb.Import(glossdata,false,false,true);

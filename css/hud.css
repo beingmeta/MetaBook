@@ -1285,10 +1285,10 @@ body._FULLHEIGHT.hudup #METABOOKFOOT {
 
     #METABOOKSKIMMER {
         border-width: 2px;
-        border-bottom-left-radius: 1ex;
-        border-bottom-right-radius: 1ex;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
         padding-bottom: 0px;
-        left: 5px; right: 5px; }
+        left: 0px; right: 0px; }
     img.metabookclosehud#METABOOKSTOPSKIM {
         bottom: 50px; top: auto;}
 }
