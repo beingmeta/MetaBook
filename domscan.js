@@ -75,9 +75,11 @@ metaBook.DOMScan=(function(){
         if (!(root)) root=metaBook.docroot||document.body;
         var start=new Date();
         var allheads=[], allids=[];
+
         docinfo._root=root;
         docinfo._heads=allheads;
         docinfo._ids=allids;
+
         if (!(root.id)) root.id="SBOOKROOT";
         if ((Trace.startup>1)||(Trace.domscan)) {
             if (root.id) 
@@ -404,10 +406,7 @@ metaBook.DOMScan=(function(){
                     else if (grandchild.nodeType===1) {
                         scanner(grandchild,scanstate,docinfo);}}}
             if (info) info.ends_at=scanstate.location;
-            /*
-              if ((info)&&((info.ends_at-info.starts_at)<5000))
-              info.wsnid=md5ID(child);
-            */
+            
             if (toclevel) {
                 scanstate.lasthead=child; scanstate.lastinfo=info;
                 scanstate.lastlevel=toclevel;}}
