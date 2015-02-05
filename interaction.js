@@ -335,13 +335,16 @@
             return;}
 
         if (metaBook.glosstarget) {
+            var glossform=metaBook.glossform;
             if (hasParent(target,metaBook.glosstarget)) {
                 metaBook.setMode("addgloss",false);}
             else if (saving_dialog) {}
-            else {
-                if ((metaBook.glossform)&&
-                    (hasClass(metaBook.glossform,"modified"))) {
-                    metaBook.submitGloss(metaBook.glossform);}
+            else if (glossform) {
+                if (!(hasClass(glossform,"modified")))
+                    metaBook.cancelGloss();
+                else if (hasClass(glossform,"glossadd")) 
+                    saveGlossDialog();
+                else metaBook.submitGloss(glossform);
                 fdjtUI.cancel(evt);
                 return;}}
 
