@@ -402,6 +402,18 @@ metaBook.Startup=
                 function(){
                     applyTOCRules();
                     metadata=scanDOM();},
+                function(){
+                    var hasText=fdjtDOM.hasText;
+                    var rules=fdjtDOM.getMeta("SBOOKS.index",true);
+                    var content=fdjt.ID("CODEXCONTENT");
+                    rules.push("p,li,ul,blockquote,div");
+                    rules.push("h1,h2,h3,h4,h5,h6,h7,hgroup,.sbookindex");
+                    var nodes=fdjtDOM.getChildren(content,rules.join(","));
+                    var index=metaBook.textindex=new fdjt.TextIndex();
+                    var i=0, lim=nodes.length; while (i<lim) {
+                        var node=nodes[i++];
+                        if (hasText(node)) index.indexText(node);}
+                    index.mergeTerms();},
                 // Now you're ready to lay out the book, which is
                 //  timesliced and runs on its own.  We wait to do
                 //  this until we've scanned the DOM because we may
