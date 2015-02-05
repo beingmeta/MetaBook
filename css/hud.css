@@ -882,7 +882,7 @@ body.hudup #METABOOKHUD.overtoc div.hudpanel#METABOOKTOC { overflow: hidden; }
 body.hudup #METABOOKHUD.help div.helphud { display: block;}
 
 #METABOOKHUD .completions { line-height: 150%;}
-#METABOOKHUD .completions .weak, #METABOOKHUD .completions .words {
+#METABOOKHUD .completions .words {
     line-height: 150%; font-size: 80%;}
 #METABOOKHUD .completions .completion {
     white-space: nowrap;}

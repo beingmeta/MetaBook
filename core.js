@@ -304,7 +304,8 @@
                 return query;}}
         Query.prototype=new Knodule.TagQuery();
         Query.prototype.dbs=[metaBook.glossdb,metaBook.docdb];
-        Query.prototype.weights={"tags": 4,"^tags": 2,"+tags": 8,"^+tags": 4};
+        Query.prototype.weights={
+            "tags": 4,"^tags": 2,"+tags": 8,"^+tags": 4};
         Query.prototype.uniqueids=true;
         metaBook.Query=Query;
 

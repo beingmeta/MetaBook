@@ -110,9 +110,7 @@ div.completions.noinput .cloudtoggle {
     top: -0.2ex;}
 
 .cloud > .dterm.weak, .cloud > .rawterm, .cloud > .rootform {
-    padding-right: 0em; padding-left: 0em; 
-    border-top-left-radius: 0px; border-bottom-left-radius: 0px;
-    color: gray; background-color: inherit; border: none;}
+    background-color: silver; rbga(0,0,0,0.8);}
 .cloud > .rootform {
     color: rbga(0,0,0,0.8); font-weight: bold;}
 

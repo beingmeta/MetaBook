@@ -399,7 +399,7 @@ div.metabookglossform form .checkspan.tag {
 
 div.metabookglossform form span.source:before,
 .completions span.source:before {
-    content: '↣'; font-size: 150%;
+    content: '@'; font-size: 150%;
     color: darkblue;}
 
 div.metabookglossform .button.savebutton,

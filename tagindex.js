@@ -1,6 +1,6 @@
 /* -*- Mode: Javascript; Character-encoding: utf-8; -*- */
 
-/* ###################### metabook/nav.js ###################### */
+/* ###################### metabook/tagindex.js ###################### */
 
 /* Copyright (C) 2009-2014 beingmeta, inc.
    This file implements a Javascript/DHTML web application for reading
@@ -81,7 +81,6 @@
         var searchtags=metaBook.searchtags=metaBook.empty_query.getCoTags();
         var empty_query=metaBook.empty_query;
         var tagfreqs=empty_query.tagfreqs;
-        var max_freq=empty_query.max_freq;
         if (tracelevel)
             fdjtLog("Setting up initial tag clouds for %d tags",
                     searchtags.length);
@@ -99,19 +98,17 @@
                     taglist.appendChild(option);}
                 return;}
             var elt=addTag2Cloud(tag,empty_cloud,metaBook.knodule,
-                                 metaBook.tagweights,tagfreqs,false);
+                                 tagfreqs,tagfreqs,false);
             // Ignore section name tags
             if (tag._id[0]==="\u00a7") return;
             taglist.appendChild(knodeToOption(tag));
-            var freq=tagfreqs.get(tag);
-            if ((tag.prime)||((freq>4)&&(freq<(max_freq/2)))||
-                (tag._db!==metaBook.knodule)) {
+            if (!(tag.weak)) {
                 addClass(elt,"cue");
                 addTag2Cloud(tag,gloss_cloud);}},
-                         searchtags,addtags_progress,addtags_done,
+                         searchtags,tagindex_progress,tagindex_done,
                          200,20);}
     
-    function addtags_done(searchtags){
+    function tagindex_done(searchtags){
         var eq=metaBook.empty_query;
         var empty_cloud=metaBook.empty_cloud;
         var gloss_cloud=metaBook.gloss_cloud;
@@ -126,10 +123,10 @@
                                 true,empty_cloud.values.length));
         metaBook.sortCloud(empty_cloud);
         metaBook.sortCloud(gloss_cloud);
-        metaBook.sizeCloud(empty_cloud,metaBook.tagweights,[]);
-        metaBook.sizeCloud(gloss_cloud,metaBook.tagweights,[]);}
+        metaBook.sizeCloud(empty_cloud,metaBook.tagfreqs,[]);
+        metaBook.sizeCloud(gloss_cloud,metaBook.tagfreqs,[]);}
 
-    function addtags_progress(state,i,lim){
+    function tagindex_progress(state,i,lim){
         var tracelevel=Math.max(Trace.startup,Trace.clouds);
         var pct=((i*100)/lim);
         if (state!=='after') return;
@@ -146,7 +143,7 @@
     
     /* Using the autoindex generated during book building */
     function useIndexData(autoindex,knodule,baseweight,whendone){
-        var ntags=0, nitems=0;
+        var ntags=0, nitems=0, handle_weak=false;
         var allterms=metaBook.allterms, prefixes=metaBook.prefixes;
         var tagweights=metaBook.tagweights;
         var maxweight=metaBook.tagmaxweight, minweight=metaBook.tagminweight;
@@ -159,6 +156,8 @@
             if (tag[0]==="_") continue;
             else if (!(autoindex.hasOwnProperty(tag))) continue;
             else alltags.push(tag);}
+        // Number chosen to exclude exhaustive auto tags
+        if (alltags.length<1000) handle_weak=true;
         function handleIndexEntry(tag){
             var ids=autoindex[tag]; ntags++;
             var occurrences=[];
@@ -168,7 +167,7 @@
                 taghead=tag.slice(0,bar);
                 tagterm=tag.slice(tagstart,bar);}
             else tagterm=taghead=tag.slice(tagstart);
-            if (tag[0]!=='~')
+            if ((handle_weak)||(tag[0]!=='~'))
                 knode=metaBook.knodule.handleSubjectEntry(tag);
             else knode=metaBook.knodule.probe(taghead)||
                 metaBook.knodule.probe(tagterm);
