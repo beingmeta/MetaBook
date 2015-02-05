@@ -262,8 +262,8 @@ div.metabookglossform form div.glossetc .tags {
 div.metabookglossform form div.glossetc .outlets { padding-left: 1px;}
 div.metabookglossform form div.glossetc .links { padding-left: 1px;}
 div.metabookglossform form div.glossetc .checkspan img {
-    height: 1.7ex; width: auto; vertical-align: baseline;
-    padding-left: 3px; padding-top: 2px;}
+    height: 1.7ex; width: auto; vertical-align: bottom;
+    padding-left: 0.8ex; padding-top: 2px;}
 div.metabookglossform form div.glossetc .checkspan input {
     margin-left: 0px;}
 div.metabookglossform form div.glossetc .checkspan.anchor input,
@@ -281,7 +281,8 @@ body.hudup div.metabookglossform form div.glossetc .tags.empty,
 body.hudup div.metabookglossform form div.glossetc .excerpt.empty {
     display: none;}
 
-div.metabookglossform form div.glossetc .arrow { font-size: 150%; }
+div.metabookglossform form div.glossetc .share { 
+    font-size: 150%; font-weight: bold; color: green;}
 
 div.metabookglossform form div.glossetc span.head {
     padding-left: 0.5ex; font-weight: bold; color: black;}

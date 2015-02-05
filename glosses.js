@@ -103,6 +103,9 @@
     metaBook.getGlossMode=getGlossMode;
 
     function setGlossMode(mode,arg,toggle){
+        if ((mode)&&(arg)&&(mode.nodeType)&&
+            (typeof arg === "string")) {
+            var tmp=mode; mode=arg; arg=tmp;}
         if (!(arg)) arg=fdjtID("METABOOKLIVEGLOSS");
         if (typeof arg === 'string') arg=fdjtID(arg);
         if ((!(arg))||(!(arg.nodeType))) return;
@@ -125,6 +128,10 @@
             dropClass(form,glossmodes);
             dropClass("METABOOKHUD",/\bgloss\w+\b/);
             dropClass("METABOOKHUD","openheart");
+            if (!(metaBook.touch)) {
+                var glossinput=getInput(form,"NOTE");
+                if (glossinput) metaBook.setFocus(glossinput);
+                addClass(div,"focused");}
             return;}
         if (mode==="addtag") input=fdjtID("METABOOKADDTAGINPUT");
         else if (mode==="attach") {
@@ -516,7 +523,8 @@
                 formvar.toLowerCase());
         var checkspan=fdjtUI.CheckSpan(
             spanspec,formvar||"SHARE",outlet_id,checked,
-            fdjtDOM("span.arrow","↣"),outlet.nick||outlet.name,
+            fdjtDOM.Image(mbicon("share",32,32),"img.share","↣"),
+            outlet.nick||outlet.name,
             fdjtDOM.Image(mbicon("redx",32,32),"img.redx","x"));
         if ((outlet.nick)&&(outlet.description))
             checkspan.title=outlet.name+": "+outlet.description;

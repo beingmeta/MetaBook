@@ -427,7 +427,7 @@ metaBook.setMode=
              expandsearch: "METABOOKSEARCHINPUT"};
         
         function setMode(mode,nohud){
-            var oldmode=metaBook.mode;
+            var oldmode=metaBook.mode, mode_focus, mode_input;
             if (typeof mode === 'undefined') return oldmode;
             if (mode==='last') mode=metaBook.last_mode;
             if ((!(mode))&&(metaBook.mode)&&
@@ -462,8 +462,11 @@ metaBook.setMode=
                     /* True just puts up the HUD with no mode info */
                     metaBook.hideCover();
                     if (metabook_mode_foci[metaBook.mode]) {
-                        var input=fdjtID(metabook_mode_foci[metaBook.mode]);
-                        input.blur();}
+                        mode_focus=metabook_mode_foci[metaBook.mode];
+                        mode_input=
+                            (((mode_focus.search(/[.#]/))>=0)?
+                             (fdjtDOM.$1(mode_focus)):(fdjtID(mode_focus)));
+                        mode_input.blur();}
                     dropClass(metaBookHUD,metaBookModes);
                     metaBook.mode=false;
                     metaBook.last_mode=true;}
@@ -480,8 +483,11 @@ metaBook.setMode=
                     metaBook.hideCover();
                     metaBook.modechange=fdjtTime();
                     if (metabook_mode_foci[metaBook.mode]) {
-                        var modeinput=fdjtID(metabook_mode_foci[metaBook.mode]);
-                        modeinput.blur();}
+                        mode_focus=metabook_mode_foci[metaBook.mode];
+                        mode_input=
+                            (((mode_focus.search(/[.#]/))>=0)?
+                             (fdjtDOM.$1(mode_focus)):(fdjtID(mode_focus)));
+                        mode_input.blur();}
                     if (mode!==metaBook.mode) metaBook.last_mode=metaBook.mode;
                     metaBook.mode=mode;}
                 // If we're switching to the inner app but the iframe
@@ -633,12 +639,18 @@ metaBook.setMode=
             // We autofocus any input element appropriate to the
             // mode
             if (metabook_mode_foci[mode]) {
-                var input=fdjtID(metabook_mode_foci[mode]);
-                if ((input)&&(!(metaBook.touch))) {
+                var mode_focus=metabook_mode_foci[metaBook.mode];
+                var mode_input=
+                    (((mode_focus.search(/[.#]/))>=0)?
+                     (fdjtDOM.$1(mode_focus)):(fdjtID(mode_focus)));
+                if ((mode_input)&&(!(metaBook.touch))) {
                     setTimeout(function(){
-                        metaBook.setFocus(input);},
+                        metaBook.setFocus(mode_input);},
                                50);}}
-            else if (mode==="addgloss") {}
+            else if ((mode==="addgloss")&&(metaBook.glossform)) {
+                var glossform=metaBook.glossform;
+                var curglossmode=metaBook.getGlossMode(glossform);
+                metaBook.setGlossMode(curglossmode,glossform);}
             // Moving the focus back to the body lets keys work
             else setTimeout(metaBook.focusBody,50);
             
