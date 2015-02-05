@@ -283,16 +283,6 @@ body.hudup div.metabookglossform form div.glossetc .excerpt.empty {
 
 div.metabookglossform form div.glossetc .arrow { font-size: 150%; }
 
-div.metabookglossform form div.glossetc .outlets { display: none; }
-div.metabookglossform form div.glossetc .networks {
-    margin-right: 60px;
-    display: none;}
-div.metabookglossform form.addoutlet div.glossetc .outlets,
-div.metabookglossform form.addoutlet div.glossetc .networks { display: inline; }
-div.metabookglossform form.addoutlet div.glossetc .tags,
-div.metabookglossform form.addoutlet div.glossetc .links {
-    display: none; }
-
 div.metabookglossform form div.glossetc span.head {
     padding-left: 0.5ex; font-weight: bold; color: black;}
 

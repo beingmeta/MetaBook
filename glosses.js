@@ -696,14 +696,14 @@
     //      "xx" 'yy' /zz/ [ii] (jj) {kk} «aa»
     var tag_delims={"\"": "\"", "'": "'", "/": "/","<":">",
                     "[": "]","(":")","{":"}","«":"»"};
-    var tag_ends=/(\s|["'\/\[(<{}>)\]«»])/g;
+    var tag_ends=/["'\/\[(<{}>)\]«»]/g;
     
     // Keep completion calls from clobbering one another
     var glossinput_timer=false;
     
     // Find the tag overlapping pos in string
     // Return a description of the tag
-    function findTag(string,pos,partialok){
+    function findTag(string,pos,partialok,nospaces){
         if ((string)&&(string.length)&&(pos>0)) {
             var space=false, start=pos-1, delim=false, need=false;
             var c=string[start], pc=string[start-1], cstart=start;
@@ -723,7 +723,7 @@
                     else return false;}
                 else end=start+2+match_off;
                 if (end<pos) return false;}
-            else if (space) return false;
+            else if ((nospaces)&&(space)) return false;
             else {
                 var end_off=string.slice(start).search(tag_ends);
                 if (end_off>0) end=start+end_off;
@@ -845,7 +845,10 @@
                 else cloud.selectNext();
                 fdjtUI.cancel(evt);}
             else if (cloud.selection) {
-                metaBook.addTag2Form(form,cloud.selection);
+                if (taginfo.prefix==="@") {
+                    var outlet=cloud.selection.getAttribute("data-value");
+                    metaBook.addOutlet2Form(form,outlet,"SHARE");}
+                else metaBook.addTag2Form(form,cloud.selection);
                 target.value=text.slice(0,taginfo.start)+text.slice(taginfo.end);
                 dropClass("METABOOKHUD",/gloss(tagging|tagoutlet)/g);
                 setTimeout(function(){cloud.complete("");},10);
