@@ -239,7 +239,8 @@
         // fdjtLog("Input %o on %o",evt,target);
         // Clear any pending completion calls
         if ((ch===13)||(ch===13)||(ch===59)||(ch===93)) {
-            var qstring=target.value;
+            var qstring=target.value; 
+            target.list=""; // Clear the completion list
             if (fdjtString.isEmpty(qstring)) showSearchResults();
             else {
                 completeinfo=metaBook.queryCloud(metaBook.query);
@@ -273,6 +274,9 @@
             completeinfo=metaBook.queryCloud(metaBook.query);
             completions=completeinfo.complete(partial_string);
             fdjtUI.cancel(evt);
+            if (!(completions)) {
+                target.list="METABOOKSEARCHLIST";
+                return;}
             if (completions.prefix!==partial_string) {
                 target.value=completions.prefix;
                 fdjtDOM.cancel(evt);
@@ -284,10 +288,10 @@
             else completeinfo.selectNext();}
         else {
             completeinfo=metaBook.queryCloud(metaBook.query);
-            completeinfo.docomplete(target);
-            setTimeout(function(){
-                metaBook.UI.updateScroller("METABOOKSEARCHCLOUD");},
-                       100);}}
+            completeinfo.docomplete(target,function(completions){
+                if ((!(completions))||(completions.length===0)) 
+                    target.setAttribute('list',"METABOOKSEARCHLIST");
+                metaBook.UI.updateScroller("METABOOKSEARCHCLOUD");});}}
     metaBook.UI.handlers.search_keyup=searchInput_keyup;
 
     function searchUpdate(input,cloud){

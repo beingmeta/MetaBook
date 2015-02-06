@@ -73,6 +73,10 @@
         if (!(taglist)) {
             taglist=metaBook.taglist=fdjt.DOM("datalist#METABOOKTAGLIST");
             document.body.appendChild(taglist);}
+        var searchlist=metaBook.searchlist||fdjt.ID("METABOOKSEARCHLIST");
+        if (!(searchlist)) {
+            searchlist=metaBook.searchlist=fdjt.DOM("datalist#METABOOKSEARCHLIST");
+            document.body.appendChild(searchlist);}
         var knodeToOption=Knodule.knodeToOption;
 
         cloud_setup_start=fdjtTime();
@@ -95,13 +99,14 @@
             if (!(tag instanceof KNode)) {
                 if ((typeof tag === "string")&&(!(isEmpty(tag)))) {
                     var option=fdjtDOM("OPTION",tag); option.value=tag;
-                    taglist.appendChild(option);}
+                    searchlist.appendChild(option);}
                 return;}
             var elt=addTag2Cloud(tag,empty_cloud,metaBook.knodule,
                                  tagfreqs,tagfreqs,false);
             // Ignore section name tags
             if (tag._id[0]==="\u00a7") return;
             taglist.appendChild(knodeToOption(tag));
+            searchlist.appendChild(knodeToOption(tag));
             if (!(tag.weak)) {
                 addClass(elt,"cue");
                 addTag2Cloud(tag,gloss_cloud);}},
@@ -112,6 +117,9 @@
         var eq=metaBook.empty_query;
         var empty_cloud=metaBook.empty_cloud;
         var gloss_cloud=metaBook.gloss_cloud;
+        var searchlist=fdjt.ID("METABOOKSEARCHLIST");
+        var knodeToOption=Knodule.knodeToOption;        
+        
         if (Trace.startup>1)
             fdjtLog("Done populating clouds with %d tags",
                     searchtags.length);
@@ -121,6 +129,10 @@
             fdjtDOM.prepend(empty_cloud.dom,
                             metaBook.UI.getShowAll(
                                 true,empty_cloud.values.length));
+        fdjtTime.slowmap(function(string){
+            searchlist.appendChild(knodeToOption(string));},
+                         metaBook.textindex.allterms,
+                         false,false,100,20);
         metaBook.sortCloud(empty_cloud);
         metaBook.sortCloud(gloss_cloud);
         metaBook.sizeCloud(empty_cloud,metaBook.tagfreqs,[]);
