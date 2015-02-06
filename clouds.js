@@ -261,8 +261,8 @@
         else {
             var qid=tag._qid||tag.getQID(), id=tag._id||tag.dterm;
             // Section names as tags
-            if ((tag instanceof KNode)&&(qid[0]==="\u00A7")) {
-                var sectname=tag._id.slice(1), showname;
+            if (tag._db===metaBook.docdb) {
+                var sectname=tag.title, showname;
                 if (sectname.length>40)
                     showname=fdjtDOM(
                         "span.name.ellipsis",sectname.slice(0,17),
@@ -488,7 +488,7 @@
             else if (y instanceof KNode) return 1;
             else if (x instanceof Ref) { 
                 if (y instanceof Ref) {
-                    sx=x._qid; sy=y._qid;}
+                    sx=x._qid||x.getQID(); sy=y._qid||y.getQID();}
                 else return -1;}
             else if (y instanceof Ref) return 1;
             else if ((typeof x === "string")&&
