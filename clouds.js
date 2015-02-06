@@ -374,8 +374,9 @@
             return query.cloud;}
         else {
             var cotags=query.getCoTags();
+            var keeptags=reduceTags(cotags,query);
             var completions=makeCloud(
-                cotags,query.tagscores,query.tagfreqs,
+                keeptags,query.tagscores,query.tagfreqs,
                 cotags.length,false,false,query.tags);
             var cloud=completions.dom;
             if (!(completions.taphold))
@@ -410,6 +411,24 @@
     metaBook.queryCloud=queryCloud;
     RefDB.Query.prototype.getCloud=function(){return queryCloud(this);};
     
+    function reduceTags(cotags,query){
+        var tagfreqs=query.tagfreqs, n=query.results.length;
+        var termindex=metaBook.textindex.termindex;
+        var global_n=metaBook.textindex.allids.length;
+        var i=0, lim=cotags.length, results=[];
+        while (i<lim) {
+            var t=cotags[i++]; 
+            if (typeof t !== "string") results.push(t);
+            else {
+                var f=tagfreqs.getItem(t);
+                if ((f>0.9*n)||(f<3)||((f/n)<0.1)) continue;
+                var gl=termindex[t], gf=((gl)?(gl.length):(0));
+                if (gf===0) results.push(t);
+                if (gf/global_n>0.4) continue;
+                if ((f/n)>(5*(gf/global_n))) {
+                    results.push(t);}}}
+        return results;}
+
     function tag_sorter(x,y,scores){
         // Knodes go before Refs go before strings
         // Otherwise, use scores
