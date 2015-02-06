@@ -76,13 +76,13 @@ div.resultinfo .stats > span > br { display: none; }
 
 div.resultinfo .noresults { display: none;}
 div.resultinfo.noresults .noresults { display: block;}
+div.resultinfo.noresults .stats { display: none;}
 #METABOOKHUD.emptysearch .resultinfo.noresults .noresults {
     display: none;}
 
 div.resultinfo .noquery { display: none;}
 #METABOOKHUD.emptysearch div.resultinfo .noquery { display: block;}
 
-div.resultinfo.noresults span { display: none;}
 #METABOOKHUD.emptysearch div.resultinfo span { display: none;}
 
 #METABOOKHUD div.resultinfo {
