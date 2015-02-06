@@ -327,8 +327,7 @@
             fdjtLog("Applying inline tag attributes from content");
         for (var eltid in docinfo) {
             var info=docinfo[eltid];
-            if (info.atags) {tagged++; tohandle.push(info);}
-            else if (info.sectag) tohandle.push(info);}
+            if (info.atags) {tagged++; tohandle.push(info);}}
         if (((Trace.indexing)&&(tohandle.length))||
             (Trace.indexing>1)||(Trace.startup>1))
             fdjtLog("Indexing tag attributes for %d nodes",tohandle.length);
