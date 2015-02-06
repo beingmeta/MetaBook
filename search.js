@@ -291,6 +291,7 @@
             completeinfo.docomplete(target,function(completions){
                 if ((!(completions))||(completions.length===0)) 
                     target.setAttribute('list',"METABOOKSEARCHLIST");
+                else target.removeAttribute('list');
                 metaBook.UI.updateScroller("METABOOKSEARCHCLOUD");});}}
     metaBook.UI.handlers.search_keyup=searchInput_keyup;
 
