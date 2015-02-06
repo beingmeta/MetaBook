@@ -405,7 +405,6 @@ metaBook.Startup=
                     metadata=scanDOM();},
                 function(){
                     var hasText=fdjtDOM.hasText;
-                    var toSet=RefDB.toSet;
                     var rules=fdjtDOM.getMeta("SBOOKS.index",true);
                     var content=fdjt.ID("CODEXCONTENT");
                     rules.push("p,li,ul,blockquote,div");
@@ -415,18 +414,32 @@ metaBook.Startup=
                     var i=0, lim=nodes.length; while (i<lim) {
                         var node=nodes[i++];
                         if (hasText(node)) index.indexText(node);}
-                    index.finishIndex();
+                    index.finishIndex();},
+                function(){
+                    var toSet=RefDB.toSet;
                     var docdb=metaBook.docdb;
+                    var index=metaBook.textindex;
                     var docinfo=metaBook.docinfo;
-                    var wix=docdb.addIndex('strings',RefDB.StringMap);
                     var allids=index.allids, idterms=index.idterms;
                     var allterms=index.allterms, termindex=index.termindex;
+                    var wix=docdb.addIndex('strings',RefDB.StringMap);
                     var t=0, nterms=allterms.length; while (t<nterms) {
                         var term=allterms[t++];
                         wix[term]=toSet(termindex[term]);}
                     var n=0, nids=allids.length; while (n<nids) {
                         var id=allids[n++], doc=docinfo[id];
                         if (doc) doc.strings=toSet(idterms[id]);}},
+                /*
+                function(){
+                    var six=docdb.addIndex('sectag',RefDB.StringMap);
+                    var i=0, lim=allinfo.length; while (i<lim) {
+                        var node=allinfo[i++], heads=node.heads;
+                        if (node.sectag) six.add(node.sectag,node);
+                        var h=0, nheads=heads.length;
+                        while (h<nheads) {
+                            if (heads[h].sectag)
+                                six.add(node.sectag,node);}}},
+                */
                 // Now you're ready to lay out the book, which is
                 //  timesliced and runs on its own.  We wait to do
                 //  this until we've scanned the DOM because we may
