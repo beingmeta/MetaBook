@@ -58,6 +58,7 @@ metaBook.Startup=
         var fdjtDOM=fdjt.DOM;
         var fdjtUI=fdjt.UI;
         var fdjtID=fdjt.ID;
+        var RefDB=fdjt.RefDB;
         var mbID=metaBook.ID;
         
         var CodexLayout=fdjt.CodexLayout;
@@ -404,6 +405,7 @@ metaBook.Startup=
                     metadata=scanDOM();},
                 function(){
                     var hasText=fdjtDOM.hasText;
+                    var toSet=RefDB.toSet;
                     var rules=fdjtDOM.getMeta("SBOOKS.index",true);
                     var content=fdjt.ID("CODEXCONTENT");
                     rules.push("p,li,ul,blockquote,div");
@@ -413,7 +415,18 @@ metaBook.Startup=
                     var i=0, lim=nodes.length; while (i<lim) {
                         var node=nodes[i++];
                         if (hasText(node)) index.indexText(node);}
-                    index.mergeTerms();},
+                    index.mergeTerms();
+                    var docdb=metaBook.docdb;
+                    var docinfo=metaBook.docinfo;
+                    var wix=docdb.addIndex('strings',RefDB.StringMap);
+                    var allids=index.allids, idterms=index.idterms;
+                    var allterms=index.allterms, termindex=index.termindex;
+                    var t=0, nterms=allterms.length; while (t<nterms) {
+                        var term=allterms[t++];
+                        wix[term]=toSet(termindex[term]);}
+                    var n=0, nids=allids.length; while (n<nids) {
+                        var id=allids[n++], doc=docinfo[id];
+                        if (doc) doc.strings=toSet(idterms[id]);}},
                 // Now you're ready to lay out the book, which is
                 //  timesliced and runs on its own.  We wait to do
                 //  this until we've scanned the DOM because we may
