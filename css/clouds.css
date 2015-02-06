@@ -100,25 +100,8 @@ div.completions.noinput .cloudtoggle {
 
 .cloud .variation { 
     font-size: 70%; color: purple; font-style: italic;}
-.cloud .dterm {
-    padding-right: 0.2ex; padding-left: 0.35em; 
-    color: darkblue; background-color: gold;
-    border: solid yellow 2px;}
-.cloud .dterm sub, .cloud .dterm sup {padding-left: 0.1ex;}
-.cloud .dterm sup {
-    font-size: 100%; font-weight: bold; color: black;
-    top: -0.2ex;}
-
-.cloud > .dterm.weak {
-    background-color: silver; rbga(0,0,0,0.8);}
-.cloud > .rootform {
-    color: rbga(0,0,0,0.8); font-weight: bold;}
-.cloud > .rawterm, .cloud > .rootform {
-    color: black;}
-.cloud > .rootform { font-weight: bold; }
 .cloud > .rawterm > .text, .cloud > .rootform > .text {
     font-size: 70%;}
-
 
 .cloud .nomatchmsg {
     text-align: center; font-size: 36px; font-size: 3rem; 

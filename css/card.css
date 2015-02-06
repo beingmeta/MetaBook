@@ -51,24 +51,6 @@ div.metabookcard > hr {
 .metabookcard a.ref span.title {}
 .metabookcard a.ref span.uri {
     font-family: courier,fixed;}
-.metabookcard span.oldterm {
-    color: blue; background-color: yellow;
-    padding: 2px; border: solid blue 1px;
-    border-top-left-radius: 6px; border-bottom-left-radius: 6px;
-    border-top-right-radius: 2px; border-bottom-right-radius: 2px;
-    -webkit-border-top-left-radius: 6px;
-    -webkit-border-bottom-left-radius: 6px;
-    -webkit-border-top-right-radius: 2px;
-    -webkit-border-bottom-right-radius: 2px;
-    -o-border-top-left-radius: 6px;
-    -o-border-bottom-left-radius: 6px;
-    -o-border-top-right-radius: 2px;
-    -o-border-bottom-right-radius: 2px;
-    -moz-border-radius-topleft: 6px;
-    -moz-border-radius-bottomleft: 6px;
-    -moz-border-radius-topright: 2px;
-    -moz-border-radius-bottomright: 2px;}
-#METABOOKHUD .metabookcard span.oldterm {color: blue; }
 .metabookcard span.user { 
     color: green; font-size: 125%; font-style: italic;}
 .metabookcard span.outlet { color: green;}
@@ -120,8 +102,6 @@ div.metabookcard > hr {
 .metabookcard span.tags { font-size: 80%; vertical-align: top;}
 .metabookcard span.tags img.tagicon { height: 3ex; width: auto;}
 .metabookcard span.tags span { vertical-align: top;}
-.metabookcard span.tags span.rawterm, .metabookcard span.tags span.dterm {
-    white-space: nowrap;}
 .metabookcard span.tags span.sectname {
     font-style: italic; color: purple;}
 .metabookcard span.tags span.sectname.longterm {

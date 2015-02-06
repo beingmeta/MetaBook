@@ -49,12 +49,6 @@ div.searchbox input[type='TEXT'][name='QTEXT'] {
 body._NOSVG div.searchbox input[type='TEXT'][name='QTEXT'] {
     background-image: url(g/metabook/tagicon64x64.png);}
 
-div.searchbox div.query span.dterm {
-    padding-right: 0.35em; padding-left: 1ex;
-    padding-top: 0px; padding-bottom: 0px;
-    border-top-left-radius: 1ex; border-bottom-left-radius: 1ex;
-    color: darkblue; background-color: gold; border: solid yellow 2px;}
-
 div.searchbox div.toolbox div.tags {
     min-height: 1ex; clear: both; text-align: center;}
 div.searchbox .completions div.tags {

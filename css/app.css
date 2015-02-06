@@ -197,6 +197,35 @@ body._TOUCH .fdjtselecting .fdjtselectloupe { display: inline-block; }
 #METABOOKBODY .fdjtselectwrap {
     background-color: transparent; }
 
+/* DTerms */
+
+.dterm {
+    padding-right: 0.2ex; padding-left: 0.35em; 
+    color: darkblue; background-color: gold;
+    border: solid yellow 2px;}
+.dterm, .rawterm {
+    white-space: nowrap;}
+.dterm sub, .dterm sup {padding-left: 0.1ex;}
+.dterm sup {
+    font-size: 100%; font-weight: bold; color: black;
+    top: -0.2ex;}
+
+.dterm.weak {
+    background-color: silver; rbga(0,0,0,0.8);}
+.rootform {
+    color: rbga(0,0,0,0.8); font-weight: bold;}
+.rawterm, .rootform {
+    color: black;}
+.rootform { font-weight: bold; }
+
+/*
+div.searchbox div.query span.dterm {
+    padding-right: 0.35em; padding-left: 1ex;
+    padding-top: 0px; padding-bottom: 0px;
+    border-top-left-radius: 1ex; border-bottom-left-radius: 1ex;
+    color: darkblue; background-color: gold; border: solid yellow 2px;}
+*/
+
 /* Other default rules */
 
 .tapholdtarget { border-color: blue;}
