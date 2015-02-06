@@ -198,8 +198,10 @@
 
     function extendQuery(query,elt){
         var elts=[].concat(query.tags);
-        if (typeof elt === 'string') 
-            elts.push(kbref(elt)||elt);
+        if (typeof elt === 'string') {
+            if (elt.indexOf('@')>=0) 
+                elts.push(kbref(elt)||elt);
+            else elts.push(elt);}
         else elts.push(elt);
         return useQuery(new metaBook.Query(elts),query._box);}
     metaBook.extendQuery=extendQuery;
@@ -250,7 +252,7 @@
                     completeinfo.select();
                 // Signal error?
                 if (!(completion)) {
-                    var found=metaBook.docdb.find("~tags",qstring);
+                    var found=metaBook.textindex.termindex[qstring];
                     if ((found)&&(found.length))
                         setQuery(extendQuery(metaBook.query,qstring));
                     return;}
