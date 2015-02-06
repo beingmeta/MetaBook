@@ -106,6 +106,7 @@
                                   "*tags*","**tags*","~tags*",
                                   "^tags","~^tags","*^tags","**^tags",
                                   "^tags*","~^tags*","*^tags*","**^tags*"]});
+        metaBook.docdb.slots=["head","heads"];
         
         var knodeToOption=Knodule.knodeToOption;
 
@@ -305,7 +306,8 @@
         Query.prototype=new Knodule.TagQuery();
         Query.prototype.dbs=[metaBook.glossdb,metaBook.docdb];
         Query.prototype.weights={
-            "tags": 4,"^tags": 2,"+tags": 8,"^+tags": 4,"strings": 1};
+            "tags": 4,"^tags": 2,"+tags": 8,"^+tags": 4,
+            "strings": 1,"head": 2,"heads": 1};
         Query.prototype.uniqueids=true;
         metaBook.Query=Query;
 
@@ -675,10 +677,12 @@
             var node=nodes[i++];
             if (!(node.toclevel)) continue;
             var passages=docdb.find('head',node);
+            if (passages.length) passages=[].concat(passages);
             if ((passages)&&(passages.length))
                 knoduleAddTags(passages,tags,docdb,tagdb,
                                "^"+slotid,metaBook.tagscores);
             var subheads=docdb.find('heads',node);
+            if (subheads.length) subheads=[].concat(subheads);
             if ((subheads)&&(subheads.length))
                 addTags(subheads,tags,"^"+slotid,tagdb);}}
     metaBook.addTags=addTags;
