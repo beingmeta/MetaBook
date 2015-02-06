@@ -415,7 +415,7 @@ metaBook.Startup=
                     var i=0, lim=nodes.length; while (i<lim) {
                         var node=nodes[i++];
                         if (hasText(node)) index.indexText(node);}
-                    index.mergeTerms();
+                    index.finishIndex();
                     var docdb=metaBook.docdb;
                     var docinfo=metaBook.docinfo;
                     var wix=docdb.addIndex('strings',RefDB.StringMap);
