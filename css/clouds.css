@@ -109,10 +109,16 @@ div.completions.noinput .cloudtoggle {
     font-size: 100%; font-weight: bold; color: black;
     top: -0.2ex;}
 
-.cloud > .dterm.weak, .cloud > .rawterm, .cloud > .rootform {
+.cloud > .dterm.weak {
     background-color: silver; rbga(0,0,0,0.8);}
 .cloud > .rootform {
     color: rbga(0,0,0,0.8); font-weight: bold;}
+.cloud > .rawterm, .cloud > .rootform {
+    color: black;}
+.cloud > .rootform { font-weight: bold; }
+.cloud > .rawterm > .text, .cloud > .rootform > .text {
+    font-size: 70%;}
+
 
 .cloud .nomatchmsg {
     text-align: center; font-size: 36px; font-size: 3rem; 

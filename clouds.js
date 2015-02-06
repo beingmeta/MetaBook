@@ -243,7 +243,7 @@
             var spec="span.completion"+
                 ((isrootform)?(".rootform"):(".rawterm"))+
                 ((tag.length>20)?(".longterm"):(""));
-            entry=fdjtDOM(spec,"\u201c"+tag+"\u201d");
+            entry=fdjtDOM(spec,fdjtDOM("span.text","\u201c"+tag+"\u201d"));
             if (isrootform)
                 entry.title="forms "+tag;
             else entry.title=tag;
