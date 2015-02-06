@@ -141,13 +141,14 @@ metaBook.DOMScan=(function(){
                 return title;}}
 
         function gatherText(head,s) {
+            var root=(typeof s === "undefined");
             if (!(s)) s="";
             if (head.nodeType===3)
                 return s+head.nodeValue;
             else if (head.nodeType!==1) return s;
             else {
                 var style=getStyle(head), position=style.position;
-                if ((position==="")||(position==="static")) {
+                if ((root)||(position==="")||(position==="static")) {
                     var children=head.childNodes;
                     var i=0; var len=children.length;
                     while (i<len) {
