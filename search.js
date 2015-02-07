@@ -206,8 +206,8 @@
         var cur=[].concat(metaBook.query.tags);
         var splicepos=cur.indexOf(elt);
         if (splicepos<0) return;
-        else cur.splice(splicepos,splicepos+1);
-        useQuery(new metaBook.Query(cur),metaBook.query._box);
+        else cur.splice(splicepos,1);
+        setQuery(new metaBook.Query(cur));
         fdjtUI.cancel(evt);}
     metaBook.searchTags_onclick=searchTags_onclick;
 
