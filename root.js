@@ -184,6 +184,8 @@ var metaBook={
         gestures: 0}      // How much to trace gestures
 };
 
+if (typeof mB === 'undefined') mB=metaBook;
+
 fdjt.DOM.noautofontadjust=true;
 
 
