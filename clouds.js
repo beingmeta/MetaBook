@@ -584,7 +584,8 @@
         if (Trace.clouds)
             fdjtLog("Rendered new cloud %o using scores [%o,%o]",
                     cloud.dom,min_score,max_score);
-        if (cloud.dom.parentNode) adjustCloudFont(cloud);
+        if (cloud.dom.parentNode) setTimeout(function(){
+            adjustCloudFont(cloud);},50);
         if (Trace.clouds)
             fdjtLog("Finished sizing tags in %o using scores [%o,%o]",
                     cloud.dom,min_score,max_score);}
@@ -689,7 +690,9 @@
             if (ih<oh)
                 pct=(round(sqrt(oh/ih)*(pct/100)*100));
             else pct=(round((oh/ih)*(pct/100)*100));
-            dom.style.fontSize=pct+"%";
+            if (pct>200)
+                dom.style.fontSize="200%";
+            else dom.style.fontSize=pct+"%";
             if (Trace.clouds)
                 fdjtLog("Adjusted cloud %o: %o/%o to %o%%",dom,ih,oh,pct);}}
     metaBook.adjustCloudFont=adjustCloudFont;
