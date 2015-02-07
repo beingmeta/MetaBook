@@ -207,7 +207,10 @@
         var splicepos=cur.indexOf(elt);
         if (splicepos<0) return;
         else cur.splice(splicepos,1);
-        setQuery(new metaBook.Query(cur));
+        if (cur.length===0) {
+            metaBook.empty_cloud.dom.style.fontSize="";
+            setQuery(metaBook.empty_query);}
+        else setQuery(new metaBook.Query(cur));
         fdjtUI.cancel(evt);}
     metaBook.searchTags_onclick=searchTags_onclick;
 
