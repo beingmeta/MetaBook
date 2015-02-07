@@ -112,17 +112,8 @@
             fdjtDOM.replace(box_arg,query.dom);
         box.setAttribute("qstring",qstring);
         query.execute();
-        query.getCoTags();
-        if (Trace.search>1)
-            log("Setting query for %o to %o: %o/%o (%o)",
-                box,query.tags,
-                query.results.length,query.cotags.length,
-                qstring);
-        else if (Trace.search)
-            log("Setting query for %o to %o: %d results/%d refiners (%o)",
-                box,query.tags,
-                query.results.length,query.cotags.length,
-                qstring);
+        var cotags=query.getCoTags();
+        var showtags=query.getRefiners();
         var input=getChild(box,".searchinput");
         var cloudid=input.getAttribute("completions");
         var infoid=input.getAttribute("info");
@@ -169,7 +160,8 @@
         newtags.setAttribute("data-min","60%");
         fdjt.DOM.adjustFontSize(newtags);
         // Update the search cloud
-        var n_refiners=((query.cotags)&&(query.cotags.length))||0;
+        var n_refiners=((showtags)?(showtags.length):
+                        (cotags)?(cotags.length):(0));
         var completions=metaBook.queryCloud(query);
         refinecount.innerHTML=n_refiners+" <br/>"+
             ((n_refiners===1)?("co-tag"):("co-tags"));
