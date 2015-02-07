@@ -333,16 +333,24 @@
             else fdjtLog("Completions for '%s' n=%d, prefix=%s",
                          input.value,results.length,results.prefix);
             if ((input.value.length>0)&&
-                ((!(results))||(results.length===0))) {
-                fdjtLog("Set list attribute");
-                input.setAttribute('list',"METABOOKSEARCHLIST");
-                updateDatalist(input);}
-            else {
-                fdjtLog("Removed list attribute");
-                input.removeAttribute('list');
-                updateDatalist(input);}
+                ((!(results))||
+                 (results.length===0)||
+                 (input.value.length>4))) {
+                addRawText(cloud,input.value);
+                setTimeout(function(){cloud.complete(input.value);},50);}
+            else {}
             metaBook.UI.updateScroller("METABOOKSEARCHCLOUD");});}
     metaBook.searchUpdate=searchUpdate;
+
+    function addRawText(cloud,text,ptree,maxmatch){
+        if (!(ptree)) ptree=metaBook.textindex.prefixTree();
+        if (!(maxmatch)) maxmatch=42;
+        var matches=fdjtString.prefixFind(ptree,text);
+        if (matches.length===0) return;
+        else if (matches.length>maxmatch) return;
+        else {
+            var i=0, lim=matches.length; while (i<lim) 
+                metaBook.cloudEntry(matches[i++],cloud);}}
 
     function updateDatalist(input){
         input.focus();}
