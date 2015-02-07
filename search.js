@@ -150,8 +150,9 @@
         while (i<lim) {
             var tag=elts[i];
             if (typeof tag === 'string') tag=kbref(tag)||tag;
-            fdjtDOM(newtags,((i>0)&&("\u00a0\u00B7 ")),
-                    metaBook.cloudEntry(tag));
+            var entry=metaBook.cloudEntry(tag,false,false,"span.qelt");
+            entry.appendChild(fdjtDOM("span.redx","x"));
+            fdjtDOM(newtags,((i>0)&&("\u00a0\u00B7 ")),entry);
             i++;}
         if (qtags.id) newtags.id=qtags.id;
         fdjtDOM.replace(qtags,newtags);
@@ -195,6 +196,28 @@
         metaBook.UI.updateScroller(completions.dom);
         return query;}
     metaBook.useQuery=useQuery;
+
+    var hasParent=fdjtDOM.hasParent;
+    var getParent=fdjtDOM.hasParent;
+
+    function searchTags_onclick(evt){
+        var target=fdjtUI.T(evt);
+        var onx=hasParent(target,".redx");
+        var qelt=getParent(target,".qelt");
+        if (!(qelt)) return; else fdjtUI.cancel(evt);
+        var eltval=qelt.getAttribute("data-value"), elt;
+        if (eltval.indexOf('@')>=0) elt=kbref(eltval)||eltval;
+        if (Trace.gestures)
+            fdjtLog("searchTags_ontap %o: %s%o",
+                    evt,((onx)?("(onx) "):("")),
+                    elt);
+        var cur=[].concat(metaBook.query.tags);
+        var splicepos=cur.indexOf(elt);
+        if (splicepos<0) return;
+        else cur.splice(splicepos,splicepos+1);
+        useQuery(new metaBook.Query(cur),metaBook.query._box);
+        fdjtUI.cancel(evt);}
+    metaBook.searchTags_onclick=searchTags_onclick;
 
     function extendQuery(query,elt){
         var elts=[].concat(query.tags);
@@ -329,7 +352,8 @@
             metaBook.UI.updateScroller("METABOOKSEARCHCLOUD");});}
     metaBook.searchUpdate=searchUpdate;
 
-    function updateDatalist(input){}
+    function updateDatalist(input){
+        input.focus();}
     
     function searchInput_focus(evt){
         evt=evt||window.event||null;

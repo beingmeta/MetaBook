@@ -2819,6 +2819,7 @@
              metaBook.UI.handlers.clearSearch(evt);
              fdjt.UI.cancel(evt);
              return false;}},
+         "#METABOOKSEARCHINFO": { click: metaBook.searchTags_onclick },
          "#METABOOKSOURCES": {
              click: metaBook.UI.handlers.sources_ontap},
          "#METABOOKSOURCES .button.everyone": {
@@ -2875,6 +2876,7 @@
          "#METABOOKSOURCES": {
              touchstart: cancel,
              touchend: metaBook.UI.handlers.sources_ontap},
+         "#METABOOKSEARCHINFO": { click: metaBook.searchTags_onclick },
          "#METABOOKPAGEFOOT": {},
          "#METABOOKPAGEBAR": {tap: pagebar_tap,
                               hold: pagebar_hold,

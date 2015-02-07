@@ -107,6 +107,14 @@ div.resultinfo .noquery { display: none;}
     -webkit-flex-grow: 1; -moz-flex-grow: 1; -ms-flexbox-grow: 1;
     flex-grow: 1;}
 
+div.resultinfo .qtags .qelt { 
+    cursor: pointer; }
+div.resultinfo .qtags .qelt span.redx {
+    width: 1em; height: 1em; font-size: 120%; 
+    padding-left: 0.5ex;}
+div.resultinfo .qtags .qelt span.redx {
+    color: red; font-weight: bold;}
+
 #METABOOKHUD.refinesearch div.resultinfo span.refinecount, 
 #METABOOKHUD.expandsearch div.resultinfo span.showalltags,
 #METABOOKHUD.searchresults div.resultinfo span.resultcount {

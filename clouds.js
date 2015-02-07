@@ -232,15 +232,16 @@
                 initCloudEntry(tag,droplet.entry,droplet.cloud,droplet.lang);}
             delete tag.droplets;}}
 
-    function cloudEntry(tag,cloud,lang){
+    function cloudEntry(tag,cloud,lang,usespec){
         var entry;
+        if (!(usespec)) usespec="span.completion";
         if (typeof lang !== "string")
             lang=(metaBook.language)||(Knodule.language)||"EN";
         var existing=(cloud)&&(cloud.getByValue(tag,".completion"));
         if ((existing)&&(existing.length)) return existing[0];
         else if (typeof tag === "string") {
             var isrootform=tag.search(/\.\.\.$/)>0;
-            var spec="span.completion"+
+            var spec=usespec+
                 ((isrootform)?(".rootform"):(".rawterm"))+
                 ((tag.length>20)?(".longterm"):(""));
             entry=fdjtDOM(spec,fdjtDOM("span.text","\u201c"+tag+"\u201d"));
@@ -252,8 +253,8 @@
         else if (!(tag instanceof Ref)) {
             var strungout=entry.toString();
             entry=fdjtDOM(((strungout.length>20)?
-                           ("span.completion.weirdterm.longterm"):
-                           ("span.completion.weirdterm")),
+                           (usespec+".weirdterm.longterm"):
+                           (usespec+".weirdterm")),
                           "?"+strungout+"\u00bf");
             entry.title=strungout;
             if (cloud) cloud.addCompletion(entry,strungout,tag);
@@ -273,7 +274,7 @@
                     showname=fdjtDOM("span.name.longname",sectname);
                 else showname=fdjtDOM("span.name",sectname);
                 showname=fdjtDOM("span.name",sectname);
-                entry=fdjtDOM("span.completion.sectname","\u00A7",showname);
+                entry=fdjtDOM(usespec+".sectname","\u00A7",showname);
                 entry.setAttribute("data-key",sectname);
                 entry.setAttribute("data-value",tag._qid||tag.getQID());
                 if (sectname.length>24) addClass(entry,"longterm");
@@ -282,12 +283,12 @@
                 return entry;}
             else if (tag instanceof KNode) 
                 entry=fdjtDOM(((id.length>20)?
-                               ("span.completion.dterm.longterm"):
-                               ("span.completion.dterm")),
+                               (usespec+".dterm.longterm"):
+                               (usespec+".dterm")),
                               qid);
             else entry=fdjtDOM(((id.length>20)?
-                                ("span.completion.longterm"):
-                                ("span.completion")),
+                                (usespec+".longterm"):
+                                (usespec)),
                                qid);
             if (tag.cssclass) addClass(entry,tag.cssclass);
             entry.setAttribute("data-value",qid);
