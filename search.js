@@ -232,12 +232,11 @@
 
     var Selector=fdjtDOM.Selector;
     
-    function searchInput_keyup(evt){
+    function searchInput_keydown(evt){
         evt=evt||window.event||null;
         var ch=evt.charCode||evt.keyCode;
         var target=fdjtDOM.T(evt), completeinfo=false, completions=false;
-        // fdjtLog("Input %o on %o",evt,target);
-        // Clear any pending completion calls
+        fdjtLog("Input %o on %o",evt,target);
         if ((ch===13)||(ch===13)||(ch===59)||(ch===93)) {
             var qstring=target.value; 
             target.list=""; // Clear the completion list
@@ -277,7 +276,8 @@
             if (!(completions)) {
                 target.list="METABOOKSEARCHLIST";
                 return;}
-            if (completions.prefix!==partial_string) {
+            if ((completions.prefix)&&
+                (completions.prefix!==partial_string)) {
                 target.value=completions.prefix;
                 fdjtDOM.cancel(evt);
                 setTimeout(function(){
@@ -286,21 +286,51 @@
                 return;}
             else if (evt.shiftKey) completeinfo.selectPrevious();
             else completeinfo.selectNext();}
-        else {
-            completeinfo=metaBook.queryCloud(metaBook.query);
-            completeinfo.docomplete(target,function(completions){
-                if ((!(completions))||(completions.length===0)) 
-                    target.setAttribute('list',"METABOOKSEARCHLIST");
-                else target.removeAttribute('list');
-                metaBook.UI.updateScroller("METABOOKSEARCHCLOUD");});}}
+        else {}}
+    metaBook.UI.handlers.search_keydown=searchInput_keydown;
+
+    function searchInput_keyup(evt){
+        evt=evt||window.event||null;
+        var ch=evt.charCode||evt.keyCode;
+        var target=fdjtDOM.T(evt);
+        fdjtLog("Input %o on %o",evt,target);
+        if ((ch===13)||(ch===13)||(ch===59)||(ch===93)||(ch===9)) {}
+        else if (ch===8) {
+            setTimeout(function(){searchUpdate(target);},100);}
+        else searchUpdate(target);}
     metaBook.UI.handlers.search_keyup=searchInput_keyup;
+    
+    function searchInput_keypress(evt){
+        evt=evt||window.event||null;
+        var ch=evt.charCode||evt.keyCode;
+        var target=fdjtDOM.T(evt);
+        fdjtLog("Press %o on %o",evt,target);
+        if ((ch===13)||(ch===13)||(ch===59)||(ch===93)||(ch===9)||(ch===8)) {}
+        else searchUpdate(target);}
+    metaBook.UI.handlers.search_keypress=searchInput_keypress;
 
     function searchUpdate(input,cloud){
         if (!(input)) input=fdjtID("METABOOKSEARCHINPUT");
         if (!(cloud)) cloud=metaBook.queryCloud(metaBook.query);
-        cloud.complete(input.value);}
+        cloud.complete(input.value,function(results){
+            if (!(results))
+                fdjtLog("No completions for '%s'",input.value);
+            else fdjtLog("Completions for '%s' n=%d, prefix=%s",
+                         input.value,results.length,results.prefix);
+            if ((input.value.length>0)&&
+                ((!(results))||(results.length===0))) {
+                fdjtLog("Set list attribute");
+                input.setAttribute('list',"METABOOKSEARCHLIST");
+                updateDatalist(input);}
+            else {
+                fdjtLog("Removed list attribute");
+                input.removeAttribute('list');
+                updateDatalist(input);}
+            metaBook.UI.updateScroller("METABOOKSEARCHCLOUD");});}
     metaBook.searchUpdate=searchUpdate;
 
+    function updateDatalist(input){}
+    
     function searchInput_focus(evt){
         evt=evt||window.event||null;
         var input=fdjtDOM.T(evt);
