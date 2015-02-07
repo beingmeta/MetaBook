@@ -245,6 +245,8 @@
                 ((isrootform)?(".rootform"):(".rawterm"))+
                 ((tag.length>20)?(".longterm"):(""));
             entry=fdjtDOM(spec,fdjtDOM("span.text","\u201c"+tag+"\u201d"));
+            entry.setAttribute("data-key",tag);
+            entry.setAttribute("data-value",tag);
             if (isrootform)
                 entry.title="forms "+tag;
             else entry.title=tag;
