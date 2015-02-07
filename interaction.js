@@ -1187,7 +1187,7 @@
         var j=0; var jlim=words.length;
         while (j<jlim) {
             var word=words[j++];
-            var pattern=new RegExp(fdjtDOM.textRegExp(word,true),"gim");
+            var pattern=new fdjtDOM.textRegExp(word,true,true);
             var dups=metaBook.getDups(target);
             var ranges=fdjtDOM.findMatches(dups,pattern);
             if (Trace.highlight)
