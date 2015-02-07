@@ -295,26 +295,26 @@
                 setTimeout(metaBook.updateInfo,25);});}
         metaBook.refreshOffline=refreshOffline;
 
-        function Query(tags,base_query){
-            if (!(this instanceof Query))
-                return new Query(tags,base_query);
-            else if (arguments.length===0) return this;
-            else {
-                var query=Knodule.TagQuery.call(this,tags);
-                if (Trace.search) query.log={};
-                return query;}}
-        Query.prototype=new Knodule.TagQuery();
         Query.prototype.dbs=[metaBook.glossdb,metaBook.docdb];
         Query.prototype.weights={
             "tags": 4,"^tags": 2,"+tags": 8,"^+tags": 4,
             "strings": 1,"head": 2,"heads": 1};
         Query.prototype.uniqueids=true;
-        metaBook.Query=Query;
-
         metaBook.query=metaBook.empty_query=new Query([]);
 
         if (Trace.start>1) fdjtLog("Initialized DB");}
     metaBook.initDB=initDB;
+
+    function Query(tags,base_query){
+        if (!(this instanceof Query))
+            return new Query(tags,base_query);
+        else if (arguments.length===0) return this;
+        else {
+            var query=Knodule.TagQuery.call(this,tags);
+            if (Trace.search) query.log={};
+            return query;}}
+    Query.prototype=new Knodule.TagQuery();
+    metaBook.Query=Query;
 
     function getMakerKnodule(arg){
         var result;
