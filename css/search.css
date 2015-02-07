@@ -109,6 +109,9 @@ div.resultinfo .noquery { display: none;}
 
 div.resultinfo .qtags .qelt { 
     cursor: pointer; }
+div.resultinfo .qtags .qelt.dterm {
+    padding-top: 0.2ex;}
+
 div.resultinfo .qtags .qelt span.redx {
     width: 1em; height: 1em; font-size: 120%; 
     padding-left: 0.5ex;}
