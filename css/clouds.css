@@ -52,6 +52,11 @@ div.completions.noinput .cloudtoggle {
 .cloud.showall .showless {display: inline;}
 .cloud.showall .showmore {display: none;}
 
+.completions.cloud .completion.selected {
+    text-decoration: none;
+    outline: solid rgba(128,0,128,0.7) 2px;
+    background-color: rgba(128,0,128,0.4);}
+
 .cloud span.sep { 
     font-size: 200%; font-weight: bold; 
     color: purple; vertical-align: middle;}

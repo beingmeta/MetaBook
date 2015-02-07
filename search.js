@@ -251,10 +251,8 @@
         evt=evt||window.event||null;
         var ch=evt.charCode||evt.keyCode;
         var target=fdjtDOM.T(evt), completeinfo=false, completions=false;
-        fdjtLog("Input %o on %o",evt,target);
         if ((ch===13)||(ch===13)||(ch===59)||(ch===93)) {
             var qstring=target.value; 
-            target.list=""; // Clear the completion list
             if (fdjtString.isEmpty(qstring)) showSearchResults();
             else {
                 completeinfo=metaBook.queryCloud(metaBook.query);
@@ -288,9 +286,6 @@
             completeinfo=metaBook.queryCloud(metaBook.query);
             completions=completeinfo.complete(partial_string);
             fdjtUI.cancel(evt);
-            if (!(completions)) {
-                target.list="METABOOKSEARCHLIST";
-                return;}
             if ((completions.prefix)&&
                 (completions.prefix!==partial_string)) {
                 target.value=completions.prefix;
@@ -298,7 +293,7 @@
                 setTimeout(function(){
                     metaBook.UI.updateScroller("METABOOKSEARCHCLOUD");},
                            100);
-                return;}
+                completeinfo.selectNext();}
             else if (evt.shiftKey) completeinfo.selectPrevious();
             else completeinfo.selectNext();}
         else {}}
@@ -308,7 +303,6 @@
         evt=evt||window.event||null;
         var ch=evt.charCode||evt.keyCode;
         var target=fdjtDOM.T(evt);
-        fdjtLog("Input %o on %o",evt,target);
         if ((ch===13)||(ch===13)||(ch===59)||(ch===93)||(ch===9)) {}
         else if (ch===8) {
             setTimeout(function(){searchUpdate(target);},100);}
@@ -319,7 +313,6 @@
         evt=evt||window.event||null;
         var ch=evt.charCode||evt.keyCode;
         var target=fdjtDOM.T(evt);
-        fdjtLog("Press %o on %o",evt,target);
         if ((ch===13)||(ch===13)||(ch===59)||(ch===93)||(ch===9)||(ch===8)) {}
         else searchUpdate(target);}
     metaBook.UI.handlers.search_keypress=searchInput_keypress;
@@ -327,11 +320,8 @@
     function searchUpdate(input,cloud){
         if (!(input)) input=fdjtID("METABOOKSEARCHINPUT");
         if (!(cloud)) cloud=metaBook.queryCloud(metaBook.query);
+        if (input.value.length===0) cloud.clearSelection();
         cloud.complete(input.value,function(results){
-            if (!(results))
-                fdjtLog("No completions for '%s'",input.value);
-            else fdjtLog("Completions for '%s' n=%d, prefix=%s",
-                         input.value,results.length,results.prefix);
             if ((input.value.length>0)&&
                 ((!(results))||
                  (results.length===0)||
@@ -352,9 +342,6 @@
             var i=0, lim=matches.length; while (i<lim) 
                 metaBook.cloudEntry(matches[i++],cloud);}}
 
-    function updateDatalist(input){
-        input.focus();}
-    
     function searchInput_focus(evt){
         evt=evt||window.event||null;
         var input=fdjtDOM.T(evt);
@@ -381,7 +368,9 @@
         else {
             metaBook.empty_cloud.dom.style.fontSize="";
             setQuery(metaBook.empty_query);
-            input.value="";}
+            input.value="";
+            metaBook.empty_cloud.clearSelection();
+            metaBook.empty_cloud.complete("");}
         input.focus();}
     metaBook.UI.handlers.clearSearch=clearSearch;
     
