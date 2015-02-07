@@ -68,9 +68,9 @@ div.metabookslice div.metabookthread div.metabookcard:first-child div.locbar {
     display:block;}
 
 div.metabookslice div.metabookskimpoint {
-    border-left: solid red 16px;
-    border-top: solid red 4px;
-    border-bottom: solid red 4px;
+    border-left: solid darkblue 16px;
+    border-top: solid darkblue 4px;
+    border-bottom: solid darkblue 4px;
     margin-left: 0px;
     background-color: white;}
 div.metabookslice div.metabookskimpoint.metabookcard {}
