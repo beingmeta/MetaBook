@@ -147,6 +147,12 @@
                 var addTags=metaBook.addTags, addTag2Cloud=metaBook.addTag2Cloud;
                 var empty_cloud=metaBook.empty_cloud;
                 var maker=(item.maker)&&(metaBook.sourcedb.ref(item.maker));
+                if (item.links) {
+                    var links=item.links;
+                    for (var link in links) {
+                        if ((links.hasOwnProperty(link))&&
+                            (link.search("https://glossdata.sbooks.net/")===0))
+                            noteGlossdata(link);}}
                 if (maker) {
                     metaBook.addTag2Cloud(maker,metaBook.empty_cloud);
                     metaBook.UI.addGlossSource(maker,true);}
@@ -304,6 +310,21 @@
 
         if (Trace.start>1) fdjtLog("Initialized DB");}
     metaBook.initDB=initDB;
+
+    function noteGlossdata(link){
+        var key="cache("+link+")";
+        if (fdjtState.getLocal(key)) return;
+        else fdjtState.setLocal(key,"fetching");
+        var uri="https://glossdata.sbooks.net/U/"+
+            link.slice("https://glossdata.sbooks.net/".length);
+        var req=new XMLHttpRequest();
+        req.onreadystatechange=function () {
+            if ((req.readyState === 4) && (req.status === 200)) {
+                fdjtState.setLocal(key,req.text);}
+            else {}};
+        req.open("GET",uri);
+        req.withCredentials=true;
+        req.send(null);}
 
     function Query(tags,base_query){
         if (!(this instanceof Query))
