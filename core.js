@@ -320,7 +320,9 @@
         var req=new XMLHttpRequest();
         req.onreadystatechange=function () {
             if ((req.readyState === 4) && (req.status === 200)) {
-                fdjtState.setLocal(key,req.text);}
+                fdjtState.setLocal(key,req.responseText);}
+            else if (req.readyState === 4) {
+                fdjtState.dropLocal(key);}
             else {}};
         req.open("GET",uri);
         req.withCredentials=true;

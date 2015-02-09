@@ -221,16 +221,41 @@ metaBook.Slice=(function () {
                          " ");
         for (url in refs) {
             if (url[0]==='_') continue;
-            var urlinfo=refs[url];
-            var title; var icon=mbicon("diaglink",64,64);
+            var urlinfo=refs[url], elt=false;
+            var title; var icon=false, type=false, useclass=false;
             if (typeof urlinfo === 'string') title=urlinfo;
             else {
                 title=urlinfo.title;
-                icon=urlinfo.icon;}
+                icon=urlinfo.icon;
+                type=urlinfo.type;}
+            if (type) {}
+            else if (url.search(/\.(jpg|jpeg)$/g)>0) type="image/jpeg";
+            else if (url.search(/\.png$/g)>0) type="image/png";
+            else if (url.search(/\.gif$/g)>0) type="image/gif";
+            else if (url.search(/\.wav$/g)>0) type="audio/wav";
+            else if (url.search(/\.ogg$/g)>0) type="audio/ogg";
+            else if (url.search(/\.mp3$/g)>0) type="audio/mpeg";
+            else if (url.search(/\.mp4$/g)>0) type="video/mp4";
+            else {}
+            if (icon) {}
+            else if (type.slice(0,6)==="image/") {
+                icon=mbicon("photo",64,64); useclass="imagelink";}
+            else if (type==="audio/mpeg") {
+                icon=mbicon("music",64,64); useclass="musiclink";}
+            else if (type.slice(0,6)==="audio/") {
+                icon=mbicon("sound",64,64); useclass="audiolink";}
+            else icon=mbicon("diaglink",64,64);
             var image=fdjtDOM.Image(icon);
-            var anchor=(fdjtDOM.Anchor(url,{title:"Link to "+url},image,title));
-            anchor.target='_blank';
-            fdjtDOM(span,anchor,"\n");}
+            if ((url.search("https://glossdata.sbooks.net/")===0)||
+                (url.search("resources/")===0)) {
+                elt=fdjtDOM("span.mbmedia",image,title);
+                elt.setAttribute("data-src",url);
+                if (type) elt.setAttribute("data-type",type);
+                elt.title="Reveal "+title;}
+            else elt=fdjtDOM.Anchor(
+                url,{title:"Link to "+url,target:"_blank"},image,title);
+            if (useclass) addClass(elt,useclass);
+            fdjtDOM(span,elt,"\n");}
         return span;}
     function showexcerpts(excerpts){
         if (typeof excerpts==='string')

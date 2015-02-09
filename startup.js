@@ -274,6 +274,7 @@ metaBook.Startup=
             metaBook.initHUD();
             metaBook.setupCover();
             setupZoom();
+            setupMedia();
 
             if (metaBook.refuri) {
                 var refuris=document.getElementsByName("REFURI");
@@ -986,6 +987,15 @@ metaBook.Startup=
             zoom.metabookui=true;
             document.body.appendChild(zoom);}
         metaBook.setupZoom=setupZoom;
+        
+        function setupMedia(){
+            var media=metaBook.Media=fdjtDOM(
+                "div#METABOOKMEDIA.metabookmedia.metabookcontent",
+                fdjtDOM("div#METABOOKMEDIATARGET"),
+                fdjtDOM("div#METABOOKCLOSEMEDIA"));
+            media.metabookui=true;
+            document.body.appendChild(media);}
+        metaBook.setupMedia=setupMedia;
 
         metaBook.addConfig("uisound",function(name,value){
             metaBook.uisound=(value)&&(true);});

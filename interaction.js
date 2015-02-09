@@ -88,6 +88,7 @@
     var mB=metaBook;
     var Trace=mB.Trace;
     var fdjtString=fdjt.String;
+    var fdjtState=fdjt.State;
     var fdjtTime=fdjt.Time;
     var fdjtLog=fdjt.Log;
     var fdjtDOM=fdjt.DOM;
@@ -1030,6 +1031,19 @@
             metaBook.GoTOC(href);
             fdjtUI.cancel(evt);
             return;}
+        var link=getParent(target,".mbmedia");
+        if (link) {
+            var src=link.getAttribute("data-src"), cancel=false;
+            var type=link.getAttribute("data-type");
+            if (hasClass(link,"imagelink")) {
+                showMedia(src,type); cancel=true;}
+            else if ((hasClass(link,"audiolink"))||
+                     (hasClass(link,"musiclink"))) {
+                showMedia(src,type); cancel=true;}
+            else {}
+            if (cancel) {
+                fdjtUI.cancel(evt);
+                return;}}
         var card=getCard(target);
         var passage=mbID(card.getAttribute("data-passage"));
         var glossid=card.getAttribute("data-gloss");
@@ -1215,6 +1229,7 @@
                 metaBook.stopPreview("escape_key");
                 fdjtUI.TapHold.clear();}
             dropClass(document.body,"mbZOOM");
+            dropClass(document.body,"mbMEDIA");
             if (metaBook.mode==="addgloss") metaBook.cancelGloss();
             if (metaBook.mode) {
                 metaBook.last_mode=metaBook.mode;
@@ -2512,6 +2527,71 @@
         if (evt) fdjt.UI.cancel(evt);}
     metaBook.stopZoom=stopZoom;
     
+    function showMedia(url,type){
+        if (metaBook.showing===url) {
+            addClass(document.body,"mbMEDIA");
+            return;}
+        var media_target=fdjt.ID("METABOOKMEDIATARGET");
+        var media_elt=false, src_elt=false;
+        var use_src=url;
+        if (url.search("https://glossdata.sbooks.net/")===0) {
+            var cache_key="cache("+url+")";
+            var cache_val=fdjtState.getLocal(cache_key);
+            if ((cache_val)&&(cache_val.slice(0,5)==="data:"))
+                use_src=cache_val;}
+        if (type.search("image")===0) {
+            media_elt=fdjtDOM("IMG");
+            media_elt.src=use_src;}
+        else if (type.search("audio")===0) {
+            src_elt=fdjtDOM("SOURCE");
+            media_elt=fdjtDOM("AUDIO",src_elt);
+            media_elt.setAttribute("CONTROLS","CONTROLS");
+            media_elt.setAttribute("AUTOPLAY","AUTOPLAY");
+            src_elt.type=type;
+            src_elt.src=use_src;}
+        else if (type.search("video")===0) {
+            src_elt=fdjtDOM("SOURCE");
+            src_elt.type=type;
+            media_elt=fdjtDOM("VIDEO",src_elt);
+            media_elt.setAttribute("CONTROLS","CONTROLS");
+            media_elt.setAttribute("AUTOPLAY","AUTOPLAY");
+            src_elt.src=use_src;}
+        else {
+            media_elt=fdjtDOM("IFRAME");
+            media_elt.src=use_src;}
+        media_elt.id="METABOOKMEDIATARGET";
+        metaBook.showing=url;
+        if (media_elt)
+            fdjt.DOM.replace(media_target,media_elt);
+        else fdjt.ID("METABOOKMEDIA").appendChild(media_target);
+        addClass(document.body,"mbMEDIA");}
+    metaBook.showMedia=showMedia;
+    function hideMedia(){
+        dropClass(document.body,"mbMEDIA");}
+    metaBook.hideMedia=hideMedia;
+
+    var pause_media_timeout=false;
+    function closeMedia_tapped(evt){
+        evt=evt||window.event;
+        var media_elt=fdjt.ID("METABOOKMEDIATARGET");
+        if (pause_media_timeout) {
+            clearTimeout(pause_media_timeout);
+            pause_media_timeout=false;
+            dropClass(document.body,"mbMEDIA");}
+        else if (evt.shiftKey) {
+            clearTimeout(pause_media_timeout);
+            pause_media_timeout=false;
+            dropClass(document.body,"mbMEDIA");}
+        else if ((media_elt)&&(media_elt.pause)&&
+                 (!(media_elt.paused))) {
+            pause_media_timeout=setTimeout(function(){
+                media_elt.pause();
+                pause_media_timeout=false;
+                dropClass(document.body,"mbMEDIA");},
+                                           1500);}
+        else dropClass(document.body,"mbMEDIA");}
+    metaBook.hideMedia=hideMedia;
+
     /* Rules */
 
     var noDefault=fdjt.UI.noDefault;
@@ -2827,6 +2907,7 @@
                  evt=evt||window.event;
                  metaBook.UI.handlers.everyone_ontap(evt);
                  fdjt.UI.cancel(event);}},
+         "#METABOOKCLOSEMEDIA": {mousedown: closeMedia_tapped},
          "#METABOOKZOOMCLOSE": {click: metaBook.stopZoom},
          "#METABOOKZOOMHELP": {click: toggleHelp},
          "#METABOOKZOOMIN": {click: zoomIn},
@@ -3022,6 +3103,7 @@
                  evt=evt||window.event;
                  metaBook.UI.handlers.everyone_ontap(evt);
                  fdjt.UI.cancel(event);}},
+         "#METABOOKCLOSEMEDIA": {touchstart: closeMedia_tapped},
          "#METABOOKZOOMCLOSE": {click: metaBook.stopZoom},
          "#METABOOKZOOMHELP": {click: toggleHelp},
          "#METABOOKZOOMIN": {click: zoomIn},

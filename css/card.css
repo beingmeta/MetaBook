@@ -67,6 +67,9 @@ div.metabookcard > hr {
     color: blue; text-decoration: underline;
     white-space: nowrap;}
 .metabookcard .links img { height: 2ex; width: auto; vertical-align: baseline;}
+.metabookcard .links span.mbmedia { 
+    display: inline-block; padding: 2px; border-radius: 0.5ex;
+    background-color: lightgray;}
 .metabookcard span.tribe { 
     color: darkblue; font-weight: bold; font-style: italic;}
 .metabookcard span.audience { font-weight: normal; }
