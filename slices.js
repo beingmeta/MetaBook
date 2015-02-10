@@ -222,7 +222,18 @@ metaBook.Slice=(function () {
         for (url in refs) {
             if (url[0]==='_') continue;
             var urlinfo=refs[url], elt=false;
+            var openinbook=(url.search("https://glossdata.sbooks.net/")===0)||
+                (url.search("resources/")===0);
             var title; var icon=false, type=false, useclass=false;
+            if (!(openinbook)) {
+                var inbookurls=metaBook.inbookurls;
+                var i=0, lim=inbookurls; while (i<lim) {
+                    var pat=inbookurls[i++];
+                    if (typeof pat === 'string') {
+                        if (url.search(pat)===0) {openinbook=true; break;}}
+                    else if (pat.exec(url)) {
+                        openinbook=true; break;}
+                    else {}}}
             if (typeof urlinfo === 'string') title=urlinfo;
             else {
                 title=urlinfo.title;
@@ -246,8 +257,7 @@ metaBook.Slice=(function () {
                 icon=mbicon("sound",64,64); useclass="audiolink";}
             else icon=mbicon("diaglink",64,64);
             var image=fdjtDOM.Image(icon);
-            if ((url.search("https://glossdata.sbooks.net/")===0)||
-                (url.search("resources/")===0)) {
+            if (openinbook) {
                 elt=fdjtDOM("span.mbmedia",image,title);
                 elt.setAttribute("data-src",url);
                 if (type) elt.setAttribute("data-type",type);

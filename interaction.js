@@ -1554,6 +1554,15 @@
         else dropClass(form,target.value);}
     metaBook.UI.changeAttachment=changeAttachment;
 
+    function setAttachType(newtype){
+        var livegloss=fdjtID("METABOOKLIVEGLOSS");
+        var form=fdjtDOM.getChild(livegloss,"FORM");
+        fdjtDOM.swapClass(form,attach_types,newtype);
+        var attachform=fdjtID("METABOOKATTACHFORM");
+        var input=fdjtDOM.getInputFor(attachform,"ATTACHTYPE",newtype);
+        fdjt.UI.CheckSpan.set(input,true);}
+    metaBook.setAttachType=setAttachType;
+
     function attach_action(evt){
         var linkinput=fdjtID("METABOOKATTACHURL");
         var titleinput=fdjtID("METABOOKATTACHTITLE");
@@ -1595,13 +1604,15 @@
             itemidinput.value=itemid;}
         else fdjtUI.cancel(evt);
         if (!(title)) {
-            var namestart=((path.indexOf('/')>=0)?(path.search(/\/[^\/]+$/)):(0));
+            var namestart=((path.indexOf('/')>=0)?
+                           (path.search(/\/[^\/]+$/)):(0));
             if (namestart<0) title="attachment";
             else title=path.slice(namestart);}
         if (!(livegloss)) return;
         var glossform=getChild(livegloss,"FORM");
         if (hasClass("METABOOKHUD","glossattach")) {
-            var glossdata_url="https://glossdata.sbooks.net/"+glossid+"/"+itemid+"/"+path;
+            var glossdata_url=
+                "https://glossdata.sbooks.net/"+glossid+"/"+itemid+"/"+path;
             var commframe=fdjtID("METABOOKGLOSSCOMM");
             var listener=function(evt){
                 evt=evt||window.event;
@@ -2527,6 +2538,11 @@
         if (evt) fdjt.UI.cancel(evt);}
     metaBook.stopZoom=stopZoom;
     
+    // Not yet implemented, but the idea is to save some number of
+    // audio/video/iframe elements to make restoring them faster.
+    var saved_players=[];
+    var n_players_to_save=7;
+    
     function showMedia(url,type){
         if (metaBook.showing===url) {
             addClass(document.body,"mbMEDIA");
@@ -2556,6 +2572,12 @@
             media_elt.setAttribute("CONTROLS","CONTROLS");
             media_elt.setAttribute("AUTOPLAY","AUTOPLAY");
             src_elt.src=use_src;}
+        else if (url.search("https://www.youtube.com/embed/")===0) {
+            url="https://www.youtube-nocookie.com/"+
+                url.slice("https://www.youtube.com/".length);
+            if (url.indexOf("?")>0) 
+                url=url+"&rel=0";
+            else url=url+"?rel=0";}
         else {
             media_elt=fdjtDOM("IFRAME");
             media_elt.src=use_src;}
@@ -2701,6 +2723,45 @@
         return false;}
     metaBook.lowerHUD=lowerHUD;
 
+    function addGlossDragOK(evt){
+        evt=evt||window.event;
+        var types=evt.dataTransfer.types;
+        if (!(types)) return;
+        else if (types.indexOf("text/uri-list")>=0)
+            fdjt.UI.cancel(evt);
+        else if (types.indexOf("text/plain")>=0) {
+            var text=evt.dataTransfer.getData("text/plain");
+            if (text.search(/^\s*https?:\/\//)===0)
+                fdjt.UI.cancel(evt);}
+        else {}}
+    function addGlossDrop(evt){
+        evt=evt||window.event;
+        var types=evt.dataTransfer.types;
+        if (!(types)) return;
+        else if (types.indexOf("text/uri-list")>=0) {
+            var url=evt.dataTransfer.getData("URL");
+            if (!(url)) return;
+            fdjt.UI.cancel(evt);
+            metaBook.setGlossMode("attach");
+            setAttachType("linking");
+            fdjt.ID("METABOOKATTACHURL").value=url;
+            fdjt.ID("METABOOKATTACHTITLE").focus();}
+        else if (types.indexOf("text/plain")>=0) {
+            var text=evt.dataTransfer.getData("text/plain");
+            fdjt.UI.cancel(evt);
+            if (text.search(/^\s*https?:\/\//)===0) {
+                metaBook.setGlossMode("attach");
+                setAttachType("linking");
+                fdjt.ID("METABOOKATTACHURL").value=text;
+                fdjt.ID("METABOOKATTACHTITLE").focus();}
+            else {
+                var livegloss=fdjt.ID("METABOOKLIVEGLOSS");
+                var input=fdjtDOM.getInput(livegloss,"NOTE");
+                metaBook.setGlossMode(false);
+                input.value=text;
+                input.focus();}}
+        else {}}
+
     function zoomIn(evt){
         evt=evt||window.event;
         var zb=fdjt.ID("METABOOKZOOMBOX");
@@ -2822,6 +2883,10 @@
          "#METABOOKATTACHTITLE": {keydown: attach_keydown},
          "#METABOOKATTACHOK": {click: attach_action},
          "#METABOOKATTACHCANCEL": {click: attach_cancel},
+         "#METABOOKADDGLOSS": {
+             dragenter: addGlossDragOK,
+             dragover: addGlossDragOK,
+             drop: addGlossDrop},
          "#METABOOKGLOSSCLOUD": {
              tap: metaBook.UI.handlers.glosscloud_select,
              release: metaBook.UI.handlers.glosscloud_select},
@@ -3012,6 +3077,10 @@
              touchstart: back_to_reading,
              touchmove: cancel,
              touchend: cancel},
+         "#METABOOKADDGLOSS": {
+             dragenter: addGlossDragOK,
+             dragover: addGlossDragOK,
+             drop: addGlossDrop},
          "#METABOOKGLOSSDETAIL": {
              touchend: metaBook.UI.dropHUD,click: cancel},
          ".hudmodebutton": {

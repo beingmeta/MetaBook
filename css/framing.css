@@ -265,11 +265,14 @@ body.mbMEDIA #METABOOKMEDIA #METABOOKMEDIATARGET {
 body.mbMEDIA #METABOOKMEDIA img {}
 body.mbMEDIA #METABOOKMEDIA audio {
     position: absolute; bottom: 50%; right: 50px;}
-body.mbMEDIA #METABOOKMEDIA video {}
+body.mbMEDIA #METABOOKMEDIA video {
+    position: absolute; 
+    left: auto; right: auto; 
+    top: 50px; height: auto;}
 body.mbMEDIA #METABOOKMEDIA iframe {
-    position: absolute; top: 50px; bottom: 50px; 
+    position: absolute; 
+    top: 50px; bottom: 50px;
     left: 100px; right: 50px;}
-}
 
 @media (orientation: landscape) {
     #METABOOKZOOM > img, #METABOOKZOOM > video, #METABOOKZOOM > audio {

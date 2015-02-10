@@ -138,6 +138,9 @@ var metaBook={
     Timeline: {},
     // Word/phrase indexing structures
     allterms: [], prefixes: {},
+    // These are prefixes or Regexps for URLs which should be opened "in the book"
+    //  when they're linked in glosses
+    openinbook: ["https://www.youtube.com/"],
     // These are functions to be called when everythings has been loaded
     //  to initialize local references to common metaBook functions
     inits: [],
