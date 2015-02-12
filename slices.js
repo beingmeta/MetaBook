@@ -249,10 +249,11 @@ metaBook.Slice=(function () {
             else if (url.search(/\.mp4$/g)>0) type="video/mp4";
             else {}
             if (icon) {}
-            else if (type.slice(0,6)==="image/") {
-                icon=mbicon("photo",64,64); useclass="imagelink";}
+            else if (!(type)) icon=mbicon("diaglink",64,64);
             else if (type==="audio/mpeg") {
                 icon=mbicon("music",64,64); useclass="musiclink";}
+            else if (type.slice(0,6)==="image/") {
+                icon=mbicon("photo",64,64); useclass="imagelink";}
             else if (type.slice(0,6)==="audio/") {
                 icon=mbicon("sound",64,64); useclass="audiolink";}
             else icon=mbicon("diaglink",64,64);

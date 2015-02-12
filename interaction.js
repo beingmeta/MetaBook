@@ -2540,8 +2540,8 @@
     
     // Not yet implemented, but the idea is to save some number of
     // audio/video/iframe elements to make restoring them faster.
-    var saved_players=[];
-    var n_players_to_save=7;
+    // var saved_players=[];
+    // var n_players_to_save=7;
     
     function showMedia(url,type){
         if (metaBook.showing===url) {
