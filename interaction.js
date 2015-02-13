@@ -550,11 +550,17 @@
              handler: function(){
                  metaBook.startGloss(passage);},
              isdefault: true}];
-        if (window.ClipboardEvent) {
+        if (false) { /* (window.ClipboardEvent) */
             choices.push({label: "Copy link",
                           handler: function(){copyURI(passage);}});
             choices.push({label: "Copy content",
                           handler: function(){copyContent(passage);}});}
+        if (true) choices.push(
+            {label: "Zoom content",
+             handler: function(){
+                 metaBook.startZoom(passage);
+                 fdjt.UI.cancel(evt);
+                 return;}});
         addOptions(passage,choices);
         if (choices.length===1) {
             fdjtUI.cancel(evt);
@@ -571,7 +577,7 @@
             var len=ch.label.length;
             if (len>max) max=len;}
         var spec={choices: choices,
-                  spec: "div.fdjtdialog",
+                  spec: "div.fdjtdialog.metabooktaptap",
                   style: "width: "+(max*0.8)+"em"};
         fdjtUI.choose(spec);}
 
@@ -590,14 +596,15 @@
     function makeOpener(url){
         return function (){window.open(url);};}
     function copyURI(passage){
-        var CE=window.ClipboardEvent;
-        var evt = new CE('copy',{ dataType: 'text/plain', 
-                                  data: metaBook.refuri+"#"+passage.id } );
+        var ClipboardEvent=window.ClipboardEvent;
+        var evt = new ClipboardEvent(
+            'copy',{ dataType: 'text/plain', 
+                     data: metaBook.refuri+"#"+passage.id } );
         document.dispatchEvent(evt);}
     function copyContent(passage){
-        var CE=window.ClipboardEvent;
-        var evt = new CE('copy',{ dataType: 'text/html', 
-                                  data: passage.innerHTML } );
+        var ClipboardEvent=window.ClipboardEvent;
+        var evt = new ClipboardEvent(
+            'copy',{ dataType: 'text/html', data: passage.innerHTML } );
         document.dispatchEvent(evt);}
 
     var body_tapstart=false;

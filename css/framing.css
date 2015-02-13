@@ -163,6 +163,14 @@ body.mbCOVER #METABOOKHUD, body.hudup.mbCOVER #METABOOKHUD {
     transform-origin: 0px 0px;
     -webkit-transform-origin: 0px 0px;
     -moz-transform-origin: 0px 0px;}
+#METABOOKZOOMTARGET {
+    display: inline-block; 
+    font-size: 2em; font-size: 2rem;}
+div#METABOOKZOOMTARGET, p#METABOOKZOOMTARGET {
+    margin-top: 2em; margin-bottom: 2em;
+    margin-left: 100px; margin-right: 100px;
+    padding-left: 1em; padding-right: 1em;
+    border: solid gray 3px;}
 
 body.mbZOOM #METABOOKZOOM {
     min-width: 100%; min-height: 100%;

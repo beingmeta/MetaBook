@@ -52,14 +52,23 @@
     /* Full page zoom mode */
     
     function startZoom(node){
-        var zoom_target=fdjt.ID("METABOOKZOOMTARGET");
+        var zoom_target=fdjt.ID("METABOOKZOOMTARGET"), copy;
         if (!(node)) return stopZoom();
         if (metaBook.zoomtarget===node) {
             metaBook.zoomed=node;
             addClass(document.body,"mbZOOM");}
         metaBook.zoomtarget=node;
-        var copy=node.cloneNode();
-        fdjtDOM.stripIDs(copy);
+        if (!(metaBook.layout)) {}
+        else {
+            var layout=metaBook.layout;
+            var id=node.getAttribute("data-baseid")||node.id;
+            if ((layout.lostids)&&(layout.lostids[id]))
+                copy=layout.lostids[id].cloneNode(true);
+            else if (layout.splits[id])
+                copy=layout.splits[id].cloneNode(true);
+            else {}}
+        if (!(copy)) copy=node.cloneNode(true);
+        fdjtDOM.stripIDs(copy,false,"data-baseid");
         copy.setAttribute("style","");
         copy.id="METABOOKZOOMTARGET";
         fdjt.DOM.replace(zoom_target,copy);

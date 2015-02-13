@@ -898,6 +898,9 @@ span.bma {
     font-variant: normal;
     color: blue; }
 
+div.fdjtdialog.metabooktaptap .choices button {
+    width: 12em;}
+
 /* Rules for page references */
 
 .staticpageref {
