@@ -110,7 +110,8 @@
             if (!(tag.weak)) {
                 addClass(elt,"cue");
                 addTag2Cloud(tag,gloss_cloud);}},
-                         searchtags,tagindex_progress,tagindex_done,
+                         searchtags,tagindex_progress,
+                         tagindex_done,false,
                          200,20);}
     
     function tagindex_done(searchtags){
@@ -132,7 +133,7 @@
         fdjtTime.slowmap(function(string){
             searchlist.appendChild(knodeToOption(string));},
                          metaBook.textindex.allterms,
-                         false,false,100,20);
+                         false,false,false,100,20);
         metaBook.sortCloud(empty_cloud);
         metaBook.sortCloud(gloss_cloud);
         metaBook.sizeCloud(empty_cloud,metaBook.tagfreqs,[]);
@@ -246,6 +247,7 @@
                 metaBook.tagminweight=minweight;
                 if (whendone) return whendone();
                 else return state;},
+            false,
             200,10);}
     metaBook.useIndexData=useIndexData;
     function indexProgress(state,i,lim){
@@ -355,6 +357,7 @@
                     fdjtLog("Finished indexing tag attributes for %d nodes",
                             tohandle.length);
                 if (whendone) whendone();},
+            false,
             200,5);}
     metaBook.applyTagAttributes=applyTagAttributes;
     

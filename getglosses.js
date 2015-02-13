@@ -300,7 +300,8 @@
                     saveItems(qids,name);}
                 else fdjtTime.slowmap(function(item){gotItem(item,qids);},
                                       info,false,
-                                      function(){saveItems(qids,name);});}
+                                      function(){saveItems(qids,name);},
+                                     false);}
             else {
                 var ref=metaBook.sourcedb.Import(
                     info,false,
