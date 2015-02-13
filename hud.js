@@ -811,10 +811,12 @@ metaBook.setMode=
                     var spellings=info.knodeterms;
                     i=0; lim=terms.length;
                     if (lim===0)
-                        addClass(metaBook.getDups(target),"metabookhighlightpassage");
+                        addClass(metaBook.getDups(target),
+                                 "metabookhighlightpassage");
                     else while (i<lim) {
                         var term=terms[i++];
-                        var h=metaBook.highlightTerm(term,target,info,spellings);
+                        var h=metaBook.highlightTerm(
+                            term,target,info,spellings);
                         highlights=highlights.concat(h);}}}
             delete metaBook.skimpoints;
             delete metaBook.skimoff;

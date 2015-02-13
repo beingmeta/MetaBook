@@ -53,9 +53,11 @@ metaBook.Slice=(function () {
     var fdjtString=fdjt.String;
     var fdjtTime=fdjt.Time;
     var fdjtDOM=fdjt.DOM;
+    var fdjtLog=fdjt.Log;
     var fdjtUI=fdjt.UI;
-    var mbID=metaBook.ID;
     var RefDB=fdjt.RefDB, Ref=RefDB.Ref;
+
+    var mB=metaBook, mbID=mB.ID, Trace=mB.Trace;
 
     var addClass=fdjtDOM.addClass;
     var dropClass=fdjtDOM.dropClass;
@@ -65,6 +67,29 @@ metaBook.Slice=(function () {
 
     var mbicon=metaBook.icon;
     var addListener=fdjtDOM.addListener;
+
+    var getParent=fdjtDOM.getParent;
+    var hasParent=fdjtDOM.hasParent;
+    var getChild=fdjtDOM.getChild;
+
+    var cancel=fdjtUI.cancel;
+    
+    function getTargetDup(scan,target){
+        var targetid=target.id;
+        while (scan) {
+            if (hasClass(scan,"codexpage")) return scan;
+            else if ((scan.getAttribute)&&
+                     ((scan.id===targetid)||
+                      (scan.getAttribute("data-baseid")===targetid))) 
+                return scan;
+            else scan=scan.parentNode;}
+        return target;}
+
+    function generic_cancel(evt){
+        evt=evt||window.event;
+        var target=fdjtUI.T(evt);
+        if (fdjtUI.isClickable(target)) return;
+        else cancel(evt);}
 
     function renderCard(info,query,idprefix,standalone){
         var target_id=(info.frag)||(info.id);
@@ -765,6 +790,172 @@ metaBook.Slice=(function () {
             else cards.push(info);}
         if (this.live) this.update();
         else this.changed=true;};
+
+    /* Slice handlers */
+
+    function getCard(target){
+        return ((hasClass(target,"metabookcard"))?(target):
+                (getParent(target,".metabookcard")))||
+            getChild(target,".metabookcard");}
+
+    function slice_tapped(evt){
+        var target=fdjtUI.T(evt);
+        if (Trace.gestures)
+            fdjtLog("slice_tapped %o: %o",evt,target);
+        if (metaBook.previewing) {
+            // Because we're previewing, this slice is invisible, so
+            //  the user really meant to tap on the body underneath,
+            //  so we stop previewing and jump there We might try to
+            //  figure out exactly which element was tapped somehow
+            metaBook.stopPreview("slice_tapped",true);
+            fdjtUI.cancel(evt);
+            return;}
+        if ((getParent(target,".ellipsis"))&&
+            ((getParent(target,".elision"))||
+             (getParent(target,".delision")))){
+            fdjtUI.Ellipsis.toggle(target);
+            fdjtUI.cancel(evt);
+            return;}
+        if (getParent(target,".tochead")) {
+            var anchor=getParent(target,".tocref");
+            var href=(anchor)&&(anchor.getAttribute("data-tocref"));
+            metaBook.GoTOC(href);
+            fdjtUI.cancel(evt);
+            return;}
+        var link=getParent(target,".mbmedia");
+        if (link) {
+            var src=link.getAttribute("data-src"), cancel=false;
+            var type=link.getAttribute("data-type");
+            if (hasClass(link,"imagelink")) {
+                metaBook.showMedia(src,type); cancel=true;}
+            else if ((hasClass(link,"audiolink"))||
+                     (hasClass(link,"musiclink"))) {
+                metaBook.showMedia(src,type); cancel=true;}
+            else {}
+            if (cancel) {
+                fdjtUI.cancel(evt);
+                return;}}
+        var card=getCard(target);
+        var passage=mbID(card.getAttribute("data-passage"));
+        var glossid=card.getAttribute("data-gloss");
+        var gloss=((glossid)&&(metaBook.glossdb.ref(glossid)));
+        if (getParent(target,".glossbody")) {
+            var detail=((gloss)&&(gloss.detail));
+            if (!(detail)) return;
+            else if (detail[0]==='<')
+                fdjt.ID("METABOOKGLOSSDETAIL").innerHTML=gloss.detail;
+            else if (detail.search(/^{(md|markdown)}/)===0) {
+                var close=detail.indexOf('}');
+                fdjt.ID("METABOOKGLOSSDETAIL").innerHTML=
+                    metaBook.md2HTML(detail.slice(close+1));}
+            else fdjt.ID("METABOOKGLOSSDETAIL").innerHTML=
+                metaBook.md2HTML(detail);
+            metaBook.setMode("glossdetail");
+            return fdjtUI.cancel(evt);}
+        else if ((!(gloss))&&(passage)) {
+            metaBook.Skim(passage,card,0);
+            return fdjtUI.cancel(evt);}
+        else if ((gloss)&&(getParent(target,".tool"))) {
+            var form=metaBook.setGlossTarget(gloss);           
+            if (!(form)) return;
+            metaBook.setMode("addgloss");
+            return fdjtUI.cancel(evt);}
+        else if (gloss) {
+            metaBook.Skim(passage,card,0);
+            return fdjtUI.cancel(evt);}
+        else return;}
+    function slice_held(evt){
+        evt=evt||window.event;
+        var slice_target=fdjtUI.T(evt), card=getCard(slice_target);
+        if (Trace.gestures)
+            fdjtLog("slice_held %o: %o, skimming=%o",
+                    evt,card,metaBook.skimming);
+        if (!(card)) return;
+        // Put a clone of the card in the skimmer
+        var clone=card.cloneNode(true);
+        clone.id="METABOOKSKIM"; fdjtDOM.replace("METABOOKSKIM",clone);
+        // If we're currently previewing something, clear it
+        if (metaBook.previewTarget) {
+            var drop=metaBook.getDups(metaBook.previewTarget);
+            dropClass(drop,"metabookpreviewtarget");
+            metaBook.clearHighlights(drop);
+            metaBook.previewTarget=false;}
+
+        // Get the attributes of this card
+        var passageid=card.getAttribute("data-passage");
+        var glossid=card.getAttribute("data-gloss");
+        var gloss=((glossid)&&metaBook.glossdb.ref(glossid));
+        var passage=mbID(passageid), show_target=false;
+        var dups=metaBook.getDups(passageid);
+        // Set up for preview
+        metaBook.previewTarget=passage; addClass(dups,"metabookpreviewtarget");
+        if ((gloss)&&(gloss.excerpt)) {
+            // Highlight the gloss excerpt
+            var range=metaBook.findExcerpt(dups,gloss.excerpt,gloss.exoff);
+            if (range) {
+                var starts=range.startContainer;
+                if (!(getParent(starts,passage)))
+                    // This is the case where the glosses excerpt
+                    //  starts in a 'dup' generated by page layout
+                    show_target=getTargetDup(starts,passage);
+                fdjtUI.Highlight(range,"metabookhighlightexcerpt");}}
+
+        if (getParent(card,".sbookresults")) {
+            // It's a search result, so highlight any matching terms
+            var terms=metaBook.query.tags;
+            var info=metaBook.docinfo[passageid];
+            // knodeterms match tags to their originating strings
+            var spellings=info.knodeterms;
+            var i=0; var lim=terms.length; while (i<lim) {
+                var term=terms[i++];
+                var highlights=metaBook.highlightTerm(
+                    term,passage,info,spellings);
+                if (!(show_target))
+                    if ((highlights)&&(highlights.length)&&
+                        (!(getParent(highlights[0],passage))))
+                        show_target=getTargetDup(highlights[0],passage);}}
+        metaBook.startPreview(show_target||passage,"slice_held");
+        return fdjtUI.cancel(evt);}
+    function slice_released(evt){
+        var card=getCard(fdjtUI.T(evt||window.event));
+        if (Trace.gestures) {
+            fdjtLog("slice_released %o: %o, skimming=%o",evt,card);}
+        metaBook.stopPreview("slice_released");}
+    function slice_slipped(evt){
+        evt=evt||window.event;
+        var rel=evt.relatedTarget||fdjtUI.T(evt);
+        if (!(hasParent(rel,".metabookslice"))) {
+            metaBook.slipTimeout(function(){
+                if (Trace.gestures)
+                    fdjtLog("slice_slipped/timeout %o",evt);
+                metaBook.stopPreview("slice_slipped");});}}
+    function slice_touchtoo(evt){
+        evt=evt||window.event;
+        metaBook.previewTimeout(false);
+        if (!(metaBook.previewing)) return;
+        else if (Trace.gestures) {
+            fdjtLog("slice_touchtoo %o noabout",evt);
+            metaBook.stopPreview("toc_touchtoo",true);}
+        else {
+            metaBook.stopPreview("toc_touchtoo",true);}
+        fdjtUI.cancel(evt);}
+
+    metaBook.UI.getCard=getCard;
+
+    fdjt.DOM.defListeners(
+        metaBook.UI.handlers.mouse,
+        {summary: {tap: slice_tapped, hold: slice_held,
+                   release: slice_released, click: generic_cancel,
+                   slip: slice_slipped}});
+
+   fdjt.DOM.defListeners(
+        metaBook.UI.handlers.touch,
+        {summary: {tap: slice_tapped,
+                   hold: slice_held,
+                   release: slice_released,
+                   touchtoo: slice_touchtoo,
+                   slip: slice_slipped}});
+
 
     return MetaBookSlice;
 
