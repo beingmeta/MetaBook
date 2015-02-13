@@ -263,12 +263,13 @@
             catch (ex) {
                 try {
                     fdjtLog.warn(
-                        "Sync request %s returned status %d %j, pausing",
-                        uri,req.status,JSON.parse(req.responseText));}
+                        "Sync request %s returned status %d %j, pausing for %ds",
+                        uri,req.status,JSON.parse(req.responseText),
+                        metaBook.sync_pause/1000);}
                 catch (err) {
                     fdjtLog.warn(
-                        "Sync request %s returned status %d, pausing",
-                        uri,req.status);}
+                        "Sync request %s returned status %d, pausing for %ds",
+                        uri,req.status,metaBook.sync_pause/1000);}
                 metaBook.locsync=false;
                 setTimeout(function(){metaBook.locsync=true;},
                            metaBook.sync_pause);}}
@@ -277,10 +278,12 @@
 
     function syncTimeout(evt){
         evt=evt||window.event;
-        fdjtLog.warn("Sync request timed out, pausing");
+        fdjtLog.warn("Sync request timed out, pausing for %ds",
+                     metaBook.sync_pause/1000);
         metaBook.locsync=false;
         setTimeout(function(){
-            metaBook.locsync=true;},metaBook.sync_pause);}
+            metaBook.locsync=true;},
+                   metaBook.sync_pause);}
 
     var prompted=false;
 
