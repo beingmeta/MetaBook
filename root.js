@@ -141,6 +141,9 @@ var metaBook={
     // These are prefixes or Regexps for URLs which should be opened "in the book"
     //  when they're linked in glosses
     openinbook: ["https://www.youtube.com/"],
+    // These are elements, indexed by URL, whose content is being
+    // loaded to cache locally
+    srcloading: {}, tmpurlcache: {},
     // These are functions to be called when everythings has been loaded
     //  to initialize local references to common metaBook functions
     inits: [],
@@ -175,6 +178,7 @@ var metaBook={
         savegloss: 0,     // When glosses are saved to the server
         glosses: 0,       // How much we're tracing gloss processing
         addgloss: 0,      // Note whenever a gloss post completes
+        glossdata: 0,     // Whether to trace caching/retrieval of glossdata
         layout: 0,        // How much to trace document layout
         knodules: 0,      // How much to trace knodule processing
         flips: false,     // Whether to trace page flips (movement by pages)

@@ -59,6 +59,7 @@
 
     var getLocal=fdjtState.getLocal;
     var setLocal=fdjtState.setLocal;
+    var dropLocal=fdjtState.dropLocal;
     
     var mB=metaBook;
     var Trace=metaBook.Trace;
@@ -266,12 +267,12 @@
             var dropLocal=fdjtState.dropLocal;
             if (!(uri)) {
                 dropLocal("metabook.user");
-                if (metaBook.user) {
-                    // For now, we clear layouts, because they might
-                    //  contain personalized information
-                    fdjt.CodexLayout.clearLayouts();}
+                // We clear layouts, because they might
+                //  contain personalized information
+                fdjt.CodexLayout.clearLayouts();
                 fdjtState.clearLocal();
-                fdjtState.clearSession();}
+                fdjtState.clearSession();
+                clearGlossData();}
             else {
                 if (typeof uri !== "string") uri=metaBook.docuri;
                 metaBook.sync=false;
@@ -283,7 +284,8 @@
                 // specific clearing because they might be shared
                 // between books.  This is a bug.
                 metaBook.glossdb.clearOffline(function(){
-                    clearLocal("metabook.sync("+uri+")");});}}
+                    clearLocal("metabook.sync("+uri+")");});
+                clearGlossData(uri);}}
         metaBook.clearOffline=clearOffline;
         
         function refreshOffline(){
@@ -311,22 +313,111 @@
         if (Trace.start>1) fdjtLog("Initialized DB");}
     metaBook.initDB=initDB;
 
+    /* Noting (and caching) glossdata */
+
     function noteGlossdata(link){
+        if (link.search("https://glossdata.sbooks.net/")!==0) return;
         var key="cache("+link+")";
         if (fdjtState.getLocal(key)) return;
         else fdjtState.setLocal(key,"fetching");
         var uri="https://glossdata.sbooks.net/U/"+
             link.slice("https://glossdata.sbooks.net/".length);
         var req=new XMLHttpRequest();
+        if (Trace.glossdata)
+            fdjtLog("Fetching glossdata %s to cache locally",link);
         req.onreadystatechange=function () {
-            if ((req.readyState === 4) && (req.status === 200)) {
-                fdjtState.setLocal(key,req.responseText);}
-            else if (req.readyState === 4) {
-                fdjtState.dropLocal(key);}
+            if (req.readyState === 4) {
+                if (Trace.glossdata)
+                    fdjtLog("Glossdata from %s status %d",req.status);
+                var use_data=((req.status===200)?(req.responseText):(link));
+                var waiting=mB.srcloading[link];
+                if (waiting) {
+                    var i=0, lim=waiting.length;
+                    if (Trace.glossdata)
+                        fdjtLog("Setting glossdata src for %d element(s)",lim);
+                    while (i<lim) waiting[i++].src=use_data;}
+                if (req.status === 200) 
+                    saveGlossData(link,req.responseText);
+                else fdjtState.dropLocal(key);}
             else {}};
         req.open("GET",uri);
         req.withCredentials=true;
         req.send(null);}
+
+    var urlCacheDB=false, urldbinit_timeout=false;
+    var tmpurlcache=metaBook.tmpurlcache;
+
+    if (window.indexedDB) {
+        var req=window.indexedDB.open("urlcache",1);
+        urldbinit_timeout=setTimeout(urldbinit_timeout,15000);
+        req.onerror=function(event){
+            fdjtLog("Error initializing indexedDB URL cache: %o",
+                    event.errorCode);
+            if (urldbinit_timeout) clearTimeout(urldbinit_timeout);};
+        req.onsuccess=function(event) {
+            var db=event.target.result;
+            if (urldbinit_timeout) clearTimeout(urldbinit_timeout);
+            fdjtLog("Using existing indexedDB url cache");
+            metaBook.urlCacheDB=urlCacheDB=db;};
+        req.onupgradeneeded=function(event) {
+            var db=event.target.result;
+            if (urldbinit_timeout) clearTimeout(urldbinit_timeout);
+            db.onerror=function(event){
+                fdjtLog("Unexpected error setting up URL data cache: %d",
+                        event.target.errorCode);
+                event=false;};
+            db.onsuccess=function(event){
+                var db=event.target.result;
+                fdjtLog("Initialized indexedDB url cache");
+                metaBook.urlCacheDB=urlCacheDB=db;};
+            db.createObjectStore("urlcache",{keyPath: "url"});};}
+
+    function saveGlossData(url,datauri){
+        var key="cache("+url+")";
+        if (urlCacheDB) {
+            var txn=urlCacheDB.transaction(["urlcache"],"readwrite");
+            var storage=txn.objectStore("urlcache");
+            tmpurlcache[url]=datauri;
+            var req=storage.put({url: url,datauri: datauri});
+            req.onerror=function(event){
+                fdjtLog("Error saving %s in indexedDB: %o",
+                        url,event.target.errorCode);};
+            req.onsuccess=function(event){
+                event=false; // ignored
+                fdjtState.setLocal(key,"cached");
+                if (Trace.glossdata)
+                    fdjtLog("Saved glossdata for %s in IndexedDB",url);
+                tmpurlcache[url]=false;
+                glossSaved(url);};}
+        else {
+            fdjtState.setLocal(key,datauri);
+            glossSaved(url);}}
+
+    function glossSaved(url){
+        var cached=getLocal("glossdata("+mB.docuri+")",true)||[];
+        var allcached=getLocal("glossdata()",true)||[];
+        cached.push(url); allcached.push(url);
+        setLocal("glossdata("+mB.docuri+")",cached);
+        setLocal("glossdata()",allcached);}
+
+    function clearGlossData(url){
+        var urls=((url)?(getLocal("glossdata("+url+")")):
+                  (getLocal("glossdata()")));
+        if (urls) {
+            var i=0, lim=urls.length; while (i<lim) {
+                var gdurl=urls[i++]; dropLocal("cached("+gdurl+")");
+                if (urlCacheDB) clearGlossDataFor(gdurl);}}}
+
+    function clearGlossDataFor(url){
+        var txn=urlCacheDB.transaction(["urlcache"],"readwrite");
+        var storage=txn.objectStore("urlcache");
+        var req=storage['delete'](url);
+        req.onerror=function(event){
+            fdjtLog("Error clearing gloss data for %s: %s",
+                    url,event.target.errorCode);}; 
+        req.onsuccess=function(){
+            if (Trace.glossdata>1)
+                fdjtLog("Cleared gloss data for %s",url);};}
 
     function Query(tags,base_query){
         if (!(this instanceof Query))

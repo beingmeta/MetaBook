@@ -88,7 +88,6 @@
     var mB=metaBook;
     var Trace=mB.Trace;
     var fdjtString=fdjt.String;
-    var fdjtState=fdjt.State;
     var fdjtTime=fdjt.Time;
     var fdjtLog=fdjt.Log;
     var fdjtDOM=fdjt.DOM;
@@ -1036,10 +1035,10 @@
             var src=link.getAttribute("data-src"), cancel=false;
             var type=link.getAttribute("data-type");
             if (hasClass(link,"imagelink")) {
-                showMedia(src,type); cancel=true;}
+                metaBook.showMedia(src,type); cancel=true;}
             else if ((hasClass(link,"audiolink"))||
                      (hasClass(link,"musiclink"))) {
-                showMedia(src,type); cancel=true;}
+                metaBook.showMedia(src,type); cancel=true;}
             else {}
             if (cancel) {
                 fdjtUI.cancel(evt);
@@ -2515,105 +2514,6 @@
         clearFocus(input);}
     metaBook.UI.blur=metabookblur;
 
-    /* Full page zoom mode */
-    
-    function startZoom(node){
-        var zoom_target=fdjt.ID("METABOOKZOOMTARGET");
-        if (!(node)) return stopZoom();
-        if (metaBook.zoomtarget===node) {
-            metaBook.zoomed=node;
-            addClass(document.body,"mbZOOM");}
-        metaBook.zoomtarget=node;
-        var copy=node.cloneNode();
-        fdjtDOM.stripIDs(copy);
-        copy.setAttribute("style","");
-        copy.id="METABOOKZOOMTARGET";
-        fdjt.DOM.replace(zoom_target,copy);
-        addClass(document.body,"mbZOOM");}
-    metaBook.startZoom=startZoom;
-
-    function stopZoom(evt){
-        dropClass(document.body,"mbZOOM");
-        metaBook.zoomed=false;
-        if (evt) fdjt.UI.cancel(evt);}
-    metaBook.stopZoom=stopZoom;
-    
-    // Not yet implemented, but the idea is to save some number of
-    // audio/video/iframe elements to make restoring them faster.
-    // var saved_players=[];
-    // var n_players_to_save=7;
-    
-    function showMedia(url,type){
-        if (metaBook.showing===url) {
-            addClass(document.body,"mbMEDIA");
-            return;}
-        var media_target=fdjt.ID("METABOOKMEDIATARGET");
-        var media_elt=false, src_elt=false;
-        var use_src=url;
-        if (url.search("https://glossdata.sbooks.net/")===0) {
-            var cache_key="cache("+url+")";
-            var cache_val=fdjtState.getLocal(cache_key);
-            if ((cache_val)&&(cache_val.slice(0,5)==="data:"))
-                use_src=cache_val;}
-        if (type.search("image")===0) {
-            media_elt=fdjtDOM("IMG");
-            media_elt.src=use_src;}
-        else if (type.search("audio")===0) {
-            src_elt=fdjtDOM("SOURCE");
-            media_elt=fdjtDOM("AUDIO",src_elt);
-            media_elt.setAttribute("CONTROLS","CONTROLS");
-            media_elt.setAttribute("AUTOPLAY","AUTOPLAY");
-            src_elt.type=type;
-            src_elt.src=use_src;}
-        else if (type.search("video")===0) {
-            src_elt=fdjtDOM("SOURCE");
-            src_elt.type=type;
-            media_elt=fdjtDOM("VIDEO",src_elt);
-            media_elt.setAttribute("CONTROLS","CONTROLS");
-            media_elt.setAttribute("AUTOPLAY","AUTOPLAY");
-            src_elt.src=use_src;}
-        else if (url.search("https://www.youtube.com/embed/")===0) {
-            url="https://www.youtube-nocookie.com/"+
-                url.slice("https://www.youtube.com/".length);
-            if (url.indexOf("?")>0) 
-                url=url+"&rel=0";
-            else url=url+"?rel=0";}
-        else {
-            media_elt=fdjtDOM("IFRAME");
-            media_elt.src=use_src;}
-        media_elt.id="METABOOKMEDIATARGET";
-        metaBook.showing=url;
-        if (media_elt)
-            fdjt.DOM.replace(media_target,media_elt);
-        else fdjt.ID("METABOOKMEDIA").appendChild(media_target);
-        addClass(document.body,"mbMEDIA");}
-    metaBook.showMedia=showMedia;
-    function hideMedia(){
-        dropClass(document.body,"mbMEDIA");}
-    metaBook.hideMedia=hideMedia;
-
-    var pause_media_timeout=false;
-    function closeMedia_tapped(evt){
-        evt=evt||window.event;
-        var media_elt=fdjt.ID("METABOOKMEDIATARGET");
-        if (pause_media_timeout) {
-            clearTimeout(pause_media_timeout);
-            pause_media_timeout=false;
-            dropClass(document.body,"mbMEDIA");}
-        else if (evt.shiftKey) {
-            clearTimeout(pause_media_timeout);
-            pause_media_timeout=false;
-            dropClass(document.body,"mbMEDIA");}
-        else if ((media_elt)&&(media_elt.pause)&&
-                 (!(media_elt.paused))) {
-            pause_media_timeout=setTimeout(function(){
-                media_elt.pause();
-                pause_media_timeout=false;
-                dropClass(document.body,"mbMEDIA");},
-                                           1500);}
-        else dropClass(document.body,"mbMEDIA");}
-    metaBook.hideMedia=hideMedia;
-
     /* Rules */
 
     var noDefault=fdjt.UI.noDefault;
@@ -2761,31 +2661,6 @@
                 input.value=text;
                 input.focus();}}
         else {}}
-
-    function zoomIn(evt){
-        evt=evt||window.event;
-        var zb=fdjt.ID("METABOOKZOOMBOX");
-        var scale=metaBook.zoomscale;
-        if (!(scale)) scale=metaBook.zoomscale=1.0;
-        scale=scale*1.1;
-        metaBook.zoomscale=scale;
-        zb.style[fdjt.DOM.transform]="scale("+scale+")";
-        fdjt.UI.cancel(evt);}
-    function zoomOut(evt){
-        evt=evt||window.event;
-        var zb=fdjt.ID("METABOOKZOOMBOX");
-        var scale=metaBook.zoomscale;
-        if (!(scale)) scale=metaBook.zoomscale=1.0;
-        scale=scale/1.1;
-        metaBook.zoomscale=scale;
-        zb.style[fdjt.DOM.transform]="scale("+scale+")";
-        fdjt.UI.cancel(evt);}
-    function unZoom(evt){
-        evt=evt||window.event;
-        var zb=fdjt.ID("METABOOKZOOMBOX");
-        zb.style[fdjt.DOM.transform]="";
-        metaBook.zoomscale=false;
-        fdjt.UI.cancel(evt);}
 
     function saveGloss(evt){
         evt=evt||window.event; metaBook.submitGloss();}
@@ -2971,13 +2846,7 @@
              click: function(evt){
                  evt=evt||window.event;
                  metaBook.UI.handlers.everyone_ontap(evt);
-                 fdjt.UI.cancel(event);}},
-         "#METABOOKCLOSEMEDIA": {mousedown: closeMedia_tapped},
-         "#METABOOKZOOMCLOSE": {click: metaBook.stopZoom},
-         "#METABOOKZOOMHELP": {click: toggleHelp},
-         "#METABOOKZOOMIN": {click: zoomIn},
-         "#METABOOKZOOMOUT": {click: zoomOut},
-         "#METABOOKUNZOOM": {click: unZoom}});
+                 fdjt.UI.cancel(event);}}});
 
     fdjt.DOM.defListeners(
         metaBook.UI.handlers.touch,
@@ -3171,13 +3040,7 @@
              touchend: function(evt){
                  evt=evt||window.event;
                  metaBook.UI.handlers.everyone_ontap(evt);
-                 fdjt.UI.cancel(event);}},
-         "#METABOOKCLOSEMEDIA": {touchstart: closeMedia_tapped},
-         "#METABOOKZOOMCLOSE": {click: metaBook.stopZoom},
-         "#METABOOKZOOMHELP": {click: toggleHelp},
-         "#METABOOKZOOMIN": {click: zoomIn},
-         "#METABOOKZOOMOUT": {click: zoomOut},
-         "#METABOOKUNZOOM": {click: unZoom}});
+                 fdjt.UI.cancel(event);}}});
     
 })();
 
