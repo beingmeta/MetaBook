@@ -2,7 +2,7 @@
 
 /* ###################### metabook/startup.js ###################### */
 
-/* Copyright (C) 2009-2014 beingmeta, inc.
+/* Copyright (C) 2009-2015 beingmeta, inc.
 
    This file specifies the startup of the metaBook web application,
    initializing both internal data structures and the DOM.

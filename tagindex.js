@@ -2,7 +2,7 @@
 
 /* ###################### metabook/tagindex.js ###################### */
 
-/* Copyright (C) 2009-2014 beingmeta, inc.
+/* Copyright (C) 2009-2015 beingmeta, inc.
    This file implements a Javascript/DHTML web application for reading
    large structured documents (sBooks).
 

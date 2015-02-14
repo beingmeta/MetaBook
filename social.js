@@ -2,7 +2,7 @@
 
 /* ###################### metabook/social.js ###################### */
 
-/* Copyright (C) 2009-2014 beingmeta, inc.
+/* Copyright (C) 2009-2015 beingmeta, inc.
 
    This file implements basic features for browsing glosses based on
    their "sources" --- the reasons they're overlaid on the reader's

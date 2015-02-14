@@ -2,7 +2,7 @@
 
 /* ###################### metabook/hud.js ###################### */
 
-/* Copyright (C) 2009-2014 beingmeta, inc.
+/* Copyright (C) 2009-2015 beingmeta, inc.
 
    This file provides initialization and some interaction for the
    metaBook HUD (Heads Up Display), an layer on the book content

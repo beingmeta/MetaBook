@@ -2,7 +2,7 @@
 
 /* ###################### metabook/domscan.js ###################### */
 
-/* Copyright (C) 2009-2014 beingmeta, inc.
+/* Copyright (C) 2009-2015 beingmeta, inc.
 
    This file implements extraction of map and metadata from the loaded
    DOM.
