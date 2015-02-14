@@ -394,15 +394,12 @@
             glossSaved(url);}}
 
     function glossSaved(url){
-        var cached=getLocal("glossdata("+mB.docuri+")",true)||[];
-        var allcached=getLocal("glossdata()",true)||[];
-        cached.push(url); allcached.push(url);
-        setLocal("glossdata("+mB.docuri+")",cached);
-        setLocal("glossdata()",allcached);}
+        fdjtState.pushLocal("glossdata("+mB.docuri+")",url);
+        fdjtState.pushLocal("glossdata()",url);}
 
     function clearGlossData(url){
-        var urls=((url)?(getLocal("glossdata("+url+")")):
-                  (getLocal("glossdata()")));
+        var urls=((url)?(getLocal("glossdata("+url+")",true)):
+                  (getLocal("glossdata()",true)));
         if (urls) {
             var i=0, lim=urls.length; while (i<lim) {
                 var gdurl=urls[i++]; dropLocal("cached("+gdurl+")");

@@ -128,12 +128,16 @@
     // var n_players_to_save=7;
     
     function showMedia(url,type){
+        var media_target=fdjt.ID("METABOOKMEDIATARGET");
+        var media_elt=false, src_elt=false;
+        function placeMedia(){
+            if (media_elt) fdjt.DOM.replace(media_target,media_elt);
+            else fdjt.ID("METABOOKMEDIA").appendChild(media_target);
+            addClass(document.body,"mbMEDIA");}
         if (metaBook.showing===url) {
             addClass(document.body,"mbMEDIA");
             return;}
-        var media_target=fdjt.ID("METABOOKMEDIATARGET");
-        var media_elt=false, src_elt=false;
-        if (type.search("image")===0) {
+        else if (type.search("image")===0) {
             src_elt=media_elt=fdjtDOM("IMG");}
         else if (type.search("audio")===0) {
             src_elt=fdjtDOM("SOURCE");
@@ -157,10 +161,9 @@
             src_elt=media_elt=fdjtDOM("IFRAME");}
         media_elt.id="METABOOKMEDIATARGET";
         metaBook.showing=url;
-        if (media_elt) fdjt.DOM.replace(media_target,media_elt);
-        else fdjt.ID("METABOOKMEDIA").appendChild(media_target);
-        if ((src_elt)&&(mB.tmpurlcache[url])) 
+        if ((src_elt)&&(mB.tmpurlcache[url])) {
             src_elt.src=mB.tmpurlcache[url];
+            placeMedia();}
         else if (src_elt) {
             var cache_key="cache("+url+")";
             var cache_val=fdjtState.getLocal(cache_key);
@@ -168,6 +171,7 @@
                 if (cache_val.slice(0,5)==="data:")
                     src_elt.src=cache_val;
                 else if (cache_val==="cached") {
+                    addClass(fdjt.ID("METABOOKMEDIA"),"loadingcontent");
                     addClass(src_elt,"loadingcontent");
                     var txn=mB.urlCacheDB.transaction(["urlcache"]);
                     var storage=txn.objectStore("urlcache");
@@ -175,18 +179,28 @@
                     req.onsuccess=function(event){
                         var target=event.target;
                         var result=((target)&&(target.result));
+                        dropClass(fdjt.ID("METABOOKMEDIA"),"loadingcontent");
+                        dropClass(src_elt,"loadingcontent");
                         if ((result)&&(result.datauri))
                             src_elt.src=result.datauri;
-                        else src_elt.src=url;};
+                        else src_elt.src=url;
+                        placeMedia();};
                     req.onerror=function(event){
                         fdjtLog("Retrieval of %s from indexedDB failed: %o",
                                 url,event.errorCode);
-                        src_elt.src=url;};}
+                        dropClass(fdjt.ID("METABOOKMEDIA"),"loadingcontent");
+                        dropClass(src_elt,"loadingcontent");
+                        src_elt.src=url;
+                        placeMedia();};}
                 else if (metaBook.srcloading[url]) {
-                    metaBook.srcloading[url].push(src_elt);}
-                else metaBook.srcloading[url]=[src_elt];}
-            else src_elt.src=url;}
-        addClass(document.body,"mbMEDIA");}
+                    metaBook.srcloading[url].push(src_elt); placeMedia();}
+                else {
+                    metaBook.srcloading[url]=[src_elt];
+                    placeMedia();}}
+            else {
+                src_elt.src=url;
+                placeMedia();}}
+        else placeMedia();}
     metaBook.showMedia=showMedia;
     function hideMedia(){
         dropClass(document.body,"mbMEDIA");}
