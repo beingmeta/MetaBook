@@ -292,8 +292,9 @@ metaBook.setMode=
                     var range=metaBook.findExcerpt(
                         nodes,item.excerpt,item.exoff);
                     if (range) {
-                        fdjtUI.Highlight(range,"metabookuserexcerpt",
-                                         item.note,{"data-glossid":item._id});}}
+                        fdjtUI.Highlight(
+                            range,"metabookuserexcerpt",
+                            item.note,{"data-glossid":item._id});}}
                 if (item.tags) {
                     var gloss_cloud=metaBook.gloss_cloud;
                     var tags=item.tags, j=0, n_tags=tags.length;
