@@ -239,8 +239,8 @@
                 var range=metaBook.findExcerpt(dups,gloss.excerpt,gloss.exoff);
                 if (range) {
                     var starts=range.startContainer;
-                    if (!(hasClass(starts,"metabookhighlightexcerpt"))) {
-                        fdjtUI.Highlight(range,"metabookhighlightexcerpt");}}}}
+                    if (!(hasClass(starts,"mbhighlightexcerpt"))) {
+                        fdjtUI.Highlight(range,"mbhighlightexcerpt");}}}}
         var slice=new MetaBookSlice(slicediv,glosses,sort_point_glosses);
         var hudwrapper=fdjtDOM("div.hudpanel#METABOOKPOINTGLOSSES",slicediv);
         if (point) {

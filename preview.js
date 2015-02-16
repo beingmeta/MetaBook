@@ -75,10 +75,10 @@
             preview_elt=false; oldscroll=false;}}
     
     function clearPreview(){
-        var current=fdjtDOM.$(".metabookpreviewtarget");
+        var current=fdjtDOM.$(".mbpreviewing");
         var i=0, lim=current.length; while (i<lim) {
             var p=current[i++];
-            dropClass(p,"metabookpreviewtarget");
+            dropClass(p,"mbpreviewing");
             metaBook.clearHighlights(p);}}
 
     function startPreview(spec,caller){
@@ -89,11 +89,11 @@
         else if (metaBook.layout instanceof fdjt.CodexLayout) {
             var dups=((getTarget(target))&&(metaBook.getDups(target)));
             metaBook.startPagePreview(target,caller);
-            addClass(target,"metabookpreviewtarget");
-            if (dups) addClass(dups,"metabookpreviewtarget");}
+            addClass(target,"mbpreviewing");
+            if (dups) addClass(dups,"mbpreviewing");}
         else {
             scrollPreview(target,caller);
-            addClass(target,"metabookpreviewtarget");}
+            addClass(target,"mbpreviewing");}
         metaBook.previewing=target;
         addClass(document.body,"mbPREVIEW");
         if (hasClass(target,"codexpage"))

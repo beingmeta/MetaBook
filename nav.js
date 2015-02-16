@@ -146,10 +146,10 @@
         if (metaBook.target) {
             var old_target=metaBook.target, oldid=old_target.id;
             var old_targets=getDups(oldid);
-            dropClass(old_target,"metabooktarget");
-            dropClass(old_target,"metabooknewtarget");
-            dropClass(old_targets,"metabooktarget");
-            dropClass(old_targets,"metabooknewtarget");
+            dropClass(old_target,"mbtarget");
+            dropClass(old_target,"mbnewtarget");
+            dropClass(old_targets,"mbtarget");
+            dropClass(old_targets,"mbnewtarget");
             if (!(hasParent(old_target,target)))
                 clearHighlights(old_targets);
             metaBook.target=false;}
@@ -162,16 +162,16 @@
         var targetid=target.codexbaseid||target.id;
         var primary=((targetid)&&(mbID(targetid)))||target;
         var targets=getDups(targetid);
-        addClass(target,"metabooktarget");
-        addClass(target,"metabooknewtarget");
-        addClass(targets,"metabooktarget");
-        addClass(targets,"metabooknewtarget");
+        addClass(target,"mbtarget");
+        addClass(target,"mbnewtarget");
+        addClass(targets,"mbtarget");
+        addClass(targets,"mbnewtarget");
         setTimeout(function(){
-            dropClass(target,"metabooknewtarget");
-            dropClass(targets,"metabooknewtarget");},
+            dropClass(target,"mbnewtarget");
+            dropClass(targets,"mbnewtarget");},
                    3000);
         fdjtState.setCookie(
-            "metabooktarget",targetid||target.getAttribute('data-sbookid'));
+            "mbtarget",targetid||target.getAttribute('data-sbookid'));
         metaBook.target=primary;
         if (metaBook.UI.setTarget) metaBook.UI.setTarget(primary);
         if (metaBook.empty_cloud)
@@ -182,16 +182,16 @@
         if (typeof target === "string") target=mbID(target);
         if (!(target)) return;
         else if (target.length) {
-            dropClass(target,"metabookhighlightpassage");
+            dropClass(target,"mbhighlightpassage");
             var i=0, lim=target.length;
             while (i<lim) {
                 var node=target[i++];
-                fdjtUI.Highlight.clear(node,"metabookhighlightexcerpt");
-                fdjtUI.Highlight.clear(node,"metabookhighlightsearch");}}
+                fdjtUI.Highlight.clear(node,"mbhighlightexcerpt");
+                fdjtUI.Highlight.clear(node,"mbhighlightsearch");}}
         else {
-            dropClass(target,"metabookhighlightpassage");
-            fdjtUI.Highlight.clear(target,"metabookhighlightexcerpt");
-            fdjtUI.Highlight.clear(target,"metabookhighlightsearch");}}
+            dropClass(target,"mbhighlightpassage");
+            fdjtUI.Highlight.clear(target,"mbhighlightexcerpt");
+            fdjtUI.Highlight.clear(target,"mbhighlightsearch");}}
     metaBook.clearHighlights=clearHighlights;
 
     function findExcerpt(node,excerpt,off){

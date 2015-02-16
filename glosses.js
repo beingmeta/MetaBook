@@ -325,7 +325,7 @@
             fdjtLog("setGlossTarget %o form=%o selecting=%o",
                     target,form,selecting);
         if (metaBook.glosstarget) {
-            dropClass(metaBook.glosstarget,"metabookglosstarget");}
+            dropClass(metaBook.glosstarget,"mbglosstarget");}
         dropClass("METABOOKHUD",/\bgloss\w+\b/);
         dropClass("METABOOKHUD","editgloss");
         if (!(target)) {
@@ -366,7 +366,7 @@
         metaBook.glosstarget=target;
         // Reset this when we actually get a gloss
         metaBook.select_target=false;
-        addClass(target,"metabookglosstarget");
+        addClass(target,"mbglosstarget");
         if (gloss.exoff)
             metaBook.GoTo({target: target,offset: gloss.exoff},"addgloss",true);
         else metaBook.GoTo(target,"addgloss",true);
@@ -1700,7 +1700,7 @@
                 if (newglosses.length===0) fdjtDOM.remove(glossmark);
                 else glossmark.glosses=newglosses;}
             var highlights=fdjtDOM.$(
-                ".metabookuserexcerpt[data-glossid='"+glossid+"']");
+                ".mbexcerpt[data-glossid='"+glossid+"']");
             highlights=fdjtDOM.Array(highlights);
             i=0; lim=highlights.length; while (i<lim) {
                 fdjtUI.Highlight.remove(highlights[i++]);}}

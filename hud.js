@@ -293,7 +293,7 @@ metaBook.setMode=
                         nodes,item.excerpt,item.exoff);
                     if (range) {
                         fdjtUI.Highlight(
-                            range,"metabookuserexcerpt",
+                            range,"mbexcerpt",
                             item.note,{"data-glossid":item._id});}}
                 if (item.tags) {
                     var gloss_cloud=metaBook.gloss_cloud;
@@ -551,7 +551,7 @@ metaBook.setMode=
                 if (metaBook.skimming) {
                     var dups=metaBook.getDups(metaBook.target);
                     metaBook.clearHighlights(dups);
-                    dropClass(dups,"metabookhighlightpassage");}
+                    dropClass(dups,"mbhighlightpassage");}
                 dropClass(metaBookHUD,"openheart");
                 dropClass(metaBookHUD,"openhead");
                 dropClass(document.body,"dimmed");
@@ -798,12 +798,12 @@ metaBook.setMode=
                         searching,glossinfo.excerpt,glossinfo.exoff);
                     if (range) {
                         highlights=
-                            fdjtUI.Highlight(range,"metabookhighlightexcerpt");
+                            fdjtUI.Highlight(range,"mbhighlightexcerpt");
                         addClass("METABOOKSKIMMER","mbfoundhighlights");}}
                 else if (src.about[0]==="#")
                     addClass(metaBook.getDups(src.about.slice(1)),
-                             "metabookhighlightpassage");
-                else addClass(metaBook.getDups(src.about),"metabookhighlightpassage");}
+                             "mbhighlightpassage");
+                else addClass(metaBook.getDups(src.about),"mbhighlightpassage");}
             else if ((src)&&(getParent(src,".sbookresults"))) {
                 var about=src.about, target=mbID(about);
                 if (target) {
@@ -813,7 +813,7 @@ metaBook.setMode=
                     i=0; lim=terms.length;
                     if (lim===0)
                         addClass(metaBook.getDups(target),
-                                 "metabookhighlightpassage");
+                                 "mbhighlightpassage");
                     else while (i<lim) {
                         var term=terms[i++];
                         var h=metaBook.highlightTerm(

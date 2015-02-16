@@ -377,36 +377,9 @@ body._MOUSE .glossmark#METABOOKOPENGLOSSMARK.hover > img {
 .glossmark img.wedge {
     position: absolute; right: 0px; top: 0px;}
 
-.metabookglossbutton {
-    position: absolute; left: 0px;
-    margin: 0px; padding: 0px; text-indent: 0px; 
-    border: solid transparent 2px;
-    width: 32px; height: 32px; z-index: 50;
-    border-right-width: 0px;
-    /* margin-left: -50px; */
-    opacity: 0.0001;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=1)";
-    filter: alpha(opacity=1);
-    -webkit-opacity: 0.0001;
-    -khtml-opacity: 0.0001;
-    -moz-opacity: 0.0001;
-    -o-opacity: 0.0001;
-    display: none;}
-body.hudup .metabookglossbutton {
-    opacity: 0.5;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-    filter: alpha(opacity=50);
-    -webkit-opacity: 0.50;
-    -khtml-opacity: 0.50;
-    -moz-opacity: 0.50;
-    -o-opacity: 0.50;}
-body.hudup .metabooktarget .metabookglossbutton { display: block;}
-body.hudup .metabooktarget.metabookglosstarget .metabookglossbutton {
-    background-color: lightblue;}
-
 /* Displaying the sbook target */
 
-body._ANIMATE .metabooktarget, body.mbSHRINK .metabooktarget {
+body._ANIMATE .mbtarget, body.mbSHRINK .mbtarget {
     transition-property: color,background-color;
     transition-duration: 6s;
     -o-transition-property: color,background-color;
@@ -415,26 +388,26 @@ body._ANIMATE .metabooktarget, body.mbSHRINK .metabooktarget {
     -moz-transition-duration: 6s;
     -webkit-transition-property: color,background-color;
     -webkit-transition-duration: 6s;}
-body.hudup .metabooktarget, body.mbSHRINK .metabooktarget {
+body.hudup .mbtarget, body.mbSHRINK .mbtarget {
     cursor: pointer;}
-body.hudup .metabooktarget, body.mbSHRINK .metabooktarget,
-body.mbSKIMMING .metabooktarget {
+body.hudup .mbtarget, body.mbSHRINK .mbtarget,
+body.mbSKIMMING .mbtarget {
     outline: dotted silver 2px;}
 
-body.hudup .metabooktarget.metabooknewtarget {
+body.hudup .mbtarget.mbnewtarget {
     background-color: inherit; }
-.metabooknewtarget {color: blue; }
-div.sbooksection.metabooknewtarget, section.metabooknewtarget,
-div.sbooksection.metabooknewtarget > *, section.metabooknewtarget > * {
+.mbnewtarget {color: blue; }
+div.sbooksection.mbnewtarget, section.mbnewtarget,
+div.sbooksection.mbnewtarget > *, section.mbnewtarget > * {
     color: inherit;}
-section.metabooknewtarget > *:first-child,
-div.sbooksection.metabooknewtarget > *:first-child {
+section.mbnewtarget > *:first-child,
+div.sbooksection.mbnewtarget > *:first-child {
     color: blue;}
 
 /* Don't color the body
    (actually, the body should probably never be a target, but when it is...)
 */
-body.metabooktarget { color: inherit;}
+body.mbtarget { color: inherit;}
 
 body._ANIMATE .glossmark > img {
     transition-property: opacity;
@@ -446,11 +419,11 @@ body._ANIMATE .glossmark > img {
     -webkit-transition-property: opacity;
     -webkit-transition-duration: 0.5s;}
 
-.metabooktarget > .glossmark {
+.mbtarget > .glossmark {
     border-right-color: blue;} /* double */
 
-body._MOUSE.hudup .metabooktarget .glossmark:hover > img,
-body._MOUSE.hudup .metabooktarget .glossmark.hover > img {
+body._MOUSE.hudup .mbtarget .glossmark:hover > img,
+body._MOUSE.hudup .mbtarget .glossmark.hover > img {
     opacity: 0.9;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
     filter: alpha(opacity=90);
@@ -459,8 +432,8 @@ body._MOUSE.hudup .metabooktarget .glossmark.hover > img {
     -moz-opacity: 0.90;
     -o-opacity: 0.90;}
 
-body._TOUCH.hudup .metabooktarget > .glossmark > img,
-body._TOUCH.openhud .metabooktarget > .glossmark > img {
+body._TOUCH.hudup .mbtarget > .glossmark > img,
+body._TOUCH.openhud .mbtarget > .glossmark > img {
     opacity: 0.80;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
     filter: alpha(opacity=80);
@@ -534,27 +507,16 @@ h1[toclevel='1'],h2[toclevel='1'] { page-break-before: always;}
 .avoidbreakinside { page-break-inside: avoid;}
 
 .alwaysbreakbefore { page-break-before: always;}
-.alwaysbreakbefore.metabookdup, .alwaysbreakbefore.metabookdupend {
-    page-break-before: auto;}
 .alwaysbreakafter { page-break-after: always;}
-.alwaysbreakafter.metabookdup, .alwaysbreakafter.metabookdupstart {
-    page-break-after: auto;}
 
 .avoidbreakbefore { page-break-before: avoid;}
-.avoidbreakbefore.metabookdup, .avoidbreakbefore.metabookdupend {
-    page-break-before: auto;}
 
 .avoidbreakafter { page-break-after: avoid;}
 .avoidbreakafter.metabookdupstart, .avoidbreakafter.metabookdup {
     page-break-after: auto;}
 
 .forcebreakbefore { page-break-before: always;}
-.forcebreakbefore.metabookdup, .forcebreakbefore.metabookdupend {
-    page-break-before: auto;}
-
 .forcebreakafter { page-break-after: always;}
-.forcebreakafter.metabookdupstart, .forcebreakafter.metabookdup {
-    page-break-after: auto;}
 
 .sbookpage {
     display: block; 
@@ -787,12 +749,6 @@ body #METABOOKBODY #CODEXPAGE .codexpage .metabookdup {
     border-bottom-width: 0px;
     margin-bottom: 0px;}
 body #METABOOKBODY #CODEXPAGE .codexpage p.metabookdup,
-body #METABOOKBODY #CODEXPAGE .codexpage p.metabookdupend {
-    text-indent: 0px;}
-body #METABOOKBODY #CODEXPAGE .codexpage .metabookdupend {
-    padding-top: 0px;
-    border-top-width: 0px;
-    margin-top: 0px;}
 
 img.metabookcoverpage {
     display: block;
@@ -802,32 +758,32 @@ img.metabookcoverpage {
 
 /* Highlighting */
 
-body.mbSKIMMING .metabookhighlightexcerpt,
-body.mbPREVIEW .metabookhighlightexcerpt,
-body.openhud .metabookhighlightexcerpt {
+body.mbSKIMMING .mbhighlightexcerpt,
+body.mbPREVIEW .mbhighlightexcerpt,
+body.openhud .mbhighlightexcerpt {
     background-color: yellow;}
-body.mbSKIMMING .metabookhighlightpassage,
-body.mbPREVIEW .metabookhighlightpassage,
-body.openhud .metabookhighlightpassage {
+body.mbSKIMMING .mbhighlightpassage,
+body.mbPREVIEW .mbhighlightpassage,
+body.openhud .mbhighlightpassage {
     background-color: rgba(255, 255, 0, 0.21);}
-body.mbSKIMMING .metabookhighlightsearch,
-body.mbPREVIEW .metabookhighlightsearch {
+body.mbSKIMMING .mbhighlightsearch,
+body.mbPREVIEW .mbhighlightsearch {
     background-color: gold;}
-.metabookpreviewtarget {
+.mbpreviewing {
     color: rgb(122,34,95);
     background-color: rgba(255,215,0,0.3);}
-section.metabookpreviewtarget, div.html5section.metabookpreviewtarget,
-section.metabookpreviewtarget p, div.html5section.metabookpreviewtarget p,
-section.metabookpreviewtarget h1, div.html5section.metabookpreviewtarget h1,
-section.metabookpreviewtarget h2, div.html5section.metabookpreviewtarget h2,
-section.metabookpreviewtarget h3, div.html5section.metabookpreviewtarget h3,
-section.metabookpreviewtarget h4, div.html5section.metabookpreviewtarget h4,
-section.metabookpreviewtarget h5, div.html5section.metabookpreviewtarget h5,
-section.metabookpreviewtarget h6, div.html5section.metabookpreviewtarget h6,
-section.metabookpreviewtarget h7, div.html5section.metabookpreviewtarget h7 {
+section.mbpreviewing, div.html5section.mbpreviewing,
+section.mbpreviewing p, div.html5section.mbpreviewing p,
+section.mbpreviewing h1, div.html5section.mbpreviewing h1,
+section.mbpreviewing h2, div.html5section.mbpreviewing h2,
+section.mbpreviewing h3, div.html5section.mbpreviewing h3,
+section.mbpreviewing h4, div.html5section.mbpreviewing h4,
+section.mbpreviewing h5, div.html5section.mbpreviewing h5,
+section.mbpreviewing h6, div.html5section.mbpreviewing h6,
+section.mbpreviewing h7, div.html5section.mbpreviewing h7 {
     color: rgb(122,34,95); } 
 
-.metabookuserexcerpt {
+.mbexcerpt {
     text-shadow: 0.2ex 0.2ex rgba(255, 215, 0, 0.53);}
 
 /* Startup messages */

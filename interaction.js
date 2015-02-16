@@ -898,7 +898,7 @@
             if ((ranges)&&(ranges.length)) {
                 var k=0; while (k<ranges.length) {
                     var h=fdjtUI.Highlight(
-                        ranges[k++],"metabookhighlightsearch");
+                        ranges[k++],"mbhighlightsearch");
                     highlights=highlights.concat(h);}}}
         return highlights;}
     metaBook.highlightTerm=highlightTerm;
@@ -1196,14 +1196,14 @@
         evt=evt||window.event;
         var target=fdjtUI.T(evt);
         var passage=getTarget(target);
-        if (!(fdjtDOM.hasClass(passage,"metabooktarget")))
+        if (!(fdjtDOM.hasClass(passage,"mbtarget")))
             animate_glossmark(target,true);}
 
     function glossmark_hoverdone(evt){
         evt=evt||window.event;
         var target=fdjtUI.T(evt);
         var passage=getTarget(target);
-        if (!(fdjtDOM.hasClass(passage,"metabooktarget")))
+        if (!(fdjtDOM.hasClass(passage,"mbtarget")))
             animate_glossmark(target,false);}
 
     function setTargetUI(target){

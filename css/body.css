@@ -236,6 +236,26 @@ div.codexpage img {
     max-height: 90% !important; max-width: 90% !important;
     width: auto; height: auto;}
 
+/* Add some layout override rules */
+body #METABOOKBODY #CODEXPAGE .codexpage p.codexdupend,
+body #METABOOKBODY #CODEXPAGE .codexpage p.codexdup {
+    text-indent: 0px;}
+body #METABOOKBODY #CODEXPAGE .codexpage .codexdupstart {
+    padding-bottom: 0px;
+    border-bottom-width: 0px;
+    margin-bottom: 0px;}
+body #METABOOKBODY #CODEXPAGE .codexpage .codexdupend {
+    padding-top: 0px;
+    border-top-width: 0px;
+    margin-top: 0px;}
+body #METABOOKBODY #CODEXPAGE .codexpage .codexdup {
+    padding-bottom: 0px;
+    border-bottom-width: 0px;
+    margin-bottom: 0px;
+    padding-top: 0px;
+    border-top-width: 0px;
+    margin-top: 0px;}
+
 /* Anchor display */
 
 a[href].sbookextlink, a[href].sbextref, a[href].extlink, a[href].extref {
