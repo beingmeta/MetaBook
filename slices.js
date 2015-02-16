@@ -74,6 +74,8 @@ metaBook.Slice=(function () {
 
     var cancel=fdjtUI.cancel;
     
+    var TOA=fdjtDOM.toArray;
+
     function getTargetDup(scan,target){
         var targetid=target.id;
         while (scan) {
@@ -227,15 +229,22 @@ metaBook.Slice=(function () {
                 if (info.about) 
                     outlet_span.title="Shared with “"+info.name+"” — "+info.about;
                 else outlet_span.title="Shared with “"+info.name+"”";}
-            else info.load(fill_outlet_span,[info,outlet_span]);
+            else {
+                outlet_span.setAttribute("NAME","OUTLETSPAN"+info._id);
+                info.load().then(fill_outlet_spans);}
             fdjtDOM.append(span," ",outlet_span);
             i++;}
         return span;}
-    function fill_outlet_span(info,outlet_span){
-        fdjtDOM(outlet_span,info.name);
-        if (info.about) 
-            outlet_span.title="Shared with “"+info.name+"” — "+info.about;
-        else outlet_span.title="Shared with “"+info.name+"”";}
+    function fill_outlet_spans(info){
+        var outlet_spans=
+            TOA(document.getElementsByName("OUTLETSPAN"+info._id));
+        var i=0, len=outlet_spans.length; while (i<len) {
+            var outlet_span=outlet_spans[i++];
+            outlet_span.removeAttribute("NAME");
+            fdjtDOM(outlet_span,info.name);
+            if (info.about) 
+                outlet_span.title="Shared with “"+info.name+"” — "+info.about;
+            else outlet_span.title="Shared with “"+info.name+"”";}}
 
     function showlinks(refs,spec){
         var count=0;
@@ -716,9 +725,9 @@ metaBook.Slice=(function () {
             var cards=this.cards, byfrag=this.byfrag;
             cards.sort(this.sortfn);
             var passage_starts=
-                fdjtDOM.toArray(fdjtDOM.$(".slicenewpassage",this.container));
+                TOA(fdjtDOM.$(".slicenewpassage",this.container));
             var head_starts=
-                fdjtDOM.toArray(fdjtDOM.$(".slicenewhead",this.container));
+                TOA(fdjtDOM.$(".slicenewhead",this.container));
             this.container.innerHTML="";
             dropClass(passage_starts,"slicenewpassage");
             dropClass(head_starts,"slicenewhead");

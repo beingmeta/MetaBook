@@ -36,7 +36,7 @@
 (function(){
     "use strict";
     var fdjtDOM=fdjt.DOM, fdjtLog=fdjt.Log, fdjtString=fdjt.String;
-    var fdjtTime=fdjt.Time, fdjtID=fdjt.ID;
+    var fdjtTime=fdjt.Time, fdjtID=fdjt.ID, fdjtAsync=fdjt.Async;
     var RefDB=fdjt.RefDB, fdjtState=fdjt.State, fdjtAjax=fdjt.Ajax;
 
     var dropClass=fdjtDOM.dropClass, addClass=fdjtDOM.addClass;
@@ -298,7 +298,7 @@
                     var i=0; var lim=info.length; 
                     while (i<lim) gotItem(info[i++],qids);
                     saveItems(qids,name);}
-                else fdjtTime.slowmap(
+                else fdjtAsync.slowmap(
                     function(item){gotItem(item,qids);},
                     info,{done: function(){saveItems(qids,name);}});}
             else {
@@ -376,7 +376,8 @@
             fdjtLog("Starting initializing glosses from local storage");
         metaBook.glosses.setLive(false);
         metaBook.sourcedb.load(true);
-        metaBook.glossdb.load(true,function(){
+        var loading=metaBook.glossdb.load(true);
+        loading.then(function(){
             metaBook.glosses.setLive(true);
             if (metaBook.heartscroller)
                 metaBook.heartscroller.refresh();
