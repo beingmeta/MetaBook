@@ -198,23 +198,29 @@
         if (typeof node === "string") node=mbID(node);
         if (!(node)) return false;
         if (node.nodeType) node=getDups(node);
-        var found=fdjtDOM.findString(node,excerpt,off||0);
-        if (found) return found;
         var trimmed=fdjtString.trim(excerpt);
-        var regex_string=fdjtDOM.textRegExp(trimmed,true);
-        var pattern=new RegExp("(\\s*)"+regex_string+"(\\s*)","gm");
+        var before=((trimmed.search(/[.,"']/)===0)?("(^|\\s)"):("\\b"));
+        var after=((trimmed.search(/[.,"']$/)>0)?("($|\\s)"):("\\b"));
+        var pattern=fdjtDOM.textRegExp(trimmed,before,after);
         var matches=fdjtDOM.findMatches(node,pattern,off||0,1);
         if ((matches)&&(matches.length)) return matches[0];
         // We could do this more intelligently
-        var result=false;
+        var result=false, roff=-1;
         matches=fdjtDOM.findMatches(node,pattern,0,1);
         while (matches.length>0) {
-            result=matches[0];
+            var first=matches[0];
+            if (first.start_offset>off) {
+                if (roff<0) return result;
+                else if ((off-roff)<(result.start_offset-off))
+                    return result;
+                else return first;}
+            else {result=first; roff=first.start_offset;}
             matches=fdjtDOM.findMatches(
-                node,pattern,result.end_offset+1,1);}
+                node,pattern,first.endOffset+1,1);}
         if ((matches)&&(matches.length)) return matches[0];
         else return result;}
     metaBook.findExcerpt=findExcerpt;
+
     /* Navigation */
 
     var sbookUIclasses=
