@@ -335,13 +335,15 @@ metaBook.Paginate=
                 (!(forced))) {
                 if (Trace.layout)
                     fdjtLog("Fetching layout %s",layout_id);
-                CodexLayout.fetchLayout(layout_id,function(content){
-                    if (content) {
-                        if (Trace.layout)
-                            fdjtLog("Got layout %s",layout_id);
-                        recordLayout(layout_id,metaBook.sourceid);
-                        restore_layout(content,layout_id);}
-                    else new_layout();});}
+                CodexLayout.fetchLayout(layout_id).
+                    then(function(content){
+                        if (content) {
+                            if (Trace.layout)
+                                fdjtLog("Got layout %s",layout_id);
+                            recordLayout(layout_id,metaBook.sourceid);
+                            restore_layout(content,layout_id);}
+                        else new_layout();}).
+                    catch(function(){new_layout();});}
             else {
                 setTimeout(new_layout,10);}}
         metaBook.Paginate=Paginate;
