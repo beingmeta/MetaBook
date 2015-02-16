@@ -341,8 +341,12 @@ metaBook.Paginate=
                             if (Trace.layout)
                                 fdjtLog("Got layout %s",layout_id);
                             recordLayout(layout_id,metaBook.sourceid);
-                            restore_layout(content,layout_id);}
-                        else new_layout();}).
+                            try {
+                                return restore_layout(content,layout_id);}
+                            catch (ex) {
+                                fdjtLog("Layout restore error: %o",ex);
+                                return new_layout();}}
+                        else return new_layout();}).
                     catch(function(){new_layout();});}
             else {
                 setTimeout(new_layout,10);}}
