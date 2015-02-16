@@ -193,7 +193,7 @@ metaBook.Paginate=
                 layoutMessage("Using cached layout",0);
                 dropClass(document.body,"_SCROLL");
                 addClass(document.body,"_BYPAGE");
-                layout.restoreLayout(content,finish_layout);}
+                layout.restoreLayout(content).then(finish_layout);}
             function finish_layout(layout) {
                 fdjtID("CODEXPAGE").style.visibility='';
                 fdjtID("CODEXCONTENT").style.visibility='';
@@ -327,7 +327,6 @@ metaBook.Paginate=
                                               layout_progress,rootloop);
                         else return rootloop();}}
 
-                
                 rootloop();}
             
             if ((metaBook.cache_layout_thresh)&&
@@ -337,17 +336,15 @@ metaBook.Paginate=
                     fdjtLog("Fetching layout %s",layout_id);
                 CodexLayout.fetchLayout(layout_id).
                     then(function(content){
-                        if (content) {
-                            if (Trace.layout)
-                                fdjtLog("Got layout %s",layout_id);
-                            recordLayout(layout_id,metaBook.sourceid);
-                            try {
-                                return restore_layout(content,layout_id);}
-                            catch (ex) {
-                                fdjtLog("Layout restore error: %o",ex);
-                                return new_layout();}}
-                        else return new_layout();}).
-                    catch(function(){new_layout();});}
+                        if (Trace.layout)
+                            fdjtLog("Got layout %s",layout_id);
+                        recordLayout(layout_id,metaBook.sourceid);
+                        try {
+                            return restore_layout(content,layout_id);}
+                        catch (ex) {
+                            fdjtLog("Layout restore error: %o",ex);
+                            return new_layout();}}).
+                    catch(function(){return new_layout();});}
             else {
                 setTimeout(new_layout,10);}}
         metaBook.Paginate=Paginate;
