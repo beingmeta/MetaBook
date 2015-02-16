@@ -497,7 +497,7 @@ metaBook.Startup=
                     window._sbook_newinfo=false;})),
                 function(){metaBook.setupIndex(metadata);},
                 startupDone],
-             100,25);}
+             {slice: 100, space: 25});}
         metaBook.Startup=metaBookStartup;
         
         function addTOCLevel(specs,level){

@@ -110,9 +110,10 @@
             if (!(tag.weak)) {
                 addClass(elt,"cue");
                 addTag2Cloud(tag,gloss_cloud);}},
-                         searchtags,tagindex_progress,
-                         tagindex_done,false,
-                         200,20);}
+                         searchtags,
+                         {watchfn: tagindex_progress,
+                          done: tagindex_done,
+                          slice: 200,space: 20});}
     
     function tagindex_done(searchtags){
         var eq=metaBook.empty_query;
@@ -133,7 +134,7 @@
         fdjtTime.slowmap(function(string){
             searchlist.appendChild(knodeToOption(string));},
                          metaBook.textindex.allterms,
-                         false,false,false,100,20);
+                         {slice: 100,space: 20});
         metaBook.sortCloud(empty_cloud);
         metaBook.sortCloud(gloss_cloud);
         metaBook.sizeCloud(empty_cloud,metaBook.tagfreqs,[]);
@@ -239,16 +240,16 @@
         addClass(document.body,"mbINDEXING");
         fdjtTime.slowmap(
             handleIndexEntry,alltags,
-            ((alltags.length>100)&&(tracelevel>1)&&(indexProgress)),
-            function(state){
+            {watchfn: ((alltags.length>100)&&(tracelevel>1)&&(indexProgress)),
+             done:
+             function(state){
                 fdjtLog("Book index links %d keys to %d refs",ntags,nitems);
                 dropClass(document.body,"mbINDEXING");
                 metaBook.tagmaxweight=maxweight;
                 metaBook.tagminweight=minweight;
                 if (whendone) return whendone();
                 else return state;},
-            false,
-            200,10);}
+             slice: 200,space: 10});}
     metaBook.useIndexData=useIndexData;
     function indexProgress(state,i,lim){
         if (state!=='suspend') return;
@@ -325,6 +326,26 @@
     function applyTagAttributes(docinfo,whendone){
         var tracelevel=Math.max(Trace.startup,Trace.clouds);
         var tohandle=[]; var tagged=0;
+        function index_progress(state,i,lim){
+            // For chunks:
+            if (!((state==='suspend')||(state==='finishing')))
+                return;
+            var pct=(i*100)/lim;
+            if (tracelevel>1)
+                fdjtLog("Processed %d/%d (%d%%) inline tags",
+                        i,lim,Math.floor(pct));
+            fdjtUI.ProgressBar.setProgress(
+                "METABOOKINDEXMESSAGE",pct);
+            fdjtUI.ProgressBar.setMessage(
+                "METABOOKINDEXMESSAGE",
+                fdjtString("Assimilated %d (%d%% of %d) inline tags",
+                           i,Math.floor(pct),lim));}
+        function index_done(){
+            if (((Trace.indexing>1)&&(tohandle.length))||
+                (tohandle.length>24))
+                fdjtLog("Finished indexing tag attributes for %d nodes",
+                        tohandle.length);
+            if (whendone) whendone();}
         if ((Trace.startup>1)||(Trace.indexing>1))
             fdjtLog("Applying inline tag attributes from content");
         for (var eltid in docinfo) {
@@ -336,29 +357,8 @@
         fdjtTime.slowmap(
             handle_inline_tags,
             tohandle,
-            ((tohandle.length>100)&&
-             (function(state,i,lim){
-                 // For chunks:
-                 if (!((state==='suspend')||(state==='finishing')))
-                     return;
-                 var pct=(i*100)/lim;
-                 if (tracelevel>1)
-                     fdjtLog("Processed %d/%d (%d%%) inline tags",
-                             i,lim,Math.floor(pct));
-                 fdjtUI.ProgressBar.setProgress(
-                     "METABOOKINDEXMESSAGE",pct);
-                 fdjtUI.ProgressBar.setMessage(
-                     "METABOOKINDEXMESSAGE",
-                     fdjtString("Assimilated %d (%d%% of %d) inline tags",
-                                i,Math.floor(pct),lim));})),
-            function(){
-                if (((Trace.indexing>1)&&(tohandle.length))||
-                    (tohandle.length>24))
-                    fdjtLog("Finished indexing tag attributes for %d nodes",
-                            tohandle.length);
-                if (whendone) whendone();},
-            false,
-            200,5);}
+            {watchfn: ((tohandle.length>100)&&(index_progress)),
+             done: index_done,slice: 200, space: 5});}
     metaBook.applyTagAttributes=applyTagAttributes;
     
     function handle_inline_tags(info){

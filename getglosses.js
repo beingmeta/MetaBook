@@ -298,10 +298,9 @@
                     var i=0; var lim=info.length; 
                     while (i<lim) gotItem(info[i++],qids);
                     saveItems(qids,name);}
-                else fdjtTime.slowmap(function(item){gotItem(item,qids);},
-                                      info,false,
-                                      function(){saveItems(qids,name);},
-                                     false);}
+                else fdjtTime.slowmap(
+                    function(item){gotItem(item,qids);},
+                    info,{done: function(){saveItems(qids,name);}});}
             else {
                 var ref=metaBook.sourcedb.Import(
                     info,false,
