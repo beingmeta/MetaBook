@@ -53,6 +53,7 @@ metaBook.Startup=
         var fdjtString=fdjt.String;
         var fdjtDevice=fdjt.device;
         var fdjtState=fdjt.State;
+        var fdjtAsync=fdjt.Async;
         var fdjtTime=fdjt.Time;
         var fdjtLog=fdjt.Log;
         var fdjtDOM=fdjt.DOM;
@@ -397,7 +398,7 @@ metaBook.Startup=
             metaBook.resizeUI();
 
             // The rest of the stuff we timeslice
-            fdjtTime.timeslice
+            fdjtAsync.timeslice
             ([  // Scan the DOM for metadata.  This is surprisingly
                 //  fast, so we don't currently try to timeslice it or
                 //  cache it, though we could.
@@ -464,7 +465,7 @@ metaBook.Startup=
                                metaBook.docinfo._headcount,
                                fdjtTime()-tocstart);
                     if (tocmsg) dropClass(tocmsg,"running");},
-                // Load all account information
+                // Load all source (user,layer,etc) information
                 function(){
                     if (Trace.startup>1) fdjtLog("Loading sourcedb");
                     metaBook.sourcedb.load(true);},

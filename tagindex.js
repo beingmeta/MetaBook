@@ -37,6 +37,7 @@
     "use strict";
     var fdjtDOM=fdjt.DOM, fdjtLog=fdjt.Log, fdjtID=fdjt.ID;
     var fdjtTime=fdjt.Time, fdjtString=fdjt.String, fdjtUI=fdjt.UI;
+    var fdjtAsync=fdjt.Async;
     var dropClass=fdjtDOM.dropClass, addClass=fdjtDOM.addClass;
     var getLink=fdjtDOM.getLink, isEmpty=fdjtString.isEmpty;
 
@@ -95,7 +96,7 @@
         fdjtDOM(gloss_cloud.dom,
                 fdjtDOM("div.cloudprogress","Cloud Shaping in Progress"));
         addClass(gloss_cloud.dom,"working");
-        fdjtTime.slowmap(function(tag){
+        fdjtAsync.slowmap(function(tag){
             if (!(tag instanceof KNode)) {
                 if ((typeof tag === "string")&&(!(isEmpty(tag)))) {
                     var option=fdjtDOM("OPTION",tag); option.value=tag;
@@ -131,7 +132,7 @@
             fdjtDOM.prepend(empty_cloud.dom,
                             metaBook.UI.getShowAll(
                                 true,empty_cloud.values.length));
-        fdjtTime.slowmap(function(string){
+        fdjtAsync.slowmap(function(string){
             searchlist.appendChild(knodeToOption(string));},
                          metaBook.textindex.allterms,
                          {slice: 100,space: 20});
@@ -238,7 +239,7 @@
                 occurrences.push(info);}
             addTags(occurrences,knode||taghead);}
         addClass(document.body,"mbINDEXING");
-        fdjtTime.slowmap(
+        fdjtAsync.slowmap(
             handleIndexEntry,alltags,
             {watchfn: ((alltags.length>100)&&(tracelevel>1)&&(indexProgress)),
              done:
@@ -354,7 +355,7 @@
         if (((Trace.indexing)&&(tohandle.length))||
             (Trace.indexing>1)||(Trace.startup>1))
             fdjtLog("Indexing tag attributes for %d nodes",tohandle.length);
-        fdjtTime.slowmap(
+        fdjtAsync.slowmap(
             handle_inline_tags,
             tohandle,
             {watchfn: ((tohandle.length>100)&&(index_progress)),
