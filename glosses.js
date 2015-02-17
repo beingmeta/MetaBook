@@ -865,7 +865,8 @@
                     var outlet=cloud.selection.getAttribute("data-value");
                     metaBook.addOutlet2Form(form,outlet,"SHARE");}
                 else metaBook.addTag2Form(form,cloud.selection);
-                target.value=text.slice(0,taginfo.start)+text.slice(taginfo.end);
+                target.value=text.slice(0,taginfo.start)+
+                    text.slice(taginfo.end);
                 dropClass("METABOOKHUD",/gloss(tagging|tagoutlet)/g);
                 setTimeout(function(){cloud.complete("");},10);
                 cloud.clearSelection();
@@ -1812,7 +1813,7 @@
             gloss_cloud.complete(target.value);},
                         100);}
 
-    var attach_types=/\b(uploading|linking|glossbody|image|audio|dropbox|gdrive|usebox)\b/g;
+    var attach_types=/\b(uploading|linking|glossbody|capture)\b/g;
     function changeAttachment(evt){
         evt=evt||window.event;
         var target=fdjtUI.T(evt);
@@ -1931,6 +1932,8 @@
         evt=evt||window.event;
         var types=evt.dataTransfer.types;
         if (!(types)) return;
+        else if (types.indexOf("Files")>=0)
+            fdjt.UI.cancel(evt);
         else if (types.indexOf("text/uri-list")>=0)
             fdjt.UI.cancel(evt);
         else if (types.indexOf("text/plain")>=0) {
@@ -1964,6 +1967,12 @@
                 metaBook.setGlossMode(false);
                 input.value=text;
                 input.focus();}}
+        else if (types.indexOf("Files")>=0) {
+            var files=evt.dataTransfer.files;
+            var f=0, nfiles=files.length;
+            fdjtUI.cancel(evt);
+            while (f<nfiles) {
+                var file=files[f++];}}
         else {}}
 
     function editglossnote(evt){

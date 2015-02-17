@@ -471,6 +471,8 @@ body.hudup #METABOOKHUD.addgloss.glossaddoutlet
     font-size: 1.2rem; padding-top: 1ex;}
 body.hudup #METABOOKHUD.addgloss.glossattach {
     display: block;}
+#METABOOKGLOSSATTACH tr.fileokay td {
+    padding-bottom: 1ex;}
 
 #METABOOKGLOSSATTACH table { color: black; }
 #METABOOKGLOSSATTACH table tr th:first-child {
@@ -490,9 +492,11 @@ body.hudup #METABOOKHUD.addgloss.glossattach {
 #METABOOKGLOSSATTACH .attachtype td { vertical-align: middle; }
 
 #METABOOKGLOSSATTACH tbody.upload { display:  none;}
-#METABOOKGLOSSATTACH form.uploading tbody.upload {
+#METABOOKGLOSSATTACH form.uploadfile tbody.upload,
+#METABOOKGLOSSATTACH form.uploadurl tbody.upload {
     display:  table-row-group;}
-#METABOOKGLOSSATTACH form.uploading tr.url { display: none; }
+#METABOOKGLOSSATTACH form.uploadfile tr.url { display: none; }
+#METABOOKGLOSSATTACH form.uploadurl tr.uploadfile { display: none; }
 
 #METABOOKGLOSSATTACH tbody.glossbody { display: none;}
 #METABOOKGLOSSATTACH form.glossbody tbody.glossbody {

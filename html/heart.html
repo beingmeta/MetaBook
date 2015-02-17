@@ -30,25 +30,24 @@
             <input type="RADIO" NAME="ATTACHTYPE" VALUE="linking"
                    onchange="metaBook.UI.changeAttachment(event);"
                    CHECKED/>
-            URL</span>
+            Link</span>
           <span class="checkspan">
-            <input type="RADIO" NAME="ATTACHTYPE" VALUE="uploading"
+            <input type="RADIO" NAME="ATTACHTYPE" VALUE="uploadfile"
                    onchange="metaBook.UI.changeAttachment(event);"/>
-            File</span>
+            Upload (File)</span>
           <span class="checkspan">
-            <input type="RADIO" NAME="ATTACHTYPE" VALUE="glossbody"
+            <input type="RADIO" NAME="ATTACHTYPE" VALUE="uploadurl"
                    onchange="metaBook.UI.changeAttachment(event);"/>
-            Body</span>
+            Upload (URL)</span>
+          <span class="checkspan">
+            <input type="RADIO" NAME="ATTACHTYPE" VALUE="editbody"
+                   onchange="metaBook.UI.changeAttachment(event);"/>
+            Edit</span>
           <span class="checkspan disabled">
-            <input type="RADIO" NAME="ATTACHTYPE" VALUE="audio"
+            <input type="RADIO" NAME="ATTACHTYPE" VALUE="capture"
                    onchange="metaBook.UI.changeAttachment(event);"
                    disabled="DISABLED"/>
-            Audio</span>
-          <span class="checkspan disabled">
-            <input type="RADIO" NAME="ATTACHTYPE" VALUE="video"
-                   onchange="metaBook.UI.changeAttachment(event);"
-                   disabled="DISABLED"/>
-            Video</span>
+            Capture</span>
         </td>
         <th class="button"></th>
       </tr>
@@ -70,19 +69,32 @@
             Link</button></th>
       </tr>
       <tbody class="upload">
-        <tr>
+        <tr class="checkspan fileokay">
+          <th><input TYPE="CHECKBOX" NAME="FILEOKAY" VALUE="yes"/></th>
+          <td colspan="2">
+            I affirm that I have the right to use and share this
+            file according to the &sBooks;
+            <a href="https://www.sbooks.net/legalia/TOS/" target="_blank">
+              Terms of Service</a>.</td>
+        </tr>
+        <tr class="uploadfile">
           <th>File</th>
           <td><input TYPE="FILE" NAME="UPLOAD" ID="METABOOKATTACHFILE"/></td>
           <th class="button">
-            <button id="METABOOKUPLOADOK" NAME="ATTACH" "UPLOAD">
+            <button id="METABOOKUPLOADOK" NAME="ATTACH" VALUE="UPLOAD">
               Upload</button></th></tr>
-        <tr class="checkspan fileokay">
-          <th><input TYPE="CHECKBOX" NAME="FILEOKAY" VALUE="yes"/></th>
-          <td>I affirm that I have the right to use and share this
-            file according to the &sBooks;
-                <a href="https://www.sbooks.net/legalia/TOS/" target="_blank">
-                  Terms of Service</a>.</td>
-        </tr>
+        <tr class="uploadfile">
+          <th></th>
+          <td>Drag a file here to upload it</td>
+          <th class="button"></th></tr>
+        <tr class="uploadurl">
+          <th>URL</th>
+          <td><input TYPE="TEXT" NAME="URL" VALUE=""
+                     ID="METABOOKATTACHURL" class="fdjturlinput"
+                     placeholder="a URL to attach"/></td>
+          <th class="button">
+            <button id="METABOOKUPLOADURL" NAME="ATTACH" VALUE="UPLOAD">
+              Copy</button></th></tr>
       </tbody>
       <tbody class="glossbody" id="METABOOKGLOSSBODY">
         <tr>
