@@ -17,17 +17,17 @@
   <form id="METABOOKATTACHFORM" target="METABOOKGLOSSCOMM"
 	method="POST" enctype="multipart/form-data" accept-charset="utf-8"
         action="https://glosses.sbooks.net/1/attach"
-        class="linking">
-    <table class="fdjtform">
+        class="linkurl">
+    <table class="fdjtform"
+           onclick="fdjt.UI.CheckSpan.onclick(event);">
       <input TYPE="HIDDEN" NAME="GLOSSID" VALUE="" id="METABOOKUPLOADGLOSSID"/>
       <input TYPE="HIDDEN" NAME="ITEMID" VALUE="" id="METABOOKUPLOADITEMID"/>
-      <tr class="attachtype"
-          onclick="fdjt.UI.CheckSpan.onclick(event);">
+      <tr class="attachtype">
         <th class="headcell">
           Attach<img src="{{bmg}}metabook/gloss_attach.svgz"/></th>
         <td>
           <span class="checkspan ischecked">
-            <input type="RADIO" NAME="ATTACHTYPE" VALUE="linking"
+            <input type="RADIO" NAME="ATTACHTYPE" VALUE="linkurl"
                    onchange="metaBook.UI.changeAttachment(event);"
                    CHECKED/>
             Link</span>
@@ -36,11 +36,7 @@
                    onchange="metaBook.UI.changeAttachment(event);"/>
             Upload (File)</span>
           <span class="checkspan">
-            <input type="RADIO" NAME="ATTACHTYPE" VALUE="uploadurl"
-                   onchange="metaBook.UI.changeAttachment(event);"/>
-            Upload (URL)</span>
-          <span class="checkspan">
-            <input type="RADIO" NAME="ATTACHTYPE" VALUE="editbody"
+            <input type="RADIO" NAME="ATTACHTYPE" VALUE="glossbody"
                    onchange="metaBook.UI.changeAttachment(event);"/>
             Edit</span>
           <span class="checkspan disabled">
@@ -49,53 +45,44 @@
                    disabled="DISABLED"/>
             Capture</span>
         </td>
-        <th class="button"></th>
+        <th class="button">
+          <button id="METABOOKATTACHLINK" NAME="ATTACH" VALUE="LINK">
+            Link</button>
+          <button id="METABOOKUPLOADOK" NAME="ATTACH" VALUE="UPLOAD">
+            Upload</button>
+          <button id="METABOOKATTACHLINK" NAME="ATTACH" VALUE="SAVE">
+            Save</button>
+          <button id="METABOOKATTACHCANCEL">Cancel</button></th>
       </tr>
       <tr class="title">
         <th>Label</th>
-        <td><INPUT TYPE="TEXT" NAME="TITLE" VALUE="" ID="METABOOKATTACHTITLE"
-                   placeholder="a descriptive label"/>
-          <th class="button">
-            <button id="METABOOKATTACHCANCEL">Cancel</button></th></tr>
-      <tr class="spacing"><td> </td></tr>
+        <td colspan="2">
+          <INPUT TYPE="TEXT" NAME="TITLE" VALUE="" ID="METABOOKATTACHTITLE"
+                 placeholder="a descriptive label"/></tr>
+      <tr class="checkspan uploadrights"
+          id="METABOOKUPLOADRIGHTS">
+        <th><input TYPE="CHECKBOX" NAME="FILEOKAY" VALUE="yes"/></th>
+        <td colspan="2">
+          I affirm that I have the right to use and share this
+          content according to the &sBooks;
+          <a href="https://www.sbooks.net/legalia/TOS/" target="_blank">
+            Terms of Service</a>.</td>
+      </tr>
       <tr class="url">
         <th>URL</th>
-        <td><input TYPE="TEXT" NAME="URL" VALUE=""
-                   ID="METABOOKATTACHURL" class="fdjturlinput"
-                   placeholder="a URL to attach"/>
+        <td colspan="2">
+          <input TYPE="TEXT" NAME="URL" VALUE=""
+                 ID="METABOOKATTACHURL" class="fdjturlinput"
+                 placeholder="a URL to attach"/>
         </td>
-        <th class="button">
-          <button id="METABOOKATTACHOK" NAME="ATTACH" "LINK">
-            Link</button></th>
       </tr>
-      <tbody class="upload">
-        <tr class="checkspan fileokay">
-          <th><input TYPE="CHECKBOX" NAME="FILEOKAY" VALUE="yes"/></th>
-          <td colspan="2">
-            I affirm that I have the right to use and share this
-            file according to the &sBooks;
-            <a href="https://www.sbooks.net/legalia/TOS/" target="_blank">
-              Terms of Service</a>.</td>
-        </tr>
-        <tr class="uploadfile">
-          <th>File</th>
-          <td><input TYPE="FILE" NAME="UPLOAD" ID="METABOOKATTACHFILE"/></td>
-          <th class="button">
-            <button id="METABOOKUPLOADOK" NAME="ATTACH" VALUE="UPLOAD">
-              Upload</button></th></tr>
-        <tr class="uploadfile">
-          <th></th>
-          <td>Drag a file here to upload it</td>
-          <th class="button"></th></tr>
-        <tr class="uploadurl">
-          <th>URL</th>
-          <td><input TYPE="TEXT" NAME="URL" VALUE=""
-                     ID="METABOOKATTACHURL" class="fdjturlinput"
-                     placeholder="a URL to attach"/></td>
-          <th class="button">
-            <button id="METABOOKUPLOADURL" NAME="ATTACH" VALUE="UPLOAD">
-              Copy</button></th></tr>
-      </tbody>
+      <tr class="uploadfile">
+        <th>File<input TYPE="FILE" NAME="UPLOAD" ID="METABOOKFILEINPUT"/></th>
+        <td id="METABOOKATTACHFILE" class="nofile" colspan="2">
+          <span class="mbmessage">
+            Drag a file here or click to browse files</span>
+          <span class="mbfilename" id="METABOOKATTACHFILENAME"></span>
+        </td></tr>
       <tbody class="glossbody" id="METABOOKGLOSSBODY">
         <tr>
           <td colspan="3">

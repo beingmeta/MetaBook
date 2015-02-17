@@ -262,7 +262,7 @@ div.metabookglossform form div.glossetc .tags {
 div.metabookglossform form div.glossetc .outlets { padding-left: 1px;}
 div.metabookglossform form div.glossetc .links { padding-left: 1px;}
 div.metabookglossform form div.glossetc .checkspan img {
-    height: 1.7ex; width: auto; vertical-align: bottom;
+    height: 1.7ex; width: auto; vertical-align: baseline;
     padding-left: 0.8ex; padding-top: 2px;}
 div.metabookglossform form div.glossetc .checkspan input {
     margin-left: 0px;}
@@ -471,7 +471,51 @@ body.hudup #METABOOKHUD.addgloss.glossaddoutlet
     font-size: 1.2rem; padding-top: 1ex;}
 body.hudup #METABOOKHUD.addgloss.glossattach {
     display: block;}
-#METABOOKGLOSSATTACH tr.fileokay td {
+#METABOOKGLOSSATTACH tr { display: none; }
+#METABOOKGLOSSATTACH .glossbody tbody.glossbody tr {
+    display: table-row; }
+
+#METABOOKGLOSSATTACH tr.title, #METABOOKGLOSSATTACH tr.attachtype {
+    display: table-row;}
+#METABOOKGLOSSATTACH .uploadfile tr.uploadrights {
+    display: table-row;}
+#METABOOKGLOSSATTACH .linkurl tr.url {
+    display: table-row;}
+#METABOOKGLOSSATTACH .uploadfile tr.uploadfile {
+    display: table-row;}
+
+td#METABOOKATTACHFILE {
+    background-color: lightgray;
+    padding-bottom: 2em; padding-top: 1em;
+    text-align: center;
+    cursor: pointer;}
+#METABOOKATTACHFILE span {
+    font-size: 120%; font-size: 1.5rem;
+    display: none;}
+input#METABOOKFILEINPUT[TYPE="FILE"] { display: none;}
+
+#METABOOKATTACHFILE span.mbmessage { font-style: italic;}
+#METABOOKATTACHFILE span.mbfilename {
+    font-family: fixed; font-weight: bold;}
+#METABOOKATTACHFILE.nofile span.mbmessage,
+#METABOOKATTACHFILE.havefile span.mbfilename {
+    display: inline;}
+
+#METABOOKGLOSSATTACH .checkspan { color: gray; }
+#METABOOKGLOSSATTACH .checkspan.ischecked {
+    color: black; font-weight: normal;}
+
+#METABOOKGLOSSATTACH th.button button { display: none;}
+
+#METABOOKGLOSSATTACH th.button button[VALUE="CANCEL"],
+#METABOOKGLOSSATTACH .glossbody th.button button[VALUE="SAVE"],
+#METABOOKGLOSSATTACH .uploadfile th.button button[VALUE="UPLOAD"],
+#METABOOKGLOSSATTACH .linkurl th.button button[VALUE="LINK"] {
+    display: block;}
+
+#METABOOKGLOSSATTACH tr.title td,
+#METABOOKGLOSSATTACH tr.uploadrights td,
+#METABOOKGLOSSATTACH tr.attachtype td {
     padding-bottom: 1ex;}
 
 #METABOOKGLOSSATTACH table { color: black; }
@@ -485,11 +529,9 @@ body.hudup #METABOOKHUD.addgloss.glossattach {
 
 #METABOOKGLOSSATTACH tr.attachtype {
     border-bottom: solid transparent 1em;}
-#METABOOKGLOSSATTACH .attachtype td .checkspan.ischecked {
-    font-size: 100%;}
-#METABOOKGLOSSATTACH .attachtype td .checkspan {
-    display: inline-block; padding-left: 1ex; padding-right: 1ex;}
 #METABOOKGLOSSATTACH .attachtype td { vertical-align: middle; }
+#METABOOKGLOSSATTACH .attachtype td .checkspan {
+    display: inline-block; padding-right: 1em;}
 
 #METABOOKGLOSSATTACH tbody.upload { display:  none;}
 #METABOOKGLOSSATTACH form.uploadfile tbody.upload,
