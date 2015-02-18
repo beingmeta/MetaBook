@@ -2215,6 +2215,10 @@
          "#METABOOKATTACHTITLE": {keydown: attach_keydown},
          "#METABOOKATTACHFILE": {click: attach_file_click},
          "#METABOOKATTACHCANCEL": {click: attach_cancel},
+         "#METABOOKADDGLOSS": {
+             dragenter: addGlossDragOK,
+             dragover: addGlossDragOK,
+             drop: addGlossDrop},
          "#METABOOKFILEINPUT": {change: glossUploadChanged},
          "#METABOOKGLOSSCLOUD": {
              tap: metaBook.UI.handlers.glosscloud_select,
