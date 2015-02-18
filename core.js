@@ -508,6 +508,7 @@
              ((((width)&&(height))?(width+"x"+height):
                (width)?(width+"w"):(height)?(height+"h"):"")+
               ".png"));};
+    var mbicon=metaBook.icon;
 
     function getRefURI(target){
         var scan=target;
@@ -919,6 +920,38 @@
         "<span class='metabook'><span class='bmm'>m<span class='bme'>e<span class='bmt'>t<span class='bma'>a</span></span></span></span>Book<sub>β</sub></span>";
     fdjtString.entities.metaBook=
         "<span class='metabook'><span class='bmm'>m<span class='bme'>e<span class='bmt'>t<span class='bma'>a</span></span></span></span>Book</span>";
+
+    function urlType(url){
+        if (url.search(/\.(jpg|jpeg)$/g)>0) return "image/jpeg";
+        else if (url.search(/\.png$/g)>0) return "image/png";
+        else if (url.search(/\.gif$/g)>0) return "image/gif";
+        else if (url.search(/\.wav$/g)>0) return "audio/wav";
+        else if (url.search(/\.ogg$/g)>0) return "audio/ogg";
+        else if (url.search(/\.mp3$/g)>0) return "audio/mpeg";
+        else if (url.search(/\.mp4$/g)>0) return "video/mp4";
+        else return false;}
+    metaBook.urlType=urlType;
+    function typeIcon(type,w){
+        if (!(w)) w=64;
+        if (!(type)) return mbicon("diaglink",w,w);
+        else if (type==="audio/mpeg") 
+            return mbicon("music",w,w);
+        else if (type.slice(0,6)==="image/") 
+            return mbicon("photo",w,w);
+        else if (type.slice(0,6)==="audio/")
+            return mbicon("sound",w,w);
+        else return mbicon("diaglink",w,w);}
+    metaBook.typeIcon=typeIcon;
+    function typeClass(type){
+        if (!(type)) return false;
+        else if (type==="audio/mpeg")
+            return "musiclink";
+        else if (type.slice(0,6)==="image/") 
+            return "imagelink";
+        else if (type.slice(0,6)==="audio/")
+            return "audiolink";
+        else return false;}
+    metaBook.typeClass=typeClass;
 
 })();
 
