@@ -26,20 +26,24 @@
         <th class="headcell">
           Attach<img src="{{bmg}}metabook/gloss_attach.svgz"/></th>
         <td>
-          <span class="checkspan ischecked">
+          <span class="checkspan ischecked"
+                title="Attach a link to this gloss">
             <input type="RADIO" NAME="ATTACHTYPE" VALUE="linkurl"
                    onchange="metaBook.UI.changeAttachment(event);"
                    CHECKED/>
             Link</span>
-          <span class="checkspan">
+          <span class="checkspan"
+                title="Upload a file and attach it to this gloss">
             <input type="RADIO" NAME="ATTACHTYPE" VALUE="uploadfile"
                    onchange="metaBook.UI.changeAttachment(event);"/>
-            Upload (File)</span>
-          <span class="checkspan">
+            File</span>
+          <span class="checkspan"
+                title="Create or edit a 'body' for this gloss">
             <input type="RADIO" NAME="ATTACHTYPE" VALUE="glossbody"
                    onchange="metaBook.UI.changeAttachment(event);"/>
-            Edit</span>
-          <span class="checkspan disabled">
+            Body</span>
+          <span class="checkspan disabled"
+                title="Attach audio or video recorded on this device">
             <input type="RADIO" NAME="ATTACHTYPE" VALUE="capture"
                    onchange="metaBook.UI.changeAttachment(event);"
                    disabled="DISABLED"/>

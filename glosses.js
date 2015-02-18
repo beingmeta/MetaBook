@@ -1862,9 +1862,20 @@
             if (!(metaBook.glossattach)) {
                 fdjtUI.alert("You need to specify a file!");
                 return;}
-            else if (!(isokay.checked)) 
-                fdjtUI.alert(
-                    "You need to confirm that the file satisfies our restrictions!");
+            else if (!(isokay.checked))
+                fdjt.UI.choose([{label: "Yes",
+                                 handler: function(){
+                                     fdjtUI.CheckSpan.set(isokay,true);
+                                     doFileAttach(title,livegloss);}},
+                                {label: "Cancel"}],
+                               fdjtDOM("P","By choosing 'Yes,' I affirm that ",
+                                       "I have the right to use and share this ",
+                                       "file according to the sBooks ",
+                                       fdjtDOM.Anchor(
+                                           "https://www.sbooks.net/legalia/TOS/",
+                                           "A[target='_blank']",
+                                           "Terms of Service"),
+                                       "."));
             else {
                 attachFile(metaBook.glossattach,
                            title||metaBook.glossattach.name,
@@ -1900,6 +1911,17 @@
         linkinput.value="";
         titleinput.value="";
         metaBook.setGlossMode("editnote");}
+
+    function doFileAttach(title,livegloss){
+        attachFile(metaBook.glossattach,
+                   title||metaBook.glossattach.name,
+                   livegloss).
+            then(function(){
+                metaBook.setGlossMode("editnote");
+                clearAttachForm();}).
+            catch(function(trouble){
+                fdjtLog("Trouble attaching file %o (%o)",
+                        metaBook.glossattach,trouble);});}
 
     function attach_file_click(evt){
         var file_input=fdjtID("METABOOKFILEINPUT");
