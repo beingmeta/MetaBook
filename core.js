@@ -942,7 +942,7 @@
             return mbicon("sound",w,w);
         else return mbicon("diaglink",w,w);}
     metaBook.typeIcon=typeIcon;
-    function typeClass(type){
+    function mediaTypeClass(type){
         if (!(type)) return false;
         else if (type==="audio/mpeg")
             return "musiclink";
@@ -951,7 +951,7 @@
         else if (type.slice(0,6)==="audio/")
             return "audiolink";
         else return false;}
-    metaBook.typeClass=typeClass;
+    metaBook.mediaTypeClass=mediaTypeClass;
 
 })();
 
