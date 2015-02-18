@@ -254,6 +254,8 @@ body.mbSHOWHELP.mbZOOM #METABOOKZOOMHELPTEXT { display: block; }
     transform-origin: 0px 0px;
     -webkit-transform-origin: 0px 0px;
     -moz-transform-origin: 0px 0px;}
+img#METABOOKMEDIATARGET {
+    max-height: 90%; max-width: 90%;}
 
 body.mbMEDIA #METABOOKMEDIA {
     min-width: 100%; min-height: 100%;

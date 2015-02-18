@@ -87,7 +87,7 @@ div.metabookglossform div .respdate {
 
 div.metabookglossform form {
     padding: 0px; margin: 0px;}
-div.metabookglossform form .excerpt { padding-left: 1em;}
+div.metabookglossform form .excerpt { }
 div.metabookglossform form .excerpt.empty { display: none;}
 div.metabookglossform form .checkspan.excerpt {
     white-space: normal; text-decoration: line-through;}
@@ -252,16 +252,19 @@ div.metabookglossform form div.glossetc .tags span.checkspan .term {
 div.metabookglossform form div.glossetc .tags span.checkspan {
     padding: 2px; padding-top: 0px;}
 div.metabookglossform form div.glossetc .checkspan.waschecked {
-    text-decoration: line-through; text-decoration-color: red;}
+    text-decoration: line-through; color: red;}
+div.metabookglossform form div.glossetc .glosslink.checkspan.waschecked
+   span.linktext { opacity: 0.6; text-decoration: none;}
 div.metabookglossform form div.glossetc .checkspan.ischecked {
-    text-decoration: none;}
+    text-decoration: none; color: inherit;}
 div.metabookglossform form div.glossetc .checkspan.waschecked.ischecked {
     text-decoration: none;}
 div.metabookglossform form div.glossetc .outlets,
 div.metabookglossform form div.glossetc .tags { 
     line-height: 0.6;}
 div.metabookglossform form div.glossetc .outlets { padding-left: 1px;}
-div.metabookglossform form div.glossetc .links { padding-left: 1px;}
+div.metabookglossform form div.glossetc .links {
+    padding-left: 1px; padding-right: 1em;}
 div.metabookglossform form div.glossetc .checkspan img {
     height: 1.7ex; width: auto; vertical-align: baseline;
     padding-left: 0.8ex; padding-top: 2px;}
@@ -277,6 +280,10 @@ div.metabookglossform form div.glossetc .glosslink span.linktext {
     color: blue; text-decoration: underline;}
 div.metabookglossform form div.glossetc .glosslink.glossdata span.linktext {
     text-decoration: overline;}
+div.metabookglossform .glosslink.waschecked {
+    background-color: pink; border-color: red;}
+div.metabookglossform .glosslink.ischecked.waschecked {
+    background-color: lightblue; border-color: blue;}
 
 div.metabookglossform form div.glossetc .outlets.empty,
 div.metabookglossform form div.glossetc .links.empty,
@@ -504,22 +511,31 @@ input#METABOOKFILEINPUT[TYPE="FILE"] { display: none;}
 #METABOOKATTACHFILE span.mbmessage { font-style: italic;}
 #METABOOKATTACHFILE span.mbfilename {
     font-family: fixed; font-weight: bold;}
-#METABOOKATTACHFILE.nofile span.mbmessage,
-#METABOOKATTACHFILE.havefile span.mbfilename {
+#METABOOKGLOSSATTACH.haveupload #METABOOKATTACHFILE span.mbmessage {
+    display: none;}
+#METABOOKGLOSSATTACH.haveupload #METABOOKATTACHFILE span.mbfilename {
     display: inline;}
 
 #METABOOKGLOSSATTACH .checkspan { color: gray; }
 #METABOOKGLOSSATTACH .checkspan.ischecked {
     color: black; font-weight: normal;}
 
-#METABOOKGLOSSATTACH th.button button { display: none;}
+#METABOOKGLOSSATTACH button { display: none;}
+#METABOOKGLOSSATTACH button[VALUE="DELETE"] {
+    float: right; color: red; font-weight: bold;
+    background-color: lightgray;}
 
-#METABOOKGLOSSATTACH th.button button[VALUE="CANCEL"],
-#METABOOKGLOSSATTACH .body th.button button[VALUE="BODY"],
-#METABOOKGLOSSATTACH .upload th.button button[VALUE="UPLOAD"],
-#METABOOKGLOSSATTACH .link th.button button[VALUE="LINK"],
-#METABOOKGLOSSATTACH .edit th.button button[VALUE="DELETE"] {
+#METABOOKGLOSSATTACH button[VALUE="CANCEL"],
+#METABOOKGLOSSATTACH .body button[VALUE="BODY"],
+#METABOOKGLOSSATTACH .upload button[VALUE="UPLOAD"],
+#METABOOKGLOSSATTACH .link button[VALUE="LINK"],
+#METABOOKGLOSSATTACH .editlink button[VALUE="DELETE"],
+#METABOOKGLOSSATTACH .editlink button[VALUE="SAVE"] {
     display: block;}
+
+#METABOOKGLOSSATTACH .editlink.upload button[VALUE="UPLOAD"],
+#METABOOKGLOSSATTACH .editlink.link button[VALUE="LINK"] {
+    display: none;}
 
 #METABOOKGLOSSATTACH tr.title td,
 #METABOOKGLOSSATTACH tr.uploadrights td,

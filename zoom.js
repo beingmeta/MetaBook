@@ -225,7 +225,8 @@
                 pause_media_timeout=false;
                 dropClass(document.body,"mbMEDIA");},
                                            1500);}
-        else dropClass(document.body,"mbMEDIA");}
+        else dropClass(document.body,"mbMEDIA");
+        fdjt.UI.cancel(evt);}
     metaBook.hideMedia=hideMedia;
 
     fdjt.DOM.defListeners(

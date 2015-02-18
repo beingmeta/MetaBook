@@ -363,7 +363,7 @@
             var frag=fdjtDOM.getInput(form,"FRAG");
             if (frag.value!==target.id) {
                 setExcerpt(form,false);
-                fdjtDOM.addClass(form,"modified");
+                fdjtDOM.addClass(getParent(form,".metabookglossform"),"modified");
                 frag.value=target.id;}}
         else {
             if (gloss) form=getGlossForm(gloss);
@@ -579,7 +579,7 @@
         aspan.title=title||url; aspan.setAttribute("data-href",url);
         if (url.search(/https:\/\/glossdata./)===0)
             addClass(aspan,"glossdata");
-        if (type) addClass(aspan,metaBook.typeClass(type));
+        if (type) addClass(aspan,metaBook.mediaTypeClass(type));
         var wrapper=getParent(form,".metabookglossform");
         if (Trace.glossing)
             fdjtLog("addOutlet wrapper=%o form=%o url=%o title=%o",
@@ -1879,7 +1879,7 @@
                            linkinput.value,title);
                 metaBook.editlink=false;}
             else addLink(form,linkinput.value,title);
-            fdjtDOM.addClass(form,"modified");
+            fdjtDOM.addClass(livegloss,"modified");
             metaBook.setGlossMode("editnote");}
         else if (hasClass(form,"upload")) {
             if ((!(metaBook.glossattach))&&(!(metaBook.editlink))) {
@@ -1911,28 +1911,24 @@
                             metaBook.editlink=false;}
                         else addLink(livegloss,req.responseURL,
                                      title||filename||"attachment");
-                        fdjtDOM.addClass(form,"modified");
+                        fdjtDOM.addClass("METABOOKLIVEGLOSS","modified");
                         metaBook.setGlossMode("editnote");
                         clearAttachForm();}).
                     catch(function(trouble){
                         fdjtLog("Trouble attaching file %o (%o)",
                                 metaBook.glossattach,trouble);});}
             else if (metaBook.editlink) {
-                fdjtDOM.addClass(form,"modified");
+                fdjtDOM.addClass("METABOOKLIVEGLOSS","modified");
                 changeLink(livegloss,metaBook.editlink,metaBook.editlink,title);
                 metaBook.editlink=false;}
             else {fdjtLog.warn("Fall through in attach_submit");}}
         else {fdjtLog.warn("Fall through in attach_submit");}
         return;}
     function attach_cancel(evt){
-        var linkinput=fdjtID("METABOOKATTACHURL");
-        var titleinput=fdjtID("METABOOKATTACHTITLE");
         var livegloss=fdjtID("METABOOKLIVEGLOSS");
+        clearAttachForm(); fdjtUI.cancel(evt);
         if (!(livegloss)) return;
-        linkinput.value="";
-        titleinput.value="";
-        metaBook.setGlossMode("editnote");
-        fdjtUI.cancel(evt);}
+        metaBook.setGlossMode("editnote");}
     function attach_keydown(evt){
         evt=evt||window.event;
         var ch=evt.keyCode||evt.charCode;
@@ -1946,8 +1942,11 @@
     function editLink(href,title){
         metaBook.editlink=href;
         setGlossMode("attach");
-        if (href.search(/https:\/\/glossdata\./)===0)
+        if (href.search(/https:\/\/glossdata\./)===0) {
+            var name=/\/([^\/]+)$/.exec(href);
             setAttachType("upload");
+            addClass("METABOOKGLOSSATTACH","haveupload");
+            fdjt.ID("METABOOKATTACHFILENAME").innerHTML=name[1];}
         else if (href.search(/\/capture\.[A-Za-z0-9]+$/)>=0)
             setAttachType("capture");
         else {
@@ -1971,6 +1970,7 @@
                 else addLink(livegloss,req.responseURL,
                              title||filename||"attachment");
                 metaBook.setGlossMode("editnote");
+                addClass(livegloss,"modified");
                 clearAttachForm();}).
             catch(function(trouble){
                 fdjtLog("Trouble attaching file %o (%o)",
@@ -1988,11 +1988,23 @@
         var titleinput=fdjtID("METABOOKATTACHTITLE");
         var rightsok=fdjt.ID("METABOOKUPLOADRIGHTS");
         linkinput.value=""; titleinput.value="";
+        fdjtDOM.dropClass("METABOOKGLOSSATTACH","haveupload");
         fdjt.ID("METABOOKATTACHFILE").className="nofile";
         fdjt.ID("METABOOKATTACHFILENAME").innerHTML="";
         fdjt.UI.CheckSpan.set(rightsok,false);        
         metaBook.glossatach=false;
         metaBook.editlink=false;}
+
+    function attach_delete(evt){
+        var oldlink=metaBook.editlink;
+        var livegloss=fdjtID("METABOOKLIVEGLOSS");
+        var exists=fdjtDOM.getChild(livegloss,"[data-href='"+oldlink+"']");
+        fdjtUI.cancel(evt);
+        if (exists) {
+            addClass(livegloss,"modified");
+            fdjtUI.CheckSpan.set(exists,false);}
+        clearAttachForm();
+        setGlossMode("editnote");}
 
     function attachFile(file,title,livegloss){
         var glossid=fdjtDOM.getInputValue(livegloss,"UUID");
@@ -2058,8 +2070,7 @@
             metaBook.glossattach=file;
             setAttachType("uploadfile");
             fdjtID("METABOOKATTACHFILENAME").innerHTML=file.name;
-            fdjtDOM.swapClass(
-                fdjtID("METABOOKATTACHFILE"),"nofile","havefile");
+            fdjtDOM.addClass("METABOOKGLOSSATTACH","haveupload");
             if (hasClass(attachform,"editlink"))
                 fdjt.UI.CheckSpan.set(fdjtID("METABOOKUPLOADRIGHTS"),false);}
         else if (types.indexOf("text/uri-list")>=0) {
@@ -2094,8 +2105,7 @@
         if (file) {
             metaBook.glossattach=file;
             fdjtID("METABOOKATTACHFILENAME").innerHTML=file.name;
-            fdjtDOM.swapClass(
-                fdjtID("METABOOKATTACHFILE"),"nofile","havefile");
+            fdjtDOM.addClass("METABOOKGLOSSATTACH","haveupload");
             if (hasClass("METABOOKATTACHFORM","editlink"))
                 fdjt.UI.CheckSpan.set(fdjtID("METABOOKUPLOADRIGHTS"),
                                       false);}}
@@ -2246,6 +2256,7 @@
          "#METABOOKATTACHURL": {keydown: attach_keydown},
          "#METABOOKATTACHTITLE": {keydown: attach_keydown},
          "#METABOOKATTACHCANCEL": {click: attach_cancel},
+         "#METABOOKATTACHDELETE": {click: attach_delete},
          "#METABOOKFILEINPUT": {change: glossUploadChanged},
          "#METABOOKGLOSSCLOUD": {
              tap: metaBook.UI.handlers.glosscloud_select,
@@ -2278,6 +2289,7 @@
          "#METABOOKATTACHTITLE": {keydown: attach_keydown},
          "#METABOOKATTACHFILE": {click: attach_file_click},
          "#METABOOKATTACHCANCEL": {click: attach_cancel},
+         "#METABOOKATTACHDELETE": {click: attach_delete},
          "#METABOOKADDGLOSS": {
              dragenter: addGlossDragOK,
              dragover: addGlossDragOK,

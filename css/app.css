@@ -218,6 +218,18 @@ body._TOUCH .fdjtselecting .fdjtselectloupe { display: inline-block; }
     color: black;}
 .rootform { font-weight: bold; }
 
+/* Gloss links */
+
+.glosslink {
+    background-color: lightblue;
+    border: solid blue 1px;
+    padding-right: 1ex; border-radius: 1ex;}
+.glosslink .linktext { color: blue; }
+.glosslink .linktext {
+    text-decoration: underline;}
+.glosslink.glossdata .linktext {
+    text-decoration: overline;}
+
 /*
 div.searchbox div.query span.dterm {
     padding-right: 0.35em; padding-left: 1ex;

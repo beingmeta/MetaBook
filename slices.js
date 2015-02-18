@@ -275,6 +275,7 @@ metaBook.Slice=(function () {
                 type=urlinfo.type;}
             if (!(type)) type=metaBook.urlType(url);
             if (!(icon)) icon=metaBook.typeIcon(type);
+            if (!(useclass)) useclass=metaBook.mediaTypeClass(type);
             var image=fdjtDOM.Image(icon);
             if (openinbook) {
                 elt=fdjtDOM("span.mbmedia",image,title);
