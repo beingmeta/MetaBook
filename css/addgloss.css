@@ -268,7 +268,8 @@ div.metabookglossform form div.glossetc .checkspan input {
     margin-left: 0px;}
 div.metabookglossform form div.glossetc .checkspan.anchor input,
 div.metabookglossform form div.glossetc .checkspan.outlet input,
-div.metabookglossform form div.glossetc .checkspan.glosstag input {
+div.metabookglossform form div.glossetc .checkspan.glosstag input,
+div.metabookglossform form div.glossetc .checkspan.glosslink input {
     display: none;}
 
 div.metabookglossform form div.glossetc .outlets.empty,
@@ -511,7 +512,8 @@ input#METABOOKFILEINPUT[TYPE="FILE"] { display: none;}
 #METABOOKGLOSSATTACH th.button button[VALUE="CANCEL"],
 #METABOOKGLOSSATTACH .glossbody th.button button[VALUE="SAVE"],
 #METABOOKGLOSSATTACH .uploadfile th.button button[VALUE="UPLOAD"],
-#METABOOKGLOSSATTACH .linkurl th.button button[VALUE="LINK"] {
+#METABOOKGLOSSATTACH .linkurl th.button button[VALUE="LINK"],
+#METABOOKGLOSSATTACH .editlink th.button button[VALUE="DELETE"] {
     display: block;}
 
 #METABOOKGLOSSATTACH tr.title td,
