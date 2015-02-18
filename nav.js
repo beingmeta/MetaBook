@@ -311,6 +311,10 @@
         else {}
         var info=(target)&&
             metaBook.docinfo[target.getAttribute("data-baseid")||target.id];
+        if ((location)&&(info.ends_at)&&(info.starts_at)&&
+            ((location>(info.ends_at))||(location<(info.starts_at))))
+            // Why does this happen???
+            location=false;
         var page=((metaBook.bypage)&&(metaBook.layout)&&
                   (metaBook.getPage(target,location)));
         var pageno=(page)&&(parseInt(page.getAttribute("data-pagenum"),10));

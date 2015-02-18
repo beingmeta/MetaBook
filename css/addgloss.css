@@ -87,6 +87,7 @@ div.metabookglossform div .respdate {
 
 div.metabookglossform form {
     padding: 0px; margin: 0px;}
+div.metabookglossform form .excerpt { padding-left: 1em;}
 div.metabookglossform form .excerpt.empty { display: none;}
 div.metabookglossform form .checkspan.excerpt {
     white-space: normal; text-decoration: line-through;}
@@ -271,6 +272,11 @@ div.metabookglossform form div.glossetc .checkspan.outlet input,
 div.metabookglossform form div.glossetc .checkspan.glosstag input,
 div.metabookglossform form div.glossetc .checkspan.glosslink input {
     display: none;}
+
+div.metabookglossform form div.glossetc .glosslink span.linktext {
+    color: blue; text-decoration: underline;}
+div.metabookglossform form div.glossetc .glosslink.glossdata span.linktext {
+    text-decoration: overline;}
 
 div.metabookglossform form div.glossetc .outlets.empty,
 div.metabookglossform form div.glossetc .links.empty,
@@ -479,11 +485,10 @@ body.hudup #METABOOKHUD.addgloss.glossattach {
 
 #METABOOKGLOSSATTACH tr.title, #METABOOKGLOSSATTACH tr.attachtype {
     display: table-row;}
-#METABOOKGLOSSATTACH .uploadfile tr.uploadrights {
-    display: table-row;}
-#METABOOKGLOSSATTACH .linkurl tr.url {
-    display: table-row;}
-#METABOOKGLOSSATTACH .uploadfile tr.uploadfile {
+
+#METABOOKGLOSSATTACH .upload tr.uploadrights,
+#METABOOKGLOSSATTACH .link tr.url,
+#METABOOKGLOSSATTACH .upload tr.uploadfile {
     display: table-row;}
 
 td#METABOOKATTACHFILE {
@@ -510,10 +515,10 @@ input#METABOOKFILEINPUT[TYPE="FILE"] { display: none;}
 #METABOOKGLOSSATTACH th.button button { display: none;}
 
 #METABOOKGLOSSATTACH th.button button[VALUE="CANCEL"],
-#METABOOKGLOSSATTACH .glossbody th.button button[VALUE="SAVE"],
-#METABOOKGLOSSATTACH .uploadfile th.button button[VALUE="UPLOAD"],
-#METABOOKGLOSSATTACH .linkurl th.button button[VALUE="LINK"],
-#METABOOKGLOSSATTACH .editlink th.button button[VALUE="DELETE"] {
+#METABOOKGLOSSATTACH .body th.button button[VALUE="BODY"],
+#METABOOKGLOSSATTACH .upload th.button button[VALUE="UPLOAD"],
+#METABOOKGLOSSATTACH .link th.button button[VALUE="LINK"],
+#METABOOKGLOSSATTACH .edit th.button button[VALUE="DELETE"] {
     display: block;}
 
 #METABOOKGLOSSATTACH tr.title td,
@@ -533,23 +538,22 @@ input#METABOOKFILEINPUT[TYPE="FILE"] { display: none;}
 #METABOOKGLOSSATTACH tr.attachtype {
     border-bottom: solid transparent 1em;}
 #METABOOKGLOSSATTACH .attachtype td { vertical-align: middle; }
+#METABOOKGLOSSATTACH .editlink .attachtype td {
+    vertical-align: top;}
 #METABOOKGLOSSATTACH .attachtype td .checkspan {
     display: inline-block; padding-right: 1em;}
 
-#METABOOKGLOSSATTACH tbody.upload { display:  none;}
-#METABOOKGLOSSATTACH form.uploadfile tbody.upload,
-#METABOOKGLOSSATTACH form.uploadurl tbody.upload {
-    display:  table-row-group;}
-#METABOOKGLOSSATTACH form.uploadfile tr.url { display: none; }
-#METABOOKGLOSSATTACH form.uploadurl tr.uploadfile { display: none; }
+#METABOOKGLOSSATTACH .upload tr.url,
+#METABOOKGLOSSATTACH .body tr.url,
+#METABOOKGLOSSATTACH .capture tr.url {
+    display: none; }
+#METABOOKGLOSSATTACH .body tr.title { display: none; }
 
 #METABOOKGLOSSATTACH tbody.glossbody { display: none;}
-#METABOOKGLOSSATTACH form.glossbody tbody.glossbody {
+#METABOOKGLOSSATTACH .body tbody.glossbody {
     display: table-row-group;}
-#METABOOKGLOSSATTACH form.glossbody tbody.glossbody textarea {
+#METABOOKGLOSSATTACH .body tbody.glossbody textarea {
     min-height: 10em; width: 100%;}
-#METABOOKGLOSSATTACH form.glossbody tr.title { display: none; }
-#METABOOKGLOSSATTACH form.glossbody tr.url { display: none; }
 
 #METABOOKGLOSSATTACH tr.spacing td { height: 1ex;}
 
@@ -560,8 +564,8 @@ input#METABOOKFILEINPUT[TYPE="FILE"] { display: none;}
 #METABOOKGLOSSATTACH tr.fileokay a { color: blue; text-decoration: underline;}
 #METABOOKGLOSSATTACH tr.fileokay.ischecked {
     color: green; font-weight: normal;}
-#METABOOKGLOSSATTACH table.fdjtform td input[type="TEXT"],
-#METABOOKGLOSSATTACH table.fdjtform td input[type="URL"] {
+#METABOOKGLOSSATTACH td input[type="TEXT"],
+#METABOOKGLOSSATTACH td input[type="URL"] {
     box-sizing: border-box; width: 100%;}
 #METABOOKGLOSSATTACH th button { width: 5em; }
 

@@ -273,24 +273,8 @@ metaBook.Slice=(function () {
                 title=urlinfo.title;
                 icon=urlinfo.icon;
                 type=urlinfo.type;}
-            if (type) {}
-            else if (url.search(/\.(jpg|jpeg)$/g)>0) type="image/jpeg";
-            else if (url.search(/\.png$/g)>0) type="image/png";
-            else if (url.search(/\.gif$/g)>0) type="image/gif";
-            else if (url.search(/\.wav$/g)>0) type="audio/wav";
-            else if (url.search(/\.ogg$/g)>0) type="audio/ogg";
-            else if (url.search(/\.mp3$/g)>0) type="audio/mpeg";
-            else if (url.search(/\.mp4$/g)>0) type="video/mp4";
-            else {}
-            if (icon) {}
-            else if (!(type)) icon=mbicon("diaglink",64,64);
-            else if (type==="audio/mpeg") {
-                icon=mbicon("music",64,64); useclass="musiclink";}
-            else if (type.slice(0,6)==="image/") {
-                icon=mbicon("photo",64,64); useclass="imagelink";}
-            else if (type.slice(0,6)==="audio/") {
-                icon=mbicon("sound",64,64); useclass="audiolink";}
-            else icon=mbicon("diaglink",64,64);
+            if (!(type)) type=metaBook.urlType(url);
+            if (!(icon)) icon=metaBook.typeIcon(type);
             var image=fdjtDOM.Image(icon);
             if (openinbook) {
                 elt=fdjtDOM("span.mbmedia",image,title);

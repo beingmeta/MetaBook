@@ -79,15 +79,10 @@
     var getInputValues=fdjtDOM.getInputValues;
 
     var cancel=fdjtUI.cancel;
-
     var setCheckSpan=fdjtUI.CheckSpan.set;
-
     var glossmodes=metaBook.glossmodes;
-
     var mbicon=metaBook.icon;
-
     var getTarget=metaBook.getTarget;
-
     var getGlossTags=metaBook.getGlossTags;
 
     var uri_prefix=/(http:)|(https:)|(ftp:)|(urn:)/;
@@ -570,10 +565,12 @@
     
     /***** Adding links ******/
     
-    function addLink(form,url,title) {
+    function addLink(form,url,title,replace) {
         var linkselt=getChild(form,'.links');
         var linkval=((title)?(url+" "+title):(url));
-        var img=fdjtDOM.Image(mbicon("diaglink",64,64),"img");
+        var type=metaBook.urlType(url);
+        var icon=metaBook.typeIcon(type);
+        var img=fdjtDOM.Image(icon,"img");
         var text=fdjtDOM("span.linktext",((title)||url));
         var checkbox=fdjtDOM.Checkbox("LINKS",linkval,true);
         var aspan=fdjtDOM(
@@ -582,16 +579,22 @@
         aspan.title=title||url; aspan.setAttribute("data-href",url);
         if (url.search(/https:\/\/glossdata./)===0)
             addClass(aspan,"glossdata");
+        if (type) addClass(aspan,metaBook.typeClass(type));
         var wrapper=getParent(form,".metabookglossform");
         if (Trace.glossing)
             fdjtLog("addOutlet wrapper=%o form=%o url=%o title=%o",
                     wrapper,form,url,title);
         addClass(wrapper,"modified");
-        fdjtDOM(linkselt,aspan," ");
+        if (replace)
+            fdjtDOM.replace(replace,aspan);
+        else fdjtDOM(linkselt,aspan," ");
         dropClass(linkselt,"empty");
         updateForm(form);
         return aspan;}
-    metaBook.addLink2Form=addLink;
+
+    function changeLink(form,oldlink,newlink,title){
+        var exists=fdjtDOM.getChild(form,"[data-href='"+oldlink+"']");
+        addLink(form,newlink,title,exists);}
 
     /***** Adding excerpts ******/
     
@@ -1009,7 +1012,8 @@
 
     function addgloss_callback(req,form,keep){
         if ((Trace.network)||(Trace.glossing))
-            fdjtLog("Got AJAX gloss response %o from %o",req,req.uri);
+            fdjtLog("Got AJAX gloss response %o from %o",
+                    req,req.responseURL);
         if (Trace.savegloss)
             fdjtLog("Gloss %o successfully added (status %d) to %o",
                     getInput(form,"UUID").value,req.status,
@@ -1827,7 +1831,7 @@
             gloss_cloud.complete(target.value);},
                         100);}
 
-    var attach_types=/\b(uploading|linking|glossbody|capture)\b/g;
+    var attach_types=/\b(link|upload|body|capture)\b/g;
     function changeAttachment(evt){
         evt=evt||window.event;
         var target=fdjtUI.T(evt);
@@ -1851,6 +1855,7 @@
     function attach_submit(evt){
         evt=evt||window.event;
         var form=fdjtUI.T(evt);
+        if (form.tagName!=="FORM") form=getParent(form,"form");
         var livegloss=fdjtID("METABOOKLIVEGLOSS");
         var linkinput=fdjtDOM.getInput(form,"URL");
         var titleinput=fdjtDOM.getInput(form,"TITLE");
@@ -1865,17 +1870,22 @@
                            (path.search(/\/[^\/]+$/)):(0));
             if (namestart<0) title=path;
             else title=path.slice(namestart);}
-        if (hasClass(form,"linkurl")) {
+        if (hasClass(form,"link")) {
             if (!(goodURL(linkinput.value))) {
                 fdjtUI.alert("This URL doesn't look right");
                 return;}
-            metaBook.addLink2Form(form,linkinput.value,title);
+            if (metaBook.editlink) {
+                changeLink(form,metaBook.editlink,
+                           linkinput.value,title);
+                metaBook.editlink=false;}
+            else addLink(form,linkinput.value,title);
+            fdjtDOM.addClass(form,"modified");
             metaBook.setGlossMode("editnote");}
-        else if (hasClass(form,"uploadfile")) {
-            if (!(metaBook.glossattach)) {
+        else if (hasClass(form,"upload")) {
+            if ((!(metaBook.glossattach))&&(!(metaBook.editlink))) {
                 fdjtUI.alert("You need to specify a file!");
                 return;}
-            else if (!(isokay.checked))
+            else if ((metaBook.glossattach)&&(!(isokay.checked)))
                 fdjt.UI.choose([{label: "Yes",
                                  handler: function(){
                                      fdjtUI.CheckSpan.set(isokay,true);
@@ -1889,17 +1899,30 @@
                                            "A[target='_blank']",
                                            "Terms of Service"),
                                        "."));
-            else {
+            else if (metaBook.glossattach) {
+                var filename=metaBook.glossattach.name;
                 attachFile(metaBook.glossattach,
                            title||metaBook.glossattach.name,
                            livegloss).
-                    then(function(){
+                    then(function(req){
+                        if (metaBook.editlink) {
+                            changeLink(livegloss,metaBook.editlink,
+                                       req.responseURL,title);
+                            metaBook.editlink=false;}
+                        else addLink(livegloss,req.responseURL,
+                                     title||filename||"attachment");
+                        fdjtDOM.addClass(form,"modified");
                         metaBook.setGlossMode("editnote");
                         clearAttachForm();}).
                     catch(function(trouble){
                         fdjtLog("Trouble attaching file %o (%o)",
-                                metaBook.glossattach,trouble);});}}
-        else {}
+                                metaBook.glossattach,trouble);});}
+            else if (metaBook.editlink) {
+                fdjtDOM.addClass(form,"modified");
+                changeLink(livegloss,metaBook.editlink,metaBook.editlink,title);
+                metaBook.editlink=false;}
+            else {fdjtLog.warn("Fall through in attach_submit");}}
+        else {fdjtLog.warn("Fall through in attach_submit");}
         return;}
     function attach_cancel(evt){
         var linkinput=fdjtID("METABOOKATTACHURL");
@@ -1915,33 +1938,38 @@
         var ch=evt.keyCode||evt.charCode;
         if (ch!==13) return;
         fdjtUI.cancel(evt);
-        var linkinput=fdjtID("METABOOKATTACHURL");
-        var titleinput=fdjtID("METABOOKATTACHTITLE");
         var livegloss=fdjtID("METABOOKLIVEGLOSS");
         if (!(livegloss)) return;
-        var form=getChild(livegloss,"FORM");
-        metaBook.addLink2Form(form,linkinput.value,titleinput.value);
-        linkinput.value="";
-        titleinput.value="";
+        attach_submit(evt);
         metaBook.setGlossMode("editnote");}
 
     function editLink(href,title){
         metaBook.editlink=href;
         setGlossMode("attach");
-        if (href.search(/https:\/\/glossdata./)===0)
-            setAttachType("fileupload");
+        if (href.search(/https:\/\/glossdata\./)===0)
+            setAttachType("upload");
+        else if (href.search(/\/capture\.[A-Za-z0-9]+$/)>=0)
+            setAttachType("capture");
         else {
-            setAttachType("linkurl");
+            setAttachType("link");
             fdjtID("METABOOKATTACHURL").value=href;}
+        fdjt.UI.CheckSpan.set(fdjtID("METABOOKUPLOADRIGHTS"),true);
         fdjtID("METABOOKATTACHTITLE").value=title||href;
-        addClass(fdjtID("METABOOKATTACHFORM"),"attachedit");
+        addClass(fdjtID("METABOOKATTACHFORM"),"editlink");
         fdjtID("METABOOKATTACHTITLE").focus();}
 
     function doFileAttach(title,livegloss){
+        var filename=metaBook.glossattach.name;
         attachFile(metaBook.glossattach,
                    title||metaBook.glossattach.name,
                    livegloss).
-            then(function(){
+            then(function(req){
+                if (metaBook.editlink) {
+                    changeLink(livegloss,metaBook.editlink,
+                               req.responseURL,title);
+                    metaBook.editlink=false;}
+                else addLink(livegloss,req.responseURL,
+                             title||filename||"attachment");
                 metaBook.setGlossMode("editnote");
                 clearAttachForm();}).
             catch(function(trouble){
@@ -1974,8 +2002,6 @@
         var savereq=new XMLHttpRequest();
         var endpoint="https://glossdata.sbooks.net/"+
             glossid+"/"+itemid+"/"+filename;
-        var glossdata_uri="https://glossdata.sbooks.net/"+
-            glossid+"/"+itemid+"/"+filename;
         var aborted=false, done=false;
         function attaching_file(resolve,reject){        
             savereq.onreadystatechange=function(){
@@ -1983,8 +2009,6 @@
                 else if (done) {}
                 else if (savereq.readyState===4) {
                     if (savereq.status===200) {
-                        addLink(livegloss,glossdata_uri,
-                                title||filename||"attachment");
                         metaBook.glossattach=false;
                         done=true; resolve(savereq);}
                     else {done=aborted=true; reject(savereq);}}
@@ -2035,7 +2059,9 @@
             setAttachType("uploadfile");
             fdjtID("METABOOKATTACHFILENAME").innerHTML=file.name;
             fdjtDOM.swapClass(
-                fdjtID("METABOOKATTACHFILE"),"nofile","havefile");}
+                fdjtID("METABOOKATTACHFILE"),"nofile","havefile");
+            if (hasClass(attachform,"editlink"))
+                fdjt.UI.CheckSpan.set(fdjtID("METABOOKUPLOADRIGHTS"),false);}
         else if (types.indexOf("text/uri-list")>=0) {
             var url=evt.dataTransfer.getData("URL")||
                 evt.dataTransfer.getData("text/uri-list");
@@ -2069,7 +2095,10 @@
             metaBook.glossattach=file;
             fdjtID("METABOOKATTACHFILENAME").innerHTML=file.name;
             fdjtDOM.swapClass(
-                fdjtID("METABOOKATTACHFILE"),"nofile","havefile");}}
+                fdjtID("METABOOKATTACHFILE"),"nofile","havefile");
+            if (hasClass("METABOOKATTACHFORM","editlink"))
+                fdjt.UI.CheckSpan.set(fdjtID("METABOOKUPLOADRIGHTS"),
+                                      false);}}
 
     function editglossnote(evt){
         evt=evt||window.event;
