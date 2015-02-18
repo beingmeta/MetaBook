@@ -468,7 +468,8 @@ body.hudup #METABOOKHUD.addgloss.glossaddoutlet
           div.completions#METABOOKSHARECLOUD {
     display: block;}
 #METABOOKGLOSSATTACH {
-    font-size: 1.2rem; padding-top: 1ex;}
+    font-size: 1.2rem; padding-top: 1ex;
+    min-height: 90%;}
 body.hudup #METABOOKHUD.addgloss.glossattach {
     display: block;}
 #METABOOKGLOSSATTACH tr { display: none; }

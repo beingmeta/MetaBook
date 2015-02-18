@@ -36,7 +36,7 @@
 
 */
 /* jshint browser: true */
-/* global metaBook: false */
+/* global metaBook: false, Promise: false */
 
 /* Initialize these here, even though they should always be
    initialized before hand.  This will cause various code checkers to
@@ -96,7 +96,7 @@
     var selectors=[];
 
     function goodURL(string){
-        return /https?:[\/][\/](\w+[.])+\w+[\/]/.exec(string);}
+        return (/https?:[\/][\/](\w+[.])+\w+[\/]/).exec(string);}
 
     // The gloss mode is stored in two places:
     //  * the class of the gloss FORM element
@@ -1999,9 +1999,7 @@
             if (!(url)) return;
             fdjt.UI.cancel(evt);
             metaBook.setGlossMode("attach");
-            if (hasClass(attachform,"linkurl")) {}
-            else if (hasClass(attachform,"copyurl")) {}
-            else setAttachType("linkurl");
+            setAttachType("linkurl");
             fdjt.ID("METABOOKATTACHURL").value=url;
             fdjt.ID("METABOOKATTACHTITLE").focus();}
         else if (types.indexOf("text/plain")>=0) {
@@ -2025,6 +2023,7 @@
             var file=files[0];
             fdjtUI.cancel(evt);
             metaBook.glossattach=file;
+            setAttachType("uploadfile");
             fdjtID("METABOOKATTACHFILENAME").innerHTML=file.name;
             fdjtDOM.swapClass(
                 fdjtID("METABOOKATTACHFILE"),"nofile","havefile");}
@@ -2172,13 +2171,18 @@
              dragenter: addGlossDragOK,
              dragover: addGlossDragOK,
              drop: addGlossDrop},
+         "#METABOOKATTACHFILE": {
+             click: attach_file_click},
+         "#METABOOKGLOSSATTACH": {
+             dragenter: addGlossDragOK,
+             dragover: addGlossDragOK,
+             drop: addGlossDrop},
          "#METABOOKADDTAGINPUT": {keydown: addtag_keydown},
          "#METABOOKADDSHAREINPUT": {keydown: addoutlet_keydown},
          "#METABOOKATTACHFORM": {submit: attach_submit},
          "#METABOOKATTACHURL": {keydown: attach_keydown},
          "#METABOOKATTACHTITLE": {keydown: attach_keydown},
          "#METABOOKATTACHCANCEL": {click: attach_cancel},
-         "#METABOOKATTACHFILE": {click: attach_file_click},
          "#METABOOKFILEINPUT": {change: glossUploadChanged},
          "#METABOOKGLOSSCLOUD": {
              tap: metaBook.UI.handlers.glosscloud_select,
