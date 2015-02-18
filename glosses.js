@@ -1994,8 +1994,18 @@
         var attachform=fdjt.ID("METABOOKATTACHFORM");
         var types=evt.dataTransfer.types;
         if (!(types)) return;
+        else if (types.indexOf("Files")>=0) {
+            var files=evt.dataTransfer.files;
+            var file=files[0];
+            fdjtUI.cancel(evt);
+            metaBook.glossattach=file;
+            setAttachType("uploadfile");
+            fdjtID("METABOOKATTACHFILENAME").innerHTML=file.name;
+            fdjtDOM.swapClass(
+                fdjtID("METABOOKATTACHFILE"),"nofile","havefile");}
         else if (types.indexOf("text/uri-list")>=0) {
-            var url=evt.dataTransfer.getData("URL");
+            var url=evt.dataTransfer.getData("URL")||
+                evt.dataTransfer.getData("text/uri-list");
             if (!(url)) return;
             fdjt.UI.cancel(evt);
             metaBook.setGlossMode("attach");
@@ -2018,15 +2028,6 @@
                 metaBook.setGlossMode(false);
                 input.value=text;
                 input.focus();}}
-        else if (types.indexOf("Files")>=0) {
-            var files=evt.dataTransfer.files;
-            var file=files[0];
-            fdjtUI.cancel(evt);
-            metaBook.glossattach=file;
-            setAttachType("uploadfile");
-            fdjtID("METABOOKATTACHFILENAME").innerHTML=file.name;
-            fdjtDOM.swapClass(
-                fdjtID("METABOOKATTACHFILE"),"nofile","havefile");}
         else {}}
 
     function glossUploadChanged(evt){
