@@ -371,16 +371,24 @@ metaBook.Slice=(function () {
         addClass(pic,"sbooknopic");
         return pic;}
 
+    function getpic(info){
+        if (info._pic) return info._pic;
+        else if (info.pic) {
+            info._pic=fdjtDOM.data2URL(info.pic);
+            return info._pic;}
+        else return false;}
+
     function getpicinfo(info){
         var i, lim;
-        if (info.pic) return {src: info.pic,alt: info.pic};
+        if (info.pic) return {
+            src: getpic(info),alt: info.note||info.name};
         if (info.sources) {
             var sources=info.sources;
             if (typeof sources==='string') sources=[sources];
             i=0; lim=sources.length; while (i<lim) {
                 var source=metaBook.sourcedb.loadref(sources[i++]);
                 if ((source)&&(source.kind===':OVERLAY')&&(source.pic))
-                    return { src: source.pic, alt: source.name,
+                    return { src: getpic(source), alt: source.name,
                              classname: "img.glosspic.sourcepic"};}}
         if (info.links) {
             var links=info.links;
@@ -395,12 +403,12 @@ metaBook.Slice=(function () {
             i=0; lim=outlets.length; while (i<lim) {
                 var outlet=metaBook.sourcedb.loadref(outlets[i++]);
                 if ((outlet)&&(outlet.kind===':LAYER')&&(outlet.pic))
-                    return { src: outlet.pic, alt: outlet.name,
+                    return { src: getpic(outlet), alt: outlet.name,
                              classname: "img.glosspic.sourcepic"};}}
         if (info.maker) {
             var userinfo=metaBook.sourcedb.loadref(info.maker);
             if (userinfo.pic)
-                return { src: userinfo.pic, alt: userinfo.name,
+                return { src: getpic(userinfo), alt: userinfo.name,
                          classname: "img.glosspic.userpic"};
             else if (userinfo.fbid)
                 return {

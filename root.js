@@ -143,7 +143,7 @@ var metaBook={
     openinbook: ["https://www.youtube.com/"],
     // These are elements, indexed by URL, whose content is being
     // loaded to cache locally
-    srcloading: {}, tmpurlcache: {},
+    srcloading: {}, glossdata: {},
     // These are functions to be called when everythings has been loaded
     //  to initialize local references to common metaBook functions
     inits: [],

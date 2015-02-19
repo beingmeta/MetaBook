@@ -46,6 +46,7 @@
 
     var fdjtString=fdjt.String;
     var fdjtState=fdjt.State;
+    var fdjtAsync=fdjt.Async;
     var fdjtLog=fdjt.Log;
     var fdjtDOM=fdjt.DOM;
     var fdjtUI=fdjt.UI;
@@ -89,6 +90,43 @@
         // document.body.focus();
     };
     
+    /* Initialize the indexedDB database, when used */
+
+    var metaBookDB=false;
+
+    if (window.indexedDB) {
+        var req=window.indexedDB.open("metaBook",1);
+        req.onerror=function(event){
+            fdjtLog("Error initializing the metaBook IndexedDB: %o",
+                    event.errorCode);};
+        req.onsuccess=function(event) {
+            var db=event.target.result;
+            fdjtLog("Using existing metaBook IndexedDB");
+            fdjtAsync(function(){
+                fdjt.CodexLayout.useIndexedDB("metaBook");});
+            metaBook.metaBookDB=metaBookDB=db;};
+        req.onupgradeneeded=function(event) {
+            var db=event.target.result;
+            db.onerror=function(event){
+                fdjtLog("Unexpected error setting up glossdata cache: %d",
+                        event.target.errorCode);
+                event=false;};
+            db.onsuccess=function(event){
+                var db=event.target.result;
+                fdjtLog("Initialized metaBook indexedDB");
+                fdjtAsync(function(){
+                    fdjt.CodexLayout.useIndexedDB("metaBook");});
+                metaBook.metaBookDB=metaBookDB=db;};
+            db.createObjectStore("glossdata",{keyPath: "url"});
+            db.createObjectStore("layouts",{keyPath: "layout_id"});
+            db.createObjectStore("sources",{keyPath: "_id"});
+            db.createObjectStore("docs",{keyPath: "_id"});
+            db.createObjectStore("glosses",{keyPath: "glossid"});
+            fdjtAsync(function(){
+                fdjt.CodexLayout.useIndexedDB("metaBook");});};}
+
+    /* Initialize the runtime for the core databases */
+
     function initDB() {
         if (Trace.start>1) fdjtLog("Initializing DB");
         var refuri=(metaBook.refuri||document.location.href);
@@ -153,7 +191,7 @@
                     for (var link in links) {
                         if ((links.hasOwnProperty(link))&&
                             (link.search("https://glossdata.sbooks.net/")===0))
-                            noteGlossdata(link);}}
+                            cacheGlossData(link);}}
                 if (maker) {
                     metaBook.addTag2Cloud(maker,metaBook.empty_cloud);
                     metaBook.UI.addGlossSource(maker,true);}
@@ -315,9 +353,11 @@
 
     /* Noting (and caching) glossdata */
 
-    function noteGlossdata(link){
+    var glossdata=metaBook.glossdata;
+
+    function cacheGlossData(link){
         if (link.search("https://glossdata.sbooks.net/")!==0) return;
-        var key="cache("+link+")";
+        var key="glossdata("+link+")";
         if (fdjtState.getLocal(key)) return;
         else fdjtState.setLocal(key,"fetching");
         var uri="https://glossdata.sbooks.net/U/"+
@@ -329,7 +369,9 @@
             if (req.readyState === 4) {
                 if (Trace.glossdata)
                     fdjtLog("Glossdata from %s status %d",req.status);
-                var use_data=((req.status===200)?(req.responseText):(link));
+                var use_data=((req.status===200)?
+                              (gotGlossData(link,req.responseText)):
+                              (link));
                 var waiting=mB.srcloading[link];
                 if (waiting) {
                     var i=0, lim=waiting.length;
@@ -337,47 +379,24 @@
                         fdjtLog("Setting glossdata src for %d element(s)",lim);
                     while (i<lim) waiting[i++].src=use_data;}
                 if (req.status === 200) 
-                    saveGlossData(link,req.responseText);
+                    storeGlossData(link,req.responseText);
                 else fdjtState.dropLocal(key);}
             else {}};
         req.open("GET",uri);
         req.withCredentials=true;
         req.send(null);}
 
-    var urlCacheDB=false, urldbinit_timeout=false;
-    var tmpurlcache=metaBook.tmpurlcache;
+    function gotGlossData(link,datauri){
+        var url=fdjtDOM.data2URL(datauri);
+        glossdata[link]=url;
+        return url;}
+    metaBook.gotGlossData=gotGlossData;
 
-    if (window.indexedDB) {
-        var req=window.indexedDB.open("urlcache",1);
-        urldbinit_timeout=setTimeout(urldbinit_timeout,15000);
-        req.onerror=function(event){
-            fdjtLog("Error initializing indexedDB URL cache: %o",
-                    event.errorCode);
-            if (urldbinit_timeout) clearTimeout(urldbinit_timeout);};
-        req.onsuccess=function(event) {
-            var db=event.target.result;
-            if (urldbinit_timeout) clearTimeout(urldbinit_timeout);
-            fdjtLog("Using existing indexedDB url cache");
-            metaBook.urlCacheDB=urlCacheDB=db;};
-        req.onupgradeneeded=function(event) {
-            var db=event.target.result;
-            if (urldbinit_timeout) clearTimeout(urldbinit_timeout);
-            db.onerror=function(event){
-                fdjtLog("Unexpected error setting up URL data cache: %d",
-                        event.target.errorCode);
-                event=false;};
-            db.onsuccess=function(event){
-                var db=event.target.result;
-                fdjtLog("Initialized indexedDB url cache");
-                metaBook.urlCacheDB=urlCacheDB=db;};
-            db.createObjectStore("urlcache",{keyPath: "url"});};}
-
-    function saveGlossData(url,datauri){
-        var key="cache("+url+")";
-        if (urlCacheDB) {
-            var txn=urlCacheDB.transaction(["urlcache"],"readwrite");
-            var storage=txn.objectStore("urlcache");
-            tmpurlcache[url]=datauri;
+    function storeGlossData(url,datauri){
+        var key="glossdata("+url+")";
+        if (metaBookDB) {
+            var txn=metaBookDB.transaction(["glossdata"],"readwrite");
+            var storage=txn.objectStore("glossdata");
             var req=storage.put({url: url,datauri: datauri});
             req.onerror=function(event){
                 fdjtLog("Error saving %s in indexedDB: %o",
@@ -387,13 +406,12 @@
                 fdjtState.setLocal(key,"cached");
                 if (Trace.glossdata)
                     fdjtLog("Saved glossdata for %s in IndexedDB",url);
-                tmpurlcache[url]=false;
-                glossSaved(url);};}
+                glossDataSaved(url);};}
         else {
             fdjtState.setLocal(key,datauri);
-            glossSaved(url);}}
+            glossDataSaved(url);}}
 
-    function glossSaved(url){
+    function glossDataSaved(url){
         fdjtState.pushLocal("glossdata("+mB.docuri+")",url);
         fdjtState.pushLocal("glossdata()",url);}
 
@@ -403,11 +421,11 @@
         if (urls) {
             var i=0, lim=urls.length; while (i<lim) {
                 var gdurl=urls[i++]; dropLocal("cached("+gdurl+")");
-                if (urlCacheDB) clearGlossDataFor(gdurl);}}}
+                if (metaBookDB) clearGlossDataFor(gdurl);}}}
 
     function clearGlossDataFor(url){
-        var txn=urlCacheDB.transaction(["urlcache"],"readwrite");
-        var storage=txn.objectStore("urlcache");
+        var txn=metaBookDB.transaction(["glossdata"],"readwrite");
+        var storage=txn.objectStore("glossdata");
         var req=storage['delete'](url);
         req.onerror=function(event){
             fdjtLog("Error clearing gloss data for %s: %s",
@@ -415,6 +433,8 @@
         req.onsuccess=function(){
             if (Trace.glossdata>1)
                 fdjtLog("Cleared gloss data for %s",url);};}
+
+    /* Queries */
 
     function Query(tags,base_query){
         if (!(this instanceof Query))

@@ -161,11 +161,11 @@
             src_elt=media_elt=fdjtDOM("IFRAME");}
         media_elt.id="METABOOKMEDIATARGET";
         metaBook.showing=url;
-        if ((src_elt)&&(mB.tmpurlcache[url])) {
-            src_elt.src=mB.tmpurlcache[url];
+        if ((src_elt)&&(mB.glossdata[url])) {
+            src_elt.src=mB.glossdata[url];
             placeMedia();}
         else if (src_elt) {
-            var cache_key="cache("+url+")";
+            var cache_key="glossdata("+url+")";
             var cache_val=fdjtState.getLocal(cache_key);
             if (cache_val) {
                 if (cache_val.slice(0,5)==="data:")
@@ -173,16 +173,17 @@
                 else if (cache_val==="cached") {
                     addClass(fdjt.ID("METABOOKMEDIA"),"loadingcontent");
                     addClass(src_elt,"loadingcontent");
-                    var txn=mB.urlCacheDB.transaction(["urlcache"]);
-                    var storage=txn.objectStore("urlcache");
+                    var txn=mB.glossdataDB.transaction(["glossdata"]);
+                    var storage=txn.objectStore("glossdata");
                     var req=storage.get(url);
                     req.onsuccess=function(event){
                         var target=event.target;
                         var result=((target)&&(target.result));
                         dropClass(fdjt.ID("METABOOKMEDIA"),"loadingcontent");
                         dropClass(src_elt,"loadingcontent");
-                        if ((result)&&(result.datauri))
-                            src_elt.src=result.datauri;
+                        if ((result)&&(result.datauri)) {
+                            var objurl=metaBook.gotGlossData(url,result.datauri);
+                            src_elt.src=objurl;}
                         else src_elt.src=url;
                         placeMedia();};
                     req.onerror=function(event){
@@ -193,7 +194,8 @@
                         src_elt.src=url;
                         placeMedia();};}
                 else if (metaBook.srcloading[url]) {
-                    metaBook.srcloading[url].push(src_elt); placeMedia();}
+                    metaBook.srcloading[url].push(src_elt);
+                    placeMedia();}
                 else {
                     metaBook.srcloading[url]=[src_elt];
                     placeMedia();}}
