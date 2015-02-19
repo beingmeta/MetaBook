@@ -112,6 +112,9 @@ metaBook.setMode=
             var heart=fdjtID("METABOOKHEARTBODY");
             heart.innerHTML=fixStaticRefs(metaBook.HTML.heart);
             metaBook.DOM.heart=heart;
+            var gloss_attach=fdjtID("METABOOKGLOSSATTACH");
+            gloss_attach.innerHTML=fixStaticRefs(metaBook.HTML.attach);
+            metaBook.DOM.heart=heart;
             // Other HUD parts
             metaBook.DOM.top=fdjtID("METABOOKHEAD");
             metaBook.DOM.heart=fdjtID("METABOOKHEARTBODY");

@@ -55,7 +55,7 @@
           <button id="METABOOKATTACHLINK" NAME="ATTACH" VALUE="LINK">
             Link</button>
           <button id="METABOOKUPLOADOK" NAME="ATTACH" VALUE="UPLOAD">
-            Upload</button>
+            Save</button>
           <button id="METABOOKUPLOADOK" NAME="ATTACH" VALUE="SAVE">
             Save</button>
           <button id="METABOOKATTACHLINK" NAME="ATTACH" VALUE="BODY">
@@ -88,10 +88,10 @@
         </td>
       </tr>
       <tr class="uploadfile">
-        <th>File<input TYPE="FILE" NAME="UPLOAD" ID="METABOOKFILEINPUT"/></th>
+        <th>Upload<input TYPE="FILE" NAME="UPLOAD" ID="METABOOKFILEINPUT"/></th>
         <td id="METABOOKATTACHFILE" class="nofile" colspan="2">
-          <span class="mbmessage">
-            Drag a file here or click to browse files</span>
+          <span class="mbdragmessage">Drag a file here or click to browse</span>
+          <span class="mbmessage">Tap to find files or media</span>
           <span class="mbfilename" id="METABOOKATTACHFILENAME"></span>
         </td></tr>
       <tbody class="glossbody" id="METABOOKGLOSSBODY">
@@ -103,6 +103,7 @@
     </table>
   </form>
 </div>
+<div id="METABOOKGLOSSATTACH" class="hudpanel"></div>
 <div id="METABOOKSEARCHCLOUD" class="completions cloud searchcloud"></div>
 <div id="METABOOKALLTAGS" class="completions searchcloud cloud noinput">
 </div>

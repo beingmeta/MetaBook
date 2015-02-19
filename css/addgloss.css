@@ -508,11 +508,18 @@ td#METABOOKATTACHFILE {
     display: none;}
 input#METABOOKFILEINPUT[TYPE="FILE"] { display: none;}
 
-#METABOOKATTACHFILE span.mbmessage { font-style: italic;}
+#METABOOKATTACHFILE span.mbmessage,
+#METABOOKATTACHFILE span.mbdragmessage {
+    font-style: italic;}
+._MOUSE #METABOOKATTACHFILE span.mbdragmessage,
+._TOUCH #METABOOKATTACHFILE span.mbmessage {
+    display: inline;}
+._MOUSE .haveupload #METABOOKATTACHFILE span.mbdragmessage,
+._TOUCH .haveupload #METABOOKATTACHFILE span.mbmessage {
+    display: none;}
+
 #METABOOKATTACHFILE span.mbfilename {
     font-family: fixed; font-weight: bold;}
-#METABOOKGLOSSATTACH.haveupload #METABOOKATTACHFILE span.mbmessage {
-    display: none;}
 #METABOOKGLOSSATTACH.haveupload #METABOOKATTACHFILE span.mbfilename {
     display: inline;}
 

@@ -1880,7 +1880,8 @@
                 metaBook.editlink=false;}
             else addLink(form,linkinput.value,title);
             fdjtDOM.addClass(livegloss,"modified");
-            metaBook.setGlossMode("editnote");}
+            metaBook.setGlossMode("editnote");
+            clearAttachForm();}
         else if (hasClass(form,"upload")) {
             if ((!(metaBook.glossattach))&&(!(metaBook.editlink))) {
                 fdjtUI.alert("You need to specify a file!");
@@ -1920,6 +1921,7 @@
             else if (metaBook.editlink) {
                 fdjtDOM.addClass("METABOOKLIVEGLOSS","modified");
                 changeLink(livegloss,metaBook.editlink,metaBook.editlink,title);
+                clearAttachForm();
                 metaBook.editlink=false;}
             else {fdjtLog.warn("Fall through in attach_submit");}}
         else {fdjtLog.warn("Fall through in attach_submit");}
