@@ -336,7 +336,7 @@ metaBook.Paginate=
                     fdjtLog("Fetching layout %s",layout_id);
                 CodexLayout.fetchLayout(layout_id).
                     then(function(content){
-                        // if (!(content)) new_layout();
+                        if (!(content)) return new_layout();
                         if (Trace.layout) fdjtLog("Got layout %s",layout_id);
                         recordLayout(layout_id,metaBook.sourceid);
                         try {
