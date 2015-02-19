@@ -173,7 +173,7 @@
                 else if (cache_val==="cached") {
                     addClass(fdjt.ID("METABOOKMEDIA"),"loadingcontent");
                     addClass(src_elt,"loadingcontent");
-                    var txn=mB.glossdataDB.transaction(["glossdata"]);
+                    var txn=mB.metaBookDB.transaction(["glossdata"]);
                     var storage=txn.objectStore("glossdata");
                     var req=storage.get(url);
                     req.onsuccess=function(event){
