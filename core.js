@@ -264,10 +264,7 @@
                 var name=source.name||source.oid||source.uuid||source.uuid;
                 var span=fdjtDOM(spec,name);
                 if (source.about) span.title=source.about;
-                return span;};
-            var anonymous=metaBook.sourcedb.ref("@1961/0");
-            metaBook.anonymous=anonymous;
-            anonymous.name="anonymous";}
+                return span;};}
 
         metaBook.queued=((metaBook.cacheglosses)&&
                          (getLocal("metabook.queued("+metaBook.refuri+")",true)))||[];
