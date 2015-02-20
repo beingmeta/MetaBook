@@ -1988,14 +1988,16 @@
     function clearAttachForm(){
         var linkinput=fdjtID("METABOOKATTACHURL");
         var titleinput=fdjtID("METABOOKATTACHTITLE");
-        var rightsok=fdjt.ID("METABOOKUPLOADRIGHTS");
+        var rightsok=fdjt.ID("METABOOKUPLOADRIGHTS")
+        var fileinput=fdjt.ID("METABOOKFILEINPUT");
         linkinput.value=""; titleinput.value="";
         fdjtDOM.dropClass("METABOOKGLOSSATTACH","haveupload");
         fdjt.ID("METABOOKATTACHFILE").className="nofile";
         fdjt.ID("METABOOKATTACHFILENAME").innerHTML="";
         fdjt.UI.CheckSpan.set(rightsok,false);        
-        metaBook.glossatach=false;
-        metaBook.editlink=false;}
+        metaBook.glossattach=false;
+        metaBook.editlink=false;
+        fileinput.value="";}
 
     function attach_delete(evt){
         var oldlink=metaBook.editlink;
