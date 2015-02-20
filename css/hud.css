@@ -773,8 +773,6 @@ body.hudup #CODEXPAGE p, body.hudup #CODEXPAGE div { cursor: pointer;}
     max-width: 80vw; min-width: 15em; min-height: 20px; 
     background-color: rgb(255,255,240);
     border: solid blue 5px; overflow: auto;
-    border-radius: 1ex; -webkit-border-radius: 1ex;
-    -o-border-radius: 1ex; -moz-border-radius: 1ex;
     position: absolute;}
 #METABOOKHUD.openglossmark #METABOOKPOINTGLOSSES.hudpanel {
     opacity: 0.95;
@@ -790,7 +788,11 @@ body.hudup #CODEXPAGE p, body.hudup #CODEXPAGE div { cursor: pointer;}
 #METABOOKHUD #METABOOKPOINTGLOSSES.hudpanel {
     border: solid blue 2px;
     border-radius: 1ex; -webkit-border-radius: 1ex;
-    -o-border-radius: 1ex; -moz-border-radius: 1ex;}
+    -o-border-radius: 1ex; -moz-border-radius: 1ex;
+    border-top-right-radius: 0px; -webkit-border-top-right-radius: 0px;
+    -o-border-top-right-radius: 0px; -moz-border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px; -webkit-border-bottom-right-radius: 0px;
+    -o-border-bottom-right-radius: 0px; -moz-border-bottom-right-radius: 0px;}
 
 #METABOOKHUD.openglossmark #METABOOKPOINTGLOSSES.hudpanel {
     display: block;}
