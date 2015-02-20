@@ -26,7 +26,7 @@ body.hudup #METABOOKADDGLOSS div.metabookglossform {
 div.metabookglossform form div.textbox,
 div.metabookglossform form div.glossetc {
     max-height: 90%; font-size: 0.6em;
-    clear: left; text-align: left; margin-right: 60px;
+    clear: left; text-align: left; margin-right: 70px;
     padding-right: 3px; padding-top: 3px;
     box-sizing: border-box; -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;}
@@ -177,40 +177,19 @@ div.metabookglossform .glossetc .glossdate {
 div.metabookglossform.focused form .glossetc .glossdate {
     padding-bottom: 1ex;}
 
-div.metabookglossform .glossetc .glossdate,
-div.metabookglossform .glossetc .glossexposure {
+div.metabookglossform .glossetc .glossdate {
     float: right;}
-div.metabookglossform .glossetc .glossexposure,
 div.metabookglossform .glossetc .excerpt {
     font-size: 0.8em;}
-div.metabookglossform.focused .glossetc .glossexposure,
 div.metabookglossform.focused .glossetc .excerpt {
     font-size: 1em;}
 
-div.metabookglossform form .glossexposure .checkspan {
-    float: right; margin-right: 1ex; margin-top: 2px;
-    font-variant: smallcaps; vertical-align: top;}
-div.metabookglossform form .glossexposure .checkspan span {
-    vertical-align: middle;}
 div.metabookglossform.private .checkspan.postgloss {
     display: none;}
 
-div.metabookglossform form .glossexposure,
-div.metabookglossform form .excerpt {
     display: none; }
-body.hudup div.metabookglossform form .glossexposure,
 body.hudup div.metabookglossform form .excerpt {
     display: inline-block; }
-
-#METABOOKHUD .metabookglossform .checkspan.private {
-    color: white; font-weight: bold; background-color: green;
-    text-align: center;}
-#METABOOKHUD .metabookglossform .checkspan.private input { display: none; }
-#METABOOKHUD .metabookglossform .checkspan.private.ischecked {
-    background-color: red; color: white;}
-#METABOOKHUD .metabookglossform .checkspan.private span {
-    padding-left: 1ex; padding-right: 1ex;
-    vertical-align: top;}
 
 div.metabookglossform .checkspan.postgloss {}
 div.metabookglossform .checkspan.postgloss input[type='checkbox'] {
@@ -219,8 +198,8 @@ div.metabookglossform .checkspan.postgloss img {
     height: 2ex; width: auto; padding: 0px; margin: 0px; border: 0px;
     vertical-align: top;}
 
-div.metabookglossform.glossedit form .glossetc .glossdate {
-    display: inline-block;}
+/* div.metabookglossform.glossedit form .glossetc .glossdate {
+    display: inline-block;} */
 
 div.metabookglossform form div.glossetc .twisty { display: none;}
 div.metabookglossform form div.glossetc.overflow .twisty { display: none;}
@@ -231,8 +210,6 @@ body.hudup div.metabookglossform form div.glossetc {
     max-height: inherit;}
 body.hudup div.metabookglossform.focused form div.glossetc {
     overflow: visible;}
-div.metabookglossform form div.glossetc .glossexposure .checkspan input {
-    vertical-align: top;}
 
 div.metabookglossform form div.glossetc .notespan {
     color: purple; font-weight: bold;}
@@ -334,10 +311,6 @@ div.metabookglossform div.glossetc .networks img {
 div.metabookglossform form div.glossetc .links span.checkspan a {
     color: darkblue;}
 div.metabookglossform form div.glossetc span.checkspan input {}
-
-div.metabookglossform form div.glossetc > .checkspan.private {
-    float: right; vertical-align: top; margin-left: 4px;
-    padding-top: 0px; margin-top: 0px;}
 
 div.metabookglossform form .button {
     font-weight: bold; color: black; font-size: 24px;
@@ -633,11 +606,11 @@ body._NOSVG #METABOOKRIBBON input[TYPE="TEXT"]#METABOOKADDSHAREINPUT {
 
 div.metabookglossform form div.addglossmenu {
     position: absolute; top: 0px; right: 0px;
-    width: 50px; margin-right: 5px; margin-left: 5px;
+    width: 60px; margin-right: 5px; margin-left: 5px;
     z-index: 800;}
 
 div.metabookglossform form div.addglossmenu > img {
-    width: 40px; height: 40px; padding: 2px; 
+    width: 50px; height: 50px; padding: 2px; 
     box-sizing: content-box;
     display: none; }
 div.metabookglossform form div.addglossmenu > img.held {
@@ -645,19 +618,25 @@ div.metabookglossform form div.addglossmenu > img.held {
 div.metabookglossform form div.addglossmenu.expanded > img {
     margin-bottom: 4px;}
 
-
-body._TOUCH div.metabookglossform form div.addglossmenu > img.held {
+._TOUCH div.metabookglossform
+  form div.addglossmenu > img.held {
     width: 80px; height: 80px; margin-left: -20px;}
-body._TOUCH div.metabookglossform form div.addglossmenu > img.held.menutop {
+._TOUCH div.metabookglossform 
+  form div.addglossmenu > img.held.menutop {
     width: 40px; height: 40px; margin-left: 0px;}
-div.metabookglossform form div.addglossmenu > img.menutop[alt="downmenu"],
-div.metabookglossform form div.addglossmenu.expanded > img.menutop[alt="upmenu"],
-div.metabookglossform form div.addglossmenu.held > img.menutop[alt="holdmenu"] {
+div.metabookglossform
+  form div.addglossmenu > img.menutop[alt="downmenu"],
+div.metabookglossform
+  form div.addglossmenu.expanded > img.menutop[alt="upmenu"],
+div.metabookglossform
+  form div.addglossmenu.held > img.menutop[alt="holdmenu"] {
     display: block; }
-div.metabookglossform form div.addglossmenu.expanded.held > img.menutop[alt="upmenu"] {
+div.metabookglossform 
+  form div.addglossmenu.expanded.held > img.menutop[alt="upmenu"] {
     display: none;}
 
-div.metabookglossform form div.addglossmenu.expanded > img {
+div.metabookglossform
+  form div.addglossmenu.expanded > img {
     display: block; opacity: 0.90;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
     filter: alpha(opacity=90);
@@ -665,27 +644,56 @@ div.metabookglossform form div.addglossmenu.expanded > img {
     -khtml-opacity: 0.90;
     -moz-opacity: 0.90;
     -o-opacity: 0.90;}
-div.metabookglossform form div.addglossmenu.expanded > img.menutop {
+div.metabookglossform
+  form div.addglossmenu.expanded > img.menutop {
     display: none;}
 
-div.metabookglossform form.addtag div.addglossmenu > img.menutop {
+div.metabookglossform
+  form.addtag div.addglossmenu > img.menutop {
     display: none; }
-div.metabookglossform form.addtag div.addglossmenu > img[alt="addtag"] {
+div.metabookglossform
+  form.addtag div.addglossmenu > img[alt="addtag"] {
     display: block; }
 
-div.metabookglossform form.attach div.addglossmenu > img.menutop {
+div.metabookglossform 
+  form.attach div.addglossmenu > img.menutop {
     display: none; }
-div.metabookglossform form.attach div.addglossmenu > img[alt="attach"] {
+div.metabookglossform
+  form.attach div.addglossmenu > img[alt="attach"] {
     display: block; }
 
-div.metabookglossform form.addoutlet div.addglossmenu > img.menutop {
+div.metabookglossform
+  form.addoutlet div.addglossmenu > img.menutop {
     display: none; }
-div.metabookglossform form.addoutlet div.addglossmenu > img[alt="addoutlet"] {
+div.metabookglossform 
+  form.addoutlet div.addglossmenu > img[alt="addoutlet"] {
     display: block; }
 
-div.metabookglossform.glossreply form div.addglossmenu.expanded > img[alt="glossrespond"],
-div.metabookglossform.glossadd form div.addglossmenu.expanded > img[alt="glossrespond"] {
+div.metabookglossform.glossreply 
+  form div.addglossmenu.expanded > img[alt="glossrespond"],
+div.metabookglossform.glossadd
+  form div.addglossmenu.expanded > img[alt="glossrespond"] {
     display: none;}
+
+div.metabookglossform span.glossexposure {
+    margin-right: 1.2ex; margin-left: 0.5ex;
+    float: right;}
+div.metabookglossform form div.glossetc .glossexposure .checkspan input {
+    vertical-align: top;}
+
+div.metabookglossform form .glossexposure .checkspan {
+    float: right; margin-top: 2px; margin-right: 0px;
+    font-variant: smallcaps; vertical-align: top;}
+div.metabookglossform form .glossexposure .checkspan span {
+    vertical-align: middle;}
+
+#METABOOKHUD .metabookglossform .checkspan.private {
+    color: white; background-color: green; text-align: center;
+    padding-left: 0.5ex; padding-right: 0.5ex; 
+    border-radius: 0.5ex;}
+#METABOOKHUD .metabookglossform .checkspan.private input { display: none; }
+#METABOOKHUD .metabookglossform .checkspan.private.ischecked {
+    background-color: red; color: white;}
 
 /* Saving/saved overlays */
 

@@ -1988,7 +1988,7 @@
     function clearAttachForm(){
         var linkinput=fdjtID("METABOOKATTACHURL");
         var titleinput=fdjtID("METABOOKATTACHTITLE");
-        var rightsok=fdjt.ID("METABOOKUPLOADRIGHTS")
+        var rightsok=fdjt.ID("METABOOKUPLOADRIGHTS");
         var fileinput=fdjt.ID("METABOOKFILEINPUT");
         linkinput.value=""; titleinput.value="";
         fdjtDOM.dropClass("METABOOKGLOSSATTACH","haveupload");
