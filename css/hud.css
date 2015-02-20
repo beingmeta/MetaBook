@@ -1292,7 +1292,7 @@ body._FULLHEIGHT.hudup #METABOOKFOOT {
         bottom: 50px; top: auto;}
 }
 @media screen and (max-width: 500px) {
-    #METABOOKHUD.openhead #METABOOKHEAD {
+    #METABOOKHEAD, #METABOOKHUD.openhead #METABOOKHEAD {
         left: 5px; right: 5px;}
     body.mbSKIMMING .hudbutton,
     body.hudup.mbSKIMMING .hudbutton, 
@@ -1311,6 +1311,8 @@ body._FULLHEIGHT.hudup #METABOOKFOOT {
         font-size: 60%;}
 }
 @media (max-width: 700px) {
+    #METABOOKHEAD, #METABOOKHUD.openhead #METABOOKHEAD {
+        left: 10px; right: 10px;}
     #METABOOKHUD.openhead #METABOOKHEAD,
     #METABOOKHUD.openheart #METABOOKHEART,
     #METABOOKHUD.openfoot #METABOOKFOOT,

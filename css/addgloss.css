@@ -34,7 +34,7 @@ div.metabookglossform.focused form div.textbox,
 div.metabookglossform.focused form div.glossetc {
     max-height: inherit;}
 div.metabookglossform form div.glossetc {
-    overflow: hidden;}
+    padding-bottom: 0.5ex; overflow: hidden;}
 div.metabookglossform form div.textbox textarea,
 div.metabookglossform form div.textbox input[type="TEXT"] {
     min-height: 1.5em; max-height: 3em; padding: 2px;}
@@ -182,7 +182,7 @@ div.metabookglossform .glossetc .glossexposure {
     float: right;}
 div.metabookglossform .glossetc .glossexposure,
 div.metabookglossform .glossetc .excerpt {
-    font-size: 0.5em;}
+    font-size: 0.8em;}
 div.metabookglossform.focused .glossetc .glossexposure,
 div.metabookglossform.focused .glossetc .excerpt {
     font-size: 1em;}
@@ -195,7 +195,8 @@ div.metabookglossform form .glossexposure .checkspan span {
 div.metabookglossform.private .checkspan.postgloss {
     display: none;}
 
-div.metabookglossform form .glossexposure, div.metabookglossform form .excerpt {
+div.metabookglossform form .glossexposure,
+div.metabookglossform form .excerpt {
     display: none; }
 body.hudup div.metabookglossform form .glossexposure,
 body.hudup div.metabookglossform form .excerpt {
@@ -244,7 +245,8 @@ div.metabookglossform form div.glossetc .excerpt .delision {
 div.metabookglossform form div.glossetc .checkspan.excerpt.ischecked {
     font-weight: normal;}
 div.metabookglossform form div.glossetc .links,
-div.metabookglossform form div.glossetc .tags {}
+div.metabookglossform form div.glossetc .tags {
+    line-height: 140%;}
 
 div.metabookglossform form div.glossetc .tags span.checkspan .term {
     color: black;}
@@ -730,6 +732,16 @@ div.metabookglossform.submitclose form > div.messageoverlay {
     #METABOOKHUD.addgloss img.hudbutton[alt="toc"],
     #METABOOKHUD.addgloss img.hudbutton[alt="search"] {
         display: none;}}
+
+@media screen and (max-width: 700px) {
+    ._TOUCH div.metabookglossform form div.addglossmenu > img {
+        width: 60px; height: 60px;}
+    div.metabookglossform form div.addglossmenu {
+        width: 70px;}
+    div.metabookglossform form div.textbox,
+    div.metabookglossform form div.glossetc {
+        margin-right: 80px;}
+}
 
 /* Emacs local variables
 ;;;  Local variables: ***
