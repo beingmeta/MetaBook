@@ -473,8 +473,7 @@
             else {}
             scan=scan.parentNode;
             style=fdjtDOM.getStyle(scan);}
-        if (block) return block; else return elt;
-        return elt;}
+        if (block) return block; else return elt;}
 
     function jumpToNote(evt){
         evt=evt||window.event;
