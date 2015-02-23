@@ -160,7 +160,7 @@ body._ANIMATE .qtags {
     #METABOOKHUD div.resultinfo span.stats { font-size: 2vmin; }}
 
 @media screen and (max-width: 640px) {
-    #METABOOKHUD div.resultinfo span.stats { font-size: 3vmin; }}
+    #METABOOKHUD div.resultinfo span.stats { font-size: 3vmin; }
     div.resultinfo .stats > span > br { display: initial; }}
 
 @media screen and (max-width: 500px) {

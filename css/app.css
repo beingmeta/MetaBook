@@ -307,7 +307,7 @@ body._TOUCH li.fortouch { display: list-item;}
 /* Make checkboxes bigger */
 body._TOUCH .checkspan input[TYPE="CHECKBOX"],
 body._TOUCH .checkspan input[TYPE="RADIO"] {
-    height: 1em; width: 1em;}}
+    height: 1em; width: 1em;}
 
 body._MOUSE._USESVG img.fortouch.svg,
 body._TOUCH._USESVG img.notouch.svg {

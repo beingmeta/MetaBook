@@ -98,7 +98,8 @@ div.metabookglossform form .checkspan.excerpt img.redx {
 div.metabookglossform form div.checkspan.excerpt img.redx { height: 2ex; }
 div.metabookglossform form .checkspan.excerpt input {
     display: none;}
-div.metabookglossform form .inputhelp {color: black; display: none;}
+div.metabookglossform form .inputhelp {
+    color: black; display: none;}
 div.metabookglossform form div.inputhelp {
     padding-bottom: 4px; text-align: left;}
 div.metabookglossform form .bracketbutton {
@@ -187,7 +188,6 @@ div.metabookglossform.focused .glossetc .excerpt {
 div.metabookglossform.private .checkspan.postgloss {
     display: none;}
 
-    display: none; }
 body.hudup div.metabookglossform form .excerpt {
     display: inline-block; }
 

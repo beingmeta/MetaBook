@@ -549,11 +549,13 @@
              handler: function(){
                  metaBook.startGloss(passage);},
              isdefault: true}];
-        if (false) { /* (window.ClipboardEvent) */
+        /*
+          if (window.ClipboardEvent) {
             choices.push({label: "Copy link",
                           handler: function(){copyURI(passage);}});
             choices.push({label: "Copy content",
                           handler: function(){copyContent(passage);}});}
+        */
         if (true) choices.push(
             {label: "Zoom content",
              handler: function(){
@@ -594,6 +596,7 @@
     
     function makeOpener(url){
         return function (){window.open(url);};}
+    /*
     function copyURI(passage){
         var ClipboardEvent=window.ClipboardEvent;
         var evt = new ClipboardEvent(
@@ -605,6 +608,7 @@
         var evt = new ClipboardEvent(
             'copy',{ dataType: 'text/html', data: passage.innerHTML } );
         document.dispatchEvent(evt);}
+    */
 
     var body_tapstart=false;
     function body_touchstart(evt){
