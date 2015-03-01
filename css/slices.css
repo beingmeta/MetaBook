@@ -16,33 +16,7 @@ div.metabookslice div.metabookcard { margin-left: 20px;}
 div.metabookslice.sourced div.metabookcard { display: none;}
 div.metabookslice.sourced div.metabookcard.sourced { display: block;}
 
-div.metabookslice.sourced div.metabookthread { display: none;}
-div.metabookslice.sourced div.metabookthread > div { display: none;}
-div.metabookslice.sourced div.metabookthread.sourced { display: block;}
-div.metabookslice.sourced div.metabookthread.sourced > div.tochead {
-    display: block;}
-div.metabookslice.sourced div.metabookthread.sourced > div.idhead {
-    display: block;}
-div.metabookslice.sourced div.metabookthread.sourced > div.metabookthread {
-    display: none;}
-div.metabookslice.sourced div.metabookthread.sourced
-      > div.metabookthread.sourced {
-          display: block;}
-
 div.metabookslice.onepassage .tocblock .tochead {display:none;}
-
-div.metabookslice .tocthread {}
-div.metabookslice .tocthread .metabookcard .tochead { display: none;}
-div.metabookslice .idthread .metabookcard .idhead { display: none;}
-div.metabookslice .tocthread > .metabookcard .idhead { display: none;}
-
-div.metabookslice .tocthread > .metabookcard:first-child .tochead {
-    display: block;}
-div.metabookslice .tocthread 
-  > p.idthread:first-child .metabookcard:first-child .tochead {
-      display: block;}
-div.metabookslice .idthread > .metabookcard:first-child .idhead {
-    display: block;}
 
 div.metabookslice .metabookcard div.glossbody { 
     display: none; color: ivory; clear: both;}
@@ -51,21 +25,6 @@ div.metabookslice div.xrefs { display: none;}
 div.metabookslice .showxrefs div.xrefs { display: block;}
 div.metabookslice div.xrefs a { display: block;}
 div.metabookslice div.metabookcard span.tags span.other { display: none;}
-
-div.metabookthread {
-    clear: both; margin: 0px; border: none;
-    border-right: gold solid 3px;}
-div.metabookthread.singleton {
-    border-left: none; margin-left: 0px;
-    padding-left: 0px; margin-top: 0px; margin-bottom: 6px;}
-div.metabookthread .locbar { background-color: silver;}
-div.metabookthread.headthread { border-top: solid gold 2px;}
-div.metabookthread.idthread {border: none;}
-div.metabookthread.idthread .metabookcard {}
-div.metabookslice div.metabookthread div.metabookcard div.locbar {border: none;}
-div.metabookslice div.metabookthread div.metabookcard div.locbar {display:none;}
-div.metabookslice div.metabookthread div.metabookcard:first-child div.locbar {
-    display:block;}
 
 div.metabookslice div.metabookskimpoint {
     border-left: solid darkblue 16px;
@@ -109,10 +68,6 @@ div.metabooksources div.button.source {
     clear: none;}
 
 /* Heads of various sorts */
-
-#METABOOKHUD div.metabookthread > div.locrule {
-    position: relative; left: 0px; bottom: 0px; z-index: 50;
-    width: 100%; min-height: 10px;}
 
 div.tochead { 
     position: relative; /* width: 100%; */
@@ -173,9 +128,11 @@ div.idhead div {
 
 div.metabookslice div.metabookcard div.tochead { display: none; }
 div.metabookslice div.metabookcard div.idhead { display: none; }
-div.metabookslice div.metabookcard.slicenewhead div.tochead {
-    display: block; }
-div.metabookslice div.metabookcard.slicenewpassage div.idhead {
+
+div.metabookslice div.metabookcard.slicenewhead div.tochead,
+div.metabookslice div.metabookcard.slicenewpassage div.idhead ,
+div.metabookslice  div.pagerblock > div.metabookcard:first-child div.tochead,
+div.metabookslice div.pagerblock > div.metabookcard:first-child div.idhead {
     display: block; }
 
 #METABOOKSKIMMER div.metabookcard div.metabookcardbody {
