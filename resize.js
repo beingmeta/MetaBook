@@ -130,7 +130,7 @@
         var pagers=metaBook.pagers;
         for (var mode in pagers) {
             if (pagers.hasOwnProperty(mode))
-                pagers[mode].resize();}}
+                pagers[mode].resized();}}
 
     function resizeNow(evt){
         if (resizing) clearTimeout(resizing);
