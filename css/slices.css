@@ -47,6 +47,9 @@ div.metabookslice div.metabookcard.metabookskimpoint .metabookcardbody {
 div.metabookslice div.metabookcard.metabookskimpoint .fdjtclearfloats {
     margin-bottom: 0px;}
 
+div.metabookslice.pager div.pagernav {
+    border-bottom: solid black 1px; margin-bottom: 1ex;}
+
 /* METABOOKSOURCES */
 
 div.metabooksources {}
