@@ -1,0 +1,108 @@
+/* -*- Mode: CSS; character-encoding: utf-8; -*- */
+
+/* Copyright (C) 2009-2015 beingmeta, inc.
+   This file implements a Javascript/DHTML web application for reading
+    large structured documents (sBooks).
+
+   For more information on sbooks, visit www.sbooks.net
+   For more information on knodules, visit www.knodules.net
+   For more information about beingmeta, visit www.beingmeta.com
+
+   This library uses the FDJT (www.fdjt.org) toolkit.
+
+   This program comes with absolutely NO WARRANTY, including implied
+   warranties of merchantability or fitness for any particular
+   purpose.
+
+    Use and redistribution (especially embedding in other
+      CC licensed content) is permitted under the terms of the
+      Creative Commons "Attribution-NonCommercial" license:
+
+          http://creativecommons.org/licenses/by-nc/3.0/ 
+
+    Other uses may be allowed based on prior agreement with
+      beingmeta, inc.  Inquiries can be addressed to:
+
+       licensing@biz.beingmeta.com
+
+   Enjoy!
+
+*/
+
+@charset "UTF-8";
+
+.metabooksettings > div {
+    display: block; clear: both; 
+    text-align: left; }
+.metabooksettings > div.device,
+.metabooksettings > div.data,
+.metabooksettings > div.info {
+    margin-top: 1ex;}
+
+.metabooksettings .label { 
+    font-size: 200%; font-weight: bold;
+    width: 4em; margin-right: 1ex;
+    text-align: right;
+    display: inline-block;}
+.metabooksettings .label span.text {
+    vertical-align: baseline;}
+
+.metabooksettings div.fontsizes .checkspan,
+.metabooksettings div.contrast .checkspan,
+.metabooksettings div.animation .checkspan {
+    display: inline-block;
+    margin-top: 0.5ex; margin-right: 1em;}
+
+.metabooksettings .checkspan { white-space: normal; }
+
+.metabooksettings div.contrast .label span.text,
+.metabooksettings div.animation .label span.text {
+    font-size: 70%;}
+.metabooksettings div.contrast span.checkspan,
+.metabooksettings div.animation span.checkspan {
+    font-size: 120%;}
+
+.metabooksettings div.fontsizes span.checkspan {
+    border-bottom: transparent solid 3px;}
+.metabooksettings div.fontsizes span.checkspan span.sample {
+    vertical-align: baseline;}
+.metabooksettings div.fontsizes span.checkspan input[TYPE="RADIO"] { display: none; }
+.metabooksettings div.fontsizes span.checkspan.ischecked {
+    border-color: blue; }
+.metabooksettings div.fontsizes span.checkspan.xlarge span.sample { font-size: 220%; }
+.metabooksettings div.fontsizes span.checkspan.large span.sample { font-size: 180%; }
+.metabooksettings div.fontsizes span.checkspan.normal span.sample { font-size: 150%; }
+.metabooksettings div.fontsizes span.checkspan.small span.sample { font-size: 100%; }
+.metabooksettings div.fontsizes span.checkspan.tiny span.sample { font-size: 80%; }
+
+.metabooksettings div.checkspan {}
+.metabooksettings div.checkspan span.text { font-size: 150%;}
+.metabooksettings div.checkspan input {}
+.metabooksettings div.checkspan.syncloc,
+.metabooksettings div.checkspan.saveglosses,
+.metabooksettings div.info {
+    margin-top: 1ex;}
+
+#METABOOKCOVER .metabooksettings span.text a { color: darkblue; }
+.metabooksettings span.text a { color: darkblue; }
+.metabooksettings div.opendyslexic .text {
+    font-family: 'Open Dyslexic', serif;
+    font-size: 150%; }
+
+.metabooksettings div.contrast {}
+.metabooksettings div.contrast span.highcontrast {}
+.metabooksettings div.contrast span.normalcontrast {}
+.metabooksettings div.contrast span.lowcontrast {}
+
+.metabooksettings div.info .label { float: left; }
+.metabooksettings div.info div.metabookinfo {
+    margin-left: 160px;}
+.metabooksettings div.info div.metabookinfo p {}
+
+/* Emacs local variables
+;;;  Local variables: ***
+;;;  compile-command: "cd ../..; make" ***
+;;;  indent-tabs-mode: nil ***
+;;;  End: ***
+*/
+
