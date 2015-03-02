@@ -566,7 +566,9 @@ body._MOUSE #METABOOKHUD img.hudbutton:hover,
     width: 125px; height: 125px;}
 
 #METABOOKHUD .topleft {top: 0px; left: 0px;}
+#METABOOKHUD .topleftin {top: 0px; left: 70px;}
 #METABOOKHUD .topright {top: 0px; right: 0px;}
+#METABOOKHUD .toprightin {top: 0px; right: 70px;}
 #METABOOKHUD .botleft {bottom: 0px; left: 0px;}
 #METABOOKHUD .botright {bottom: 0px; right: 0px;}
 

@@ -455,6 +455,10 @@ metaBook.setMode=
                 var fn=metaBook.popmode;
                 metaBook.popmode=false;
                 fn();}
+            if ((mode==="layers")&&
+                (!(fdjtID("SBOOKSAPP").src))&&
+                (!(metaBook.appinit)))
+                metaBook.initIFrameApp();
             if (hasClass(document.body,"mbCOVER")) {
                 if (!(mode)) hideCover();
                 else if (mode.search(metaBookCoverModes)>=0)
