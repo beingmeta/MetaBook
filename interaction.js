@@ -1989,11 +1989,6 @@
          glossmark: {touchstart: glossmark_tapped,touchend: cancel},
          "#METABOOKSTARTPAGE": {touchend: metaBook.UI.dropHUD},
          "#METABOOKTOPBAR": {tap: raiseHUD},
-         /*
-           "#METABOOKTOOLTAB": {
-           touchstart: cancel,
-           touchmove: cancel,
-           touchend: raiseHUD}, */
          "#METABOOKSHOWCOVER": {
              tap: showcover_tapped, release: showcover_released},
          "#METABOOKSOURCES": {
