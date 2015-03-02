@@ -12,7 +12,7 @@
       Your changes have been applied but not saved</span>
     <span class="message" ID="METABOOKSETTINGSMESSAGE"></span></h1>
   <div class="fontsizes body" id="METABOOKFONTSIZES">
-    <span class="label"><span class="text">Text</span></span>
+    <span class="label">Text size</span>
     <span class="checkspan xlarge">
       <input TYPE="RADIO" NAME="METABOOKBODYSIZE" VALUE="xlarge"/><span class="sample">Aa</span></span>
     <span class="checkspan large">
@@ -24,23 +24,21 @@
     <span class="checkspan tiny">
       <input TYPE="RADIO" NAME="METABOOKBODYSIZE" VALUE="tiny"/><span class="sample">Aa</span></span>
   </div>
-  <div class="contrast">
-    <span class="label smaller"><span class="text">Contrast</span></span>
-    <p class="checkspans">
-      <span class="checkspan highcontrast">
-        <input TYPE="RADIO" NAME="METABOOKBODYCONTRAST" VALUE="high"/>
-        <span class="sample">High</span></span>
-      <span class="checkspan normalcontrast">
-        <input TYPE="RADIO" NAME="METABOOKBODYCONTRAST" VALUE="medium"/>
-        <span class="sample">Normal</span></span>
-      <span class="checkspan lowcontrast">
-        <input TYPE="RADIO" NAME="METABOOKBODYCONTRAST" VALUE="low"/>
-        <span class="sample">Low</span></span>
-    </p>
+  <div class="contrast checkspans">
+    <span class="label smaller">Contrast</span>
+    <span class="checkspan highcontrast">
+      <input TYPE="RADIO" NAME="METABOOKBODYCONTRAST" VALUE="high"/>
+      <span class="sample">High</span></span>
+    <span class="checkspan normalcontrast">
+      <input TYPE="RADIO" NAME="METABOOKBODYCONTRAST" VALUE="medium"/>
+      <span class="sample">Normal</span></span>
+    <span class="checkspan lowcontrast">
+      <input TYPE="RADIO" NAME="METABOOKBODYCONTRAST" VALUE="low"/>
+      <span class="sample">Low</span></span>
   </div>
-  <div class="textlayout checkspan">
-    <span class="label smaller"><span class="text">Layout</span></span>
-    <p class="checkspans">
+  <div class="textlayout checkspans">
+    <span class="label smaller">Layout</span>
+    <span class="checkspans">
       <span class="checkspan codex">
         <input TYPE="RADIO" NAME="METABOOKLAYOUT" VALUE="bypage"/>
         by pages</span>
@@ -50,24 +48,20 @@
       <span class="checkspan scrollio">
         <input TYPE="RADIO" NAME="METABOOKLAYOUT" VALUE="scrollio"/>
         hybrid (<em>scrollio</em>)</span>
-    </p>
+    </span>
   </div>
-  <div class="also">
-    <span class="label smaller"><span class="text">also</span></span>
-    <p class="checkspans">
-      <span class="checkspan opendyslexical">
-        <input TYPE="CHECKBOX" NAME="METABOOKDYSLEXICAL" VALUE="yes"/>
-        Use <a href="http://opendyslexic.org/" title="The Open Dyslexic font size">OpenDyslexic</a>
-        font</span>
-      <span class="checkspan justify">
-        <input TYPE="CHECKBOX" NAME="METABOOKJUSTIFY" VALUE="true"/>
-        Justify paragraphs.</span>
-    </p>
-  </div>
-  <div class="justify checkspan">
+  <div class="also checkspans">
+    <span class="label smaller">Options</span>
+    <span class="checkspan opendyslexical">
+      <input TYPE="CHECKBOX" NAME="METABOOKDYSLEXICAL" VALUE="yes"/>
+      Use <a href="http://opendyslexic.org/" title="The Open Dyslexic font size">OpenDyslexic</a>
+      font</span>
+    <span class="checkspan justify">
+      <input TYPE="CHECKBOX" NAME="METABOOKJUSTIFY" VALUE="true"/>
+      Justify paragraphs.</span>
   </div>
   <div class="fontsizes device">
-    <span class="label"><span class="text">Tools</span></span>
+    <span class="label">Tools</span>
     <span class="checkspan xlarge">
       <input TYPE="RADIO" NAME="METABOOKUISIZE" VALUE="xlarge"/><span class="sample">Aa</span></span>
     <span class="checkspan large">
@@ -80,7 +74,7 @@
       <input TYPE="RADIO" NAME="METABOOKUISIZE" VALUE="tiny"/><span class="sample">Aa</span></span>
   </div>
   <div class="animation">
-    <span class="label smaller"><span class="text">Animate</span></span>
+    <span class="label smaller">Animate</span>
     <span class="checkspan">
       <input TYPE="CHECKBOX" NAME="METABOOKANIMATECONTENT" VALUE="true"/>
       <span class="text">content (page flips, etc)</span></span>
@@ -88,33 +82,25 @@
       <input TYPE="CHECKBOX" NAME="METABOOKANIMATEHUD" VALUE="true"/>
       <span class="text">interface (overlays, controls, etc)</span></span>
   </div>
-  <div class="data">
-    <span class="label">Data</span>
-    <span class="body">Control where information is kept</span>
-  </div>
-  <div class="checkspan syncloc">
-    <span class="label">
-      <input TYPE="CHECKBOX" NAME="METABOOKLOCSYNC" VALUE="true"/></span>
+  <div class="checkspan syncloc cf">
     <button id="METABOOKRESETSYNC" name="SYNC" VALUE="RESET"
             class="reset floatright"
             title="Reset synchronized location information.">
       Reset</button>
-    <span class="body">
-      Sync your reading location with other devices</span>
+    <input TYPE="CHECKBOX" NAME="METABOOKLOCSYNC" VALUE="true"/>
+    Sync your reading location with other devices
   </div>
-  <div class="checkspan saveglosses">
-    <span class="label">
-      <input TYPE="CHECKBOX" NAME="METABOOKCACHEGLOSSES"
-             VALUE="true" CHECKED/></span>
+  <div class="checkspan saveglosses cf">
     <button id="METABOOKREFRESHOFFLINE" class="refresh floatright"
             title="Reload glosses and layers for this book from the sBooks cloud.">
       All</button>
-    <span class="body">
-      Save copies of this book's glosses on this device</span>
+    <input TYPE="CHECKBOX" NAME="METABOOKCACHEGLOSSES"
+           VALUE="true" CHECKED/>
+    Save copies of notes and overlays on this device
   </div>
   <div class="info">
     <span class="label">Info</span>
-    <div id="METABOOKINFO" class="metabookinfo">
+    <div id="METABOOKINFO" class="metabookinfo"></div>
   </div>
 </form>
 

@@ -31,12 +31,47 @@
 
 @charset "UTF-8";
 
+body form.metabooksettings h1 { 
+    margin-top: 0px; margin-bottom: 0.25ex;
+    text-align: left;}
+body form.metabooksettings h1 .button {
+    font-size: 50%; float: right;}
+body form.metabooksettings h1 .message {
+    font-size: 50%; float: right; padding-top: 0.5ex;}
+._NOUSER form.metabooksettings h1 a.logout {display:none;}
+form.metabooksettings h1 a.logout {
+    float: right; color: red; text-decoration: none;
+    font-size: 60%; font-variant: small-caps;}
+form.metabooksettings h1 a.logout:visited {color: red;}
+
+form.metabooksettings h1 .button {
+    font-size: 125%; cursor: pointer;
+    font-weight: bold;
+    color: white; background-color: silver;
+    margin-left: 6px; padding: 4px; border: solid black 2px;
+    border-radius: 5px;
+    -o-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;}
+form.metabooksettings .button.exit {
+    color: red; background-color: white;}
+
+.metabooksettings span.message {
+    float: right; clear: right; font-size: 40%;}
+.metabooksettings .metabooksettingschanged {
+    color: red; display: none;}
+.metabooksettings.changed .metabooksettingschanged { display: block;}
+
+form.metabooksettings {
+    max-width: 50em; margin-left: auto; margin-right: auto;}
+
 form.metabooksettings > div {
     display: block; clear: both; 
     text-align: left; }
 form.metabooksettings > div.device,
 form.metabooksettings > div.data,
 form.metabooksettings > div.info {
+    border-top: solid black 2px;
     margin-top: 1ex;}
 form.metabooksettings > div.textlayout,
 form.metabooksettings > div.animation,
@@ -51,26 +86,30 @@ form.metabooksettings > div span.body {
     font-size: 150%; display: inline-block;}
 
 form.metabooksettings .label { 
-    font-size: 200%; font-weight: bold;
-    width: 4em; margin-right: 1ex;
+    font-size: 20px; font-size: 3vw; 
+    font-weight: bold; white-space: nowrap;
+    margin-left: 1ex;
     text-align: right;
+    float: right;}
+form.metabooksettings .label.smaller { 
+    font-size: 14px; font-size: 2vw;}
+
+form.metabooksettings > div.fontsizes { 
+    font-size: 20px; font-size: 2vw;}
+form.metabooksettings > div.checkspan { 
+    white-space: normal; font-size: 20px; font-size: 2.5vw;
+    border-top: solid lightgray 1px;
+    margin-top: 0.4ex;}
+form.metabooksettings > div.checkspan input[type='RADIO'],
+form.metabooksettings > div.checkspan input[type='CHECKBOX'] { 
+    float: left; width: 1.2em; height: 1.2em; margin-right: 1ex;}
+
+form.metabooksettings div.checkspans {}
+form.metabooksettings div.checkspans .checkspan {
+    font-size: 110%; padding-right: 1ex; padding-top: 0.25ex;
     display: inline-block;}
-form.metabooksettings .label span.text {
-    vertical-align: baseline;}
-form.metabooksettings .label.smaller span.text {
-    font-size: 50%;}
-
-form.metabooksettings div.fontsizes .checkspan,
-form.metabooksettings div.contrast .checkspan,
-form.metabooksettings div.animation .checkspan {
-    display: inline-block;
-    margin-top: 0.5ex; margin-right: 1em;}
-
-form.metabooksettings .checkspan { white-space: normal; }
-
-form.metabooksettings div .checkspans {}
-form.metabooksettings div .checkspans .checkspan {
-    font-size: 140%; padding-right: 1em;}
+form.metabooksettings div.checkspans .checkspan.ischecked {
+    font-weight: normal; color: black;}
 
 form.metabooksettings div.fontsizes span.checkspan {
     border-bottom: transparent solid 3px;}
@@ -85,15 +124,12 @@ form.metabooksettings div.fontsizes span.checkspan.normal span.sample { font-siz
 form.metabooksettings div.fontsizes span.checkspan.small span.sample { font-size: 100%; }
 form.metabooksettings div.fontsizes span.checkspan.tiny span.sample { font-size: 80%; }
 
-form.metabooksettings div.checkspan { color: gray; }
-form.metabooksettings div.checkspan.ischecked { 
+form.metabooksettings > div.checkspan { color: gray; }
+form.metabooksettings > div.checkspan { color: gray; }
+form.metabooksettings > div.checkspan.ischecked { 
     font-weight: normal; color: black;}
 form.metabooksettings div.checkspan span.text { font-size: 120%;}
 form.metabooksettings div.checkspan input {}
-form.metabooksettings div.checkspan.syncloc,
-form.metabooksettings div.checkspan.saveglosses,
-form.metabooksettings div.info {
-    margin-top: 1ex;}
 
 #METABOOKCOVER form.metabooksettings span.text a { color: darkblue; }
 form.metabooksettings span.text a { color: darkblue; }
@@ -106,9 +142,7 @@ form.metabooksettings div.contrast span.highcontrast {}
 form.metabooksettings div.contrast span.normalcontrast {}
 form.metabooksettings div.contrast span.lowcontrast {}
 
-form.metabooksettings div.info .label { float: left; }
-form.metabooksettings div.info div.metabookinfo {
-    margin-left: 10em; padding-top: 1ex;}
+form.metabooksettings div.info div.metabookinfo {}
 form.metabooksettings div.info div.metabookinfo p {}
 
 form.metabooksettings > div button {
@@ -116,14 +150,11 @@ form.metabooksettings > div button {
     background-repeat: no-repeat; background-size: contain;}
 form.metabooksettings button.reset {
     background-image: url(g/metabook/reset.svgz);}
+._NOSVG form.metabooksettings button.reset {
+    background-image: url(g/metabook/reset50x50.pg);}
 form.metabooksettings button.refresh {
     background-image: url(g/metabook/refresh.svgz);}
-    
+._NOSVG form.metabooksettings button.refresh {    
+    background-image: url(g/metabook/refresh50x50.png);}
 
-/* Emacs local variables
-;;;  Local variables: ***
-;;;  compile-command: "cd ../..; make" ***
-;;;  indent-tabs-mode: nil ***
-;;;  End: ***
-*/
 

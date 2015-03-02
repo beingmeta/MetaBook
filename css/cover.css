@@ -318,129 +318,9 @@ body._SHOWCONSOLE .control[alt='Console'] {display: none;}
 .metabooktitlepage { text-align: center;}
 .metabookbibpage { text-align: left;}
 
-/* Settings */
-
 #METABOOKSETTINGS {
     padding: 2%; padding-top: 1ex; padding-bottom: 4em;
     font-size: 80%;}
-#METABOOKSETTINGS form {
-    max-width: 50em; margin-left: auto; margin-right: auto;}
-
-#METABOOKSETTINGS h1 { margin-top: 0px; text-align: left;}
-#METABOOKSETTINGS h1 a.logout {
-    float: right; color: red; text-decoration: none;
-    font-size: 60%; font-variant: small-caps;}
-#METABOOKSETTINGS h1 a.logout:visited {color: red;}
-#METABOOKSETTINGS span.message {
-    float: right; clear: right; font-size: 40%;}
-#METABOOKSETTINGS .metabooksettingschanged {
-    color: red; display: none;}
-#METABOOKSETTINGS.changed .metabooksettingschanged { display: block;}
-
-body._NOUSER #METABOOKSETTINGS h1 a.logout {display:none;}
-
-#METABOOKSETTINGS div.setting {
-    clear: both; padding: 3px; margin-bottom: 5px; min-height: 20px;}
-#METABOOKSETTINGS div.setting span.checkspan {
-    font-size: 125%; color: orange;}
-#METABOOKSETTINGS div.setting span.checkspan input[type='CHECKBOX'] {
-    width: 16px; height: 16px; color: orange; background-color: orange;
-    vertical-align: bottom;}
-#METABOOKSETTINGS div.setting div.explanation { 
-    font-style: italic; clear: both; margin-left: 3em;}
-#METABOOKSETTINGS table.settings {
-    width: 98%; margin-left: auto; margin-right: auto; vertical-align: top;}
-#METABOOKSETTINGS table.settings .metabookhighlightsetting {
-    font-size: 120%; background-color: yellow;}
-#METABOOKSETTINGS table.settings tbody { margin-bottom: 1ex;}
-#METABOOKSETTINGS table.settings th {
-    text-align: right; vertical-align: top;
-    white-space: nowrap;}
-#METABOOKSETTINGS table.settings td {
-    text-align: left; vertical-align: top; padding-left: 12px;}
-#METABOOKSETTINGS table.settings td button { float: right; margin-bottom: 3px;}
-#METABOOKSETTINGS table.settings td input[type='TEXT'] {
-    width: 100%;}
-#METABOOKSETTINGS table.settings tr.buttons td {
-    text-align: right;}
-#METABOOKSETTINGS table.settings td button.floatright,
-#METABOOKSETTINGS table.settings th.buttons button {
-    min-width: 14ex; height: 2em;
-    border-width: 2px; text-align: right;
-    margin-left: 0.5ex; margin-bottom: 0.2ex;
-    font-weight: 600;}
-#METABOOKSETTINGS table.settings th.buttons button img {
-    height: 1em; width: auto; float: left;}
-#METABOOKSETTINGS table.settings th.buttons button.refresh,
-#METABOOKSETTINGS table.settings td button.floatright.refresh,
-#METABOOKSETTINGS table.settings th.buttons button.reset,
-#METABOOKSETTINGS table.settings td button.floatright.reset {
-    background-position: left center; background-repeat: no-repeat;
-    background-size: contain;
-}
-
-#METABOOKSETTINGS table.settings th.buttons button.refresh,
-#METABOOKSETTINGS table.settings td button.floatright.refresh {
-    background-image: url(g/metabook/refresh.svgz);}
-#METABOOKSETTINGS table.settings th.buttons button.reset,
-#METABOOKSETTINGS table.settings td button.floatright.reset {
-    background-image: url(g/metabook/reset.svgz);}
-body._NOSVG #METABOOKSETTINGS table.settings th.buttons button.refresh,
-body._NOSVG #METABOOKSETTINGS table.settings td button.floatright.refresh {
-    background-image: url(g/metabook/refresh50x50.png);}
-body._NOSVG #METABOOKSETTINGS table.settings th.buttons button.reset,
-body._NOSVG #METABOOKSETTINGS table.settings td button.floatright.reset {
-    background-image: url(g/metabook/reset50x50.png);}
-    
-table.settings .checkspan.disabled { opacity: 0.75;}
-
-table.settings .checkspan.ischecked {
-    font-weight: normal; color: rgb(0,61,111); font-size: 100%;}
-
-#METABOOKSETTINGS table.settings .smallbutton {
-    cursor: pointer;
-    margin-left: 4px; margin-right: 4px; padding: 3px;
-    background-color: gold; color: darkblue;
-    font-size: 80%; font-weight: bold;
-    border-radius: 4px;
-    -o-border-radius: 4px; 
-    -webkit-border-radius: 4px; 
-    -moz-border-radius: 4px;}
-
-#METABOOKSETTINGS .button {
-    font-size: 125%; cursor: pointer;
-    font-weight: bold;
-    color: white; background-color: silver;
-    margin-left: 6px; padding: 4px; border: solid black 2px;
-    border-radius: 5px;
-    -o-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;}
-#METABOOKSETTINGS h1 .button {
-    font-size: 50%; float: right;}
-#METABOOKSETTINGS h1 .message {
-    font-size: 50%; float: right; padding-top: 0.5ex;}
-#METABOOKSETTINGS .button.exit {
-    color: red; background-color: white;}
-body._NOUSER #METABOOKSETTINGS h1 a.logout {display:none;}
-
-#METABOOKSETTINGS tr.metabooklayoutsettings { display: none; }
-
-table.settings td { padding-bottom: 0.5ex;}
-
-table.settings td .checkspan {
-    padding-right: 0.5ex;}
-table.settings td .checkspan input[TYPE='CHECKBOX'],
-table.settings td .checkspan input[TYPE='RADIO'] {
-    margin-right: 0.5ex;}
-
-table.settings tbody.bookinfo td { font-size: 60%; }
-table.settings tbody.bookinfo p {
-    margin-top: 0px; margin-bottom: 0.5ex;
-    margin-left: 2em; text-indent: -2em;}
-table.settings tbody.buttons { border-top: solid black 2px;}
-table.settings tr.buttons td, table.settings tr.buttons th {
-    padding-top: 1ex;}
 
 /* The Console */
 
@@ -560,8 +440,6 @@ body.mbBUSY #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE {
 
     #METABOOKSETTINGS table.settings th {
         white-space: normal; font-size: 80%; max-width: 10ex;}
-    #METABOOKSETTINGS .button, #METABOOKSETTINGS button {
-        font-size: 85%;}
 
     #METABOOKCOVER div.userbox span.text {display: none;}
     #METABOOKCOVER div.userbox a.sbookslogo { float: left; display: inline-block;}
@@ -609,9 +487,7 @@ body.mbBUSY #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE {
         width: 48%; font-size: 16px; font-size: 1rem;
         display: inline-block;}
     #METABOOKCOVER div.loginbox form input[TYPE="TEXT"]:focus {
-        width: 100%; max-width: 100%; z-index: 100;}
-    #METABOOKSETTINGS button.floatright {
-        font-size: 16px; font-size: 0.8rem;}}
+        width: 100%; max-width: 100%; z-index: 100;}}
 
 /* Emacs local variables
 ;;;  Local variables: ***
