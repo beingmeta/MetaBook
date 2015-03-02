@@ -31,80 +31,92 @@
 
 @charset "UTF-8";
 
-.metabooksettings > div {
+form.metabooksettings > div {
     display: block; clear: both; 
     text-align: left; }
-.metabooksettings > div.device,
-.metabooksettings > div.data,
-.metabooksettings > div.info {
+form.metabooksettings > div.device,
+form.metabooksettings > div.data,
+form.metabooksettings > div.info {
     margin-top: 1ex;}
+form.metabooksettings > div.textlayout,
+form.metabooksettings > div.animation,
+form.metabooksettings > div.justify {
+    display: none;}
 
-.metabooksettings .label { 
+form.metabooksettings > div p {
+    display: inline-block; margin-top: 0px; margin-bottom: 3px;}
+form.metabooksettings > div p.body {
+    font-size: 150%;}
+form.metabooksettings > div span.body {
+    font-size: 150%; display: inline-block;}
+
+form.metabooksettings .label { 
     font-size: 200%; font-weight: bold;
     width: 4em; margin-right: 1ex;
     text-align: right;
     display: inline-block;}
-.metabooksettings .label span.text {
+form.metabooksettings .label span.text {
     vertical-align: baseline;}
+form.metabooksettings .label.smaller span.text {
+    font-size: 50%;}
 
-.metabooksettings div.fontsizes .checkspan,
-.metabooksettings div.contrast .checkspan,
-.metabooksettings div.animation .checkspan {
+form.metabooksettings div.fontsizes .checkspan,
+form.metabooksettings div.contrast .checkspan,
+form.metabooksettings div.animation .checkspan {
     display: inline-block;
     margin-top: 0.5ex; margin-right: 1em;}
 
-.metabooksettings .checkspan { white-space: normal; }
+form.metabooksettings .checkspan { white-space: normal; }
 
-.metabooksettings div.contrast .label span.text,
-.metabooksettings div.animation .label span.text {
-    font-size: 70%;}
-.metabooksettings div.contrast span.checkspan,
-.metabooksettings div.animation span.checkspan {
-    font-size: 120%;}
+form.metabooksettings div .checkspans {}
+form.metabooksettings div .checkspans .checkspan {
+    font-size: 140%; padding-right: 1em;}
 
-.metabooksettings div.fontsizes span.checkspan {
+form.metabooksettings div.fontsizes span.checkspan {
     border-bottom: transparent solid 3px;}
-.metabooksettings div.fontsizes span.checkspan span.sample {
+form.metabooksettings div.fontsizes span.checkspan span.sample {
     vertical-align: baseline;}
-.metabooksettings div.fontsizes span.checkspan input[TYPE="RADIO"] { display: none; }
-.metabooksettings div.fontsizes span.checkspan.ischecked {
+form.metabooksettings div.fontsizes span.checkspan input[TYPE="RADIO"] { display: none; }
+form.metabooksettings div.fontsizes span.checkspan.ischecked {
     border-color: blue; }
-.metabooksettings div.fontsizes span.checkspan.xlarge span.sample { font-size: 220%; }
-.metabooksettings div.fontsizes span.checkspan.large span.sample { font-size: 180%; }
-.metabooksettings div.fontsizes span.checkspan.normal span.sample { font-size: 150%; }
-.metabooksettings div.fontsizes span.checkspan.small span.sample { font-size: 100%; }
-.metabooksettings div.fontsizes span.checkspan.tiny span.sample { font-size: 80%; }
+form.metabooksettings div.fontsizes span.checkspan.xlarge span.sample { font-size: 220%; }
+form.metabooksettings div.fontsizes span.checkspan.large span.sample { font-size: 180%; }
+form.metabooksettings div.fontsizes span.checkspan.normal span.sample { font-size: 150%; }
+form.metabooksettings div.fontsizes span.checkspan.small span.sample { font-size: 100%; }
+form.metabooksettings div.fontsizes span.checkspan.tiny span.sample { font-size: 80%; }
 
-.metabooksettings div.checkspan {}
-.metabooksettings div.checkspan span.text { font-size: 150%;}
-.metabooksettings div.checkspan input {}
-.metabooksettings div.checkspan.syncloc,
-.metabooksettings div.checkspan.saveglosses,
-.metabooksettings div.info {
+form.metabooksettings div.checkspan { color: gray; }
+form.metabooksettings div.checkspan.ischecked { 
+    font-weight: normal; color: black;}
+form.metabooksettings div.checkspan span.text { font-size: 120%;}
+form.metabooksettings div.checkspan input {}
+form.metabooksettings div.checkspan.syncloc,
+form.metabooksettings div.checkspan.saveglosses,
+form.metabooksettings div.info {
     margin-top: 1ex;}
 
-#METABOOKCOVER .metabooksettings span.text a { color: darkblue; }
-.metabooksettings span.text a { color: darkblue; }
-.metabooksettings div.opendyslexic .text {
+#METABOOKCOVER form.metabooksettings span.text a { color: darkblue; }
+form.metabooksettings span.text a { color: darkblue; }
+form.metabooksettings div.opendyslexic .text {
     font-family: 'Open Dyslexic', serif;
     font-size: 150%; }
 
-.metabooksettings div.contrast {}
-.metabooksettings div.contrast span.highcontrast {}
-.metabooksettings div.contrast span.normalcontrast {}
-.metabooksettings div.contrast span.lowcontrast {}
+form.metabooksettings div.contrast {}
+form.metabooksettings div.contrast span.highcontrast {}
+form.metabooksettings div.contrast span.normalcontrast {}
+form.metabooksettings div.contrast span.lowcontrast {}
 
-.metabooksettings div.info .label { float: left; }
-.metabooksettings div.info div.metabookinfo {
-    margin-left: 160px;}
-.metabooksettings div.info div.metabookinfo p {}
+form.metabooksettings div.info .label { float: left; }
+form.metabooksettings div.info div.metabookinfo {
+    margin-left: 10em; padding-top: 1ex;}
+form.metabooksettings div.info div.metabookinfo p {}
 
-.metabooksettings > div button {
+form.metabooksettings > div button {
     width: 2em; height: 2em; color: transparent;
     background-repeat: no-repeat; background-size: contain;}
-.metabooksettings button.reset {
+form.metabooksettings button.reset {
     background-image: url(g/metabook/reset.svgz);}
-.metabooksettings button.refresh {
+form.metabooksettings button.refresh {
     background-image: url(g/metabook/refresh.svgz);}
     
 

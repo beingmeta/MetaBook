@@ -24,40 +24,48 @@
     <span class="checkspan tiny">
       <input TYPE="RADIO" NAME="METABOOKBODYSIZE" VALUE="tiny"/><span class="sample">Aa</span></span>
   </div>
-  <div class="opendyslexic checkspan">
-    <span class="label"><input TYPE="CHECKBOX" NAME="METABOOKDYSLEXICAL" VALUE="yes"/></span>
-    <span class="text">
-      Use <a href="http://opendyslexic.org/" title="The Open Dyslexic font size">OpenDyslexic</a>
-      font to enhance readability.</span></div>
   <div class="contrast">
-    <span class="label"><span class="text">Contrast</span></span>
-    <span class="checkspan highcontrast">
-      <input TYPE="RADIO" NAME="METABOOKBODYCONTRAST" VALUE="high"/>
-      <span class="sample">High</span></span>
-    <span class="checkspan normalcontrast">
-      <input TYPE="RADIO" NAME="METABOOKBODYCONTRAST" VALUE="medium"/>
-      <span class="sample">Normal</span></span>
-    <span class="checkspan lowcontrast">
-      <input TYPE="RADIO" NAME="METABOOKBODYCONTRAST" VALUE="low"/>
-      <span class="sample">Low</span></span>
+    <span class="label smaller"><span class="text">Contrast</span></span>
+    <p class="checkspans">
+      <span class="checkspan highcontrast">
+        <input TYPE="RADIO" NAME="METABOOKBODYCONTRAST" VALUE="high"/>
+        <span class="sample">High</span></span>
+      <span class="checkspan normalcontrast">
+        <input TYPE="RADIO" NAME="METABOOKBODYCONTRAST" VALUE="medium"/>
+        <span class="sample">Normal</span></span>
+      <span class="checkspan lowcontrast">
+        <input TYPE="RADIO" NAME="METABOOKBODYCONTRAST" VALUE="low"/>
+        <span class="sample">Low</span></span>
+    </p>
   </div>
-  <div class "checkspan textlayout">
-    <span class="label">Layout</span>
-    <span class="body">
-      <span class="checkspan">
+  <div class="textlayout checkspan">
+    <span class="label smaller"><span class="text">Layout</span></span>
+    <p class="checkspans">
+      <span class="checkspan codex">
         <input TYPE="RADIO" NAME="METABOOKLAYOUT" VALUE="bypage"/>
         by pages</span>
-      <span class="checkspan">
+      <span class="checkspan scrolling">
         <input TYPE="RADIO" NAME="METABOOKLAYOUT" VALUE="scrolling"/>
         just scroll</span>
-      <span class="checkspan">
+      <span class="checkspan scrollio">
         <input TYPE="RADIO" NAME="METABOOKLAYOUT" VALUE="scrollio"/>
         hybrid (<em>scrollio</em>)</span>
-    </span>
+    </p>
+  </div>
+  <div class="also">
+    <span class="label smaller"><span class="text">also</span></span>
+    <p class="checkspans">
+      <span class="checkspan opendyslexical">
+        <input TYPE="CHECKBOX" NAME="METABOOKDYSLEXICAL" VALUE="yes"/>
+        Use <a href="http://opendyslexic.org/" title="The Open Dyslexic font size">OpenDyslexic</a>
+        font</span>
+      <span class="checkspan justify">
+        <input TYPE="CHECKBOX" NAME="METABOOKJUSTIFY" VALUE="true"/>
+        Justify paragraphs.</span>
+    </p>
   </div>
   <div class="justify checkspan">
-    <span class="label"><input TYPE="CHECKBOX" NAME="METABOOKJUSTIFY" VALUE="true"/></span>
-    <span class="text">Justify paragraphs.</div>
+  </div>
   <div class="fontsizes device">
     <span class="label"><span class="text">Tools</span></span>
     <span class="checkspan xlarge">
@@ -72,7 +80,7 @@
       <input TYPE="RADIO" NAME="METABOOKUISIZE" VALUE="tiny"/><span class="sample">Aa</span></span>
   </div>
   <div class="animation">
-    <span class="label"><span class="text">Animate</span></span>
+    <span class="label smaller"><span class="text">Animate</span></span>
     <span class="checkspan">
       <input TYPE="CHECKBOX" NAME="METABOOKANIMATECONTENT" VALUE="true"/>
       <span class="text">content (page flips, etc)</span></span>
@@ -82,7 +90,7 @@
   </div>
   <div class="data">
     <span class="label">Data</span>
-    <span class="text">Control how information is stored locally or shared in the cloud</span>
+    <span class="body">Control where information is kept</span>
   </div>
   <div class="checkspan syncloc">
     <span class="label">
@@ -91,7 +99,7 @@
             class="reset floatright"
             title="Reset synchronized location information.">
       Reset</button>
-    <span class="text">
+    <span class="body">
       Sync your reading location with other devices</span>
   </div>
   <div class="checkspan saveglosses">
@@ -101,7 +109,7 @@
     <button id="METABOOKREFRESHOFFLINE" class="refresh floatright"
             title="Reload glosses and layers for this book from the sBooks cloud.">
       All</button>
-    <span class="text">
+    <span class="body">
       Save copies of this book's glosses on this device</span>
   </div>
   <div class="info">
