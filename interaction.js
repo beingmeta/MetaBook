@@ -1861,9 +1861,24 @@
     function refreshLayout(evt){
         evt=evt||window.event; cancel(evt); metaBook.refreshLayout();}
     function resetState(evt){
-        evt=evt||window.event; cancel(evt); metaBook.resetState();}
+        evt=evt||window.event; cancel(evt);
+        fdjtUI.choose(
+            {choices: [{label: "OK",default: true,
+                        handler: function(){
+                            metaBook.resetState();}},
+                       {label: "Cancel"}],
+             spec: "div.fdjtdialog"},
+            "Set this location as latest and furthest location ",
+            "on all synchronized devices");}
     function refreshOffline(evt){
-        evt=evt||window.event; cancel(evt); metaBook.refreshOffline();}
+        evt=evt||window.event; cancel(evt);
+        fdjtUI.choose(
+            {choices: [{label: "OK",default: true,
+                        handler: function(){
+                            metaBook.refreshOffline();}},
+                       {label: "Cancel"}],
+             spec: "div.fdjtdialog"},
+            "Erase and reload all glosses and layers for this title");}
     function clearOffline(evt){
         evt=evt||window.event; cancel(evt); metaBook.clearOffline();}
     function consolefn(evt){

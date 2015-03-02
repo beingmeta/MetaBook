@@ -99,6 +99,15 @@
     margin-left: 160px;}
 .metabooksettings div.info div.metabookinfo p {}
 
+.metabooksettings > div button {
+    width: 2em; height: 2em; color: transparent;
+    background-repeat: no-repeat; background-size: contain;}
+.metabooksettings button.reset {
+    background-image: url(g/metabook/reset.svgz);}
+.metabooksettings button.refresh {
+    background-image: url(g/metabook/refresh.svgz);}
+    
+
 /* Emacs local variables
 ;;;  Local variables: ***
 ;;;  compile-command: "cd ../..; make" ***
