@@ -491,7 +491,8 @@ div#METABOOKOPENTAB {
     white-space: nowrap;
     box-sizing: border-box; -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box; -o-box-sizing: border-box;
-    width: 7em; font-size: 36px; font-style: normal;
+    width: 5em; font-size: 45px; line-height: 1.0; height: 50px;
+    font-style: normal;
     margin: 0px; margin-left: auto; margin-right: auto;
     padding:  0px 1em 0px 1em; 
     border: solid transparent 2px; border-top: 0px;
