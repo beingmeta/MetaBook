@@ -886,33 +886,33 @@ metaBook.setMode=
 
         /* Settings apply/save handlers */
 
-        function getSettings(){
+        function getSettings(settings){
+            
+            if (!(settings)) settings=fdjtID("METABOOKSETTINGS");
             var result={};
-            var settings=fdjtID("METABOOKSETTINGS");
             var layout=fdjtDOM.getInputValues(settings,"METABOOKLAYOUT");
             result.layout=
                 ((layout)&&(layout.length)&&(layout[0]))||false;
             var bodysize=fdjtDOM.getInputValues(settings,"METABOOKBODYSIZE");
             if ((bodysize)&&(bodysize.length))
                 result.bodysize=bodysize[0];
-            /*
-              var bodyfamily=fdjtDOM.getInputValues(settings,"METABOOKBODYFAMILY");
-              if ((bodyfamily)&&(bodyfamily.length))
-              result.bodyfamily=bodyfamily[0];
-            */
             var uisize=fdjtDOM.getInputValues(settings,"METABOOKUISIZE");
             if ((uisize)&&(uisize.length))
                 result.uisize=uisize[0];
-            var contrast=fdjtDOM.getInputValues(settings,"METABOOKBODYCONTRAST");
+            var contrast=
+                fdjtDOM.getInputValues(settings,"METABOOKBODYCONTRAST");
             if ((contrast)&&(contrast.length))
                 result.bodycontrast=contrast[0];
-            var dyslexical=fdjtDOM.getInputValues(settings,"METABOOKDYSLEXICAL");
+            var dyslexical=
+                fdjtDOM.getInputValues(settings,"METABOOKDYSLEXICAL");
             if ((dyslexical)&&(dyslexical.length))
                 result.dyslexical=dyslexical[0];
             else result.dyslexical=false;
-            var hidesplash=fdjtDOM.getInputValues(settings,"METABOOKHIDESPLASH");
+            var hidesplash=
+                fdjtDOM.getInputValues(settings,"METABOOKHIDESPLASH");
             result.hidesplash=((hidesplash)&&(hidesplash.length))||false;
-            var showconsole=fdjtDOM.getInputValues(settings,"METABOOKSHOWCONSOLE");
+            var showconsole=
+                fdjtDOM.getInputValues(settings,"METABOOKSHOWCONSOLE");
             result.showconsole=
                 ((showconsole)&&(showconsole.length)&&(true))||false;
             var locsync=fdjtDOM.getInputValues(settings,"METABOOKLOCSYNC");
@@ -920,13 +920,16 @@ metaBook.setMode=
             var justify=fdjtDOM.getInputValues(settings,"METABOOKJUSTIFY");
             if ((justify)&&(justify.length)) result.justify=true;
             else result.justify=false;
-            var cacheglosses=fdjtDOM.getInputValues(settings,"METABOOKCACHEGLOSSES");
-            if ((cacheglosses)&&(cacheglosses.length)) result.cacheglosses=true;
+            var cacheglosses=
+                fdjtDOM.getInputValues(settings,"METABOOKCACHEGLOSSES");
+            if ((cacheglosses)&&(cacheglosses.length))
+                result.cacheglosses=true;
             else result.cacheglosses=false;
             var animatecontent=fdjtDOM.getInputValues(
                 settings,"METABOOKANIMATECONTENT");
             result.animatecontent=
-                (((animatecontent)&&(animatecontent.length)&&(animatecontent[0]))?
+                (((animatecontent)&&(animatecontent.length)&&
+                  (animatecontent[0]))?
                  (true):(false));
             var animatehud=fdjtDOM.getInputValues(
                 settings,"METABOOKANIMATEHUD");
