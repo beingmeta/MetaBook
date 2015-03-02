@@ -76,6 +76,7 @@
             // layout, don't make a new one.
             metaBook.scaleLayout(true);
             return;}
+        resizePagers();
         // Set these values to the new one
         outer_width=window.outerWidth;
         outer_height=window.outerHeight;
@@ -124,6 +125,12 @@
                           spec: "div.fdjtdialog.fdjtconfirm.updatelayout"};
                 choosing_resize=fdjtUI.choose(spec,msg);}}}
     metaBook.resize=metabookResize;
+
+    function resizePagers(){
+        var pagers=metaBook.pagers;
+        for (var mode in pagers) {
+            if (pagers.hasOwnProperty(mode))
+                pagers[mode].resize();}}
 
     function resizeNow(evt){
         if (resizing) clearTimeout(resizing);
