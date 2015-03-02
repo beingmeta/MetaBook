@@ -189,7 +189,7 @@ body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER.expanded {
 
 #METABOOKHEART {
     position: absolute;
-    top: 50%; bottom: 50%; height: auto;
+    top: 70px; bottom: 70px; height: auto;
     left: 50px; right: 50px;
     z-index: -100; 
     overflow: hidden;
@@ -206,10 +206,6 @@ body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER.expanded {
     background-color: ivory;
     background-color: whitesmoke;
     border-color: rgba(70, 130, 180, 0.54);}
-#METABOOKHUD.openheart #METABOOKHEART {
-    top: 50px; bottom: 50px;}
-#METABOOKHUD.openhead.openheart #METABOOKHEART {
-    top: 70px;}
 body.hudup #METABOOKHEART {
     display: block; opacity: 1.0;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
@@ -297,9 +293,7 @@ body.hudup #METABOOKHUD.openheart #METABOOKHEART,
 body.hudup #METABOOKHUD.openheart.allglosses #METABOOKHEARTBODY div.hudpanel,
 body.hudup #METABOOKHUD.openheart.searchresults
      #METABOOKHEARTBODY div.hudpanel {
-    padding-bottom: 0px; 
-    border-bottom: double black 12px;
-    margin-bottom: 20px;}
+    padding-bottom: 0px; border-bottom: 0px; margin-bottom: 0px;}
 body.hudup #METABOOKHUD.openheart #METABOOKHEARTBODY div.hudpanel,
 #METABOOKHUD.addgloss.glossaddtag #METABOOKHEARTBODY div.hudpanel,
 #METABOOKHUD.addgloss.glosstagging #METABOOKHEARTBODY div.hudpanel,

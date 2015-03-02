@@ -1244,7 +1244,9 @@
         if (Trace.nav)
             fdjtLog("Forward e=%o h=%o t=%o",evt,
                     metaBook.head,metaBook.target);
-        if ((evt)&&(evt.shiftKey))
+        if ((metaBook.mode)&&(metaBook.pagers[metaBook.mode]))
+            pagerForward(evt);
+        else if ((evt)&&(evt.shiftKey))
             skimForward(evt);
         else pageForward(evt);}
     metaBook.Forward=forward;
@@ -1254,7 +1256,9 @@
         if (Trace.nav)
             fdjtLog("Backward e=%o h=%o t=%o",evt,
                     metaBook.head,metaBook.target);
-        if ((evt)&&(evt.shiftKey))
+        if ((metaBook.mode)&&(metaBook.pagers[metaBook.mode]))
+            pagerBackward(evt);
+        else if ((evt)&&(evt.shiftKey))
             skimBackward();
         else pageBackward();}
     metaBook.Backward=backward;
@@ -1311,6 +1315,36 @@
             var newy=fdjtDOM.viewTop()-delta;
             window.scrollTo(fdjtDOM.viewLeft(),newy);}}
     metaBook.pageBackward=pageBackward;
+
+    function pagerForward(evt){
+        var pager=metaBook.pagers[metaBook.mode];
+        if (!(pager)) return;
+        evt=evt||window.event;
+        var now=fdjtTime();
+        if ((last_motion)&&((now-last_motion)<100)) return;
+        else last_motion=now;
+        dropClass(document.body,/\bmb(PAGE)?PREVIEW/g);
+        fdjtUI.cancel(evt);
+        if ((Trace.gestures)||(Trace.flips))
+            fdjtLog("pagerForward (on %o) %o %d/%d",
+                    evt,pager.root,pager.pageoff+1,pager.npages);
+        pager.forward();}
+    metaBook.pagerForward=pagerForward;
+
+    function pagerBackward(evt){
+        var pager=metaBook.pagers[metaBook.mode];
+        if (!(pager)) return;
+        evt=evt||window.event;
+        var now=fdjtTime();
+        if ((last_motion)&&((now-last_motion)<100)) return;
+        else last_motion=now;
+        dropClass(document.body,/\bmb(PAGE)?PREVIEW/g);
+        fdjtUI.cancel(evt);
+        if ((Trace.gestures)||(Trace.flips))
+            fdjtLog("pagerBackward (on %o) %o %d/%d",
+                    evt,pager.root,pager.pageoff+1,pager.npages);
+        pager.backward();}
+    metaBook.pagerBackward=pagerBackward;
 
     function skimForward(evt){
         var now=fdjtTime();

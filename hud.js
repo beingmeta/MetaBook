@@ -286,6 +286,8 @@ metaBook.setMode=
                     item.uuid);}
             else if (mbID(item.frag)) {
                 var addGlossmark=metaBook.UI.addGlossmark;
+                // Assume it belongs to the user if it doesn't say
+                if ((!(item.maker))&&(metaBook.user)) item.maker=(metaBook.user);
                 allglosses.addCards(item);
                 var nodes=metaBook.getDups(item.frag);
                 addClass(nodes,"glossed");
@@ -304,7 +306,12 @@ metaBook.setMode=
                     while (j<n_tags) 
                         metaBook.cloudEntry(tags[j++],gloss_cloud);}
                 if (item.tstamp>metaBook.syncstamp)
-                    metaBook.syncstamp=item.tstamp;}}
+                    metaBook.syncstamp=item.tstamp;
+                if (metaBook.pagers.METABOOKALLGLOSSES)
+                    metaBook.pagers.METABOOKALLGLOSSES.changed();}
+            else {
+                fdjtLog("Gloss refers to nonexistent '%s': %o",item.frag,item);
+                return;}}
         metaBook.addGloss2UI=addGloss2UI;
 
         /* Creating the HUD */
@@ -569,13 +576,11 @@ metaBook.setMode=
         
         function scrollSlices(mode){
             if (mode==="allglosses") {
-                if ((metaBook.skimming)||(metaBook.point))
-                    metaBook.UI.scrollSlice(
-                        metaBook.skimming||metaBook.point,metaBook.glosses);}
+                metaBook.pagers.allglosses.setPage(
+                    metaBook.skimming||metaBook.point);}
             else if (mode==="searchresults") {
-                if ((metaBook.skimming)||(metaBook.point))
-                    metaBook.UI.scrollSlice(
-                        metaBook.skimming||metaBook.point,metaBook.query.listing);}
+                metaBook.pagers.searchresults.setPage(
+                    metaBook.skimming||metaBook.point);}
             else {}}
         metaBook.scrollSlices=scrollSlices;
 
@@ -617,16 +622,8 @@ metaBook.setMode=
                     if (loc) loc=parseInt(loc,10);
                     if (loc>=curloc) break;}
                 if (i>=lim) card=lastcard=false;
-                if ((card)&&(lasthead)&&(metaBook.iscroll)) {
-                    metaBook.heartscroller.scrollToElement(lasthead,0);
-                    metaBook.heartscroller.scrollToElement(card,0);}
-                else if ((card)&&(metaBook.iscroll)) {
-                    metaBook.heartscroller.scrollToElement(card,0);}
-                else if ((card)&&(lasthead)&&(card.scrollIntoViewIfNeeded)) {
-                    lasthead.scrollIntoView();
-                    card.scrollIntoViewIfNeeded();}
-                else if ((card)&&(lastcard.scrollIntoView))
-                    card.scrollIntoView();}
+                if (metaBook.pagers.allglosses)
+                    (metaBook.pagers.allglosses).setPage(card);}
             else {}
             
             // This updates scroller dimensions, we delay it

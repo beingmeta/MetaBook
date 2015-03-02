@@ -233,6 +233,10 @@
         var results=metaBook.query.showResults();
         addClass(results,"hudpanel");
         fdjtDOM.replace("METABOOKSEARCHRESULTS",results);
+        if ((!(metaBook.pagers.searchresults))||
+            (metaBook.pagers.searchresults.root!==results))
+            metaBook.pagers.searchresults=fdjt.Pager(
+                results,fdjtID("METABOOKHEARTBODY"));
         metaBook.setMode("searchresults");
         fdjtID("METABOOKSEARCHINPUT").blur();
         fdjtID("METABOOKSEARCHRESULTS").focus();

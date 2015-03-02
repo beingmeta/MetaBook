@@ -598,25 +598,10 @@ metaBook.Slice=(function () {
                     ((RefDB.contains(sourcerefs,gloss.maker))||
                      (RefDB.overlaps(sourcerefs,gloss.sources))||
                      (RefDB.overlaps(sourcerefs,gloss.shared))));});
-        metaBook.UI.updateScroller(slice.container);
-        if (metaBook.target) scrollSlice(metaBook.target,slice);}
+        if (metaBook.pagers[metaBook.mode]) {
+            metaBook.pagers[metaBook.mode].changed();}}
     metaBook.UI.selectSources=selectSources;
 
-    /* Scrolling slices */
-
-    function scrollSlice(elt,slice,top){
-        if (metaBook.iscroll) {
-            var scroller=metaBook.scrollers[elt.id]||
-                ((elt.parentNode)&&(metaBook.scrollers[elt.parentNode.id]));
-            if (scroller) scroller.scrollToElement(elt,0);}
-        else {
-            var cardinfo=slice.getCard(elt);
-            if (cardinfo) {
-                var scrollto=cardinfo.dom;
-                if ((scrollto)&&((top)||(!(fdjtDOM.isVisible(scrollto))))) {
-                    scrollto.scrollIntoView(true);}}}}
-    metaBook.UI.scrollSlice=scrollSlice;
-    
     /* Results handlers */
 
     var named_slices={};
@@ -641,7 +626,7 @@ metaBook.Slice=(function () {
             else named_slices[container.id]=container;}
         else if ((container.nodeType)&&(container.nodeType===1))  {}
         else return false;
-        var settings={noslip: true,id: container.id,holdclass: false,
+        var settings={noslip: false,id: container.id,holdclass: false,
                       touchtoo: function(evt){
                           evt=evt||window.event;
                           if (metaBook.previewing)
@@ -812,6 +797,17 @@ metaBook.Slice=(function () {
             metaBook.stopPreview("slice_tapped",true);
             fdjtUI.cancel(evt);
             return;}
+        if (hasParent(target,".pagernav")) {
+            var pager=metaBook.pagers[metaBook.mode];
+            if (!(pager)) {fdjtUI.cancel(evt); return;}
+            var last=target, scan=target.parentNode;
+            while (scan) {
+                if (hasClass(scan,"pagernav")) break;
+                else scan=scan.parentNode;}
+            var pageno=parseInt(last.innerHTML);
+            pager.setPage(pageno-1);
+            fdjtUI.cancel(evt);
+            return;}
         if ((getParent(target,".ellipsis"))&&
             ((getParent(target,".elision"))||
              (getParent(target,".delision")))){
@@ -869,6 +865,20 @@ metaBook.Slice=(function () {
     function slice_held(evt){
         evt=evt||window.event;
         var slice_target=fdjtUI.T(evt), card=getCard(slice_target);
+        if (hasParent(slice_target,".pagernav")) {
+            var pager=metaBook.pagers[metaBook.mode];
+            if (Trace.gestures)
+                fdjtLog("slice_held/pager %o: %o in %o",
+                        evt,slice_target,pager);
+            if (!(pager)) {fdjtUI.cancel(evt); return;}
+            var last=slice_target, scan=slice_target.parentNode;
+            while (scan) {
+                if (hasClass(scan,"pagernav")) break;
+                else scan=scan.parentNode;}
+            var pageno=parseInt(last.innerHTML);
+            pager.setPage(pageno-1);
+            fdjtUI.cancel(evt);
+            return;}
         if (Trace.gestures)
             fdjtLog("slice_held %o: %o, skimming=%o",
                     evt,card,metaBook.skimming);
@@ -942,6 +952,46 @@ metaBook.Slice=(function () {
             metaBook.stopPreview("toc_touchtoo",true);}
         fdjtUI.cancel(evt);}
 
+    function slice_swiped(evt){
+        var pager=metaBook.pagers[metaBook.mode];
+        if (!(pager)) return;
+        var dx=evt.deltaX, dy=evt.deltaY;
+        var vw=fdjtDOM.viewWidth();
+        var adx=((dx<0)?(-dx):(dx)), ady=((dy<0)?(-dy):(dy));
+        if (Trace.gestures)
+            fdjtLog("slice_swiped d=%o,%o, ad=%o,%o, s=%o,%o vw=%o, n=%o",
+                    dx,dy,adx,ady,evt.startX,evt.startY,vw,evt.ntouches);
+        if (adx>(ady*2)) {
+            // Horizontal swipe
+            if (dx<(-(metaBook.minswipe||10)))
+                pager.forward();
+            else if (dx>(metaBook.minswipe||10))
+                pager.backward();}
+        else if (ady>(adx*2)) {
+            // Vertical swipe
+            if (!(metaBook.hudup)) {
+                // Ignore really short swipes 
+                if (ady<=(metaBook.minswipe||10)) return;
+                else if ((evt.startX<(vw/5))&&(dy<0))
+                    // On the left, up, show help
+                    metaBook.setMode("help");
+                else if ((evt.startX<(vw/5))&&(dy>0))
+                    // On the left, down, show TOC
+                    metaBook.setMode("statictoc");
+                else if ((evt.startX>(vw*0.8))&&(dy>0))
+                    // On the right, down, show SEARCH
+                    metaBook.setMode("search");
+                else if ((evt.startX>(vw*0.8))&&(dy<0))
+                    // On the right, up, show GLOSSES
+                    metaBook.setMode("allglosses");
+                else if (dy>0) {
+                    metaBook.clearStateDialog();
+                    metaBook.showCover();}
+                else metaBook.setHUD(true);}
+            else if (dy<-(metaBook.minswipe||10)) metaBook.setMode("allglosses");
+            else if (dy>(metaBook.minswipe||10)) metaBook.setMode("search");}
+        else {}}
+
     metaBook.UI.getCard=getCard;
 
     fdjt.DOM.defListeners(
@@ -956,6 +1006,7 @@ metaBook.Slice=(function () {
                    hold: slice_held,
                    release: slice_released,
                    touchtoo: slice_touchtoo,
+                   swipe: slice_swiped,
                    slip: slice_slipped}});
 
 

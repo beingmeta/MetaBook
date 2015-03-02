@@ -94,6 +94,8 @@ var metaBook={
     keyboard: true,
     // This is a table for iScroll scrollers, when used
     scrollers: {},
+    // This is a table for pager objects, by ID and mode
+    pagers: {},
     // Restrictions on excerpts
     min_excerpt: 3, max_excerpt: false,
     // These are the UUIDs of locally stored glosses which are queued
