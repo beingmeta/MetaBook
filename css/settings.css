@@ -68,18 +68,18 @@ form.metabooksettings {
 form.metabooksettings > div {
     display: block; clear: both; 
     text-align: left; }
-form.metabooksettings > div.device,
-form.metabooksettings > div.data,
 form.metabooksettings > div.info {
     border-top: solid black 2px;
-    margin-top: 1ex;}
+    margin-top: 2px;}
 form.metabooksettings > div.textlayout,
 form.metabooksettings > div.animation,
 form.metabooksettings > div.justify {
     display: none;}
 
 form.metabooksettings > div p {
-    display: inline-block; margin-top: 0px; margin-bottom: 3px;}
+    display: inline-block; 
+    margin-top: 0px; 
+    margin-bottom: 1px;}
 form.metabooksettings > div p.body {
     font-size: 150%;}
 form.metabooksettings > div span.body {
@@ -95,14 +95,24 @@ form.metabooksettings .label.smaller {
     font-size: 14px; font-size: 2vw;}
 
 form.metabooksettings > div.fontsizes { 
-    font-size: 20px; font-size: 2vw;}
+    font-size: 20px; font-size: 2vw;
+    border-top: solid lightgray 2px;}
 form.metabooksettings > div.checkspan { 
     white-space: normal; font-size: 20px; font-size: 2.5vw;
-    border-top: solid lightgray 1px;
     margin-top: 0.4ex;}
 form.metabooksettings > div.checkspan input[type='RADIO'],
 form.metabooksettings > div.checkspan input[type='CHECKBOX'] { 
-    float: left; width: 1.2em; height: 1.2em; margin-right: 1ex;}
+    float: left; width: 1.2em; height: 1.2em; 
+    margin-right: 1ex;}
+
+form.metabooksettings > div.fontsizes,
+form.metabooksettings > div.checkspans {
+    margin-bottom: 1ex;}
+
+form.metabooksettings > div.checkspan,
+form.metabooksettings > div.checkspans {
+    border-top: solid lightgray 1px;}
+
 
 form.metabooksettings div.checkspans {}
 form.metabooksettings div.checkspans .checkspan {
@@ -131,19 +141,28 @@ form.metabooksettings > div.checkspan.ischecked {
 form.metabooksettings div.checkspan span.text { font-size: 120%;}
 form.metabooksettings div.checkspan input {}
 
-#METABOOKCOVER form.metabooksettings span.text a { color: darkblue; }
-form.metabooksettings span.text a { color: darkblue; }
-form.metabooksettings div.opendyslexic .text {
-    font-family: 'Open Dyslexic', serif;
-    font-size: 150%; }
+#METABOOKCOVER form.metabooksettings a,
+form.metabooksettings a {
+    color: blue; }
+form.metabooksettings span.opendyslexical {
+    font-family: 'Open Dyslexic', serif;}
 
 form.metabooksettings div.contrast {}
 form.metabooksettings div.contrast span.highcontrast {}
 form.metabooksettings div.contrast span.normalcontrast {}
 form.metabooksettings div.contrast span.lowcontrast {}
 
-form.metabooksettings div.info div.metabookinfo {}
-form.metabooksettings div.info div.metabookinfo p {}
+form.metabooksettings div.info {}
+form.metabooksettings div.info p {
+    font-family: fixed;}
+form.metabooksettings div.info p strong {
+    font-family: Verdana, Tahoma, Arial, Helvetica, 
+    sans-serif, sans;}
+form.metabooksettings div.info p.metabookcopyrightinfo {
+    border-top: solid black 2px; margin-top: 1ex;
+    font-family: Verdana, Tahoma, Arial, Helvetica, 
+    sans-serif, sans;
+    font-weight: bold;}
 
 form.metabooksettings > div button {
     width: 2em; height: 2em; color: transparent;

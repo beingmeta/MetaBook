@@ -274,6 +274,7 @@ metaBook.Startup=
             //  (the HUD/Heads Up Display and the cover)
             metaBook.initHUD();
             metaBook.setupCover();
+            setupBookInfo();
             setupZoom();
             setupMedia();
 
@@ -971,6 +972,36 @@ metaBook.Startup=
                             getMeta("SBOOKS.notarget",true));
             if (nofocus.length)
                 metaBook.nofocus=new fdjtDOM.Selector(nofocus);}
+
+        function setupBookInfo(){
+            var info=fdjt.DOM.$(".metabookrefinfo");
+            var i=0, lim=info.length; while (i<lim) {
+                info[i++].innerHTML=
+                    "<strong>Ref:</strong> "+
+                    metaBook.docref+" "+
+                    metaBook.refuri;}
+            info=fdjt.DOM.$(".metabooksourceinfo");
+            i=0; lim=info.length; while (i<lim) {
+                info[i++].innerHTML="<strong>Source:</strong> "+
+                    "#"+metaBook.sourceid+" "+
+                    metaBook.sourcetime;}
+            info=fdjt.DOM.$(".metabookbuildinfo");
+            i=0; lim=info.length; while (i<lim) {
+                info[i++].innerHTML="<strong>Build:</strong> "+
+                    metaBook.bookbuild;}
+            info=fdjt.DOM.$(".metabookappinfo");
+            i=0; lim=info.length; while (i<lim) {
+                info[i++].innerHTML="<strong>App:</strong> "+
+                    "metaBook version "+
+                    metaBook.version+
+                    " built on "+metaBook.buildhost+", "+
+                    metaBook.buildtime;}
+            info=fdjt.DOM.$(".metabookcopyrightinfo");
+            i=0; lim=info.length; while (i<lim) {
+                info[i++].innerHTML=
+                    "Program and interface are Copyright "+
+                    "<span style='font-size: 120%;'>©"+
+                    "</span> beingmeta, inc 2008-2015";}}
 
         function setupZoom(){
             var zoom=metaBook.Zoom=fdjtDOM(

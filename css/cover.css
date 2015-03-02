@@ -319,7 +319,8 @@ body._SHOWCONSOLE .control[alt='Console'] {display: none;}
 .metabookbibpage { text-align: left;}
 
 #METABOOKSETTINGS {
-    padding: 2%; padding-top: 1ex; padding-bottom: 4em;
+    padding: 2%; 
+    padding-top: 3px; padding-bottom: 1em;
     font-size: 80%;}
 
 /* The Console */
