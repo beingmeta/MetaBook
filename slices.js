@@ -56,6 +56,7 @@ metaBook.Slice=(function () {
     var fdjtLog=fdjt.Log;
     var fdjtUI=fdjt.UI;
     var RefDB=fdjt.RefDB, Ref=RefDB.Ref;
+    var Pager=fdjt.Pager;
 
     var mB=metaBook, mbID=mB.ID, Trace=mB.Trace;
 
@@ -227,7 +228,8 @@ metaBook.Slice=(function () {
             if (info._live) {
                 fdjtDOM(outlet_span,info.name);
                 if (info.about) 
-                    outlet_span.title="Shared with “"+info.name+"” — "+info.about;
+                    outlet_span.title="Shared with “"+info.name+
+                    "” — "+info.about;
                 else outlet_span.title="Shared with “"+info.name+"”";}
             else {
                 outlet_span.setAttribute("NAME","OUTLETSPAN"+info._id);
@@ -313,7 +315,8 @@ metaBook.Slice=(function () {
         var tool=fdjtDOM(
             "span.tool",age," ",
             fdjtDOM("span.label",
-                    (((user===metaBook.user)||(user===metaBook.user._id))?"modify":"respond")),
+                    (((user===metaBook.user)||(user===metaBook.user._id))?
+                     "modify":"respond")),
             fdjtDOM.Image(
                 (((user===metaBook.user)||(user===metaBook.user._id))?
                  (mbicon("gloss_edit_titled",64,64)):
@@ -418,7 +421,8 @@ metaBook.Slice=(function () {
             else return false;}
         else return false;}
 
-    var months=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    var months=["Jan","Feb","Mar","Apr","May","Jun",
+                "Jul","Aug","Sep","Oct","Nov","Dec"];
     function timestring(tick){
         var now=fdjtTime.tick(), date=new Date(1000*tick);
         if ((now-tick)<(12*3600)) {
@@ -597,19 +601,18 @@ metaBook.Slice=(function () {
             return ((gloss)&&
                     ((RefDB.contains(sourcerefs,gloss.maker))||
                      (RefDB.overlaps(sourcerefs,gloss.sources))||
-                     (RefDB.overlaps(sourcerefs,gloss.shared))));});
-        if (metaBook.pagers[metaBook.mode]) {
-            metaBook.pagers[metaBook.mode].changed();}}
+                     (RefDB.overlaps(sourcerefs,gloss.shared))));});}
     metaBook.UI.selectSources=selectSources;
 
     /* Results handlers */
 
     var named_slices={};
 
-    function MetaBookSlice(container,cards,sortfn){
+    function MetaBookSlice(container,cards,sortfn,opts){
+        if (!(opts)) opts={};
         if (typeof container === "undefined") return false;
         else if (!(this instanceof MetaBookSlice))
-            return new MetaBookSlice(container,cards,sortfn);
+            return new MetaBookSlice(container,cards,sortfn,opts);
         else if (!(container)) 
             container=fdjtDOM("div.metabookslice");
         else if (typeof container === "string") {
@@ -626,18 +629,22 @@ metaBook.Slice=(function () {
             else named_slices[container.id]=container;}
         else if ((container.nodeType)&&(container.nodeType===1))  {}
         else return false;
-        var settings={noslip: false,id: container.id,holdclass: false,
-                      touchtoo: function(evt){
-                          evt=evt||window.event;
-                          if (metaBook.previewing)
-                              metaBook.stopPreview("touchtoo",true);
-                          this.abort(evt,"touchtoo");}};
-        if (metaBook.iscroll) {
-            settings.override=true; settings.bubble=true;}
+        if (!(opts.hasOwnProperty('noslip')))
+            opts.noslip=false;
+        if (!(opts.hasOwnProperty('id')))
+            opts.id=container.id;
+        if (opts.hasOwnProperty('holdclass'))
+            opts.holdclass=false;
+        if (opts.hasOwnProperty('touchtoo'))
+            opts.touchtoo=function(evt){
+                evt=evt||window.event;
+                if (metaBook.previewing)
+                    metaBook.stopPreview("touchtoo",true);
+                this.abort(evt,"touchtoo");};
         if (container.id)
             metaBook.TapHold[container.id]=new fdjtUI.TapHold(
-                container,settings);
-        else fdjtUI.TapHold(container,settings);
+                container,opts);
+        else fdjtUI.TapHold(container,opts);
         metaBook.UI.addHandlers(container,'summary');
         this.container=container; this.cards=[];
         if (sortfn) this.sortfn=sortfn;
@@ -645,6 +652,7 @@ metaBook.Slice=(function () {
         this.byfrag=new fdjt.RefMap();
         this.live=false; this.changed=false;
         this.addCards(cards);
+        this.pager=(opts.pager)||(new Pager(container,opts));
         if ((cards)&&(cards.length)) this.update();
         return this;}
 
@@ -700,13 +708,13 @@ metaBook.Slice=(function () {
     MetaBookSlice.prototype.display=MetaBookSlice.prototype.update=
         function updateSlice(force){
             if ((!(this.changed))&&(!(force))) return;
-            var cards=this.cards, byfrag=this.byfrag;
+            var cards=this.cards, byfrag=this.byfrag, pager=this.pager;
             cards.sort(this.sortfn);
             var passage_starts=
                 TOA(fdjtDOM.$(".slicenewpassage",this.container));
             var head_starts=
                 TOA(fdjtDOM.$(".slicenewhead",this.container));
-            this.container.innerHTML="";
+            this.container.innerHTML=""; pager.reset();
             dropClass(passage_starts,"slicenewpassage");
             dropClass(head_starts,"slicenewhead");
             var head=false, passage=false;
@@ -723,6 +731,7 @@ metaBook.Slice=(function () {
                     addClass(card.dom,"slicenewhead");}
                 frag.appendChild(card.dom);}
             if (frag!==this.container) this.container.appendChild(frag);
+            if (this.pager) this.pager.changed();
             this.changed=false;};
 
     MetaBookSlice.prototype.filter=function filterSlice(fn){

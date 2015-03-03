@@ -342,7 +342,6 @@
         if (glosses.length)
             fdjtLog("Assimilated %d new glosses in %dms...",
                     glosses.length,fdjtTime()-start);
-        setupAllGlosses();
         dropClass(msg,"running");}
     metaBook.initGlosses=initGlosses;
     
@@ -365,13 +364,6 @@
     metaBook.addConfig("updatepause",function(name,value){
         metaBook.update_pause=value;});
 
-    function setupAllGlosses(){
-        if (metaBook.pagers.allglosses)
-            metaBook.pagers.allglosses.changed();
-        else metaBook.pagers.allglosses=
-            new fdjt.Pager(fdjt.ID("METABOOKALLGLOSSES"),
-                           {container: fdjt.ID("METABOOKHEARTBODY")});}
-
     var offline_init=false;
 
     function initGlossesOffline(){
@@ -388,7 +380,6 @@
             metaBook.glosses.setLive(true);
             if (metaBook.heartscroller)
                 metaBook.heartscroller.refresh();
-            setupAllGlosses();
             if ((metaBook.glossdb.allrefs.length)||
                 (metaBook.sourcedb.allrefs.length))
                 fdjtLog("Initialized %d glosses (%d sources) from local storage",

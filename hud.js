@@ -165,7 +165,9 @@ metaBook.setMode=
             if ((Trace.startup>2)&&(metaBook.DOM.allglosses))
                 fdjtLog("Setting up gloss UI %o",allglosses);
 
-            metaBook.glosses=allglosses=new metaBook.Slice(metaBook.DOM.allglosses);
+            metaBook.glosses=allglosses=
+                new metaBook.Slice(metaBook.DOM.allglosses);
+            metaBook.pagers.allglosses=metaBook.glosses.pager;
             metaBook.glossdb.onAdd("maker",function(f,p,v){
                 metaBook.sourcedb.ref(v).oninit
                 (metaBook.UI.addGlossSource,"newsource");});
@@ -287,7 +289,8 @@ metaBook.setMode=
             else if (mbID(item.frag)) {
                 var addGlossmark=metaBook.UI.addGlossmark;
                 // Assume it belongs to the user if it doesn't say
-                if ((!(item.maker))&&(metaBook.user)) item.maker=(metaBook.user);
+                if ((!(item.maker))&&(metaBook.user))
+                    item.maker=(metaBook.user);
                 allglosses.addCards(item);
                 var nodes=metaBook.getDups(item.frag);
                 addClass(nodes,"glossed");
