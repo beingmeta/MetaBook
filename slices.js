@@ -57,6 +57,7 @@ metaBook.Slice=(function () {
     var fdjtUI=fdjt.UI;
     var RefDB=fdjt.RefDB, Ref=RefDB.Ref;
     var Pager=fdjt.Pager;
+    var $=fdjtDOM.$;
 
     var mB=metaBook, mbID=mB.ID, Trace=mB.Trace;
 
@@ -708,15 +709,13 @@ metaBook.Slice=(function () {
     MetaBookSlice.prototype.display=MetaBookSlice.prototype.update=
         function updateSlice(force){
             if ((!(this.changed))&&(!(force))) return;
-            var cards=this.cards, byfrag=this.byfrag, pager=this.pager;
+            var cards=this.cards, visible=[];
+            var byfrag=this.byfrag, pager=this.pager;
+            var container=this.container;
             cards.sort(this.sortfn);
-            var passage_starts=
-                TOA(fdjtDOM.$(".slicenewpassage",this.container));
-            var head_starts=
-                TOA(fdjtDOM.$(".slicenewhead",this.container));
+            dropClass($(".slicenewpassage",container),"slicenewpassage");
+            dropClass($(".slicenewhead",container),"slicenewhead");
             this.container.innerHTML=""; pager.reset();
-            dropClass(passage_starts,"slicenewpassage");
-            dropClass(head_starts,"slicenewhead");
             var head=false, passage=false;
             var frag=document.createDocumentFragment()||this.container;
             var i=0, lim=cards.length; while (i<lim) {
@@ -729,9 +728,11 @@ metaBook.Slice=(function () {
                 if (card.head!==head) {
                     head=card.head;
                     addClass(card.dom,"slicenewhead");}
-                frag.appendChild(card.dom);}
+                frag.appendChild(card.dom);
+                visible.push(card.dom);}
             if (frag!==this.container) this.container.appendChild(frag);
             if (this.pager) this.pager.changed();
+            this.visible=visible;
             this.changed=false;};
 
     MetaBookSlice.prototype.filter=function filterSlice(fn){
@@ -788,6 +789,27 @@ metaBook.Slice=(function () {
         else this.changed=true;};
 
     /* Slice handlers */
+
+    MetaBookSlice.prototype.setSkim=function setSkim(card){
+        var pager=this.pager;
+        var visible=this.visible, off=visible.indexOf(card);
+        if (off<0) return; else {
+            if (this.skim) dropClass(this.skim,"skimpoint");
+            pager.setPage(focus); this.skim=card;
+            addClass(card,"skimpoint");}};
+    MetaBookSlice.prototype.skimForward=
+        function skimForward(card){
+            if (!(card)) card=this.skim;
+            var off=this.visible.indexOf(card);
+            if ((off<0)||(off>=this.visible.length))
+                return; 
+            else this.setSkim(this.visible[off+1]);};
+    MetaBookSlice.prototype.skimBackward=
+        function skimBackward(card){
+            if (!(card)) card=this.skim;
+            var off=this.visible.indexOf(card);
+            if (off<=0) return; 
+            else this.setSkim(this.visible[off-1]);};
 
     function getCard(target){
         return ((hasClass(target,"metabookcard"))?(target):

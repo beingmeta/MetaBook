@@ -581,23 +581,12 @@ metaBook.setMode=
                 if (nohud) metaBook.setHUD(false);
                 else setHUD(false);}}
         
-        function scrollSlices(mode){
-            if (mode==="allglosses") {
-                metaBook.pagers.allglosses.setPage(
-                    metaBook.skimming||metaBook.point);}
-            else if (mode==="searchresults") {
-                metaBook.pagers.searchresults.setPage(
-                    metaBook.skimming||metaBook.point);}
-            else {}}
-        metaBook.scrollSlices=scrollSlices;
-
         function changeMode(mode){      
             if (Trace.mode)
                 fdjtLog("changeMode %o, cur=%o dbc=%o",
                         mode,metaBook.mode,document.body.className);
             fdjtDOM.dropClass(metaBookHUD,metaBookModes);
             fdjtDOM.addClass(metaBookHUD,mode);
-            scrollSlices(mode);
             if (mode==="statictoc") {
                 var headinfo=((metaBook.head)&&(metaBook.head.id)&&
                               (metaBook.docinfo[metaBook.head.id]));
@@ -785,8 +774,8 @@ metaBook.setMode=
                 var skiminfo=fdjtID("METABOOKSKIMINFO");
                 skiminfo.innerHTML=(before+1)+"/"+(before+after+1);
                 // This marks where we are currently skimming
-                if (pelt) dropClass(pelt,"metabookskimpoint");
-                if (src) addClass(src,"metabookskimpoint");
+                if (pelt) dropClass(pelt,"skimpoint");
+                if (src) addClass(src,"skimpoint");
                 if (typeof expanded === "undefined") {}
                 else if (expanded) addClass("METABOOKSKIMMER","expanded");
                 else dropClass("METABOOKSKIMMER","expanded");

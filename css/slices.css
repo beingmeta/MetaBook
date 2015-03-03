@@ -26,25 +26,25 @@ div.metabookslice .showxrefs div.xrefs { display: block;}
 div.metabookslice div.xrefs a { display: block;}
 div.metabookslice div.metabookcard span.tags span.other { display: none;}
 
-div.metabookslice div.metabookskimpoint {
+div.metabookslice div.skimpoint {
     border-left: solid darkblue 16px;
     border-top: solid darkblue 4px;
     border-bottom: solid darkblue 4px;
     margin-left: 0px;
     background-color: white;}
-div.metabookslice div.metabookskimpoint.metabookcard {}
-div.metabookslice div.metabookskimpoint.metabookcard .tool {
+div.metabookslice div.skimpoint.metabookcard {}
+div.metabookslice div.skimpoint.metabookcard .tool {
     font-size: 47%; font-weight: bold;}
-div.metabookslice div.metabookskimpoint.metabookcard img.userpic,
-div.metabookslice div.metabookskimpoint.metabookcard img.sourcepic {
+div.metabookslice div.skimpoint.metabookcard img.userpic,
+div.metabookslice div.skimpoint.metabookcard img.sourcepic {
     width: 75px;}
 
-div.metabookskimpoint .metabookcard .metabookcardbody { padding-top: 0px;}
+div.skimpoint .metabookcard .metabookcardbody { padding-top: 0px;}
 
-div.metabookslice div.metabookcard.metabookskimpoint + div.metabookcard > div.metabookcardbody,
-div.metabookslice div.metabookcard.metabookskimpoint .metabookcardbody {
+div.metabookslice div.metabookcard.skimpoint + div.metabookcard > div.metabookcardbody,
+div.metabookslice div.metabookcard.skimpoint .metabookcardbody {
     border-top-width: 0px;}
-div.metabookslice div.metabookcard.metabookskimpoint .fdjtclearfloats {
+div.metabookslice div.metabookcard.skimpoint .fdjtclearfloats {
     margin-bottom: 0px;}
 
 div.metabookslice.pager div.pagernav {
