@@ -70,6 +70,11 @@
         metaBook.resizeUI();
         metaBook.scaleLayout(false);
         if (!(layout)) return;
+        else if ((metaBook.textinput)||
+                 ((metaBook.touch)&&
+                  (document.activeElement)&&
+                  (document.activeElement.tagName==="INPUT")))
+            return;
         if ((window.outerWidth===outer_width)&&
             (window.outerHeight===outer_height)) {
             // Not a real change (we think), so just scale the
