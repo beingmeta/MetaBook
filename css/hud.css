@@ -133,10 +133,10 @@ body._TOUCH.hudup #METABOOKFRAME > #METABOOKHUD > div.helphud {
     -o-border-radius-bottomright: 0px;}
 
 body._ANIMATE #METABOOKSKIMMER.transanimate {
-    transition-property: transform; transition-duration: 0.5s;
-    -webkit-property: -webkit-transform; -webkit-transition-duration: 0.5s;
-    -moz-property: -moz-transform; -moz-transition-duration: 0.5s;
-    -o-property: -o-transform; -o-transition-duration: 0.5s;}
+    transition-property: transform; transition-duration: 0.25s;
+    -webkit-property: -webkit-transform; -webkit-transition-duration: 0.25s;
+    -moz-property: -moz-transform; -moz-transition-duration: 0.25s;
+    -o-property: -o-transform; -o-transition-duration: 0.25s;}
 
 #METABOOKFRAME._ANIMATE #METABOOKHEAD {
     transition-property: opacity; transition-duration: 2s;
@@ -571,6 +571,13 @@ body._MOUSE #METABOOKHUD img.hudbutton:hover,
 #METABOOKHUD .toprightin {top: 0px; right: 70px;}
 #METABOOKHUD .botleft {bottom: 0px; left: 0px;}
 #METABOOKHUD .botright {bottom: 0px; right: 0px;}
+
+#METABOOKHUD .topleftin.hudbutton,
+#METABOOKHUD .toprightin.hudbutton {
+    display: none;}
+.hudup #METABOOKHUD .topleftin.hudbutton,
+.hudup #METABOOKHUD .toprightin.hudbutton {
+    display: block;}
 
 #METABOOKHUD img.topleft {
     border-top-width: 0px; border-left-width: 0px;
