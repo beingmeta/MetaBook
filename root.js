@@ -190,7 +190,7 @@ var metaBook={
         iscroll: false,   // Whether to trace HUD scrolling with iScroll
         highlight: 0,     // Whether to trace highlighting
         indexing: 0,      // How much to trace document indexing
-        gestures: 2}      // How much to trace gestures
+        gestures: 0}      // How much to trace gestures
 };
 
 if (typeof mB === 'undefined') mB=metaBook;
