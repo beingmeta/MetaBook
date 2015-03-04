@@ -494,11 +494,11 @@
         var target=((cxt.nodeType)?(cxt):(fdjtUI.T(cxt)));
         if (target)
             fdjtLog(trace1,handler,cxt,target,
-                    ((metaBook.skimming)?("(skimming)"):""),metaBook.mode,
-                    metaBook.target,metaBook.head,metaBook.skimming);
+                    ((metaBook.skimpoint)?("(skimming)"):""),metaBook.mode,
+                    metaBook.target,metaBook.head,metaBook.skimpoint);
         else fdjtLog(trace2,handler,cxt,
-                     ((metaBook.skimming)?("(skimming)"):""),metaBook.mode,
-                     metaBook.target,metaBook.head,metaBook.skimming);}
+                     ((metaBook.skimpoint)?("(skimming)"):""),metaBook.mode,
+                     metaBook.target,metaBook.head,metaBook.skimpoint);}
     metaBook.trace=sbook_trace;
 
     // This is the hostname for the sbookserver.

@@ -237,10 +237,10 @@
             (metaBook.pagers.searchresults.root!==results))
             metaBook.pagers.searchresults=fdjt.Pager(
                 results,fdjtID("METABOOKHEARTBODY"));
+        metaBook.searchresults=result;
         metaBook.setMode("searchresults");
         fdjtID("METABOOKSEARCHINPUT").blur();
-        fdjtID("METABOOKSEARCHRESULTS").focus();
-        metaBook.UI.updateScroller(fdjtID("METABOOKSEARCHRESULTS"));}
+        fdjtID("METABOOKSEARCHRESULTS").focus();}
     metaBook.showSearchResults=showSearchResults;
 
     /* Call this to search */

@@ -1035,7 +1035,7 @@ metaBook.Paginate=
                 if (savestate) {
                     metaBook.point=curnode;
                     if (!((metaBook.hudup)||(metaBook.mode)))
-                        metaBook.skimming=false;}
+                        metaBook.skimpoint=false;}
                 if ((savestate)&&(page)) {
                     var loc=page.getAttribute("data-sbookloc");
                     var pageno=page.getAttribute("data-pagenum");

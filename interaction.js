@@ -1103,7 +1103,7 @@
         if (Trace.gestures)
             fdjtLog("hudmodebutton() %o mode=%o cl=%o skim=%o sbh=%o mode=%o",
                     evt,mode,(isClickable(target)),
-                    metaBook.skimming,metaBook.hudup,metaBook.setMode());
+                    metaBook.skimpoint,metaBook.hudup,metaBook.setMode());
         metaBook.clearStateDialog();
         if (reticle.live) reticle.flash();
         fdjtUI.cancel(evt);
@@ -1112,11 +1112,13 @@
             (evt.type==='tap')||
             (evt.type==='release')) {
             dropClass(document.body,"_HOLDING");
-            if ((metaBook.skimming)&&(!(metaBook.hudup))) {
+            if ((metaBook.skimpoint)&&(!(metaBook.hudup))) {
                 if ((mode==="refinesearch")||(mode==="searchresults")) {
                     metaBook.setMode("searchresults"); return;}
                 else if (mode==="allglosses") {
-                    metaBook.setMode("allglosses"); return;}}
+                    metaBook.setMode("allglosses"); return;}
+                else if (mode==="statictoc") {
+                    metaBook.setMode("statictoc"); return;}}
             if (fdjtDOM.hasClass(metaBook.HUD,mode))
                 metaBook.setMode(false,true);
             else if ((mode==="search")&&
@@ -1347,33 +1349,13 @@
     metaBook.pagerBackward=pagerBackward;
 
     function skimForward(evt){
-        var now=fdjtTime();
+        var now=fdjtTime(), slice=metaBook[metaBook.mode];
         dropClass(document.body,/\bmb(PAGE)?PREVIEW/g);
         if ((last_motion)&&((now-last_motion)<100)) return;
         else last_motion=now;
-        evt=evt||window.event;
         if (metaBook.uisound)
             fdjtDOM.playAudio("METABOOKSKIMFORWARDAUDIO");
-        if (hasClass(document.body,"mbSKIMMING")) {}
-        else if (metaBook.mode==="openglossmark") {
-            var ids=metaBook.docinfo._ids;
-            var id=((metaBook.target)&&(metaBook.target.id));
-            var glossdb=metaBook.glossdb;
-            var i, lim=ids.length;
-            if ((id)&&((i=RefDB.position(ids,id))>0)) {
-                i++; while (i<lim) {
-                    var g=glossdb.find('frag',ids[i]);
-                    if ((g)&&(g.length)) {
-                        var passage=mbID(ids[i]);
-                        var glossmark=getChild(passage,".glossmark");
-                        metaBook.GoTo(passage,"skimForward/glosses",true);
-                        metaBook.showGlossmark(passage,glossmark);
-                        return;}
-                    else i++;}}
-            metaBook.setMode(false);
-            return;}
-        else if (metaBook.skimming) {}
-        else return; /* Need default */
+        if (!(slice)) return;
         if (metaBook.uisound)
             fdjtDOM.playAudio("METABOOKSKIMFORWARDAUDIO");
         addClass("METABOOKSKIMMER","flash");
@@ -1382,93 +1364,28 @@
             dropClass("METABOOKSKIMMER","flash");
             dropClass("METABOOKNEXTSKIM","flash");},
                    200);
-        if (metaBook.mode==="statictoc") {
-            var head=metaBook.head;
-            var headid=head.codexbaseid||head.id;
-            var headinfo=metaBook.docinfo[headid];
-            if (Trace.nav) 
-                fdjtLog("skimForward/toc() head=%o info=%o n=%o h=%o",
-                        head,headinfo,headinfo.next,headinfo.head);
-            if (headinfo.next) metaBook.GoTo(headinfo.next.frag,"skimForward");
-            else if ((headinfo.head)&&(headinfo.head.next)) 
-                metaBook.GoTo(headinfo.head.next.frag,"skimForward");
-            else if ((headinfo.head)&&(headinfo.head.head)&&
-                     (headinfo.head.head.next)) 
-                metaBook.GoTo(headinfo.head.head.next.frag,"skimForward");
-            else metaBook.setMode(false);
-            return;}
-        if ((metaBook.skimpoints)&&
-            ((metaBook.skimoff+1)<metaBook.skimpoints.length)) {
-            metaBook.skimoff++;
-            metaBook.GoTo(metaBook.skimpoints[metaBook.skimoff]);
-            return;}
-        var start=metaBook.skimming;
-        var scan=metaBook.nextSlice(start);
-        var ref=((scan)&&(metaBook.getRef(scan)));
-        if ((Trace.gestures)||(Trace.flips)||(Trace.nav)) 
-            fdjtLog("scanForward (on %o) from %o/%o to %o/%o under %o",
-                    evt,start,metaBook.getRef(start),scan,ref,metaBook.skimming);
-        if ((ref)&&(scan)) metaBook.Skim(ref,scan,1);
-        return scan;}
+        var next=slice.forward();
+        if (next) metaBook.SkimTo(next,1);
+        return next;}
     metaBook.skimForward=skimForward;
 
     function skimBackward(evt){
-        var now=fdjtTime();
+        var now=fdjtTime(), slice=metaBook[metaBook.mode];
         dropClass(document.body,/\bmb(PAGE)?PREVIEW/g);
         if ((last_motion)&&((now-last_motion)<100)) return;
         else last_motion=now;
         if (metaBook.uisound)
             fdjtDOM.playAudio("METABOOKSKIMBACKWARDAUDIO");
-        if (hasClass(document.body,"mbSKIMMING")) {}
-        else if (metaBook.mode==="openglossmark") {
-            var ids=metaBook.docinfo._ids;
-            var id=((metaBook.target)&&(metaBook.target.id));
-            var glossdb=metaBook.glossdb;
-            var i=ids.length;
-            if ((id)&&((i=RefDB.position(ids,id))>0)) {
-                i--; while (i>=0) {
-                    var g=glossdb.find('frag',ids[i]);
-                    if ((g)&&(g.length)) {
-                        var passage=mbID(ids[i]);
-                        var glossmark=getChild(passage,".glossmark");
-                        metaBook.GoTo(passage,"skimBackward/glosses",true);
-                        metaBook.showGlossmark(passage,glossmark);
-                        return;}
-                    else i--;}}
-            metaBook.setMode(false);
-            return;}
-        else if (metaBook.skimming) {}
-        else return false;
+        if (!(slice)) return;
         addClass("METABOOKPREVSKIM","flash");
         addClass("METABOOKSKIMMER","flash");
         setTimeout(function(){
             dropClass("METABOOKSKIMMER","flash");
             dropClass("METABOOKPREVSKIM","flash");},
                    200);
-        if (metaBook.mode==="statictoc") {
-            var head=metaBook.head;
-            var headid=head.codexbaseid||head.id;
-            var headinfo=metaBook.docinfo[headid];
-            if (Trace.nav) 
-                fdjtLog("skimBackward/toc() head=%o info=%o p=%o h=%o",
-                        head,headinfo,headinfo.prev,headinfo.head);
-            if (headinfo.prev) metaBook.GoTo(headinfo.prev.frag,"skimBackward");
-            else if (headinfo.head) 
-                metaBook.GoTo(headinfo.head.frag,"skimBackward");
-            else metaBook.setMode(false);
-            return;}
-        if ((metaBook.skimpoints)&&(metaBook.skimoff>0)) {
-            metaBook.skimoff--;
-            metaBook.GoTo(metaBook.skimpoints[metaBook.skimoff]);
-            return;}
-        var start=metaBook.skimming;
-        var scan=metaBook.prevSlice(start);
-        var ref=((scan)&&(metaBook.getRef(scan)));
-        if ((Trace.gestures)||(Trace.flips)||(Trace.nav))
-            fdjtLog("skimBackward (on %o) from %o/%o to %o/%o under %o",
-                    evt,start,metaBook.getRef(start),scan,ref,metaBook.skimming);
-        if ((ref)&&(scan)) metaBook.Skim(ref,scan,-1);
-        return scan;}
+        var next=slice.backward();
+        if (next) metaBook.SkimTo(next,-1);
+        return next;}
     metaBook.skimBackward=skimBackward;
 
     function skimmer_tapped(evt){
@@ -1502,6 +1419,10 @@
         else toggleClass("METABOOKSKIMMER","expanded");
         fdjtUI.cancel(evt);
         return;}
+
+    function skimmer_taptap(evt){
+        metaBook.stopSkimming();
+        fdjtUI.cancel(evt);}
 
     /* Entering page numbers and locations */
 
@@ -1914,6 +1835,9 @@
                mouseover: fdjtUI.CoHi.onmouseover,
                mouseout: fdjtUI.CoHi.onmouseout,
                click: cancel},
+         ".mbtocslice": {
+             mouseover: fdjtUI.CoHi.onmouseover,
+             mouseout: fdjtUI.CoHi.onmouseout},
          glossmark: {mouseup: glossmark_tapped,
                      click: cancel, mousedown: cancel,
                      mouseover: glossmark_hoverstart,
@@ -1937,7 +1861,8 @@
          "#METABOOKLOCPCT": {tap: enterPercentage},
          "#METABOOKLOCOFF": {tap: enterLocation},
          // Return to skimmer
-         "#METABOOKSKIMMER": {tap: skimmer_tapped},
+         "#METABOOKSKIMMER": {tap: skimmer_tapped,
+                              taptap: skimmer_taptap},
          // Expanding/contracting the skimmer
          // Raise and lower HUD
          "#METABOOKPAGEHEAD": {click: head_tap},
@@ -2056,7 +1981,7 @@
          "#METABOOKLOCPCT": {tap: enterPercentage},
          "#METABOOKLOCOFF": {tap: enterLocation},
          // Return to skimming
-         "#METABOOKSKIMMER": {tap: skimmer_tapped},
+         "#METABOOKSKIMMER": {tap: skimmer_tapped, taptap: skimmer_taptap},
          // Expanding/contracting the skimmer
          // Raise and lower HUD
          "#METABOOKPAGEHEAD": {touchstart: head_tap},

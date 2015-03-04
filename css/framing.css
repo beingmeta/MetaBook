@@ -74,7 +74,7 @@ body {
 #METABOOKFRAME > div, #METABOOKFRAME > div > div, #METABOOKFRAME > div > a {
     box-sizing: border-box; -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box; -o-box-sizing: border-box;}
-#METABOOKFRAME a { 
+.hudpanel a { 
     background-color: transparent; text-decoration: none;}
 #METABOOKCOVER a { color: lightblue; }
 

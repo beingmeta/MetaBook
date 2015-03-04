@@ -63,6 +63,8 @@ metaBook.setMode=
         var mB=metaBook;
         var Trace=mB.Trace;
 
+        var MetaBookTOC=mB.TOCSlice;
+
         var IScroll=window.IScroll;
 
         // Helpful dimensions
@@ -165,9 +167,9 @@ metaBook.setMode=
             if ((Trace.startup>2)&&(metaBook.DOM.allglosses))
                 fdjtLog("Setting up gloss UI %o",allglosses);
 
-            metaBook.glosses=allglosses=
+            metaBook.allglosses=allglosses=
                 new metaBook.Slice(metaBook.DOM.allglosses);
-            metaBook.pagers.allglosses=metaBook.glosses.pager;
+            metaBook.pagers.allglosses=metaBook.allglosses.pager;
             metaBook.glossdb.onAdd("maker",function(f,p,v){
                 metaBook.sourcedb.ref(v).oninit
                 (metaBook.UI.addGlossSource,"newsource");});
@@ -223,10 +225,11 @@ metaBook.setMode=
                     {override: true,holdfast: true,taptapthresh: 0,
                      holdthresh: 500});
             metaBook.TapHold.head=
-                new fdjtUI.TapHold(metaBook.DOM.head,
-                                   {override: true,taptapthresh: 0});
+                new TapHold(metaBook.DOM.head,
+                            {override: true,taptapthresh: 0});
             metaBook.DOM.skimmer=fdjtID("METABOOKSKIMMER");
-            metaBook.TapHold.skimmer=new TapHold(metaBook.DOM.skimmer);
+            metaBook.TapHold.skimmer=
+                new TapHold(metaBook.DOM.skimmer,{taptapthresh: 800});
             
             var help=metaBook.DOM.help=fdjtID("METABOOKHELP");
             help.innerHTML=fixStaticRefs(metaBook.HTML.help);
@@ -306,7 +309,7 @@ metaBook.setMode=
                 if (item.tags) {
                     var gloss_cloud=metaBook.gloss_cloud;
                     var tags=item.tags, j=0, n_tags=tags.length;
-                    while (j<n_tags) 
+                    while (j<n_tags)
                         metaBook.cloudEntry(tags[j++],gloss_cloud);}
                 if (item.tstamp>metaBook.syncstamp)
                     metaBook.syncstamp=item.tstamp;
@@ -320,44 +323,16 @@ metaBook.setMode=
         /* Creating the HUD */
         
         function setupTOC(root_info){
-            var navhud=createNavHUD("div#METABOOKTOC.hudpanel",root_info);
-            var toc_button=fdjtID("METABOOKTOCBUTTON");
-            toc_button.style.visibility='';
-            metaBook.DOM.toc=navhud;
-            fdjtDOM.replace("METABOOKTOC",navhud);
-            var statictoc=createStaticTOC(
-                "div#METABOOKSTATICTOC.hudpanel",root_info);
-            metaBook.Statictoc=statictoc;
-            fdjtDOM.replace("METABOOKSTATICTOC",statictoc);}
+            var panel=fdjtDOM("div#METABOOKSTATICTOC.metabookslice.mbtocslice.hudpanel");
+            fdjtDOM.replace("METABOOKSTATICTOC",panel);
+            var tocslice=new MetaBookTOC(root_info,panel);
+            tocslice.update();
+            metaBook.tocslice=tocslice;
+            metaBook.statictoc=tocslice;
+            metaBook.pagers.statictoc=tocslice.pager;
+            metaBook.setupGestures(panel);
+            return tocslice;}
         metaBook.setupTOC=setupTOC;
-
-        function createNavHUD(eltspec,root_info){
-            var scan=root_info;
-            while (scan) {
-                if ((!(scan.sub))||(scan.sub.length===0)) break;
-                else if (scan.sub.length>1) {
-                    root_info=scan; break;}
-                else scan=scan.sub[0];}
-            var toc_div=metaBook.TOC(root_info,0,false,"METABOOKTOC4",true);
-            var div=fdjtDOM(eltspec||"div#METABOOKTOC.hudpanel",toc_div);
-            metaBook.UI.addHandlers(div,"toc");
-            return div;}
-
-        function createStaticTOC(eltspec,root_info){
-            var scan=root_info;
-            while (scan) {
-                if ((!(scan.sub))||(scan.sub.length===0)) break;
-                else if (scan.sub.length>1) {
-                    root_info=scan; break;}
-                else scan=scan.sub[0];}
-            var toc_div=metaBook.TOC(scan,0,false,"METABOOKSTATICTOC4");
-            var div=fdjtDOM(eltspec||"div#METABOOKSTATICTOC",toc_div);
-            var istouch=metaBook.touch;
-            metaBook.UI.addHandlers(div,"toc");
-            div.title=
-                ((istouch)?("Tap"):("Click on"))+
-                " a section to go to its start; press and hold to simply preview it.";
-            return div;}
 
         /* HUD animation */
 
@@ -565,7 +540,7 @@ metaBook.setMode=
                 if (metaBook.textinput) {
                     metaBook.setFocus(false);}
                 metaBook.focusBody();
-                if (metaBook.skimming) {
+                if (metaBook.skimpoint) {
                     var dups=metaBook.getDups(metaBook.target);
                     metaBook.clearHighlights(dups);
                     dropClass(dups,"mbhighlightpassage");}
@@ -608,7 +583,7 @@ metaBook.setMode=
                 var allcards=metaBook.DOM.allglosses.childNodes;
                 var i=0, lim=allcards.length;
                 var card=false, lastcard=false, lasthead=false;
-                if (metaBook.glosses) metaBook.glosses.setLive(true);
+                if (metaBook.allglosses) metaBook.allglosses.setLive(true);
                 while (i<lim) {
                     var each=allcards[i++];
                     if (each.nodeType!==1) continue;
@@ -726,24 +701,40 @@ metaBook.setMode=
 
         /* Skimming */
 
-        function metaBookSkim(elt,src,dir,expanded){
-            var nextSlice=metaBook.nextSlice, prevSlice=metaBook.prevSlice;
-            var pelt=metaBook.skimming;
+        function stopSkimming(){
+            // Tapping the tochead returns to results/glosses/etc
+            var skimming=metaBook.skimpoint;
+            if (!(skimming)) return;
+            dropClass(document.body,"mbSKIMMING");
+            if (getParent(skimming,fdjtID("METABOOKALLGLOSSES"))) 
+                metaBook.setMode("allglosses");
+            else if (getParent(skimming,fdjtID("METABOOKSTATICTOC"))) 
+                metaBook.setMode("statictoc");
+            else if (getParent(skimming,fdjtID("METABOOKSEARCHRESULTS"))) 
+                metaBook.setMode("searchresults");
+            else {}}
+        metaBook.stopSkimming=stopSkimming;
+        
+        function metaBookSkimTo(card,dir,expanded){
+            var skimpoint=metaBook.skimpoint;
+            var slice=metaBook[metaBook.mode];
+            var cardinfo=slice.getInfo(card);
+            var passage=fdjt.ID(cardinfo.id);
             var i=0, lim=0;
             if (typeof dir !== "number") dir=0;
             addClass(document.body,"mbSKIMMING"); setHUD(false,false);
             if (Trace.mode)
-                fdjtLog("metaBookSkim() %o (src=%o) mode=%o scn=%o/%o dir=%o",
-                        elt,src,metaBook.mode,metaBook.skimming,metaBook.target,
+                fdjtLog("metaBookSkim() %o (card=%o) mode=%o scn=%o/%o dir=%o",
+                        passage,card,
+                        metaBook.mode,metaBook.skimpoint,
+                        metaBook.target,
                         dir);
             // Copy the description of what we're skimming into the
             // skimmer (at the top of the page during skimming and
             // preview)
-            if (metaBook.skimming!==src) {
+            if (skimpoint!==card) {
                 var skimmer=fdjtID("METABOOKSKIMMER");
-                var clone=src.cloneNode(true);
-                var next=nextSlice(src), prev=prevSlice(src);
-                var before=0, after=0, slice=prev;
+                var clone=card.cloneNode(true);
                 var pct=((dir<0)?("-120%"):(dir>0)?("120%"):(false));
                 dropClass(skimmer,"transimate");
                 fdjtDOM.replace("METABOOKSKIM",clone);
@@ -751,7 +742,7 @@ metaBook.setMode=
                     dropClass(skimmer,"transanimate");
                     fdjtDOM.removeListener(
                         skimmer,"transitionend",dropTransAnimate);};
-                if ((metaBook.skimming)&&(pct)) {
+                if ((skimpoint)&&(pct)) {
                     skimmer.style[fdjtDOM.transform]=
                         "translate("+pct+",0)";
                     setTimeout(function(){
@@ -764,44 +755,45 @@ metaBook.setMode=
                                0);}
                 // This all makes sure that the >| and |< buttons
                 // appear appropriately
-                if (next) dropClass(document.body,"mbSKIMEND");
-                else addClass(document.body,"mbSKIMEND");
-                if (prev) dropClass(document.body,"mbSKIMSTART");
-                else addClass(document.body,"mbSKIMSTART");
-                while (slice) {before++; slice=prevSlice(slice);}
-                slice=next; while (slice) {
-                    after++; slice=nextSlice(slice);}
+                if (slice.atEnd)
+                    addClass(document.body,"mbSKIMEND");
+                else dropClass(document.body,"mbSKIMEND");
+                if (slice.atStart)
+                    addClass(document.body,"mbSKIMSTART");
+                else dropClass(document.body,"mbSKIMSTART");
+                slice.setSkim(card);
                 var skiminfo=fdjtID("METABOOKSKIMINFO");
-                skiminfo.innerHTML=(before+1)+"/"+(before+after+1);
+                if (skiminfo)
+                    skiminfo.innerHTML=(slice.skimpos)+"/"+(slice.visible.length);
                 // This marks where we are currently skimming
-                if (pelt) dropClass(pelt,"skimpoint");
-                if (src) addClass(src,"skimpoint");
+                if (skimpoint) dropClass(skimpoint,"skimpoint");
+                if (card) addClass(card,"skimpoint");
                 if (typeof expanded === "undefined") {}
                 else if (expanded) addClass("METABOOKSKIMMER","expanded");
                 else dropClass("METABOOKSKIMMER","expanded");
-                metaBook.skimming=src;}
+                metaBook.skimpoint=card;}
             else {}
             var highlights=[];
             if (metaBook.target)
                 metaBook.clearHighlights(metaBook.getDups(metaBook.target));
             dropClass("METABOOKSKIMMER","mbfoundhighlights");
-            metaBook.setTarget(elt);
-            if ((src)&&(hasClass(src,"gloss"))) {
-                var glossinfo=metaBook.glossdb.ref(src.name);
+            metaBook.setTarget(passage);
+            if ((card)&&(hasClass(card,"gloss"))) {
+                var glossinfo=metaBook.glossdb.ref(card.name);
                 if (glossinfo.excerpt) {
-                    var searching=metaBook.getDups(elt.id);
+                    var searching=metaBook.getDups(passage.id);
                     var range=metaBook.findExcerpt(
                         searching,glossinfo.excerpt,glossinfo.exoff);
                     if (range) {
                         highlights=
                             fdjtUI.Highlight(range,"mbhighlightexcerpt");
                         addClass("METABOOKSKIMMER","mbfoundhighlights");}}
-                else if (src.about[0]==="#")
-                    addClass(metaBook.getDups(src.about.slice(1)),
+                else if (card.about[0]==="#")
+                    addClass(metaBook.getDups(card.about.slice(1)),
                              "mbhighlightpassage");
-                else addClass(metaBook.getDups(src.about),"mbhighlightpassage");}
-            else if ((src)&&(getParent(src,".sbookresults"))) {
-                var about=src.about, target=mbID(about);
+                else addClass(metaBook.getDups(card.about),"mbhighlightpassage");}
+            else if ((card)&&(getParent(card,".sbookresults"))) {
+                var about=card.about, target=mbID(about);
                 if (target) {
                     var info=metaBook.docinfo[target.id];
                     var terms=metaBook.query.tags;
@@ -815,44 +807,9 @@ metaBook.setMode=
                         var h=metaBook.highlightTerm(
                             term,target,info,spellings);
                         highlights=highlights.concat(h);}}}
-            delete metaBook.skimpoints;
-            delete metaBook.skimoff;
-            if ((highlights)&&(highlights.length===1)&&
-                (getParent(highlights[0],elt)))
-                metaBook.GoTo(elt,"Skim");
-            else if ((highlights)&&(highlights.length)) {
-                var possible=metaBook.getDups(elt.id);
-                if (possible.length) {
-                    var skimpoints=[];
-                    i=0; lim=possible.length;
-                    while (i<lim) {
-                        var poss=possible[i++];
-                        var j=0, jlim=highlights.length;
-                        while (j<jlim) {
-                            if (getParent(highlights[j++],poss)) {
-                                skimpoints.push(poss); break;}}}
-                    if (skimpoints.length)
-                        metaBook.skimpoints=skimpoints;
-                    else metaBook.skimpoints=possible;
-                    if (dir<0) 
-                        metaBook.skimoff=metaBook.skimpoints.length-1;
-                    else metaBook.skimoff=0;
-                    metaBook.GoTo(metaBook.skimpoints[metaBook.skimoff]);}
-                else metaBook.GoTo(elt,"Skim");}
-            else metaBook.GoTo(elt,"Skim");}
-        metaBook.Skim=metaBookSkim;
-        function stopSkimming(){
-            // Tapping the tochead returns to results/glosses/etc
-            var skimming=metaBook.skimming;
-            if (!(skimming)) return;
-            dropClass(document.body,"mbSKIMMING");
-            if (getParent(skimming,fdjtID("METABOOKALLGLOSSES"))) 
-                metaBook.setMode("allglosses");
-            else if (getParent(skimming,fdjtID("METABOOKSEARCHRESULTS"))) 
-                metaBook.setMode("searchresults");
-            else {}}
-        metaBook.stopSkimming=stopSkimming;
-        
+            metaBook.GoTo(passage,"Skim");}
+        metaBook.SkimTo=metaBookSkimTo;
+
         metaBook.addConfig("uisize",function(name,value){
             fdjtDOM.swapClass(
                 metaBook.Frame,/metabookuifont\w+/g,"metabookuifont"+value);});
@@ -1023,9 +980,8 @@ metaBook.setMode=
                 while (i<lim) {
                     var src=elts[i++];
                     if (hasParent(src,allglosses)) {
-                        var elt=mbID(src.about);
                         setMode("allglosses");
-                        metaBook.Skim(elt,src);
+                        metaBook.SkimTo(src);
                         return true;}}
                 return false;}};
 

@@ -458,6 +458,8 @@ metaBook.DOMScan=(function(){
                 scaninfo.ends_at=scanstate.location;
                 scaninfo=scaninfo.head;}};
         
+        docinfo._rootinfo=docinfo[root.id];
+
         return docinfo;}
 
     MetaBookDOMScan.prototype.toJSON=function(){

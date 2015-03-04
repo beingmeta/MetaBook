@@ -113,7 +113,7 @@
         var selected=fdjtDOM.$(".selected",sources);
         fdjtDOM.toggleClass(selected,"selected");
         fdjtDOM.addClass(target,"selected");
-        metaBook.UI.selectSources(metaBook.glosses,false);
+        metaBook.UI.selectSources(metaBook.allglosses,false);
         fdjtDOM.cancel(evt);}
     metaBook.UI.handlers.everyone_ontap=everyone_ontap;
 
@@ -144,10 +144,10 @@
         var everyone=fdjtDOM.$(".everyone",sources)[0];
         if (new_sources.length) {
             if (everyone) fdjtDOM.dropClass(everyone,"selected");
-            metaBook.UI.selectSources(metaBook.glosses,new_sources);}
+            metaBook.UI.selectSources(metaBook.allglosses,new_sources);}
         else {
             if (everyone) fdjtDOM.addClass(everyone,"selected");
-            metaBook.UI.selectSources(metaBook.glosses,false);}
+            metaBook.UI.selectSources(metaBook.allglosses,false);}
         fdjtDOM.cancel(evt);}
     metaBook.UI.handlers.sources_ontap=sources_ontap;
 
@@ -233,8 +233,9 @@
                     var starts=range.startContainer;
                     if (!(hasClass(starts,"mbhighlightexcerpt"))) {
                         fdjtUI.Highlight(range,"mbhighlightexcerpt");}}}}
-        var slice=new MetaBookSlice(slicediv,glosses,sort_point_glosses);
+        var slice=new MetaBookSlice(slicediv,glosses,sort_point_glosses,{nopager: true});
         var hudwrapper=fdjtDOM("div.hudpanel#METABOOKPOINTGLOSSES",slicediv);
+        metaBook.openglossmark=slice;
         if (point) {
             hudwrapper.style.display='block';
             hudwrapper.style.opacity=0.0;

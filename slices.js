@@ -567,25 +567,6 @@ metaBook.Slice=(function () {
         idhead.title=makelocstring(info,headinfo);
         return idhead;}
 
-    metaBook.nextSlice=function(start){
-        var card=fdjtDOM.getParent(start,".metabookcard");
-        if (!(card)) return false;
-        var scan=card.nextSibling;
-        while (scan) {
-            if ((scan.nodeType===1)&&(hasClass(scan,"metabookcard")))
-                return scan;
-            else scan=scan.nextSibling;}
-        return false;};
-    metaBook.prevSlice=function(start){
-        var card=fdjtDOM.getParent(start,".metabookcard");
-        if (!(card)) return false;
-        var scan=card.previousSibling;
-        while (scan) {
-            if ((scan.nodeType===1)&&(hasClass(scan,"metabookcard")))
-                return scan;
-            else scan=scan.previousSibling;}
-        return false;};
-
     /* Selecting a subset of glosses to display */
 
     var hasClass=fdjtDOM.hasClass;
@@ -634,6 +615,8 @@ metaBook.Slice=(function () {
             opts.noslip=false;
         if (!(opts.hasOwnProperty('id')))
             opts.id=container.id;
+        if (!(opts.hasOwnProperty('holdthresh')))
+            opts.holdthresh=350;
         if (opts.hasOwnProperty('holdclass'))
             opts.holdclass=false;
         if (opts.hasOwnProperty('touchtoo'))
@@ -653,7 +636,8 @@ metaBook.Slice=(function () {
         this.byfrag=new fdjt.RefMap();
         this.live=false; this.changed=false;
         this.addCards(cards);
-        this.pager=(opts.pager)||(new Pager(container,opts));
+        if (!(opts.nopager))
+            this.pager=(opts.pager)||(new Pager(container,opts));
         if ((cards)&&(cards.length)) this.update();
         return this;}
 
@@ -662,6 +646,7 @@ metaBook.Slice=(function () {
             if (this.live) return false;
             else {
                 if (this.changed) this.update();
+                this.live=true;
                 return true;}}
         else if (this.live) {
             this.live=false;
@@ -685,7 +670,9 @@ metaBook.Slice=(function () {
         else return 1;};
 
     MetaBookSlice.prototype.getCard=function getCard(ref){
-        if ((ref.nodeType===1)&&(hasClass(ref,"metabookcard"))) {
+        if ((ref.nodeType===1)&&
+            ((hasClass(ref,"metabookcard"))||
+             (hasClass(ref,"mbtoc")))) {
             var id=ref.getAttribute("data-gloss")||
                 ref.getAttribute("data-passage");
             return this.byid.get(id);}
@@ -709,13 +696,13 @@ metaBook.Slice=(function () {
     MetaBookSlice.prototype.display=MetaBookSlice.prototype.update=
         function updateSlice(force){
             if ((!(this.changed))&&(!(force))) return;
-            var cards=this.cards, visible=[];
+            var cards=this.cards, visible=[], shown=[];
             var byfrag=this.byfrag, pager=this.pager;
             var container=this.container;
             cards.sort(this.sortfn);
             dropClass($(".slicenewpassage",container),"slicenewpassage");
             dropClass($(".slicenewhead",container),"slicenewhead");
-            this.container.innerHTML=""; pager.reset();
+            this.container.innerHTML=""; if (pager) pager.reset();
             var head=false, passage=false;
             var frag=document.createDocumentFragment()||this.container;
             var i=0, lim=cards.length; while (i<lim) {
@@ -729,10 +716,12 @@ metaBook.Slice=(function () {
                     head=card.head;
                     addClass(card.dom,"slicenewhead");}
                 frag.appendChild(card.dom);
-                visible.push(card.dom);}
+                visible.push(card);
+                shown.push(card.dom);}
             if (frag!==this.container) this.container.appendChild(frag);
             if (this.pager) this.pager.changed();
             this.visible=visible;
+            this.shown=shown;
             this.changed=false;};
 
     MetaBookSlice.prototype.filter=function filterSlice(fn){
@@ -753,8 +742,10 @@ metaBook.Slice=(function () {
         var i=0, lim=adds.length;
         while (i<lim) {
             var add=adds[i++], info=false, card, id, about=false, replace=false;
+            if ((add.about)&&(add.dom)) {
+                info=add; card=add.dom;}
             if ((add.nodeType)&&(add.nodeType===1)&&
-                (hasClass(add,"metabookcard"))) {
+                     (hasClass(add,"metabookcard"))) {
                 card=add; id=add.name||add.getAttribute("name");
                 if (!(id)) continue;
                 if ((info=byid[id])) {
@@ -792,29 +783,41 @@ metaBook.Slice=(function () {
 
     MetaBookSlice.prototype.setSkim=function setSkim(card){
         var pager=this.pager;
-        var visible=this.visible, off=visible.indexOf(card);
+        var visible=this.visible, shown=this.shown;
+        var off=shown.indexOf(card);
         if (off<0) return; else {
-            if (this.skim) dropClass(this.skim,"skimpoint");
-            pager.setPage(focus); this.skim=card;
-            addClass(card,"skimpoint");}};
-    MetaBookSlice.prototype.skimForward=
+            if (this.skimpoint) dropClass(this.skimpoint,"skimpoint");
+            if (pager) pager.setPage(card);
+            this.skimpoint=card; this.skimpos=off;
+            this.atStart=(off===0);
+            this.atEnd=(off>=visible.length);
+            addClass(card,"skimpoint");
+            return card;}};
+    MetaBookSlice.prototype.forward=
         function skimForward(card){
-            if (!(card)) card=this.skim;
-            var off=this.visible.indexOf(card);
+            var shown=this.shown;
+            if (!(card)) card=this.skimpoint||shown[0];
+            var off=shown.indexOf(card);
             if ((off<0)||(off>=this.visible.length))
                 return; 
-            else this.setSkim(this.visible[off+1]);};
-    MetaBookSlice.prototype.skimBackward=
+            else return this.setSkim(shown[off+1]);};
+    MetaBookSlice.prototype.backward=
         function skimBackward(card){
-            if (!(card)) card=this.skim;
-            var off=this.visible.indexOf(card);
+            var shown=this.shown;
+            if (!(card)) card=this.skimpoint||shown[shown.length-1];
+            var off=shown.indexOf(card);
             if (off<=0) return; 
-            else this.setSkim(this.visible[off-1]);};
+            else return this.setSkim(shown[off-1]);};
+    MetaBookSlice.prototype.getInfo=function(card){
+        var pos; if (!(card)) pos=this.skimpos;
+        else pos=this.shown.indexOf(card);
+        return this.visible[pos];};
 
     function getCard(target){
-        return ((hasClass(target,"metabookcard"))?(target):
-                (getParent(target,".metabookcard")))||
-            getChild(target,".metabookcard");}
+        if ((hasClass(target,"metabookcard"))||(hasClass(target,"mbtoc")))
+            return target;
+        else return getParent(target,".metabookcard,.mbtoc")||
+            getChild(target,".metabookcard,.mbtoc");}
 
     function slice_tapped(evt){
         var target=fdjtUI.T(evt);
@@ -830,18 +833,13 @@ metaBook.Slice=(function () {
             return;}
         if (hasParent(target,".pagernav")) {
             var pager=metaBook.pagers[metaBook.mode];
-            if (!(pager)) {fdjtUI.cancel(evt); return;}
-            var last=target, scan=target.parentNode;
-            while (scan) {
-                if (hasClass(scan,"pagernav")) break;
-                else scan=scan.parentNode;}
-            var pageno=parseInt(last.innerHTML);
+            var pageno=pager.getNum(target);
             pager.setPage(pageno-1);
             fdjtUI.cancel(evt);
             return;}
         if ((getParent(target,".ellipsis"))&&
             ((getParent(target,".elision"))||
-             (getParent(target,".delision")))){
+             (getParent(target,".delision")))) {
             fdjtUI.Ellipsis.toggle(target);
             fdjtUI.cancel(evt);
             return;}
@@ -882,7 +880,7 @@ metaBook.Slice=(function () {
             metaBook.setMode("glossdetail");
             return fdjtUI.cancel(evt);}
         else if ((!(gloss))&&(passage)) {
-            metaBook.Skim(passage,card,0);
+            metaBook.SkimTo(card,0);
             return fdjtUI.cancel(evt);}
         else if ((gloss)&&(getParent(target,".tool"))) {
             var form=metaBook.setGlossTarget(gloss);           
@@ -890,7 +888,7 @@ metaBook.Slice=(function () {
             metaBook.setMode("addgloss");
             return fdjtUI.cancel(evt);}
         else if (gloss) {
-            metaBook.Skim(passage,card,0);
+            metaBook.SkimTo(card,0);
             return fdjtUI.cancel(evt);}
         else return;}
     function slice_held(evt){
@@ -912,7 +910,7 @@ metaBook.Slice=(function () {
             return;}
         if (Trace.gestures)
             fdjtLog("slice_held %o: %o, skimming=%o",
-                    evt,card,metaBook.skimming);
+                    evt,card,metaBook.skimpoint);
         if (!(card)) return;
         // Put a clone of the card in the skimmer
         var clone=card.cloneNode(true);
@@ -963,7 +961,9 @@ metaBook.Slice=(function () {
         var card=getCard(fdjtUI.T(evt||window.event));
         if (Trace.gestures) {
             fdjtLog("slice_released %o: %o, skimming=%o",evt,card);}
-        metaBook.stopPreview("slice_released");}
+        if (metaBook.previewing)
+            metaBook.stopPreview("slice_released");
+        fdjtUI.cancel(evt);}
     function slice_slipped(evt){
         evt=evt||window.event;
         var rel=evt.relatedTarget||fdjtUI.T(evt);

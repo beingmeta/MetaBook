@@ -1,0 +1,64 @@
+/* -*- Mode: CSS; character-encoding: utf-8; -*- */
+
+/* Copyright (C) 2009-2015 beingmeta, inc. */
+
+@charset "UTF-8";
+
+.mbtocslice {}
+.mbtocslice .mbtoc {
+    text-align: left;
+    display: block;}
+.mbtoc .context .tocpath { padding-left: 1ex; }
+.mbtoc .context { font-size: 60%; float: right;}
+.mbtocslice .mbtoc .context { display: none;}
+#METABOOKSKIMMER .mbtoc .extents {display: none;}
+.mbtoc a.sectname { color: black; z-index: 50;}
+.mbtoc div.extents {
+    position: relative; z-index: -10; overflow: visible;
+    margin: 0px; padding: 0px; border: 0px;}
+.mbtoc {
+    font-size: 100%; line-height: 100%;
+    height: 1.2em; margin-right: 1ex;}
+.mbtoc div.extents a.brick {
+    position: absolute; display: inline-block;
+    box-sizing: border-box;
+    border: solid gray 1px; border-left: 0px;
+    background-color: lightblue;
+    opacity: 0.8;
+    height: 1.2em;}
+.mbtoc div.extents a.brick.cohi,
+.mbtoc.cohi div.extents a.showsize {
+    background-color: gold;}
+.mbtoc.cohi a.sectname {
+    color: darkblue;}
+.mbtoc div.extents a.showsize {
+    position: absolute; display: inline-block;
+    box-sizing: border-box;
+    background-color: lightblue;
+    height: 1.2em; }
+.mbtoc div.extents a.brick:first-child {
+    border-left: solid gray 1px;}
+.mbtoc.mbtoc1 { font-size: 130%;}
+.mbtoc.mbtoc2 { margin-left: 2em; font-size: 120%;}
+.mbtoc.mbtoc3 { margin-left: 4em; font-size: 100%;}
+.mbtoc.mbtoc4 { margin-left: 6em; font-size: 80%;}
+
+#METABOOKSKIMMER .sectname:before {
+    content: "§"; font-style: italic;
+    vertical-align: bottom;
+    font-size: 120%;}
+
+#METABOOKSKIMMER .mbtoc.mbtoc1, #METABOOKSKIMMER .mbtoc.mbtoc2,
+#METABOOKSKIMMER .mbtoc.mbtoc3, #METABOOKSKIMMER .mbtoc.mbtoc4,
+#METABOOKSKIMMER .mbtoc.mbtoc5, #METABOOKSKIMMER .mbtoc.mbtoc6 {
+    margin-left: 0px; font-size: 100%;}
+
+.statictoc #METABOOKSKIMMER .metabookskiminfo { display: none; }
+
+/* Emacs local variables
+;;;  Local variables: ***
+;;;  compile-command: "cd ../..; make" ***
+;;;  indent-tabs-mode: nil ***
+;;;  End: ***
+*/
+

@@ -342,7 +342,7 @@
                     ((info)&&(info.starts_at)),target);
         if (info) {
             metaBook.point=target;
-            if (!((metaBook.hudup)||(metaBook.mode))) metaBook.skimming=false;}
+            if (!((metaBook.hudup)||(metaBook.mode))) metaBook.skimpoint=false;}
         setHead(target);
         setLocation(location);
         if ((istarget)&&(targetid)&&(!(inUI(target)))) setTarget(target);

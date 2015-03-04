@@ -118,7 +118,7 @@
         if ((info.glosses)||(info.etc))
             initGlosses(info.glosses||[],info.etc||[],
                         function(){infoLoaded(info);});
-        if (metaBook.glosses) metaBook.glosses.update();}
+        if (metaBook.allglosses) metaBook.allglosses.update();}
     metaBook.loadInfo=loadInfo;
 
     function infoLoaded(info){
@@ -373,11 +373,11 @@
         if (!(sync)) return;
         if ((Trace.glosses)||(Trace.startup))
             fdjtLog("Starting initializing glosses from local storage");
-        metaBook.glosses.setLive(false);
+        metaBook.allglosses.setLive(false);
         metaBook.sourcedb.load(true);
         var loading=metaBook.glossdb.load(true);
         loading.then(function(){
-            metaBook.glosses.setLive(true);
+            metaBook.allglosses.setLive(true);
             if (metaBook.heartscroller)
                 metaBook.heartscroller.refresh();
             if ((metaBook.glossdb.allrefs.length)||
