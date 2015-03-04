@@ -1246,7 +1246,9 @@
         if (Trace.nav)
             fdjtLog("Forward e=%o h=%o t=%o",evt,
                     metaBook.head,metaBook.target);
-        if ((metaBook.mode)&&(metaBook.pagers[metaBook.mode]))
+        if (hasClass(document.body,"mbSKIMMING"))
+            skimForward(evt);
+        else if ((metaBook.mode)&&(metaBook.pagers[metaBook.mode]))
             pagerForward(evt);
         else if ((evt)&&(evt.shiftKey))
             skimForward(evt);
@@ -1258,7 +1260,9 @@
         if (Trace.nav)
             fdjtLog("Backward e=%o h=%o t=%o",evt,
                     metaBook.head,metaBook.target);
-        if ((metaBook.mode)&&(metaBook.pagers[metaBook.mode]))
+        if (hasClass(document.body,"mbSKIMMING"))
+            skimBackward(evt);
+        else if ((metaBook.mode)&&(metaBook.pagers[metaBook.mode]))
             pagerBackward(evt);
         else if ((evt)&&(evt.shiftKey))
             skimBackward();

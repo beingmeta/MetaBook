@@ -578,6 +578,9 @@ body._MOUSE #METABOOKHUD img.hudbutton:hover,
 .hudup #METABOOKHUD .topleftin.hudbutton,
 .hudup #METABOOKHUD .toprightin.hudbutton {
     display: block;}
+.hudup #METABOOKHUD.openheart .topleftin.hudbutton,
+.hudup #METABOOKHUD.openheart .toprightin.hudbutton {
+    display: none;}
 
 #METABOOKHUD img.topleft {
     border-top-width: 0px; border-left-width: 0px;
@@ -1252,8 +1255,12 @@ body._FULLHEIGHT.hudup #METABOOKFOOT {
         border-bottom-right-radius: 0px;
         padding-bottom: 0px;
         left: 0px; right: 0px; }
+    body.mbSKIMMING #METABOOKTOPBAR {
+        display: none;}
+
     img.metabookclosehud#METABOOKSTOPSKIM {
         bottom: 50px; top: auto;}
+
 }
 @media screen and (max-width: 500px) {
     #METABOOKHEAD, #METABOOKHUD.openhead #METABOOKHEAD {

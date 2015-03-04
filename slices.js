@@ -994,10 +994,14 @@ metaBook.Slice=(function () {
                     dx,dy,adx,ady,evt.startX,evt.startY,vw,evt.ntouches);
         if (adx>(ady*2)) {
             // Horizontal swipe
-            if (dx<(-(metaBook.minswipe||10)))
-                pager.forward();
-            else if (dx>(metaBook.minswipe||10))
-                pager.backward();}
+            if (dx<(-(metaBook.minswipe||10))) {
+                if (hasClass(document.body,"mbSKIMMING"))
+                    metaBook.skimForward();
+                else pager.forward();}
+            else if (dx>(metaBook.minswipe||10)) {
+                if (hasClass(document.body,"mbSKIMMING"))
+                    metaBook.skimBackward();
+                pager.backward();}}
         else if (ady>(adx*2)) {
             // Vertical swipe
             if (!(metaBook.hudup)) {
