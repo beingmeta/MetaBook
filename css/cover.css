@@ -421,7 +421,7 @@ body.mbLAYOUT #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE,
 body.mbBUSY #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE {
     display: none;}
 #METABOOKLAYOUTMESSAGE div.message {
-    font-size: 24px; font-size: 5vmin;}
+    font-size: 24px; font-size: 4vw;}
 
 #METABOOKREADYMESSAGE { padding-bottom: 1ex; }
 

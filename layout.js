@@ -107,7 +107,7 @@ metaBook.Paginate=
                             "%)"));
                 layoutMessage(fdjtString(
                     "Finished laying out %d %dx%d pages in %s",
-                    pagenum,
+                    pagenum,info.width,info.height,
                     secs2short((info.done-info.started)/1000)),
                               100);
                 fdjtLog("Finished laying out %d %dx%d pages in %s",
