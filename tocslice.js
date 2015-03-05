@@ -127,7 +127,6 @@ metaBook.TOCSlice=
             dropClass($(".mbcurtoc"),"mbcurtoc");
             var head=headinfo;
             while (head) {
-                var level=head.level;
                 var refs=document.getElementsByName("MBTOC4"+head.frag);
                 var j=0; var jlim=refs.length;
                 while (j<jlim) {
@@ -136,8 +135,9 @@ metaBook.TOCSlice=
                     if (head===headinfo) addClass(ref,"mbcurtoc");}
                 head=head.head;}
             var toc=metaBook.statictoc;
-            var info=toc.byfrag[headinfo.frag];
-            if (info) toc.setSkim(info.dom);};
+            if (toc) {
+                var info=toc.byfrag[headinfo.frag];
+                if (info) toc.setSkim(info.dom);}};
 
         metaBook.TOC=MetaBookTOC;
 

@@ -849,7 +849,10 @@ metaBook.Paginate=
                 " select to change %";
             if (update_progress) {
                 var page_progress=fdjtID("METABOOKPAGEPROGRESS");
+                var page_progress_edge=fdjtID("METABOOKPAGEPROGRESSEDGE");
                 if (page_progress) page_progress.style.width=
+                    (((pagenum-1)*100)/npages)+"%";
+                if (page_progress) page_progress_edge.style.width=
                     (((pagenum-1)*100)/npages)+"%";}
             if (update_progress) {
                 /* Update section markers */

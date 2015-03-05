@@ -110,6 +110,8 @@
     var getInput=fdjtDOM.getInput;
     var Selector=fdjtDOM.Selector;
 
+    var isEmptyString=fdjtString.isEmpty;
+
     var getCard=metaBook.UI.getCard;
 
     var submitEvent=fdjtUI.submitEvent;
@@ -1076,18 +1078,26 @@
                 var num=parseInt(target.value,10);
                 if (typeof num === 'number') {
                     handled=true; metaBook.GoToPage(num);}
+                else if (isEmptyString(target.value))
+                    handled=true;
                 else {}}
             else if (target.name==='GOTOREF') {
                 var pagemap=metaBook.layout.pagemap;
                 var page=pagemap[target.value];
                 if (page) {
-                    metaBook.GoToPage(page); handled=true;}}
+                    metaBook.GoToPage(page); handled=true;}
+                else if (isEmptyString(target.value))
+                    handled=true;
+                else {}}
             else if (target.name==='GOTOLOC') {
                 var locstring=target.value;
                 var loc=parseFloat(locstring);
                 if ((typeof loc === 'number')&&(loc>=0)&&(loc<=100)) {
                     loc=Math.floor((loc/100)*metaBook.ends_at)+1;
-                    metaBook.JumpTo(loc); handled=true;}}
+                    metaBook.JumpTo(loc); handled=true;}
+                else if (isEmptyString(target.value))
+                    handled=true;
+                else {}}
             else {}
             if (handled) {
                 target.value="";
@@ -1354,6 +1364,8 @@
 
     function skimForward(evt){
         var now=fdjtTime(), slice=metaBook[metaBook.mode];
+        if ((Trace.gestures)||(Trace.nav))
+            fdjtLog("skimForward %o: mode=%s",evt,metaBook.mode);
         dropClass(document.body,/\bmb(PAGE)?PREVIEW/g);
         if ((last_motion)&&((now-last_motion)<100)) return;
         else last_motion=now;
@@ -1375,6 +1387,8 @@
 
     function skimBackward(evt){
         var now=fdjtTime(), slice=metaBook[metaBook.mode];
+        if ((Trace.gestures)||(Trace.nav))
+            fdjtLog("skimBackward %o: mode=%s",evt,metaBook.mode);
         dropClass(document.body,/\bmb(PAGE)?PREVIEW/g);
         if ((last_motion)&&((now-last_motion)<100)) return;
         else last_motion=now;
@@ -1594,10 +1608,11 @@
         var pagebar=fdjtID("METABOOKPAGEBAR");
         previewTimeout(false);
         if ((Trace.gestures)||(hasClass(pagebar,"metabooktrace")))
-            fdjtLog("pagebar_slip %o, previewing=%o, target=%o start=%o",
+            fdjtLog("pagebar_slip %o, pre=%o, target=%o start=%o, rel=%o",
                     evt,metaBook.previewing,metaBook.previewTarget,
-                    preview_start_page);
+                    preview_start_page,rel);
         if (!(metaBook.previewing)) return;
+        if (getParent(rel,metaBook.DOM.pagebar)) return;
         if ((rel)&&(hasParent(rel,metaBook.body)))
             previewTimeout(function(){
                 var pagebar=fdjtID("METABOOKPAGEBAR");

@@ -75,6 +75,7 @@ metaBook.setMode=
         var dropClass=fdjtDOM.dropClass;
         var hasClass=fdjtDOM.hasClass;
         var getParent=fdjtDOM.getParent;
+        var hasParent=fdjtDOM.hasParent;
         var hasSuffix=fdjtString.hasSuffix;
 
         var fixStaticRefs=metaBook.fixStaticRefs;
@@ -615,7 +616,9 @@ metaBook.setMode=
                 var mode_input=
                     (((mode_focus.search(/[.#]/))>=0)?
                      (fdjtDOM.$1(mode_focus)):(fdjtID(mode_focus)));
-                if ((mode_input)&&(!(metaBook.touch))) {
+                if ((mode_input)&&
+                    ((!(metaBook.touch))||
+                     (hasParent(mode_input,metaBook.DOM.foot)))) {
                     setTimeout(function(){
                         metaBook.setFocus(mode_input);},
                                50);}}

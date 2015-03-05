@@ -7,12 +7,17 @@
 /* metabook 'slices' of summaries or glosses */
 
 div.metabookslice { cursor: crosshair; }
+div#METABOOKHEART div.metabookslice.hudpanel {
+    min-height: 100%;}
 div.metabookslice button, div.metabookslice input[TYPE="SUBMIT"],
 div.metabookslice img.button, div.metabookslice .tool {
     cursor: pointer; }
-div.metabookslice input[TYPE="TEXT"], div.metabookslice textarea { cursor: text; }
+div.metabookslice textarea,
+div.metabookslice input[TYPE="TEXT"] {
+    cursor: text; }
 
-div.metabookslice div.metabookcard { margin-left: 20px;}
+div.metabookslice div.metabookcard {
+    margin-left: 20px; margin-right: 3px;}
 div.metabookslice.sourced div.metabookcard { display: none;}
 div.metabookslice.sourced div.metabookcard.sourced { display: block;}
 
