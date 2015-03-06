@@ -1985,8 +1985,7 @@
          "#METABOOKSHOWCOVER": {
              tap: showcover_tapped, release: showcover_released},
          "#METABOOKSOURCES": {
-             touchstart: cancel,
-             touchend: metaBook.UI.handlers.sources_ontap},
+             click: metaBook.UI.handlers.sources_ontap},
          "#METABOOKSEARCHINFO": { click: metaBook.searchTags_onclick },
          "#METABOOKPAGEFOOT": {},
          "#METABOOKPAGEBAR": {tap: pagebar_tap,
