@@ -95,6 +95,7 @@ metaBook.TOCSlice=
             tocbar.setAttribute("name","MBTOC4"+headinfo.frag);
             tocbar.setAttribute("data-passage",headinfo.frag);
             tocbar.setAttribute("data-location",headinfo.starts_at);
+            tocbar.setAttribute("data-level",headinfo.toclevel);
             addClass(tocbar,"mbtoc"+headinfo.toclevel);
             return tocbar;}
 
@@ -121,6 +122,14 @@ metaBook.TOCSlice=
             maketoc(this,rootinfo);
             return this;}
         MetaBookTOC.prototype=new MetaBookSlice();
+
+        MetaBookTOC.prototype.badBreak=function(a,b){
+            var la=a.getAttribute("data-toclevel");
+            var lb=b.getAttribute("data-toclevel");
+            if ((la)&&(lb)) {
+                la=parseInt(la); lb=parseInt(lb);
+                if (la>lb) return true; else return false;}
+            else return false;};
 
         MetaBookTOC.setHead=function setHead(headinfo){
             dropClass($(".mblivetoc"),"mblivetoc");
