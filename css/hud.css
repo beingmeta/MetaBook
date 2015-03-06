@@ -1230,7 +1230,7 @@ body._FULLHEIGHT.hudup #METABOOKFOOT {
         left: 5px; right: 5px;}
     #METABOOKHEARTBODY {
         border-radius: 1ex; padding-bottom: 0px;
-        margin-bottom: 2px; margin-top: 2px;
+        margin-bottom: 2px;
         left: 5px; right: 5px;}
     #METABOOKHUD.openheart #METABOOKHEART {
         top: 75px; bottom: 60px;}
