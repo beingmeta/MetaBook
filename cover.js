@@ -104,6 +104,7 @@
             frame=fdjtDOM("div#METABOOKFRAME");
             fdjtDOM.prepend(document.body,frame);}
         metaBook.Frame=frame;
+        metaBook.cover=cover;
         cover.innerHTML=fixStaticRefs(metaBook.HTML.cover);
         
         var coverpage=fdjtID("METABOOKCOVERPAGE");
@@ -322,18 +323,16 @@
             fdjt.Dialog.close(metaBook.statedialog);
             metaBook.statedialog=false;}
         if (fdjt.UI.isClickable(target)) return;
-        if (!(hasParent(target,fdjtID("METABOOKCOVERCONTROLS")))) {
-            if (!(hasParent(target,fdjtID("METABOOKCOVERMESSAGE")))) {
-                var section=target;
-                while ((section)&&(section.parentNode!==cover))
-                    section=section.parentNode;
-                if ((section)&&(section.nodeType===1)&&
-                    (section.scrollHeight>section.offsetHeight))
-                    return;}
+        if (hasParent(target,fdjtID("METABOOKCOVERCONTROLS")))
+            return controls_clicked(evt,target,cover);
+        else if (hasParent(target,".scrolling")) {}
+        else {
             metaBook.clearStateDialog();
             metaBook.hideCover();
             fdjtUI.cancel(evt);
-            return;}
+            return;}}
+        
+    function controls_clicked(evt,target,cover){
         var scan=target;
         while (scan) {
             if (scan===document.body) break;
@@ -364,7 +363,8 @@
             cover.className=mode;
             metaBook.mode=mode;},
                    20);
-        fdjt.UI.cancel(evt);}
+        fdjt.UI.cancel(evt);
+        return false;}
 
     metaBook.addConfig("showconsole",function(name,value){
         if (value) addClass(document.body,"_SHOWCONSOLE");

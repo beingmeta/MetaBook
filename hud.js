@@ -379,12 +379,14 @@ metaBook.setMode=
             if (metaBook._setup)
                 fdjtState.dropLocal("metabook.opened("+metaBook.docuri+")");
             setHUD(false);
+            metaBook.closed=true;
             addClass(document.body,"mbCOVER");}
         metaBook.showCover=showCover;
         function hideCover(){
             if (metaBook._setup)
                 fdjtState.setLocal(
                     "metabook.opened("+metaBook.docuri+")",fdjtTime());
+            metaBook.closed=false;
             dropClass(document.body,"mbCOVER");}
         metaBook.hideCover=hideCover;
         function toggleCover(){
@@ -439,12 +441,6 @@ metaBook.setMode=
                 (!(fdjtID("SBOOKSAPP").src))&&
                 (!(metaBook.appinit)))
                 metaBook.initIFrameApp();
-            if (hasClass(document.body,"mbCOVER")) {
-                if (!(mode)) hideCover();
-                else if (mode.search(metaBookCoverModes)>=0)
-                    hideCover();
-                else {}
-                metaBookCoverModes.lastIndex=0;} // Kludge
             if ((metaBook.mode==="addgloss")&&(mode!=="addgloss")&&
                 (hasClass("METABOOKLIVEGLOSS","modified")))
                 metaBook.submitGloss(fdjt.ID("METABOOKLIVEGLOSS"));
@@ -536,6 +532,7 @@ metaBook.setMode=
                 //  setHUD clears most of the classes when it brings
                 //  the HUD down.
                 metaBook.last_mode=metaBook.mode;
+                if (hasClass(document.body,"mbCOVER")) hideCover();
                 if ((metaBook.mode==="openglossmark")&&
                     (fdjtID("METABOOKOPENGLOSSMARK")))
                     fdjtID("METABOOKOPENGLOSSMARK").id="";

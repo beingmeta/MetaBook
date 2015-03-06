@@ -911,14 +911,14 @@
 
     metaBook.getTOCLevel=getLevel;
     
-    function getCover(){
-        if (metaBook.cover) return metaBook.cover;
-        var cover=fdjtID("METABOOKCOVERPAGE")||
+    function getCoverPage(){
+        if (metaBook.coverpage) return metaBook.coverpage;
+        var coverpage=fdjtID("METABOOKCOVERPAGE")||
             fdjtID("SBOOKCOVERPAGE")||
             fdjtID("COVERPAGE");
-        if (cover) metaBook.cover=cover;
-        return cover;}
-    metaBook.getCover=getCover;
+        if (coverpage) metaBook.coverpage=coverpage;
+        return coverpage;}
+    metaBook.getCoverPage=getCoverPage;
 
     var fillIn=fdjtString.fillIn;
     var expand=fdjtString.expandEntities;

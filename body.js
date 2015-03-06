@@ -157,7 +157,7 @@
             fdjtDOM.append(content,"\n",notesblock,"\n");
         
         // Initialize cover and titlepage (if specified)
-        metaBook.cover=metaBook.getCover();
+        metaBook.coverpage=metaBook.getCoverPage();
         metaBook.titlepage=fdjtID("SBOOKTITLEPAGE");
 
         var pages=metaBook.pages=fdjtID("METABOOKPAGES")||

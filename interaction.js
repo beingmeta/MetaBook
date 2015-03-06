@@ -1130,7 +1130,9 @@
                     metaBook.setMode("allglosses"); return;}
                 else if (mode==="statictoc") {
                     metaBook.setMode("statictoc"); return;}}
-            if (fdjtDOM.hasClass(metaBook.HUD,mode))
+            if ((metaBook.closed)?
+                (fdjtDOM.hasClass(metaBook.HUD,mode)):
+                (fdjtDOM.hasClass(metaBook.HUD,mode)))
                 metaBook.setMode(false,true);
             else if ((mode==="search")&&
                      (fdjtDOM.hasClass(metaBook.HUD,metaBook.searchModes)))
