@@ -120,10 +120,11 @@ metaBook.TOCSlice=
                 return new MetaBookTOC(rootinfo,dom);
             MetaBookSlice.call(this,dom);
             maketoc(this,rootinfo);
+            this.pager.changed();
             return this;}
         MetaBookTOC.prototype=new MetaBookSlice();
 
-        MetaBookTOC.prototype.badBreak=function(a,b){
+        MetaBookTOC.prototype.bb=function(a,b){
             var la=a.getAttribute("data-toclevel");
             var lb=b.getAttribute("data-toclevel");
             if ((la)&&(lb)) {
