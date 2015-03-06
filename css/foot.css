@@ -34,7 +34,7 @@ body.mbPREVIEW #METABOOKFOOT #METABOOKPAGEBAR span#METABOOKPAGEREFTEXT {
 body.mbPAGEREFS #METABOOKFOOT #METABOOKPAGEREFTEXT {display: inline-block;}
 #METABOOKFOOT #METABOOKPAGEREFTEXT.metabookpageno {
     position: absolute; left: 3px;
-    font-style: italic; font-size: 85%;}
+    font-style: italic; font-size: 90%;}
 /*
 #METABOOKFOOT #METABOOKPAGEREFTEXT.metabookpageno:before {
     content: '《'; font-style: normal; font-weight: bold;}
@@ -78,8 +78,9 @@ body.hudup #METABOOKFOOT #METABOOKPAGELEAP {
 /* Page spans */
 
 #METABOOKFOOT #METABOOKPAGEBAR div.textfoot {
-    position: absolute; bottom: 4px;
-    width: 100%; height: 60%; font-size: 28px;
+    position: absolute; bottom: 0px;
+    font-size: 28px; line-height: 100%;
+    width: 100%; height: 60%; 
     box-sizing: border-box; -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box; -o-box-sizing: border-box;
     border-top: solid black 1px; z-index: 50;
@@ -89,8 +90,9 @@ body.hudup #METABOOKFOOT #METABOOKPAGELEAP {
 #METABOOKFOOT #METABOOKPAGEBAR div.textfoot > span {
     z-index: 50; pointer-events: all;}
 hr#METABOOKLAYOUTINDICATOR {
-    position: absolute; top: 0px; left: 0px; height: 100%; width: 0%;
+    position: absolute; bottom: 0px; left: 0px; height: 60%; width: 0%;
     background-color: silver; color: gray; opacity: 0.0; margin: 0px;
+    box-sizing: border-box;
     display: none;}
 #METABOOKLAYOUTADJUST {
     position: absolute;
@@ -146,13 +148,6 @@ body.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR
 #METABOOKFOOT #METABOOKPAGEBAR #METABOOKPAGEPROGRESS {
     box-sizing: content-box; border-right: solid darkblue 2px;
     position: absolute; bottom: 0px; left: 0px;
-    width: 33%; height: 28px; 
-    background-color: rgba(162,181,205,0.8);
-    pointer-events: none;
-    z-index: 15;}
-#METABOOKFOOT #METABOOKPAGEBAR #METABOOKPAGEPROGRESSEDGE {
-    box-sizing: content-box; border-right: solid purple 2px;
-    position: absolute; bottom: 0px; left: 0px;
     width: 33%; height: 100%; 
     background-color: transparent;
     pointer-events: none;
@@ -165,11 +160,11 @@ body.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR
     pointer-events: none;
     z-index: 45;}
 #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER1.metabooksectmarker {
-    height: 100%;}
+    height: 85%;}
 #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER2.metabooksectmarker {
-    height: 75%; background-color: rgba(0,0,255,0.2); }
+    height: 70%; background-color: rgba(0,0,255,0.2); }
 #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER3.metabooksectmarker {
-    height: 60%; background-color: rgba(0,0,255,0.1); }
+    height: 55%; background-color: rgba(0,0,255,0.1); }
 
 body._TOUCH.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR {
     height: 150px;}
@@ -281,12 +276,6 @@ body._FULLHEIGHT #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT > span > span {
         left: 0px; right: 0px;}
     #METABOOKFOOT #METABOOKPAGEBAR .metabooksectmarker { 
         border: solid blue 1px; border-bottom: 0px; opacity: 0.7; }
-    #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER1.metabooksectmarker {
-        height: 60%;}
-    #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER2.metabooksectmarker {
-        height: 45%; }
-    #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER3.metabooksectmarker {
-        height: 20%; }
 
     #METABOOKFOOT .hudbutton { bottom: 30px;}
     body.hudup #METABOOKFOOT .hudbutton { bottom: 0px;}
