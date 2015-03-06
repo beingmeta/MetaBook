@@ -120,17 +120,16 @@ metaBook.TOCSlice=
                 return new MetaBookTOC(rootinfo,dom);
             MetaBookSlice.call(this,dom);
             maketoc(this,rootinfo);
+            this.pager.badBreak=function(a,b){
+                var la=a.getAttribute("data-level");
+                var lb=b.getAttribute("data-level");
+                if ((la)&&(lb)) {
+                    la=parseInt(la); lb=parseInt(lb);
+                    if (la<lb) return true; else return false;}
+                else return false;};
             this.pager.changed();
             return this;}
         MetaBookTOC.prototype=new MetaBookSlice();
-
-        MetaBookTOC.prototype.bb=function(a,b){
-            var la=a.getAttribute("data-toclevel");
-            var lb=b.getAttribute("data-toclevel");
-            if ((la)&&(lb)) {
-                la=parseInt(la); lb=parseInt(lb);
-                if (la>lb) return true; else return false;}
-            else return false;};
 
         MetaBookTOC.setHead=function setHead(headinfo){
             dropClass($(".mblivetoc"),"mblivetoc");
