@@ -203,7 +203,7 @@
         if (blurb) addToCover(cover,blurb);
         
         var settings=fdjtDOM(
-            "div#METABOOKSETTINGS.metabooksettings.scrolling");
+            "div#METABOOKSETTINGS.scrolling");
         settings.innerHTML=fixStaticRefs(metaBook.HTML.settings);
         metaBook.DOM.settings=settings;
         if (settings) addToCover(cover,settings);
@@ -368,7 +368,8 @@
 
     metaBook.addConfig("showconsole",function(name,value){
         if (value) addClass(document.body,"_SHOWCONSOLE");
-        else dropClass(document.body,"_SHOWCONSOLE");});
+        else dropClass(document.body,"_SHOWCONSOLE");
+        fdjt.Async(function(){metaBook.updateSettings(name,value);});});
     
 
 }());

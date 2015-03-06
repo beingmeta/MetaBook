@@ -38,6 +38,8 @@
     var fdjtDOM=fdjt.DOM, fdjtLog=fdjt.Log, fdjtUI=fdjt.UI;
     var fdjtState=fdjt.State, fdjtTime=fdjt.Time, fdjtString=fdjt.String;
 
+    var getChildren=fdjtDOM.getChildren;
+
     var getMeta=fdjtDOM.getMeta;
 
     var isEmpty=fdjtString.isEmpty;
@@ -55,8 +57,6 @@
     var current_config={};
     var saved_config={};
 
-    var setCheckSpan=fdjtUI.CheckSpan.set;
-
     function addConfig(name,handler){
         if (Trace.config>1)
             fdjtLog("Adding config handler for %s: %s",name,handler);
@@ -73,56 +73,44 @@
         else return current_config[name];}
     metaBook.getConfig=getConfig;
 
-    function setConfig(name,value,save){
+    function setConfig(name,value,save,cxt){
+        if (cxt) cxt=" ("+cxt+")";
+        else cxt="";
         if (arguments.length===1) {
             var config=name;
             metaBook.postconfig=[];
-            if (Trace.config) fdjtLog("batch setConfig: %s",config);
+            if (Trace.config)
+                fdjtLog("batch setConfig %s: %s",cxt,config);
             for (var setting in config) {
                 if (config.hasOwnProperty(setting))
                     setConfig(setting,config[setting]);}
             var dopost=metaBook.postconfig;
             metaBook.postconfig=false;
             if ((Trace.config>1)&&(!((dopost)||(dopost.length===0))))
-                fdjtLog("batch setConfig, no post processing",config);
+                fdjtLog("batch setConfig, no post processing %s",
+                        config,cxt);
             var post_i=0; var post_lim=dopost.length;
             while (post_i<post_lim) {
                 if (Trace.config>1)
-                    fdjtLog("batch setConfig, post processing %s",
+                    fdjtLog("batch setConfig%s, post processing %s",
                             dopost[post_i]);
                 dopost[post_i++]();}
             return;}
-        if (Trace.config) fdjtLog("setConfig %o=%o",name,value);
-        var input_name="METABOOK"+(name.toUpperCase());
-        var inputs=document.getElementsByName(input_name);
-        var input_i=0, input_lim=inputs.length;
-        while (input_i<input_lim) {
-            var input=inputs[input_i++];
-            if (input.tagName!=='INPUT') continue;
-            if (input.type==='checkbox') {
-                if (value) setCheckSpan(input,true);
-                else setCheckSpan(input,false);}
-            else if (input.type==='radio') {
-                if (value===input.value) setCheckSpan(input,true);
-                else setCheckSpan(input,false);}
-            else input.value=value;}
+        if (Trace.config) fdjtLog("setConfig%s %o=%o",cxt,name,value);
         if (!((current_config.hasOwnProperty(name))&&
               (current_config[name]===value))) {
             if (config_handlers[name]) {
                 if (Trace.config)
-                    fdjtLog("setConfig (handler=%s) %o=%o",
-                            config_handlers[name],name,value);
+                    fdjtLog("setConfig%s (handler=%s) %o=%o",
+                            cxt,config_handlers[name],name,value);
                 config_handlers[name](name,value);}
             else if (Trace.config)
-                fdjtLog("setConfig (no handler) %o=%o",name,value);
-            else {}}
+                fdjtLog("setConfig%s (no handler) %o=%o",cxt,name,value);
+            else {}
+            current_config[name]=value;}
         else if (Trace.config)
-            fdjtLog("Redundant setConfig %o=%o",name,value);
+            fdjtLog("Redundant setConfig%s %o=%o",cxt,name,value);
         else {}
-        if (current_config[name]!==value) {
-            current_config[name]=value;
-            if ((!(save))&&(inputs.length))
-                fdjtDOM.addClass("METABOOKSETTINGS","changed");}
         if ((save)&&(saved_config[name]!==value)) {
             saved_config[name]=value;
             saveConfig(saved_config);}}
@@ -144,41 +132,46 @@
                 saved[setting]=config[setting];}}
         if (Trace.config) fdjtLog("Saving config %o",saved);
         saveLocal("metabook.config("+mB.docuri+")",JSON.stringify(saved));
-        fdjtDOM.dropClass("METABOOKSETTINGS","changed");
         saved_config=saved;}
     metaBook.saveConfig=saveConfig;
 
     function initConfig(){
-        var setting, started=fdjtTime(); // changed=false;
+        var setting, value, source, started=fdjtTime(); // changed=false;
         var config=getLocal("metabook.config("+mB.docuri+")",true)||
             fdjtState.getSession("metabook.config("+mB.docuri+")",
                                  true);
         metaBook.postconfig=[];
         if (config) {
+            if (Trace.config) fdjtLog("initConfig local=%j",config);
             for (setting in config) {
-                if ((config.hasOwnProperty(setting))&&
-                    (!(getQuery(setting)))) {
+                if (config.hasOwnProperty(setting)) {
                     // if ((!(default_config.hasOwnProperty(setting)))||
                     //    (config[setting]!==default_config[setting]))
                     //    changed=true;
-                    setConfig(setting,config[setting]);}}}
+                    if (getQuery(setting)) {
+                        value=getQuery(setting); source="initConfig/QUERY";}
+                    else {
+                        value=config[setting]; source="initConfig/local";}
+                    setConfig(setting,value,false,source);
+                    metaBook.updateSettings(setting,value);}}}
         else config={};
-        if (Trace.config)
-            fdjtLog("initConfig (default) %j",default_config);
+        if (Trace.config) fdjtLog("initConfig default=%j",default_config);
         for (setting in default_config) {
-            if (!(config.hasOwnProperty(setting)))
-                if (default_config.hasOwnProperty(setting)) {
-                    if (getQuery(setting))
-                        setConfig(setting,getQuery(setting));
-                    else if (getMeta("METABOOK."+setting))
-                        setConfig(setting,getMeta("METABOOK."+setting));
-                    else setConfig(setting,default_config[setting]);}}
+            if ((default_config.hasOwnProperty(setting))&&
+                (!((config.hasOwnProperty(setting))||(getQuery(setting))))) {
+                if (getMeta("METABOOK."+setting)) {
+                    value=getMeta("METABOOK."+setting);
+                    source="initConfig/HTML";}
+                else {
+                    value=default_config[setting];
+                    source="initConfig/appdefaults";}
+                setConfig(setting,value,false,"initConfig/HTML");
+                setConfig(setting,value,false,source);
+                metaBook.updateSettings(setting,value);}}
         var dopost=metaBook.postconfig;
         metaBook.postconfig=false;
         var i=0; var lim=dopost.length;
         while (i<lim) dopost[i++]();
-        
-        // if (changed) fdjtDOM.addClass("METABOOKSETTINGS","changed");
         
         var devicename=current_config.devicename;
         if ((devicename)&&(!(isEmpty(devicename))))
@@ -200,10 +193,9 @@
             (id);
         if (Trace.config) fdjtLog("Update config %s",name);
         if ((elt.type==='radio')||(elt.type==='checkbox'))
-            setConfig(name,elt.checked||false,save);
-        else setConfig(name,elt.value,save);}
+            setConfig(name,elt.checked||false,save,"updateConfig/checked");
+        else setConfig(name,elt.value,save,"updateConfig/input");}
     metaBook.updateConfig=updateConfig;
-
 
     function metabookPropConfig(name,value){
         metaBook[name]=value;}
@@ -229,7 +221,7 @@
         metaBook.taptapmsecs=value;
         fdjtUI.TapHold.default_opts.taptapthresh=value;});
 
-    metaBook.addConfig("syncinterval",function(name,value){
+    metaBook.addConfig("checksync",function(name,value){
         metaBook.sync_interval=value;
         if (metaBook.synctock) {
             clearInterval(metaBook.synctock);
@@ -251,14 +243,69 @@
             metaBook.synctock=setInterval(
                 metaBook.syncState,(metaBook.sync_interval)*1000);
         else {}
-        metaBook.locsync=value;});
+        metaBook.locsync=value;
+        fdjt.Async(function(){metaBook.updateSettings(name,value);});});
     
+    function configChange(evt){
+        evt=evt||window.event;
+        var target=fdjtUI.T(evt);
+        var setting=target.name, val=target.value;
+        var cur=current_config[setting];
+        if ((target.checked)&&(cur===val)) return;
+        else if (target.checked)
+            setConfig(setting,val,true,"configChange");
+        else if (target.type==="checkbox")
+            setConfig(setting,"",true,"configChange");
+        else {}}
+    metaBook.configChange=configChange;
+
     function applyMetaClass(name,metaname){
         if (!(metaname)) metaname=name;
         var meta=getMeta(metaname,true);
         var i=0; var lim=meta.length;
         while (i<lim) fdjtDOM.addClass(fdjtDOM.$(meta[i++]),name);}
     metaBook.applyMetaClass=applyMetaClass;
+
+    function updateSettings(setting,value){
+        var forms=fdjtDOM.$(".metabooksettings");
+        var i=0, n_forms=forms.length; while (i<n_forms) {
+            var form=forms[i++];
+            var inputs=getChildren(
+                form,"input[type='CHECKBOX'],input[type='RADIO']");
+            var toset=[], toclear=[];
+            var j=0, n_inputs=inputs.length, input=false;
+            while (j<n_inputs) {
+                input=inputs[j++];
+                if (input.name===setting) {
+                    if (input.value===value) toset.push(input);
+                    else toclear.push(input);}}
+            j=0; n_inputs=toset.length; while (j<n_inputs) {
+                input=toset[j++];
+                if (input.checked) continue;
+                if (getParent(input,".checkspan")) 
+                    fdjt.UI.CheckSpan.set(input,true);
+                else input.checked=true;}
+            j=0; n_inputs=toclear.length; while (j<n_inputs) {
+                input=toclear[j++];
+                if ((!(input.checked))&&
+                    (typeof input.checked !== "undefined"))
+                    continue;
+                if (getParent(input,".checkspan"))
+                    fdjt.UI.CheckSpan.set(input,false);
+                else input.checked=false;}
+            j=0; n_inputs=toset.length; while (j<n_inputs) {
+                input=toset[j++];
+                if (input.checked) continue;
+                if (getParent(input,".checkspan")) 
+                    fdjt.UI.CheckSpan.set(input,true);
+                else input.checked=true;}}}
+    metaBook.updateSettings=updateSettings;
+
+    function initSettings(){
+        for (var setting in current_config) {
+            if (current_config.hasOwnProperty(setting))
+                updateSettings(setting,current_config[setting]);}}
+    metaBook.initSettings=initSettings;
 
 })();
 

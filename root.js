@@ -152,21 +152,21 @@ var metaBook={
     default_config: {
         layout: 'bypage',forcelayout: false,
         bodysize: 'normal',bodyfamily: 'serif',
-        bodycontrast: 'high', justify: false,
+        bodycontrast: 'high', textjustify: false,
         linespacing: 'normal',
         uisize: 'normal',dyslexical: false,
         animatecontent: true,animatehud: true,
         hidesplash: false,keyboardhelp: true,
         holdmsecs: 150,wandermsecs: 1500,
-        syncinterval: 60,glossupdate: 5*60,
-        locsync: 15, cacheglosses: true,
+        locsync: true, syncinterval: 60, checksync: 15*60,
+        glossupdate: 5*60,cacheglosses: true,
         soundeffects: false, buzzeffects: false,
         showconsole: false,devmode: false,
         controlc: false},
     // What to trace, for debugging
     Trace: {
         startup: 0,       // Whether to trace startup
-        config: 0,        // Whether to trace config setup/modification/etc
+        config: 2,        // Whether to trace config setup/modification/etc
         mode: false,      // Whether to trace mode changes
         nav: false,       // Whether to trace book navigation
         domscan: 0,       // How much to trace initial DOM scanning

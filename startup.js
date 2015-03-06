@@ -284,6 +284,8 @@ metaBook.Startup=
             setupZoom();
             setupMedia();
 
+            metaBook.initSettings();
+
             if (metaBook.refuri) {
                 var refuris=document.getElementsByName("REFURI");
                 if (refuris) {
@@ -295,7 +297,10 @@ metaBook.Startup=
 
             metaBook.addConfig(
                 "cacheglosses",
-                function(name,value){metaBook.cacheGlosses(value);});
+                function(name,value){
+                    metaBook.cacheGlosses(value);
+                    fdjt.Async(function(){
+                        metaBook.updateSettings(name,value);});});
 
             imageSetup();
 
@@ -1073,8 +1078,9 @@ metaBook.Startup=
             if (!(value))
                 dropClass(mbody,/\bmetabookcontrast[a-z]+\b/g);
             else swapClass(mbody,/\bmetabookcontrast[a-z]+\b/g,
-                           "metabookcontrast"+value);});
-        
+                           "metabookcontrast"+value);
+            fdjt.Async(function(){
+                metaBook.updateSettings(name,value);});});
         
         /* Enable Open Sans */
         var open_sans_stack=

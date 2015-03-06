@@ -1,15 +1,6 @@
 <form onsubmit="fdjt.UI.cancel(event); return false;" class="metabooksettings">
   <h1 class="cf">
-    <span class="button" id="METABOOKSAVESETTINGS">Save</span>
-    <span class="button" id="METABOOKAPPLYSETTINGS">Apply</span>
-    <!--
-        <span class="exit button" id="METABOOKLOGOUT"
-              title="Logout of sBooks and erase any local data">Logout</span>
-        <span class="button" id="METABOOKRESETSETTINGS">Reset</span>
-        -->
     Settings
-    <span class="message metabooksettingschanged">
-      Your changes have been applied but not saved</span>
     <span class="message" ID="METABOOKSETTINGSMESSAGE"></span></h1>
   <div class="fontsizes body"
        title="Set the font sizes used for the body text.">
@@ -21,23 +12,23 @@
         Layout</button></span>
     <span class="samples">
       <span class="checkspan">
-        <input TYPE="RADIO" NAME="METABOOKBODYSIZE"
+        <input TYPE="RADIO" NAME="bodysize"
                VALUE="xlarge"/>
         <span class="sample xlarge">Aa</span></span>
       <span class="checkspan">
-        <input TYPE="RADIO" NAME="METABOOKBODYSIZE" 
+        <input TYPE="RADIO" NAME="bodysize" 
                VALUE="large"/>
         <span class="sample large">Aa</span></span>
       <span class="checkspan">
-        <input TYPE="RADIO" NAME="METABOOKBODYSIZE" 
+        <input TYPE="RADIO" NAME="bodysize" 
                VALUE="normal"/>
         <span class="sample normal">Aa</span></span>
       <span class="checkspan">
-        <input TYPE="RADIO" NAME="METABOOKBODYSIZE" 
+        <input TYPE="RADIO" NAME="bodysize" 
                VALUE="small"/>
         <span class="sample small">Aa</span></span>
       <span class="checkspan">
-        <input TYPE="RADIO" NAME="METABOOKBODYSIZE"
+        <input TYPE="RADIO" NAME="bodysize"
                VALUE="tiny"/>
         <span class="sample tiny">Aa</span></span>
     </span>
@@ -46,15 +37,15 @@
        title="Select the contrast level for body text">
     <span class="label smaller">Text Contrast</span>
     <span class="checkspan highcontrast">
-      <input TYPE="RADIO" NAME="METABOOKBODYCONTRAST"
+      <input TYPE="RADIO" NAME="bodycontrast"
              VALUE="high"/>
       <span class="sample">High</span></span>
     <span class="checkspan normalcontrast">
-      <input TYPE="RADIO" NAME="METABOOKBODYCONTRAST" 
+      <input TYPE="RADIO" NAME="bodycontrast" 
              VALUE="medium"/>
       <span class="sample">Normal</span></span>
     <span class="checkspan lowcontrast">
-      <input TYPE="RADIO" NAME="METABOOKBODYCONTRAST"
+      <input TYPE="RADIO" NAME="bodycontrast"
              VALUE="low"/>
       <span class="sample">Low</span></span>
   </div>
@@ -79,8 +70,7 @@
     <span class="label smaller">Other Options</span>
     <span class="checkspan opendyslexical"
           title="OpenDyslexic is a font designed to increase readability for readers with dyslexia">
-      <input TYPE="CHECKBOX" NAME="METABOOKDYSLEXICAL"
-             VALUE="yes"/>
+      <input TYPE="CHECKBOX" NAME="dyslexical" VALUE="yes"/>
       <span class="text">Use OpenDyslexic font</span>
       <a href="http://opendyslexic.org/"
          title="The Open Dyslexic font site">(about)</a>
@@ -88,7 +78,7 @@
     <span class="sep">//</span>
     <span class="checkspan justify"
           title="left/right justify paragraphs of body text">
-      <input TYPE="CHECKBOX" NAME="METABOOKJUSTIFY" 
+      <input TYPE="CHECKBOX" NAME="justifytext" 
              VALUE="true"/>
       Justify paragraphs</span>
   </div>
@@ -97,29 +87,23 @@
     <span class="label">App font</span>
     <span class="samples">
       <span class="checkspan">
-        <input TYPE="RADIO" NAME="METABOOKUISIZE" VALUE="xlarge"/>
+        <input TYPE="RADIO" NAME="uisize" VALUE="large"/>
         <span class="sample xlarge">Aa</span></span>
       <span class="checkspan">
-        <input TYPE="RADIO" NAME="METABOOKUISIZE" VALUE="large"/>
-        <span class="sample large">Aa</span></span>
-      <span class="checkspan">
-        <input TYPE="RADIO" NAME="METABOOKUISIZE" VALUE="normal"/>
+        <input TYPE="RADIO" NAME="uisize" VALUE="normal"/>
         <span class="sample normal">Aa</span></span>
       <span class="checkspan">
-        <input TYPE="RADIO" NAME="METABOOKUISIZE" VALUE="small"/>
+        <input TYPE="RADIO" NAME="uisize" VALUE="small"/>
         <span class="sample small">Aa</span></span>
-      <span class="checkspan">
-        <input TYPE="RADIO" NAME="METABOOKUISIZE" VALUE="tiny"/>
-        <span class="sample tiny">Aa</span></span>
     </span>
   </div>
   <div class="animation">
     <span class="label smaller">Animate</span>
     <span class="checkspan">
-      <input TYPE="CHECKBOX" NAME="METABOOKANIMATECONTENT" VALUE="true"/>
+      <input TYPE="CHECKBOX" NAME="animatecontent" VALUE="true"/>
       <span class="text">content (page flips, etc)</span></span>
     <span class="checkspan">
-      <input TYPE="CHECKBOX" NAME="METABOOKANIMATEHUD" VALUE="true"/>
+      <input TYPE="CHECKBOX" NAME="animatehud" VALUE="true"/>
       <span class="text">interface (overlays, controls, etc)</span></span>
   </div>
   <div class="header dataheader cf">
@@ -132,7 +116,7 @@
             title="Reset synchronized location information.">
       <img src="{{bmg}}/metabook/reset.svgz" alt=""/>
       Reset</button>
-    <input TYPE="CHECKBOX" NAME="METABOOKLOCSYNC" VALUE="true"/>
+    <input TYPE="CHECKBOX" NAME="locsync" VALUE="true"/>
     <span class="text">
       Sync your reading location with other devices</span>
   </div>

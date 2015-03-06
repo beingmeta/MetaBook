@@ -97,7 +97,7 @@
     var fdjtID=fdjt.ID;
     var mbID=metaBook.ID;
 
-    // Imports (kind of )
+    // Imports (kind of)
     var addClass=fdjtDOM.addClass;
     var hasClass=fdjtDOM.hasClass;
     var dropClass=fdjtDOM.dropClass;
@@ -1828,14 +1828,6 @@
         evt=evt||window.event; cancel(evt); metaBook.clearOffline();}
     function consolefn(evt){
         evt=evt||window.event; metaBook.consolefn(evt);}
-    function saveSettings(evt){
-        evt=evt||window.event; metaBook.UI.settingsSave(evt);}
-    function applySettings(evt){
-        evt=evt||window.event; metaBook.UI.settingsOK(evt);}
-    function resetSettings(evt){
-        evt=evt||window.event; metaBook.UI.settingsReset(evt);}
-    function updateSettings(evt){
-        evt=evt||window.event; metaBook.UI.settingsUpdate(evt);}
 
     var devmode_click=false;
     function toggleDevMode(evt){
@@ -1947,11 +1939,6 @@
              blur: function(){
                  fdjt.DOM.dropClass('METABOOKCONSOLEINPUT','uptop');}},
          "#METABOOKCONSOLEBUTTON": {click: consolefn},
-         "#METABOOKSAVESETTINGS": {click: saveSettings},
-         "#METABOOKAPPLYSETTINGS": {click: applySettings},
-         // "#METABOOKWIPE": {click: wipeBook},
-         "#METABOOKRESETSETTINGS": {click: resetSettings},
-         "#METABOOKSETTINGSTABLE": {},
          "#METABOOKREFRESHOFFLINE": {click: refreshOffline},
          "#METABOOKREFRESHLAYOUT": {click: refreshLayout},
          "#METABOOKRESETSYNC": {click: resetState},
@@ -1980,7 +1967,10 @@
                  metaBook.UI.handlers.everyone_ontap(evt);
                  fdjt.UI.cancel(event);}},
          "#METABOOKINFOPANEL": {
-             click: toggleDevMode}});
+             click: toggleDevMode},
+         ".metabooksettings input[type='RADIO'],.metabooksettings input[type='CHECKBOX']": {
+             change: mB.configChange}
+        });
 
     fdjt.DOM.defListeners(
         metaBook.UI.handlers.touch,
@@ -2083,16 +2073,6 @@
 
          "#METABOOKCONSOLEBUTTON": {
              touchstart: cancel, touchend: consolefn},
-         "#METABOOKSAVESETTINGS": {
-             touchstart: cancel, touchend: saveSettings},
-         "#METABOOKAPPLYSETTINGS": {
-             touchstart: cancel,
-             touchend: updateSettings},
-         // "#METABOOKWIPE": {touchstart: cancel, touchend: wipeBook},
-         "#METABOOKRESETSETTINGS": {
-             touchstart: cancel,
-             touchend: resetSettings},
-         "#METABOOKSETTINGSTABLE": {},
          "#METABOOKREFRESHOFFLINE": {
              touchstart: cancel, touchend: refreshOffline},
          "#METABOOKREFRESHLAYOUT": {

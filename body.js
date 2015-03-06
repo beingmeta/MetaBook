@@ -168,7 +168,7 @@
         if (!(metaBook.body)) {
             var cxbody=metaBook.body=
                 fdjtDOM("div#METABOOKBODY.metabookbody",content,page);
-            if (metaBook.justify) addClass(cxbody,"metabookjustify");
+            if (metaBook.textjustify) addClass(cxbody,"metabookjustify");
             if (metaBook.bodycontrast)
                 addClass(cxbody,"metabookcontrast"+metaBook.bodycontrast);
             if (metaBook.bodysize)

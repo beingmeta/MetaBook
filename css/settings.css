@@ -34,6 +34,10 @@
 body form.metabooksettings h1 { 
     margin-top: 0px; margin-bottom: 0.25ex;
     text-align: left;}
+form.metabooksettings > h1 + div.fontsizes {
+    margin-top: 0px;}
+
+form.metabooksettings {font-size: 1rem;}
 
 form.metabooksettings button, form.metabooksettings .button {
     font-size: 1.2rem; cursor: pointer;}
@@ -75,9 +79,6 @@ form.metabooksettings .button.exit {
 .metabooksettings .metabooksettingschanged {
     color: red; display: none;}
 .metabooksettings.changed .metabooksettingschanged { display: block;}
-
-form.metabooksettings {
-    max-width: 50em; margin-left: auto; margin-right: auto;}
 
 form.metabooksettings > div {
     display: block; clear: both; 
@@ -146,11 +147,11 @@ form.metabooksettings div.fontsizes
   span.checkspan input[TYPE="RADIO"] { display: none; }
 form.metabooksettings div.fontsizes span.checkspan.ischecked {
     border-color: blue; }
-form.metabooksettings div.fontsizes span.sample.xlarge { font-size: 220%; }
+form.metabooksettings div.fontsizes span.sample.xlarge { font-size: 225%; }
 form.metabooksettings div.fontsizes span.sample.large { font-size: 180%; }
 form.metabooksettings div.fontsizes span.sample.normal { font-size: 150%; }
 form.metabooksettings div.fontsizes span.sample.small { font-size: 100%; }
-form.metabooksettings div.fontsizes span.sample.tiny { font-size: 80%; }
+form.metabooksettings div.fontsizes span.sample.tiny { font-size: 75%; }
 
 form.metabooksettings > div.checkspan {
     white-space: normal; margin-top: 0.5ex;}

@@ -151,10 +151,11 @@ metaBook.Paginate=
             var forced=((init)&&(init.forced));
             var geom=getGeometry(fdjtID("CODEXPAGE"),false,true);
             var height=geom.inner_height, width=geom.width;
-            var justify=metaBook.justify;
+            var justify=metaBook.textjustify;
             var spacing=metaBook.bodyspacing;
             var size=metaBook.bodysize||"normal";
-            var dyslexical=metaBook.dyslexical||false;
+            var family=(metaBook.dyslexical)?("opendyslexic"):
+                (metaBook.bodyfamily||"default");
             if ((!(metaBook.layout))&&(Trace.startup))
                 fdjtLog("Page layout requires %dx%d %s pages",
                         width,height,size);
@@ -164,7 +165,7 @@ metaBook.Paginate=
                     (width===current.width)&&
                     (height===current.height)&&
                     (size===current.bodysize)&&
-                    (dyslexical===current.dyslexical)&&
+                    (family===current.bodyfamily)&&
                     ((!(spacing))||(spacing===current.bodyspacing))&&
                     (((justify)&&(current.justify))||
                      ((!justify)&&(!current.justify)))) {
@@ -182,7 +183,7 @@ metaBook.Paginate=
             // Create a new layout
             var layout_args=getLayoutArgs();
             var layout=new CodexLayout(layout_args);
-            layout.bodysize=size; layout.dyslexical=dyslexical;
+            layout.bodysize=size; layout.bodyfamily=family;
             metaBook.layout=layout;
             
             var layout_id=layout.layout_id;
@@ -413,12 +414,15 @@ metaBook.Paginate=
                     metaBook.postconfig.push(function(){
                         metaBook.Paginate(name);});}
                 else {
-                    metaBook.Paginate(name);}}}
+                    metaBook.Paginate(name);}}
+            fdjt.Async(function(){metaBook.updateSettings(name,val);});}
         metaBook.addConfig("bodysize",updateLayoutProperty);
+        metaBook.addConfig("bodyfamily",updateLayoutProperty);
         metaBook.addConfig("bodyspacing",updateLayoutProperty);
-        metaBook.addConfig("justify",updateLayoutProperty);
+        metaBook.addConfig("textjustify",updateLayoutProperty);
         
-        function getLayoutID(width,height,dyslexical,size,spacing,justify,source_id){
+        function getLayoutID(width,height,family,size,spacing,
+                             justify,source_id){
             var page=fdjtID("CODEXPAGE");
             var left=page.style.left, right=page.style.right;
             var layout_source=fdjt.CodexLayout.sourcehash;
@@ -430,11 +434,11 @@ metaBook.Paginate=
             if (!(size)) size=metaBook.bodysize||"normal";
             if (!(source_id))
                 source_id=metaBook.sourceid||fdjtHash.hex_md5(metaBook.docuri);
-            if (!(justify)) justify=metaBook.justify;
-            if (!(spacing)) justify=metaBook.bodyspacing;
+            if (!(justify)) justify=metaBook.textjustify;
+            if (!(spacing)) spacing=metaBook.bodyspacing;
             page.style.left=left; page.style.right=right;
             return fdjtString("%dx%d-%s-%s%s%s(%s)%s",
-                              width,height,((dyslexical)?("dyslexical"):("")),size,
+                              width,height,((family)?(family):("")),size,
                               ((spacing)?("-"+spacing):("")),
                               ((justify)?("-j"):("")),
                               // Layout depends on the actual file ID,
@@ -473,14 +477,15 @@ metaBook.Paginate=
             var height=getGeometry(fdjtID("CODEXPAGE"),false,true).inner_height;
             var origin=fdjtDOM("div#CODEXCONTENT");
             var container=fdjtDOM("div.metabookpages#METABOOKPAGES");
-            var dyslexical=metaBook.dyslexical||false;
+            var bodyfamily=(metaBook.dyslexical)?("opendyslexic"):
+                (metaBook.bodyfamily||"default");
             var bodysize=metaBook.bodysize||"normal";
             var sourceid=metaBook.sourceid||fdjtHash.hex_md5(metaBook.docuri);
-            var justify=metaBook.justify;
+            var justify=metaBook.textjustify;
             var sourcehash=fdjt.CodexLayout.sourcehash;
             var layout_id=fdjtString(
                 "%dx%d-%s-%s%s(%s)%s",
-                width,height,((dyslexical)?("dyslexical"):("")),bodysize,
+                width,height,bodyfamily,bodysize,
                 ((justify)?("-j"):("")),
                 // Layout depends on the actual file ID, if we've got
                 // one, rather than just the REFURI

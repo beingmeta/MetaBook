@@ -103,7 +103,8 @@ metaBook.setMode=
                 fdjtDOM.prepend(document.body,frame);}
             addClass(frame,"metabookframe");
             frame.appendChild(messages); frame.appendChild(hud);
-
+            if (metaBook.getConfig("uisize"))
+                addClass(frame,"metabookuifont"+metaBook.getConfig("uisize"));
             metaBook.Frame=frame;
             // Fill in the HUD help
             var hudhelp=fdjtID("METABOOKHUDHELP");
@@ -815,7 +816,10 @@ metaBook.setMode=
 
         metaBook.addConfig("uisize",function(name,value){
             fdjtDOM.swapClass(
-                metaBook.Frame,/metabookuifont\w+/g,"metabookuifont"+value);});
+                metaBook.Frame,/metabookuifont\w+/g,"metabookuifont"+value);
+            fdjt.Async(function(){metaBook.resizeUI();});
+            fdjt.Async(function(){
+                metaBook.updateSettings(name,value);});});
         metaBook.addConfig("dyslexical",function(name,value){
             if ((value)&&(typeof value === 'string')&&(/yes|on|t/i.exec(value))) {
                 if (hasClass(document.body,"_DYSLEXICAL")) return;
@@ -825,116 +829,26 @@ metaBook.setMode=
             else if (!(hasClass(document.body,"_DYSLEXICAL")))
                 return;
             else {
-                metaBook.dyslexical=true;
+                metaBook.dyslexical=false;
                 fdjtDOM.dropClass(document.body,"_DYSLEXICAL");}
-            setTimeout(function(){
+            fdjt.Async(function(){
                 metaBook.resizeUI();
                 if (metaBook.layout) metaBook.Paginate("typechange");},
                        10);});
         metaBook.addConfig("animatecontent",function(name,value){
             if (metaBook.dontanimate) {}
             else if (value) addClass(document.body,"_ANIMATE");
-            else dropClass(metaBook.page,"_ANIMATE");});
+            else dropClass(metaBook.page,"_ANIMATE");
+            fdjt.Async(function(){
+                metaBook.updateSettings(name,value);});});
         metaBook.addConfig("animatehud",function(name,value){
             if (metaBook.dontanimate) {}
             else if (value) addClass("METABOOKFRAME","_ANIMATE");
-            else dropClass("METABOOKFRAME","_ANIMATE");});
+            else dropClass("METABOOKFRAME","_ANIMATE");
+            fdjt.Async(function(){
+                metaBook.updateSettings(name,value);});});
 
         /* Settings apply/save handlers */
-
-        function getSettings(settings){
-            
-            if (!(settings)) settings=fdjtID("METABOOKSETTINGS");
-            var result={};
-            var layout=fdjtDOM.getInputValues(settings,"METABOOKLAYOUT");
-            result.layout=
-                ((layout)&&(layout.length)&&(layout[0]))||false;
-            var bodysize=fdjtDOM.getInputValues(settings,"METABOOKBODYSIZE");
-            if ((bodysize)&&(bodysize.length))
-                result.bodysize=bodysize[0];
-            var uisize=fdjtDOM.getInputValues(settings,"METABOOKUISIZE");
-            if ((uisize)&&(uisize.length))
-                result.uisize=uisize[0];
-            var contrast=
-                fdjtDOM.getInputValues(settings,"METABOOKBODYCONTRAST");
-            if ((contrast)&&(contrast.length))
-                result.bodycontrast=contrast[0];
-            var dyslexical=
-                fdjtDOM.getInputValues(settings,"METABOOKDYSLEXICAL");
-            if ((dyslexical)&&(dyslexical.length))
-                result.dyslexical=dyslexical[0];
-            else result.dyslexical=false;
-            var hidesplash=
-                fdjtDOM.getInputValues(settings,"METABOOKHIDESPLASH");
-            result.hidesplash=((hidesplash)&&(hidesplash.length))||false;
-            var showconsole=
-                fdjtDOM.getInputValues(settings,"METABOOKSHOWCONSOLE");
-            result.showconsole=
-                ((showconsole)&&(showconsole.length)&&(true))||false;
-            var locsync=fdjtDOM.getInputValues(settings,"METABOOKLOCSYNC");
-            if ((locsync)&&(locsync.length)) result.locsync=true;
-            var justify=fdjtDOM.getInputValues(settings,"METABOOKJUSTIFY");
-            if ((justify)&&(justify.length)) result.justify=true;
-            else result.justify=false;
-            var cacheglosses=
-                fdjtDOM.getInputValues(settings,"METABOOKCACHEGLOSSES");
-            if ((cacheglosses)&&(cacheglosses.length))
-                result.cacheglosses=true;
-            else result.cacheglosses=false;
-            var animatecontent=fdjtDOM.getInputValues(
-                settings,"METABOOKANIMATECONTENT");
-            result.animatecontent=
-                (((animatecontent)&&(animatecontent.length)&&
-                  (animatecontent[0]))?
-                 (true):(false));
-            var animatehud=fdjtDOM.getInputValues(
-                settings,"METABOOKANIMATEHUD");
-            result.animatehud=
-                (((animatehud)&&(animatehud.length)&&(animatehud[0]))?
-                 (true):(false));
-            
-            return result;}
-
-        metaBook.UI.settingsUpdate=function(){
-            var settings=getSettings();
-            metaBook.setConfig(settings);};
-
-        metaBook.UI.settingsSave=function(evt){
-            if (typeof evt === "undefined") evt=window.event;
-            if (evt) fdjt.UI.cancel(evt);
-            var settings=getSettings();
-            metaBook.setConfig(settings);
-            metaBook.saveConfig(settings);
-            fdjtDOM.dropClass("METABOOKSETTINGS","changed");
-            fdjtDOM.replace("METABOOKSETTINGSMESSAGE",
-                            fdjtDOM("span.message#METABOOKSETTINGSMESSAGE",
-                                    "Your settings have been saved."));};
-
-        metaBook.UI.settingsReset=function(evt){
-            if (typeof evt === "undefined") evt=window.event;
-            if (evt) fdjt.UI.cancel(evt);
-            metaBook.resetConfig();
-            fdjtDOM.dropClass("METABOOKSETTINGS","changed");
-            fdjtDOM.replace("METABOOKSETTINGSMESSAGE",
-                            fdjtDOM("span.message#METABOOKSETTINGSMESSAGE",
-                                    "Your settings have been reset."));};
-
-        metaBook.UI.settingsOK=function(evt){
-            if (typeof evt === "undefined") evt=window.event;
-            if (evt) fdjt.UI.cancel(evt);
-            var settings=getSettings();
-            metaBook.setConfig(settings);
-            fdjtDOM.replace("METABOOKSETTINGSMESSAGE",
-                            fdjtDOM("span.message#METABOOKSETTINGSMESSAGE",
-                                    "Your settings have been applied."));};
-        
-        metaBook.UI.settingsCancel=function(evt){
-            if (typeof evt === "undefined") evt=window.event;
-            if (evt) fdjt.UI.cancel(evt);
-            metaBook.setConfig(metaBook.getConfig());
-            fdjtDOM.replace("METABOOKSETTINGSMESSAGE",
-                            fdjtDOM("span.message#METABOOKSETTINGSMESSAGE",
-                                    "Your changes have been discarded."));};
 
         function keyboardHelp(arg,force){
             if (arg===true) {
