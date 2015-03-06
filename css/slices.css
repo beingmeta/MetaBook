@@ -50,6 +50,13 @@ div.metabookslice div.metabookcard.skimpoint .fdjtclearfloats {
 
 div.metabookslice.pager div.pagernav {
     border-bottom: solid black 1px;}
+._TOUCH div.metabookslice.pager div.pagernav {
+    font-size: 200%;}
+div.metabookslice.pager.hudpanel div.pagernav {
+    position: absolute; bottom: 0px;
+    border-top: solid black 1px;}
+div.metabookslice.pager.hudpanel div.pagernav>span {
+    border-bottom: 0px; border-top: solid black 1ex;}
 
 /* METABOOKSOURCES */
 
