@@ -40,6 +40,9 @@ body._BYPAGE { overflow: hidden; }
 body._BYPAGE #CODEXCONTENT { display: none;}
 body.mbLAYOUT #CODEXCONTENT { display: none;}
 
+.inlinesymbol { font-size: 120%; vertical-align: baseline;}
+.inlinesymbol img { height: 1.5ex; width: auto;}
+
 /* The page content gets a little transparent when the HUD comes up*/
 body._ANIMATE.hudup #CODEXPAGE {
     transition-property: opacity;

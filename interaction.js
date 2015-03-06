@@ -88,6 +88,7 @@
     var mB=metaBook;
     var Trace=mB.Trace;
     var fdjtString=fdjt.String;
+    var fdjtState=fdjt.State;
     var fdjtTime=fdjt.Time;
     var fdjtLog=fdjt.Log;
     var fdjtDOM=fdjt.DOM;
@@ -1797,28 +1798,32 @@
     metaBook.lowerHUD=lowerHUD;
 
     function saveGloss(evt){
-        evt=evt||window.event; metaBook.submitGloss();}
+        evt=evt||window.event;
+        metaBook.submitGloss();}
     function refreshLayout(evt){
-        evt=evt||window.event; cancel(evt); metaBook.refreshLayout();}
+        evt=evt||window.event; cancel(evt);
+        metaBook.refreshLayout();}
     function resetState(evt){
         evt=evt||window.event; cancel(evt);
         fdjtUI.choose(
-            {choices: [{label: "OK",default: true,
+            {choices: [{label: "OK",isdefault: true,
                         handler: function(){
                             metaBook.resetState();}},
                        {label: "Cancel"}],
-             spec: "div.fdjtdialog"},
-            "Set this location as latest and furthest location ",
-            "on all synchronized devices");}
+             spec: "div.fdjtdialog.mbsettings"},
+            "Mark current location as ",
+            fdjtDOM("em","latest")," and ",
+            fdjtDOM("em","farthest"),"?",
+            ((mB.locsync)&&("for all syncing devices")));}
     function refreshOffline(evt){
         evt=evt||window.event; cancel(evt);
         fdjtUI.choose(
-            {choices: [{label: "OK",default: true,
+            {choices: [{label: "OK",isdefault: true,
                         handler: function(){
                             metaBook.refreshOffline();}},
                        {label: "Cancel"}],
-             spec: "div.fdjtdialog"},
-            "Erase and reload all glosses and layers for this title");}
+             spec: "div.fdjtdialog.mbsettings"},
+            "Reload all glosses and layers?");}
     function clearOffline(evt){
         evt=evt||window.event; cancel(evt); metaBook.clearOffline();}
     function consolefn(evt){
@@ -1831,6 +1836,25 @@
         evt=evt||window.event; metaBook.UI.settingsReset(evt);}
     function updateSettings(evt){
         evt=evt||window.event; metaBook.UI.settingsUpdate(evt);}
+
+    var devmode_click=false;
+    function toggleDevMode(evt){
+        fdjtLog("toggleDevMode %o",evt);
+        if (devmode_click) {
+            var now=fdjtTime();
+            if ((now-devmode_click)<1000) {
+                if (metaBook.devmode)  {
+                    metaBook.devmode=false;
+                    fdjtState.dropLocal("metabook.devmode");
+                    dropClass(document.documentElement,"_DEVMODE");}
+                else {
+                    metaBook.devmode=true;
+                    fdjtState.setLocal("metabook.devmode",true);
+                    addClass(document.documentElement,"_DEVMODE");}
+                devmode_click=false;}
+            else devmode_click=now;}
+        else devmode_click=fdjtTime();
+        fdjtUI.cancel(evt);}
 
     fdjt.DOM.defListeners(
         metaBook.UI.handlers.mouse,
@@ -1954,7 +1978,9 @@
              click: function(evt){
                  evt=evt||window.event;
                  metaBook.UI.handlers.everyone_ontap(evt);
-                 fdjt.UI.cancel(event);}}});
+                 fdjt.UI.cancel(event);}},
+         "#METABOOKINFOPANEL": {
+             click: toggleDevMode}});
 
     fdjt.DOM.defListeners(
         metaBook.UI.handlers.touch,
@@ -2102,7 +2128,9 @@
              touchend: function(evt){
                  evt=evt||window.event;
                  metaBook.UI.handlers.everyone_ontap(evt);
-                 fdjt.UI.cancel(event);}}});
+                 fdjt.UI.cancel(event);}},
+         "#METABOOKINFOPANEL": {
+             click: toggleDevMode}});
     
 })();
 

@@ -138,7 +138,9 @@ metaBook.Startup=
             fdjtLog("Book %s (%s) %s (%s%s)",
                     mB.docref||"@??",mB.bookbuild||"",
                     mB.refuri,mB.sourceid,
-                    ((mB.sourcetime)?(": "+mB.sourcetime):("")));
+                    ((mB.sourcetime)?
+                     (": "+mB.sourcetime.toString()):
+                     ("")));
             
             // Initialize the databases
             metaBook.initDB();
@@ -254,6 +256,10 @@ metaBook.Startup=
                 metaBook.server=fdjtState.getCookie("SBOOKSERVER");
             else metaBook.server=lookupServer(document.domain);
             if (!(metaBook.server)) metaBook.server=metaBook.default_server;
+
+            if (fdjtState.getLocal("metabook.devmode")) {
+                addClass(document.documentElement,"_DEVMODE");
+                metaBook.devmode=true;}
 
             // Get the settings for scanning the document structure
             getScanSettings();}
@@ -651,20 +657,29 @@ metaBook.Startup=
             metaBook.sourceid=
                 getMeta("SBOOKS.sourceid")||getMeta("SBOOKS.fileid")||
                 metaBook.docuri;
-            metaBook.sourcetime=getMeta("SBOOKS.sourcetime");
+            metaBook.sourcetime=fdjtTime.parse(getMeta("SBOOKS.sourcetime"));
             var oldid=getLocal("metabook.sourceid("+metaBook.docuri+")");
             if ((oldid)&&(oldid!==metaBook.sourceid)) {
                 var layouts=getLocal("metabook.layouts("+oldid+")");
                 if ((layouts)&&(layouts.length)) {
                     var i=0, lim=layouts.length; while (i<lim) 
                         CodexLayout.dropLayout(layouts[i++]);}}
-            else saveLocal("metabook.sourceid("+metaBook.docuri+")",metaBook.sourceid);
+            else saveLocal("metabook.sourceid("+metaBook.docuri+")",
+                           metaBook.sourceid);
 
-            metaBook.bookbuild=getMeta("SBOOKS.buildstamp");
+            var bookbuild=getMeta("SBOOKS.buildstamp");
+            if (bookbuild) {
+                var brk=bookbuild.indexOf(' ');
+                if (brk>0) {
+                    metaBook.bookbuildhost=bookbuild.slice(0,brk);
+                    metaBook.bookbuildtime=
+                        fdjtTime.parse(bookbuild.slice(brk+1));}}
 
             metaBook.bypage=(metaBook.page_style==='bypage'); 
-            metaBook.max_excerpt=getMeta("SBOOKS.maxexcerpt")||(metaBook.max_excerpt);
-            metaBook.min_excerpt=getMeta("SBOOKS.minexcerpt")||(metaBook.min_excerpt);
+            metaBook.max_excerpt=
+                getMeta("SBOOKS.maxexcerpt")||(metaBook.max_excerpt);
+            metaBook.min_excerpt=
+                getMeta("SBOOKS.minexcerpt")||(metaBook.min_excerpt);
             
             var notespecs=getMeta("sbooknote",true).concat(
                 getMeta("SBOOKS.note",true));
@@ -974,34 +989,54 @@ metaBook.Startup=
                 metaBook.nofocus=new fdjtDOM.Selector(nofocus);}
 
         function setupBookInfo(){
-            var info=fdjt.DOM.$(".metabookrefinfo");
+            var info=fdjt.DOM.$(".metabookrefinfo"), elt;
             var i=0, lim=info.length; while (i<lim) {
-                info[i++].innerHTML=
-                    "<strong>Ref:</strong> "+
-                    metaBook.docref+" "+
-                    metaBook.refuri;}
+                elt=info[i++];
+                elt.innerHTML="<strong>Ref:</strong> ";
+                fdjtDOM.append(elt,fdjtDOM("span.refuri",metaBook.refuri),
+                               " ",fdjtDOM("span.oidref",metaBook.docref));}
             info=fdjt.DOM.$(".metabooksourceinfo");
             i=0; lim=info.length; while (i<lim) {
-                info[i++].innerHTML="<strong>Source:</strong> "+
-                    "#"+metaBook.sourceid+" "+
-                    metaBook.sourcetime;}
+                elt=info[i++];
+                elt.innerHTML="<strong>Source:</strong> ";
+                if (metaBook.sourcetime)
+                    elt.appendChild(timeDOM(metaBook.sourcetime));
+                fdjtDOM.append(
+                    elt," ",fdjtDOM("span.uuid",metaBook.sourceid));}
             info=fdjt.DOM.$(".metabookbuildinfo");
             i=0; lim=info.length; while (i<lim) {
-                info[i++].innerHTML="<strong>Build:</strong> "+
-                    metaBook.bookbuild;}
+                elt=info[i++]; elt.innerHTML="<strong>Book Build:</strong> ";
+                if ((metaBook.bookbuild)&&(!(metaBook.bookbuildhost)))
+                    elt.appendChild(metaBook.bookbuild);
+                else {
+                    if (metaBook.bookbuildtime) 
+                        elt.appendChild(timeDOM(metaBook.bookbuildtime));
+                    fdjtDOM.append(
+                        elt," on ",fdjtDOM("span.host",metaBook.bookbuildhost));}}
             info=fdjt.DOM.$(".metabookappinfo");
             i=0; lim=info.length; while (i<lim) {
-                info[i++].innerHTML="<strong>App:</strong> "+
-                    "metaBook version "+
-                    metaBook.version+
-                    " built on "+metaBook.buildhost+", "+
-                    metaBook.buildtime;}
+                elt=info[i++]; elt.innerHTML="";
+                fdjtDOM(elt,fdjtDOM("strong","App:")," ",
+                        "metaBook version ",metaBook.version,
+                        " built on ",fdjtDOM("span.host",metaBook.buildhost),
+                        ((metaBook.buildtime)&&(" at ")),
+                        timeDOM(metaBook.buildtime));}
             info=fdjt.DOM.$(".metabookcopyrightinfo");
             i=0; lim=info.length; while (i<lim) {
                 info[i++].innerHTML=
-                    "Program and interface are Copyright "+
-                    "<span style='font-size: 120%;'>©"+
-                    "</span> beingmeta, inc 2008-2015";}}
+                    "Program and Interface "+
+                    "<span class='inlinesymbol'>©"+"</span>"+
+                    " beingmeta, inc 2008-2015";}}
+
+        function timeDOM(x){
+            var elt;
+            if (typeof x === "string")
+                elt=fdjtDOM("time",x);
+            else elt=fdjtDOM("time",x.toString());
+            if (typeof x === "string")
+                elt.setAttribute("datetime",x);
+            else elt.setAttribute("datetime",x.toISOString());
+            return elt;}
 
         function setupZoom(){
             var zoom=metaBook.Zoom=fdjtDOM(

@@ -34,9 +34,21 @@
 body form.metabooksettings h1 { 
     margin-top: 0px; margin-bottom: 0.25ex;
     text-align: left;}
-body form.metabooksettings h1 .button {
-    font-size: 50%; float: right;}
-body form.metabooksettings h1 .message {
+
+form.metabooksettings button, form.metabooksettings .button {
+    font-size: 1.2rem; cursor: pointer;}
+form.metabooksettings > div button {
+    white-space: nowrap; width: 5em;
+    text-align: left;}
+form.metabooksettings button img {
+    height: 1.5ex; width: auto;
+    vertical-align: baseline;}
+form.metabooksettings span.sep {
+    font-size: 150%; padding-right: 1ex;
+    vertical-align: bottom;}
+
+form.metabooksettings h1 .button {float: right;}
+form.metabooksettings h1 .message {
     font-size: 50%; float: right; padding-top: 0.5ex;}
 ._NOUSER form.metabooksettings h1 a.logout {display:none;}
 form.metabooksettings h1 a.logout {
@@ -45,14 +57,16 @@ form.metabooksettings h1 a.logout {
 form.metabooksettings h1 a.logout:visited {color: red;}
 
 form.metabooksettings h1 .button {
-    font-size: 125%; cursor: pointer;
-    font-weight: bold;
-    color: white; background-color: silver;
-    margin-left: 6px; padding: 4px; border: solid black 2px;
+    font-weight: bold; color: white; background-color: silver;
+    margin-left: 6px; padding: 4px;
+    border: solid gray 2px;
     border-radius: 5px;
     -o-border-radius: 5px;
     -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;}
+    -webkit-border-radius: 5px;
+    float: right;}
+._MOUSE form.metabooksettings h1 .button:hover {
+    border-color: black;}
 form.metabooksettings .button.exit {
     color: red; background-color: white;}
 
@@ -94,16 +108,19 @@ form.metabooksettings .label {
 form.metabooksettings .label.smaller { 
     font-size: 14px; font-size: 2vw;}
 
-form.metabooksettings > div.fontsizes { 
-    font-size: 20px; font-size: 2vw;
-    border-top: solid lightgray 2px;}
-form.metabooksettings > div.checkspan { 
-    white-space: normal; font-size: 20px; font-size: 2.5vw;
-    margin-top: 0.4ex;}
-form.metabooksettings > div.checkspan input[type='RADIO'],
-form.metabooksettings > div.checkspan input[type='CHECKBOX'] { 
-    float: left; width: 1.2em; height: 1.2em; 
-    margin-right: 1ex;}
+form.metabooksettings > div.fontsizes,
+form.metabooksettings > div.checkspan {
+    font-size: 20px; font-size: 2vw;}
+
+form.metabooksettings > div.fontsizes,
+form.metabooksettings > div.header,
+form.metabooksettings > div.showconsole,
+form.metabooksettings > div.info {
+    margin-top: 1.5ex;
+    border-top: solid gray 4px;}
+
+form.metabooksettings > div.fontsizes span.samples {
+    font-size: 150%;}
 
 form.metabooksettings > div.fontsizes,
 form.metabooksettings > div.checkspans {
@@ -125,26 +142,40 @@ form.metabooksettings div.fontsizes span.checkspan {
     border-bottom: transparent solid 3px;}
 form.metabooksettings div.fontsizes span.checkspan span.sample {
     vertical-align: baseline;}
-form.metabooksettings div.fontsizes span.checkspan input[TYPE="RADIO"] { display: none; }
+form.metabooksettings div.fontsizes
+  span.checkspan input[TYPE="RADIO"] { display: none; }
 form.metabooksettings div.fontsizes span.checkspan.ischecked {
     border-color: blue; }
-form.metabooksettings div.fontsizes span.checkspan.xlarge span.sample { font-size: 220%; }
-form.metabooksettings div.fontsizes span.checkspan.large span.sample { font-size: 180%; }
-form.metabooksettings div.fontsizes span.checkspan.normal span.sample { font-size: 150%; }
-form.metabooksettings div.fontsizes span.checkspan.small span.sample { font-size: 100%; }
-form.metabooksettings div.fontsizes span.checkspan.tiny span.sample { font-size: 80%; }
+form.metabooksettings div.fontsizes span.sample.xlarge { font-size: 220%; }
+form.metabooksettings div.fontsizes span.sample.large { font-size: 180%; }
+form.metabooksettings div.fontsizes span.sample.normal { font-size: 150%; }
+form.metabooksettings div.fontsizes span.sample.small { font-size: 100%; }
+form.metabooksettings div.fontsizes span.sample.tiny { font-size: 80%; }
 
-form.metabooksettings > div.checkspan { color: gray; }
-form.metabooksettings > div.checkspan { color: gray; }
+form.metabooksettings > div.checkspan {
+    white-space: normal; margin-top: 0.5ex;}
 form.metabooksettings > div.checkspan.ischecked { 
     font-weight: normal; color: black;}
-form.metabooksettings div.checkspan span.text { font-size: 120%;}
+form.metabooksettings > div.checkspan input[type='RADIO'],
+form.metabooksettings > div.checkspan input[type='CHECKBOX'] { 
+    float: left; width: 1.2em; height: 1.2em; 
+    margin-right: 1ex;}
+form.metabooksettings div.checkspan span.text {
+    color: gray; font-size: 120%;}
 form.metabooksettings div.checkspan input {}
+
+form.metabooksettings > div.checkspan.showconsole {
+    margin-top: 1.5ex;
+    border-top: solid gray 4px;}
+form.metabooksettings > div.showconsole { display: none; }
+._DEVMODE form.metabooksettings > div.showconsole,
+._SHOWCONSOLE form.metabooksettings > div.showconsole{
+    display: block; }
 
 #METABOOKCOVER form.metabooksettings a,
 form.metabooksettings a {
     color: blue; }
-form.metabooksettings span.opendyslexical {
+form.metabooksettings span.opendyslexical span.text {
     font-family: 'Open Dyslexic', serif;}
 
 form.metabooksettings div.contrast {}
@@ -154,26 +185,47 @@ form.metabooksettings div.contrast span.lowcontrast {}
 
 form.metabooksettings div.info {}
 form.metabooksettings div.info p {
-    font-family: fixed;}
-form.metabooksettings div.info p strong {
-    font-family: Verdana, Tahoma, Arial, Helvetica, 
-    sans-serif, sans;}
-form.metabooksettings div.info p.metabookcopyrightinfo {
-    border-top: solid black 2px; margin-top: 1ex;
-    font-family: Verdana, Tahoma, Arial, Helvetica, 
-    sans-serif, sans;
-    font-weight: bold;}
+    font-size: 90%; margin-left: 3em; text-indent: -3em;}
+form.metabooksettings div.info span.refuri {
+    font-size: 90%;}
+form.metabooksettings div.info span.oidref {
+    font-family: monospace; font-size: 80%;}
+form.metabooksettings div.info span.uuid {
+    font-family: monospace; font-size: 80%;}
+form.metabooksettings div.info span.uuid:before {
+    font-weight: bold; content: '#U';}
+form.metabooksettings div.info time {font-style: italic;}
+form.metabooksettings div.info p strong {}
+form.metabooksettings div.info span.host {
+    font-family: monospace; font-weight: bold; }
 
+form.metabooksettings div.metabookcopyright {
+    margin-top: 1.5ex; border-top: solid black 2px;}
+form.metabooksettings div.metabookcopyright p {
+    font-weight: bold; margin-left: 3em; text-indent: -3em;}
+
+/*
 form.metabooksettings > div button {
-    width: 2em; height: 2em; color: transparent;
     background-repeat: no-repeat; background-size: contain;}
 form.metabooksettings button.reset {
-    background-image: url(g/metabook/reset.svgz);}
+    width: 2em; height: 2em; color: transparent;
+    background-image: url();}
 ._NOSVG form.metabooksettings button.reset {
     background-image: url(g/metabook/reset50x50.pg);}
 form.metabooksettings button.refresh {
+    width: 2em; height: 2em; color: transparent;
     background-image: url(g/metabook/refresh.svgz);}
 ._NOSVG form.metabooksettings button.refresh {    
     background-image: url(g/metabook/refresh50x50.png);}
+*/
 
+div.fdjtdialog.fdjtconfirm.mbsettings div.message {
+    font-weight: normal;}
+
+/* Emacs local variables
+;;;  Local variables: ***
+;;;  compile-command: "cd ../..; make" ***
+;;;  indent-tabs-mode: nil ***
+;;;  End: ***
+*/
 

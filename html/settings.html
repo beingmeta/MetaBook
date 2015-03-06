@@ -13,27 +13,34 @@
     <span class="message" ID="METABOOKSETTINGSMESSAGE"></span></h1>
   <div class="fontsizes body"
        title="Set the font sizes used for the body text.">
-    <span class="label">Body size</span>
-    <span class="checkspan xlarge">
-      <input TYPE="RADIO" NAME="METABOOKBODYSIZE"
-             VALUE="xlarge"/>
-      <span class="sample">Aa</span></span>
-    <span class="checkspan large">
-      <input TYPE="RADIO" NAME="METABOOKBODYSIZE" 
-             VALUE="large"/>
-      <span class="sample">Aa</span></span>
-    <span class="checkspan normal">
-      <input TYPE="RADIO" NAME="METABOOKBODYSIZE" 
-             VALUE="normal"/>
-      <span class="sample">Aa</span></span>
-    <span class="checkspan small">
-      <input TYPE="RADIO" NAME="METABOOKBODYSIZE" 
-             VALUE="small"/>
-      <span class="sample">Aa</span></span>
-    <span class="checkspan tiny">
-      <input TYPE="RADIO" NAME="METABOOKBODYSIZE"
-             VALUE="tiny"/>
-      <span class="sample">Aa</span></span>
+    <span class="label" id="METABOOKBODYSIZELABEL">
+      Body size<br/>
+      <button name="REFRESH" value="Layout"
+              id="METABOOKREFRESHLAYOUT">
+        <img src="{{bmg}}/metabook/refresh.svgz" alt="Update">
+        Layout</button></span>
+    <span class="samples">
+      <span class="checkspan">
+        <input TYPE="RADIO" NAME="METABOOKBODYSIZE"
+               VALUE="xlarge"/>
+        <span class="sample xlarge">Aa</span></span>
+      <span class="checkspan">
+        <input TYPE="RADIO" NAME="METABOOKBODYSIZE" 
+               VALUE="large"/>
+        <span class="sample large">Aa</span></span>
+      <span class="checkspan">
+        <input TYPE="RADIO" NAME="METABOOKBODYSIZE" 
+               VALUE="normal"/>
+        <span class="sample normal">Aa</span></span>
+      <span class="checkspan">
+        <input TYPE="RADIO" NAME="METABOOKBODYSIZE" 
+               VALUE="small"/>
+        <span class="sample small">Aa</span></span>
+      <span class="checkspan">
+        <input TYPE="RADIO" NAME="METABOOKBODYSIZE"
+               VALUE="tiny"/>
+        <span class="sample tiny">Aa</span></span>
+    </span>
   </div>
   <div class="contrast checkspans"
        title="Select the contrast level for body text">
@@ -71,12 +78,12 @@
   <div class="also checkspans">
     <span class="label smaller">Other Options</span>
     <span class="checkspan opendyslexical"
-          title="OpenDyslexic is a font especially designed for readability by dyslexics">
+          title="OpenDyslexic is a font designed to increase readability for readers with dyslexia">
       <input TYPE="CHECKBOX" NAME="METABOOKDYSLEXICAL"
              VALUE="yes"/>
-      Use OpenDyslexic font
+      <span class="text">Use OpenDyslexic font</span>
       <a href="http://opendyslexic.org/"
-         title="The Open Dyslexic font site">read more</a>
+         title="The Open Dyslexic font site">(about)</a>
     </span>
     <span class="sep">//</span>
     <span class="checkspan justify"
@@ -87,17 +94,24 @@
   </div>
   <div class="fontsizes device"
        title="Set the font sizes used by the interface components of metaBook">
-    <span class="label">Display size</span>
-    <span class="checkspan xlarge">
-      <input TYPE="RADIO" NAME="METABOOKUISIZE" VALUE="xlarge"/><span class="sample">Aa</span></span>
-    <span class="checkspan large">
-      <input TYPE="RADIO" NAME="METABOOKUISIZE" VALUE="large"/><span class="sample">Aa</span></span>
-    <span class="checkspan normal">
-      <input TYPE="RADIO" NAME="METABOOKUISIZE" VALUE="normal"/><span class="sample">Aa</span></span>
-    <span class="checkspan small">
-      <input TYPE="RADIO" NAME="METABOOKUISIZE" VALUE="small"/><span class="sample">Aa</span></span>
-    <span class="checkspan tiny">
-      <input TYPE="RADIO" NAME="METABOOKUISIZE" VALUE="tiny"/><span class="sample">Aa</span></span>
+    <span class="label">App font</span>
+    <span class="samples">
+      <span class="checkspan">
+        <input TYPE="RADIO" NAME="METABOOKUISIZE" VALUE="xlarge"/>
+        <span class="sample xlarge">Aa</span></span>
+      <span class="checkspan">
+        <input TYPE="RADIO" NAME="METABOOKUISIZE" VALUE="large"/>
+        <span class="sample large">Aa</span></span>
+      <span class="checkspan">
+        <input TYPE="RADIO" NAME="METABOOKUISIZE" VALUE="normal"/>
+        <span class="sample normal">Aa</span></span>
+      <span class="checkspan">
+        <input TYPE="RADIO" NAME="METABOOKUISIZE" VALUE="small"/>
+        <span class="sample small">Aa</span></span>
+      <span class="checkspan">
+        <input TYPE="RADIO" NAME="METABOOKUISIZE" VALUE="tiny"/>
+        <span class="sample tiny">Aa</span></span>
+    </span>
   </div>
   <div class="animation">
     <span class="label smaller">Animate</span>
@@ -108,30 +122,47 @@
       <input TYPE="CHECKBOX" NAME="METABOOKANIMATEHUD" VALUE="true"/>
       <span class="text">interface (overlays, controls, etc)</span></span>
   </div>
+  <div class="header dataheader cf">
+    <button NAME="CLEARDATA" VALUE="ALL">Erase all</button>
+    <span class="label">Storage</span>
+  </div>
   <div class="checkspan syncloc cf">
     <button id="METABOOKRESETSYNC" name="SYNC" VALUE="RESET"
             class="reset floatright"
             title="Reset synchronized location information.">
+      <img src="{{bmg}}/metabook/reset.svgz" alt=""/>
       Reset</button>
     <input TYPE="CHECKBOX" NAME="METABOOKLOCSYNC" VALUE="true"/>
-    Sync your reading location with other devices
+    <span class="text">
+      Sync your reading location with other devices</span>
   </div>
   <div class="checkspan saveglosses cf">
     <button id="METABOOKREFRESHOFFLINE" class="refresh floatright"
             title="Reload glosses and layers for this book from the sBooks cloud.">
-      All</button>
+      <img src="{{bmg}}/metabook/refresh.svgz" alt=""/>
+      Reload</button>
     <input TYPE="CHECKBOX" NAME="METABOOKCACHEGLOSSES"
            VALUE="true" CHECKED/>
-    Save copies of notes and overlays on this device
+    <span class="text">
+      Save copies of notes and overlays on this device</span>
   </div>
-  <div class="info">
+  <div class="checkspan showconsole cf">
+    <span class="label">Developer</span>
+    <input TYPE="CHECKBOX" NAME="METABOOKSHOWCONSOLE"
+           VALUE="true"/>
+    <span class="text">Show the application console</span>
+  </div>
+  <div class="info" id="METABOOKINFOPANEL">
     <span class="label">Info</span>
     <p class="metabookrefinfo"></p>
     <p class="metabooksourceinfo"></p>
     <p class="metabookbuildinfo"></p>
     <p class="metabookappinfo"></p>
+  </div>
+  <div class="metabookcopyright">
     <p class="metabookcopyrightinfo"></p>
   </div>
+
 </form>
 
 <!--

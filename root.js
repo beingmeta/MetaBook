@@ -161,7 +161,7 @@ var metaBook={
         syncinterval: 60,glossupdate: 5*60,
         locsync: 15, cacheglosses: true,
         soundeffects: false, buzzeffects: false,
-        showconsole: false,
+        showconsole: false,devmode: false,
         controlc: false},
     // What to trace, for debugging
     Trace: {
