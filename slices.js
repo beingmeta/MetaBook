@@ -636,6 +636,7 @@ metaBook.Slice=(function () {
         this.byfrag=new fdjt.RefMap();
         this.live=false; this.changed=false;
         this.addCards(cards);
+        if (metaBook.touch) opts.packthresh=40;
         if (!(opts.nopager))
             this.pager=(opts.pager)||(new Pager(container,opts));
         if ((cards)&&(cards.length)) this.update();
@@ -900,12 +901,9 @@ metaBook.Slice=(function () {
                 fdjtLog("slice_held/pager %o: %o in %o",
                         evt,slice_target,pager);
             if (!(pager)) {fdjtUI.cancel(evt); return;}
-            var last=slice_target, scan=slice_target.parentNode;
-            while (scan) {
-                if (hasClass(scan,"pagernav")) break;
-                else scan=scan.parentNode;}
-            var pageno=parseInt(last.innerHTML);
-            pager.setPage(pageno-1);
+            var pageno=pager.getNum(fdjtUI.T(evt));
+            if ((typeof pageno === "number")&&(pageno>0))
+                pager.setPage(pageno-1);
             fdjtUI.cancel(evt);
             return;}
         if (Trace.gestures)
