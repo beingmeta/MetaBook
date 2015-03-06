@@ -280,8 +280,10 @@ metaBook.setMode=
         metaBook.initHUD=initHUD;
         
         function resizeHUD(){
-            var view_height=fdjtDOM.viewHeight();
-            fdjtID("METABOOKHEARTBODY").style.maxHeight=(view_height-100)+'px';
+            var heart=fdjt.ID("METABOOKHEART"), hbody=fdjtID("METABOOKHEARTBODY");
+            var geom=fdjtDOM.getGeometry(heart,false,true);
+            hbody.style.maxWidth=geom.inner_width+"px";
+            hbody.style.maxHeight=(geom.inner_height-100)+"px";
             fdjt.DOM.adjustFonts(metaBook.HUD);}
         metaBook.resizeHUD=resizeHUD;
 
@@ -754,18 +756,11 @@ metaBook.setMode=
                             skimmer.style[fdjtDOM.transform]="";},
                                    0);},
                                0);}
-                // This all makes sure that the >| and |< buttons
-                // appear appropriately
-                if (slice.atEnd)
-                    addClass(document.body,"mbSKIMEND");
-                else dropClass(document.body,"mbSKIMEND");
-                if (slice.atStart)
-                    addClass(document.body,"mbSKIMSTART");
-                else dropClass(document.body,"mbSKIMSTART");
                 slice.setSkim(card);
                 var skiminfo=fdjtID("METABOOKSKIMINFO");
                 if (skiminfo)
-                    skiminfo.innerHTML=(slice.skimpos)+"/"+(slice.visible.length);
+                    skiminfo.innerHTML=
+                    (slice.skimpos+1)+"/"+(slice.visible.length);
                 // This marks where we are currently skimming
                 if (skimpoint) dropClass(skimpoint,"skimpoint");
                 if (card) addClass(card,"skimpoint");
@@ -774,6 +769,14 @@ metaBook.setMode=
                 else dropClass("METABOOKSKIMMER","expanded");
                 metaBook.skimpoint=card;}
             else {}
+            // This all makes sure that the >| and |< buttons
+            // appear appropriately
+            if (slice.atEnd)
+                addClass(document.body,"mbSKIMEND");
+            else dropClass(document.body,"mbSKIMEND");
+            if (slice.atStart)
+                addClass(document.body,"mbSKIMSTART");
+            else dropClass(document.body,"mbSKIMSTART");
             var highlights=[];
             if (metaBook.target)
                 metaBook.clearHighlights(metaBook.getDups(metaBook.target));

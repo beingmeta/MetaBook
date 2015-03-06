@@ -86,17 +86,17 @@ div.completions.noinput .cloudtoggle {
 .cloud.showall.noinput span.completion.singleton.cue,
 .cloud.showall.noinput span.completion.doubleton.cue,
 .cloud.showall.noinput span.completion.singleton.prime {
-    display: inline;}
+    display: inline-block;}
 #METABOOKHUD #METABOOKALLTAGS.completions.noinput
    span.completion.sectname.cue {
     display: none;}
 #METABOOKHUD #METABOOKALLTAGS.completions.noinput.showall
    span.completion.sectname.cue {
-    display: inline;}
+    display: inline-block;}
 
 .cloud.showall.noinput span.completion.singleton.dterm,
 .cloud.showall.noinput span.completion.doubleton.dterm {
-    display: inline;}
+    display: inline-block;}
 .cloud { }
 .cloud .completion.prime { 
     font-weight: bold;}
@@ -143,22 +143,22 @@ div.completions.noinput .cloudtoggle {
 .cloud.showall .sectname.longterm .ellipsis {
     font-size: 70%; letter-spacing: -0.5px;}
 .cloud.showall .sectname .ellipsis .elision { display: none;}
-.cloud.showall .sectname .ellipsis .elided { display: inline;}
+.cloud.showall .sectname .ellipsis .elided { display: inline-block;}
 
-.cloud.noinput a.completion.cue { display: inline; }
-.cloud.noinput span.completion.cue { display: inline; }
-.cloud.showall.noinput a.completion { display: inline; }
-.cloud.showall.noinput span.completion { display: inline; }
-.cloud a.completion[displayed] { display: inline;}
-.cloud span.completion[displayed] { display: inline;}
+.cloud.noinput a.completion.cue { display: inline-block; }
+.cloud.noinput span.completion.cue { display: inline-block; }
+.cloud.showall.noinput a.completion { display: inline-block; }
+.cloud.showall.noinput span.completion { display: inline-block; }
+.cloud a.completion[displayed] { display: inline-block;}
+.cloud span.completion[displayed] { display: inline-block;}
 .cloud .completion[displayed] span.variation[displayed] { 
-    display: inline; }
-.cloud a.completion.displayed { display: inline;}
-.cloud span.completion.displayed { display: inline;}
+    display: inline-block; }
+.cloud a.completion.displayed { display: inline-block;}
+.cloud span.completion.displayed { display: inline-block;}
 .cloud a.completion.displayed span.variation.displayed { 
-    display: inline; }
+    display: inline-block; }
 .cloud .completion.displayed span.variation.displayed { 
-    display: inline; }
+    display: inline-block; }
 
 .cloud.iblocktags.noinput a.completion.cue,
 .cloud.iblocktags.noinput span.completion.cue,

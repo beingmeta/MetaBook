@@ -104,6 +104,7 @@
     function useQuery(query,box_arg){
         if (query instanceof Query) query=query;
         else query=new metaBook.Query(query);
+        if (query===metaBook.query) return query;
         var qstring=query.getString();
         if ((box_arg)&&(typeof box_arg === 'string'))
             box_arg=document.getElementById(box_arg);
@@ -172,14 +173,15 @@
             metaBook.empty_cloud.dom.style.fontSize="";
             metaBook.empty_cloud.complete("");}
         else {
-            if (cloudid) completions.id=cloudid;
+            if (cloudid) completions.dom.id=cloudid;
+            addClass(completions.dom,"hudpanel");
             if (Trace.search>1)
                 log("Setting search cloud for %o to %o",box,completions.dom);
-            cloudid=cloud.id;
-            addClass(completions.dom,"hudpanel");
-            fdjtDOM.replace(cloud,completions.dom);
-            completions.dom.style.fontSize="";
             completions.complete("",function(){
+                completions.dom.style.fontSize="";
+                if (cloud)
+                    fdjtDOM.replace(cloud,completions.dom);
+                else fdjtDOM.append(fdjt.ID("METABOOKHEARTBODY"),completions.dom);
                 metaBook.adjustCloudFont(completions);});}
         if (n_refiners===0) {
             addClass(box,"norefiners");
@@ -231,13 +233,11 @@
 
     function showSearchResults(){
         var results=metaBook.query.showResults();
-        addClass(results,"hudpanel");
-        fdjtDOM.replace("METABOOKSEARCHRESULTS",results);
-        if ((!(metaBook.pagers.searchresults))||
-            (metaBook.pagers.searchresults.root!==results))
-            metaBook.pagers.searchresults=fdjt.Pager(
-                results,fdjtID("METABOOKHEARTBODY"));
-        metaBook.searchresults=result;
+        var results_panel=results.container;
+        addClass(results_panel,"hudpanel");
+        results_panel.id="METABOOKSEARCHRESULTS";
+        fdjtDOM.replace("METABOOKSEARCHRESULTS",results_panel);
+        metaBook.searchresults=results;
         metaBook.setMode("searchresults");
         fdjtID("METABOOKSEARCHINPUT").blur();
         fdjtID("METABOOKSEARCHRESULTS").focus();}
@@ -426,10 +426,9 @@
     /* Show search results */
 
     function showResults(query){
-        if (query.listing) return query.listing.container;
+        if (query.listing) return query.listing;
         else query.listing=new SearchResults(query);
-        var div=query.listing.container;
-        return div;}
+        return query.listing;}
     RefDB.Query.prototype.showResults=
         function(){return showResults(this);};
     

@@ -109,8 +109,9 @@
                 // there's are a lot of weak terms
                 ((n_terms/info.normals._count)>4));
         if (!(usecues)) fdjtDOM.addClass(dom,"showall");
-        if (!(getChild(dom,".showall")))
+        else if (getChild(dom,".showall"))
             fdjtDOM.prepend(dom,getShowAll(usecues,n_terms));
+        else {}
 
         // Sort the tags before adding them
         tags=[].concat(tags);
@@ -370,8 +371,7 @@
     /* Getting query cloud */
 
     function queryCloud(query){
-        if (metaBook.mode==="expandsearch") return metaBook.empty_cloud;
-        else if (query.cloud) return query.cloud;
+        if (query.cloud) return query.cloud;
         else if ((query.tags.length)===0) {
             query.cloud=metaBook.empty_cloud;
             return query.cloud;}
@@ -411,7 +411,8 @@
             query.cloud=completions;
             return query.cloud;}}
     metaBook.queryCloud=queryCloud;
-    RefDB.Query.prototype.getCloud=function(){return queryCloud(this);};
+    RefDB.Query.prototype.getCloud=function(){
+        return queryCloud(this);};
     
     function tag_sorter(x,y,scores){
         // Knodes go before Refs go before strings
@@ -586,7 +587,7 @@
         if (Trace.gestures) log("cloud tap on %o",completion);
         var completions=getParent(target,".completions");
         if (completion) {
-            var cinfo=metaBook.query.cloud;
+            var cinfo=metaBook.query.cloud||metaBook.query.getCloud();
             var value=cinfo.getValue(completion);
             if (typeof value !== 'string') add_searchtag(value);
             else  if (value.length===0) {}

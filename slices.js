@@ -791,7 +791,7 @@ metaBook.Slice=(function () {
             if (pager) pager.setPage(card);
             this.skimpoint=card; this.skimpos=off;
             this.atStart=(off===0);
-            this.atEnd=(off>=visible.length);
+            this.atEnd=(off>=(visible.length-1));
             addClass(card,"skimpoint");
             return card;}};
     MetaBookSlice.prototype.forward=
