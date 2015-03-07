@@ -228,7 +228,8 @@ metaBook.setMode=
                      holdthresh: 500});
             metaBook.TapHold.head=
                 new TapHold(metaBook.DOM.head,
-                            {override: true,taptapthresh: 0});
+                            {override: true,taptapthresh: 0,
+                             holdthresh: 1000});
             metaBook.DOM.skimmer=fdjtID("METABOOKSKIMMER");
             metaBook.TapHold.skimmer=
                 new TapHold(metaBook.DOM.skimmer,{taptapthresh: 800});
