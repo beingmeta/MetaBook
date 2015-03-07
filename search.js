@@ -238,6 +238,7 @@
         results_panel.id="METABOOKSEARCHRESULTS";
         fdjtDOM.replace("METABOOKSEARCHRESULTS",results_panel);
         metaBook.searchresults=results;
+        metaBook.pagers.searchresults=results.pager;
         metaBook.setMode("searchresults");
         fdjtID("METABOOKSEARCHINPUT").blur();
         fdjtID("METABOOKSEARCHRESULTS").focus();}
