@@ -1970,7 +1970,9 @@
                  fdjt.UI.cancel(event);}},
          "#METABOOKINFOPANEL": {
              click: toggleDevMode},
-         ".metabooksettings input[type='RADIO'],.metabooksettings input[type='CHECKBOX']": {
+         ".metabooksettings input[type='RADIO']": {
+             change: mB.configChange},
+         ".metabooksettings input[type='CHECKBOX']": {
              change: mB.configChange}
         });
 
@@ -2112,7 +2114,11 @@
                  metaBook.UI.handlers.everyone_ontap(evt);
                  fdjt.UI.cancel(event);}},
          "#METABOOKINFOPANEL": {
-             click: toggleDevMode}});
+             click: toggleDevMode},
+         ".metabooksettings input[type='RADIO']": {
+             change: mB.configChange},
+         ".metabooksettings input[type='CHECKBOX']": {
+             change: mB.configChange}});
     
 })();
 
