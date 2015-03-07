@@ -166,7 +166,7 @@ var metaBook={
     // What to trace, for debugging
     Trace: {
         startup: 0,       // Whether to trace startup
-        config: 2,        // Whether to trace config setup/modification/etc
+        config: 0,        // Whether to trace config setup/modification/etc
         mode: false,      // Whether to trace mode changes
         nav: false,       // Whether to trace book navigation
         domscan: 0,       // How much to trace initial DOM scanning
