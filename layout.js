@@ -126,10 +126,14 @@ metaBook.Paginate=
                         fdjtDOM("div.metabookpageno#METABOOKPAGENOTEXT",
                                 metaBook.curpage||"?",
                                 "/",pagenum," (",fpct,"%)"));
-                    layoutMessage(fdjtString(
-                        "Formatted %d %dx%d pages (%d%%)",
-                        pagenum,info.width,info.height,fpct),
-                                  pct);
+                    if (metaBook.devmode) 
+                        layoutMessage(fdjtString(
+                            "Formatted %d %dx%d pages (%d%%)",
+                            pagenum,info.width,info.height,fpct),
+                                      pct);
+                    else layoutMessage(fdjtString(
+                        "Formatting for your device (%d%%)",fpct),
+                                       pct);
                     if (tracelevel)
                         fdjtLog("Formatted %d %dx%d pages (%d%%) in %s",
                                 pagenum,info.width,info.height,fpct,howlong);}
