@@ -281,10 +281,6 @@ metaBook.setMode=
         metaBook.initHUD=initHUD;
         
         function resizeHUD(){
-            var heart=fdjt.ID("METABOOKHEART"), hbody=fdjtID("METABOOKHEARTBODY");
-            var geom=fdjtDOM.getGeometry(heart,false,true);
-            hbody.style.maxWidth=geom.inner_width+"px";
-            hbody.style.maxHeight=(geom.inner_height-100)+"px";
             fdjt.DOM.adjustFonts(metaBook.HUD);}
         metaBook.resizeHUD=resizeHUD;
 
