@@ -382,6 +382,9 @@ metaBook.setMode=
                 fdjtState.dropLocal("metabook.opened("+metaBook.docuri+")");
             setHUD(false);
             metaBook.closed=true;
+            if (metaBook.covermode) {
+                addClass(metaBook.cover,metaBook.covermode);
+                metaBook.mode=metaBook.covermode;}
             addClass(document.body,"mbCOVER");}
         metaBook.showCover=showCover;
         function hideCover(){
@@ -389,7 +392,11 @@ metaBook.setMode=
                 fdjtState.setLocal(
                     "metabook.opened("+metaBook.docuri+")",fdjtTime());
             metaBook.closed=false;
-            dropClass(document.body,"mbCOVER");}
+            dropClass(document.body,"mbCOVER");
+            if (metaBook.mode) {
+                metaBook.covermode=metaBook.mode;
+                metaBook.mode=false;
+                metaBook.cover.className="";}}
         metaBook.hideCover=hideCover;
         function toggleCover(){
             if (hasClass(document.body,"mbCOVER")) hideCover();
@@ -429,7 +436,7 @@ metaBook.setMode=
                 (metaBook.mode.search(metaBookPopModes)>=0))
                 mode=metaBook.last_mode;
             if (mode==='none') mode=false;
-            if (mode==='heart') mode=metaBook.heart_mode||"about";
+            if (mode==='heart') mode=metaBook.heart_mode||"statictoc";
             if (Trace.mode)
                 fdjtLog("setMode %o, cur=%o dbc=%o",
                         mode,metaBook.mode,document.body.className);
@@ -450,8 +457,7 @@ metaBook.setMode=
                 if (mode==="search") mode=metaBook.search_mode||"refinesearch";
                 if (mode==="addgloss") {}
                 else dropClass(document.body,"mbSHRINK");
-                if (mode===metaBook.mode) {}
-                else if (mode===true) {
+                if (mode===true) {
                     /* True just puts up the HUD with no mode info */
                     metaBook.hideCover();
                     if (metabook_mode_foci[metaBook.mode]) {
@@ -466,12 +472,14 @@ metaBook.setMode=
                 else if (typeof mode !== 'string') 
                     throw new Error('mode arg not a string');
                 else if (mode.search(metaBookCoverModes)>=0) {
-                    fdjtID("METABOOKCOVER").className=mode;
+                    if (mode!==metaBook.mode) {
+                        fdjtID("METABOOKCOVER").className=mode;
+                        metaBook.mode=mode;
+                        metaBook.modechange=fdjtTime();}
                     if (mode==="console") fdjtLog.update();
                     showCover();
-                    metaBook.mode=mode;
-                    metaBook.modechange=fdjtTime();
                     return;}
+                else if (mode===metaBook.mode) {}
                 else {
                     metaBook.hideCover();
                     metaBook.modechange=fdjtTime();
