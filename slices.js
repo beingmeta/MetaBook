@@ -699,7 +699,7 @@ metaBook.Slice=(function () {
     MetaBookSlice.prototype.display=MetaBookSlice.prototype.update=
         function updateSlice(force){
             if ((!(this.changed))&&(!(force))) return;
-            if (metaBook.Trace.slices) 
+            if (metaBook.Trace.slices)
                 fdjtLog("Updating slice %o force=%o",this.container,force);
             var cards=this.cards, visible=[], shown=[];
             var byfrag=this.byfrag, pager=this.pager;
