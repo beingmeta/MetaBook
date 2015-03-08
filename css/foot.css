@@ -80,7 +80,7 @@ body.hudup #METABOOKFOOT #METABOOKPAGELEAP {
 #METABOOKFOOT #METABOOKPAGEBAR div.textfoot {
     position: absolute; bottom: 0px;
     font-size: 28px; line-height: 100%;
-    width: 100%; height: 60%; 
+    width: 100%; height: 28px; 
     box-sizing: border-box; -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box; -o-box-sizing: border-box;
     border-top: solid black 1px; z-index: 50;
@@ -88,9 +88,9 @@ body.hudup #METABOOKFOOT #METABOOKPAGELEAP {
 #METABOOKFOOT #METABOOKPAGEBAR div.textfoot > div {}
 #METABOOKFOOT #METABOOKPAGEBAR div.textfoot > span {}
 #METABOOKFOOT #METABOOKPAGEBAR div.textfoot > span {
-    z-index: 50; pointer-events: all;}
+    z-index: 50; pointer-events: all; bottom: 0px;}
 hr#METABOOKLAYOUTINDICATOR {
-    position: absolute; bottom: 0px; left: 0px; height: 60%; width: 0%;
+    position: absolute; bottom: 0px; left: 0px; height: 70%; width: 0%;
     background-color: silver; color: gray; opacity: 0.0; margin: 0px;
     box-sizing: border-box;
     display: none;}
@@ -121,7 +121,7 @@ body.mbPREVIEW #METABOOKFOOT #METABOOKPAGEBAR .metabookpagespans span {
 body.mbPREVIEW #METABOOKFOOT #METABOOKPAGEBAR .metabookpagespans {
     top: 0px; bottom: auto;}
 body #METABOOKFOOT #METABOOKPAGEBAR .metabookpagespans span.current {
-    vertical-align: bottom; height: 24px;}
+    vertical-align: bottom; height: 28px;}
 body.mbPREVIEW #METABOOKFOOT #METABOOKPAGEBAR
    .metabookpagespans span.current {
     height: 100%;}
