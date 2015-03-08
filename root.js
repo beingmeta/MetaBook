@@ -181,6 +181,7 @@ var metaBook={
         glosses: 0,       // How much we're tracing gloss processing
         addgloss: 0,      // Note whenever a gloss post completes
         glossdata: 0,     // Whether to trace caching/retrieval of glossdata
+        slices: 0,        // How much to trace slice creation and layout
         layout: 0,        // How much to trace document layout
         knodules: 0,      // How much to trace knodule processing
         flips: false,     // Whether to trace page flips (movement by pages)

@@ -611,6 +611,8 @@ metaBook.Slice=(function () {
             else named_slices[container.id]=container;}
         else if ((container.nodeType)&&(container.nodeType===1))  {}
         else return false;
+        if (!(opts.hasOwnProperty('initlayout')))
+            opts.initLayout=false;
         if (!(opts.hasOwnProperty('noslip')))
             opts.noslip=false;
         if (!(opts.hasOwnProperty('id')))
@@ -697,6 +699,8 @@ metaBook.Slice=(function () {
     MetaBookSlice.prototype.display=MetaBookSlice.prototype.update=
         function updateSlice(force){
             if ((!(this.changed))&&(!(force))) return;
+            if (metaBook.Trace.slices) 
+                fdjtLog("Updating slice %o force=%o",this.container,force);
             var cards=this.cards, visible=[], shown=[];
             var byfrag=this.byfrag, pager=this.pager;
             var container=this.container;
@@ -727,6 +731,9 @@ metaBook.Slice=(function () {
 
     MetaBookSlice.prototype.filter=function filterSlice(fn){
         var cards=this.cards; var i=0, n=cards.length;
+        if (metaBook.Trace.slices) {
+            if (fn) fdjtLog("Filtering slice %o by %o",this.container,fn);
+            else fdjtLog("Restoring filtered slice %o",this.container);}
         if (!(fn)) while (i<n) delete cards[i++].hidden;
         else while (i<n) {
             var card=cards[i++];
@@ -739,6 +746,9 @@ metaBook.Slice=(function () {
         if (!(adds)) return;
         if (!(adds instanceof Array)) adds=[adds];
         if (adds.length===0) return;
+        if (metaBook.Trace.slices) 
+            fdjtLog("Adding %d cards to slice %o",
+                    adds.length,this.container);
         var byid=this.byid, cards=this.cards;
         var i=0, lim=adds.length;
         while (i<lim) {
