@@ -301,10 +301,10 @@ div.metabooknotebody a.mbackref { float: left; margin-left: -3em;}
 @media only screen and
             (min-device-width: 480px) and
             (max-device-width: 800px) {
-    #CODEXPAGE {top: 10px; bottom: 20px; left: 25px; right: 25px;}
+    #CODEXPAGE {top: 25px; bottom: 25px; left: 25px; right: 25px;}
     .metabookbodysizelarge #CODEXPAGE,
     .metabookbodysizexlarge #CODEXPAGE {
-        top: 10px; bottom: 20px; left: 10px; right: 10px;}
+        top: 15px; bottom: 15px; left: 10px; right: 10px;}
 }
 @media only screen and
             (min-device-width: 800px) and
@@ -313,7 +313,7 @@ div.metabooknotebody a.mbackref { float: left; margin-left: -3em;}
     #CODEXPAGE {top: 40px; bottom: 50px; left: 40px; right: 40px;}
     .metabookbodysizelarge #CODEXPAGE,
     .metabookbodysizexlarge #CODEXPAGE {
-        top: 10px; bottom: 20px; left: 20px; right: 20px;}
+        top: 10px; bottom: 15px; left: 20px; right: 20px;}
 }
 @media only screen and
             (min-device-width: 768px) and
