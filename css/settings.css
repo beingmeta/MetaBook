@@ -42,7 +42,7 @@ form.metabooksettings {font-size: 1rem;}
 form.metabooksettings button, form.metabooksettings .button {
     font-size: 1.2rem; cursor: pointer;}
 form.metabooksettings > div button {
-    white-space: nowrap; width: 5em;
+    white-space: nowrap; width: 6em;
     text-align: left;}
 form.metabooksettings button img {
     height: 1.5ex; width: auto;
