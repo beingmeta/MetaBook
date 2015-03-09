@@ -2114,7 +2114,7 @@
                  metaBook.UI.handlers.everyone_ontap(evt);
                  fdjt.UI.cancel(event);}},
          "#METABOOKINFOPANEL": {
-             click: toggleDevMode},
+             touchstart: toggleDevMode},
          ".metabooksettings input[type='RADIO']": {
              change: mB.configChange},
          ".metabooksettings input[type='CHECKBOX']": {
