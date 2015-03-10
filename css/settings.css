@@ -179,6 +179,8 @@ form.metabooksettings a {
 form.metabooksettings span.opendyslexical span.text {
     font-family: 'Open Dyslexic', serif;}
 
+form.metabooksettings div.fontfamily {}
+
 form.metabooksettings div.contrast {}
 form.metabooksettings div.contrast span.highcontrast {}
 form.metabooksettings div.contrast span.normalcontrast {}

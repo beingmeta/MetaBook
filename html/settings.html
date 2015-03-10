@@ -33,6 +33,24 @@
         <span class="sample tiny">Aa</span></span>
     </span>
   </div>
+  <!--
+  <div class="checkspans fontfamily"
+       title="Set the font sizes used for the body text.">
+    <span class="label smaller">Font family</span>
+    <span class="checkspan sanserif">
+      <input TYPE="RADIO" NAME="bodyfamily"
+             VALUE="sanserif"/>
+      <span class="sample sanserif">Sans</span></span>
+    <span class="checkspan serif">
+      <input TYPE="RADIO" NAME="bodyfamily" 
+             VALUE="serif"/>
+      <span class="sample serif">Serif</span></span>
+    <span class="checkspan lowcontrast">
+      <input TYPE="RADIO" NAME="bodyfamily"
+             VALUE="opendyslexic"/>
+      <span class="sample opendyslexic">Open Dyslexic</span></span>
+  </div>
+  -->
   <div class="contrast checkspans"
        title="Select the contrast level for body text">
     <span class="label smaller">Text Contrast</span>
@@ -78,7 +96,7 @@
     <span class="sep">//</span>
     <span class="checkspan justify"
           title="left/right justify paragraphs of body text">
-      <input TYPE="CHECKBOX" NAME="justifytext" VALUE="yes"/>
+      <input TYPE="CHECKBOX" NAME="textjustify" VALUE="yes"/>
       Justify paragraphs</span>
   </div>
   <div class="fontsizes device"
@@ -117,7 +135,7 @@
       Reset</button>
     <input TYPE="CHECKBOX" NAME="locsync" VALUE="yes"/>
     <span class="text">
-      Sync your reading location with other devices</span>
+      Sync your <strong>reading location</strong> with other devices</span>
   </div>
   <div class="checkspan saveglosses cf">
     <button id="METABOOKREFRESHOFFLINE" class="refresh floatright"
@@ -126,7 +144,8 @@
       Reload</button>
     <input TYPE="CHECKBOX" NAME="cacheglosses" VALUE="yes" CHECKED/>
     <span class="text">
-      Save copies of notes and overlays on this device</span>
+      Save copies of <strong>glosses</strong>
+      and <strong>layers</strong> on this device</span>
   </div>
   <div class="checkspan showconsole cf">
     <span class="label">Developer</span>
