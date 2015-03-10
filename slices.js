@@ -660,8 +660,8 @@ metaBook.Slice=(function () {
         return renderCard(about);};
 
     MetaBookSlice.prototype.sortfn=function defaultSliceSortFn(x,y){
-        if (x.location) {
-            if (y.location) {
+        if (x.hasOwnProperty('location')) {
+            if (y.hasOwnProperty(location)) {
                 if (x.location===y.location) {
                     if (x.timestamp) {
                         if (y.timestamp)
