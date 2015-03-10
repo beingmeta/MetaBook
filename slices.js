@@ -661,7 +661,7 @@ metaBook.Slice=(function () {
 
     MetaBookSlice.prototype.sortfn=function defaultSliceSortFn(x,y){
         if (x.hasOwnProperty('location')) {
-            if (y.hasOwnProperty(location)) {
+            if (y.hasOwnProperty("location")) {
                 if (x.location===y.location) {
                     if (x.timestamp) {
                         if (y.timestamp)
