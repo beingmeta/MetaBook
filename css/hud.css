@@ -575,6 +575,8 @@ body._MOUSE #METABOOKHUD img.hudbutton:hover,
 #METABOOKHUD .topleftin.hudbutton,
 #METABOOKHUD .toprightin.hudbutton {
     display: none;}
+#METABOOKHUD .tapholding .topleftin.hudbutton,
+#METABOOKHUD .tapholding .toprightin.hudbutton,
 .hudup #METABOOKHUD .topleftin.hudbutton,
 .hudup #METABOOKHUD .toprightin.hudbutton {
     display: block;}
