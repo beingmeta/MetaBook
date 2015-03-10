@@ -429,7 +429,8 @@ metaBook.Paginate=
                              justify,source_id){
             var page=fdjtID("CODEXPAGE");
             var left=page.style.left, right=page.style.right;
-            var layout_source=fdjt.CodexLayout.sourcehash;
+            var docref=metaBook.docref, sourceid=metaBook.sourceid;
+            var sourcehash=fdjt.CodexLayout.sourcehash;
             page.style.left=""; page.style.right="";
             if (!(width))
                 width=getGeometry(page,false,true).width;
@@ -439,17 +440,18 @@ metaBook.Paginate=
             if (!(source_id))
                 source_id=metaBook.sourceid||fdjtHash.hex_md5(metaBook.docuri);
             if (!(justify)) justify=metaBook.textjustify;
-            if (!(spacing)) spacing=metaBook.bodyspacing;
+            if (!(spacing)) spacing=metaBook.linespacing;
             page.style.left=left; page.style.right=right;
-            return fdjtString("%dx%d-%s-%s%s%s(%s)%s",
-                              width,height,((family)?(family):("")),size,
-                              ((spacing)?("-"+spacing):("")),
-                              ((justify)?("-j"):("")),
-                              // Layout depends on the actual file ID,
-                              // if we've got one, rather than just
-                              // the REFURI
-                              source_id,
-                              ((layout_source)?("["+layout_source+"]"):("")));}
+            return fdjtString(
+                "%s%dx%d-%s-%s%s%s%s%s",
+                ((docref)?(docref+":"):("")),
+                width,height,family,size,
+                ((justify)?("-j"):("")),
+                ((spacing)?("-l"+spacing):("")),
+                // Layout depends on the actual file ID, if we've got
+                // one, rather than just the REFURI
+                ((sourceid)?("#"+sourceid):("")),
+                ((sourcehash)?("/"+sourcehash):("")));}
         metaBook.getLayoutID=getLayoutID;
 
         function layoutCached(layout_id){
@@ -484,17 +486,21 @@ metaBook.Paginate=
             var bodyfamily=(metaBook.dyslexical)?("opendyslexic"):
                 (metaBook.bodyfamily||"default");
             var bodysize=metaBook.bodysize||"normal";
-            var sourceid=metaBook.sourceid||fdjtHash.hex_md5(metaBook.docuri);
+            var docref=metaBook.docref;
+            var sourceid=metaBook.sourceid;
             var justify=metaBook.textjustify;
+            var spacing=metaBook.linespacing;
             var sourcehash=fdjt.CodexLayout.sourcehash;
             var layout_id=fdjtString(
-                "%dx%d-%s-%s%s(%s)%s",
+                "%s%dx%d-%s-%s%s%s%s%s",
+                ((docref)?(docref+":"):("")),
                 width,height,bodyfamily,bodysize,
                 ((justify)?("-j"):("")),
+                ((spacing)?("-l"+spacing):("")),
                 // Layout depends on the actual file ID, if we've got
                 // one, rather than just the REFURI
-                sourceid||metaBook.refuri,
-                ((sourcehash)?("["+sourcehash+"]"):("")));
+                ((sourceid)?("#"+sourceid):("")),
+                ((sourcehash)?("/"+sourcehash):("")));
 
             var docinfo=metaBook.docinfo;
             var goneto=false;
