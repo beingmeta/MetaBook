@@ -46,6 +46,10 @@ body._DYSLEXICAL #METABOOKFRAME, body._DYSLEXICAL .fdjtdialog {
 
 body._DYSLEXICAL #METABOOKBODY, .dyslexical {
     font-family: 'Open Dyslexic', serif;}
+body._DYSLEXICAL #METABOOKBODY, .dyslexical,
+body._DYSLEXICAL #METABOOKBODY p, .dyslexical p,
+body._DYSLEXICAL #METABOOKBODY li, .dyslexical li {
+    line-height: 1.5;}
 
 #METABOOKFRAME #METABOOKCONSOLE, span.uri {
   font-family: 'Courier New', 'Lucia Console', Courier, fixed;}
