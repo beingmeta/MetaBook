@@ -6,7 +6,8 @@
 
 /* metabook 'slices' of summaries or glosses */
 
-div.metabookslice { cursor: crosshair; }
+div.metabookslice {
+    cursor: crosshair; }
 div#METABOOKHEART div.metabookslice.hudpanel {
     min-height: 100%;}
 div.metabookslice button, div.metabookslice input[TYPE="SUBMIT"],
@@ -32,7 +33,8 @@ div.metabookslice div.xrefs a { display: block;}
 div.metabookslice div.metabookcard span.tags span.other { display: none;}
 
 div.metabookslice div.skimpoint {
-    border-top: solid rgba(255,0,0,0.65) 4px;}
+    border-top: solid rgba(255,0,0,0.9) 1px;
+    border-bottom: solid rgba(255,0,0,0.9) 4px;}
 div.metabookslice div.skimpoint.metabookcard {}
 div.metabookslice div.skimpoint.metabookcard .tool {
     font-size: 47%; font-weight: bold;}
@@ -160,6 +162,9 @@ div.metabookslice div.pagerblock > div.metabookcard:first-child div.idhead {
     -webkit-transition-duration: 0.3s;
     -o-transition-duration: 0.3s;
     -moz-duration: 0.3s;}
+
+._MOUSE div.metabookcard:hover .metabookcardbody {
+    outline: dotted blue 2px;}
 
 @media (pointer: coarse) and (max-width: 650px) {
     div.metabookslice div.metabookcard { font-size: 120%; }

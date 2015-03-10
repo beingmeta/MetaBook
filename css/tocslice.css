@@ -18,14 +18,14 @@
     margin: 0px; padding: 0px; border: 0px;}
 .mbtoc {
     font-size: 100%; line-height: 100%;
-    height: 1.2em; margin-right: 1ex;}
+    height: 1em; margin-bottom: 0.2em; margin-right: 1ex;}
 .mbtoc div.extents a.brick {
     position: absolute; display: inline-block;
     box-sizing: border-box;
     border: solid gray 1px; border-left: 0px;
     background-color: lightblue;
     opacity: 0.8;
-    height: 1.2em;}
+    height: 1em;}
 .mbtoc div.extents a.brick.cohi,
 .mbtoc.cohi div.extents a.showsize {
     background-color: gold;}
@@ -35,7 +35,7 @@
     position: absolute; display: inline-block;
     box-sizing: border-box;
     background-color: lightblue;
-    height: 1.2em; }
+    height: 1em; }
 .mbtoc div.extents a.brick:first-child {
     border-left: solid gray 1px;}
 .mbtoc.mbtoc1 { font-size: 130%;}
@@ -54,6 +54,11 @@
     margin-left: 0px; font-size: 100%;}
 
 .statictoc #METABOOKSKIMMER .metabookskiminfo { display: none; }
+
+#METABOOKSTATICTOC .pagerblock { padding-top: 1.5ex;}
+
+._MOUSE .mbtocslice .mbtoc:hover {
+    outline: dotted blue 2px;}
 
 /* Emacs local variables
 ;;;  Local variables: ***
