@@ -948,7 +948,7 @@ body.hudup #METABOOKHUD #METABOOKSKIMMER.sbookatstart img[alt="beginning"] {disp
 #METABOOKHUD #METABOOKPOINTGLOSSES div.idhead {
     height: 0px;}
 
-#METABOOKSKIMMER._highlights .metabookcard .excerpt { display: none; }
+#METABOOKSKIMMER.mbfoundhighlights .metabookcard .excerpt { display: none; }
 
 #METABOOKHUD div.hudpanel#METABOOKSKIMMER.expanded { max-height: inherit; }
 #METABOOKHUD #METABOOKSKIMMER.expanded img.glosspic {  height: inherit; }
