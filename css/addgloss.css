@@ -610,7 +610,7 @@ div.metabookglossform form div.addglossmenu {
     z-index: 800;}
 
 div.metabookglossform form div.addglossmenu > img {
-    width: 50px; height: 50px; padding: 2px; 
+    width: 40px; height: 40px; padding: 2px; 
     box-sizing: content-box;
     display: none; }
 div.metabookglossform form div.addglossmenu > img.held {
@@ -740,16 +740,6 @@ div.metabookglossform.submitclose form > div.messageoverlay {
     #METABOOKHUD.addgloss img.hudbutton[alt="toc"],
     #METABOOKHUD.addgloss img.hudbutton[alt="search"] {
         display: none;}}
-
-@media screen and (max-width: 700px) {
-    ._TOUCH div.metabookglossform form div.addglossmenu > img {
-        width: 60px; height: 60px;}
-    div.metabookglossform form div.addglossmenu {
-        width: 70px;}
-    div.metabookglossform form div.textbox,
-    div.metabookglossform form div.glossetc {
-        margin-right: 80px;}
-}
 
 /* Emacs local variables
 ;;;  Local variables: ***
