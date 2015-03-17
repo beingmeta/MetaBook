@@ -33,8 +33,10 @@ div.metabookslice div.xrefs a { display: block;}
 div.metabookslice div.metabookcard span.tags span.other { display: none;}
 
 div.metabookslice div.skimpoint {
-    border-top: solid rgba(255,0,0,0.9) 1px;
-    border-bottom: solid rgba(255,0,0,0.9) 4px;}
+    /* border-top: solid rgba(255,0,0,0.9) 1px;
+       border-right: solid rgba(255,0,0,0.9) 2px;
+       border-bottom: solid rgba(255,0,0,0.9) 4px; */
+    background-color: lightgreen;}
 div.metabookslice div.skimpoint.metabookcard {}
 div.metabookslice div.skimpoint.metabookcard .tool {
     font-size: 47%; font-weight: bold;}

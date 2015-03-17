@@ -128,7 +128,7 @@ div.metabookcard > hr {
 .metabookcardbody img.userpic,
 .metabookcardbody img.sourcepic  {
     float: left; clear: left; margin-right: 3px;
-    width: 50px; height: auto;
+    width: 50px; overflow:hidden; height: auto;
     /* This lines up with the padding on metabookcardbody */
     margin-top: -6px;}
 .metabookcardbody div.glosspic,
