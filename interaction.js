@@ -452,7 +452,7 @@
             var gloss=metaBook.glossdb.ref(glossid);
             if (!(gloss)) return false;
             var slicediv=fdjtDOM("div.metabookglosses.metabookslice");
-            var slice=new MetaBookSlice(slicediv,[gloss]);
+            var slice=new MetaBookSlice(slicediv,[gloss],false,{nopager: true});
             var hudwrapper=fdjtDOM("div.hudpanel#METABOOKPOINTGLOSSES",slicediv);
             fdjtDOM.replace("METABOOKPOINTGLOSSES",hudwrapper);
             metaBook.setTarget(target);
