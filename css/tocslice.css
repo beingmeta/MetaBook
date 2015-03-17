@@ -57,7 +57,7 @@
 
 #METABOOKSTATICTOC .pagerblock { padding-top: 1.5ex;}
 
-._MOUSE .mbtocslice .mbtoc:hover {
+html._MOUSE .mbtocslice .mbtoc:hover {
     outline: dotted blue 2px;}
 
 /* Emacs local variables

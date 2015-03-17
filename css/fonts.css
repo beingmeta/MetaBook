@@ -34,7 +34,7 @@
 #METABOOKFRAME {
     /* font-family: 'Open Sans', Arial, Helvetica, sans-serif, sans; */
     font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif, sans;}
-body._DYSLEXICAL #METABOOKFRAME, body._DYSLEXICAL .fdjtdialog {
+html._DYSLEXICAL #METABOOKFRAME, html._DYSLEXICAL .fdjtdialog {
     font-family: 'Open Dyslexic', serif;}
 .wf-inactive #METABOOKFRAME {
     font-family: Arial, Helvetica, sans-serif, sans;}
@@ -44,11 +44,11 @@ body._DYSLEXICAL #METABOOKFRAME, body._DYSLEXICAL .fdjtdialog {
                  Georgia, Charter, Garamond,
                  'Times New Roman', Times;}
 
-body._DYSLEXICAL #METABOOKBODY, .dyslexical {
+html._DYSLEXICAL #METABOOKBODY, .dyslexical {
     font-family: 'Open Dyslexic', serif;}
-body._DYSLEXICAL #METABOOKBODY, .dyslexical,
-body._DYSLEXICAL #METABOOKBODY p, .dyslexical p,
-body._DYSLEXICAL #METABOOKBODY li, .dyslexical li {
+html._DYSLEXICAL #METABOOKBODY, .dyslexical,
+html._DYSLEXICAL #METABOOKBODY p, .dyslexical p,
+html._DYSLEXICAL #METABOOKBODY li, .dyslexical li {
     line-height: 1.5;}
 
 #METABOOKFRAME #METABOOKCONSOLE, span.uri {

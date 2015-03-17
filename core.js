@@ -845,6 +845,7 @@
     //  to reflect the state. Also, run run any delayed thunks
     //  queued for connection.
     function setConnected(val){
+        var root=document.documentElement||document.body;
         if ((val)&&(!(metaBook.connected))) {
             var onconnect=metaBook._onconnect;
             metaBook._onconnect=false;
@@ -855,7 +856,7 @@
                 metaBook.writeQueuedGlosses();}
         if (((val)&&(!(metaBook.connected)))||
             ((!(val))&&(metaBook.connected)))
-            fdjtDOM.swapClass(document.body,/\b(_|cx)(CONN|DISCONN)\b/,
+            fdjtDOM.swapClass(root,/\b(_|cx)(CONN|DISCONN)\b/,
                               ((val)?("_CONN"):("_DISCONN")));
         metaBook.connected=val;
     } metaBook.setConnected=setConnected;

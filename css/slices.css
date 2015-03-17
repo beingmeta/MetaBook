@@ -52,7 +52,7 @@ div.metabookslice div.metabookcard.skimpoint .fdjtclearfloats {
 
 div.metabookslice.pager div.pagernav {
     border-bottom: solid black 1px;}
-._TOUCH div.metabookslice.pager div.pagernav {
+html._TOUCH div.metabookslice.pager div.pagernav {
     font-size: 200%;}
 div.metabookslice.pager.hudpanel div.pagernav {
     position: absolute; bottom: 0px;
@@ -163,7 +163,7 @@ div.metabookslice div.pagerblock > div.metabookcard:first-child div.idhead {
     -o-transition-duration: 0.3s;
     -moz-duration: 0.3s;}
 
-._MOUSE div.metabookcard:hover .metabookcardbody {
+html._MOUSE div.metabookcard:hover .metabookcardbody {
     outline: dotted blue 2px;}
 
 @media (pointer: coarse) and (max-width: 650px) {

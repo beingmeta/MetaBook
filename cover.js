@@ -367,8 +367,9 @@
         return false;}
 
     metaBook.addConfig("showconsole",function(name,value){
-        if (value) addClass(document.body,"_SHOWCONSOLE");
-        else dropClass(document.body,"_SHOWCONSOLE");
+        var root=document.documentElement||document.body;
+        if (value) addClass(root,"_SHOWCONSOLE");
+        else dropClass(root,"_SHOWCONSOLE");
         fdjt.Async(function(){metaBook.updateSettings(name,value);});});
     
 

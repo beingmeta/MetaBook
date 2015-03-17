@@ -159,17 +159,17 @@ div.metabookglossform.glossreply form .showmode.add {
 
 div.metabookglossform form textarea[name='NOTE'] {
     background-image: url(g/metabook/remark.svgz);}
-body._NOSVG div.metabookglossform form textarea[name='NOTE'] {
+html._NOSVG div.metabookglossform form textarea[name='NOTE'] {
     background-image: url(g/metabook/remark24x24.png);}
 div.metabookglossform div.textbox input[name='TAG'] {
     background-image: url(g/metabook/tagicon.svgz);}
-body._NOSVG div.metabookglossform div.textbox input[name='TAG'] {
+html._NOSVG div.metabookglossform div.textbox input[name='TAG'] {
     background-image: url(g/metabook/tagicon24x24.png);}
 div.metabookglossform div.textbox input[name='LINK'] {
     background-image: url(g/metabook/diaglink24x24.png);}
 div.metabookglossform div.textbox input[name='OUTLET'] {
     background-image: url(g/metabook/sbookspeople.svgz);}
-body._NOSVG div.metabookglossform div.textbox input[name='OUTLET'] {
+html._NOSVG div.metabookglossform div.textbox input[name='OUTLET'] {
     background-image: url(g/metabook/sbookspeople24x24.png);}
 
 div.metabookglossform .glossetc .glossdate {
@@ -423,9 +423,9 @@ div.metabookglossform div.textbox input[type="TEXT"][name='TAG'] {
     background-image: url(g/metabook/tagicon.svgz);}
 div.metabookglossform div.textbox input[type="TEXT"][name='LINK'] {
     background-image: url(g/metabook/diaglink.svgz);}
-body._NOSVG div.metabookglossform div.textbox input[type="TEXT"][name='TAG'] {
+html._NOSVG div.metabookglossform div.textbox input[type="TEXT"][name='TAG'] {
     background-image: url(g/metabook/tagicon16x16.png);}
-body._NOSVG div.metabookglossform div.textbox input[type="TEXT"][name='LINK'] {
+html._NOSVG div.metabookglossform div.textbox input[type="TEXT"][name='LINK'] {
     background-image: url(g/metabook/diaglink16x16.png);}
 
 div.glossetc, div.glossetc img, div.glossetc span, div.glossetc input {
@@ -486,11 +486,11 @@ input#METABOOKFILEINPUT[TYPE="FILE"] { display: none;}
 #METABOOKATTACHFILE span.mbmessage,
 #METABOOKATTACHFILE span.mbdragmessage {
     font-style: italic;}
-._MOUSE #METABOOKATTACHFILE span.mbdragmessage,
-._TOUCH #METABOOKATTACHFILE span.mbmessage {
+html._MOUSE #METABOOKATTACHFILE span.mbdragmessage,
+html._TOUCH #METABOOKATTACHFILE span.mbmessage {
     display: inline;}
-._MOUSE .haveupload #METABOOKATTACHFILE span.mbdragmessage,
-._TOUCH .haveupload #METABOOKATTACHFILE span.mbmessage {
+html._MOUSE .haveupload #METABOOKATTACHFILE span.mbdragmessage,
+html._TOUCH .haveupload #METABOOKATTACHFILE span.mbmessage {
     display: none;}
 
 #METABOOKATTACHFILE span.mbfilename {
@@ -597,9 +597,9 @@ input#METABOOKFILEINPUT[TYPE="FILE"] { display: none;}
     background-image: url(g/metabook/tagicon.svgz);}
 #METABOOKRIBBON input[TYPE="TEXT"]#METABOOKADDSHAREINPUT {
     background-image: url(g/metabook/sbookspeople.svgz);}
-body._NOSVG #METABOOKRIBBON input[TYPE="TEXT"]#METABOOKADDTAGINPUT {
+html._NOSVG #METABOOKRIBBON input[TYPE="TEXT"]#METABOOKADDTAGINPUT {
     background-image: url(g/metabook/tagicon64x64.png);}
-body._NOSVG #METABOOKRIBBON input[TYPE="TEXT"]#METABOOKADDSHAREINPUT {
+html._NOSVG #METABOOKRIBBON input[TYPE="TEXT"]#METABOOKADDSHAREINPUT {
     background-image: url(g/metabook/sbookspeople64x64.png);}
 
 /* New menu stuff */
@@ -618,10 +618,10 @@ div.metabookglossform form div.addglossmenu > img.held {
 div.metabookglossform form div.addglossmenu.expanded > img {
     margin-bottom: 4px;}
 
-._TOUCH div.metabookglossform
+html._TOUCH div.metabookglossform
   form div.addglossmenu > img.held {
     width: 80px; height: 80px; margin-left: -20px;}
-._TOUCH div.metabookglossform 
+html._TOUCH div.metabookglossform 
   form div.addglossmenu > img.held.menutop {
     width: 40px; height: 40px; margin-left: 0px;}
 div.metabookglossform

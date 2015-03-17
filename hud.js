@@ -826,16 +826,18 @@ metaBook.setMode=
             fdjt.Async(function(){
                 metaBook.updateSettings(name,value);});});
         metaBook.addConfig("dyslexical",function(name,value){
-            if ((value)&&(typeof value === 'string')&&(/yes|on|t/i.exec(value))) {
-                if (hasClass(document.body,"_DYSLEXICAL")) return;
+            var root=document.documentElement||document.body;
+            if ((value)&&(typeof value === 'string')&&
+                (/yes|on|t/i.exec(value))) {
+                if (hasClass(root,"_DYSLEXICAL")) return;
                 else {
                     metaBook.dyslexical=true;
-                    addClass(document.body,"_DYSLEXICAL");}}
-            else if (!(hasClass(document.body,"_DYSLEXICAL")))
+                    addClass(root,"_DYSLEXICAL");}}
+            else if (!(hasClass(root,"_DYSLEXICAL")))
                 return;
             else {
                 metaBook.dyslexical=false;
-                fdjtDOM.dropClass(document.body,"_DYSLEXICAL");}
+                fdjtDOM.dropClass(root,"_DYSLEXICAL");}
             fdjt.Async(function(){
                 metaBook.resizeUI();
                 if (metaBook.layout) metaBook.Paginate("typechange");},

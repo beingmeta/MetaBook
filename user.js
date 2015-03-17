@@ -47,11 +47,12 @@
 
     function setUser(userinfo,outlets,layers,sync){
         var started=fdjtTime();
+        var root=document.documentElement||document.body;
         fdjtLog("Setting up user %s (%s)",userinfo._id,
                 userinfo.name||userinfo.email);
         if (userinfo) {
-            fdjtDOM.dropClass(document.body,"_NOUSER");
-            fdjtDOM.addClass(document.body,"_USER");}
+            fdjtDOM.dropClass(root,"_NOUSER");
+            fdjtDOM.addClass(root,"_USER");}
         if (metaBook.user) {
             if (userinfo._id===metaBook.user._id) {}
             else throw { error: "Can't change user"};}
@@ -60,7 +61,8 @@
             fdjtLog.warn(
                 "Cached user information is newer (%o) than loaded (%o)",
                 cursync,sync);}
-        if ((navigator.onLine)&&(getLocal("metabook.queued("+metaBook.refuri+")")))
+        if ((navigator.onLine)&&
+            (getLocal("metabook.queued("+metaBook.refuri+")")))
             metaBook.writeQueuedGlosses();
         metaBook.user=metaBook.sourcedb.Import(
             userinfo,false,RefDB.REFLOAD|RefDB.REFSTRINGS|RefDB.REFINDEX);
@@ -95,12 +97,14 @@
 
     function setupUI4User(){
         var i=0, lim;
+        var root=document.documentElement||document.body;
         if (Trace.startup>1) fdjtLog("Starting UI setup for user");
         var startui=fdjtTime();
         if (!(metaBook.user)) {
-            fdjtDOM.addClass(document.body,"_NOUSER");
+            fdjtDOM.addClass(root,"_NOUSER");
             return;}
-        fdjtDOM.dropClass(document.body,"_NOUSER");
+        fdjtDOM.addClass(root,"_NOUSER");
+        fdjtDOM.dropClass(root,"_NOUSER");
         var username=metaBook.user.name||metaBook.user.handle||metaBook.user.email;
         if (username) {
             if (fdjtID("METABOOKUSERNAME"))

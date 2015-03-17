@@ -54,7 +54,7 @@ form.metabooksettings span.sep {
 form.metabooksettings h1 .button {float: right;}
 form.metabooksettings h1 .message {
     font-size: 50%; float: right; padding-top: 0.5ex;}
-._NOUSER form.metabooksettings h1 a.logout {display:none;}
+html._NOUSER form.metabooksettings h1 a.logout {display:none;}
 form.metabooksettings h1 a.logout {
     float: right; color: red; text-decoration: none;
     font-size: 60%; font-variant: small-caps;}
@@ -69,7 +69,7 @@ form.metabooksettings h1 .button {
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     float: right;}
-._MOUSE form.metabooksettings h1 .button:hover {
+html._MOUSE form.metabooksettings h1 .button:hover {
     border-color: black;}
 form.metabooksettings .button.exit {
     color: red; background-color: white;}
@@ -169,8 +169,8 @@ form.metabooksettings > div.checkspan.showconsole {
     margin-top: 1.5ex;
     border-top: solid gray 4px;}
 form.metabooksettings > div.showconsole { display: none; }
-._DEVMODE form.metabooksettings > div.showconsole,
-._SHOWCONSOLE form.metabooksettings > div.showconsole{
+html._DEVMODE form.metabooksettings > div.showconsole,
+html._SHOWCONSOLE form.metabooksettings > div.showconsole{
     display: block; }
 
 #METABOOKCOVER form.metabooksettings a,
@@ -213,12 +213,12 @@ form.metabooksettings > div button {
 form.metabooksettings button.reset {
     width: 2em; height: 2em; color: transparent;
     background-image: url();}
-._NOSVG form.metabooksettings button.reset {
+html._NOSVG form.metabooksettings button.reset {
     background-image: url(g/metabook/reset50x50.pg);}
 form.metabooksettings button.refresh {
     width: 2em; height: 2em; color: transparent;
     background-image: url(g/metabook/refresh.svgz);}
-._NOSVG form.metabooksettings button.refresh {    
+html._NOSVG form.metabooksettings button.refresh {    
     background-image: url(g/metabook/refresh50x50.png);}
 */
 

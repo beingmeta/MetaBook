@@ -190,7 +190,7 @@ span.note.ellipsis span.elision, span.note.ellipsis span.delision {
 
 /* Fuzzy selections */
 
-body._TOUCH .fdjtselecting .fdjtselectloupe { display: inline-block; }
+html._TOUCH .fdjtselecting .fdjtselectloupe { display: inline-block; }
 
 .fdjtselected {
     box-shadow: 0px 0px 0.5ex 0.5ex rgba(255, 255, 0, 0.33);}
@@ -297,29 +297,29 @@ div.sbookabout div.publisher { font-style: italic;}
 div.logindoc { display: none;}
 
 .fortouch { display: none;}
-body._TOUCH .notouch { display: none;}
-body._TOUCH div.fortouch,
-body._TOUCH p.fortouch {
+html._TOUCH .notouch { display: none;}
+html._TOUCH div.fortouch,
+html._TOUCH p.fortouch {
     display: block;}
-body._TOUCH .fortouch {display: inline;}
-body._TOUCH li.fortouch {display: list-item;}
-body._TOUCH span.fortouch { display: inline;}
-body._TOUCH div.fortouch { display: block;}
-body._TOUCH p.fortouch { display: block;}
-body._TOUCH li.fortouch { display: list-item;}
+html._TOUCH .fortouch {display: inline;}
+html._TOUCH li.fortouch {display: list-item;}
+html._TOUCH span.fortouch { display: inline;}
+html._TOUCH div.fortouch { display: block;}
+html._TOUCH p.fortouch { display: block;}
+html._TOUCH li.fortouch { display: list-item;}
 /* Make checkboxes bigger */
-body._TOUCH .checkspan input[TYPE="CHECKBOX"],
-body._TOUCH .checkspan input[TYPE="RADIO"] {
+html._TOUCH .checkspan input[TYPE="CHECKBOX"],
+html._TOUCH .checkspan input[TYPE="RADIO"] {
     height: 1em; width: 1em;}
 
 body._MOUSE._USESVG img.fortouch.svg,
-body._TOUCH._USESVG img.notouch.svg {
+html._TOUCH._USESVG img.notouch.svg {
     display: none !important;}
 
 body img.touchicon { display: none;}
 body img.mouseicon { display: inline;}
-body._TOUCH img.touchicon { display: inline;}
-body._TOUCH img.mouseicon { display: none;}
+html._TOUCH img.touchicon { display: inline;}
+html._TOUCH img.mouseicon { display: none;}
 
 div.locbar {
     background-color: ivory;
@@ -447,8 +447,8 @@ body._MOUSE.hudup .mbtarget .glossmark.hover > img {
     -moz-opacity: 0.90;
     -o-opacity: 0.90;}
 
-body._TOUCH.hudup .mbtarget > .glossmark > img,
-body._TOUCH.openhud .mbtarget > .glossmark > img {
+html._TOUCH.hudup .mbtarget > .glossmark > img,
+html._TOUCH.openhud .mbtarget > .glossmark > img {
     opacity: 0.80;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
     filter: alpha(opacity=80);
@@ -459,61 +459,61 @@ body._TOUCH.openhud .mbtarget > .glossmark > img {
 
 /* Not logged in conditionalization */
 
-body._NOUSER a.logout {display: none;}
-body._NOUSER #SBOOKLOGOUT { display: none;}
-body._NOUSER #METABOOKHUD div.hud#METABOOKSOURCES img.button.login {
+html._NOUSER a.logout {display: none;}
+html._NOUSER #SBOOKLOGOUT { display: none;}
+html._NOUSER #METABOOKHUD div.hud#METABOOKSOURCES img.button.login {
     display: block;}
 
 .mbwithuser, .mbdisconn, .mbwithconn, .mbneedlogin { display: none;}
-body._USER .mbnouser { display: none;}
+html._USER .mbnouser { display: none;}
 
-body._NOUSER span.mbnouser, body._NOUSER a.mbnouser,
-body._NOUSER em.mbnouser, body._NOUSER strong.mbnouser {
+html._NOUSER span.mbnouser, html._NOUSER a.mbnouser,
+html._NOUSER em.mbnouser, html._NOUSER strong.mbnouser {
     display: inline; }
 
-body._NOUSER p._nouser, body._NOUSER div.mbnouser,
-body._NOUSER blockquote.mbnouser { display: block; }
+html._NOUSER p._nouser, html._NOUSER div.mbnouser,
+html._NOUSER blockquote.mbnouser { display: block; }
 
-body._NOUSER tr.mbnouser { display: table-row; }
-body._NOUSER tbody.mbnouser { display: table-row-group; }
+html._NOUSER tr.mbnouser { display: table-row; }
+html._NOUSER tbody.mbnouser { display: table-row-group; }
 
-body._USER span.mbwithuser, body._USER a.mbwithuser,
-body._USER em.mbwithuser, body._USER strong.mbwithuser {
+html._USER span.mbwithuser, html._USER a.mbwithuser,
+html._USER em.mbwithuser, html._USER strong.mbwithuser {
     display: inline; }
 
-body._DISCONN span.mbdisconn, body._DISCONN a.mbdisconn,
-body._DISCONN em.mbdisconn, body._DISCONN strong.mbdisconn {
+html._DISCONN span.mbdisconn, html._DISCONN a.mbdisconn,
+html._DISCONN em.mbdisconn, html._DISCONN strong.mbdisconn {
     display: inline; }
 
-body._DISCONN p.mbdisconn, body._DISCONN div.mbdisconn,
-body._DISCONN blockquote.mbdisconn { display: block; }
+html._DISCONN p.mbdisconn, html._DISCONN div.mbdisconn,
+html._DISCONN blockquote.mbdisconn { display: block; }
 
-body._DISCONN tr.mbdisconn { display: table-row; }
-body._DISCONN tbody.mbdisconn { display: table-row-group; }
+html._DISCONN tr.mbdisconn { display: table-row; }
+html._DISCONN tbody.mbdisconn { display: table-row-group; }
 
-body._NOUSER tbody.mbneedlogin, body._DISCONN tbody.mbneedlogin {
+html._NOUSER tbody.mbneedlogin, html._DISCONN tbody.mbneedlogin {
     display: table-row-group; }
-body._NOUSER tr.mbneedlogin, body._DISCONN tr.mbneedlogin {
+html._NOUSER tr.mbneedlogin, html._DISCONN tr.mbneedlogin {
     display: table-row; }
-body._NOUSER p.mbneedlogin, body._DISCONN p.mbneedlogin,
-body._NOUSER div.mbneedlogin, body._DISCONN div.mbneedlogin {
+html._NOUSER p.mbneedlogin, html._DISCONN p.mbneedlogin,
+html._NOUSER div.mbneedlogin, html._DISCONN div.mbneedlogin {
     display: block; }
 
-body._USER p.mbwithuser, body._USER div.mbwithuser,
-body._USER blockquote.mbwithuser { display: block; }
+html._USER p.mbwithuser, html._USER div.mbwithuser,
+html._USER blockquote.mbwithuser { display: block; }
 
-body._USER tr.mbwithuser { display: table-row; }
-body._USER tbody.mbwithuser { display: table-row-group; }
+html._USER tr.mbwithuser { display: table-row; }
+html._USER tbody.mbwithuser { display: table-row-group; }
 
-body._CONN span.mbwithconn, body._CONN a.mbwithconn,
-body._CONN em.mbwithconn, body._CONN strong.mbwithconn {
+html._CONN span.mbwithconn, html._CONN a.mbwithconn,
+html._CONN em.mbwithconn, html._CONN strong.mbwithconn {
     display: inline; }
 
-body._CONN p.mbwithconn, body._CONN div.mbwithconn,
-body._CONN blockquote.mbwithconn { display: block; }
+html._CONN p.mbwithconn, html._CONN div.mbwithconn,
+html._CONN blockquote.mbwithconn { display: block; }
 
-body._CONN tr.mbwithconn { display: table-row; }
-body._CONN tbody.mbwithconn { display: table-row-group; }
+html._CONN tr.mbwithconn { display: table-row; }
+html._CONN tbody.mbwithconn { display: table-row-group; }
 
 /* Pagination stuff */
 

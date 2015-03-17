@@ -68,7 +68,8 @@
                     metaBook.glossdb.load(
                         getLocal("metabook.queued("+metaBook.refuri+")",true));
                 fdjtID("METABOOKCOVER").className="bookcover";
-                addClass(document.body,"_NOUSER");}
+                addClass(document.documentElement||document.body,
+                         "_NOUSER");}
             if (info.nodeid) metaBook.setNodeID(info.nodeid);}
         else if (info.wronguser) {
             metaBook.clearOffline();

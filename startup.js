@@ -753,9 +753,9 @@ metaBook.Startup=
             if (metaBook.persist) saveLocal("metabook.refuris",refuris,true);}
 
         function setupDevice(){
+            var root=document.documentElement||document.body;
             var useragent=navigator.userAgent;
             var device=fdjtDevice;
-            var body=document.body;
             if (Trace.startup>2) 
                 fdjtLog("Starting device setup for %s",useragent);
 
@@ -768,7 +768,7 @@ metaBook.Startup=
             fdjt.TapHold.default_opts.bubble=false;
             
             if (device.touch) {
-                fdjtDOM.addClass(body,"_TOUCH");
+                fdjtDOM.addClass(root,"_TOUCH");
                 fdjt.TapHold.default_opts.fortouch=true;
                 metaBook.ui="touch";
                 metaBook.touch=true;
@@ -794,15 +794,15 @@ metaBook.Startup=
                 // Have fdjtLog do it's own format conversion for the log
                 fdjtLog.doformat=true;}
             else if (device.touch) {
-                fdjtDOM.addClass(body,"_TOUCH");
+                fdjtDOM.addClass(root,"_TOUCH");
                 metaBook.ui="touch";}
             else if (!(metaBook.ui)) {
                 // Assume desktop or laptop
-                fdjtDOM.addClass(body,"_MOUSE");
+                fdjtDOM.addClass(root,"_MOUSE");
                 metaBook.ui="mouse";}
             else {}
             if (metaBook.iscroll) {
-                fdjtDOM.addClass(body,"_ISCROLL");
+                fdjtDOM.addClass(root,"_ISCROLL");
                 device.iscroll=true;}
             device.string=device.string+" "+
                 ((metaBook.iscroll)?("iScroll"):("nativescroll"));

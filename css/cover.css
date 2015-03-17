@@ -144,11 +144,11 @@ body._MOUSE #METABOOKCOVERCONTROLS span.control:hover,
 #METABOOKCOVER > div.userbox {
     padding-top: 0px;}
 
-body._NOUSER #METABOOKCOVER > div {
+html._NOUSER #METABOOKCOVER > div {
     top: 65px; bottom: 150px; }
-body._USER #METABOOKCOVER > div.userbox {
+html._USER #METABOOKCOVER > div.userbox {
     height: 40px; padding-top: 1px; display: block;}
-body._NOUSER #METABOOKCOVER > div.loginbox {
+html._NOUSER #METABOOKCOVER > div.loginbox {
     height: 70px; display: block;}
 
 #METABOOKCOVER div.loginmessage {
@@ -173,7 +173,7 @@ body._NOUSER #METABOOKCOVER > div.loginbox {
     max-width: 50%; float: left;} 
 #METABOOKCOVER div.loginbox form select {display: none;}
 
-body._NOUSER #METABOOKCOVER > #METABOOKCOVERCONTROLS {
+html._NOUSER #METABOOKCOVER > #METABOOKCOVERCONTROLS {
     bottom: 70px;}
 
 #METABOOKCOVER div.loginbox {
@@ -198,7 +198,7 @@ div.loginbox form > span, div.loginbox form > select {
 #METABOOKCOVER div.userbox a.sbookslogo em { color: cornflowerblue; }
 #METABOOKCOVER div.userbox span.sbooks em { color: silver;}
 #METABOOKCOVER div.userbox a.sbooks em { color: steelblue;}
-body._USER #METABOOKCOVER div.userbox {
+html._USER #METABOOKCOVER div.userbox {
     height: 40px;}
 
 #METABOOKCOVER div.userbox a.sbookslogo { display: none;}
@@ -239,13 +239,13 @@ body._USER #METABOOKCOVER div.userbox {
 .control[data-mode='aboutbook'] {
     display: none;}
 body._SHOWCONSOLE span.control[data-mode='console'] { display: inline;}
-body._NOUSER span.control[data-mode='layers'] { display: none;}
+html._NOUSER span.control[data-mode='layers'] { display: none;}
 span.control[data-mode='layers'] .whenloggedin { display: none;}
-body._USER span.control[data-mode='layers'] .whenloggedin {
+html._USER span.control[data-mode='layers'] .whenloggedin {
     display: inline;}
-body._USER span.control[data-mode='layers'] .notloggedin {
+html._USER span.control[data-mode='layers'] .notloggedin {
     display: none;}
-body._USER._CONN .control[data-mode='login'] { display: none;}
+html._USER._CONN .control[data-mode='login'] { display: none;}
 
 #METABOOKCOVERCONTROLS.nobookcover .control[data-mode='bookcover'],
 #METABOOKCOVERCONTROLS.nocoverpage .control[data-mode='coverpage'],
@@ -345,11 +345,11 @@ body._SHOWCONSOLE .control[alt='Console'] {display: none;}
     background-color: silver;
     float: right;}
 #METABOOKCONSOLE #METABOOKCONSOLEINPUT textarea { width: 90%;}
-body._TOUCH #METABOOKCONSOLE #METABOOKCONSOLEINPUT.uptop {
+html._TOUCH #METABOOKCONSOLE #METABOOKCONSOLEINPUT.uptop {
     position: absolute;
     top: 5px; left: 10%; right: 10%; width: 90%;
     margin-left: 0px; padding-top: 0px;}
-body._TOUCH #METABOOKCONSOLELOG {
+html._TOUCH #METABOOKCONSOLELOG {
     /* This make it always scrollable on touch devices,
        in case interesting content is underneath the
        soft keyboard. */
@@ -386,8 +386,8 @@ body._MOUSE #METABOOKOPENTAB:hover, #METABOOKOPENTAB.tapholdtarget {
     border-color: blue; border-style: dotted;}
 #METABOOKCOVERMESSAGE > div#METABOOKOPENTAB {
     width: 7em; color: white;}
-body._TOUCH #METABOOKCOVERMESSAGE > div#METABOOKOPENTAB { font-size: 36px;}
-body._TOUCH #METABOOKCOVERMESSAGE > div#METABOOKOPENTAB {
+html._TOUCH #METABOOKCOVERMESSAGE > div#METABOOKOPENTAB { font-size: 36px;}
+html._TOUCH #METABOOKCOVERMESSAGE > div#METABOOKOPENTAB {
     width: 5em; }
 
 body.mbREADY #METABOOKCOVERMESSAGE > #METABOOKOPENTAB {
@@ -433,7 +433,7 @@ body.mbBUSY #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE {
 /* Media specific rules */
 
 @media screen and (max-width: 750px) {
-    body._TOUCH #METABOOKSETTINGS table.settings {  font-size: 1.3em; }}
+    html._TOUCH #METABOOKSETTINGS table.settings {  font-size: 1.3em; }}
 
 @media screen and (max-width: 640px) {
     div.fdjtprogress#METABOOKLAYOUTMESSAGE {
@@ -449,15 +449,15 @@ body.mbBUSY #METABOOKCOVERMESSAGE > #METABOOKREADYMESSAGE {
 }
 @media screen and (max-width: 500px) {
     #METABOOKCOVER > div { bottom: 120px; }
-    body._NOUSER #METABOOKCOVER > div { bottom: 150px; }
+    html._NOUSER #METABOOKCOVER > div { bottom: 150px; }
     #METABOOKCOVERMESSAGE > div { font-size: 0.7em;}
     #METABOOKCOVERMESSAGE > div#METABOOKOPENTAB { font-size: 30px;}
     #METABOOKCOVERMESSAGE > div#METABOOKREADYMESSAGE { font-size: 30px;}
 
     #METABOOKCOVER > div { left: 10px; right: 10px;}
 
-    body._TOUCH #METABOOKSETTINGS {  font-size: 0.9em; }
-    body._TOUCH #METABOOKSETTINGS table.settings {  font-size: 1em; }
+    html._TOUCH #METABOOKSETTINGS {  font-size: 0.9em; }
+    html._TOUCH #METABOOKSETTINGS table.settings {  font-size: 1em; }
     
     #METABOOKCOVER > #METABOOKCOVERCONTROLS {
         height: 80px; white-space: normal; }

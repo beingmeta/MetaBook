@@ -5,9 +5,9 @@
 @charset "UTF-8";
 
 #METABOOKHUD a img { border: transparent;}
-._MOUSE #METABOOKHUD a:hover img { border: inherit;}
-._MOUSE #METABOOKHUD a:hover { text-decoration: underline;}
-._MOUSE #METABOOKHUD a.brick:hover { text-decoration: none;}
+html._MOUSE #METABOOKHUD a:hover img { border: inherit;}
+html._MOUSE #METABOOKHUD a:hover { text-decoration: underline;}
+html._MOUSE #METABOOKHUD a.brick:hover { text-decoration: none;}
 
 /* Size rules */
 
@@ -36,7 +36,7 @@
     background-color: white;
     border: solid steelblue 4px; padding: 0px; font-size: 70%;
     max-height: 75px;}
-._ANIMATE #METABOOKSKIMMER {
+body._ANIMATE #METABOOKSKIMMER {
     transition-property: height; transition-duration: 0.5x;
     -webkit-transition-property: height; -webkit-transition-duration: 0.5x;
     -moz-transition-property: height; -moz-transition-duration: 0.5x;
@@ -67,11 +67,11 @@ body.hudup #METABOOKHEAD .hudpanel {
 body._FULLHEIGHT #METABOOKTOPBAR {height: 20px;}
 body._FULLHEIGHT.hudup #METABOOKTOPBAR {height: 50px;}
 
-body._TOUCH.hudup #METABOOKFRAME > #METABOOKHUD > div,
-body._TOUCH #METABOOKFRAME > #METABOOKHUD.addgloss > div,
-body._TOUCH.mbSKIMMING #METABOOKFRAME > #METABOOKHUD > #METABOOKSKIMMER {
+html._TOUCH.hudup #METABOOKFRAME > #METABOOKHUD > div,
+html._TOUCH #METABOOKFRAME > #METABOOKHUD.addgloss > div,
+html._TOUCH.mbSKIMMING #METABOOKFRAME > #METABOOKHUD > #METABOOKSKIMMER {
     pointer-events: all;}
-body._TOUCH.hudup #METABOOKFRAME > #METABOOKHUD > div.helphud {
+html._TOUCH.hudup #METABOOKFRAME > #METABOOKHUD > div.helphud {
     background-color: ivory;}
 
 #METABOOKHEAD, #METABOOKSKIMMER {top: 0px; border-top: 0px;}
@@ -458,7 +458,7 @@ body.mbSKIMMING #METABOOKHUD.searchresults #METABOOKSEARCH {
     -moz-opacity: 0.98;
     -o-opacity: 0.98;}
 
-body._TOUCH .metabookcard .age {
+html._TOUCH .metabookcard .age {
     font-size: 125%; padding-bottom: 2px;}
 
 div.completions.hudpanel { line-height: 120%;}
@@ -490,7 +490,7 @@ div.completions.hudpanel .normal { line-height: 250%;}
     -khtml-opacity: 0.02;
     -moz-opacity: 0.02;
     -o-opacity: 0.02;}
-._MOUSE #METABOOKHUD:hover img.hudbutton {
+html._MOUSE #METABOOKHUD:hover img.hudbutton {
     opacity: 0.30;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
     filter: alpha(opacity=30);
@@ -525,7 +525,7 @@ body.mbSKIMMING #METABOOKHUD img.hudbutton {
     -webkit-transition-property: width, height, opacity;
     -webkit-transition-duration: 1s;}
 
-._TOUCH #METABOOKHUD img.hudbutton {
+html._TOUCH #METABOOKHUD img.hudbutton {
     width: 65px; height: 64px;}
 
 /* .hudup #METABOOKHUD img.hudbutton { width: 75px; height: 75px;} */
@@ -567,8 +567,8 @@ body._MOUSE #METABOOKHUD img.hudbutton:hover,
 #METABOOKHUD #METABOOKFOOT.tapholding img.hudbutton.tapholdtarget,
 #METABOOKHUD #METABOOKTOPBAR.tapholding img.hudbutton {
     width: 75px; height: 75px;}
-._TOUCH #METABOOKHUD #METABOOKFOOT.tapholding img.hudbutton.tapholdtarget,
-._TOUCH #METABOOKHUD #METABOOKTOPBAR.tapholding img.hudbutton.tapholdtarget {
+html._TOUCH #METABOOKHUD #METABOOKFOOT.tapholding img.hudbutton.tapholdtarget,
+html._TOUCH #METABOOKHUD #METABOOKTOPBAR.tapholding img.hudbutton.tapholdtarget {
     width: 125px; height: 125px;}
 
 #METABOOKHUD .topleft {top: 0px; left: 0px;}
@@ -650,7 +650,7 @@ body._ANIMATE #METABOOKTOOLTAB {
     transition-duration: 0.2s;}
 #METABOOKTOOLTAB {
     background-image: url(g/metabook/downbar.svgz);}
-body._NOSVG #METABOOKTOOLTAB {
+html._NOSVG #METABOOKTOOLTAB {
     background-image: url(g/metabook/downbar128w.png);}
 .hudup #METABOOKTOOLTAB, .mbcover #METABOOKTOOLTAB { display: none;}
 #METABOOKTOPBAR.tapholding #METABOOKTOOLTAB { display: none; }
@@ -691,7 +691,7 @@ body._MOUSE #METABOOKTOPBAR:hover #METABOOKSHOWCOVER {
     height: 1.2em; width: auto;
     float: left;}
 
-body._NOUSER a.logout {
+html._NOUSER a.logout {
     display: none !important;}
 
 #METABOOKHUD #METABOOKBUTTON.toc img[alt='toc'],
@@ -784,7 +784,7 @@ body.hudup #METABOOKHUD.openglossmark div.hudpanel#METABOOKPOINTGLOSSES {
     -o-box-shadow: 1em 1em 1em #cccccc;
     display: block;}
 
-body._TOUCH #METABOOKFRAME > #METABOOKHUD > #METABOOKPOINTGLOSSES {
+html._TOUCH #METABOOKFRAME > #METABOOKHUD > #METABOOKPOINTGLOSSES {
     pointer-events: all;}
 
 /* The METABOOKSKIMMER */
@@ -1153,28 +1153,28 @@ form.sbooksapp table td.text { padding-bottom: 1ex;}
 
 /* User, no user rules */
 
-body._NOUSER ._USER { display: none;}
-body._USER ._NOUSER { display: none;}
+html._NOUSER ._USER { display: none;}
+html._USER ._NOUSER { display: none;}
 
-body._NOUSER form.sbooksapp { padding-top: 0px;}
+html._NOUSER form.sbooksapp { padding-top: 0px;}
 
 .mbwithuser, .mbnouser, .mbdisconn, .mbwithconn { display: none; }
 
-body._USER tr.mbwithuser, body._NOUSER tr.mbnouser {
+html._USER tr.mbwithuser, html._NOUSER tr.mbnouser {
     display: table-row; }
-body._USER tbody.mbwithuser, body._NOUSER tbody.mbnouser {
+html._USER tbody.mbwithuser, html._NOUSER tbody.mbnouser {
     display: table-row-group; }
-body._USER._CONN tbody.mbwithconn { display: table-row-group; }
-body._USER._CONN tr.mbwithconn { display: table-row; }
-body._USER._DISCONN tbody.mbdisconn { display: table-row-group; }
-body._USER._DISCONN tr.mbdisconn { display: table-row; }
+html._USER._CONN tbody.mbwithconn { display: table-row-group; }
+html._USER._CONN tr.mbwithconn { display: table-row; }
+html._USER._DISCONN tbody.mbdisconn { display: table-row-group; }
+html._USER._DISCONN tr.mbdisconn { display: table-row; }
 
-body._NOUSER .mbwithuser { display: none;}
-body._NOUSER .mbdisconn {display: none;}
-body._USER._CONN .mbdisconn {display: none;}
-body._USER._CONN .mbdisconn {display: none;}
-body._USER .nouser {display: none;}
-body._USER._DISCONN .mbwithconn {display: none;}
+html._NOUSER .mbwithuser { display: none;}
+html._NOUSER .mbdisconn {display: none;}
+html._USER._CONN .mbdisconn {display: none;}
+html._USER._CONN .mbdisconn {display: none;}
+html._USER .nouser {display: none;}
+html._USER._DISCONN .mbwithconn {display: none;}
 
 /* Close HUD buttons */
 

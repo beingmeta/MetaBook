@@ -45,7 +45,7 @@ div.completions.noinput .cloudtoggle {
 .cloud .showall { display: none; }
 .cloud.noinput .showall { display: block; }
 
-._MOUSE .cloud .showall:hover,
+html._MOUSE .cloud .showall:hover,
 .cloud .showall.tapholdtarget {
     border-color: blue;}
 .cloud .showall .showless { display: none;}

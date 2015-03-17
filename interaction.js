@@ -1835,16 +1835,17 @@
     function toggleDevMode(evt){
         fdjtLog("toggleDevMode %o",evt);
         if (devmode_click) {
+            var root=document.documentElement||document.body;
             var now=fdjtTime();
             if ((now-devmode_click)<1000) {
                 if (metaBook.devmode)  {
                     metaBook.devmode=false;
                     fdjtState.dropLocal("metabook.devmode");
-                    dropClass(document.documentElement,"_DEVMODE");}
+                    dropClass(root,"_DEVMODE");}
                 else {
                     metaBook.devmode=true;
                     fdjtState.setLocal("metabook.devmode",true);
-                    addClass(document.documentElement,"_DEVMODE");}
+                    addClass(root,"_DEVMODE");}
                 devmode_click=false;}
             else devmode_click=now;}
         else devmode_click=fdjtTime();

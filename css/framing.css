@@ -113,15 +113,15 @@ body.mbSHOWHELP #METABOOKFRAME {
     pointer-events: none;}
 #METABOOKFRAME > #METABOOKHUD > div {
     pointer-events: all;}
-body._TOUCH #METABOOKFRAME > #METABOOKHUD > div {
+html._TOUCH #METABOOKFRAME > #METABOOKHUD > div {
     pointer-events: none;}
 body.mbSHOWHELP._TOUCH #METABOOKFRAME > #METABOOKHUD > div.metabookhelp {
     pointer-events: all;}
 body.mbSHOWHELP._TOUCH #METABOOKBODY {
     pointer-events: none;}
 
-body._TOUCH #METABOOKFRAME > #METABOOKHUD > #METABOOKTOPBAR,
-body._TOUCH #METABOOKFRAME > #METABOOKHUD > #METABOOKFOOT {
+html._TOUCH #METABOOKFRAME > #METABOOKHUD > #METABOOKTOPBAR,
+html._TOUCH #METABOOKFRAME > #METABOOKHUD > #METABOOKFOOT {
     pointer-events: all;}
 
 /* The COVER contains the usual wrapping elements for the book
@@ -192,7 +192,7 @@ body.mbZOOM #METABOOKZOOM {
     width: 50px; width: 8vmin; height: 50px; height: 8vmin; 
     background-repeat: no-repeat; background-size: contain;
     background-image: url(g/metabook/redx.svgz);}
-body._NOSVG #METABOOKZOOMCLOSE {
+html._NOSVG #METABOOKZOOMCLOSE {
     background-image: url(g/metabook/redx100x100.png);}
 #METABOOKZOOMHELP {
     position: absolute;
@@ -200,7 +200,7 @@ body._NOSVG #METABOOKZOOMCLOSE {
     width: 50px; width: 8vmin; height: 50px; height: 8vmin; 
     background-repeat: no-repeat; background-size: contain;
     background-image: url(g/metabook/help.svgz);}
-body._NOSVG #METABOOKZOOMHELP {
+html._NOSVG #METABOOKZOOMHELP {
     background-image: url(g/metabook/help100x100.png);}
 
 #METABOOKZOOMOUT {
@@ -209,7 +209,7 @@ body._NOSVG #METABOOKZOOMHELP {
     width: 50px; width: 8vmin; height: 50px; height: 8vmin; 
     background-repeat: no-repeat; background-size: contain;
     background-image: url(g/metabook/zoomout.svgz);}
-body._NOSVG #METABOOKZOOMOUT {
+html._NOSVG #METABOOKZOOMOUT {
     background-image: url(g/metabook/zoomout50x50.png);}
 
 #METABOOKZOOMIN {
@@ -218,7 +218,7 @@ body._NOSVG #METABOOKZOOMOUT {
     width: 50px; width: 8vmin; height: 50px; height: 8vmin; 
     background-repeat: no-repeat; background-size: contain;
     background-image: url(g/metabook/zoomin.svgz);}
-body._NOSVG #METABOOKZOOMIN {
+html._NOSVG #METABOOKZOOMIN {
     background-image: url(g/metabook/zoomin50x50.png);}
 
 #METABOOKUNZOOM {
@@ -227,7 +227,7 @@ body._NOSVG #METABOOKZOOMIN {
     width: 50px; width: 8vmin; height: 50px; height: 8vmin; 
     background-repeat: no-repeat; background-size: contain;
     background-image: url(g/metabook/unzoom.svgz);}
-body._NOSVG #METABOOKUNZOOM {
+html._NOSVG #METABOOKUNZOOM {
     background-image: url(g/metabook/unzoom50x50.png);}
 
 body.mbSHOWHELP #METABOOKZOOMHELP {
