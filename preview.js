@@ -1,6 +1,6 @@
 /* -*- Mode: Javascript; Character-encoding: utf-8; -*- */
 
-/* ###################### metabook/nav.js ###################### */
+/* ###################### metabook/preview.js ###################### */
 
 /* Copyright (C) 2009-2015 beingmeta, inc.
    This file implements a Javascript/DHTML web application for reading
@@ -83,7 +83,7 @@
 
     function startPreview(spec,caller){
         var target=((spec.nodeType)?(spec):(mbID(spec)));
-        if (Trace.flips)
+        if ((Trace.flips)||(Trace.preview))
             fdjtLog("startPreview %o (%s)",target,caller);
         if (target===metaBook.previewing) {}
         else if (metaBook.layout instanceof fdjt.CodexLayout) {
@@ -104,7 +104,7 @@
         clearPreview();
         if ((jumpto)&&(!(jumpto.nodeType)))
             jumpto=metaBook.previewTarget||metaBook.previewing;
-        if (Trace.flips)
+        if ((Trace.flips)||(Trace.preview))
             fdjtLog("stopPreview/%s jump to %o, pt=%o, p=%o",
                     caller||"nocaller",jumpto,
                     metaBook.previewTarget,metaBook.previewing);

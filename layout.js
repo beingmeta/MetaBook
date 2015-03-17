@@ -828,6 +828,9 @@ metaBook.Paginate=
             var staticmax=metaBook.layout.laststaticref;
             var page_elt=fdjt.ID("METABOOKPAGESPAN"+pagenum);
             var cur=getChildren("METABOOKPAGEBAR","."+classname);
+            if (Trace.flips)
+                fdjtLog("updatePageDisplay/%s %d %d/%d",
+                        classname,location,pagenum,npages);
             if (cur[0]!==page_elt) {
                 dropClass(cur,classname);
                 addClass(page_elt,classname);}
@@ -1076,6 +1079,8 @@ metaBook.Paginate=
             var page=((spec.nodeType)&&(getParent(spec,".codexpage")))||
                 metaBook.layout.getPage(spec)||
                 metaBook.layout.getPage(1);
+            if ((Trace.preview)||(Trace.flips)) {
+                fdjtLog("startPagePreview for %o from %s",page,spec);}
             if (!(page)) return;
             var pagenum=parseInt(page.getAttribute("data-pagenum"),10);
             var pageloc=parseInt(page.getAttribute("data-sbookloc"),10);

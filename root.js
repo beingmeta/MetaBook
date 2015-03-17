@@ -185,6 +185,7 @@ var metaBook={
         pagers: 0,        // How much to trace Pager layout
         layout: 0,        // How much to trace document layout
         knodules: 0,      // How much to trace knodule processing
+        preview: false,   // Whether to trace preview activity
         flips: false,     // Whether to trace page flips (movement by pages)
         messages: false,  // Whether to trace inter-window messages
         glossing: false,  // Whether to trace gloss adding or edition

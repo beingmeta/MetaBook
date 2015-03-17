@@ -523,11 +523,11 @@ body.mbSKIMMING #METABOOKHUD img.hudbutton {
     -o-opacity: 0.80;}
 #METABOOKHUD .hudbutton {
     transition-property: width, height, opacity;
-    transition-duration: 1s;
+    transition-duration: 0.2s;
     -moz-transition-property: width, height, opacity;
-    -moz-transition-duration: 1s;
+    -moz-transition-duration: 0.2s;
     -webkit-transition-property: width, height, opacity;
-    -webkit-transition-duration: 1s;}
+    -webkit-transition-duration: 0.2s;}
 
 html._TOUCH #METABOOKHUD img.hudbutton {
     width: 65px; height: 64px;}
@@ -958,8 +958,8 @@ body.hudup #METABOOKHUD #METABOOKSKIMMER.sbookatstart img[alt="beginning"] {disp
     -o-transition-property: background-color;
     -moz-transition-property: background-color;
     -webkit-transition-property: background-color; 
-    transition-duration: 0.5s; -o-transition-duration: 0.5s;
-    -webkit-transition-duration: 0.5s; -moz-transition-duration: 0.5s;}
+    transition-duration: 0.2s; -o-transition-duration: 0.2s;
+    -webkit-transition-duration: 0.2s; -moz-transition-duration: 0.2s;}
 #METABOOKHUD #METABOOKSKIMMER div.metabookcard span.glossinfo span.isclickable {
     display: none;}
 body img.metabookskimbutton {
@@ -971,8 +971,8 @@ body._ANIMATE img.metabookskimbutton {
     -o-transition-property: -o-opacity,background-color;
     -moz-transition-property: -moz-opacity,background-color;
     -webkit-transition-property: -webkit-opacity,background-color; 
-    transition-duration: 0.5s; -o-transition-duration: 0.5s;
-    -webkit-transition-duration: 0.5s; -moz-transition-duration: 0.5s;
+    transition-duration: 0.2s; -o-transition-duration: 0.2s;
+    -webkit-transition-duration: 0.2s; -moz-transition-duration: 0.2s;
     opacity: 0.50;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
     filter: alpha(opacity=50);
