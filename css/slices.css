@@ -19,6 +19,9 @@ div.metabookslice input[TYPE="TEXT"] {
 
 div.metabookslice div.metabookcard {
     margin-left: 20px; margin-right: 3px;}
+div.metabookslice div.metabookcard.skimpoint {
+    margin-left: 0px; padding-left: 20px;
+    margin-right: 3px;}
 div.metabookslice.sourced div.metabookcard { display: none;}
 div.metabookslice.sourced div.metabookcard.sourced { display: block;}
 
@@ -36,7 +39,7 @@ div.metabookslice div.skimpoint {
     /* border-top: solid rgba(255,0,0,0.9) 1px;
        border-right: solid rgba(255,0,0,0.9) 2px;
        border-bottom: solid rgba(255,0,0,0.9) 4px; */
-    background-color: lightgreen;}
+    background-color: rgba(70, 130, 180, 0.5);}
 div.metabookslice div.skimpoint.metabookcard {}
 div.metabookslice div.skimpoint.metabookcard .tool {
     font-size: 47%; font-weight: bold;}

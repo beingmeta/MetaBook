@@ -90,7 +90,6 @@ div.metabookcard > hr {
 .metabookcard.gloss .metabookcardbody {
     border-top: solid purple 2px;}
 .metabookcard.passage .metabookcardbody {
-    background-color: white;
     border-top: solid purple 1px;}
 .metabookslice > .metabookcard:first-child .metabookcardbody {
     border-top-width: 0px;}

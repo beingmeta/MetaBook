@@ -33,7 +33,6 @@ html._MOUSE #METABOOKHUD a.brick:hover { text-decoration: none;}
 #METABOOKFOOT { bottom: 0px; }
 #METABOOKSKIMMER {
     position: absolute; left: 60px; right: 60px; z-index: 100;
-    background-color: white;
     border: solid steelblue 4px; padding: 0px; font-size: 70%;
     max-height: 75px;}
 html._TOUCH #METABOOKSKIMMER,
@@ -47,7 +46,9 @@ body._ANIMATE #METABOOKSKIMMER {
     -o-transition-property: height; -o-transition-duration: 0.3s;}
 
 #METABOOKSKIMMER.flash { background-color: silver;}
-#METABOOKSKIMMER.expanded { max-height: inherit; }
+#METABOOKSKIMMER.expanded {
+    background-color: white;
+    max-height: inherit; }
 #METABOOKSKIMMER .tochead {
     background-color: steelblue; color: white;
     font-weight: bold; max-height: 4ex;}
@@ -271,14 +272,16 @@ body.hudup #METABOOKHUD.openheart #METABOOKHEART,
 #METABOOKHUD.glossaddtag #METABOOKRIBBON,
 #METABOOKHUD.glossaddoutlet #METABOOKRIBBON {
     border-bottom: solid blue 2px;
-    padding-top: 0px; height: 6ex;}
+    padding-top: 0px;
+    height: 6ex;} /* font-size: 50%; */
 #METABOOKHUD.refinesearch #METABOOKHEARTBODY,
 #METABOOKHUD.expandsearch #METABOOKHEARTBODY,
 #METABOOKHUD.searchresults #METABOOKHEARTBODY,
 #METABOOKHUD.glossaddtag #METABOOKHEARTBODY,
 #METABOOKHUD.glossaddoutlet #METABOOKHEARTBODY {
-    top: 6ex; margin-top: 0px;
-    border-radius: 0px;}
+    margin-top: 0px;
+    border-radius: 0px;
+    top: 3ex;}
 
 /*
 #METABOOKHUD.addgloss.glossaddtag #METABOOKHEARTBODY,
@@ -343,6 +346,7 @@ body._ISCROLL #METABOOKHUD.addgloss.glossattach #METABOOKHEARTBODY #METABOOKHEAR
     position: absolute; bottom: 0px; z-index: 300;}
 
 body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER {display: block;}
+body.mbSKIMMING #METABOOKHUD #METABOOKHEAD {display: none;}
 
 /* HUD panels */
 

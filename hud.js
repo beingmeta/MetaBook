@@ -776,11 +776,11 @@ metaBook.setMode=
                 slice.setSkim(card);
                 if (slice.atStart)
                     fdjt.ID("METABOOKSKIMINDEX").innerHTML="";
-                else fdjt.ID("METABOOKSKIMINDEX").innerHTML=""+(slice.skimpos+1);
+                else fdjt.ID("METABOOKSKIMINDEX").innerHTML=""+(slice.skimpos);
                 if (slice.atEnd)
                     fdjt.ID("METABOOKSKIMLIMIT").innerHTML="";
                 else fdjt.ID("METABOOKSKIMLIMIT").innerHTML=
-                    ""+(slice.visible.length-slice.skimpos);
+                    ""+(slice.visible.length-slice.skimpos-1);
                 // This marks where we are currently skimming
                 if (skimpoint) dropClass(skimpoint,"skimpoint");
                 if (card) addClass(card,"skimpoint");
