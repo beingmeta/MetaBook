@@ -1448,6 +1448,19 @@
                 metaBook.setMode("addgloss");
                 return;}
             else return;}
+        if (getParent(target,".mbmedia")) {
+            var link=getParent(target,".mbmedia");
+            var src=link.getAttribute("data-src"), cancel=false;
+            var type=link.getAttribute("data-type");
+            if (hasClass(link,"imagelink")) {
+                metaBook.showMedia(src,type); cancel=true;}
+            else if ((hasClass(link,"audiolink"))||
+                     (hasClass(link,"musiclink"))) {
+                metaBook.showMedia(src,type); cancel=true;}
+            else {}
+            if (cancel) {
+                fdjtUI.cancel(evt);
+                return;}}
         if (getParent(target,".tochead")) {
             var anchor=getParent(target,".tocref");
             var href=(anchor)&&(anchor.getAttribute("data-tocref"));
@@ -1658,6 +1671,8 @@
             fdjtUI.cancel(evt);
             fn();}}
 
+    /* Dead Code */
+    /*
     function unhighlightSettings(){
         dropClass(fdjtDOM.$(".metabookhighlightsetting"),
                   "metabookhighlightsetting");}
@@ -1678,6 +1693,7 @@
                 fn();}
             metaBook.setMode("device");}}
     metaBook.UI.highlightSetting=highlightSetting;
+    */
 
     function showcover_tapped(evt){
         evt=evt||window.event;
