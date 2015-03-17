@@ -778,6 +778,13 @@ metaBook.setMode=
                 if (skiminfo)
                     skiminfo.innerHTML=
                     (slice.skimpos+1)+"/"+(slice.visible.length);
+                if (slice.atStart)
+                    fdjt.ID("METABOOKSKIMINDEX").innerHTML="";
+                else fdjt.ID("METABOOKSKIMINDEX").innerHTML=""+(slice.skimpos+1);
+                if (slice.atEnd)
+                    fdjt.ID("METABOOKSKIMLIMIT").innerHTML="";
+                else fdjt.ID("METABOOKSKIMLIMIT").innerHTML=
+                    ""+(slice.visible.length-slice.skimpos);
                 // This marks where we are currently skimming
                 if (skimpoint) dropClass(skimpoint,"skimpoint");
                 if (card) addClass(card,"skimpoint");
