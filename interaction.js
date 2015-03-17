@@ -114,6 +114,7 @@
     var isEmptyString=fdjtString.isEmpty;
 
     var getCard=metaBook.UI.getCard;
+    var pagers=metaBook.pagers, mbDOM=metaBook.DOM;
 
     var submitEvent=fdjtUI.submitEvent;
 
@@ -156,7 +157,7 @@
 
     function addHandlers(node,type){
         var mode=metaBook.ui;
-        fdjtDOM.addListeners(node,metaBook.UI.handlers[mode][type]);}
+        fdjtDOM.addListeners(node,mB.UI.handlers[mode][type]);}
     metaBook.UI.addHandlers=addHandlers;
 
     function externClickable(evt){
@@ -262,11 +263,11 @@
 
         if (Trace.gestures)
             fdjtLog("body_tapped %o c=%d,%d now=%o p=%o",
-                    evt,cX,cY,now,metaBook.previewing);
+                    evt,cX,cY,now,mB.previewing);
         
         // If we're previewing, stop it and go to the page we're
         //  previewing (which was touched)
-        if (metaBook.previewing) {
+        if (mB.previewing) {
             var jumpto=getTarget(target);
             metaBook.stopPreview("body_tapped/stop_preview",jumpto||true);
             fdjtUI.TapHold.clear();
@@ -277,8 +278,8 @@
             cancel(evt);
             return false;}
 
-        if ((metaBook.touch)&&(metaBook.textinput)) {
-            metaBook.clearFocus(metaBook.textinput);
+        if ((mB.touch)&&(mB.textinput)) {
+            metaBook.clearFocus(mB.textinput);
             cancel(evt);
             return;}
 
@@ -287,17 +288,24 @@
             cancel(evt);
             return;}
 
-        if (metaBook.glosstarget) {
+        if (mB.glosstarget) {
             var glossform=metaBook.glossform;
-            if (hasParent(target,metaBook.glosstarget)) {
+            if (hasParent(target,mB.glosstarget)) {
                 metaBook.setMode("addgloss",false);}
             else metaBook.closeGlossForm(glossform);}
 
-        if ((metaBook.hudup)||(metaBook.mode)) {
+        if (mB.skimming) {
+            fdjtUI.cancel(evt);
+            if (hasClass("METABOOKSKIMMER","expanded")) 
+                dropClass("METABOOKSKIMMER","expanded");
+            else metaBook.setHUD(false);
+            return;}
+
+        if ((mB.hudup)||(mB.mode)) {
             metaBook.setMode(false); metaBook.setHUD(false);
             if (fdjtID("METABOOKOPENGLOSSMARK")) {
-                if (metaBook.target)
-                    metaBook.clearHighlights(metaBook.target);
+                if (mB.target)
+                    metaBook.clearHighlights(mB.target);
                 fdjtID("METABOOKOPENGLOSSMARK").id="";}
             fdjtUI.cancel(evt); gesture_start=false;
             clicked=fdjtTime();
@@ -317,7 +325,7 @@
 
         if (fdjtID("METABOOKOPENGLOSSMARK")) {
             fdjtID("METABOOKOPENGLOSSMARK").id="";
-            if (metaBook.target) metaBook.clearHighlights(metaBook.target);
+            if (mB.target) metaBook.clearHighlights(mB.target);
             fdjtUI.cancel(evt); gesture_start=false;
             return;}
 
@@ -328,8 +336,8 @@
             cX=touch.clientX; cY=touch.clientY;}
         if (Trace.gestures)
             fdjtLog("body_tapped/fallthrough (%o) %o, m=%o, @%o,%o, vw=%o",
-                    evt,target,metaBook.mode,cX,cY,fdjtDOM.viewWidth());
-        if ((metaBook.fullheight)&&(!(metaBook.hudup))&&
+                    evt,target,mB.mode,cX,cY,fdjtDOM.viewWidth());
+        if ((mB.fullheight)&&(!(mB.hudup))&&
             ((cY<50)||(cY>(fdjtDOM.viewHeight()-50)))) 
             metaBook.setHUD(true);
         else if (cX<(fdjtDOM.viewWidth()/3))
@@ -378,7 +386,7 @@
                   (rel.search(/\b((sbooknote)|(footnote)|(endnote)|(note))\b/)>=0))||
                  ((classname)&&
                   (classname.search(/\b((sbooknote)|(sbooknoteref))\b/)>=0))||
-                 ((metaBook.sbooknoterefs)&&(metaBook.sbooknoterefs.match(anchor))))) {
+                 ((mB.sbooknoterefs)&&(mB.sbooknoterefs.match(anchor))))) {
                 var note_node=getNoteNode(href.slice(1));
                 var noteid=note_node.id;
                 metaBook.DOM.noteshud.innerHTML="";
@@ -387,7 +395,7 @@
                 dropClass(shownote,/\bmetabook\S+/g);
                 addClass(shownote,"metabooknotebody");                
                 metaBook.DOM.noteshud.setAttribute("data-note",noteid||(href.slice(1)));
-                fdjtDOM.append(metaBook.DOM.noteshud,shownote);
+                fdjtDOM.append(mbDOM.noteshud,shownote);
                 metaBook.setMode("shownote");
                 gesture_start=false;
                 clicked=fdjtTime();
@@ -395,8 +403,8 @@
             else if ((href[0]==="#")&&(rel)&&
                      (rel.search(/\b((sidebar)|(breakout)|(tangent))\b/)>=0)) {
                 var aside_target=fdjt.ID(href.slice(1));
-                fdjtDOM.removeChildren(metaBook.DOM.asidehud);
-                fdjtDOM.append(metaBook.DOM.asidehud,aside_target.cloneNode(true));
+                fdjtDOM.removeChildren(mbDOM.asidehud);
+                fdjtDOM.append(mbDOM.asidehud,aside_target.cloneNode(true));
                 metaBook.setMode("showaside");
                 gesture_start=false;
                 clicked=fdjtTime();
@@ -424,7 +432,7 @@
 
         var details=getParent(target,"details,.html5details,.sbookdetails");
         if (details) {
-            fdjtDOM.removeChildren(metaBook.DOM.notehud);
+            fdjtDOM.removeChildren(mbDOM.notehud);
             metaBook.DOM.notehud.innerHTML=details.innerHTML;
             metaBook.setMode("showdetails");
             clicked=fdjtTime();
@@ -432,7 +440,7 @@
         
         var aside=getParent(target,"aside,.html5aside,.sbookaside");
         if (aside) {
-            fdjtDOM.removeChildren(metaBook.DOM.asidehud);
+            fdjtDOM.removeChildren(mbDOM.asidehud);
             metaBook.DOM.asidehud.innerHTML=aside.innerHTML;
             metaBook.setMode("showaside");
             clicked=fdjtTime();
@@ -492,7 +500,7 @@
                 metaBook.setMode(false);
                 metaBook.GoTo(jumpto,"jumpToNote",true,true);}
             else metaBook.setMode(false);}}
-    
+
     function body_held(evt){
         evt=evt||window.event;
         var target=fdjtUI.T(evt);
@@ -502,7 +510,7 @@
                     evt,passage,((passage)&&(passage.parentNode)),
                     document.body.className,
                     metaBook.HUD.className);
-        if (metaBook.previewing) return;
+        if (mB.previewing) return;
         else if (hasParent(target,"A")) {
             var anchor=getParent(target,"A");
             var href=((anchor)&&(anchor.getAttribute("href")));
@@ -514,14 +522,20 @@
                 metaBook.startPreview(href.slice(1),"content/anchor_held");
                 return;}}
         if (!(passage)) return;
-        if (metaBook.glosstarget===passage) {
-            if (metaBook.mode!=="addgloss")
+        if (mB.glosstarget===passage) {
+            if (mB.mode!=="addgloss")
                 metaBook.setMode("addgloss",false);
             return;}
         // If the HUD is up, bring it down, but don't start a gloss
-        if ((metaBook.hudup)||(metaBook.skimming)) {
+        if (mB.hudup) {
             fdjtUI.cancel(evt);
             metaBook.setHUD(false);
+            return;}
+        if (mB.skimming) {
+            fdjtUI.cancel(evt);
+            if (hasClass("METABOOKSKIMMER","expanded")) 
+                dropClass("METABOOKSKIMMER","expanded");
+            else metaBook.setHUD(false);
             return;}
         metaBook.startSelect(passage,evt);
         metaBook.startAddGloss(passage,false,evt);}
@@ -532,19 +546,19 @@
         if (Trace.gestures) 
             fdjtLog("body_taptap %o p=%o p.p=%o bc=%s hc=%s t=%o gt=%o",
                     evt,passage,((passage)&&(passage.parentNode)),
-                    document.body.className,metaBook.HUD.className,
-                    target,metaBook.glosstarget);
+                    document.body.className,mB.HUD.className,
+                    target,mB.glosstarget);
         if (hasParent(target,"IMG,AUDIO,VIDEO,OBJECT")) {
             metaBook.startZoom(getParent(target,"IMG,AUDIO,VIDEO,OBJECT"));
             fdjt.UI.cancel(evt);
             return;}
-        if (metaBook.glosstarget) {
-            if (hasParent(target,metaBook.glosstarget)) {
+        if (mB.glosstarget) {
+            if (hasParent(target,mB.glosstarget)) {
                 metaBook.setMode("addgloss",false);}
             else metaBook.closeGlossForm();}
         if (!(passage)) return;
-        if (metaBook.glosstarget===passage) {
-            if (metaBook.mode!=="addgloss")
+        if (mB.glosstarget===passage) {
+            if (mB.mode!=="addgloss")
                 metaBook.setMode("addgloss",false);
             return;}
         var choices=[
@@ -616,19 +630,19 @@
     var body_tapstart=false;
     function body_touchstart(evt){
         evt=evt||window.event;
-        if (metaBook.zoomed) return;
+        if (mB.zoomed) return;
         var target=fdjtUI.T(evt);
         if (target.id!=="METABOOKBODY") return;
         body_tapstart=fdjtTime();}
 
     function body_touchend(evt){
         evt=evt||window.event;
-        if (metaBook.zoomed) return;
+        if (mB.zoomed) return;
         var target=fdjtUI.T(evt);
         if (target.id!=="METABOOKBODY") return;
         if ((body_tapstart)&&(true) //((fdjtTime()-body_tapstart)<1000)
            ) {
-            if (metaBook.TapHold.body) metaBook.TapHold.body.abort();
+            if (mB.TapHold.body) metaBook.TapHold.body.abort();
             fdjtUI.cancel(evt);
             var x=(evt.clientX)||
                 ((evt.changedTouches)&&
@@ -640,10 +654,10 @@
     
     function body_released(evt){
         evt=evt||window.event;
-        if (metaBook.zoomed) return;
+        if (mB.zoomed) return;
         var target=fdjtUI.T(evt), children=false;
         if (Trace.gestures) fdjtLog("body_released %o",evt);
-        if (metaBook.previewing) {
+        if (mB.previewing) {
             metaBook.stopPreview("body_released");
             fdjtUI.cancel(evt);
             return;}
@@ -660,28 +674,28 @@
             target=children[0]; passage=getTarget(target);}
         if (Trace.gestures)
             fdjtLog("body_released %o p=%o gt=%o gf=%o",
-                    evt,passage,metaBook.glosstarget,metaBook.glossform);
-        if (metaBook.glosstarget===passage) {
-            if (metaBook.glossform)
+                    evt,passage,mB.glosstarget,mB.glossform);
+        if (mB.glosstarget===passage) {
+            if (mB.glossform)
                 metaBook.glossform.id="METABOOKLIVEGLOSS";
-            if (metaBook.mode!=="addgloss") metaBook.setMode("addgloss");}
+            if (mB.mode!=="addgloss") metaBook.setMode("addgloss");}
         else metaBook.startAddGloss(passage,((evt.shiftKey)&&("addtag")),evt);}
 
     function body_swiped(evt){
-        if (metaBook.zoomed) return;
+        if (mB.zoomed) return;
         var dx=evt.deltaX, dy=evt.deltaY;
         var vw=fdjtDOM.viewWidth();
         var adx=((dx<0)?(-dx):(dx)), ady=((dy<0)?(-dy):(dy));
         var head=metaBook.head;
-        var headinfo=((head)&&(head.id)&&(metaBook.docinfo[head.id]));
+        var headinfo=((head)&&(head.id)&&(mB.docinfo[head.id]));
         if (Trace.gestures)
             fdjtLog("swiped d=%o,%o, ad=%o,%o, s=%o,%o vw=%o, n=%o",
                     dx,dy,adx,ady,evt.startX,evt.startY,vw,evt.ntouches);
         if (adx>(ady*2)) {
             // Horizontal swipe
-            if (dx<-(metaBook.minswipe||10)) {
+            if (dx<-(mB.minswipe||10)) {
                 if ((evt.ntouches>1)&&
-                    (metaBook.skimming))
+                    (mB.skimming))
                     metaBook.skimForward(evt);
                 else if (evt.ntouches>1) {
                     if (!(headinfo)) metaBook.Forward(evt);
@@ -693,16 +707,16 @@
                         metaBook.GoTo(headinfo.head.frag,"doubleswipe");
                     else metaBook.Forward(evt);}
                 else metaBook.Forward(evt);}
-            else if (dx>(metaBook.minswipe||10)) {
+            else if (dx>(mB.minswipe||10)) {
                 if ((evt.ntouches>1)&&
-                    (metaBook.skimming))
+                    (mB.skimming))
                     metaBook.skimBackward(evt);
                 else if (evt.ntouches>1) window.history.back();
                 else metaBook.Backward(evt);}}
         else if (ady>(adx*2)) {
             // Vertical swipe
-            if (!(metaBook.hudup)) {
-                if (ady<=(metaBook.minswipe||10)) return; // Ignore really short swipes 
+            if (!(mB.hudup)) {
+                if (ady<=(mB.minswipe||10)) return; // Ignore really short swipes 
                 else if ((evt.startX<(vw/5))&&(dy<0))
                     // On the left, up, show help
                     metaBook.setMode("help");
@@ -715,12 +729,14 @@
                 else if ((evt.startX>(vw*0.8))&&(dy<0))
                     // On the right, up, show GLOSSES
                     metaBook.setMode("allglosses");
+                else if ((dy>0)&&(metaBook.skimming)) {
+                    metaBook.stopSkimming();}
                 else if (dy>0) {
                     metaBook.clearStateDialog();
                     metaBook.showCover();}
                 else metaBook.setHUD(true);}
-            else if (dy<-(metaBook.minswipe||10)) metaBook.setMode("allglosses");
-            else if (dy>(metaBook.minswipe||10)) metaBook.setMode("search");}
+            else if (dy<-(mB.minswipe||10)) metaBook.setMode("allglosses");
+            else if (dy>(mB.minswipe||10)) metaBook.setMode("search");}
         else {}}
 
     function initGlossMode(){
@@ -733,7 +749,7 @@
 
     function body_click(evt){
         evt=evt||window.event;
-        if (metaBook.zoomed) return;
+        if (mB.zoomed) return;
         var target=fdjtUI.T(evt);
         // This avoids double-handling of clicks
         if ((clicked)&&((fdjtTime()-clicked)<3000))
@@ -770,7 +786,7 @@
     function toc_tapped(evt){
         evt=evt||window.event;
         var tap_target=fdjtUI.T(evt);
-        if (metaBook.previewing) {
+        if (mB.previewing) {
             // Because we're previewing, this slice is invisible, so
             //  the user really meant to tap on the body underneath,
             //  so we stop previewing and jump there We might try to
@@ -830,7 +846,7 @@
             var spanbar=getParent(about,".spanbar")||getChild(toc,".spanbar");
             dropClass(spanbar,"metabookvisible");
             dropClass(toc,"metabookheld");
-            if (metaBook.previewing)
+            if (mB.previewing)
                 metaBook.stopPreview("toc_released");}
         else if (Trace.gestures) {
             fdjtLog("toc_released %o noabout",evt);
@@ -841,7 +857,7 @@
     function toc_touchtoo(evt){
         evt=evt||window.event;
         previewTimeout(false);
-        if (!(metaBook.previewing)) return;
+        if (!(mB.previewing)) return;
         else if (Trace.gestures) {
             fdjtLog("toc_touchtoo %o noabout",evt);
             metaBook.stopPreview("toc_touchtoo",true);}
@@ -919,13 +935,13 @@
         var target=fdjtUI.T(evt);
         // fdjtLog("sbook_onkeydown %o",evt);
         if (evt.keyCode===27) { /* Escape works anywhere */
-            if (metaBook.previewing) {
+            if (mB.previewing) {
                 metaBook.stopPreview("escape_key");
                 fdjtUI.TapHold.clear();}
             dropClass(document.body,"mbZOOM");
             dropClass(document.body,"mbMEDIA");
-            if (metaBook.mode==="addgloss") metaBook.cancelGloss();
-            if (metaBook.mode) {
+            if (mB.mode==="addgloss") metaBook.cancelGloss();
+            if (mB.mode) {
                 metaBook.last_mode=metaBook.mode;
                 metaBook.setMode(false);
                 metaBook.setTarget(false);
@@ -938,13 +954,13 @@
             return;
         else if (hasClass(document.body,"mbZOOM"))
             return;
-        else if ((metaBook.controlc)&&(evt.ctrlKey)&&((kc===99)||(kc===67))) {
-            if (metaBook.previewing) metaBook.stopPreview("onkeydown",true);
+        else if ((mB.controlc)&&(evt.ctrlKey)&&((kc===99)||(kc===67))) {
+            if (mB.previewing) metaBook.stopPreview("onkeydown",true);
             fdjtUI.TapHold.clear();
             metaBook.setMode("console");
             fdjt.UI.cancel(evt);}
         else if ((evt.altKey)||(evt.ctrlKey)||(evt.metaKey)) return true;
-        else if (metaBook.previewing) {
+        else if (mB.previewing) {
             // Any key stops a preview and goes to the target
             metaBook.stopPreview("onkeydown",true);
             fdjtUI.TapHold.clear();
@@ -956,9 +972,9 @@
             metaBook.hideCover();
             fdjt.UI.cancel(evt);
             return false;}
-        else if (metaBook.glossform) {
-            var input=fdjt.DOM.getInput(metaBook.glossform,"NOTE");
-            metaBook.UI.glossFormFocus(metaBook.glossform);
+        else if (mB.glossform) {
+            var input=fdjt.DOM.getInput(mB.glossform,"NOTE");
+            metaBook.UI.glossFormFocus(mB.glossform);
             metaBook.setFocus(input); input.focus();
             var new_evt=document.createEvent("UIEvent");
             new_evt.initUIEvent("keydown",true,true,window);
@@ -984,8 +1000,8 @@
         else if ((kc===8)||(kc===45))
             metaBook.Backward(evt);
         // Home goes to the current head.
-        else if (kc===36) metaBook.JumpTo(metaBook.head);
-        else if (metaBook.mode==="addgloss") {
+        else if (kc===36) metaBook.JumpTo(mB.head);
+        else if (mB.mode==="addgloss") {
             var mode=metaBook.getGlossMode();
             if (mode) return;
             var formdiv=fdjtID("METABOOKLIVEGLOSS");
@@ -1070,7 +1086,7 @@
         var max=false; var min=false;
         var handled=false;
         if (target.name==='GOTOLOC') {
-            min=0; max=Math.floor(metaBook.ends_at/128);}
+            min=0; max=Math.floor(mB.ends_at/128);}
         else if (target.name==='GOTOPAGE') {
             min=1; max=metaBook.pagecount;}
         else if (ch===13) fdjtUI.cancel(evt);
@@ -1114,7 +1130,7 @@
         if (Trace.gestures)
             fdjtLog("hudmodebutton() %o mode=%o cl=%o skim=%o sbh=%o mode=%o",
                     evt,mode,(isClickable(target)),
-                    metaBook.skimpoint,metaBook.hudup,metaBook.setMode());
+                    metaBook.skimpoint,mB.hudup,mB.setMode());
         metaBook.clearStateDialog();
         if (reticle.live) reticle.flash();
         fdjtUI.cancel(evt);
@@ -1123,19 +1139,19 @@
             (evt.type==='tap')||
             (evt.type==='release')) {
             dropClass(document.body,"_HOLDING");
-            if ((metaBook.skimpoint)&&(!(metaBook.hudup))) {
+            if ((mB.skimpoint)&&(!(mB.hudup))) {
                 if ((mode==="refinesearch")||(mode==="searchresults")) {
                     metaBook.setMode("searchresults"); return;}
                 else if (mode==="allglosses") {
                     metaBook.setMode("allglosses"); return;}
                 else if (mode==="statictoc") {
                     metaBook.setMode("statictoc"); return;}}
-            if ((metaBook.closed)?
-                (fdjtDOM.hasClass(metaBook.HUD,mode)):
-                (fdjtDOM.hasClass(metaBook.HUD,mode)))
+            if ((mB.closed)?
+                (fdjtDOM.hasClass(mB.HUD,mode)):
+                (fdjtDOM.hasClass(mB.HUD,mode)))
                 metaBook.setMode(false,true);
             else if ((mode==="search")&&
-                     (fdjtDOM.hasClass(metaBook.HUD,metaBook.searchModes)))
+                     (fdjtDOM.hasClass(mB.HUD,mB.searchModes)))
                 metaBook.setMode(false,true);
             else metaBook.setMode(mode);}
         else if (evt.type==="tap")
@@ -1172,15 +1188,15 @@
             passage=mbID(passage.getAttribute("data-baseid"));
         if (Trace.gestures)
             fdjtLog("glossmark_tapped (%o) on %o gmark=%o passage=%o mode=%o target=%o",
-                    evt,target,glossmark,passage,metaBook.mode,metaBook.target);
+                    evt,target,glossmark,passage,mB.mode,mB.target);
         if (!(glossmark)) return false;
         fdjtUI.cancel(evt);
-        if ((metaBook.mode==='openglossmark')&&
-            (metaBook.target===passage)) {
+        if ((mB.mode==='openglossmark')&&
+            (mB.target===passage)) {
             metaBook.setMode(false);
             metaBook.clearGlossmark();
             return;}
-        else if (metaBook.select_target) return;
+        else if (mB.select_target) return;
         else metaBook.showGlossmark(passage,glossmark);}
 
     var animated_glossmark=false;
@@ -1241,7 +1257,7 @@
         if (!(navigator.onLine))
             fdjtUI.alertFor(
                 15,"You're currently offline; information will be synchronized when you're back online");
-        else if (!(metaBook.connected))
+        else if (!(mB.connected))
             fdjtUI.alertFor(
                 15,"You're not currently logged into sBooks.  Information will be synchronized when you've logged in.");
         else fdjtUI.alertFor(7,"Sychronizing glosses, etc with the remote server");
@@ -1258,10 +1274,10 @@
         if (evt) fdjtUI.cancel(evt);
         if (Trace.nav)
             fdjtLog("Forward e=%o h=%o t=%o",evt,
-                    metaBook.head,metaBook.target);
-        if (metaBook.skimming)
+                    metaBook.head,mB.target);
+        if (mB.skimming)
             skimForward(evt);
-        else if ((metaBook.mode)&&(metaBook.pagers[metaBook.mode]))
+        else if ((mB.mode)&&(pagers[metaBook.mode]))
             pagerForward(evt);
         else if ((evt)&&(evt.shiftKey))
             skimForward(evt);
@@ -1272,10 +1288,10 @@
         if (evt) fdjtUI.cancel(evt);
         if (Trace.nav)
             fdjtLog("Backward e=%o h=%o t=%o",evt,
-                    metaBook.head,metaBook.target);
-        if (metaBook.skimming)
+                    metaBook.head,mB.target);
+        if (mB.skimming)
             skimBackward(evt);
-        else if ((metaBook.mode)&&(metaBook.pagers[metaBook.mode]))
+        else if ((mB.mode)&&(pagers[metaBook.mode]))
             pagerBackward(evt);
         else if ((evt)&&(evt.shiftKey))
             skimBackward();
@@ -1283,7 +1299,7 @@
     metaBook.Backward=backward;
 
     function preview_touchmove_nodefault(evt){
-        if (metaBook.previewing) fdjtUI.noDefault(evt);}
+        if (mB.previewing) fdjtUI.noDefault(evt);}
 
     function pageForward(evt){
         evt=evt||window.event;
@@ -1292,16 +1308,16 @@
         if ((last_motion)&&((now-last_motion)<100)) return;
         else last_motion=now;
         dropClass(document.body,/\bmb(PAGE)?PREVIEW/g);
-        if (metaBook.readsound)
+        if (mB.readsound)
             fdjtDOM.playAudio("METABOOKPAGEORWARDAUDIO");
         if ((Trace.gestures)||(Trace.flips))
             fdjtLog("pageForward (on %o) c=%o n=%o",
-                    evt,metaBook.curpage,metaBook.pagecount);
-        if ((metaBook.bypage)&&(typeof metaBook.curpage === "number")) {
-            var pagemax=((metaBook.bypage)&&
-                         ((metaBook.pagecount)||(metaBook.layout.pagenum-1)));
+                    evt,mB.curpage,mB.pagecount);
+        if ((mB.bypage)&&(typeof metaBook.curpage === "number")) {
+            var pagemax=((mB.bypage)&&
+                         ((mB.pagecount)||(mB.layout.pagenum-1)));
             var newpage=false;
-            if (metaBook.curpage>=pagemax) {}
+            if (mB.curpage>=pagemax) {}
             else metaBook.GoToPage(
                 newpage=metaBook.curpage+1,"pageForward",true,false);}
         else {
@@ -1317,14 +1333,14 @@
         if ((last_motion)&&((now-last_motion)<100)) return;
         else last_motion=now;
         evt=evt||window.event;
-        if (metaBook.readsound)
+        if (mB.readsound)
             fdjtDOM.playAudio("METABOOKPAGEBACKWARDAUDIO");
         if ((Trace.gestures)||(Trace.flips))
             fdjtLog("pageBackward (on %o) c=%o n=%o",
-                    evt,metaBook.curpage,metaBook.pagecount);
-        if ((metaBook.bypage)&&(typeof metaBook.curpage === "number")) {
+                    evt,mB.curpage,mB.pagecount);
+        if ((mB.bypage)&&(typeof metaBook.curpage === "number")) {
             var newpage=false;
-            if (metaBook.curpage===0) {}
+            if (mB.curpage===0) {}
             else {
                 newpage=metaBook.curpage-1;
                 metaBook.GoToPage(newpage,"pageBackward",true,false);}}
@@ -1368,14 +1384,14 @@
     function skimForward(evt){
         var now=fdjtTime(), slice=metaBook[metaBook.mode];
         if ((Trace.gestures)||(Trace.nav))
-            fdjtLog("skimForward %o: mode=%s",evt,metaBook.mode);
+            fdjtLog("skimForward %o: mode=%s",evt,mB.mode);
         dropClass(document.body,/\bmb(PAGE)?PREVIEW/g);
         if ((last_motion)&&((now-last_motion)<100)) return;
         else last_motion=now;
-        if (metaBook.uisound)
+        if (mB.uisound)
             fdjtDOM.playAudio("METABOOKSKIMFORWARDAUDIO");
         if (!(slice)) return;
-        if (metaBook.uisound)
+        if (mB.uisound)
             fdjtDOM.playAudio("METABOOKSKIMFORWARDAUDIO");
         addClass("METABOOKSKIMMER","flash");
         addClass("METABOOKNEXTSKIM","flash");
@@ -1391,11 +1407,11 @@
     function skimBackward(evt){
         var now=fdjtTime(), slice=metaBook[metaBook.mode];
         if ((Trace.gestures)||(Trace.nav))
-            fdjtLog("skimBackward %o: mode=%s",evt,metaBook.mode);
+            fdjtLog("skimBackward %o: mode=%s",evt,mB.mode);
         dropClass(document.body,/\bmb(PAGE)?PREVIEW/g);
         if ((last_motion)&&((now-last_motion)<100)) return;
         else last_motion=now;
-        if (metaBook.uisound)
+        if (mB.uisound)
             fdjtDOM.playAudio("METABOOKSKIMBACKWARDAUDIO");
         if (!(slice)) return;
         addClass("METABOOKPREVSKIM","flash");
@@ -1424,7 +1440,7 @@
             var card=getCard(target);
             if ((card)&&((card.name)||(card.getAttribute("name")))) {
                 var name=(card.name)||(card.getAttribute("name"));
-                var gloss=RefDB.resolve(name,metaBook.glossdb);
+                var gloss=RefDB.resolve(name,mB.glossdb);
                 if (!(gloss)) return;
                 var form=metaBook.setGlossTarget(gloss);
                 if (!(form)) return;
@@ -1444,44 +1460,66 @@
     function skimmer_taptap(evt){
         metaBook.stopSkimming();
         fdjtUI.cancel(evt);}
+    
+    function skimmer_swiped(evt){
+        var dx=evt.deltaX, dy=evt.deltaY;
+        var vw=fdjtDOM.viewWidth();
+        var adx=((dx<0)?(-dx):(dx)), ady=((dy<0)?(-dy):(dy));
+        if (Trace.gestures)
+            fdjtLog("skimmer_swiped d=%o,%o, ad=%o,%o, s=%o,%o vw=%o, n=%o",
+                    dx,dy,adx,ady,evt.startX,evt.startY,vw,evt.ntouches);
+        if (adx>(ady*2)) {
+            // Horizontal swipe
+            if (dx<-(mB.minswipe||10))
+                metaBook.skimForward(evt);
+            else if (dx>(mB.minswipe||10))
+                metaBook.skimBackward(evt);
+            else {/* Ignored */}}
+        else if (ady>(adx*2)) {
+            // Vertical swipe
+            if (ady<=(mB.minswipe||10)) return;
+            else if (dy<0) mB.setHUD(false);
+            else mB.stopSkimming();}
+        else {}
+        fdjtUI.cancel(evt);}
 
     /* Entering page numbers and locations */
 
     function enterPageNum(evt) {
         evt=evt||window.event;
-        if ((metaBook.hudup)||(metaBook.mode)||(metaBook.cxthelp)) {
+        if ((mB.hudup)||(mB.mode)||(mB.cxthelp)) {
             fdjtUI.cancel(evt);
             metaBook.setMode(false);
             return;}
         fdjtUI.cancel(evt);
-        if (metaBook.hudup) {metaBook.setMode(false); return;}
+        if (mB.hudup) {metaBook.setMode(false); return;}
         metaBook.setMode("gotopage",true);}
     function enterPageRef(evt) {
         evt=evt||window.event;
-        if ((metaBook.hudup)||(metaBook.mode)||(metaBook.cxthelp)) {
+        if ((mB.hudup)||(mB.mode)||(mB.cxthelp)) {
             fdjtUI.cancel(evt);
             metaBook.setMode(false);
             return;}
         fdjtUI.cancel(evt);
-        if (metaBook.hudup) {metaBook.setMode(false); return;}
+        if (mB.hudup) {metaBook.setMode(false); return;}
         metaBook.setMode("gotoref",true);}
     function enterLocation(evt) {
         evt=evt||window.event;
-        if ((metaBook.hudup)||(metaBook.mode)||(metaBook.cxthelp)) {
+        if ((mB.hudup)||(mB.mode)||(mB.cxthelp)) {
             fdjtUI.cancel(evt);
             metaBook.setMode(false);
             return;}
         fdjtUI.cancel(evt);
-        if (metaBook.hudup) {metaBook.setMode(false); return;}
+        if (mB.hudup) {metaBook.setMode(false); return;}
         metaBook.setMode("gotoloc",true);}
     function enterPercentage(evt) {
         evt=evt||window.event;
-        if ((metaBook.hudup)||(metaBook.mode)||(metaBook.cxthelp)) {
+        if ((mB.hudup)||(mB.mode)||(mB.cxthelp)) {
             fdjtUI.cancel(evt);
             metaBook.setMode(false);
             return;}
         fdjtUI.cancel(evt);
-        if (metaBook.hudup) {metaBook.setMode(false); return;}
+        if (mB.hudup) {metaBook.setMode(false); return;}
         metaBook.setMode("gotoloc",true);}
     
     /* Other handlers */
@@ -1494,7 +1532,7 @@
         evt=evt||window.event;
         var target=fdjtUI.T(evt);
         if (Trace.gestures) fdjtLog("head_tap %o t=%o",evt,target);
-        if (metaBook.previewing) {
+        if (mB.previewing) {
             metaBook.stopPreview("head_tap");
             cancel(evt);
             return;}
@@ -1502,13 +1540,13 @@
         if (!((target===metaBook.DOM.head)||
               (target===metaBook.DOM.tabs)))
             return;
-        else if (metaBook.mode) {
+        else if (mB.mode) {
             fdjtUI.cancel(evt);
             metaBook.setMode(false);}
         else if (fdjtDOM.hasClass(document.body,"mbSHOWHELP")) {
             fdjtUI.cancel(evt);
             fdjtDOM.dropClass(document.body,"mbSHOWHELP");}
-        else if (metaBook.hudup) {
+        else if (mB.hudup) {
             fdjtUI.cancel(evt);
             metaBook.setMode(false);}
         else {
@@ -1516,13 +1554,13 @@
             metaBook.setMode(true);}}
     function foot_tap(evt){
         if (Trace.gestures) fdjtLog("foot_tap %o",evt);
-        if (metaBook.previewing) {
+        if (mB.previewing) {
             metaBook.stopPreview("foot_tap");
             cancel(evt);
             return;}
         if ((isClickable(evt))||(hasParent(fdjtUI.T(evt),"hudbutton")))
             return;
-        else if ((metaBook.hudup)||(metaBook.mode)||(metaBook.cxthelp)) {
+        else if ((mB.hudup)||(mB.mode)||(mB.cxthelp)) {
             fdjtUI.cancel(evt);
             metaBook.setMode(false);
             return;}}
@@ -1535,8 +1573,8 @@
         evt=evt||window.event; if (!(target)) target=fdjtUI.T(evt);
         var pagebar=fdjtID("METABOOKPAGEBAR");
         previewTimeout(false);
-        if (((metaBook.hudup)||(metaBook.mode))&&
-            (!(metaBook.fullheight))) {
+        if (((mB.hudup)||(mB.mode))&&
+            (!(mB.fullheight))) {
             fdjtUI.cancel(evt);
             metaBook.setMode(false);
             return;}
@@ -1546,7 +1584,7 @@
         var gopage=getGoPage(target,evt);
         if ((Trace.gestures)||(hasClass(pagebar,"metabooktrace")))
             fdjtLog("pagebar_span_hold %o t=%o gopage: %o=>%o/%o, start=%o",
-                    evt,target,previewing_page,gopage,metaBook.pagecount,
+                    evt,target,previewing_page,gopage,mB.pagecount,
                     preview_start_page);
         if (!(preview_start_page)) preview_start_page=gopage;
         if (previewing_page===gopage) return;
@@ -1556,9 +1594,9 @@
         if (previewing_page)
             pagebar.title=fdjtString(
                 "Release to go to this page (%d), move away to return to page %d",
-                gopage,metaBook.curpage);
+                gopage,mB.curpage);
         else pagebar.title=fdjtString(
-            ((metaBook.touch)?
+            ((mB.touch)?
              ("Release to return to page %d, tap the content or margin to settle here (page %d)"):
              ("Release to return to page %d, tap a key to settle here (page %d)")),
             metaBook.curpage,gopage);
@@ -1570,14 +1608,14 @@
         if ((Trace.gestures)||(hasClass(pagebar,"metabooktrace")))
             fdjtLog("pagebar_tap %o",evt);
         previewTimeout(false);
-        if ((metaBook.previewing)&&(!(previewing_page))) {
+        if ((mB.previewing)&&(!(previewing_page))) {
             metaBook.stopPreview("pagebar_tap",true);
             return;}
-        if ((metaBook.hudup)||(metaBook.mode)||(metaBook.cxthelp)) {
+        if ((mB.hudup)||(mB.mode)||(mB.cxthelp)) {
             if (Trace.gestures)
-                fdjtLog("clearHUD %s %s %s",metaBook.mode,
-                        ((metaBook.hudup)?"hudup":""),
-                        ((metaBook.cxthelp)?"hudup":""));
+                fdjtLog("clearHUD %s %s %s",mB.mode,
+                        ((mB.hudup)?"hudup":""),
+                        ((mB.cxthelp)?"hudup":""));
             fdjtUI.cancel(evt);
             metaBook.setMode(false);
             return;}
@@ -1593,11 +1631,11 @@
         var pagebar=fdjtID("METABOOKPAGEBAR");
         if ((Trace.gestures)||(hasClass(pagebar,"metabooktrace")))
             fdjtLog("pagebar_release %o, previewing=%o, ptarget=%o start=%o",
-                    evt,metaBook.previewing,metaBook.previewTarget,
+                    evt,mB.previewing,mB.previewTarget,
                     preview_start_page);
         previewTimeout(false);
         if (target.nodeType===3) target=target.parentNode;
-        if (!(metaBook.previewing)) {preview_start_page=false; return;}
+        if (!(mB.previewing)) {preview_start_page=false; return;}
         dropClass(target,"preview");
         metaBook.stopPreview("pagebar_release",true);
         preview_start_page=false;
@@ -1612,11 +1650,11 @@
         previewTimeout(false);
         if ((Trace.gestures)||(hasClass(pagebar,"metabooktrace")))
             fdjtLog("pagebar_slip %o, pre=%o, target=%o start=%o, rel=%o",
-                    evt,metaBook.previewing,metaBook.previewTarget,
+                    evt,mB.previewing,mB.previewTarget,
                     preview_start_page,rel);
-        if (!(metaBook.previewing)) return;
-        if (getParent(rel,metaBook.DOM.pagebar)) return;
-        if ((rel)&&(hasParent(rel,metaBook.body)))
+        if (!(mB.previewing)) return;
+        if (getParent(rel,mbDOM.pagebar)) return;
+        if ((rel)&&(hasParent(rel,mB.body)))
             previewTimeout(function(){
                 var pagebar=fdjtID("METABOOKPAGEBAR");
                 pagebar.title=""; preview_timer=false;
@@ -1629,7 +1667,7 @@
         previewing_page=false;}
     function pagebar_touchtoo(evt,target){
         evt=evt||window.event; if (!(target)) target=fdjtUI.T(evt);
-        if (metaBook.previewing) {
+        if (mB.previewing) {
             metaBook.stopPreview("touchtoo");
             fdjtUI.TapHold.clear();
             metaBook.setHUD(false);
@@ -1641,7 +1679,7 @@
     function back_to_reading(evt){
         evt=evt||window.event;
         fdjtUI.cancel(evt);
-        if (metaBook.mode==="addgloss") 
+        if (mB.mode==="addgloss") 
             metaBook.cancelGloss();
         metaBook.setMode(false);
         fdjtDOM.dropClass(document.body,"mbSHOWHELP");}
@@ -1658,7 +1696,7 @@
             metaBook.freezelayout=false;
             if (cur) cur.blur();
             return;}
-        else if (metaBook.textinput===target) return;
+        else if (mB.textinput===target) return;
         else {
             metaBook.textinput=target;
             metaBook.freezelayout=true;
@@ -1666,7 +1704,7 @@
     metaBook.setFocus=setFocus;
     function clearFocus(target){
         if (!(target)) target=metaBook.textinput;
-        if ((target)&&(metaBook.textinput===target)) {
+        if ((target)&&(mB.textinput===target)) {
             metaBook.textinput=false;
             metaBook.freezelayout=false;
             target.blur();}}
@@ -1711,7 +1749,7 @@
     function toggleHelp(evt){
         evt=evt||window.event;
         fdjtUI.cancel(evt);
-        if (metaBook.cxthelp) {
+        if (mB.cxthelp) {
             fdjtDOM.dropClass(document.body,"mbSHOWHELP");
             metaBook.cxthelp=false;}
         else {
@@ -1724,7 +1762,7 @@
         evt=evt||window.event;
         var anchor=fdjtUI.T(evt);
         if ((anchor.href)&&(anchor.href[0]==='#')&&
-            (metaBook.xtargets[anchor.href.slice(1)])) {
+            (mB.xtargets[anchor.href.slice(1)])) {
             var fn=metaBook.xtargets[anchor.href.slice(1)];
             fdjtUI.cancel(evt);
             fn();}}
@@ -1742,8 +1780,8 @@
             metaBook.setMode("device");
             return;}
         addClass(setting,"metabookhighlightsetting");
-        if (metaBook.mode!=="device") {
-            if (metaBook.popmode) {
+        if (mB.mode!=="device") {
+            if (mB.popmode) {
                 var fn=metaBook.popmode;
                 metaBook.popmode=unhighlightSettings(); 
                 fn();}
@@ -1752,7 +1790,7 @@
 
     function showcover_tapped(evt){
         evt=evt||window.event;
-        if ((metaBook.touch)&&(!(metaBook.hudup))) return;
+        if ((mB.touch)&&(!(mB.hudup))) return;
         if (!((evt.shiftKey)||((evt.touches)&&(evt.touches.length>=2)))) {
             var opened=
                 metaBook.readLocal(
@@ -1775,12 +1813,12 @@
 
     function global_mouseup(evt){
         evt=evt||window.event;
-        if (metaBook.zoomed) return;
-        if (metaBook.page_turner) {
-            clearInterval(metaBook.page_turner);
+        if (mB.zoomed) return;
+        if (mB.page_turner) {
+            clearInterval(mB.page_turner);
             metaBook.page_turner=false;
             return;}
-        if (metaBook.select_target) {
+        if (mB.select_target) {
             metaBook.startAddGloss(
                 metaBook.select_target,
                 ((evt.shiftKey)&&("addtag")),evt);
@@ -1838,7 +1876,7 @@
             var root=document.documentElement||document.body;
             var now=fdjtTime();
             if ((now-devmode_click)<1000) {
-                if (metaBook.devmode)  {
+                if (mB.devmode)  {
                     metaBook.devmode=false;
                     fdjtState.dropLocal("metabook.devmode");
                     dropClass(root,"_DEVMODE");}
@@ -1900,7 +1938,8 @@
          "#METABOOKLOCOFF": {tap: enterLocation},
          // Return to skimmer
          "#METABOOKSKIMMER": {tap: skimmer_tapped,
-                              taptap: skimmer_taptap},
+                              taptap: skimmer_taptap,
+                              swipe: skimmer_swiped},
          // Expanding/contracting the skimmer
          // Raise and lower HUD
          "#METABOOKPAGEHEAD": {click: head_tap},
@@ -2020,7 +2059,10 @@
          "#METABOOKLOCPCT": {tap: enterPercentage},
          "#METABOOKLOCOFF": {tap: enterLocation},
          // Return to skimming
-         "#METABOOKSKIMMER": {tap: skimmer_tapped, taptap: skimmer_taptap},
+         "#METABOOKSKIMMER": {
+             tap: skimmer_tapped,
+             taptap: skimmer_taptap,
+             swipe: skimmer_swiped},
          // Expanding/contracting the skimmer
          // Raise and lower HUD
          "#METABOOKPAGEHEAD": {touchstart: head_tap},
