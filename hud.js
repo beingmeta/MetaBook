@@ -225,7 +225,7 @@ metaBook.setMode=
                 new fdjtUI.TapHold(
                     metaBook.DOM.foot,
                     {override: true,holdfast: true,taptapmsecs: 0,
-                     holdmsecs: 350});
+                     holdmsecs: 350,minswipe:0});
             metaBook.TapHold.head=
                 new TapHold(metaBook.DOM.head,
                             {override: true,taptapmsecs: 0,
