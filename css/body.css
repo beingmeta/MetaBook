@@ -294,32 +294,32 @@ div.metabooknotebody a.mbackref { float: left; margin-left: -3em;}
 
 /* Phone */
 @media only screen and
-            (min-device-width: 320px) and
-            (max-device-width: 480px) {
-    #CODEXPAGE {top: 10px; bottom: 20px; left: 10px; right: 10px;}}
+            (min-width: 320px) and
+            (max-width: 480px) {
+    #CODEXPAGE {top: 15px; bottom: 50px; left: 10px; right: 10px;}}
 /* Tablet */
 @media only screen and
-            (min-device-width: 480px) and
-            (max-device-width: 800px) {
-    #CODEXPAGE {top: 25px; bottom: 25px; left: 25px; right: 25px;}
+            (min-width: 480px) and
+            (max-width: 800px) {
+    #CODEXPAGE {top: 25px; bottom: 50px; left: 25px; right: 25px;}
     .metabookbodysizelarge #CODEXPAGE,
     .metabookbodysizexlarge #CODEXPAGE {
-        top: 15px; bottom: 15px; left: 10px; right: 10px;}
+        top: 15px; bottom: 25px; left: 10px; right: 10px;}
 }
 @media only screen and
-            (min-device-width: 800px) and
-            (max-device-width: 1024px) and
+            (min-width: 800px) and
+            (max-width: 1024px) and
             (orientation: portrait) {
     #CODEXPAGE {top: 40px; bottom: 50px; left: 40px; right: 40px;}
     .metabookbodysizelarge #CODEXPAGE,
     .metabookbodysizexlarge #CODEXPAGE {
-        top: 10px; bottom: 15px; left: 20px; right: 20px;}
+        top: 15px; bottom: 50px; left: 20px; right: 20px;}
 }
 @media only screen and
-            (min-device-width: 768px) and
-            (max-device-width: 1024px) and
+            (min-width: 768px) and
+            (max-width: 1024px) and
             (orientation: landscape) {
-    #CODEXPAGE {top: 20px; bottom: 40px; left: 50px; right: 50px;}}
+    #CODEXPAGE {top: 20px; bottom: 50px; left: 50px; right: 50px;}}
 
 /* Handheld media rules */
 
