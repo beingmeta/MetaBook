@@ -116,7 +116,6 @@ metaBook.Slice=(function () {
                      (showdocinfo(info))),
                     ((note_len>0)&&
                      (fdjtDOM("span.note",convertNote(info.note))))," ",
-                    // (fdjtUI.Ellipsis("span.note",info.note,140))
                     ((excerpt_len>0)&&(showexcerpts(info.excerpt)))," ",
                     ((info.detail)&&(fdjtDOM("span.glossbody","More")))," ",
                     (((info.alltags)||(info.tags))&&(showtags(info,query)))," ",
@@ -294,16 +293,16 @@ metaBook.Slice=(function () {
         return span;}
     function showexcerpts(excerpts){
         if (typeof excerpts==='string')
-            return fdjtUI.Ellipsis("span.excerpt",excerpts,140);
+            return fdjtUI.Ellipsis("span.excerpt",excerpts,40);
         else if (excerpts.length===1)
-            return fdjtUI.Ellipsis("span.excerpt",excerpts[0],140);
+            return fdjtUI.Ellipsis("span.excerpt",excerpts[0],40);
         else {
             var ediv=fdjtDOM("div.excerpts");
             var i=0; var lim=excerpts.length;
             while (i<lim)
                 fdjtDOM(ediv,
                         ((i>0)&&" "),
-                        fdjtDOM("span.excerpt",odq,excerpts[i++],cdq));
+                        fdjtUI.Ellipsis("span.excerpt",excerpts[i++],40));
             return ediv;}}
     function showscore(score,query){
         if ((query)&&(query.max_score))
@@ -372,7 +371,7 @@ metaBook.Slice=(function () {
         var userinfo=metaBook.sourcedb.loadref(maker);
         var pic=fdjtDOM(spec||"div.sbooksourcepic",
                         (((userinfo)&&(userinfo.name))?
-                         (fdjtString.getInitials(userinfo.name)):
+                         (fdjtString.getInitials(userinfo.name,2)):
                          "?"));
         addClass(pic,"sbooknopic");
         return pic;}

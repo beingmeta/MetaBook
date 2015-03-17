@@ -816,7 +816,8 @@ body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER {
 
 #METABOOKSKIMMER .metabookskiminfo {
     position: absolute; right: 2px; top: 1px; z-index: 100;
-    font-size: 90%; color:  cyan;}
+    font-size: 90%; color:  cyan;
+    display: none;}
 #METABOOKSKIMMER #METABOOKSKIMCONTROLS .expanded { display: none;}
 #METABOOKSKIMMER.expanded #METABOOKSKIMCONTROLS .expanded {
     display: inline;}
@@ -934,6 +935,11 @@ body.hudup #METABOOKHUD #METABOOKSKIMMER.sbookatstart img[alt="beginning"] {disp
 #METABOOKHUD #METABOOKSKIMMER div.idhead,
 #METABOOKHUD #METABOOKPOINTGLOSSES div.idhead {
     height: 0px;}
+#METABOOKHUD #METABOOKSKIMMER div.gloss div.tochead,
+#METABOOKHUD #METABOOKPOINTGLOSSES div.tochead {
+    height: 0px;}
+#METABOOKHUD #METABOOKSKIMMER.expanded div.gloss div.tochead {
+    height: inherit;}
 
 #METABOOKSKIMMER.mbfoundhighlights .metabookcard .excerpt { display: none; }
 

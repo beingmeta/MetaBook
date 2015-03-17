@@ -40,9 +40,11 @@ div.metabookslice div.skimpoint {
 div.metabookslice div.skimpoint.metabookcard {}
 div.metabookslice div.skimpoint.metabookcard .tool {
     font-size: 47%; font-weight: bold;}
-div.metabookslice div.skimpoint.metabookcard img.userpic,
-div.metabookslice div.skimpoint.metabookcard img.sourcepic {
-    width: 75px;}
+div.metabookslice .excerpt .elision,
+div.metabookslice .excerpt .delision {
+    display: none; }
+div.metabookslice .excerpt .elided {
+    display: inline;}
 
 div.skimpoint .metabookcard .metabookcardbody { padding-top: 0px;}
 
