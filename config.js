@@ -213,13 +213,13 @@
 
     metaBook.addConfig("holdmsecs",function(name,value){
         metaBook.holdmsecs=value;
-        fdjtUI.TapHold.default_opts.holdthresh=value;});
+        fdjtUI.TapHold.default_opts.holdmsecs=value;});
     metaBook.addConfig("wandermsecs",function(name,value){
         metaBook.wandermsecs=value;
         fdjtUI.TapHold.default_opts.wanderthresh=value;});
     metaBook.addConfig("taptapmsecs",function(name,value){
         metaBook.taptapmsecs=value;
-        fdjtUI.TapHold.default_opts.taptapthresh=value;});
+        fdjtUI.TapHold.default_opts.taptapmsecs=value;});
 
     metaBook.addConfig("checksync",function(name,value){
         metaBook.sync_interval=value;

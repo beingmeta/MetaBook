@@ -617,8 +617,8 @@ metaBook.Slice=(function () {
             opts.noslip=false;
         if (!(opts.hasOwnProperty('id')))
             opts.id=container.id;
-        if (!(opts.hasOwnProperty('holdthresh')))
-            opts.holdthresh=350;
+        if (!(opts.hasOwnProperty('holdmsecs')))
+            opts.holdmsecs=250;
         if (opts.hasOwnProperty('holdclass'))
             opts.holdclass=false;
         if (opts.hasOwnProperty('touchtoo'))

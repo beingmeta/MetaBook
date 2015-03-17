@@ -224,15 +224,15 @@ metaBook.setMode=
             metaBook.TapHold.foot=
                 new fdjtUI.TapHold(
                     metaBook.DOM.foot,
-                    {override: true,holdfast: true,taptapthresh: 0,
-                     holdthresh: 500});
+                    {override: true,holdfast: true,taptapmsecs: 0,
+                     holdmsecs: 350});
             metaBook.TapHold.head=
                 new TapHold(metaBook.DOM.head,
-                            {override: true,taptapthresh: 0,
-                             holdthresh: 1000});
+                            {override: true,taptapmsecs: 0,
+                             holdmsecs: 500});
             metaBook.DOM.skimmer=fdjtID("METABOOKSKIMMER");
             metaBook.TapHold.skimmer=
-                new TapHold(metaBook.DOM.skimmer,{taptapthresh: 800});
+                new TapHold(metaBook.DOM.skimmer,{taptapmsecs: 250});
             
             var help=metaBook.DOM.help=fdjtID("METABOOKHELP");
             help.innerHTML=fixStaticRefs(metaBook.HTML.help);

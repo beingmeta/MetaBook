@@ -448,7 +448,7 @@
                   onrelease: ((opts)&&(opts.onrelease)),
                   onslip: ((opts)&&(opts.onslip)),
                   fortouch: metaBook.touch,
-                  holdthresh: 150,
+                  holdmsecs: 150,
                   movethresh: 250});}
     metaBook.UI.selectText=selectText;
 
