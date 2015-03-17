@@ -440,8 +440,8 @@ body._ANIMATE .glossmark > img {
 .mbtarget > .glossmark {
     border-right-color: blue;} /* double */
 
-body._MOUSE.hudup .mbtarget .glossmark:hover > img,
-body._MOUSE.hudup .mbtarget .glossmark.hover > img {
+html._MOUSE .glossmark:hover > img
+{
     opacity: 0.9;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
     filter: alpha(opacity=90);
@@ -450,8 +450,7 @@ body._MOUSE.hudup .mbtarget .glossmark.hover > img {
     -moz-opacity: 0.90;
     -o-opacity: 0.90;}
 
-html._TOUCH body.hudup .mbtarget > .glossmark > img,
-html._TOUCH body.openhud .mbtarget > .glossmark > img {
+body.hudup .mbtarget > .glossmark > img {
     opacity: 0.80;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
     filter: alpha(opacity=80);
@@ -459,6 +458,14 @@ html._TOUCH body.openhud .mbtarget > .glossmark > img {
     -khtml-opacity: 0.80;
     -moz-opacity: 0.80;
     -o-opacity: 0.80;}
+body.openhud .mbtarget > .glossmark > img {
+    opacity: 0.40;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+    filter: alpha(opacity=40);
+    -webkit-opacity: 0.40;
+    -khtml-opacity: 0.40;
+    -moz-opacity: 0.40;
+    -o-opacity: 0.40;}
 
 /* Not logged in conditionalization */
 
