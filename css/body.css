@@ -301,7 +301,7 @@ div.metabooknotebody a.mbackref { float: left; margin-left: -3em;}
 @media only screen and
             (min-width: 480px) and
             (max-width: 800px) {
-    #CODEXPAGE {top: 25px; bottom: 50px; left: 25px; right: 25px;}
+    #CODEXPAGE {top: 50px; bottom: 50px; left: 25px; right: 25px;}
     .metabookbodysizelarge #CODEXPAGE,
     .metabookbodysizexlarge #CODEXPAGE {
         top: 15px; bottom: 25px; left: 10px; right: 10px;}

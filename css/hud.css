@@ -543,18 +543,19 @@ html._TOUCH #METABOOKHUD img.hudbutton {
 #METABOOKTOPBAR img.hudbutton[hudmode="help"] {left: 60px;}
 
 #METABOOKFOOT img.hudbutton[hudmode="searchresults"],
+#METABOOKFOOT img.hudbutton[hudmode="statictoc"],
 #METABOOKFOOT img.hudbutton[alt="save gloss"] {
     display: none; }
 #METABOOKHUD.addgloss #METABOOKFOOT img.hudbutton {
     opacity: 0.8; -webkit-opacity: 0.8;
     -moz-opacity: 0.8; -o-opacity: 0.8;}
 #METABOOKHUD.addgloss #METABOOKFOOT img.hudbutton[alt="save gloss"],
-body.mbSKIMMING #METABOOKHUD.searchresults
-    img.hudbutton[hudmode="searchresults"] {
+body.mbSKIMMING #METABOOKHUD.searchresults img.hudbutton[hudmode="searchresults"],
+body.mbSKIMMING #METABOOKHUD.statictoc img.hudbutton[hudmode="statictoc"] {
     display: inline-block; }
 #METABOOKHUD.addgloss img.hudbutton[hudmode="allglosses"],
-body.mbSKIMMING #METABOOKHUD.searchresults
-    img.hudbutton[hudmode="allglosses"] {
+body.mbSKIMMING #METABOOKHUD.searchresults img.hudbutton[hudmode="allglosses"],
+body.mbSKIMMING #METABOOKHUD.statictoc img.hudbutton[hudmode="allglosses"]{
     display: none; }
 
 body.hudup #METABOOKHUD img.hudbutton  {}
