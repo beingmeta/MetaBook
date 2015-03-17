@@ -774,10 +774,6 @@ metaBook.setMode=
                                    0);},
                                0);}
                 slice.setSkim(card);
-                var skiminfo=fdjtID("METABOOKSKIMINFO");
-                if (skiminfo)
-                    skiminfo.innerHTML=
-                    (slice.skimpos+1)+"/"+(slice.visible.length);
                 if (slice.atStart)
                     fdjt.ID("METABOOKSKIMINDEX").innerHTML="";
                 else fdjt.ID("METABOOKSKIMINDEX").innerHTML=""+(slice.skimpos+1);
