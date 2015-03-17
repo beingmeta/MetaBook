@@ -49,10 +49,10 @@ body._ANIMATE.hudup #CODEXPAGE {
     -webkit-transition-property: opacity;
     -moz-transition-property: opacity;
     -o-transition-property: opacity;
-    transition-duration: 1s; 
-    -webkit-transition-duration: 1s;
-    -o-transition-duration: 1s;
-    -moz-duration: 1s; }
+    transition-duration: 0.2s; 
+    -webkit-transition-duration: 0.2s;
+    -o-transition-duration: 0.2s;
+    -moz-duration: 0.2s;}
 body.hudup #CODEXPAGE {
     opacity: 0.8;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";

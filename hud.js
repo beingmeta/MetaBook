@@ -224,12 +224,13 @@ metaBook.setMode=
             metaBook.TapHold.foot=
                 new fdjtUI.TapHold(
                     metaBook.DOM.foot,
-                    {override: true,holdfast: true,taptapmsecs: 0,
-                     holdmsecs: 350,minswipe:0});
+                    {override: true,holdfast: true,
+                     taptapmsecs: 0,holdmsecs: 150,
+                     minswipe:0});
             metaBook.TapHold.head=
                 new TapHold(metaBook.DOM.head,
                             {override: true,taptapmsecs: 0,
-                             holdmsecs: 500});
+                             holdmsecs: 200});
             metaBook.DOM.skimmer=fdjtID("METABOOKSKIMMER");
             metaBook.TapHold.skimmer=
                 new TapHold(metaBook.DOM.skimmer,{taptapmsecs: 250});
