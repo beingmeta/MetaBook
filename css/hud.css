@@ -36,6 +36,10 @@ html._MOUSE #METABOOKHUD a.brick:hover { text-decoration: none;}
     background-color: white;
     border: solid steelblue 4px; padding: 0px; font-size: 70%;
     max-height: 75px;}
+html._TOUCH #METABOOKSKIMMER,
+html._TOUCH #METABOOKSKIMMER div.mbtoc,
+html._TOUCH #METABOOKSKIMMER div.metabookcard {
+    min-height: 50px;}
 body._ANIMATE #METABOOKSKIMMER {
     transition-property: height; transition-duration: 0.5x;
     -webkit-transition-property: height; -webkit-transition-duration: 0.5x;

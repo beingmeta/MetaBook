@@ -67,11 +67,12 @@ metaBook.TOCSlice=
         metaBook.navicon=navicon;
 
         function tocBar(headinfo,context){
-            var extents=fdjtDOM("div.extents");
             var title=fdjtDOM("a.sectname",headinfo.title);
-            var tocbar=fdjtDOM("div.mbtoc",extents,
-                               ((context)&&(context.cloneNode(true))),
-                               title);
+            var elements=fdjtDOM("div.elements",
+                                 fdjtDOM("div.toctext",
+                                         ((context)&&(context.cloneNode(true))),
+                                         title));
+            var tocbar=fdjtDOM("div.mbtoc",elements);
             var start=headinfo.starts_at, end=headinfo.ends_at, sectlen=end-start;
             if ((headinfo.sub)&&(headinfo.sub.length)) {
                 var sub=headinfo.sub; var s=0, smax=sub.length;
@@ -81,7 +82,7 @@ metaBook.TOCSlice=
                     brick.name="MBTOC4"+subsect.frag;
                     brick.style.left=(((left-start)/sectlen)*100)+"%";
                     brick.style.width=(((size)/sectlen)*100)+"%";
-                    extents.appendChild(brick);}}
+                    elements.appendChild(brick);}}
             else {
                 var parent=headinfo.head;
                 var rel_start=headinfo.starts_at-parent.starts_at;
@@ -90,8 +91,8 @@ metaBook.TOCSlice=
                 var showsize=fdjtDOM("a.showsize");
                 showsize.style.width=((inner_length/outer_length)*100)+"%";
                 showsize.style.left=((rel_start/outer_length)*100)+"%";
-                extents.appendChild(showsize);}
-            extents.appendChild(fdjtDOM("div.posbar"));
+                elements.appendChild(showsize);}
+            elements.appendChild(fdjtDOM("div.posbar"));
             tocbar.setAttribute("name","MBTOC4"+headinfo.frag);
             tocbar.setAttribute("data-passage",headinfo.frag);
             tocbar.setAttribute("data-location",headinfo.starts_at);

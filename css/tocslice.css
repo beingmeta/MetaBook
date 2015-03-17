@@ -9,40 +9,48 @@
     text-align: left;
     display: block;}
 .mbtoc .context .tocpath { padding-left: 1ex; }
-.mbtoc .context { font-size: 60%; float: right;}
+.mbtoc .context { font-size: 60%; float: right; }
 .mbtocslice .mbtoc .context { display: none;}
-#METABOOKSKIMMER .mbtoc .extents {display: none;}
 .mbtoc a.sectname { color: black; z-index: 50;}
-.mbtoc div.extents {
-    position: relative; z-index: -10; overflow: visible;
+.mbtoc div.elements {
+    position: relative; overflow: visible;
     margin: 0px; padding: 0px; border: 0px;}
 .mbtoc {
     font-size: 100%; line-height: 100%;
     height: 1em; margin-bottom: 0.2em; margin-right: 1ex;}
-.mbtoc div.extents a.brick {
+.mbtoc a.brick {
     position: absolute; display: inline-block;
     box-sizing: border-box;
     border: solid gray 1px; border-left: 0px;
     background-color: lightblue;
     opacity: 0.8;
     height: 1em;}
-.mbtoc div.extents a.brick.cohi,
-.mbtoc.cohi div.extents a.showsize {
+.mbtoc a.brick.cohi, .mbtoc.cohi a.showsize {
     background-color: gold;}
+.mbtoc .toctext {
+    position: absolute;
+    left: 1px; top: 0px; width: 100%;
+    pointer-events: none;
+    z-index: 100; }
 .mbtoc.cohi a.sectname {
     color: darkblue;}
-.mbtoc div.extents a.showsize {
+.mbtoc a.showsize {
     position: absolute; display: inline-block;
     box-sizing: border-box;
     background-color: lightblue;
     height: 1em; }
-.mbtoc div.extents a.brick:first-child {
+.mbtoc div.elements a.brick:first-child {
     border-left: solid gray 1px;}
 .mbtoc.mbtoc1 { font-size: 130%;}
 .mbtoc.mbtoc2 { margin-left: 2em; font-size: 120%;}
 .mbtoc.mbtoc3 { margin-left: 4em; font-size: 100%;}
 .mbtoc.mbtoc4 { margin-left: 6em; font-size: 80%;}
 
+#METABOOKSKIMMER .mbtoc .elements .brick,
+#METABOOKSKIMMER .mbtoc .elements .showsize {
+    display: none;}
+#METABOOKSKIMMER .mbtoc .toctext {
+    top: 2px;}
 #METABOOKSKIMMER .sectname:before {
     content: "§"; font-style: italic;
     vertical-align: bottom;
@@ -51,11 +59,15 @@
 #METABOOKSKIMMER .mbtoc.mbtoc1, #METABOOKSKIMMER .mbtoc.mbtoc2,
 #METABOOKSKIMMER .mbtoc.mbtoc3, #METABOOKSKIMMER .mbtoc.mbtoc4,
 #METABOOKSKIMMER .mbtoc.mbtoc5, #METABOOKSKIMMER .mbtoc.mbtoc6 {
-    margin-left: 0px; font-size: 100%;}
+    margin-left: 1ex; font-size: 100%;}
 
 .statictoc #METABOOKSKIMMER .metabookskiminfo { display: none; }
 
-#METABOOKSTATICTOC .pagerblock { padding-top: 1.5ex;}
+#METABOOKSTATICTOC {padding-left: 1em; padding-right: 1em;}
+#METABOOKSTATICTOC.pager {padding-left: 0px; padding-right: 0px;}
+#METABOOKSTATICTOC.pager .pagerblock {
+    padding-left: 1em; padding-right: 1em;
+    padding-top: 1.5ex;}
 
 html._MOUSE .mbtocslice .mbtoc:hover {
     outline: dotted blue 2px;}
