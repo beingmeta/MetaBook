@@ -64,9 +64,6 @@ metaBook.Slice=(function () {
     var addClass=fdjtDOM.addClass;
     var dropClass=fdjtDOM.dropClass;
 
-    var debug_locbars=false;
-    var odq="\u201c"; var cdq="\u201d";
-
     var mbicon=metaBook.icon;
     var addListener=fdjtDOM.addListener;
 
@@ -371,7 +368,7 @@ metaBook.Slice=(function () {
         var userinfo=metaBook.sourcedb.loadref(maker);
         var pic=fdjtDOM(spec||"div.sbooksourcepic",
                         (((userinfo)&&(userinfo.name))?
-                         (fdjtString.getInitials(userinfo.name,2)):
+                         (fdjtString.getInitials(userinfo.name,1)):
                          "?"));
         addClass(pic,"sbooknopic");
         return pic;}
@@ -449,9 +446,6 @@ metaBook.Slice=(function () {
         var cxt_start=cxt_info.starts_at;
         var cxt_end=cxt_info.ends_at;
         var cxt_len=cxt_end-cxt_start;
-        if (debug_locbars)
-            locbar.setAttribute(
-                "debug","ts="+target_start+"; te="+target_end+"; cl="+cxt_len);
         locrule.style.width=((target_len/cxt_len)*100)+"%";
         locrule.style.left=(((target_start-cxt_start)/cxt_len)*100)+"%";
         var id=target_info.id||target_info.frag;
