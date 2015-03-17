@@ -447,8 +447,8 @@ body._MOUSE.hudup .mbtarget .glossmark.hover > img {
     -moz-opacity: 0.90;
     -o-opacity: 0.90;}
 
-html._TOUCH.hudup .mbtarget > .glossmark > img,
-html._TOUCH.openhud .mbtarget > .glossmark > img {
+html._TOUCH body.hudup .mbtarget > .glossmark > img,
+html._TOUCH body.openhud .mbtarget > .glossmark > img {
     opacity: 0.80;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
     filter: alpha(opacity=80);

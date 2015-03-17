@@ -115,9 +115,9 @@ body.mbSHOWHELP #METABOOKFRAME {
     pointer-events: all;}
 html._TOUCH #METABOOKFRAME > #METABOOKHUD > div {
     pointer-events: none;}
-body.mbSHOWHELP._TOUCH #METABOOKFRAME > #METABOOKHUD > div.metabookhelp {
+html._TOUCH body.mbSHOWHELP #METABOOKFRAME > #METABOOKHUD > div.metabookhelp {
     pointer-events: all;}
-body.mbSHOWHELP._TOUCH #METABOOKBODY {
+html._TOUCH body.mbSHOWHELP #METABOOKBODY {
     pointer-events: none;}
 
 html._TOUCH #METABOOKFRAME > #METABOOKHUD > #METABOOKTOPBAR,

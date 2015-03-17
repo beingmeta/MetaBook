@@ -125,7 +125,9 @@ body.mbPREVIEW.hudup #METABOOKHUD.searchresults #METABOOKSEETHRUHELP,
 body.mbPREVIEW.hudup #METABOOKHUD.allglosses #METABOOKSEETHRUHELP {
     display: none;}
 
-body.mbPREVIEW #METABOOKPAGENOTEXT, body.mbPREVIEW #METABOOKLOCPCT, body.mbPREVIEW #METABOOKLOCOFF {
+body.mbPREVIEW #METABOOKPAGENOTEXT,
+body.mbPREVIEW #METABOOKLOCPCT,
+body.mbPREVIEW #METABOOKLOCOFF {
     pointer-events: none;}
 
 div.metabookhelp .result span { display: none; }

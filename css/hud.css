@@ -67,11 +67,11 @@ body.hudup #METABOOKHEAD .hudpanel {
 body._FULLHEIGHT #METABOOKTOPBAR {height: 20px;}
 body._FULLHEIGHT.hudup #METABOOKTOPBAR {height: 50px;}
 
-html._TOUCH.hudup #METABOOKFRAME > #METABOOKHUD > div,
+html._TOUCH body.hudup #METABOOKFRAME > #METABOOKHUD > div,
 html._TOUCH #METABOOKFRAME > #METABOOKHUD.addgloss > div,
-html._TOUCH.mbSKIMMING #METABOOKFRAME > #METABOOKHUD > #METABOOKSKIMMER {
+html._TOUCH body.mbSKIMMING #METABOOKFRAME > #METABOOKHUD > #METABOOKSKIMMER {
     pointer-events: all;}
-html._TOUCH.hudup #METABOOKFRAME > #METABOOKHUD > div.helphud {
+html._TOUCH body.hudup #METABOOKFRAME > #METABOOKHUD > div.helphud {
     background-color: ivory;}
 
 #METABOOKHEAD, #METABOOKSKIMMER {top: 0px; border-top: 0px;}
@@ -683,8 +683,9 @@ body.mbPREVIEW #METABOOKSHOWCOVER,
 body.mbPREVIEW.hudup #METABOOKSHOWCOVER {
     display: none;}
 #METABOOKSHOWCOVER { pointer-events: none; }
-body.hudup #METABOOKSHOWCOVER, #METABOOKTOPBAR.tapholding #METABOOKSHOWCOVER,
-body._MOUSE #METABOOKTOPBAR:hover #METABOOKSHOWCOVER {
+body.hudup #METABOOKSHOWCOVER,
+#METABOOKTOPBAR.tapholding #METABOOKSHOWCOVER,
+html._MOUSE #METABOOKTOPBAR:hover #METABOOKSHOWCOVER {
     pointer-events: all; }
 
 #METABOOKSHOWCOVER img {

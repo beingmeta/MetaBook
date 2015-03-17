@@ -166,9 +166,9 @@ body.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR
 #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER3.metabooksectmarker {
     height: 55%; background-color: rgba(0,0,255,0.1); }
 
-html._TOUCH.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR {
+html._TOUCH body.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR {
     height: 150px;}
-html._TOUCH.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR
+html._TOUCH body.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR
   .metabookpagespans span.preview  {
     height: 100%;}
 
@@ -266,9 +266,9 @@ body._FULLHEIGHT #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT > span > span {
     padding-left: 0.5ex; padding-right: 0.5ex;}
 
 @media screen and (max-width: 640px) {
-    html._TOUCH.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR { 
+    html._TOUCH body.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR { 
         height: 80px;}
-    html._TOUCH.mbPAGEPREVIEW #METABOOKFOOT .hudbutton { display: none; }
+    html._TOUCH body.mbPAGEPREVIEW #METABOOKFOOT .hudbutton { display: none; }
 }
 @media screen and (max-width: 500px) {
     #METABOOKFOOT #METABOOKPAGEBAR {
