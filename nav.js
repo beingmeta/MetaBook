@@ -423,7 +423,8 @@
             var headinfo=metaBook.docinfo[target]||metaBook.docinfo[target.id];
             if ((headinfo)&&((!(headinfo.sub))||(headinfo.sub.length===0))) {
                 metaBook.setMode("statictoc"); metaBook.setHUD(false,false);
-                addClass(document.body,"mbSKIMMING");}}
+                addClass(document.body,"mbSKIMMING");
+                metaBook.skimming=true;}}
         metaBook.GoTo(target,"metaBookSkimTo");}
     metaBook.Skimto=metaBookSkimTo;
 

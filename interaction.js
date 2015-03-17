@@ -519,7 +519,7 @@
                 metaBook.setMode("addgloss",false);
             return;}
         // If the HUD is up, bring it down, but don't start a gloss
-        if (metaBook.hudup) {
+        if ((metaBook.hudup)||(metaBook.skimming)) {
             fdjtUI.cancel(evt);
             metaBook.setHUD(false);
             return;}
@@ -681,7 +681,7 @@
             // Horizontal swipe
             if (dx<-(metaBook.minswipe||10)) {
                 if ((evt.ntouches>1)&&
-                    (hasClass(document.body,"mbSKIMMING")))
+                    (metaBook.skimming))
                     metaBook.skimForward(evt);
                 else if (evt.ntouches>1) {
                     if (!(headinfo)) metaBook.Forward(evt);
@@ -695,7 +695,7 @@
                 else metaBook.Forward(evt);}
             else if (dx>(metaBook.minswipe||10)) {
                 if ((evt.ntouches>1)&&
-                    (hasClass(document.body,"mbSKIMMING")))
+                    (metaBook.skimming))
                     metaBook.skimBackward(evt);
                 else if (evt.ntouches>1) window.history.back();
                 else metaBook.Backward(evt);}}
@@ -1259,7 +1259,7 @@
         if (Trace.nav)
             fdjtLog("Forward e=%o h=%o t=%o",evt,
                     metaBook.head,metaBook.target);
-        if (hasClass(document.body,"mbSKIMMING"))
+        if (metaBook.skimming)
             skimForward(evt);
         else if ((metaBook.mode)&&(metaBook.pagers[metaBook.mode]))
             pagerForward(evt);
@@ -1273,7 +1273,7 @@
         if (Trace.nav)
             fdjtLog("Backward e=%o h=%o t=%o",evt,
                     metaBook.head,metaBook.target);
-        if (hasClass(document.body,"mbSKIMMING"))
+        if (metaBook.skimming)
             skimBackward(evt);
         else if ((metaBook.mode)&&(metaBook.pagers[metaBook.mode]))
             pagerBackward(evt);

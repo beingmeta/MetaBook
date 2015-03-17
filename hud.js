@@ -347,6 +347,7 @@ metaBook.setMode=
             if (flag) {
                 metaBook.hudup=true;
                 dropClass(document.body,"mbSKIMMING");
+                metaBook.skimming=false;
                 addClass(document.body,"hudup");}
             else {
                 metaBook.hudup=false;
@@ -366,6 +367,7 @@ metaBook.setMode=
                     dropClass(document.body,"mbSKIMMING");
                     dropClass(document.body,"mbSKIMSTART");
                     dropClass(document.body,"mbSKIMEND");
+                    metaBook.skimming=false;
                     metaBook.mode=false;}
                 dropClass(document.body,"hudup");
                 dropClass(document.body,"openhud");
@@ -712,8 +714,9 @@ metaBook.setMode=
         function stopSkimming(){
             // Tapping the tochead returns to results/glosses/etc
             var skimming=metaBook.skimpoint;
-            if (!(skimming)) return;
+            if (!(metaBook.skimming)) return;
             dropClass(document.body,"mbSKIMMING");
+            metaBook.skimming=false;
             if (getParent(skimming,fdjtID("METABOOKALLGLOSSES"))) 
                 metaBook.setMode("allglosses");
             else if (getParent(skimming,fdjtID("METABOOKSTATICTOC"))) 
@@ -730,7 +733,15 @@ metaBook.setMode=
             var passage=fdjt.ID(cardinfo.passage||cardinfo.id);
             var i=0, lim=0;
             if (typeof dir !== "number") dir=0;
-            addClass(document.body,"mbSKIMMING"); setHUD(false,false);
+            addClass(document.body,"mbSKIMMING");
+            if (hasParent(card,metaBook.DOM.allglosses))
+                metaBook.skimming=metaBook.allglosses;
+            else if (hasParent(card,fdjt.ID("METABOOKSEARCHRESULTS")))
+                metaBook.skimming=metaBook.searchresults;
+            else if (hasParent(card,fdjt.ID("METABOOKSTATICTOC")))
+                metaBook.skimming=metaBook.statictoc;
+            else metaBook.skimming=true;
+            setHUD(false,false);
             if (Trace.mode)
                 fdjtLog("metaBookSkim() %o (card=%o) mode=%o scn=%o/%o dir=%o",
                         passage,card,

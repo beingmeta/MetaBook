@@ -174,11 +174,11 @@ metaBook.Slice=(function () {
         var count=0, seen={};
         var tagslots=["**tags","*tags","+tags","+tags*","knodes","tags",
                       "**tags*","*tags*","tags*","^tags","^tags*"];
-        var j=0, nslots=tagslots.length;
+        var j=0, nslots=tagslots.length, ntags=0;
         while (j<nslots) {
             var slot=tagslots[j++], tags=info[slot];
             if ((!(tags))||(tags.length===0)) continue;
-            var i=0, lim=tags.length;
+            var i=0, lim=tags.length; ntags=ntags+lim;
             while (i<lim) {
                 var tag=tags[i++];
                 if (!(tag)) continue;
@@ -194,8 +194,10 @@ metaBook.Slice=(function () {
                 else if (sectag) fdjtDOM(sectags," ",elt);
                 else if (count<4) fdjtDOM(toptags," ",elt);
                 else fdjtDOM(othertags," ",elt);}}
-        return fdjtDOM("span.tags",tagicon,
-                       matches,toptags,othertags,sectags);}
+        if (ntags)
+            return fdjtDOM("span.tags",tagicon,
+                           matches,toptags,othertags,sectags);
+        else return false;}
 
     function tag_matchp(tag,query){
         var qtags=query.tags;
@@ -1003,11 +1005,11 @@ metaBook.Slice=(function () {
         if (adx>(ady*2)) {
             // Horizontal swipe
             if (dx<(-(metaBook.minswipe||10))) {
-                if (hasClass(document.body,"mbSKIMMING"))
+                if (metaBook.skimming)
                     metaBook.skimForward();
                 else pager.forward();}
             else if (dx>(metaBook.minswipe||10)) {
-                if (hasClass(document.body,"mbSKIMMING"))
+                if (metaBook.skimming)
                     metaBook.skimBackward();
                 pager.backward();}}
         else if (ady>(adx*2)) {
