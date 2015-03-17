@@ -392,6 +392,9 @@ body._MOUSE .glossmark#METABOOKOPENGLOSSMARK.hover > img {
 .glossmark img.wedge {
     position: absolute; right: 0px; top: 0px;}
 
+.mbSKIMMING .glossmark, .mbPREVIEW .glossmark {
+    opacity: 0.5;}
+
 /* Displaying the sbook target */
 
 body._ANIMATE .mbtarget, body.mbSHRINK .mbtarget {
