@@ -104,7 +104,7 @@ metaBook.TOCSlice=
             var bar=((headinfo.toclevel)&&(tocBar(headinfo,context)));
             var card=((bar)&&
                       ({dom: bar,about: headinfo,id: headinfo._id,
-                        head: headinfo.frag,
+                        head: headinfo.frag,passage: headinfo._id,
                         location: headinfo.starts_at}));
             if (card) {
                 slice.addCards([card]);

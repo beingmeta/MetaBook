@@ -727,7 +727,7 @@ metaBook.setMode=
             var skimpoint=metaBook.skimpoint;
             var slice=metaBook[metaBook.mode];
             var cardinfo=slice.getInfo(card);
-            var passage=fdjt.ID(cardinfo.id);
+            var passage=fdjt.ID(cardinfo.passage||cardinfo.id);
             var i=0, lim=0;
             if (typeof dir !== "number") dir=0;
             addClass(document.body,"mbSKIMMING"); setHUD(false,false);
