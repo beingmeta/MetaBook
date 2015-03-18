@@ -277,7 +277,10 @@
             while (j<n_inputs) {
                 input=inputs[j++];
                 if (input.name===setting) {
-                    if (input.value===value) toset.push(input);
+                    if ((value===true)?
+                        (/(yes|on|true)/i.exec(input.value)):
+                        (input.value===value))
+                        toset.push(input);
                     else toclear.push(input);}}
             j=0; n_inputs=toset.length; while (j<n_inputs) {
                 input=toset[j++];
