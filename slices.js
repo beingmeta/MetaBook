@@ -631,7 +631,7 @@ metaBook.Slice=(function () {
         if (sortfn) this.sortfn=sortfn;
         this.byid=new fdjt.RefMap();
         this.byfrag=new fdjt.RefMap();
-        this.live=false; this.changed=false;
+        this.live=false; this.needupdate=false;
         this.addCards(cards);
         if (metaBook.touch) opts.packthresh=40;
         if (!(opts.nopager))
@@ -643,7 +643,7 @@ metaBook.Slice=(function () {
         if (flag) {
             if (this.live) return false;
             else {
-                if (this.changed) this.update();
+                if (this.needupdate) this.update();
                 this.live=true;
                 return true;}}
         else if (this.live) {
@@ -693,7 +693,7 @@ metaBook.Slice=(function () {
 
     MetaBookSlice.prototype.display=MetaBookSlice.prototype.update=
         function updateSlice(force){
-            if ((!(this.changed))&&(!(force))) return;
+            if ((!(this.needupdate))&&(!(force))) return;
             if (metaBook.Trace.slices)
                 fdjtLog("Updating slice %o force=%o",this.container,force);
             var cards=this.cards, visible=[], shown=[];
@@ -722,23 +722,23 @@ metaBook.Slice=(function () {
             if (this.pager) this.pager.changed();
             this.visible=visible;
             this.shown=shown;
-            this.changed=false;};
+            this.needupdate=false;};
 
     MetaBookSlice.prototype.refresh=function refreshSlice(){
         var slice=this;
         if (this.refresh_timer) {
             clearTimeout(this.refresh_timer);
             this.refresh_timer=false;}
-        if (this.refreshing) this.refresh_again=true;
-        else this.refresh_timer=setTimeout(function(){
-            this.refresh_timer=false;
-            this.refreshing=true; {
-                slice.update(true);}
-            this.refreshing=false;
-            if (this.refresh_again) {
-                this.refresh_again=false;
-                fdjt.Async(function(){slice.refresh();});}},
-                                           2000);};
+        if (!(this.refreshing))
+            this.refresh_timer=setTimeout(function(){
+                this.refresh_timer=false;
+                this.needupdate=false;
+                this.refreshing=true; {
+                    slice.update();}
+                this.refreshing=false;
+                if (this.needupdate) {
+                    fdjt.Async(function(){slice.refresh();});}},
+                                          2000);};
 
     MetaBookSlice.prototype.filter=function filterSlice(fn){
         var cards=this.cards; var i=0, n=cards.length;
@@ -750,7 +750,8 @@ metaBook.Slice=(function () {
             var card=cards[i++];
             if (fn(card)) card.hidden=false;
             else card.hidden=true;}
-        this.changed=true;
+        this.filterfn=fn;
+        this.needupdate=true;
         this.update();};
 
     MetaBookSlice.prototype.addCards=function addCards(adds){
@@ -796,9 +797,14 @@ metaBook.Slice=(function () {
                 info.passage=card.getAttribute("data-passage");
             if (card.getAttribute("data-tochead"))
                 info.head=card.getAttribute("data-tochead");
+            if (this.filterfn) {
+                var fn=this.filterfn;
+                if (fn(info))
+                    info.hidden=false;
+                else info.hidden=true;}
             if (replace) this.container.replaceChild(card,replace);
             else cards.push(info);}
-        this.changed=true;
+        this.needupdate=true;
         if (this.live) this.refresh();};
 
     /* Slice handlers */
@@ -995,7 +1001,7 @@ metaBook.Slice=(function () {
         return fdjtUI.cancel(evt);}
     function slice_released(evt){
         var card=getCard(fdjtUI.T(evt||window.event));
-        var glossid=card.getAttribute("data-gloss");
+        var glossid=(card)&&(card.getAttribute("data-gloss"));
         if (Trace.gestures) {
             fdjtLog("slice_released %o: %o, skimming=%o",evt,card);}
         if (metaBook.previewing)
