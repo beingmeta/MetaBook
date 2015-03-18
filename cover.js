@@ -370,8 +370,9 @@
         var root=document.documentElement||document.body;
         if (value) addClass(root,"_SHOWCONSOLE");
         else dropClass(root,"_SHOWCONSOLE");
+        var controls=fdjtID("METABOOKCOVERCONTROLS");
+        fdjtDOM.adjustFontSize(controls);
         fdjt.Async(function(){metaBook.updateSettings(name,value);});});
-    
 
 }());
 

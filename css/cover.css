@@ -238,7 +238,7 @@ html._USER #METABOOKCOVER div.userbox {
 .control[data-mode='console'], .control[data-mode='aboutsbooks'],
 .control[data-mode='aboutbook'] {
     display: none;}
-body._SHOWCONSOLE span.control[data-mode='console'] { display: inline;}
+html._SHOWCONSOLE span.control[data-mode='console'] { display: inline;}
 html._NOUSER span.control[data-mode='layers'] { display: none;}
 span.control[data-mode='layers'] .whenloggedin { display: none;}
 html._USER span.control[data-mode='layers'] .whenloggedin {
@@ -306,7 +306,7 @@ html._USER._CONN .control[data-mode='login'] { display: none;}
     max-width: 30%; float: right;}
 #METABOOKBLURB p .floatright img, #ABOUTSBOOKS p .floatright img {
     max-width: 100%; height: auto; }
-body._SHOWCONSOLE .control[alt='Console'] {display: none;}
+html._SHOWCONSOLE .control[alt='Console'] {display: none;}
 
 /* Title page */
 
