@@ -814,10 +814,20 @@ metaBook.Slice=(function () {
             var off=shown.indexOf(card);
             if (off<=0) return; 
             else return this.setSkim(shown[off-1]);};
-    MetaBookSlice.prototype.getInfo=function(card){
+    MetaBookSlice.prototype.getInfo=function getSliceInfo(card){
         var pos; if (!(card)) pos=this.skimpos;
         else pos=this.shown.indexOf(card);
         return this.visible[pos];};
+
+    MetaBookSlice.prototype.setLocation=function setSliceLocation(location){
+        var visible=this.visible; var i=0, lim=visible.length;
+        while (i<lim) {
+            var card=visible[i];
+            if (typeof card.location !== "number") {i++; continue;}
+            else if (card.location>=location) {
+                this.setSkim(card);
+                return;}
+            else {i++; continue;}}};
 
     function getCard(target){
         if ((hasClass(target,"metabookcard"))||(hasClass(target,"mbtoc")))
