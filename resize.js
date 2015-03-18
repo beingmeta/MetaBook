@@ -69,6 +69,7 @@
             clearTimeout(resizing); resizing=false;}
         updateSizeClasses();
         metaBook.resizeUI();
+        metaBook.sizeContent();
         metaBook.scaleLayout(false);
         if (!(layout)) return;
         else if ((metaBook.textinput)||
@@ -141,7 +142,6 @@
     function resizeNow(evt){
         if (resizing) clearTimeout(resizing);
         resizing=false;
-        metaBook.sizeContent();
         metaBook.layout.onresize(evt);}
 
     var sizeclass_regexp=/\b_(NARROW|WIDE|REALLYSHORT|SHORT|TALL)\b/g;
