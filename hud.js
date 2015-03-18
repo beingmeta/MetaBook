@@ -233,7 +233,7 @@ metaBook.setMode=
                              holdmsecs: 200});
             metaBook.DOM.skimmer=fdjtID("METABOOKSKIMMER");
             metaBook.TapHold.skimmer=
-                new TapHold(metaBook.DOM.skimmer,{taptapmsecs: 150});
+                new TapHold(metaBook.DOM.skimmer,{taptapmsecs: 300});
             
             var help=metaBook.DOM.help=fdjtID("METABOOKHELP");
             help.innerHTML=fixStaticRefs(metaBook.HTML.help);

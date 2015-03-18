@@ -54,7 +54,7 @@ var metaBook={
     // For tracking UI state
     last_mode: false, last_heartmode: "about", demo: false,
     // How long it takes a gesture to go from tap to hold
-    taptapmsecs: 150, holdmsecs: 150, edgeclick: 50, pagesize: 250,
+    taptapmsecs: 300, holdmsecs: 150, edgeclick: 50, pagesize: 250,
     dontanimate: false, nativeselect: false,
     // Ignore swipes shorter than this:
     minswipe: 7,
