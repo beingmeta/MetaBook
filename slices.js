@@ -790,8 +790,9 @@ metaBook.Slice=(function () {
     MetaBookSlice.prototype.setSkim=function setSkim(card){
         var pager=this.pager;
         var visible=this.visible, shown=this.shown;
-        var off=shown.indexOf(card);
+        var off=((card.nodeType)?(shown.indexOf(card)):(visible.indexOf(card)));
         if (off<0) return; else {
+            card=shown[off];
             if (this.skimpoint) dropClass(this.skimpoint,"skimpoint");
             if (pager) pager.setPage(card);
             this.skimpoint=card; this.skimpos=off;
@@ -902,6 +903,14 @@ metaBook.Slice=(function () {
             var form=metaBook.setGlossTarget(gloss);           
             if (!(form)) return;
             metaBook.setMode("addgloss");
+            return fdjtUI.cancel(evt);}
+        else if ((gloss)&&(mB.mode==="openglossmark")) {
+            var glosscard=mB.allglosses.byid[glossid];
+            if (glosscard) {
+                metaBook.setMode("allglosses");
+                fdjt.Async(function(){
+                    mB.allglosses.setSkim(glosscard);});}
+            else metaBook.setHUD(false);
             return fdjtUI.cancel(evt);}
         else if (gloss) {
             metaBook.SkimTo(card,0);
