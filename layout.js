@@ -261,7 +261,9 @@ metaBook.Paginate=
                 addClass(document.body,"_BYPAGE");
                 // This keeps the page content hidden during layout
                 // fdjtID("CODEXPAGE").style.visibility='hidden';
-                fdjtID("CODEXCONTENT").style.visibility='hidden';
+                // This shouldn't be neccessary because CODEXCONTENT 
+                //  should have display:none with body._BYPAGE.
+                //fdjtID("CODEXCONTENT").style.visibility='hidden';
                 
                 // Now make the content (temporarily) the same width as
                 // the page
