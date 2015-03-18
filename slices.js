@@ -905,13 +905,7 @@ metaBook.Slice=(function () {
             metaBook.setMode("addgloss");
             return fdjtUI.cancel(evt);}
         else if ((gloss)&&(mB.mode==="openglossmark")) {
-            var glosscard=mB.allglosses.byid[glossid];
-            if (glosscard) {
-                metaBook.setMode("allglosses");
-                fdjt.Async(function(){
-                    mB.allglosses.setSkim(glosscard);});}
-            else metaBook.setHUD(false);
-            return fdjtUI.cancel(evt);}
+            goToGloss(card); return fdjtUI.cancel(evt);}
         else if (gloss) {
             metaBook.SkimTo(card,0);
             return fdjtUI.cancel(evt);}
@@ -934,6 +928,10 @@ metaBook.Slice=(function () {
             fdjtLog("slice_held %o: %o, skimming=%o",
                     evt,card,metaBook.skimpoint);
         if (!(card)) return;
+        /* Handle openglossmarks */
+        if ((card.getAttribute("data-gloss"))&&
+            (mB.mode==="openglossmark")) {
+            goToGloss(card); return fdjtUI.cancel(evt);}
         // Put a clone of the card in the skimmer
         var clone=card.cloneNode(true);
         clone.id="METABOOKSKIM"; fdjtDOM.replace("METABOOKSKIM",clone);
@@ -981,10 +979,12 @@ metaBook.Slice=(function () {
         return fdjtUI.cancel(evt);}
     function slice_released(evt){
         var card=getCard(fdjtUI.T(evt||window.event));
+        var glossid=card.getAttribute("data-gloss");
         if (Trace.gestures) {
             fdjtLog("slice_released %o: %o, skimming=%o",evt,card);}
         if (metaBook.previewing)
             metaBook.stopPreview("slice_released");
+        if ((glossid)&&(mB.mode==="openglossmark")) goToGloss(card);
         fdjtUI.cancel(evt);}
     function slice_slipped(evt){
         evt=evt||window.event;
@@ -1051,6 +1051,14 @@ metaBook.Slice=(function () {
 
     metaBook.UI.getCard=getCard;
 
+    function goToGloss(card){
+        var glossid=card.getAttribute("data-gloss");
+        var glosscard=(glossid)&&(mB.allglosses.byid[glossid]);
+        if (glosscard) {
+            metaBook.setMode("allglosses");
+            fdjt.Async(function(){
+                mB.allglosses.setSkim(glosscard);});}}
+    
     fdjt.DOM.defListeners(
         metaBook.UI.handlers.mouse,
         {summary: {tap: slice_tapped, hold: slice_held,
