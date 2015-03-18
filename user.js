@@ -82,7 +82,7 @@
                     now-started);}
         metaBook._user_setup=fdjtTime();
         // This sets up for local storage, now that we have a user 
-        if (metaBook.cacheglosses) metaBook.cacheGlosses(true);
+        if (metaBook.cacheglosses) metaBook.setCacheGlosses(true);
         if (metaBook._ui_setup) setupUI4User();
         return metaBook.user;}
     metaBook.setUser=setUser;

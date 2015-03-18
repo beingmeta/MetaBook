@@ -1293,7 +1293,8 @@
         queued.push(json.uuid);
         if (metaBook.cacheglosses) {
             fdjtState.setLocal("metabook.params("+json.uuid+")",params);
-            fdjtState.setLocal("metabook.queued("+metaBook.refuri+")",queued,true);}
+            fdjtState.setLocal(
+                "metabook.queued("+metaBook.refuri+")",queued,true);}
         else queued_data[json.uuid]=params;
         // Now save it to the in-memory database
         var glossdata=
@@ -1378,7 +1379,8 @@
                             if (pos>=0) {
                                 pending.splice(pos,1);
                                 if (metaBook.cacheglosses)
-                                    fdjtState.setLocal("metabook.queued("+metaBook.refuri+")",pending,true);
+                                    fdjtState.setLocal(
+                                        "metabook.queued("+metaBook.refuri+")",pending,true);
                                 metaBook.queued=pending;}}
                         addgloss_callback(req,false,false);
                         if (pending.length) setTimeout(writeQueuedGlosses,200);

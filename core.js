@@ -269,14 +269,16 @@
         metaBook.queued=((metaBook.cacheglosses)&&
                          (getLocal("metabook.queued("+metaBook.refuri+")",true)))||[];
 
-        function cacheGlosses(value){
+        function setCacheGlosses(value){
             var saveprops=metaBook.saveprops, uri=metaBook.docuri;
             if (value) {
                 if (metaBook.user) {
                     var storage=((mB.persist)?(window.localStorage):
                                  (window.sessionStorage));
-                    if (!(metaBook.sourcedb.storage)) metaBook.sourcedb.storage=storage;
-                    if (!metaBook.glossdb.storage) metaBook.glossdb.storage=storage;
+                    if (!(metaBook.sourcedb.storage))
+                        metaBook.sourcedb.storage=storage;
+                    if (!metaBook.glossdb.storage)
+                        metaBook.glossdb.storage=storage;
                     var props=metaBook.saveprops, i=0, lim=props.length;
                     while (i<lim) {
                         var prop=saveprops[i++];
@@ -287,14 +289,15 @@
                     if ((metaBook.queued)&&(metaBook.queued.length)) 
                         metaBook.queued=metaBook.queued.concat(
                             getLocal("metabook.queued("+uri+")",true)||[]);
-                    else metaBook.queued=getLocal("metabook.queued("+uri+")",true)||[];}
+                    else metaBook.queued=
+                        getLocal("metabook.queued("+uri+")",true)||[];}
                 metaBook.cacheglosses=true;}
             else {
                 clearOffline(metaBook.docuri);
                 if (uri) fdjtState.dropLocal("metabook.queued("+uri+")");
                 metaBook.queued=[];
                 metaBook.cacheglosses=false;}}
-        metaBook.cacheGlosses=cacheGlosses;
+        metaBook.setCacheGlosses=setCacheGlosses;
         
         /* Clearing offline data */
 
@@ -315,6 +318,7 @@
                 clearLocal("metabook.outlets("+uri+")");
                 clearLocal("metabook.layers("+uri+")");
                 clearLocal("metabook.etc("+uri+")");
+                clearLocal("metabook.sync("+uri+")");
                 // We don't currently clear sources when doing book
                 // specific clearing because they might be shared
                 // between books.  This is a bug.
@@ -413,12 +417,13 @@
         fdjtState.pushLocal("glossdata()",url);}
 
     function clearGlossData(url){
-        var urls=((url)?(getLocal("glossdata("+url+")",true)):
-                  (getLocal("glossdata()",true)));
+        var key=((url)?("glossdata("+url+")"):("glossdata()"));
+        var urls=getLocal(key,true);
         if (urls) {
             var i=0, lim=urls.length; while (i<lim) {
-                var gdurl=urls[i++]; dropLocal("cached("+gdurl+")");
-                if (metaBookDB) clearGlossDataFor(gdurl);}}}
+                var gdurl=urls[i++]; dropLocal("glossdata("+gdurl+")");
+                if (metaBookDB) clearGlossDataFor(gdurl);}}
+        dropLocal(key);}
 
     function clearGlossDataFor(url){
         var txn=metaBookDB.transaction(["glossdata"],"readwrite");

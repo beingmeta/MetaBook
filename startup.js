@@ -302,7 +302,7 @@ metaBook.Startup=
             metaBook.addConfig(
                 "cacheglosses",
                 function(name,value){
-                    metaBook.cacheGlosses(value);
+                    metaBook.setCacheGlosses(value);
                     fdjt.Async(function(){
                         metaBook.updateSettings(name,value);});});
 
