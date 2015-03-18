@@ -174,6 +174,8 @@ metaBook.Startup=
             // Execute any FDJT initializations
             fdjt.Init();
 
+            metaBook.updateSizeClasses();
+
             setupBook();
             setupDevice();
             setupApp();
@@ -806,6 +808,7 @@ metaBook.Startup=
                 device.iscroll=true;}
             device.string=device.string+" "+
                 ((metaBook.iscroll)?("iScroll"):("nativescroll"));
+            
             if (Trace.startup>1) {
                 fdjtLog("setupDevice done in %dms: %s/%dx%d %s",
                         fdjtTime()-started,
@@ -999,7 +1002,7 @@ metaBook.Startup=
             var info=fdjt.DOM.$(".metabookrefinfo"), elt;
             var i=0, lim=info.length; while (i<lim) {
                 elt=info[i++];
-                elt.innerHTML="<strong>Ref:</strong> ";
+                elt.innerHTML="<strong>Ref:</strong> ";
                 fdjtDOM.append(elt,fdjtDOM("span.refuri",metaBook.refuri),
                                " ",fdjtDOM("span.oidref",metaBook.docref));}
             info=fdjt.DOM.$(".metabooksourceinfo");

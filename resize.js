@@ -67,6 +67,7 @@
         var layout=metaBook.layout;
         if (resizing) {
             clearTimeout(resizing); resizing=false;}
+        updateSizeClasses();
         metaBook.resizeUI();
         metaBook.scaleLayout(false);
         if (!(layout)) return;
@@ -142,6 +143,20 @@
         resizing=false;
         metaBook.sizeContent();
         metaBook.layout.onresize(evt);}
+
+    var sizeclass_regexp=/\b_(NARROW|WIDE|REALLYSHORT|SHORT|TALL)\b/g;
+    function updateSizeClasses(){
+        var addClass=fdjtDOM.addClass, body=document.body;
+        var w=fdjtDOM.viewWidth(), h=fdjtDOM.viewHeight();
+        fdjtDOM.dropClass(body,sizeclass_regexp);
+        if (w<700) addClass(body,"_NARROW");
+        else if (w>1200) addClass(body,"_WIDE");
+        else {}
+        if (h<350) addClass(document.body,"_REALLYSHORT");
+        else if (h<600) addClass(document.body,"_SHORT");
+        else if (h>1200) addClass(document.body,"_TALL");
+        else {}}
+    metaBook.updateSizeClasses=updateSizeClasses;
 
     var resizing=false;
     var resize_wait=false;
