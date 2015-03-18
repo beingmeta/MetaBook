@@ -314,9 +314,7 @@ metaBook.setMode=
                     while (j<n_tags)
                         metaBook.cloudEntry(tags[j++],gloss_cloud);}
                 if (item.tstamp>metaBook.syncstamp)
-                    metaBook.syncstamp=item.tstamp;
-                if (metaBook.pagers.METABOOKALLGLOSSES)
-                    metaBook.pagers.METABOOKALLGLOSSES.changed();}
+                    metaBook.syncstamp=item.tstamp;}
             else {
                 fdjtLog("Gloss refers to nonexistent '%s': %o",item.frag,item);
                 return;}}

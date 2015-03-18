@@ -118,8 +118,7 @@
                     ((info.layers)?(info.layers.length):(0)));}
         if ((info.glosses)||(info.etc))
             initGlosses(info.glosses||[],info.etc||[],
-                        function(){infoLoaded(info);});
-        if (metaBook.allglosses) metaBook.allglosses.update();}
+                        function(){infoLoaded(info);});}
     metaBook.loadInfo=loadInfo;
 
     function infoLoaded(info){
@@ -132,6 +131,7 @@
         if ((info.sync)&&((!(metaBook.sync))||(info.sync>=metaBook.sync))) {
             metaBook.setSync(info.sync);}
         metaBook.loaded=info.loaded=fdjtTime();
+        if (metaBook.allglosses) metaBook.allglosses.update();
         if (metaBook.whenloaded) {
             var whenloaded=metaBook.whenloaded;
             metaBook.whenloaded=false;
@@ -155,7 +155,8 @@
                (!(metaBook.ticktock))&&
                (Trace.startup))))) {
             if (start)
-                fdjtLog("Response (%dms) from %s",fdjtTime()-start,source||metaBook.server);
+                fdjtLog("Response (%dms) from %s",
+                        fdjtTime()-start,source||metaBook.server);
             else fdjtLog("Response from %s",source||metaBook.server);}
         updating=false; loadInfo(data);
         if ((!(user))&&(metaBook.user)) metaBook.userSetup();
@@ -374,13 +375,9 @@
         if (!(sync)) return;
         if ((Trace.glosses)||(Trace.startup))
             fdjtLog("Starting initializing glosses from local storage");
-        metaBook.allglosses.setLive(false);
         metaBook.sourcedb.load(true);
         var loading=metaBook.glossdb.load(true);
         loading.then(function(){
-            metaBook.allglosses.setLive(true);
-            if (metaBook.heartscroller)
-                metaBook.heartscroller.refresh();
             if ((metaBook.glossdb.allrefs.length)||
                 (metaBook.sourcedb.allrefs.length))
                 fdjtLog("Initialized %d glosses (%d sources) from local storage",

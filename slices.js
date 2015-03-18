@@ -724,6 +724,22 @@ metaBook.Slice=(function () {
             this.shown=shown;
             this.changed=false;};
 
+    MetaBookSlice.prototype.refresh=function refreshSlice(){
+        var slice=this;
+        if (this.refresh_timer) {
+            clearTimeout(this.refresh_timer);
+            this.refresh_timer=false;}
+        if (this.refreshing) this.refresh_again=true;
+        else this.refresh_timer=setTimeout(function(){
+            this.refresh_timer=false;
+            this.refreshing=true; {
+                slice.update(true);}
+            this.refreshing=false;
+            if (this.refresh_again) {
+                this.refresh_again=false;
+                fdjt.Async(function(){slice.refresh();});}},
+                                           2000);};
+
     MetaBookSlice.prototype.filter=function filterSlice(fn){
         var cards=this.cards; var i=0, n=cards.length;
         if (metaBook.Trace.slices) {
@@ -782,8 +798,8 @@ metaBook.Slice=(function () {
                 info.head=card.getAttribute("data-tochead");
             if (replace) this.container.replaceChild(card,replace);
             else cards.push(info);}
-        if (this.live) this.update();
-        else this.changed=true;};
+        this.changed=true;
+        if (this.live) this.refresh();};
 
     /* Slice handlers */
 
