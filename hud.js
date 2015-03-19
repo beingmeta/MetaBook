@@ -726,12 +726,15 @@ metaBook.setMode=
         metaBook.stopSkimming=stopSkimming;
         
         function metaBookSkimTo(card,dir,expanded){
+            var skimmer=$ID("METABOOKSKIMMER");
             var skimpoint=metaBook.skimpoint;
             var slice=metaBook[metaBook.mode];
             var cardinfo=slice.getInfo(card);
             var passage=mbID(cardinfo.passage||cardinfo.id);
             var i=0, lim=0;
             if (typeof dir !== "number") dir=0;
+            if (typeof expanded === "undefined")
+                expanded=hasClass(skimmer,"expanded");
             addClass(document.body,"mbSKIMMING");
             if (hasParent(card,metaBook.DOM.allglosses))
                 metaBook.skimming=metaBook.allglosses;
@@ -751,11 +754,14 @@ metaBook.setMode=
             // skimmer (at the top of the page during skimming and
             // preview)
             if (skimpoint!==card) {
-                var skimmer=$ID("METABOOKSKIMMER");
                 var clone=card.cloneNode(true);
                 var pct=((dir<0)?("-120%"):(dir>0)?("120%"):(false));
+                dropClass(skimmer,"expanded");
                 dropClass(skimmer,"transimate");
                 fdjtDOM.replace("METABOOKSKIM",clone);
+                if ((clone.offsetHeight)>skimmer.offsetHeight)
+                    addClass(skimmer,"oversize");
+                else dropClass(skimmer,"oversize");
                 var dropTransAnimate=function(){
                     dropClass(skimmer,"transanimate");
                     fdjtDOM.removeListener(
@@ -782,11 +788,10 @@ metaBook.setMode=
                 // This marks where we are currently skimming
                 if (skimpoint) dropClass(skimpoint,"skimpoint");
                 if (card) addClass(card,"skimpoint");
-                if (typeof expanded === "undefined") {}
-                else if (expanded) addClass("METABOOKSKIMMER","expanded");
-                else dropClass("METABOOKSKIMMER","expanded");
                 metaBook.skimpoint=card;}
             else {}
+            if (expanded) addClass("METABOOKSKIMMER","expanded");
+            else dropClass("METABOOKSKIMMER","expanded");
             // This all makes sure that the >| and |< buttons
             // appear appropriately
             if (slice.atEnd)

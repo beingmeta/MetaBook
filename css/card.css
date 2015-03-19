@@ -10,7 +10,9 @@
     text-align: left;
     font-size: 90%;}
 
-div.metabookcard { margin-left: 20px; margin-right: 0px; }
+div.metabookcard {
+    margin-left: 20px; margin-right: 0px;
+    box-sizing: border-box;}
 div.metabookcard > div.idhead, div.metabookcard > div.tochead {
     max-height: 3ex; white-space: nowrap;
     text-overflow: ellipsis; overflow: hidden;}
