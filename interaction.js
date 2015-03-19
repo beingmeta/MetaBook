@@ -1671,30 +1671,6 @@
             fdjtUI.cancel(evt);
             fn();}}
 
-    /* Dead Code */
-    /*
-    function unhighlightSettings(){
-        dropClass(fdjtDOM.$(".metabookhighlightsetting"),
-                  "metabookhighlightsetting");}
-    function highlightSetting(id,evt){
-        var setting=fdjtID(id);
-        if (evt) fdjt.UI.cancel(evt);
-        if (!(id)) {
-            fdjtLog.warn("Couldn't resolve setting %s",id);
-            dropClass(fdjtDOM.$(".metabookhighlightsetting"),
-                      "metabookhighlightsetting");
-            metaBook.setMode("device");
-            return;}
-        addClass(setting,"metabookhighlightsetting");
-        if (mB.mode!=="device") {
-            if (mB.popmode) {
-                var fn=metaBook.popmode;
-                metaBook.popmode=unhighlightSettings(); 
-                fn();}
-            metaBook.setMode("device");}}
-    metaBook.UI.highlightSetting=highlightSetting;
-    */
-
     function showcover_tapped(evt){
         evt=evt||window.event;
         if ((mB.touch)&&(!(mB.hudup))) return;

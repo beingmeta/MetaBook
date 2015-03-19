@@ -174,7 +174,7 @@
     // set the gloss target for a particular passage
     function getGlossForm(arg,response) {
         if (typeof arg === 'string')
-            arg=fdjtID(arg)||metaBook.glossdb.ref(arg)||false;
+            arg=mbID(arg)||metaBook.glossdb.ref(arg)||false;
         if (!(arg)) return false;
         var gloss=((!(arg.nodeType))&&((arg.maker)||(arg.gloss))&&(arg));
         if (!(gloss)) response=false;

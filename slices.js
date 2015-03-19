@@ -888,8 +888,9 @@ metaBook.Slice=(function () {
             metaBook.GoTOC(href);
             fdjtUI.cancel(evt);
             return;}
-        var link=getParent(target,".mbmedia");
-        if (link) {
+
+        if (getParent(target,".mbmedia")) {
+            var link=getParent(target,".mbmedia");
             var src=link.getAttribute("data-src"), cancel=false;
             var type=link.getAttribute("data-type");
             if (hasClass(link,"imagelink")) {
@@ -905,7 +906,7 @@ metaBook.Slice=(function () {
         var passage=mbID(card.getAttribute("data-passage"));
         var glossid=card.getAttribute("data-gloss");
         var gloss=((glossid)&&(metaBook.glossdb.ref(glossid)));
-        if (getParent(target,".glossbody")) {
+        if (gloss) {
             var detail=((gloss)&&(gloss.detail));
             if (!(detail)) return;
             else if (detail[0]==='<')

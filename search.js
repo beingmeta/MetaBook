@@ -181,7 +181,9 @@
                 completions.dom.style.fontSize="";
                 if (cloud)
                     fdjtDOM.replace(cloud,completions.dom);
-                else fdjtDOM.append(fdjt.ID("METABOOKHEARTBODY"),completions.dom);
+                else fdjtDOM.append(
+                    fdjt.ID("METABOOKHEARTBODY"),
+                    completions.dom);
                 metaBook.adjustCloudFont(completions);});}
         if (n_refiners===0) {
             addClass(box,"norefiners");
