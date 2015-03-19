@@ -57,7 +57,7 @@ metaBook.Slice=(function () {
     var fdjtUI=fdjt.UI;
     var RefDB=fdjt.RefDB, Ref=RefDB.Ref;
     var Pager=fdjt.Pager;
-    var $=fdjtDOM.$;
+    var $=fdjtDOM.$, $ID=fdjt.ID;
 
     var mB=metaBook, mbID=mB.ID, Trace=mB.Trace;
 
@@ -910,12 +910,12 @@ metaBook.Slice=(function () {
             var detail=((gloss)&&(gloss.detail));
             if (!(detail)) return;
             else if (detail[0]==='<')
-                fdjt.ID("METABOOKGLOSSDETAIL").innerHTML=gloss.detail;
+                $ID("METABOOKGLOSSDETAIL").innerHTML=gloss.detail;
             else if (detail.search(/^{(md|markdown)}/)===0) {
                 var close=detail.indexOf('}');
-                fdjt.ID("METABOOKGLOSSDETAIL").innerHTML=
+                $ID("METABOOKGLOSSDETAIL").innerHTML=
                     metaBook.md2HTML(detail.slice(close+1));}
-            else fdjt.ID("METABOOKGLOSSDETAIL").innerHTML=
+            else $ID("METABOOKGLOSSDETAIL").innerHTML=
                 metaBook.md2HTML(detail);
             metaBook.setMode("glossdetail");
             return fdjtUI.cancel(evt);}

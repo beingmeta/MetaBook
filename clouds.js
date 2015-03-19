@@ -54,7 +54,7 @@
     var fdjtLog=fdjt.Log;
     var fdjtDOM=fdjt.DOM;
     var fdjtUI=fdjt.UI;
-    var fdjtID=fdjt.ID;
+    var $ID=fdjt.ID;
     var TapHold=fdjt.TapHold;
     var RefDB=fdjt.RefDB, Ref=fdjt.Ref;
     var KNode=Knodule.KNode;
@@ -600,14 +600,14 @@
         else if (fdjtDOM.inherits(target,".resultcounts")) {
             metaBook.showSearchResults(metaBook.query);
             metaBook.setMode("searchresults");
-            fdjtID("METABOOKSEARCHINPUT").blur();
-            fdjtID("METABOOKSEARCHRESULTS").focus();
+            $ID("METABOOKSEARCHINPUT").blur();
+            $ID("METABOOKSEARCHRESULTS").focus();
             fdjtUI.cancel(evt);}
         else if (fdjtDOM.inherits(target,".refinercounts")) {
             fdjtDOM.toggleClass(completions,"showall");
             fdjtDOM.cancel(evt);}
         else if (fdjtDOM.inherits(target,".maxcompletemsg")) {
-            fdjtID("METABOOKSEARCHINPUT").focus();
+            $ID("METABOOKSEARCHINPUT").focus();
             fdjtDOM.toggleClass(completions,"showall");
             fdjtDOM.cancel(evt);}
         else {}}
@@ -617,8 +617,8 @@
         metaBook.setQuery(metaBook.extendQuery(metaBook.query,value));}
 
     metaBook.UI.searchCloudToggle=function(){
-        fdjtDOM.toggleClass(fdjtID('METABOOKSEARCHCLOUD'),'showall');
-        metaBook.UI.updateScroller(fdjtID('METABOOKSEARCHCLOUD'));};
+        fdjtDOM.toggleClass($ID('METABOOKSEARCHCLOUD'),'showall');
+        metaBook.UI.updateScroller($ID('METABOOKSEARCHCLOUD'));};
 
     function setCloudCues(cloud,tags){
         // Clear any current tagcues from the last gloss

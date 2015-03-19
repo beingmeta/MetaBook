@@ -53,7 +53,7 @@
     var fdjtString=fdjt.String;
     var fdjtDOM=fdjt.DOM;
     var fdjtUI=fdjt.UI;
-    var RefDB=fdjt.RefDB, fdjtID=fdjt.ID;
+    var RefDB=fdjt.RefDB, $ID=fdjt.ID;
 
     var hasClass=fdjtDOM.hasClass;
     var mbicon=metaBook.icon;
@@ -65,7 +65,7 @@
         var humid=info.humid;
         if (!(info.name)) return;
         if (withgloss) {
-            var icon=fdjtID("SBOOKSOURCEICON"+humid);
+            var icon=$ID("SBOOKSOURCEICON"+humid);
             if (!(icon)) { // Add icon to the sources bar
                 var pic=(info.pic)||
                     ((info.fbid)&&
@@ -92,7 +92,7 @@
                     ((info.about)?(info.about):"");
                 icon.title=title; icon.oid=info._id;
                 icon.id="SBOOKSOURCEICON"+humid;
-                fdjtDOM(fdjtID("METABOOKSOURCES")," ",icon);}}
+                fdjtDOM($ID("METABOOKSOURCES")," ",icon);}}
         return info;}
     metaBook.UI.addSource=addSource;
     metaBook.UI.addGlossSource=function(info){addSource(info,true);};
@@ -102,8 +102,8 @@
         var target=fdjtDOM.T(evt);
         // var sources=fdjtDOM.getParent(target,".metabooksources");
         // var glosses=fdjtDOM.getParent(target,".sbookglosses");
-        var sources=fdjtID("METABOOKSOURCES");
-        var glosses=fdjtID("METABOOKALLGLOSSES");
+        var sources=$ID("METABOOKSOURCES");
+        var glosses=$ID("METABOOKALLGLOSSES");
         if ((!(sources))||(!(glosses)))
             return; /* Warning? */
         if (fdjtDOM.hasClass(target,"selected")) {
@@ -123,8 +123,8 @@
         var target=fdjtDOM.T(evt);
         // var sources=fdjtDOM.getParent(target,".metabooksources");
         // var glosses=fdjtDOM.getParent(target,".sbookglosses");
-        var sources=fdjtID("METABOOKSOURCES");
-        var glosses=fdjtID("METABOOKALLGLOSSES");
+        var sources=$ID("METABOOKSOURCES");
+        var glosses=$ID("METABOOKALLGLOSSES");
         var new_sources=[];
         if ((!(sources))||(!(glosses))||(!(target.oid)))
             return; /* Warning? */
@@ -306,7 +306,7 @@
             hudwrapper.style.opacity='';}
         else fdjtDOM.replace("METABOOKPOINTGLOSSES",hudwrapper);
         if (point) {
-            var cur=fdjtID("METABOOKOPENGLOSSMARK");
+            var cur=$ID("METABOOKOPENGLOSSMARK");
             if (cur) {
                 if (metaBook.target)
                     metaBook.clearHighlights(metaBook.target);

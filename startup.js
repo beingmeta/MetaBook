@@ -58,7 +58,7 @@ metaBook.Startup=
         var fdjtLog=fdjt.Log;
         var fdjtDOM=fdjt.DOM;
         var fdjtUI=fdjt.UI;
-        var fdjtID=fdjt.ID;
+        var $ID=fdjt.ID;
         var RefDB=fdjt.RefDB;
         var mbID=metaBook.ID;
         
@@ -113,7 +113,7 @@ metaBook.Startup=
                     mB.version,mB.buildtime,mB.buildhost,
                     mB._setup_start.toString(),
                     mB.root||"somewhere");
-            if (fdjtID("METABOOKBODY")) metaBook.body=fdjtID("METABOOKBODY");
+            if ($ID("METABOOKBODY")) metaBook.body=$ID("METABOOKBODY");
 
             /* This was for a problem with saving documents as webapps under
                iOS, where the webapp doesn't get the authentication cookies
@@ -424,7 +424,7 @@ metaBook.Startup=
                 function(){
                     var hasText=fdjtDOM.hasText;
                     var rules=fdjtDOM.getMeta("SBOOKS.index",true);
-                    var content=fdjt.ID("CODEXCONTENT");
+                    var content=$ID("CODEXCONTENT");
                     rules.push("p,li,ul,blockquote,div");
                     rules.push("h1,h2,h3,h4,h5,h6,h7,hgroup,.sbookindex");
                     var nodes=fdjtDOM.getChildren(content,rules.join(","));
@@ -469,7 +469,7 @@ metaBook.Startup=
                 // Build the display TOC, both the dynamic (top of
                 // display) and the static (inside the hudheart)
                 function(){
-                    var tocmsg=fdjtID("METABOOKSTARTUPTOC");
+                    var tocmsg=$ID("METABOOKSTARTUPTOC");
                     var tocstart=fdjtTime();
                     if (tocmsg) {
                         tocmsg.innerHTML=fdjtString(
@@ -489,8 +489,8 @@ metaBook.Startup=
                 ((Knodule)&&(Knodule.HTML)&&
                  (Knodule.HTML.Setup)&&(metaBook.knodule)&&
                  (function(){
-                     var knomsg=fdjtID("METABOOKSTARTUPKNO");
-                     var knodetails=fdjtID("METABOOKSTARTUPKNODETAILS");
+                     var knomsg=$ID("METABOOKSTARTUPKNO");
+                     var knodetails=$ID("METABOOKSTARTUPKNODETAILS");
                      if (knodetails) {
                          knodetails.innerHTML=fdjtString(
                              "Processing knodule %s",metaBook.knodule.name);}
@@ -553,7 +553,7 @@ metaBook.Startup=
             if (h7.length) addTOCLevel(h7,"7");}
 
         function scanDOM(){
-            var scanmsg=fdjtID("METABOOKSTARTUPSCAN");
+            var scanmsg=$ID("METABOOKSTARTUPSCAN");
             addClass(scanmsg,"running");
             var metadata=new metaBook.DOMScan(metaBook.content,metaBook.refuri+"#");
             metaBook.docinfo=metadata;
@@ -587,12 +587,12 @@ metaBook.Startup=
             metaBook.displaySync();
             fdjtDOM.dropClass(document.body,"mbSTARTUP");
             fdjtDOM.addClass(document.body,"mbREADY");
-            if (fdjt.ID("METABOOKSPLASHPAGE"))
+            if ($ID("METABOOKSPLASHPAGE"))
                 setTimeout(function(){
                     addClass("METABOOKSPLASHPAGE","startupdone");},
                            3000);
-            var rmsg=fdjtID("METABOOKREADYMESSAGE");
-            if (!(fdjtID("METABOOKOPENTAB"))) {
+            var rmsg=$ID("METABOOKREADYMESSAGE");
+            if (!($ID("METABOOKOPENTAB"))) {
                 rmsg.innerHTML="Open";
                 rmsg.id="METABOOKOPENTAB";}
             else rmsg.style.display='none';
@@ -856,7 +856,7 @@ metaBook.Startup=
             bookinfo.digitized=
                 getMeta("SBOOKS.digitized")||
                 getMeta("DIGITIZED");
-            bookinfo.converted=fdjtID("SBOOKS.converted")||
+            bookinfo.converted=$ID("SBOOKS.converted")||
                 getMeta("SBOOKS.converted");
             if (Trace.startup>1)
                 fdjtLog("setupBook done in %dms",fdjtTime()-started);}
@@ -944,12 +944,12 @@ metaBook.Startup=
             if (!(metaBook.docroot))
                 if (getMeta("SBOOKS.root"))
                     metaBook.docroot=mbID(getMeta("SBOOKS.root"));
-            else metaBook.docroot=fdjtID("SBOOKCONTENT")||document.body;
+            else metaBook.docroot=$ID("SBOOKCONTENT")||document.body;
             if (!(metaBook.start))
                 if (getMeta("SBOOKS.start"))
                     metaBook.start=mbID(getMeta("SBOOKS.start"));
-            else if (fdjtID("SBOOKSTART"))
-                metaBook.start=fdjtID("SBOOKSTART");
+            else if ($ID("SBOOKSTART"))
+                metaBook.start=$ID("SBOOKSTART");
             else {}
             var i=0; while (i<9) {
                 var body=document.body;
@@ -1079,7 +1079,7 @@ metaBook.Startup=
         metaBook. addConfig("readsound",function(name,value){
             metaBook.readsound=(value)&&(true);});
         metaBook.addConfig("bodycontrast",function(name,value){
-            var mbody=fdjt.ID("METABOOKBODY");
+            var mbody=$ID("METABOOKBODY");
             if (!(value))
                 dropClass(mbody,/\bmetabookcontrast[a-z]+\b/g);
             else swapClass(mbody,/\bmetabookcontrast[a-z]+\b/g,
@@ -1091,7 +1091,7 @@ metaBook.Startup=
         var open_sans_stack=
             "'Open Sans',Verdana, Tahoma, Arial, Helvetica, sans-serif, sans";
         function enableOpenSans(){
-            var frame=fdjt.ID("METABOOKFRAME");
+            var frame=$ID("METABOOKFRAME");
             if (!(frame)) return;
             frame.style.fontFamily=open_sans_stack;
             metaBook.resizeUI();}

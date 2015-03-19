@@ -36,7 +36,7 @@
 (function(){
     "use strict";
     var fdjtDOM=fdjt.DOM, fdjtLog=fdjt.Log;
-    var fdjtTime=fdjt.Time, fdjtID=fdjt.ID;
+    var fdjtTime=fdjt.Time, $ID=fdjt.ID;
     var RefDB=fdjt.RefDB, Ref=fdjt.Ref, fdjtState=fdjt.State;
     
     var mB=metaBook, Trace=mB.Trace;
@@ -107,10 +107,10 @@
         fdjtDOM.dropClass(root,"_NOUSER");
         var username=metaBook.user.name||metaBook.user.handle||metaBook.user.email;
         if (username) {
-            if (fdjtID("METABOOKUSERNAME"))
-                fdjtID("METABOOKUSERNAME").innerHTML=username;
-            if (fdjtID("CODEXUSERNAME"))
-                fdjtID("CODEXUSERNAME").innerHTML=username;
+            if ($ID("METABOOKUSERNAME"))
+                $ID("METABOOKUSERNAME").innerHTML=username;
+            if ($ID("CODEXUSERNAME"))
+                $ID("CODEXUSERNAME").innerHTML=username;
             var names=document.getElementsByName("METABOOKUSERNAME");
             if ((names)&&(names.length)) {
                 i=0; lim=names.length; while (i<lim)
@@ -127,12 +127,12 @@
             if ((names)&&(names.length)) {
                 i=0; lim=names.length; while (i<lim)
                     names[i++].innerHTML=username;}}
-        if (fdjtID("SBOOKMARKUSER"))
-            fdjtID("SBOOKMARKUSER").value=metaBook.user._id;
+        if ($ID("SBOOKMARKUSER"))
+            $ID("SBOOKMARKUSER").value=metaBook.user._id;
         
         /* Initialize add gloss prototype */
         var ss=metaBook.stylesheet;
-        var form=fdjtID("METABOOKADDGLOSSPROTOTYPE");
+        var form=$ID("METABOOKADDGLOSSPROTOTYPE");
         if (metaBook.user.fbid)  
             ss.insertRule(
                 "#METABOOKHUD span.facebook_share { display: inline;}",
@@ -157,8 +157,8 @@
              ("https://graph.facebook.com/"+metaBook.user.fbid+
               "/picture?type=square"));
         if (pic) {
-            if (fdjtID("SBOOKMARKIMAGE")) fdjtID("SBOOKMARKIMAGE").src=pic;
-            if (fdjtID("METABOOKUSERPIC")) fdjtID("METABOOKUSERPIC").src=pic;
+            if ($ID("SBOOKMARKIMAGE")) $ID("SBOOKMARKIMAGE").src=pic;
+            if ($ID("METABOOKUSERPIC")) $ID("METABOOKUSERPIC").src=pic;
             var byname=document.getElementsByName("METABOOKUSERPIC");
             if (byname) {
                 i=0; lim=byname.length; while (i<lim)

@@ -34,7 +34,7 @@
 
 (function(){
     "use strict";
-    var fdjtDOM=fdjt.DOM, fdjtLog=fdjt.Log, fdjtUI=fdjt.UI, fdjtID=fdjt.ID;
+    var fdjtDOM=fdjt.DOM, fdjtLog=fdjt.Log, fdjtUI=fdjt.UI, $ID=fdjt.ID;
     var fdjtString=fdjt.String;
     var dropClass=fdjtDOM.dropClass, hasClass=fdjtDOM.hasClass;
     var hasParent=fdjtDOM.hasParent, getParent=fdjtDOM.getParent;
@@ -48,7 +48,7 @@
     var previewing_page=false, preview_start_page=false;
     function pagebar_hold(evt,target){
         evt=evt||window.event; if (!(target)) target=fdjtUI.T(evt);
-        var pagebar=fdjtID("METABOOKPAGEBAR");
+        var pagebar=$ID("METABOOKPAGEBAR");
         previewTimeout(false);
         if (((mB.hudup)||(mB.mode))&&
             (!(mB.fullheight))) {
@@ -82,7 +82,7 @@
             "CODEXPAGE"+previewing_page,"pagebar_span_hold/timeout");}
     function pagebar_tap(evt,target){
         evt=evt||window.event; if (!(target)) target=fdjtUI.T(evt);
-        var pagebar=fdjtID("METABOOKPAGEBAR");
+        var pagebar=$ID("METABOOKPAGEBAR");
         if ((Trace.gestures)||(hasClass(pagebar,"metabooktrace")))
             fdjtLog("pagebar_tap %o",evt);
         previewTimeout(false);
@@ -106,7 +106,7 @@
         metaBook.setMode(false);}
     function pagebar_release(evt,target){
         evt=evt||window.event; if (!(target)) target=fdjtUI.T(evt);
-        var pagebar=fdjtID("METABOOKPAGEBAR");
+        var pagebar=$ID("METABOOKPAGEBAR");
         if ((Trace.gestures)||(hasClass(pagebar,"metabooktrace")))
             fdjtLog("pagebar_release %o, previewing=%o, ptarget=%o start=%o",
                     evt,mB.previewing,mB.previewTarget,
@@ -124,7 +124,7 @@
     function pagebar_slip(evt,target){
         evt=evt||window.event; if (!(target)) target=fdjtUI.T(evt);
         var rel=evt.relatedTarget;
-        var pagebar=fdjtID("METABOOKPAGEBAR");
+        var pagebar=$ID("METABOOKPAGEBAR");
         previewTimeout(false);
         if ((Trace.gestures)||(hasClass(pagebar,"metabooktrace")))
             fdjtLog("pagebar_slip %o, pre=%o, target=%o start=%o, rel=%o",
@@ -134,10 +134,10 @@
         if (getParent(rel,mbDOM.pagebar)) return;
         if ((rel)&&(hasParent(rel,mB.body)))
             previewTimeout(function(){
-                var pagebar=fdjtID("METABOOKPAGEBAR");
+                var pagebar=$ID("METABOOKPAGEBAR");
                 pagebar.title=""; metaBook.GoTo(rel,evt);});
         else previewTimeout(function(){
-            var pagebar=fdjtID("METABOOKPAGEBAR");
+            var pagebar=$ID("METABOOKPAGEBAR");
             pagebar.title=""; dropClass(target,"preview");
             metaBook.stopPagePreview("pagebar_slip/timeout");});
         previewing_page=false;}

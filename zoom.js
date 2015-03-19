@@ -43,16 +43,16 @@
     var fdjtDOM=fdjt.DOM;
     var fdjtState=fdjt.State;
     var fdjtLog=fdjt.Log;
-    var mB=metaBook;
+    var metaBookDB=metaBook.metaBookDB;
 
-    // Imports (kind of )
+    var mB=metaBook, $ID=fdjt.ID;
     var addClass=fdjtDOM.addClass;
     var dropClass=fdjtDOM.dropClass;
 
     /* Full page zoom mode */
     
     function startZoom(node){
-        var zoom_target=fdjt.ID("METABOOKZOOMTARGET"), copy;
+        var zoom_target=$ID("METABOOKZOOMTARGET"), copy;
         if (!(node)) return stopZoom();
         if (metaBook.zoomtarget===node) {
             metaBook.zoomed=node;
@@ -83,7 +83,7 @@
 
     function zoomIn(evt){
         evt=evt||window.event;
-        var zb=fdjt.ID("METABOOKZOOMBOX");
+        var zb=$ID("METABOOKZOOMBOX");
         var scale=metaBook.zoomscale;
         if (!(scale)) scale=metaBook.zoomscale=1.0;
         scale=scale*1.1;
@@ -92,7 +92,7 @@
         fdjt.UI.cancel(evt);}
     function zoomOut(evt){
         evt=evt||window.event;
-        var zb=fdjt.ID("METABOOKZOOMBOX");
+        var zb=$ID("METABOOKZOOMBOX");
         var scale=metaBook.zoomscale;
         if (!(scale)) scale=metaBook.zoomscale=1.0;
         scale=scale/1.1;
@@ -101,7 +101,7 @@
         fdjt.UI.cancel(evt);}
     function unZoom(evt){
         evt=evt||window.event;
-        var zb=fdjt.ID("METABOOKZOOMBOX");
+        var zb=$ID("METABOOKZOOMBOX");
         zb.style[fdjt.DOM.transform]="";
         metaBook.zoomscale=false;
         fdjt.UI.cancel(evt);}
@@ -128,11 +128,11 @@
     // var n_players_to_save=7;
     
     function showMedia(url,type){
-        var media_target=fdjt.ID("METABOOKMEDIATARGET");
+        var media_target=$ID("METABOOKMEDIATARGET");
         var media_elt=false, src_elt=false;
         function placeMedia(){
             if (media_elt) fdjt.DOM.replace(media_target,media_elt);
-            else fdjt.ID("METABOOKMEDIA").appendChild(media_target);
+            else $ID("METABOOKMEDIA").appendChild(media_target);
             addClass(document.body,"mbMEDIA");}
         if (metaBook.showing===url) {
             addClass(document.body,"mbMEDIA");
@@ -171,25 +171,25 @@
                 if (cache_val.slice(0,5)==="data:")
                     src_elt.src=cache_val;
                 else if (cache_val==="cached") {
-                    addClass(fdjt.ID("METABOOKMEDIA"),"loadingcontent");
+                    addClass($ID("METABOOKMEDIA"),"loadingcontent");
                     addClass(src_elt,"loadingcontent");
-                    var txn=mB.metaBookDB.transaction(["glossdata"]);
+                    var txn=metaBookDB.transaction(["glossdata"]);
                     var storage=txn.objectStore("glossdata");
                     var req=storage.get(url);
                     req.onsuccess=function(event){
                         var target=event.target;
                         var result=((target)&&(target.result));
-                        dropClass(fdjt.ID("METABOOKMEDIA"),"loadingcontent");
+                        dropClass($ID("METABOOKMEDIA"),"loadingcontent");
                         dropClass(src_elt,"loadingcontent");
                         if ((result)&&(result.datauri)) {
-                            var objurl=metaBook.gotGlossData(url,result.datauri);
+                            var objurl=mB.gotGlossData(url,result.datauri);
                             src_elt.src=objurl;}
                         else src_elt.src=url;
                         placeMedia();};
                     req.onerror=function(event){
                         fdjtLog("Retrieval of %s from indexedDB failed: %o",
                                 url,event.errorCode);
-                        dropClass(fdjt.ID("METABOOKMEDIA"),"loadingcontent");
+                        dropClass($ID("METABOOKMEDIA"),"loadingcontent");
                         dropClass(src_elt,"loadingcontent");
                         src_elt.src=url;
                         placeMedia();};}
@@ -211,7 +211,7 @@
     var pause_media_timeout=false;
     function closeMedia_tapped(evt){
         evt=evt||window.event;
-        var media_elt=fdjt.ID("METABOOKMEDIATARGET");
+        var media_elt=$ID("METABOOKMEDIATARGET");
         if (pause_media_timeout) {
             clearTimeout(pause_media_timeout);
             pause_media_timeout=false;

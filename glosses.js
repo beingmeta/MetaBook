@@ -58,7 +58,7 @@
     var fdjtUI=fdjt.UI;
     var RefDB=fdjt.RefDB;
     var Ref=fdjt.Ref;
-    var fdjtID=fdjt.ID;
+    var $ID=fdjt.ID;
     var mB=metaBook;
     var mbID=mB.ID;
     var Trace=metaBook.Trace;
@@ -97,8 +97,8 @@
     //  * the class of the gloss FORM element
     //  * as the class gloss+mode on METABOOKHUD (e.g. glossaddtag)
     function getGlossMode(arg){
-        if (!(arg)) arg=fdjtID("METABOOKLIVEGLOSS");
-        if (typeof arg === 'string') arg=fdjtID(arg);
+        if (!(arg)) arg=$ID("METABOOKLIVEGLOSS");
+        if (typeof arg === 'string') arg=$ID(arg);
         if ((!(arg))||(!(arg.nodeType))) return false;
         if (arg.tagName!=="FORM") arg=getChild(arg,"FORM");
         var classname=arg.className;
@@ -130,15 +130,15 @@
                     if (glossinput) metaBook.setFocus(glossinput);
                     addClass(div,"focused");}
                 return;}
-            if (mode==="addtag") input=fdjtID("METABOOKADDTAGINPUT");
+            if (mode==="addtag") input=$ID("METABOOKADDTAGINPUT");
             else if (mode==="attach") {
-                var upload_glossid=fdjtID("METABOOKUPLOADGLOSSID");
+                var upload_glossid=$ID("METABOOKUPLOADGLOSSID");
                 upload_glossid.value=uuid.value;
-                var upload_itemid=fdjtID("METABOOKUPLOADITEMID");
+                var upload_itemid=$ID("METABOOKUPLOADITEMID");
                 upload_itemid.value=fdjtState.getUUID();
-                input=fdjtID("METABOOKATTACHURL");}
+                input=$ID("METABOOKATTACHURL");}
             else if (mode==="addoutlet") 
-                input=fdjtID("METABOOKADDSHAREINPUT");
+                input=$ID("METABOOKADDSHAREINPUT");
             else {
                 dropClass(form,glossmodes);
                 dropClass("METABOOKHUD",/\bgloss\w+\b/);
@@ -155,8 +155,8 @@
         if ((mode)&&(arg)&&(mode.nodeType)&&
             (typeof arg === "string")) {
             node=mode; mode=arg;}
-        else if (!(arg)) node=fdjtID("METABOOKLIVEGLOSS");
-        else if (typeof arg === 'string') node=fdjtID(arg);
+        else if (!(arg)) node=$ID("METABOOKLIVEGLOSS");
+        else if (typeof arg === 'string') node=$ID(arg);
         else node=arg;
         if ((node)&&(node.nodeType)) {
             form=((node.tagName==="FORM")?(node):
@@ -188,12 +188,12 @@
                      ("METABOOKRESPONDGLOSS_"+gloss._id):
                      ("METABOOKEDITGLOSS_"+gloss._id)):
                     ("METABOOKADDGLOSS_"+passageid));
-        var form=fdjtID(formid);
+        var form=$ID(formid);
         var div=((form)&&(form.parentNode));
-        var proto=fdjtID("METABOOKADDGLOSSPROTOTYPE");
+        var proto=$ID("METABOOKADDGLOSSPROTOTYPE");
         if (!(div)) {
             div=proto.cloneNode(true); div.id="";
-            fdjtDOM(fdjtID("METABOOKADDGLOSS"),div);
+            fdjtDOM($ID("METABOOKADDGLOSS"),div);
             form=getChildren(div,"form")[0];
             form.id=formid;
             form=setupGlossForm(form,passage,gloss,response||false);
@@ -337,7 +337,7 @@
         dropClass("METABOOKHUD",/\bgloss\w+\b/);
         dropClass("METABOOKHUD","editgloss");
         if (!(target)) {
-            var cur=fdjtID("METABOOKLIVEGLOSS");
+            var cur=$ID("METABOOKLIVEGLOSS");
             if (cur) cur.id="";
             metaBook.glosstarget=false;
             metaBook.glossform=false;
@@ -456,7 +456,7 @@
         evt=evt||window.event;
         if ((Trace.selection)||(Trace.glossing)||(Trace.gestures))
             fdjtLog("gloss_selecting_ontap %o, mode=%o, livegloss=%o",
-                    evt,metaBook.mode,fdjt.ID("METABOOKLIVEGLOSS"));
+                    evt,metaBook.mode,$ID("METABOOKLIVEGLOSS"));
         if (metaBook.mode!=="addgloss") 
             metaBook.setMode("addgloss",false);
         else if ((metaBook.modechange)&&
@@ -466,7 +466,7 @@
         return;}
 
     function setGlossForm(form){
-        var cur=fdjtID("METABOOKLIVEGLOSS");
+        var cur=$ID("METABOOKLIVEGLOSS");
         if (cur) cur.id="";
         if (Trace.glossing)
             fdjtLog("setGlossForm %o <== %o",form,metaBook.glossform);
@@ -475,7 +475,7 @@
             return;}
         form.id="METABOOKLIVEGLOSS";
         metaBook.glossform=form;
-        fdjt.ID("METABOOKGLOSSBODYTEXT").value=
+        $ID("METABOOKGLOSSBODYTEXT").value=
             fdjtDOM.getInputValue(form,"DETAIL")||"";
         var syncelt=getInput(form,"SYNC");
         syncelt.value=(metaBook.syncstamp+1);
@@ -712,7 +712,7 @@
     metaBook.addTag2Form=addTag;
 
     metaBook.setGlossNetwork=function(form,network,checked){
-        if (typeof form === 'string') form=fdjtID(form);
+        if (typeof form === 'string') form=$ID(form);
         if (!(form)) return;
         var input=getInput(form,'NETWORKS',network);
         if (!(input)) return;
@@ -1075,7 +1075,7 @@
         var target=fdjtUI.T(evt);
         var completion=getParent(target,'.completion');
         if (completion) {
-            var live=fdjtID("METABOOKLIVEGLOSS");
+            var live=$ID("METABOOKLIVEGLOSS");
             var form=((live)&&(getChild(live,"form")));
             var span=addTag(form,completion);
             if (!(hasClass("METABOOKHUD","glossaddtag"))) {
@@ -1093,7 +1093,7 @@
         var target=fdjtUI.T(evt);
         var completion=getParent(target,'.completion');
         if (completion) {
-            var live=fdjtID("METABOOKLIVEGLOSS");
+            var live=$ID("METABOOKLIVEGLOSS");
             var form=((live)&&(getChild(live,"form")));
             var value=completion.getAttribute("data-value");
             if (hasClass(completion,"source")) {
@@ -1114,7 +1114,7 @@
     function submitGloss(arg,keep){
         var div=false, form=false;
         if (typeof arg === "undefined") {
-            div=fdjtID("METABOOKLIVEGLOSS");
+            div=$ID("METABOOKLIVEGLOSS");
             if (!(div)) return;
             form=getChild(div,"FORM");}
         else {
@@ -1127,7 +1127,7 @@
                 div=arg; form=getChild(div,"FORM");}}
         if (!(form)) return;
         var detail_elt=getInput(form,"DETAIL");
-        var glossbodytext=fdjtID("METABOOKGLOSSBODYTEXT");
+        var glossbodytext=$ID("METABOOKGLOSSBODYTEXT");
         detail_elt.value=glossbodytext.value||"";
         addClass(div,"submitting");
         if (!((hasParent(form,".glossedit"))||
@@ -1239,7 +1239,7 @@
 
     function cancelGloss(arg){
         var evt=arg||window.event||null;
-        var target=((!arg)?(fdjtID("METABOOKLIVEGLOSS")):
+        var target=((!arg)?($ID("METABOOKLIVEGLOSS")):
                     (arg.nodeType)?(arg):(fdjtUI.T(arg)));
         var glossform=(target)&&
             (fdjtDOM.getParent(target,".metabookglossform"));
@@ -1360,7 +1360,7 @@
     // Saves queued glosses
     function writeQueuedGlosses(){
         if (metaBook.queued.length) {
-            var ajax_uri=getChild(fdjtID("METABOOKADDGLOSSPROTOTYPE"),"form").
+            var ajax_uri=getChild($ID("METABOOKADDGLOSSPROTOTYPE"),"form").
                 getAttribute("ajaxaction");
             var queued=metaBook.queued; var glossid=queued[0];
             var post_data=((metaBook.nocache)?((queued_data[glossid])):
@@ -1413,7 +1413,7 @@
         var outletspan=getParent(target,'.outlet')||
             getParent(target,'.source');
         if (!(outletspan)) return;
-        var live=fdjtID("METABOOKLIVEGLOSS");
+        var live=$ID("METABOOKLIVEGLOSS");
         var form=((live)&&(getChild(live,"form")));
         var outlet=metaBook.share_cloud.getValue(outletspan);
         metaBook.addOutlet2Form(form,outlet);
@@ -1588,7 +1588,7 @@
     function changeGlossNetwork(evt){
         evt=evt||window.event;
         var target=fdjtUI.T(evt);
-        var alternate=fdjtID(
+        var alternate=$ID(
             (fdjtDOM.hasParent(target,".metabookglossform"))?
                 ("METABOOKNETWORKBUTTONS"):(("METABOOKLIVEGLOSS")));
         var doppels=getInputsFor(alternate,'NETWORK',target.value);
@@ -1696,10 +1696,10 @@
     function glossdeleted(response,glossid,frag){
         if (response===glossid) {
             metaBook.glossdb.drop(glossid);
-            var editform=fdjtID("METABOOKEDITGLOSS_"+glossid);
+            var editform=$ID("METABOOKEDITGLOSS_"+glossid);
             if (editform) {
                 var editor=editform.parentNode;
-                if (editor===fdjtID('METABOOKLIVEGLOSS')) {
+                if (editor===$ID('METABOOKLIVEGLOSS')) {
                     metaBook.glosstarget=false;
                     metaBook.setMode(false);}
                 fdjtDOM.remove(editor);}
@@ -1746,7 +1746,7 @@
         evt=evt||window.event;
         var target=fdjtUI.T(evt);
         var content=target.value;
-        var glossdiv=fdjtID("METABOOKLIVEGLOSS");
+        var glossdiv=$ID("METABOOKLIVEGLOSS");
         if (!(glossdiv)) return;
         var form=getChild(glossdiv,"FORM");
         var share_cloud=metaBook.share_cloud;
@@ -1791,7 +1791,7 @@
         evt=evt||window.event;
         var target=fdjtUI.T(evt);
         var content=target.value;
-        var glossdiv=fdjtID("METABOOKLIVEGLOSS");
+        var glossdiv=$ID("METABOOKLIVEGLOSS");
         if (!(glossdiv)) return;
         var form=getChild(glossdiv,"FORM");
         var gloss_cloud=metaBook.gloss_cloud;
@@ -1845,10 +1845,10 @@
     metaBook.UI.changeAttachment=changeAttachment;
 
     function setAttachType(newtype){
-        var livegloss=fdjtID("METABOOKLIVEGLOSS");
+        var livegloss=$ID("METABOOKLIVEGLOSS");
         var form=fdjtDOM.getChild(livegloss,"FORM");
         fdjtDOM.swapClass(form,attach_types,newtype);
-        var attachform=fdjtID("METABOOKATTACHFORM");
+        var attachform=$ID("METABOOKATTACHFORM");
         var input=fdjtDOM.getInputFor(
             attachform,"ATTACHTYPE",newtype);
         fdjt.UI.CheckSpan.set(input,true);}
@@ -1858,7 +1858,7 @@
         evt=evt||window.event;
         var form=fdjtUI.T(evt);
         if (form.tagName!=="FORM") form=getParent(form,"form");
-        var livegloss=fdjtID("METABOOKLIVEGLOSS");
+        var livegloss=$ID("METABOOKLIVEGLOSS");
         var linkinput=fdjtDOM.getInput(form,"URL");
         var titleinput=fdjtDOM.getInput(form,"TITLE");
         var title=(titleinput.value)&&
@@ -1929,7 +1929,7 @@
         else {fdjtLog.warn("Fall through in attach_submit");}
         return;}
     function attach_cancel(evt){
-        var livegloss=fdjtID("METABOOKLIVEGLOSS");
+        var livegloss=$ID("METABOOKLIVEGLOSS");
         clearAttachForm(); fdjtUI.cancel(evt);
         if (!(livegloss)) return;
         metaBook.setGlossMode("editnote");}
@@ -1938,7 +1938,7 @@
         var ch=evt.keyCode||evt.charCode;
         if (ch!==13) return;
         fdjtUI.cancel(evt);
-        var livegloss=fdjtID("METABOOKLIVEGLOSS");
+        var livegloss=$ID("METABOOKLIVEGLOSS");
         if (!(livegloss)) return;
         attach_submit(evt);
         metaBook.setGlossMode("editnote");}
@@ -1950,16 +1950,16 @@
             var name=/\/([^\/]+)$/.exec(href);
             setAttachType("upload");
             addClass("METABOOKGLOSSATTACH","haveupload");
-            fdjt.ID("METABOOKATTACHFILENAME").innerHTML=name[1];}
+            $ID("METABOOKATTACHFILENAME").innerHTML=name[1];}
         else if (href.search(/\/capture\.[A-Za-z0-9]+$/)>=0)
             setAttachType("capture");
         else {
             setAttachType("link");
-            fdjtID("METABOOKATTACHURL").value=href;}
-        fdjt.UI.CheckSpan.set(fdjtID("METABOOKUPLOADRIGHTS"),true);
-        fdjtID("METABOOKATTACHTITLE").value=title||href;
-        addClass(fdjtID("METABOOKATTACHFORM"),"editlink");
-        fdjtID("METABOOKATTACHTITLE").focus();}
+            $ID("METABOOKATTACHURL").value=href;}
+        fdjt.UI.CheckSpan.set($ID("METABOOKUPLOADRIGHTS"),true);
+        $ID("METABOOKATTACHTITLE").value=title||href;
+        addClass($ID("METABOOKATTACHFORM"),"editlink");
+        $ID("METABOOKATTACHTITLE").focus();}
 
     function doFileAttach(title,livegloss){
         var filename=metaBook.glossattach.name;
@@ -1981,21 +1981,21 @@
                         metaBook.glossattach,trouble);});}
 
     function attach_file_click(evt){
-        var file_input=fdjtID("METABOOKFILEINPUT");
+        var file_input=$ID("METABOOKFILEINPUT");
         var ev=document.createEvent("MouseEvents");
         ev.initMouseEvent('click', true, true, evt.view);
         file_input.dispatchEvent(ev);
         fdjtUI.cancel(evt);}
 
     function clearAttachForm(){
-        var linkinput=fdjtID("METABOOKATTACHURL");
-        var titleinput=fdjtID("METABOOKATTACHTITLE");
-        var rightsok=fdjt.ID("METABOOKUPLOADRIGHTS");
-        var fileinput=fdjt.ID("METABOOKFILEINPUT");
+        var linkinput=$ID("METABOOKATTACHURL");
+        var titleinput=$ID("METABOOKATTACHTITLE");
+        var rightsok=$ID("METABOOKUPLOADRIGHTS");
+        var fileinput=$ID("METABOOKFILEINPUT");
         linkinput.value=""; titleinput.value="";
         fdjtDOM.dropClass("METABOOKGLOSSATTACH","haveupload");
-        fdjt.ID("METABOOKATTACHFILE").className="nofile";
-        fdjt.ID("METABOOKATTACHFILENAME").innerHTML="";
+        $ID("METABOOKATTACHFILE").className="nofile";
+        $ID("METABOOKATTACHFILENAME").innerHTML="";
         fdjt.UI.CheckSpan.set(rightsok,false);        
         metaBook.glossattach=false;
         metaBook.editlink=false;
@@ -2003,7 +2003,7 @@
 
     function attach_delete(evt){
         var oldlink=metaBook.editlink;
-        var livegloss=fdjtID("METABOOKLIVEGLOSS");
+        var livegloss=$ID("METABOOKLIVEGLOSS");
         var exists=fdjtDOM.getChild(livegloss,"[data-href='"+oldlink+"']");
         fdjtUI.cancel(evt);
         if (exists) {
@@ -2066,7 +2066,7 @@
         else {}}
     function addGlossDrop(evt){
         evt=evt||window.event;
-        var attachform=fdjt.ID("METABOOKATTACHFORM");
+        var attachform=$ID("METABOOKATTACHFORM");
         var types=evt.dataTransfer.types;
         if (!(types)) return;
         else if (types.indexOf("Files")>=0) {
@@ -2075,10 +2075,10 @@
             fdjtUI.cancel(evt);
             metaBook.glossattach=file;
             setAttachType("uploadfile");
-            fdjtID("METABOOKATTACHFILENAME").innerHTML=file.name;
+            $ID("METABOOKATTACHFILENAME").innerHTML=file.name;
             fdjtDOM.addClass("METABOOKGLOSSATTACH","haveupload");
             if (hasClass(attachform,"editlink"))
-                fdjt.UI.CheckSpan.set(fdjtID("METABOOKUPLOADRIGHTS"),false);}
+                fdjt.UI.CheckSpan.set($ID("METABOOKUPLOADRIGHTS"),false);}
         else if (types.indexOf("text/uri-list")>=0) {
             var url=evt.dataTransfer.getData("URL")||
                 evt.dataTransfer.getData("text/uri-list");
@@ -2086,8 +2086,8 @@
             fdjt.UI.cancel(evt);
             metaBook.setGlossMode("attach");
             setAttachType("linkurl");
-            fdjt.ID("METABOOKATTACHURL").value=url;
-            fdjt.ID("METABOOKATTACHTITLE").focus();}
+            $ID("METABOOKATTACHURL").value=url;
+            $ID("METABOOKATTACHTITLE").focus();}
         else if (types.indexOf("text/plain")>=0) {
             var text=evt.dataTransfer.getData("text/plain");
             fdjt.UI.cancel(evt);
@@ -2096,10 +2096,10 @@
                 if (hasClass(attachform,"linkurl")) {}
                 else if (hasClass(attachform,"copyurl")) {}
                 else setAttachType("linkurl");
-                fdjt.ID("METABOOKATTACHURL").value=text;
-                fdjt.ID("METABOOKATTACHTITLE").focus();}
+                $ID("METABOOKATTACHURL").value=text;
+                $ID("METABOOKATTACHTITLE").focus();}
             else {
-                var livegloss=fdjt.ID("METABOOKLIVEGLOSS");
+                var livegloss=$ID("METABOOKLIVEGLOSS");
                 var input=fdjtDOM.getInput(livegloss,"NOTE");
                 metaBook.setGlossMode(false);
                 input.value=text;
@@ -2110,10 +2110,10 @@
         var target=fdjtUI.T(evt), file=target.files[0];
         if (file) {
             metaBook.glossattach=file;
-            fdjtID("METABOOKATTACHFILENAME").innerHTML=file.name;
+            $ID("METABOOKATTACHFILENAME").innerHTML=file.name;
             fdjtDOM.addClass("METABOOKGLOSSATTACH","haveupload");
             if (hasClass("METABOOKATTACHFORM","editlink"))
-                fdjt.UI.CheckSpan.set(fdjtID("METABOOKUPLOADRIGHTS"),
+                fdjt.UI.CheckSpan.set($ID("METABOOKUPLOADRIGHTS"),
                                       false);}}
 
     function editglossnote(evt){

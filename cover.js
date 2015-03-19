@@ -35,7 +35,7 @@
 (function(){
     "use strict";
     var fdjtDOM=fdjt.DOM, fdjtLog=fdjt.Log, fdjtString=fdjt.String;
-    var fdjtUI=fdjt.UI, fdjtTime=fdjt.Time, fdjtID=fdjt.ID;
+    var fdjtUI=fdjt.UI, fdjtTime=fdjt.Time, $ID=fdjt.ID;
     var dropClass=fdjtDOM.dropClass, addClass=fdjtDOM.addClass;
     var hasClass=fdjtDOM.hasClass, hasParent=fdjtDOM.hasParent;
     var getChildren=fdjtDOM.getChildren;
@@ -96,9 +96,9 @@
 
     // Cover setup
     function setupCover(){
-        var frame=fdjtID("METABOOKFRAME"), started=fdjtTime();
+        var frame=$ID("METABOOKFRAME"), started=fdjtTime();
         var cover=fdjtDOM("div#METABOOKCOVER.metabookcover");
-        var existing_cover=fdjtID("METABOOKCOVER");
+        var existing_cover=$ID("METABOOKCOVER");
         if (Trace.startup>2) fdjtLog("Setting up cover");
         if (!(frame)) {
             frame=fdjtDOM("div#METABOOKFRAME");
@@ -107,12 +107,12 @@
         metaBook.cover=cover;
         cover.innerHTML=fixStaticRefs(metaBook.HTML.cover);
         
-        var coverpage=fdjtID("METABOOKCOVERPAGE");
+        var coverpage=$ID("METABOOKCOVERPAGE");
         if (coverpage) {
             if (!(hasAnyContent(coverpage))) {
                 coverpage.removeAttribute("style");
                 coverpage=false;}}
-        else if ((coverpage=fdjtID("SBOOKCOVERPAGE"))) {
+        else if ((coverpage=$ID("SBOOKCOVERPAGE"))) {
             coverpage=coverpage.cloneNode(true);
             coverpage.removeAttribute("style");
             fdjtDOM.stripIDs(coverpage);
@@ -130,15 +130,15 @@
             cover.setAttribute("data-defaultclass","titlepage");
             addClass(cover,"titlepage");
             addClass(controls,"nocoverpage");}
-        var titlepage=fdjtID("METABOOKTITLEPAGE");
+        var titlepage=$ID("METABOOKTITLEPAGE");
         if ((titlepage)&&(hasAnyContent(titlepage))) {
             titlepage=titlepage.cloneNode(true);
             titlepage.removeAttribute("style");
             titlepage.id="METABOOKTITLEPAGE";}
         else {
-            titlepage=fdjtID("SBOOKSTITLEPAGE")||
-                fdjtID("SBOOKTITLEPAGE")||
-                fdjtID("TITLEPAGE");
+            titlepage=$ID("SBOOKSTITLEPAGE")||
+                $ID("SBOOKTITLEPAGE")||
+                $ID("TITLEPAGE");
             if (titlepage) {
                 titlepage=titlepage.cloneNode(true);
                 fdjtDOM.dropClass(
@@ -162,11 +162,11 @@
                              (fdjtDOM("P",info.publisher)))));}}
         if (titlepage) addToCover(cover,titlepage);
 
-        var creditspage=fdjtID("METABOOKCREDITSPAGE");
+        var creditspage=$ID("METABOOKCREDITSPAGE");
         if (creditspage)
             creditspage=creditspage.cloneNode(true);
         else {
-            creditspage=fdjtID("SBOOKSCREDITSPAGE")||fdjtID("CREDITSPAGE");
+            creditspage=$ID("SBOOKSCREDITSPAGE")||$ID("CREDITSPAGE");
             if (creditspage) {
                 creditspage=creditspage.cloneNode(true);
                 fdjtDOM.stripIDs(creditspage);
@@ -179,23 +179,23 @@
         else creditspage=false;
         if (creditspage) addToCover(cover,creditspage);
         
-        var blurb=fdjtID("METABOOKBLURB")||fdjtID("METABOOKABOUTPAGE");
+        var blurb=$ID("METABOOKBLURB")||$ID("METABOOKABOUTPAGE");
         if ((blurb)&&(hasAnyContent(blurb))) {
             blurb=blurb.cloneNode(true);
             blurb.id="METABOOKBLURB";
             blurb.removeAttribute("style");}
         else {
-            var about_book=fdjtID("SBOOKABOUTPAGE")||
-                fdjtID("SBOOKABOUTBOOK")||
-                fdjtID("SBOOKSABOUTPAGE")||
-                fdjtID("SBOOKSABOUTBOOK");
-            var about_author=fdjtID("SBOOKABOUTAUTHOR")||
-                fdjtID("SBOOKABOUTORIGIN")||
-                fdjtID("SBOOKAUTHORPAGE")||
-                fdjtID("SBOOKSAUTHORPAGE")||
-                fdjtID("SBOOKABOUTAUTHORS")||
-                fdjtID("SBOOKSABOUTAUTHORS")||
-                fdjtID("SBOOKSABOUTAUTHOR");
+            var about_book=$ID("SBOOKABOUTPAGE")||
+                $ID("SBOOKABOUTBOOK")||
+                $ID("SBOOKSABOUTPAGE")||
+                $ID("SBOOKSABOUTBOOK");
+            var about_author=$ID("SBOOKABOUTAUTHOR")||
+                $ID("SBOOKABOUTORIGIN")||
+                $ID("SBOOKAUTHORPAGE")||
+                $ID("SBOOKSAUTHORPAGE")||
+                $ID("SBOOKABOUTAUTHORS")||
+                $ID("SBOOKSABOUTAUTHORS")||
+                $ID("SBOOKSABOUTAUTHOR");
             if ((about_book)||(about_author)) {
                 blurb=fdjtDOM(
                     "div#METABOOKBLURB.metabookblurb.scrolling",
@@ -282,9 +282,9 @@
         cover.appendChild(item);}
 
     function resizeCover(cover){
-        if (!(cover)) cover=fdjt.ID("METABOOKCOVER");
+        if (!(cover)) cover=$ID("METABOOKCOVER");
         if (!(cover)) return;
-        var frame=fdjt.ID("METABOOKFRAME");
+        var frame=$ID("METABOOKFRAME");
         var style=cover.style, framestyle=frame.style;
         var restore=0;
         if (!(cover.offsetHeight)) {
@@ -292,13 +292,13 @@
             style.opacity=0; style.display='block';
             style.height='100%'; style.width='100%';
             framestyle.display='block';}
-        var controls=fdjtID("METABOOKCOVERCONTROLS");
-        var userbox=fdjtID("METABOOKUSERBOX");
+        var controls=$ID("METABOOKCOVERCONTROLS");
+        var userbox=$ID("METABOOKUSERBOX");
         fdjtDOM.adjustFontSize(controls);
         fdjtDOM.adjustFontSize(userbox);
         // fdjt.DOM.resetFontSize(controls);
         // fdjt.DOM.resetFontSize(userbox);            
-        var covertitle=fdjtID("METABOOKTITLEPAGE");
+        var covertitle=$ID("METABOOKTITLEPAGE");
         if ((covertitle)&&
             (!(hasClass(covertitle,/\b(adjustfont|fdjtadjustfont)\b/))))
             fdjtDOM.adjustFontSize(covertitle);
@@ -318,12 +318,12 @@
 
     function cover_clicked(evt){
         var target=fdjtUI.T(evt);
-        var cover=fdjtID("METABOOKCOVER");
+        var cover=$ID("METABOOKCOVER");
         if (metaBook.statedialog) {
             fdjt.Dialog.close(metaBook.statedialog);
             metaBook.statedialog=false;}
         if (fdjt.UI.isClickable(target)) return;
-        if (hasParent(target,fdjtID("METABOOKCOVERCONTROLS")))
+        if (hasParent(target,$ID("METABOOKCOVERCONTROLS")))
             return controls_clicked(evt,target,cover);
         else if (hasParent(target,".scrolling")) {}
         else {
@@ -340,14 +340,14 @@
             else scan=scan.parentNode;}
         var mode=scan.getAttribute("data-mode");
         if ((mode==="layers")&&
-            (!(fdjtID("SBOOKSAPP").src))&&
+            (!($ID("SBOOKSAPP").src))&&
             (!(metaBook.appinit)))
             metaBook.initIFrameApp();
 
         var curclass=cover.className;
         var cur=((curclass)&&(coverids[curclass])&&
-                 (fdjtID(coverids[curclass])));
-        var nxt=((mode)&&(coverids[mode])&&(fdjtID(coverids[mode])));
+                 ($ID(coverids[curclass])));
+        var nxt=((mode)&&(coverids[mode])&&($ID(coverids[mode])));
         if ((cur)&&(nxt)) {
             cur.style.display='block';
             nxt.style.display='block';
@@ -370,7 +370,7 @@
         var root=document.documentElement||document.body;
         if (value) addClass(root,"_SHOWCONSOLE");
         else dropClass(root,"_SHOWCONSOLE");
-        var controls=fdjtID("METABOOKCOVERCONTROLS");
+        var controls=$ID("METABOOKCOVERCONTROLS");
         fdjtDOM.adjustFontSize(controls);
         fdjt.Async(function(){metaBook.updateSettings(name,value);});});
 

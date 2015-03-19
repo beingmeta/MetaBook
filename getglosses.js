@@ -36,7 +36,7 @@
 (function(){
     "use strict";
     var fdjtDOM=fdjt.DOM, fdjtLog=fdjt.Log, fdjtString=fdjt.String;
-    var fdjtTime=fdjt.Time, fdjtID=fdjt.ID, fdjtAsync=fdjt.Async;
+    var fdjtTime=fdjt.Time, $ID=fdjt.ID, fdjtAsync=fdjt.Async;
     var RefDB=fdjt.RefDB, fdjtState=fdjt.State, fdjtAjax=fdjt.Ajax;
 
     var dropClass=fdjtDOM.dropClass, addClass=fdjtDOM.addClass;
@@ -67,7 +67,7 @@
                 if (getLocal("metabook.queued("+metaBook.refuri+")"))
                     metaBook.glossdb.load(
                         getLocal("metabook.queued("+metaBook.refuri+")",true));
-                fdjtID("METABOOKCOVER").className="bookcover";
+                $ID("METABOOKCOVER").className="bookcover";
                 addClass(document.documentElement||document.body,
                          "_NOUSER");}
             if (info.nodeid) metaBook.setNodeID(info.nodeid);}
@@ -251,13 +251,13 @@
             updateInfoJSONP(uri);}}
     metaBook.updateInfo=updateInfo;
     function updatedInfoJSONP(data){
-        var elt=fdjtID("METABOOKUPDATEINFO");
+        var elt=$ID("METABOOKUPDATEINFO");
         metaBook.updatedInfo(data,(((elt)&&(elt.src))||"JSON"));}
     metaBook.updatedInfoJSONP=updatedInfoJSONP;
     function updateInfoJSONP(uri,callback){
         if (!(navigator.onLine)) return;
         if (!(callback)) callback="metaBook.updatedInfoJSONP";
-        var elt=fdjtID("METABOOKUPDATEINFO");
+        var elt=$ID("METABOOKUPDATEINFO");
         if (uri.indexOf('?')>0) {
             if (uri[uri.length-1]!=='&') uri=uri+"&";}
         else uri=uri+"?";
@@ -315,7 +315,7 @@
     function initGlosses(glosses,etc,callback){
         if (typeof callback === "undefined") callback=true;
         if ((glosses.length===0)&&(etc.length===0)) return;
-        var msg=fdjtID("METABOOKNEWGLOSSES");
+        var msg=$ID("METABOOKNEWGLOSSES");
         var start=fdjtTime();
         if (msg) {
             msg.innerHTML=fdjtString(

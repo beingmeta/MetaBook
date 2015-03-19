@@ -36,7 +36,7 @@
     "use strict";
     var fdjtDOM=fdjt.DOM, fdjtState=fdjt.State;
     var fdjtLog=fdjt.Log, fdjtUI=fdjt.UI, fdjtTime=fdjt.Time;
-    var fdjtID=fdjt.ID;
+    var $ID=fdjt.ID;
     var mB=metaBook, mbID=mB.ID;
     var saveLocal=mB.saveLocal, readLocal=mB.readLocal;
     var clearLocal=mB.clearLocal;
@@ -364,9 +364,9 @@
         var state=metaBook.state;
         if (state) {}
         else {
-            var target=fdjtID("METABOOKSTART")||fdjt.$1(".metabookstart")||
-                fdjtID("SBOOKSTART")||fdjt.$1(".sbookstart")||
-                fdjtID("SBOOKTITLEPAGE");
+            var target=$ID("METABOOKSTART")||fdjt.$1(".metabookstart")||
+                $ID("SBOOKSTART")||fdjt.$1(".sbookstart")||
+                $ID("SBOOKTITLEPAGE");
             if (target)
                 state={location: getLoc(target),
                        // This is the beginning of the 21st century

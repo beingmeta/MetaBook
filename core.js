@@ -50,7 +50,7 @@
     var fdjtLog=fdjt.Log;
     var fdjtDOM=fdjt.DOM;
     var fdjtUI=fdjt.UI;
-    var fdjtID=fdjt.ID;
+    var $ID=fdjt.ID;
     var RefDB=fdjt.RefDB, Ref=fdjt.Ref;
     var ObjectMap=fdjt.Map||RefDB.Map;
 
@@ -132,7 +132,7 @@
         var refuri=(metaBook.refuri||document.location.href);
         if (refuri.indexOf('#')>0) refuri=refuri.slice(0,refuri.indexOf('#'));
 
-        var taglist=metaBook.taglist||fdjt.ID("METABOOKTAGLIST");
+        var taglist=metaBook.taglist||$ID("METABOOKTAGLIST");
         if (!(taglist)) {
             taglist=metaBook.taglist=fdjt.DOM("datalist#METABOOKTAGLIST");
             document.body.appendChild(taglist);}
@@ -920,9 +920,9 @@
     
     function getCoverPage(){
         if (metaBook.coverpage) return metaBook.coverpage;
-        var coverpage=fdjtID("METABOOKCOVERPAGE")||
-            fdjtID("SBOOKCOVERPAGE")||
-            fdjtID("COVERPAGE");
+        var coverpage=$ID("METABOOKCOVERPAGE")||
+            $ID("SBOOKCOVERPAGE")||
+            $ID("COVERPAGE");
         if (coverpage) metaBook.coverpage=coverpage;
         return coverpage;}
     metaBook.getCoverPage=getCoverPage;

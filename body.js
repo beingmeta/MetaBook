@@ -35,7 +35,7 @@
 // body.js
 (function(){
     "use strict";
-    var fdjtDOM=fdjt.DOM, fdjtLog=fdjt.Log, fdjtID=fdjt.ID;
+    var fdjtDOM=fdjt.DOM, fdjtLog=fdjt.Log, $ID=fdjt.ID;
     var fdjtTime=fdjt.Time, fdjtString=fdjt.String;
     var dropClass=fdjtDOM.dropClass, addClass=fdjtDOM.addClass;
     var getGeometry=fdjtDOM.getGeometry;
@@ -58,7 +58,7 @@
 
     function initBody(){
         var body=document.body, started=fdjtTime();
-        var init_content=fdjtID("CODEXCONTENT");
+        var init_content=$ID("CODEXCONTENT");
         var content=(init_content)||(fdjtDOM("div#CODEXCONTENT"));
         var i, lim;
         if (Trace.startup>2) fdjtLog("Starting initBody");
@@ -74,7 +74,7 @@
         metaBook.content=content;
 
         // Move all the notes together
-        var notesblock=fdjtID("SBOOKNOTES")||
+        var notesblock=$ID("SBOOKNOTES")||
             fdjtDOM("div.sbookbackmatter#SBOOKNOTES");
         applyMetaClass("sbooknote");
         applyMetaClass("sbooknote","SBOOKS.note");
@@ -150,7 +150,7 @@
             var nref=ref.href;
             if (!(fdjtDOM.hasText(nref))) nref.innerHTML="Note";
             if ((nref)&&(nref[0]==="#")) {
-                addClass(fdjt.ID(nref.slice(1)),"sbooknote");}}
+                addClass($ID(nref.slice(1)),"sbooknote");}}
         
         // Append the notes block to the content
         if (notesblock.childNodes.length)
@@ -158,13 +158,13 @@
         
         // Initialize cover and titlepage (if specified)
         metaBook.coverpage=metaBook.getCoverPage();
-        metaBook.titlepage=fdjtID("SBOOKTITLEPAGE");
+        metaBook.titlepage=$ID("SBOOKTITLEPAGE");
 
-        var pages=metaBook.pages=fdjtID("METABOOKPAGES")||
+        var pages=metaBook.pages=$ID("METABOOKPAGES")||
             fdjtDOM("div#METABOOKPAGES");
         var page=metaBook.page=fdjtDOM("div#CODEXPAGE.metabookcontent",pages);
         
-        metaBook.body=fdjtID("METABOOKBODY");
+        metaBook.body=$ID("METABOOKBODY");
         if (!(metaBook.body)) {
             var cxbody=metaBook.body=
                 fdjtDOM("div#METABOOKBODY.metabookbody",content,page);

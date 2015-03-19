@@ -35,7 +35,7 @@
 // tagindex.js
 (function (){
     "use strict";
-    var fdjtDOM=fdjt.DOM, fdjtLog=fdjt.Log, fdjtID=fdjt.ID;
+    var fdjtDOM=fdjt.DOM, fdjtLog=fdjt.Log, $ID=fdjt.ID;
     var fdjtTime=fdjt.Time, fdjtString=fdjt.String, fdjtUI=fdjt.UI;
     var fdjtAsync=fdjt.Async;
     var dropClass=fdjtDOM.dropClass, addClass=fdjtDOM.addClass;
@@ -70,11 +70,11 @@
         var addTag2Cloud=metaBook.addTag2Cloud;
         var empty_cloud=metaBook.empty_cloud;
         var gloss_cloud=metaBook.gloss_cloud;
-        var taglist=metaBook.taglist||fdjt.ID("METABOOKTAGLIST");
+        var taglist=metaBook.taglist||$ID("METABOOKTAGLIST");
         if (!(taglist)) {
             taglist=metaBook.taglist=fdjt.DOM("datalist#METABOOKTAGLIST");
             document.body.appendChild(taglist);}
-        var searchlist=metaBook.searchlist||fdjt.ID("METABOOKSEARCHLIST");
+        var searchlist=metaBook.searchlist||$ID("METABOOKSEARCHLIST");
         if (!(searchlist)) {
             searchlist=metaBook.searchlist=fdjt.DOM("datalist#METABOOKSEARCHLIST");
             document.body.appendChild(searchlist);}
@@ -120,7 +120,7 @@
         var eq=metaBook.empty_query;
         var empty_cloud=metaBook.empty_cloud;
         var gloss_cloud=metaBook.gloss_cloud;
-        var searchlist=fdjt.ID("METABOOKSEARCHLIST");
+        var searchlist=$ID("METABOOKSEARCHLIST");
         var knodeToOption=Knodule.knodeToOption;        
         
         if (Trace.startup>1)
@@ -385,8 +385,8 @@
             handlePublisherIndex(pubindex,indexingDone);
             metaBook._publisher_index=false;
             window._sbook_autoindex=false;}
-        else if (fdjtID("SBOOKAUTOINDEX")) {
-            var elt=fdjtID("SBOOKAUTOINDEX");
+        else if ($ID("SBOOKAUTOINDEX")) {
+            var elt=$ID("SBOOKAUTOINDEX");
             fdjtDOM.addListener(elt,"load",function(evt){
                 evt=evt||window.event;
                 handlePublisherIndex(false,indexingDone);

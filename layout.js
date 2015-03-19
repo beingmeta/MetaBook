@@ -60,7 +60,7 @@ metaBook.Paginate=
         var fdjtTime=fdjt.Time;
         var fdjtLog=fdjt.Log;
         var fdjtDOM=fdjt.DOM;
-        var fdjtID=fdjt.ID;
+        var $ID=fdjt.ID;
         var mbID=metaBook.ID;
         var CodexLayout=fdjt.CodexLayout;
 
@@ -82,7 +82,7 @@ metaBook.Paginate=
         var atoi=parseInt;
 
         function layoutMessage(string,pct){
-            var pb=fdjtID("METABOOKLAYOUTMESSAGE");
+            var pb=$ID("METABOOKLAYOUTMESSAGE");
             fdjt.UI.ProgressBar.setMessage(pb,string);
             if (typeof pct==="number")
                 fdjt.UI.ProgressBar.setProgress(pb,pct);}
@@ -95,7 +95,7 @@ metaBook.Paginate=
             if (!(pagenum)) return;
             var now=fdjtTime();
             var howlong=secs2short((now-started)/1000);
-            var indicator=fdjtID("METABOOKLAYOUTINDICATOR");
+            var indicator=$ID("METABOOKLAYOUTINDICATOR");
             if (info.done) {
                 if (indicator)
                     indicator.style.width=Math.floor(pct)+"%";
@@ -153,7 +153,7 @@ metaBook.Paginate=
             addClass(document.body,"mbLAYOUT");
             scaleLayout(false);
             var forced=((init)&&(init.forced));
-            var geom=getGeometry(fdjtID("CODEXPAGE"),false,true);
+            var geom=getGeometry($ID("CODEXPAGE"),false,true);
             var height=geom.inner_height, width=geom.width;
             var justify=metaBook.textjustify;
             var spacing=metaBook.bodyspacing;
@@ -194,14 +194,14 @@ metaBook.Paginate=
 
             function restore_layout(content,layout_id){
                 fdjtLog("Using saved layout %s",layout_id);
-                fdjtID("CODEXCONTENT").style.display='none';
+                $ID("CODEXCONTENT").style.display='none';
                 layoutMessage("Using cached layout",0);
                 dropClass(document.body,"_SCROLL");
                 addClass(document.body,"_BYPAGE");
                 layout.restoreLayout(content).then(finish_layout);}
             function finish_layout(layout) {
-                fdjtID("CODEXPAGE").style.visibility='';
-                fdjtID("CODEXCONTENT").style.visibility='';
+                $ID("CODEXPAGE").style.visibility='';
+                $ID("CODEXCONTENT").style.visibility='';
                 dropClass(document.body,"mbLAYOUT");
                 metaBook.layout=layout;
                 metaBook.pagecount=layout.pages.length;
@@ -260,10 +260,10 @@ metaBook.Paginate=
                 dropClass(document.body,"_SCROLL");
                 addClass(document.body,"_BYPAGE");
                 // This keeps the page content hidden during layout
-                // fdjtID("CODEXPAGE").style.visibility='hidden';
+                // $ID("CODEXPAGE").style.visibility='hidden';
                 // This shouldn't be neccessary because CODEXCONTENT 
                 //  should have display:none with body._BYPAGE.
-                //fdjtID("CODEXCONTENT").style.visibility='hidden';
+                //$ID("CODEXCONTENT").style.visibility='hidden';
                 
                 // Now make the content (temporarily) the same width as
                 // the page
@@ -299,8 +299,8 @@ metaBook.Paginate=
                                 (elapsed>cachethresh):(elapsed>5000)) {
                                 layout.saveLayout(function(l){
                                     recordLayout(l.layout_id,metaBook.sourceid);});}}
-                        fdjtID("CODEXPAGE").style.visibility='';
-                        fdjtID("CODEXCONTENT").style.visibility='';
+                        $ID("CODEXPAGE").style.visibility='';
+                        $ID("CODEXCONTENT").style.visibility='';
                         dropClass(document.body,"mbLAYOUT");
                         metaBook.layout=layout;
                         metaBook.pagecount=layout.pages.length;
@@ -429,7 +429,7 @@ metaBook.Paginate=
         
         function getLayoutID(width,height,family,size,spacing,
                              justify,source_id){
-            var page=fdjtID("CODEXPAGE");
+            var page=$ID("CODEXPAGE");
             var left=page.style.left, right=page.style.right;
             var docref=metaBook.docref, sourceid=metaBook.sourceid;
             var sourcehash=fdjt.CodexLayout.sourcehash;
@@ -437,7 +437,7 @@ metaBook.Paginate=
             if (!(width))
                 width=getGeometry(page,false,true).width;
             if (!(height))
-                height=getGeometry(fdjtID("CODEXPAGE"),false,true).inner_height;
+                height=getGeometry($ID("CODEXPAGE"),false,true).inner_height;
             if (!(size)) size=metaBook.bodysize||"normal";
             if (!(source_id))
                 source_id=metaBook.sourceid||fdjtHash.hex_md5(metaBook.docuri);
@@ -481,8 +481,8 @@ metaBook.Paginate=
         metaBook.clearLayouts=clearLayouts;
 
         function getLayoutArgs(){
-            var width=getGeometry(fdjtID("CODEXPAGE"),false,true).width;
-            var height=getGeometry(fdjtID("CODEXPAGE"),false,true).inner_height;
+            var width=getGeometry($ID("CODEXPAGE"),false,true).width;
+            var height=getGeometry($ID("CODEXPAGE"),false,true).inner_height;
             var origin=fdjtDOM("div#CODEXCONTENT");
             var container=fdjtDOM("div.metabookpages#METABOOKPAGES");
             var bodyfamily=(metaBook.dyslexical)?("opendyslexic"):
@@ -793,7 +793,7 @@ metaBook.Paginate=
                 return;}
             else sizeCodexPage();
             var layout=metaBook.layout;
-            var geom=getGeometry(fdjtID("CODEXPAGE"),false,true);
+            var geom=getGeometry($ID("CODEXPAGE"),false,true);
             var width=geom.width, height=geom.inner_height;
             var lwidth=layout.width, lheight=layout.height;
             var hscale=height/lheight, vscale=width/lwidth;
@@ -812,7 +812,7 @@ metaBook.Paginate=
                 cheaprule.style.left=((width-nwidth)/2)+"px";
             if (nheight<height) cheaprule.style.top="0px";
             var n=metaBook.pagecount;
-            var spanwidth=(fdjtID("METABOOKPAGEBAR").offsetWidth)/n;
+            var spanwidth=($ID("METABOOKPAGEBAR").offsetWidth)/n;
             if (spanwidth<1) spanwidth=1;
             if (metaBook.CSS.pagespanrule)
                 metaBook.CSS.pagespanrule.style.width=spanwidth+"px";
@@ -828,7 +828,7 @@ metaBook.Paginate=
             if (!(classname)) classname="current";
             var npages=metaBook.pagecount;
             var staticmax=metaBook.layout.laststaticref;
-            var page_elt=fdjt.ID("METABOOKPAGESPAN"+pagenum);
+            var page_elt=$ID("METABOOKPAGESPAN"+pagenum);
             var cur=getChildren("METABOOKPAGEBAR","."+classname);
             if (Trace.flips)
                 fdjtLog("updatePageDisplay/%s %d %d/%d",
@@ -868,12 +868,12 @@ metaBook.Paginate=
                 ((locoff.title)?("; "):(""))+
                 " select to change %";
             if (update_progress) {
-                var page_progress=fdjtID("METABOOKPAGEPROGRESS");
+                var page_progress=$ID("METABOOKPAGEPROGRESS");
                 if (page_progress) page_progress.style.width=
                     (((pagenum-1)*100)/npages)+"%";}
             if (update_progress) {
                 /* Update section markers */
-                var page=fdjtID("CODEXPAGE"+pagenum);
+                var page=$ID("CODEXPAGE"+pagenum);
                 var topid=(page)&&page.getAttribute("data-topid");
                 var info=(topid)&&metaBook.docinfo[topid];
                 if (info) {
@@ -888,9 +888,9 @@ metaBook.Paginate=
                         if (!(nextspan)) break;
                         head1=head2; head2=head3; head3=head3.head;
                         span1=span2; span2=span3; span3=nextspan;}
-                    var marker1=fdjtID("METABOOKSECTMARKER1");
-                    var marker2=fdjtID("METABOOKSECTMARKER2");
-                    var marker3=fdjtID("METABOOKSECTMARKER3");
+                    var marker1=$ID("METABOOKSECTMARKER1");
+                    var marker2=$ID("METABOOKSECTMARKER2");
+                    var marker3=$ID("METABOOKSECTMARKER3");
                     if ((span1)&&(span1.width)) {
                         marker1.style.left=(100*((span1.start-1)/npages))+"%";
                         marker1.style.width=(100*(span1.width/npages))+"%";
@@ -937,10 +937,10 @@ metaBook.Paginate=
         function setupPagebar(){
             var layout=metaBook.layout, pages=layout.pages;
             var i=0, n=pages.length; var html=[];
-            var pagemax=fdjt.ID("METABOOKGOTOPAGEMAX");
+            var pagemax=$ID("METABOOKGOTOPAGEMAX");
             if (pagemax) pagemax.innerHTML=""+n;
             var spanwidth=
-                (fdjtID("METABOOKPAGEBAR").offsetWidth)/n;
+                ($ID("METABOOKPAGEBAR").offsetWidth)/n;
             if (spanwidth<1) spanwidth=1;
             if (metaBook.CSS.pagespanrule)
                 metaBook.CSS.pagespanrule.style.width=spanwidth+"px";
@@ -960,7 +960,7 @@ metaBook.Paginate=
                 var pageref=page.getAttribute("data-staticpageref");
                 if (pageref) {
                     var pagemap=layout.pagemap;
-                    var pagerefmax=fdjt.ID("METABOOKGOTOPAGEREFMAX");
+                    var pagerefmax=$ID("METABOOKGOTOPAGEREFMAX");
                     if (pagerefmax) pagerefmax.innerHTML=""+pageref;
                     if (!(pagemap)) layout.pagemap=pagemap={};
                     layout.laststaticref=pageref;
@@ -969,7 +969,7 @@ metaBook.Paginate=
             if (layout.laststaticref)
                 addClass(document.body,"mbPAGEREFS");
             else dropClass(document.body,"mbPAGEREFS");
-            var spans=fdjtID("METABOOKPAGESPANS");
+            var spans=$ID("METABOOKPAGESPANS");
             spans.innerHTML=html.join("");
             var outer_width=getGeometry(spans);
             var inner_width=fdjt.DOM.getInsideBounds(spans);
@@ -1165,7 +1165,7 @@ metaBook.Paginate=
         metaBook.refreshLayout=refreshLayout;
         
         function syncLayout(){
-            var geom=getGeometry(fdjtID("CODEXPAGE"),false,true);
+            var geom=getGeometry($ID("CODEXPAGE"),false,true);
             var height=geom.inner_height, width=geom.width;
             if ((metaBook.layout.height===height)&&
                 (metaBook.layout.width===width))

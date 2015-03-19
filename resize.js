@@ -35,7 +35,7 @@
 // resize.js
 (function (){
     "use strict";
-    var fdjtDOM=fdjt.DOM, fdjtLog=fdjt.Log, fdjtID=fdjt.ID;
+    var fdjtDOM=fdjt.DOM, fdjtLog=fdjt.Log, $ID=fdjt.ID;
     var fdjtUI=fdjt.UI;
 
     var getGeometry=fdjtDOM.getGeometry;
@@ -53,8 +53,8 @@
         if (!(wait)) wait=100;
         setTimeout(function(){
             var adjstart=fdjt.Time();
-            var hud=fdjtID("METABOOKHUD");
-            var cover=fdjtID("METABOOKCOVER");
+            var hud=$ID("METABOOKHUD");
+            var cover=$ID("METABOOKCOVER");
             if (cover) metaBook.resizeCover(cover);
             if (hud) metaBook.resizeHUD(hud);
             if ((hud)||(cover))
@@ -88,8 +88,8 @@
         outer_width=window.outerWidth;
         outer_height=window.outerHeight;
         // Possibly a new layout
-        var width=getGeometry(fdjtID("CODEXPAGE"),false,true).width;
-        var height=getGeometry(fdjtID("CODEXPAGE"),false,true).inner_height;
+        var width=getGeometry($ID("CODEXPAGE"),false,true).width;
+        var height=getGeometry($ID("CODEXPAGE"),false,true).inner_height;
         if ((layout)&&(layout.width===width)&&(layout.height===height))
             return;
         if ((layout)&&(layout.onresize)&&(!(metaBook.freezelayout))) {

@@ -55,7 +55,7 @@
     var fdjtLog=fdjt.Log;
     var fdjtDOM=fdjt.DOM;
     var fdjtUI=fdjt.UI;
-    var fdjtID=fdjt.ID;
+    var $ID=fdjt.ID;
     var RefDB=fdjt.RefDB, Query=RefDB.Query; 
 
     metaBook.search_cloud=false;
@@ -92,12 +92,12 @@
                 dropClass(metaBook.HUD,"emptysearch");
                 fdjtDOM.replace("METABOOKSEARCHCLOUD",cloud.dom);
                 metaBook.search_cloud=cloud;}
-            useQuery(query,fdjtID("METABOOKSEARCH"));}
+            useQuery(query,$ID("METABOOKSEARCH"));}
         if (metaBook.mode==="refinesearch") {
             if (query.results.length===0) {}
             else if (query.results.length<7)
                 showSearchResults();
-            else {fdjtID("METABOOKSEARCHINPUT").focus();}}}
+            else {$ID("METABOOKSEARCHINPUT").focus();}}}
 
     metaBook.setQuery=setQuery;
 
@@ -108,7 +108,7 @@
         var qstring=query.getString();
         if ((box_arg)&&(typeof box_arg === 'string'))
             box_arg=document.getElementById(box_arg);
-        var box=box_arg||query._box||fdjtID("METABOOKSEARCH");
+        var box=box_arg||query._box||$ID("METABOOKSEARCH");
         if ((query.dom)&&(box)&&(box!==query.dom))
             fdjtDOM.replace(box_arg,query.dom);
         box.setAttribute("qstring",qstring);
@@ -118,13 +118,13 @@
         var input=getChild(box,".searchinput");
         var cloudid=input.getAttribute("completions");
         var infoid=input.getAttribute("info");
-        var qtags=getChild(box,".qtags")||fdjtID("METABOOKSEARCHTAGS");
-        var cloud=((cloudid)&&(fdjtID(cloudid)));
+        var qtags=getChild(box,".qtags")||$ID("METABOOKSEARCHTAGS");
+        var cloud=((cloudid)&&($ID(cloudid)));
         /* These should possibly be used in initializing the .listing
          * field of the query */
         //var resultsid=input.getAttribute("results");
-        //var results=((resultsid)&&(fdjtID(resultsid)));
-        var info=((infoid)&&(fdjtID(infoid)));
+        //var results=((resultsid)&&($ID(resultsid)));
+        var info=((infoid)&&($ID(infoid)));
         var resultcount=getChild(info,".resultcount");
         var refinecount=getChild(info,".refinecount");
         // Update (clear) the input field
@@ -182,7 +182,7 @@
                 if (cloud)
                     fdjtDOM.replace(cloud,completions.dom);
                 else fdjtDOM.append(
-                    fdjt.ID("METABOOKHEARTBODY"),
+                    $ID("METABOOKHEARTBODY"),
                     completions.dom);
                 metaBook.adjustCloudFont(completions);});}
         if (n_refiners===0) {
@@ -243,8 +243,8 @@
         metaBook.searchresults=results;
         metaBook.pagers.searchresults=results.pager;
         metaBook.setMode("searchresults");
-        fdjtID("METABOOKSEARCHINPUT").blur();
-        fdjtID("METABOOKSEARCHRESULTS").focus();}
+        $ID("METABOOKSEARCHINPUT").blur();
+        $ID("METABOOKSEARCHRESULTS").focus();}
     metaBook.showSearchResults=showSearchResults;
 
     /* Call this to search */
@@ -329,7 +329,7 @@
     metaBook.UI.handlers.search_keypress=searchInput_keypress;
 
     function searchUpdate(input,cloud){
-        if (!(input)) input=fdjtID("METABOOKSEARCHINPUT");
+        if (!(input)) input=$ID("METABOOKSEARCHINPUT");
         if (!(cloud)) cloud=metaBook.queryCloud(metaBook.query);
         if (input.value.length===0) cloud.clearSelection();
         cloud.complete(input.value,function(results){
@@ -392,7 +392,7 @@
             metaBook.setMode(false);
         else {
             metaBook.setMode("refinesearch");
-            fdjtID("METABOOKSEARCHINPUT").focus();}
+            $ID("METABOOKSEARCHINPUT").focus();}
         fdjtUI.cancel(evt);};
     
     /* Search result listings */
