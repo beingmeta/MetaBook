@@ -691,54 +691,52 @@ metaBook.Slice=(function () {
                 else i++;}}
         return false;}
 
-    MetaBookSlice.prototype.display=MetaBookSlice.prototype.update=
-        function updateSlice(force){
-            if ((!(this.needupdate))&&(!(force))) return;
-            if (metaBook.Trace.slices)
-                fdjtLog("Updating slice %o force=%o",this.container,force);
-            var cards=this.cards, visible=[], shown=[];
-            var byfrag=this.byfrag, pager=this.pager;
-            var container=this.container;
-            cards.sort(this.sortfn);
-            dropClass($(".slicenewpassage",container),"slicenewpassage");
-            dropClass($(".slicenewhead",container),"slicenewhead");
-            this.container.innerHTML=""; if (pager) pager.reset();
-            var head=false, passage=false;
-            var frag=document.createDocumentFragment()||this.container;
-            var i=0, lim=cards.length; while (i<lim) {
-                var card=cards[i++];
-                if (card.hidden) continue;
-                else if (card.passage!==passage) {
-                    passage=card.passage;
-                    byfrag[passage]=card;
-                    addClass(card.dom,"slicenewpassage");}
-                if (card.head!==head) {
-                    head=card.head;
-                    addClass(card.dom,"slicenewhead");}
-                frag.appendChild(card.dom);
-                visible.push(card);
-                shown.push(card.dom);}
-            if (frag!==this.container) this.container.appendChild(frag);
-            if (this.pager) this.pager.changed();
-            this.visible=visible;
-            this.shown=shown;
-            this.needupdate=false;};
+    MetaBookSlice.prototype.update=function updateSlice(){
+        if (metaBook.Trace.slices)
+            fdjtLog("Updating slice %o over %o",
+                    this,this.container);
+        var cards=this.cards, visible=[], shown=[];
+        var byfrag=this.byfrag, pager=this.pager;
+        var container=this.container;
+        cards.sort(this.sortfn);
+        dropClass($(".slicenewpassage",container),"slicenewpassage");
+        dropClass($(".slicenewhead",container),"slicenewhead");
+        this.container.innerHTML=""; if (pager) pager.reset();
+        var head=false, passage=false;
+        var frag=document.createDocumentFragment()||this.container;
+        var i=0, lim=cards.length; while (i<lim) {
+            var card=cards[i++];
+            if (card.hidden) continue;
+            else if (card.passage!==passage) {
+                passage=card.passage;
+                byfrag[passage]=card;
+                addClass(card.dom,"slicenewpassage");}
+            if (card.head!==head) {
+                head=card.head;
+                addClass(card.dom,"slicenewhead");}
+            frag.appendChild(card.dom);
+            visible.push(card);
+            shown.push(card.dom);}
+        if (frag!==this.container) this.container.appendChild(frag);
+        if (this.pager) this.pager.changed();
+        this.visible=visible;
+        this.shown=shown;
+        this.needupdate=false;};
 
-    MetaBookSlice.prototype.refresh=function refreshSlice(){
+    MetaBookSlice.prototype.refresh=function refreshSlice(force){
         var slice=this;
+        if ((!(this.needupdate))&&(!(force))) return;
         if (this.refresh_timer) {
             clearTimeout(this.refresh_timer);
             this.refresh_timer=false;}
-        if (!(this.refreshing))
-            this.refresh_timer=setTimeout(function(){
-                this.refresh_timer=false;
-                this.needupdate=false;
-                this.refreshing=true; {
-                    slice.update();}
-                this.refreshing=false;
-                if (this.needupdate) {
-                    fdjt.Async(function(){slice.refresh();});}},
-                                          2000);};
+        this.refresh_timer=setTimeout(
+            function(){slice_update(slice);},
+            2000);};
+    function slice_update(slice){
+        slice.refresh_timer=false;
+        slice.needupdate=false;
+        slice.update(); if (slice.needupdate)
+            slice.refresh();}
 
     MetaBookSlice.prototype.filter=function filterSlice(fn){
         var cards=this.cards; var i=0, n=cards.length;
