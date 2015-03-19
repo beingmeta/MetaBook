@@ -47,6 +47,12 @@
 .mbtoc.mbtoc3 { margin-left: 4em; font-size: 100%;}
 .mbtoc.mbtoc4 { margin-left: 6em; font-size: 80%;}
 
+#METABOOKSKIMMER .mbtoc {
+    font-weight: bold;}
+
+#METABOOKHUD.statictoc #METABOOKSKIMMER {
+    background-color: rgba(70, 130, 180, 0.5);}
+
 #METABOOKSKIMMER .mbtoc .elements .brick,
 #METABOOKSKIMMER .mbtoc .elements .showsize {
     display: none;}
