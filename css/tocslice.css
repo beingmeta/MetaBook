@@ -13,7 +13,10 @@
     height: 1em; white-space: nowrap; overflow: hidden;
     margin-bottom: 0.2em; margin-right: 1ex;}
 .mbtoc .context .tocpath { padding-left: 1ex; }
-.mbtoc .context { font-size: 60%; float: right; }
+.mbtoc .context {
+    color: darkblue;
+    font-size: 60%;
+    float: right; }
 .mbtocslice .mbtoc .context { display: none;}
 .mbtoc a.sectname { color: black; z-index: 50;}
 .mbtoc div.elements {
@@ -48,8 +51,8 @@
 .mbtoc.mbtoc4 { margin-left: 6em; font-size: 80%;}
 
 #METABOOKSKIMMER .mbtoc {
-    font-weight: bold;}
-
+    font-weight: bold; padding-top: 2px;}
+#METABOOKSKIMMER .mbtoc .context { font-size: 80%; }
 #METABOOKHUD.statictoc #METABOOKSKIMMER {
     background-color: rgba(70, 130, 180, 0.5);}
 
