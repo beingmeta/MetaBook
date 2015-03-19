@@ -875,6 +875,8 @@
 
     /* Highlighting terms in passages (for skimming, etc) */
 
+    var textRegExp=fdjtDOM.textRegExp;
+
     function highlightTerm(term,target,info,spellings){
         var words=[]; var highlights=[];
         if (typeof term === 'string')
@@ -911,7 +913,7 @@
         var j=0; var jlim=words.length;
         while (j<jlim) {
             var word=words[j++];
-            var pattern=new fdjtDOM.textRegExp(word,true,true);
+            var pattern=textRegExp(word);
             var dups=metaBook.getDups(target);
             var ranges=fdjtDOM.findMatches(dups,pattern);
             if (Trace.highlight)
