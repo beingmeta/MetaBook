@@ -53,8 +53,8 @@ var metaBook={
     curpage: false,curoff: false,curinfo: false, curbottom: false,
     // For tracking UI state
     last_mode: false, last_heartmode: "about", demo: false,
-    // How long it takes a gesture to go from tap to hold
-    taptapmsecs: 300, holdmsecs: 150, edgeclick: 50, pagesize: 250,
+    // Various default gesture timing parameters
+    taptapmsecs: 250, holdmsecs: 500, edgeclick: 50, pagesize: 250,
     dontanimate: false, nativeselect: false,
     // Ignore swipes shorter than this:
     minswipe: 7,
@@ -72,6 +72,8 @@ var metaBook={
     // Ask about updating layouts which took longer than this
     //  many milliseconds to generate
     long_layout_thresh: 5000,
+    // How long (msecs) to wait for a resize to be 'real'
+    resize_wait: 500,
     // Whether to force new layouts
     forcelayout: false,
     // Whether layout is temporarily frozen, for example during text
@@ -157,7 +159,7 @@ var metaBook={
         uisize: 'normal',dyslexical: false,
         animatecontent: true,animatehud: true,
         hidesplash: false,keyboardhelp: true,
-        holdmsecs: 150,wandermsecs: 1500,
+        holdmsecs: 500,wandermsecs: 1500,
         locsync: true, syncinterval: 60, checksync: 15*60,
         glossupdate: 5*60,cacheglosses: true,
         soundeffects: false, buzzeffects: false,
@@ -187,6 +189,7 @@ var metaBook={
         knodules: 0,      // How much to trace knodule processing
         preview: false,   // Whether to trace preview activity
         flips: false,     // Whether to trace page flips (movement by pages)
+        resize: false,    // Whether to trace resizing events/activity
         messages: false,  // Whether to trace inter-window messages
         glossing: false,  // Whether to trace gloss adding or edition
         selection: false, // Whether to trace text selection events
