@@ -1662,7 +1662,9 @@
         var input=((div)&&(getChild(div,"TEXTAREA")));
         if (hasClass(div,"focused")) {
             setTimeout(function(){
-                if (input) {metaBook.setFocus(input); input.focus();}},
+                if (input) {
+                    metaBook.setFocus(input);
+                    input.focus();}},
                        150);
             return;}
         if ((hasParent(target,".addglossmenu"))||

@@ -97,7 +97,9 @@
             if (query.results.length===0) {}
             else if (query.results.length<7)
                 showSearchResults();
-            else {$ID("METABOOKSEARCHINPUT").focus();}}}
+            else if (!(metaBook.touch)) {
+                $ID("METABOOKSEARCHINPUT").focus();}
+            else {}}}
 
     metaBook.setQuery=setQuery;
 
@@ -392,7 +394,8 @@
             metaBook.setMode(false);
         else {
             metaBook.setMode("refinesearch");
-            $ID("METABOOKSEARCHINPUT").focus();}
+            if (!(metaBook.touch))
+                $ID("METABOOKSEARCHINPUT").focus();}
         fdjtUI.cancel(evt);};
     
     /* Search result listings */
