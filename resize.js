@@ -37,6 +37,7 @@
     "use strict";
     var fdjtDOM=fdjt.DOM, fdjtLog=fdjt.Log, $ID=fdjt.ID;
     var fdjtUI=fdjt.UI;
+    var Trace=metaBook.Trace, mB=metaBook;
 
     var getGeometry=fdjtDOM.getGeometry;
 
@@ -55,8 +56,8 @@
             var adjstart=fdjt.Time();
             var hud=$ID("METABOOKHUD");
             var cover=$ID("METABOOKCOVER");
-            if (cover) metaBook.resizeCover(cover);
-            if (hud) metaBook.resizeHUD(hud);
+            if (cover) mB.resizeCover(cover);
+            if (hud) mB.resizeHUD(hud);
             if ((hud)||(cover))
                 fdjtLog("Resized UI in %fsecs",
                         ((fdjt.Time()-adjstart)/1000));},
@@ -64,24 +65,29 @@
     metaBook.resizeUI=resizeUI;
 
     function metabookResize(){
-        var layout=metaBook.layout;
+        var layout=mB.layout;
+        if (Trace.resize)
+            fdjtLog("Real resize w/layout=%o",layout);
         if (resizing) {
             clearTimeout(resizing); resizing=false;}
         updateSizeClasses();
-        metaBook.resizeUI();
-        metaBook.sizeContent();
-        metaBook.scaleLayout(false);
-        if (!(layout)) return;
-        else if ((metaBook.textinput)||
-                 ((metaBook.touch)&&
-                  (document.activeElement)&&
-                  (document.activeElement.tagName==="INPUT")))
-            return;
+        mB.resizeUI();
+        mB.sizeContent();
+        // Unscale the layout
+        if (layout) mB.scaleLayout(false);
+        if ((mB.touch)&&
+            ((mB.textinput)||
+             ((document.activeElement)&&
+              (document.activeElement.tagName==="INPUT")))) {
+            if (Trace.resize)
+                fdjtLog("Resize for soft keyboard, mostly ignoring");
+            return;}
         if ((window.outerWidth===outer_width)&&
             (window.outerHeight===outer_height)) {
             // Not a real change (we think), so just scale the
             // layout, don't make a new one.
-            metaBook.scaleLayout(true);
+            if (layout) metaBook.scaleLayout(true);
+            if (Trace.resize) fdjtLog("Resize to norm, ignoring");
             return;}
         resizePagers();
         // Set these values to the new one
@@ -90,8 +96,9 @@
         // Possibly a new layout
         var width=getGeometry($ID("CODEXPAGE"),false,true).width;
         var height=getGeometry($ID("CODEXPAGE"),false,true).inner_height;
-        if ((layout)&&(layout.width===width)&&(layout.height===height))
-            return;
+        if ((layout)&&(layout.width===width)&&(layout.height===height)) {
+            if (Trace.resize) fdjtLog("Layout size unchanged, ignoring");
+            return;}
         if ((layout)&&(layout.onresize)&&(!(metaBook.freezelayout))) {
             // This handles prompting for whether or not to update
             // the layout.  We don't prompt if the layout didn't
@@ -100,14 +107,14 @@
             if ((metaBook.long_layout_thresh)&&(layout.started)&&
                 ((layout.done-layout.started)<=metaBook.long_layout_thresh))
                 resizing=setTimeout(resizeNow,50);
+            else if (choosing_resize) {}
             else if (metaBook.layoutCached())
                 resizing=setTimeout(resizeNow,50);
-            else if (choosing_resize) {}
             else {
                 // This prompts for updating the layout
                 var msg=fdjtDOM("div.title","Update layout?");
                 // This should be fast, so we do it right away.
-                metaBook.scaleLayout();
+                metaBook.scaleLayout(true);
                 choosing_resize=true;
                 // When a choice is made, it becomes the default
                 // When a choice is made to not resize, the
@@ -164,11 +171,14 @@
     
     function resizeHandler(evt){
         evt=evt||window.event;
+        if (Trace.resize)
+            fdjtLog("Resize event %o, waiting=%o",evt,resize_wait);
         if (resize_wait) clearTimeout(resize_wait);
         if (choosing_resize) {
+            if (Trace.resize) fdjtLog("Close resize dialog %o",evt);
             fdjt.Dialog.close(choosing_resize);
             choosing_resize=false;}
-        resize_wait=setTimeout(metabookResize,1000);}
+        resize_wait=setTimeout(metabookResize,metaBook.resize_wait);}
     metaBook.resizeHandler=resizeHandler;
 
 })();
