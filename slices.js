@@ -251,7 +251,7 @@ metaBook.Slice=(function () {
         var count=0;
         for (var url in refs) if (url[0]==='_') continue; else count++;
         if (count===0) return false;
-        var span=fdjtDOM(spec||((count>1)?("div.links"):("span.links")),
+        var span=fdjtDOM(spec||((count>4)?("div.links"):("span.links")),
                          ((count>1)&&(fdjtDOM("span.count",count, " links"))),
                          " ");
         for (url in refs) {
@@ -904,7 +904,18 @@ metaBook.Slice=(function () {
         var passage=mbID(card.getAttribute("data-passage"));
         var glossid=card.getAttribute("data-gloss");
         var gloss=((glossid)&&(metaBook.glossdb.ref(glossid)));
-        if (gloss) {
+        if (!(passage)) return;
+        else if ((!(gloss))&&(passage)) {
+            metaBook.SkimTo(card,0);
+            return fdjtUI.cancel(evt);}
+        else if (getParent(target,".tool")) {
+            var form=metaBook.setGlossTarget(gloss);           
+            if (!(form)) return;
+            metaBook.setMode("addgloss");
+            return fdjtUI.cancel(evt);}
+        else if (mB.mode==="openglossmark") {
+            goToGloss(card); return fdjtUI.cancel(evt);}
+        else if (getParent(target,".glossbody"))  {
             var detail=((gloss)&&(gloss.detail));
             if (!(detail)) return;
             else if (detail[0]==='<')
@@ -917,20 +928,9 @@ metaBook.Slice=(function () {
                 metaBook.md2HTML(detail);
             metaBook.setMode("glossdetail");
             return fdjtUI.cancel(evt);}
-        else if ((!(gloss))&&(passage)) {
+        else {
             metaBook.SkimTo(card,0);
-            return fdjtUI.cancel(evt);}
-        else if ((gloss)&&(getParent(target,".tool"))) {
-            var form=metaBook.setGlossTarget(gloss);           
-            if (!(form)) return;
-            metaBook.setMode("addgloss");
-            return fdjtUI.cancel(evt);}
-        else if ((gloss)&&(mB.mode==="openglossmark")) {
-            goToGloss(card); return fdjtUI.cancel(evt);}
-        else if (gloss) {
-            metaBook.SkimTo(card,0);
-            return fdjtUI.cancel(evt);}
-        else return;}
+            return fdjtUI.cancel(evt);}}
     function slice_held(evt){
         evt=evt||window.event;
         var slice_target=fdjtUI.T(evt), card=getCard(slice_target);
