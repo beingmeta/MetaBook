@@ -157,10 +157,10 @@ body._ANIMATE .qtags {
         font-size: 250%;}}
 
 @media screen and (min-width: 1000px) {
-    #METABOOKHUD div.resultinfo span.stats { font-size: 2vmin; }}
+    #METABOOKHUD div.resultinfo span.stats { font-size: 2vw; }}
 
 @media screen and (max-width: 640px) {
-    #METABOOKHUD div.resultinfo span.stats { font-size: 3vmin; }
+    #METABOOKHUD div.resultinfo span.stats { font-size: 3vw; }
     div.resultinfo .stats > span > br { display: initial; }}
 
 @media screen and (max-width: 500px) {
