@@ -54,7 +54,7 @@ var metaBook={
     // For tracking UI state
     last_mode: false, last_heartmode: "about", demo: false,
     // Various default gesture timing parameters
-    taptapmsecs: 250, holdmsecs: 500, edgeclick: 50, pagesize: 250,
+    taptapmsecs: 200, holdmsecs: 500, edgeclick: 50, pagesize: 250,
     dontanimate: false, nativeselect: false,
     // Ignore swipes shorter than this:
     minswipe: 7,
@@ -159,7 +159,7 @@ var metaBook={
         uisize: 'normal',dyslexical: false,
         animatecontent: true,animatehud: true,
         hidesplash: false,keyboardhelp: true,
-        holdmsecs: 500,wandermsecs: 1500,
+        holdmsecs: 500,wandermsecs: 1500,taptapmsecs: 200,
         locsync: true, syncinterval: 60, checksync: 15*60,
         glossupdate: 5*60,cacheglosses: true,
         soundeffects: false, buzzeffects: false,

@@ -780,8 +780,7 @@ metaBook.Paginate=
             var cheaprule=metaBook.CSS.resizerule;
             if (typeof flag==="undefined") flag=true;
             if ((flag)&&(hasClass(document.body,"_SCALEDLAYOUT"))) return;
-            if ((!(flag))&&
-                (!(hasClass(document.body,"_SCALEDLAYOUT")))) return;
+            if ((!(flag))&&(!(hasClass(document.body,"_SCALEDLAYOUT")))) return;
             if (cheaprule) {
                 cheaprule.style[fdjtDOM.transform]="";
                 cheaprule.style[fdjtDOM.transformOrigin]="";

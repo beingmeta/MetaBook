@@ -185,7 +185,7 @@
             metaBook.TapHold.body=fdjtUI.TapHold(
                 $ID("METABOOKBODY"),
                 {override: true,noslip: true,id: "METABOOKBODY",
-                 maxtouches: 2,taptapmsecs: 200,
+                 maxtouches: 2,taptapmsecs: true,
                  untouchable: externClickable,
                  movethresh: 10});
             addHandlers(metaBook.HUD,'hud');}
