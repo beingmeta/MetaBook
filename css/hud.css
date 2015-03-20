@@ -1271,13 +1271,21 @@ body._FULLHEIGHT.hudup #METABOOKFOOT {
         border-bottom-left-radius: 0px;
         border-bottom-right-radius: 0px;
         padding-bottom: 0px;
-        left: 0px; right: 0px; }
+        left: 10px; right: 10px; }
     body.mbSKIMMING #METABOOKTOPBAR {
         display: none;}
  
     img.metabookclosehud#METABOOKSTOPSKIM {
         bottom: 50px; top: auto;}
 
+    #METABOOKHEAD, #METABOOKHUD.openhead #METABOOKHEAD {
+        left: 10px; right: 10px;}
+    #METABOOKHUD.openhead #METABOOKHEAD,
+    #METABOOKHUD.openheart #METABOOKHEART,
+    #METABOOKHUD.openfoot #METABOOKFOOT,
+    #METABOOKPOINTGLOSSES {
+        box-shadow: none; -webkit-box-shadow: none;
+        -moz-box-shadow: none; -o-box-shadow: none;}
 }
 @media screen and (max-width: 500px) {
     #METABOOKHEAD, #METABOOKHUD.openhead #METABOOKHEAD {
@@ -1298,15 +1306,6 @@ body._FULLHEIGHT.hudup #METABOOKFOOT {
         left: 5px; right: 10px;
         font-size: 60%;}
 }
-@media (max-width: 700px) {
-    #METABOOKHEAD, #METABOOKHUD.openhead #METABOOKHEAD {
-        left: 10px; right: 10px;}
-    #METABOOKHUD.openhead #METABOOKHEAD,
-    #METABOOKHUD.openheart #METABOOKHEART,
-    #METABOOKHUD.openfoot #METABOOKFOOT,
-    #METABOOKPOINTGLOSSES {
-        box-shadow: none; -webkit-box-shadow: none;
-        -moz-box-shadow: none; -o-box-shadow: none;}}
 
 /* Emacs local variables
 ;;;  Local variables: ***
