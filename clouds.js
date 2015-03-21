@@ -519,43 +519,55 @@
         var gscores=metaBook.tagscores;
         var gweights=metaBook.tagweights;
         var values=cloud.values, byvalue=cloud.byvalue;
-        var vscores=new Array(values.length);
+        var compscores=new Array(values.length);
+        var matchscores=new Array(values.length);
         var i=0, lim=values.length;
+        var min_vscore=Infinity, max_vscore=-1;
         var min_score=Infinity, max_score=-1;
         if (Trace.clouds)
             fdjtLog("Sizing %d tags in cloud %o with roots %o",
                     values.length,cloud.dom,roots);
         while (i<lim) {
-            var value=values[i], score;
+            var value=values[i], score, matchscore=false;
             if ((roots)&&(roots.length)&&(roots.indexOf(value)>=0)) {
-                vscores[i++]=false; continue;}
+                matchscores[i]=compscores[i]=false; i++; continue;}
             if (scores) {
-                var cscore=scores.get(value);
+                matchscore=scores.get(value);
                 var gscore=gscores.get(value);
-                score=(cscore/gscore)*(gweights.get(value));}
+                if (gscore) {
+                    var gweight=gweights.get(value)||1;
+                    score=(matchscore/gscore)*(gweight);}
+                else score=false;}
             else score=gscores.get(value);
-            if ((typeof score === "number")&&((score)||(score===0))) {
-                vscores[i]=score;
-                if (score<min_score) min_score=score;
-                if (score>max_score) max_score=score;}
-            else vscores[i]=false;
+            if ((typeof score === "number")&&(!(isNaN(score)))) {
+                compscores[i]=score;
+                if (score<min_vscore) min_vscore=score;
+                if (score>max_vscore) max_vscore=score;}
+            else compscores[i]=false;
+            if ((typeof matchscore == "number")&&(!(isNaN(matchscore)))) {
+                matchscores[i]=matchscore;
+                if (matchscore<min_score) min_score=matchscore;
+                if (matchscore>max_score) max_score=matchscore;}
+            else matchscores[i]=false;
             i++;}
         if (Trace.clouds)
             fdjtLog("Sizing %d tags in %o with scores in [%o,%o]",
-                    values.length,cloud.dom,min_score,max_score);
+                    values.length,cloud.dom,min_vscore,max_vscore);
         cloud.dom.style.display='none';
         i=0; while (i<lim) {
-            var v=values[i], s=vscores[i];
+            var v=values[i], s=compscores[i], ms=matchscores[i];
             var elt=byvalue.get(v);
+            elt.title=(elt.title||"")+"; vscore="+s;
             if (v.prime) {
                 addClass(elt,"prime"); addClass(elt,"cue");}
             if ((roots)&&(roots.length)&&(roots.indexOf(v)>=0)) 
                 addClass(elt,"cloudroot");
-            if (!(s)) {
+            if (!((s)||(ms))) {
                 addClass(elt,"unscored");
                 elt.style.fontSize=""; i++;
                 continue;}
-            var factor=(s-min_score)/(max_score-min_score);
+            var factor=((s)?((s-min_vscore)/(max_vscore-min_vscore)):
+                        ((ms-min_score)/(max_score-min_score)));
             var fsize=50+(150*factor);
             if (fsize<200)
                 elt.style.fontSize=Math.round(fsize)+"%";
@@ -563,17 +575,17 @@
             i++;}
         if (Trace.clouds)
             fdjtLog("Finished computing sizes for %o using scores [%o,%o]",
-                    cloud.dom,min_score,max_score);
+                    cloud.dom,min_vscore,max_vscore);
         cloud.dom.style.display='';
         dropClass(cloud.dom,"working");
         if (Trace.clouds)
             fdjtLog("Rendered new cloud %o using scores [%o,%o]",
-                    cloud.dom,min_score,max_score);
+                    cloud.dom,min_vscore,max_vscore);
         if (cloud.dom.parentNode) setTimeout(function(){
             adjustCloudFont(cloud);},50);
         if (Trace.clouds)
             fdjtLog("Finished sizing tags in %o using scores [%o,%o]",
-                    cloud.dom,min_score,max_score);}
+                    cloud.dom,min_vscore,max_vscore);}
     metaBook.sizeCloud=sizeCloud;
 
     function searchcloud_select(evt){
