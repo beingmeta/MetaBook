@@ -109,10 +109,11 @@ metaBook.Startup=
             fdjtLog.consoletoo=true;
             run_inits();
             if (!(metaBook._setup_start)) metaBook._setup_start=new Date();
+            metaBook.appsource=getSourceRef();
             fdjtLog("This is metaBook v%s, built %s on %s, launched %s, from %s",
                     mB.version,mB.buildtime,mB.buildhost,
                     mB._setup_start.toString(),
-                    mB.root||"somewhere");
+                    mB.root||metaBook.appsource||"somewhere");
             if ($ID("METABOOKBODY")) metaBook.body=$ID("METABOOKBODY");
 
             /* This was for a problem with saving documents as webapps under
@@ -219,6 +220,16 @@ metaBook.Startup=
                 else delayed();}
             if (Trace.startup)
                 fdjtLog("Done with sync startup");}
+
+        function getSourceRef(){
+            var scripts=fdjtDOM.$("SCRIPT");
+            var i=0, len=scripts.length;
+            while (i<len) {
+                var elt=scripts[i++];
+                if ((elt.src)&&(typeof elt.src === "string")&&
+                    (elt.src.search(/metabook.js(#|\?|$)/)>=0))
+                    return elt.src;}
+            return false;}
 
         function showMessage(){
             var message=fdjt.State.getCookie("SBOOKSPOPUP");
@@ -1030,7 +1041,8 @@ metaBook.Startup=
                         "metaBook version ",metaBook.version,
                         " built on ",fdjtDOM("span.host",metaBook.buildhost),
                         ((metaBook.buildtime)&&(" at ")),
-                        timeDOM(metaBook.buildtime));}
+                        timeDOM(metaBook.buildtime), " loaded from ",
+                        fdjtDOM("span.host",metaBook.appsource));}
             info=fdjt.DOM.$(".metabookcopyrightinfo");
             i=0; lim=info.length; while (i<lim) {
                 info[i++].innerHTML=
