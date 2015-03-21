@@ -110,7 +110,7 @@ metaBook.Startup=
             run_inits();
             if (!(metaBook._setup_start)) metaBook._setup_start=new Date();
             metaBook.appsource=getSourceRef();
-            fdjtLog("This is metaBook v%s, built %s on %s, launched %s, from %s",
+            fdjtLog("This is metaBook %s, built %s on %s, launched %s, from %s",
                     mB.version,mB.buildtime,mB.buildhost,
                     mB._setup_start.toString(),
                     mB.root||metaBook.appsource||"somewhere");
