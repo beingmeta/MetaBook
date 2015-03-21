@@ -118,11 +118,18 @@
     
     function tagindex_done(searchtags){
         var eq=metaBook.empty_query;
+        var knodule=metaBook.knodule;
         var empty_cloud=metaBook.empty_cloud;
         var gloss_cloud=metaBook.gloss_cloud;
         var searchlist=$ID("METABOOKSEARCHLIST");
         var knodeToOption=Knodule.knodeToOption;        
         
+        /* Take the top dterms and make them into cues, so there's at
+         * least *something* */
+        metaBook.knodule.alldterms.slice(0,7).map(function(dterm){
+            var ref=knodule.ref(dterm), elts=empty_cloud.getByValue(ref);
+            elts.map(function(elt){addClass(elt,"cue");});});
+
         if (Trace.startup>1)
             fdjtLog("Done populating clouds with %d tags",
                     searchtags.length);
