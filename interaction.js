@@ -1630,12 +1630,24 @@
         evt=evt||window.event;
         var target=((evt.nodeType)?(evt):(fdjtUI.T(evt)));
         var input=getParent(target,'textarea');
+        if ((metaBook.previewing)&&(target===window))
+            metaBook.stopPreview();
         if (!(input)) input=getParent(target,'input');
         if ((!(input))||(typeof input.type !== "string")||
             (input.type.search(fdjtDOM.text_types)!==0))
             return;
         clearFocus(input);}
     metaBook.UI.blur=metabookblur;
+
+    function metabookmouseout(evt){
+        var target=fdjtUI.T(evt);
+        if ((target===window)||(target===document.documentElement)) {
+            if (metaBook.previewing) metaBook.stopPreview();}}
+
+    function metabookvischange(evt){
+        evt=evt||window.event;
+        if (document[fdjtDOM.ishidden]) {
+            if (metaBook.previewing) metaBook.stopPreview();}}
 
     /* Rules */
 
@@ -1781,6 +1793,7 @@
             keydown: onkeydown,
             keypress: onkeypress,
             focus: metabookfocus,
+            mouseout: metabookmouseout,
             blur: metabookblur},
          "#METABOOKBODY": {
              mouseup: global_mouseup},
@@ -2035,6 +2048,12 @@
              change: mB.configChange},
          ".metabooksettings input[type='CHECKBOX']": {
              change: mB.configChange}});
+
+    var vis_listeners={window: {}};
+    vis_listeners.window[fdjtDOM.vischange]=metabookvischange;
+
+    fdjt.DOM.defListeners(metaBook.UI.handlers.touch,vis_listeners);
+    fdjt.DOM.defListeners(metaBook.UI.handlers.mouse,vis_listeners);
     
 })();
 
