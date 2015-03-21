@@ -166,11 +166,8 @@ body.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR
 #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER3.metabooksectmarker {
     height: 55%; background-color: rgba(0,0,255,0.1); }
 
-html._TOUCH body.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR {
-    height: 150px;}
-html._TOUCH body.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR
-  .metabookpagespans span.preview  {
-    height: 100%;}
+html._TOUCH #METABOOKFOOT.tapholding #METABOOKPAGEBAR {
+    height: 100px;}
 
 #METABOOKHUD .metabookgoto {
     position: absolute; bottom: 0px; padding-bottom: 0px;
