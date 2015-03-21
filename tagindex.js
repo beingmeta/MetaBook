@@ -113,8 +113,8 @@
                 addTag2Cloud(tag,gloss_cloud);}},
                          searchtags,
                          {watchfn: tagindex_progress,
-                          done: tagindex_done,
-                          slice: 200,space: 20});}
+                          slice: 200,space: 20}).
+            then(tagindex_done);}
     
     function tagindex_done(searchtags){
         var eq=metaBook.empty_query;
