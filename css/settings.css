@@ -212,9 +212,9 @@ form.metabooksettings > div button {
     background-repeat: no-repeat; background-size: contain;}
 form.metabooksettings button.reset {
     width: 2em; height: 2em; color: transparent;
-    background-image: url();}
+    background-image: url(g/metabook/reset.svgz);}
 html._NOSVG form.metabooksettings button.reset {
-    background-image: url(g/metabook/reset50x50.pg);}
+    background-image: url(g/metabook/reset50x50.png);}
 form.metabooksettings button.refresh {
     width: 2em; height: 2em; color: transparent;
     background-image: url(g/metabook/refresh.svgz);}
