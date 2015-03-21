@@ -430,9 +430,9 @@
                      state.changed=fdjtTime.tick();
                      metaBook.saveState(state,true,true);
                      metaBook.hideCover();}});
-        if ((choices.length)&&(state.location!==0))
+        if ((choices.length)&&(state.location>17))
             choices.push(
-                {label: ("current @"+((state.location===0)?("start"):
+                {label: ("current @"+((state.location<42)?("start"):
                                       (loc2pct(state.location)))),
                  title: "the most recent location on this device",
                  isdefault: true,
