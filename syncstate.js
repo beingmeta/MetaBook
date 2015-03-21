@@ -432,7 +432,8 @@
                      metaBook.hideCover();}});
         if ((choices.length)&&(state.location!==0))
             choices.push(
-                {label: ("current @"+loc2pct(state.location)),
+                {label: ("current @"+((state.location===0)?("start"):
+                                      (loc2pct(state.location)))),
                  title: "the most recent location on this device",
                  isdefault: true,
                  handler: function(){
