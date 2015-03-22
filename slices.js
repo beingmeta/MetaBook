@@ -1005,8 +1005,7 @@ metaBook.Slice=(function () {
             var spellings=info.knodeterms;
             var i=0; var lim=terms.length; while (i<lim) {
                 var term=terms[i++];
-                var highlights=metaBook.highlightTerm(
-                    term,passage,info,spellings);
+                var highlights=metaBook.highlightTerm(term,passage,info,spellings);
                 if (!(show_target))
                     if ((highlights)&&(highlights.length)&&
                         (!(getParent(highlights[0],passage))))

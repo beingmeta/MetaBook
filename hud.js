@@ -841,8 +841,7 @@ metaBook.setMode=
                                  "mbhighlightpassage");
                     else while (i<lim) {
                         var term=terms[i++];
-                        var h=metaBook.highlightTerm(
-                            term,target,info,spellings);
+                        var h=metaBook.highlightTerm(term,target,info,spellings);
                         highlights=highlights.concat(h);}}}
             metaBook.GoTo(passage,"Skim");}
         metaBook.SkimTo=metaBookSkimTo;
