@@ -89,7 +89,11 @@
             metaBook.search_cloud=metaBook.empty_cloud;
             fdjtDOM.replace(
                 "METABOOKSEARCHCLOUD",fdjtDOM("div#METABOOKSEARCHCLOUD"));
+            displayQuery(query,$ID("METABOOKSEARCH"));
             metaBook.empty_cloud.complete("");
+            addClass(metaBook.HUD,"emptysearch");
+            metaBook.query=mB.empty_query;
+            metaBook.qstring="";
             return;}
         else dropClass(metaBook.HUD,"emptysearch");
         var qstring=query.getString();
@@ -151,7 +155,8 @@
         if (qtags.id) newtags.id=qtags.id;
         fdjtDOM.replace(qtags,newtags);
         // Update the results display
-        if (query.results.length) {
+        if (query.tags.length===0) {}
+        else if (query.results.length) {
             resultcount.innerHTML=query.results.length+
                 " <br/>result"+((query.results.length===1)?"":"s");
             fdjtDOM.dropClass([box,info],"noresults");}
@@ -169,10 +174,12 @@
         refinecount.innerHTML=n_refiners+" <br/>"+
             ((n_refiners===1)?("co-tag"):("co-tags"));
         fdjtDOM.dropClass(box,"norefiners");
-        fdjtDOM.replace(cloudid,completions.dom);
+        if (completions!==mB.empty_cloud) {
+            fdjtDOM.replace(cloudid,completions.dom);
+            if (cloudid) completions.dom.id=cloudid;
+            addClass(completions.dom,"hudpanel");}
+        else cloudid="METABOOKALLTAGS";
         metaBook.search_cloud=completions;
-        if (cloudid) completions.dom.id=cloudid;
-        addClass(completions.dom,"hudpanel");
         if (Trace.search>1)
             log("Setting search cloud for %o to %o",box,completions.dom);
         completions.complete("",function(){
