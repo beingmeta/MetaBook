@@ -562,7 +562,8 @@ metaBook.Slice=(function () {
         if (!(headinfo)) headinfo=info.head;
         var idhead=fdjtDOM("div.idhead",
                            makelocrule(info,headinfo),
-                           fdjtDOM("span.spacer","\u00b6"),
+                           fdjtDOM("span.spacer",
+                                   ((info.level)?("\u00a7"):("\u00b6"))),
                            fdjtDOM("span",sumText(target)));
         idhead.title=makelocstring(info,headinfo);
         return idhead;}
