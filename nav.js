@@ -398,36 +398,8 @@
 
     // This jumps and disables the HUD at the same time
     function metaBookGoTOC(target){
-        if (target) metaBook.GoTo(target,"GoTOC");
-        metaBook.setMode("statictoc");
-        var headid=((metaBook.head)&&(metaBook.head.id));
-        var headinfo=(headid)&&(metaBook.docinfo[headid]);
-        var hhid=(headinfo)&&(headinfo.head)&&(headinfo.head.frag);
-        var tocelt=(headid)&&getTOCHead(headid);
-        var cxtelt=(hhid)&&getTOCHead(hhid);
-        if ((cxtelt)&&(tocelt)) {
-            cxtelt.scrollIntoView();
-            if (fdjtDOM.isVisible(tocelt)) return;
-            else tocelt.scrollIntoView();}
-        else if (tocelt)
-            tocelt.scrollIntoView();
-        else if (cxtelt)
-            cxtelt.scrollIntoView();
-        else {}}
+        if (target) metaBook.GoTo(target,"GoTOC");}
     metaBook.GoTOC=metaBookGoTOC;
-
-    // This jumps and disables the HUD at the same time
-    // We try to animate the transition
-    function metaBookSkimTo(target){
-        if (metaBook.hudup) { // Figure out what mode to go to
-            var headinfo=metaBook.docinfo[target]||metaBook.docinfo[target.id];
-            if ((headinfo)&&((!(headinfo.sub))||(headinfo.sub.length===0))) {
-                metaBook.setMode("statictoc"); metaBook.setHUD(false,false);
-                addClass(document.body,"mbSKIMMING");
-                metaBook.skimming=true;}}
-        metaBook.GoTo(target,"metaBookSkimTo");}
-    metaBook.Skimto=metaBookSkimTo;
-
 
 })();
 
