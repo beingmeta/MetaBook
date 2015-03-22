@@ -52,7 +52,7 @@
 .mbtoc.mbtoc4 { margin-left: 6em; font-size: 80%;}
 
 #METABOOKSKIMMER .mbtoc {
-    font-weight: bold; padding-top: 2px;}
+    font-weight: bold; padding-top: 2px; height: 2em;}
 #METABOOKSKIMMER .mbtoc .context { font-size: 80%; }
 #METABOOKHUD.statictoc #METABOOKSKIMMER {
     background-color: rgba(70, 130, 180, 0.5);}
