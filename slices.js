@@ -108,7 +108,7 @@ metaBook.Slice=(function () {
         if (overlay) shared=RefDB.remove(shared,(overlay._qid||overlay._id));
         var body=
             fdjtDOM("div.metabookcardbody",
-                    ((score)&&(showscore(score,query))),
+                    ((score)&&(showscore(info,score,query))),
                     (((info.maker)||(info.tstamp))?(showglossinfo(info)):
                      (showdocinfo(info))),
                     ((note_len>0)&&
@@ -306,10 +306,12 @@ metaBook.Slice=(function () {
                         ((i>0)&&" "),
                         fdjtUI.Ellipsis("span.excerpt",excerpts[i++],40));
             return ediv;}}
-    function showscore(score,query){
+    function showscore(elt,score,query){
+        var count=((query)&&(query.counts)&&(query.counts.get(elt)));
+        if (count) count=count+":";
         if ((query)&&(query.max_score))
-            return fdjtDOM("span.score","(",score,"/",query.max_score,")");
-        else return fdjtDOM("span.score","(",score,")");}
+            return fdjtDOM("span.score","(",count,score,"/",query.max_score,")");
+        else return fdjtDOM("span.score","(",count,score,")");}
     function showglossinfo(info) {
         var user=info.maker;
         var userinfo=(user)&&(metaBook.sourcedb.load(user));
@@ -831,7 +833,7 @@ metaBook.Slice=(function () {
             var shown=this.shown;
             if (!(card)) card=this.skimpoint||shown[0];
             var off=shown.indexOf(card);
-            if ((off<0)||(off>=this.visible.length))
+            if ((off<0)||(off+1>=this.visible.length))
                 return; 
             else return this.setSkim(shown[off+1]);};
     MetaBookSlice.prototype.backward=
