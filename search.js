@@ -74,43 +74,44 @@
     /* Set on main search input */
     // id="METABOOKSEARCHINPUT" 
     // completions="METABOOKSEARCHCLOUD"
+    var search_modes=/(search|refinesearch|searchresults|expandsearch)/;
 
     metaBook.getQuery=function(){return metaBook.query;};
     
     function setQuery(query){
+        if (query instanceof Query) query=query;
+        else query=new metaBook.Query(query);
+        if (query===metaBook.query) return query;
         if (Trace.search) log("Setting working query to %o",query);
+        if (query.tags.length===0) {
+            addClass(metaBook.HUD,"emptysearch");
+            metaBook.empty_cloud.dom.style.fontSize="";
+            metaBook.search_cloud=metaBook.empty_cloud;
+            fdjtDOM.replace(
+                "METABOOKSEARCHCLOUD",fdjtDOM("div#METABOOKSEARCHCLOUD"));
+            metaBook.empty_cloud.complete("");
+            return;}
+        else dropClass(metaBook.HUD,"emptysearch");
         var qstring=query.getString();
         if (qstring!==metaBook.qstring) {
+            displayQuery(query,$ID("METABOOKSEARCH"));
             metaBook.query=query;
-            metaBook.qstring=qstring;
-            if (query.tags.length===0)  {
-                addClass(metaBook.HUD,"emptysearch");
-                metaBook.empty_cloud.dom.style.fontSize="";
-                metaBook.search_cloud=metaBook.empty_cloud;}
-            else {
-                var cloud=metaBook.queryCloud(query);
-                dropClass(metaBook.HUD,"emptysearch");
-                fdjtDOM.replace("METABOOKSEARCHCLOUD",cloud.dom);
-                metaBook.search_cloud=cloud;}
-            useQuery(query,$ID("METABOOKSEARCH"));}
-        if (metaBook.mode==="refinesearch") {
+            metaBook.qstring=qstring;}
+        if (search_modes.exec(metaBook.mode)) {
             if (query.results.length===0) {}
             else if (query.results.length<7)
                 showSearchResults();
             else if (!(metaBook.touch)) {
                 $ID("METABOOKSEARCHINPUT").focus();}
-            else {}}}
-
+            else {}}
+        return query;}
     metaBook.setQuery=setQuery;
 
-    function useQuery(query,box_arg){
-        if (query instanceof Query) query=query;
-        else query=new metaBook.Query(query);
-        if (query===metaBook.query) return query;
-        var qstring=query.getString();
+    function displayQuery(query,box_arg){
         if ((box_arg)&&(typeof box_arg === 'string'))
             box_arg=document.getElementById(box_arg);
         var box=box_arg||query._box||$ID("METABOOKSEARCH");
+        var qstring=query.getString();
         if ((query.dom)&&(box)&&(box!==query.dom))
             fdjtDOM.replace(box_arg,query.dom);
         box.setAttribute("qstring",qstring);
@@ -121,7 +122,6 @@
         var cloudid=input.getAttribute("completions");
         var infoid=input.getAttribute("info");
         var qtags=getChild(box,".qtags")||$ID("METABOOKSEARCHTAGS");
-        var cloud=((cloudid)&&($ID(cloudid)));
         /* These should possibly be used in initializing the .listing
          * field of the query */
         //var resultsid=input.getAttribute("results");
@@ -169,31 +169,25 @@
         refinecount.innerHTML=n_refiners+" <br/>"+
             ((n_refiners===1)?("co-tag"):("co-tags"));
         fdjtDOM.dropClass(box,"norefiners");
-        if (query.tags.length===0) {
-            fdjtDOM.replace(
-                "METABOOKSEARCHCLOUD",fdjtDOM("div#METABOOKSEARCHCLOUD"));
-            metaBook.empty_cloud.dom.style.fontSize="";
-            metaBook.empty_cloud.complete("");}
-        else {
-            if (cloudid) completions.dom.id=cloudid;
-            addClass(completions.dom,"hudpanel");
-            if (Trace.search>1)
-                log("Setting search cloud for %o to %o",box,completions.dom);
-            completions.complete("",function(){
-                completions.dom.style.fontSize="";
-                if (cloud)
-                    fdjtDOM.replace(cloud,completions.dom);
-                else fdjtDOM.append(
-                    $ID("METABOOKHEARTBODY"),
-                    completions.dom);
-                metaBook.adjustCloudFont(completions);});}
+        fdjtDOM.replace(cloudid,completions.dom);
+        metaBook.search_cloud=completions;
+        if (cloudid) completions.dom.id=cloudid;
+        addClass(completions.dom,"hudpanel");
+        if (Trace.search>1)
+            log("Setting search cloud for %o to %o",box,completions.dom);
+        completions.complete("",function(){
+            completions.dom.style.fontSize="";
+            if ($ID(cloudid))
+                fdjtDOM.replace(cloudid,completions.dom);
+            else fdjtDOM.append(
+                $ID("METABOOKHEARTBODY"),
+                completions.dom);
+            metaBook.adjustCloudFont(completions);});
         if (n_refiners===0) {
             addClass(box,"norefiners");
             refinecount.innerHTML="no refiners";}
         query._box=box; box.setAttribute("qstring",qstring);
-        metaBook.UI.updateScroller(completions.dom);
         return query;}
-    metaBook.useQuery=useQuery;
 
     var hasParent=fdjtDOM.hasParent;
     var getParent=fdjtDOM.hasParent;
@@ -227,7 +221,7 @@
                 elts.push(kbref(elt)||elt);
             else elts.push(elt);}
         else elts.push(elt);
-        return useQuery(new metaBook.Query(elts),query._box);}
+        return new metaBook.Query(elts);}
     metaBook.extendQuery=extendQuery;
 
     metaBook.updateQuery=function(input_elt){
