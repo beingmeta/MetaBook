@@ -544,7 +544,7 @@
                 if (score<min_vscore) min_vscore=score;
                 if (score>max_vscore) max_vscore=score;}
             else compscores[i]=false;
-            if ((typeof matchscore == "number")&&(!(isNaN(matchscore)))) {
+            if ((typeof matchscore === "number")&&(!(isNaN(matchscore)))) {
                 matchscores[i]=matchscore;
                 if (matchscore<min_score) min_score=matchscore;
                 if (matchscore>max_score) max_score=matchscore;}
