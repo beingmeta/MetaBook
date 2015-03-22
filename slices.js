@@ -527,7 +527,7 @@ metaBook.Slice=(function () {
                 fdjtDOM("span.headtext.tocref",
                         fdjtDOM("span.spacer","\u00A7"),
                         text);
-            headtext.setAttribute("data-tocref",head.frag);
+            headtext.setAttribute("data-tocref",head.id);
             var curspan=fdjtDOM("span.head",headtext);
             headtext.title='jump to the section: '+text;
             fdjtDOM.append(basespan," ",curspan);
