@@ -344,7 +344,7 @@
 
         Query.prototype.dbs=[metaBook.glossdb,metaBook.docdb];
         Query.prototype.weights={
-            "tags": 4,"^tags": 2,"+tags": 8,"^+tags": 4,
+            "+tags": 8,"tags": 4,"+tags*": 2,"tags*": 2,"^+tags": 2,
             "strings": 1,"head": 2,"heads": 1};
         Query.prototype.uniqueids=true;
         metaBook.query=metaBook.empty_query=new Query([]);
