@@ -148,6 +148,7 @@ metaBook.TOCSlice=
             if (toc) {
                 var info=toc.byfrag[headinfo.frag];
                 if (info) toc.setSkim(info.dom);}};
+        MetaBookTOC.prototype.mode="statictoc";
 
         metaBook.TOC=MetaBookTOC;
 

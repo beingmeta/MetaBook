@@ -172,6 +172,7 @@ metaBook.setMode=
             metaBook.allglosses=allglosses=
                 new metaBook.Slice(metaBook.DOM.allglosses);
             metaBook.pagers.allglosses=metaBook.allglosses.pager;
+            metaBook.allglosses.mode="allglosses";
             metaBook.glossdb.onAdd("maker",function(f,p,v){
                 metaBook.sourcedb.ref(v).oninit
                 (metaBook.UI.addGlossSource,"newsource");});
@@ -728,8 +729,17 @@ metaBook.setMode=
         function metaBookSkimTo(card,dir,expanded){
             var skimmer=$ID("METABOOKSKIMMER");
             var skimpoint=metaBook.skimpoint;
-            var slice=metaBook[metaBook.mode];
+            var slice=getSlice(card);
+            if (!(slice)) {
+                fdjtLog.warn("Can't determine slice for skimming to %o",card);
+                return;}
             var cardinfo=slice.getInfo(card);
+            if (!(cardinfo)) {
+                fdjtLog.warn("No info for skimming to %s in %s",card,slice);
+                return;}
+            else card=cardinfo.dom||card;
+            if ((slice.mode)&&(mB.mode!==slice.mode))
+                mB.setMode(slice.mode);
             var passage=mbID(cardinfo.passage||cardinfo.id);
             var i=0, lim=0;
             if (typeof dir !== "number") dir=0;
@@ -836,6 +846,24 @@ metaBook.setMode=
                         highlights=highlights.concat(h);}}}
             metaBook.GoTo(passage,"Skim");}
         metaBook.SkimTo=metaBookSkimTo;
+
+        function getSlice(card){
+            var cur_slice=mB[mB.mode];
+            if ((cur_slice)&&(cur_slice.getInfo(card)))
+                return cur_slice;
+            else if (card.nodeType) {
+                if (hasParent(card,mB.DOM.allglosses))
+                    return mB.allglosses;
+                else if (hasParent(card,$ID("SBOOKSEARCHRESULTS")))
+                    return mB.searchresults;
+                else return false;}
+            else if (typeof card === "string") {
+                if (mB.glossdb.probe(card))
+                    return mB.allglosses;
+                else if (mB.docinfo[card])
+                    return mB.statictoc;
+                else return false;}
+            else return false;}
 
         metaBook.addConfig("uisize",function(name,value){
             fdjtDOM.swapClass(

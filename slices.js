@@ -842,9 +842,16 @@ metaBook.Slice=(function () {
             if (off<=0) return; 
             else return this.setSkim(shown[off-1]);};
     MetaBookSlice.prototype.getInfo=function getSliceInfo(card){
+        if (typeof card === "string") {
+            var found=this.byid.get(card)||this.byfrag.get(card);
+            if ((Array.isArray(found))&&(found.length))
+                card=found[0];
+            else card=found;}
         var pos; if (!(card)) pos=this.skimpos;
-        else pos=this.shown.indexOf(card);
-        return this.visible[pos];};
+        else if ((pos=this.shown.indexOf(card))<0)
+            pos=this.visible.indexOf(card);
+        if (pos>=0) return this.visible[pos];
+        else return false;};
 
     MetaBookSlice.prototype.setLocation=function setSliceLocation(location){
         var visible=this.visible; var i=0, lim=visible.length;
@@ -889,7 +896,7 @@ metaBook.Slice=(function () {
         if (getParent(target,".tochead")) {
             var anchor=getParent(target,".tocref");
             var href=(anchor)&&(anchor.getAttribute("data-tocref"));
-            metaBook.GoTOC(href);
+            metaBook.SkimTo(href);
             fdjtUI.cancel(evt);
             return;}
 
