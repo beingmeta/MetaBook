@@ -160,6 +160,8 @@ metaBook.Slice=(function () {
             return metaBook.md2DOM(note.slice(close+1),true);}
         else return note;}
 
+    var isArray=Array.isArray;
+
     function showtags(info,query){
         var tagicon=fdjtDOM.Image(mbicon("tagicon",64,64),
                                   "img.tagicon","tags");
@@ -173,7 +175,10 @@ metaBook.Slice=(function () {
         var j=0, nslots=tagslots.length, ntags=0;
         while (j<nslots) {
             var slot=tagslots[j++], tags=info[slot];
-            if ((!(tags))||(tags.length===0)) continue;
+            if (!(tags)) continue;
+            else if (!(isArray(tags))) tags=[tags];
+            else if (tags.length===0) continue;
+            else {}
             var i=0, lim=tags.length; ntags=ntags+lim;
             while (i<lim) {
                 var tag=tags[i++];
@@ -613,7 +618,7 @@ metaBook.Slice=(function () {
         if (!(opts.hasOwnProperty('id')))
             opts.id=container.id;
         if (!(opts.hasOwnProperty('holdmsecs')))
-            opts.holdmsecs=150;
+            opts.holdmsecs=400;
         if (opts.hasOwnProperty('holdclass'))
             opts.holdclass=false;
         if (opts.hasOwnProperty('touchtoo'))
