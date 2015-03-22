@@ -875,7 +875,7 @@
 
     /* Highlighting terms in passages (for skimming, etc) */
 
-    var textRegExp=fdjtDOM.textRegExp;
+    var wordRegExp=fdjtDOM.wordRegExp;
 
     function highlightTerm(term,target,info,spellings){
         var words=[]; var highlights=[];
@@ -913,9 +913,12 @@
         var j=0; var jlim=words.length;
         while (j<jlim) {
             var word=words[j++];
-            var pattern=textRegExp(word);
+            var pattern=wordRegExp(word);
             var dups=metaBook.getDups(target);
             var ranges=fdjtDOM.findMatches(dups,pattern);
+            if (!((ranges)&&(ranges.length))) {
+                pattern=wordRegExp(word,true);
+                ranges=fdjtDOM.findMatches(dups,pattern);}
             if (Trace.highlight)
                 fdjtLog("Trying to highlight %s (using %o) in %o, ranges=%o",
                         word,pattern,target,ranges);
