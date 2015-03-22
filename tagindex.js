@@ -234,7 +234,7 @@
                     // basis for the tag (we use this for
                     // highlighting).
                     var knodeterms=info.knodeterms, terms;
-                    var tagid=((knode)?(knode._qid):(tagterm));
+                    var tagid=((knode)?(knode._qid||knode.getQID()):(tagterm));
                     // If it's the regular case, we just assume that
                     if (!(info.knodeterms)) {
                         knodeterms=info.knodeterms={};
