@@ -557,7 +557,6 @@
         i=0; while (i<lim) {
             var v=values[i], s=compscores[i], ms=matchscores[i];
             var elt=byvalue.get(v);
-            elt.title=(elt.title||"")+"; vscore="+s;
             if (v.prime) {
                 addClass(elt,"prime"); addClass(elt,"cue");}
             if ((roots)&&(roots.length)&&(roots.indexOf(v)>=0)) 
