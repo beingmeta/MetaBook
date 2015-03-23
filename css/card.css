@@ -154,6 +154,9 @@ div.metabookcard > hr {
 .metabookcard .score {
     float: right; color: darkblue;
     font-size: 80%; vertical-align: top; margin-top: -0.5ex;}
+.metabookcard .score img.inline {
+    padding-left: 0px; padding-right: 0px;}
+.metabookcard .score .note { color: red; padding-right: 1ex;}
 .metabookcard .glossinfo {
     float: right; clear: right; display: block;
     padding: 0px; margin: 0px;

@@ -157,8 +157,11 @@
         // Update the results display
         if (query.tags.length===0) {}
         else if (query.results.length) {
-            resultcount.innerHTML=query.results.length+
-                " <br/>result"+((query.results.length===1)?"":"s");
+            var plural=(query.results.length!==1);
+            resultcount.innerHTML=query.results.length+" <br/>"+
+                ((elts.length>2)?
+                 ((plural)?("results"):("result")):
+                 ((plural)?("matches"):("match")));
             fdjtDOM.dropClass([box,info],"noresults");}
         else {
             resultcount.innerHTML="no results";

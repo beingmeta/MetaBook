@@ -307,11 +307,18 @@ metaBook.Slice=(function () {
                         fdjtUI.Ellipsis("span.excerpt",excerpts[i++],40));
             return ediv;}}
     function showscore(elt,score,query){
+        var staricon=fdjtDOM.Image(mbicon("goldstar",24,24),"img.inline");
+        var tagicon=fdjtDOM.Image(mbicon("tagicon",24,24),"img.inline");
         var count=((query)&&(query.counts)&&(query.counts.get(elt)));
+        var partial=((count)&&(query.tags.length>1)&&
+                     ((count!==query.tags.length)?                     
+                      (fdjtDOM("span.note",count,tagicon)):
+                      (fdjtDOM("span.note","all",tagicon))));
         if (count) count=count+":";
         if ((query)&&(query.max_score))
-            return fdjtDOM("span.score","(",count,score,"/",query.max_score,")");
-        else return fdjtDOM("span.score","(",count,score,")");}
+            return fdjtDOM(
+                "span.score",partial,"(",score,"/",query.max_score,staricon,")");
+        else return fdjtDOM("span.score",partial,"(",score,staricon,")");}
     function showglossinfo(info) {
         var user=info.maker;
         var userinfo=(user)&&(metaBook.sourcedb.load(user));
