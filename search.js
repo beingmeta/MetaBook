@@ -211,7 +211,9 @@
                     evt,((onx)?("(onx) "):("")),
                     elt);
         var cur=[].concat(metaBook.query.tags);
-        var splicepos=cur.indexOf(elt);
+        var splicepos=((elt)?(cur.indexOf(elt)):
+                       (cur.indexOf(eltval)));
+        if (splicepos<0) splicepos=cur.indexOf(eltval);
         if (splicepos<0) return;
         else cur.splice(splicepos,1);
         if (cur.length===0) {
