@@ -116,7 +116,8 @@ html._MOUSE .cloud .showall:hover,
 /* Special rules */
 
 .cloud span.dterm {
-    padding-top: 0.1ex; padding-bottom: 0.1ex;}
+    padding-top: 0.1ex; padding-bottom: 0.1ex;
+    vertical-align: middle;}
 .cloud span.dterm.longterm {
     border-top-left-radius: 1ex;
     border-bottom-left-radius: 1ex;}
