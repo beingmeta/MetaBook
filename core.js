@@ -132,6 +132,8 @@
         var refuri=(metaBook.refuri||document.location.href);
         if (refuri.indexOf('#')>0) refuri=refuri.slice(0,refuri.indexOf('#'));
 
+        setupGlossData();
+
         var taglist=metaBook.taglist||$ID("METABOOKTAGLIST");
         if (!(taglist)) {
             taglist=metaBook.taglist=fdjt.DOM("datalist#METABOOKTAGLIST");
@@ -361,6 +363,11 @@
         ((window.webkitURL)&&(window.webkitURL.createObjectURL));
     var Blob=window.Blob;
 
+    function setupGlossData(){
+        var cached=getLocal("glossdata("+mB.docuri+")",true);
+        var i=0, len=cached.length; while (i<len) 
+            glossdata_state[cached[i++]]="cached";}
+
     function cacheGlossData(uri){
         if (uri.search("https://glossdata.sbooks.net/")!==0) return;
         var key="glossdata("+uri+")";
@@ -436,7 +443,6 @@
                         url,event.target.errorCode);};
             req.onsuccess=function(){
                 glossdata_state[key]="cached"; completed=true;
-                fdjtState.setLocal(key,"cached");
                 if (Trace.glossdata)
                     fdjtLog("Saved glossdata for %s in IndexedDB",url);
                 glossDataSaved(url);};
