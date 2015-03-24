@@ -171,6 +171,8 @@
         
         var knodeToOption=Knodule.knodeToOption;
 
+        var cachelink=/^https:\/\/glossdata.sbooks.net\//;
+        
         var knodule_name=
             fdjtDOM.getMeta("SBOOKS.knodule")||
             fdjtDOM.getMeta("~KNODULE")||
@@ -185,13 +187,15 @@
                       "tags","*tags","**tags",
                       "tags*","*tags*","**tags*"]};
         var stdspace=fdjtString.stdspace;
-        metaBook.glossdb=new RefDB("glosses@"+metaBook.refuri,glosses_init); {
-            metaBook.glossdb.absrefs=true;
-            metaBook.glossdb.addAlias("glossdb");
-            metaBook.glossdb.addAlias("-UUIDTYPE=61");
-            metaBook.glossdb.addAlias(":@31055/");
-            metaBook.glossdb.addAlias("@31055/");
-            metaBook.glossdb.onLoad(function initGloss(item) {
+        var glossdbname="glosses@"+metaBook.refuri;
+        var glossdb=metaBook.glossdb=new RefDB(glossdbname,glosses_init); {
+            glossdb.absrefs=true;
+            glossdb.dbname="glosses";
+            glossdb.addAlias("glossdb");
+            glossdb.addAlias("-UUIDTYPE=61");
+            glossdb.addAlias(":@31055/");
+            glossdb.addAlias("@31055/");
+            glossdb.onLoad(function initGloss(item) {
                 var info=metaBook.docinfo[item.frag];
                 if (!(info)) {
                     fdjtLog("Gloss refers to nonexistent '%s': %o",
@@ -204,15 +208,16 @@
                         item.ends_at=info.ends_at+(item.exoff||0)+
                         (stdspace(item.excerpt).length);
                     else item.ends_at=info.ends_at;}
-                if ((!(item.maker))&&(metaBook.user)) item.maker=(metaBook.user);
-                var addTags=metaBook.addTags, addTag2Cloud=metaBook.addTag2Cloud;
+                if ((!(item.maker))&&(metaBook.user))
+                    item.maker=(metaBook.user);
+                var addTags=metaBook.addTags;
+                var addTag2Cloud=metaBook.addTag2Cloud;
                 var empty_cloud=metaBook.empty_cloud;
                 var maker=(item.maker)&&(metaBook.sourcedb.ref(item.maker));
                 if (item.links) {
-                    var links=item.links;
-                    for (var link in links) {
+                    var links=item.links; for (var link in links) {
                         if ((links.hasOwnProperty(link))&&
-                            (link.search("https://glossdata.sbooks.net/")===0))
+                            (cachelink.exec(link)))
                             metaBook.cacheGlossData(link);}}
                 if (maker) {
                     metaBook.addTag2Cloud(maker,metaBook.empty_cloud);
@@ -245,10 +250,11 @@
                                 addTags(item.thread,tags,fragslot);
                                 if (item.replyto!==item.thread)
                                     addTags(item.replyto,tags,fragslot);}
-                            if (info) addTags(info,tags,fragslot,maker_knodule);}}}},
-                                    "initgloss");
+                            if (info) addTags(
+                                info,tags,fragslot,maker_knodule);}}}},
+                           "initgloss");
             if ((metaBook.user)&&(mB.persist)&&(metaBook.cacheglosses))
-                metaBook.glossdb.storage=window.localStorage;}
+                glossdb.storage=window.localStorage;}
         
         function Gloss(){return Ref.apply(this,arguments);}
         Gloss.prototype=new Ref();
@@ -275,12 +281,14 @@
 
         metaBook.glossdb.refclass=Gloss;
         
-        metaBook.sourcedb=new RefDB("sources@"+metaBook.refuri);{
-            metaBook.sourcedb.absrefs=true;
-            metaBook.sourcedb.oidrefs=true;
-            metaBook.sourcedb.addAlias("@1961/");
-            metaBook.sourcedb.addAlias(":@1961/");            
-            metaBook.sourcedb.forDOM=function(source){
+        var sourcedbname="sources@"+metaBook.refuri;
+        var sourcedb=metaBook.sourcedb=new RefDB(sourcedbname);{
+            sourcedb.absrefs=true;
+            sourcedb.dbname="sources";
+            sourcedb.oidrefs=true;
+            sourcedb.addAlias("@1961/");
+            sourcedb.addAlias(":@1961/");            
+            sourcedb.forDOM=function(source){
                 var spec="span.source"+((source.kind)?".":"")+
                     ((source.kind)?(source.kind.slice(1).toLowerCase()):"");
                 var name=source.name||source.oid||source.uuid||source.uuid;
