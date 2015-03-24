@@ -266,8 +266,9 @@
                 if (source.about) span.title=source.about;
                 return span;};}
 
-        metaBook.queued=((metaBook.cacheglosses)&&
-                         (getLocal("metabook.queued("+metaBook.refuri+")",true)))||[];
+        metaBook.queued=
+            ((metaBook.cacheglosses)&&
+             (getLocal("metabook.queued("+metaBook.refuri+")",true)))||[];
 
         function setCacheGlosses(value){
             var saveprops=metaBook.saveprops, uri=metaBook.docuri;
@@ -354,7 +355,7 @@
 
     /* Noting (and caching) glossdata */
 
-    var glossdata=metaBook.glossdata;
+    var glossdata=metaBook.glossdata, glossdata_state={};
     var createObjectURL=
         ((window.URL)&&(window.URL.createObjectURL))||
         ((window.webkitURL)&&(window.webkitURL.createObjectURL));
@@ -363,8 +364,8 @@
     function cacheGlossData(uri){
         if (uri.search("https://glossdata.sbooks.net/")!==0) return;
         var key="glossdata("+uri+")";
-        if (fdjtState.getLocal(key)) return;
-        else fdjtState.setLocal(key,"fetching");
+        if (glossdata_state[key]) return;
+        else glossdata_state[key]="fetching";
         var req=new XMLHttpRequest(), endpoint, rtype;
         if ((!(Blob))||(!(createObjectURL))) {
             // This endpoint returns a datauri as text
@@ -388,22 +389,26 @@
                     local_uri=createObjectURL(req.response);
                 else local_uri=false;
                 if (local_uri) gotLocalURL(uri,local_uri);
-                if (data_uri) cacheDataURI(uri,data_uri);
+                if (data_uri) {
+                    glossdata_state[key]="caching";
+                    cacheDataURI(uri,data_uri);}
                 else {
                     // Need to get a data uri
                     var reader=new FileReader(req.response);
+                    glossdata_state[key]="reading";
                     reader.onload=function(){
                         try {
                             if (!(local_uri)) gotLocalURL(uri,reader.result);
+                            glossdata_state[key]="caching";
                             cacheDataURI(uri,reader.result);}
                         catch (ex) {
                             fdjtLog.warn("Error encoding %s from %s: %s",
                                          uri,endpoint,ex);
-                            fdjtState.dropLocal(key);}};
+                            glossdata_state[key]=false;}};
                     reader.readAsDataURL(req.response);}}
             catch (ex) {
                 fdjtLog.warn("Error fetching %s via %s: %s",uri,endpoint,ex);
-                fdjtState.dropLocal(key);}};
+                glossdata_state[key]=false;}};
         req.open("GET",uri);
         req.withCredentials=true;
         req.send(null);}
@@ -424,16 +429,18 @@
             var txn=metaBookDB.transaction(["glossdata"],"readwrite");
             var storage=txn.objectStore("glossdata");
             var req=storage.put({url: url,datauri: datauri});
+            var completed=false;
             req.onerror=function(event){
-                fdjtState.dropLocal(key,"cached");
+                glossdata_state[key]=false; completed=true;
                 fdjtLog("Error saving %s in indexedDB: %o",
                         url,event.target.errorCode);};
-            req.onsuccess=function(event){
-                event=false; // ignored
+            req.onsuccess=function(){
+                glossdata_state[key]="cached"; completed=true;
                 fdjtState.setLocal(key,"cached");
                 if (Trace.glossdata)
                     fdjtLog("Saved glossdata for %s in IndexedDB",url);
-                glossDataSaved(url);};}
+                glossDataSaved(url);};
+            if ((req.status==="done")&&(!(completed))) req.onsuccess();}
         else {
             fdjtState.setLocal(key,datauri);
             glossDataSaved(url);}}
@@ -456,12 +463,16 @@
         var txn=metaBookDB.transaction(["glossdata"],"readwrite");
         var storage=txn.objectStore("glossdata");
         var req=storage['delete'](url);
+        var completed=false;
         req.onerror=function(event){
+            completed=true;
             fdjtLog("Error clearing gloss data for %s: %s",
                     url,event.target.errorCode);}; 
         req.onsuccess=function(){
-            if (Trace.glossdata>1)
-                fdjtLog("Cleared gloss data for %s",url);};}
+            completed=true;
+            if (Trace.glossdata)
+                fdjtLog("Cleared gloss data for %s",url);};
+        if ((req.status==="done")&&(!(completed))) req.onsuccess();}
 
     /* Queries */
 
