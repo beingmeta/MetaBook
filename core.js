@@ -60,7 +60,6 @@
 
     var getLocal=fdjtState.getLocal;
     var setLocal=fdjtState.setLocal;
-    var dropLocal=fdjtState.dropLocal;
     
     var mB=metaBook;
     var Trace=metaBook.Trace;
@@ -92,38 +91,53 @@
     
     /* Initialize the indexedDB database, when used */
 
-    var metaBookDB=false;
+    var metaBookDB=false, dbwait=[], dbfail=[];
 
+    function getDB(){
+        function gettingdb(resolve,reject){
+            if (metaBookDB) resolve(metaBookDB);
+            else {
+                dbwait.push(resolve);
+                if (reject) dbfail.push(reject);}}
+        return new Promise(gettingdb);}
+    metaBook.getDB=getDB;
+
+    function gotDB(db){
+        metaBook.metaBookDB=metaBookDB=db;
+        fdjtAsync(function(){
+            fdjt.CodexLayout.useIndexedDB(db.name);});
+        var waiting=dbwait; dbwait=[]; dbfail=[];
+        var i=0, len=waiting.length; while (i<len)
+            waiting[i++](db);}
+    function notDB(action,name,ex){
+        var waiting=dbfail; dbwait=[]; dbfail=[];
+        fdjtLog("Error %s database %s: %o",action,name,ex);
+        var i=0, len=waiting.length; while (i<len)
+            waiting[i++](ex);}
+
+    
     if (window.indexedDB) {
         var req=window.indexedDB.open("metaBook",1);
         req.onerror=function(event){
-            fdjtLog("Error initializing the metaBook IndexedDB: %o",
-                    event.errorCode);};
+            notDB("opening","metaBook",event.errorCode);};
         req.onsuccess=function(event) {
             var db=event.target.result;
             fdjtLog("Using existing metaBook IndexedDB");
-            fdjtAsync(function(){
-                fdjt.CodexLayout.useIndexedDB("metaBook");});
-            metaBook.metaBookDB=metaBookDB=db;};
+            gotDB(db);};
         req.onupgradeneeded=function(event) {
             var db=event.target.result;
             db.onerror=function(event){
-                fdjtLog("Unexpected error setting up glossdata cache: %d",
-                        event.target.errorCode);
+                notDB("upgrading","metaBook",event.target.errorCode);
                 event=false;};
             db.onsuccess=function(event){
                 var db=event.target.result;
                 fdjtLog("Initialized metaBook indexedDB");
-                fdjtAsync(function(){
-                    fdjt.CodexLayout.useIndexedDB("metaBook");});
-                metaBook.metaBookDB=metaBookDB=db;};
+                gotDB(db);};
             db.createObjectStore("glossdata",{keyPath: "url"});
             db.createObjectStore("layouts",{keyPath: "layout_id"});
             db.createObjectStore("sources",{keyPath: "_id"});
             db.createObjectStore("docs",{keyPath: "_id"});
-            db.createObjectStore("glosses",{keyPath: "glossid"});
-            fdjtAsync(function(){
-                fdjt.CodexLayout.useIndexedDB("metaBook");});};}
+            db.createObjectStore("glosses",{keyPath: "glossid"});};}
 
     /* Initialize the runtime for the core databases */
 
@@ -132,7 +146,7 @@
         var refuri=(metaBook.refuri||document.location.href);
         if (refuri.indexOf('#')>0) refuri=refuri.slice(0,refuri.indexOf('#'));
 
-        setupGlossData();
+        metaBook.setupGlossData();
 
         var taglist=metaBook.taglist||$ID("METABOOKTAGLIST");
         if (!(taglist)) {
@@ -193,7 +207,7 @@
                     for (var link in links) {
                         if ((links.hasOwnProperty(link))&&
                             (link.search("https://glossdata.sbooks.net/")===0))
-                            cacheGlossData(link);}}
+                            metaBook.cacheGlossData(link);}}
                 if (maker) {
                     metaBook.addTag2Cloud(maker,metaBook.empty_cloud);
                     metaBook.UI.addGlossSource(maker,true);}
@@ -313,7 +327,7 @@
                 fdjt.CodexLayout.clearLayouts();
                 fdjtState.clearLocal();
                 fdjtState.clearSession();
-                clearGlossData();}
+                metaBook.clearGlossData();}
             else {
                 if (typeof uri !== "string") uri=metaBook.docuri;
                 metaBook.sync=false;
@@ -327,7 +341,7 @@
                 // between books.  This is a bug.
                 metaBook.glossdb.clearOffline(function(){
                     clearLocal("metabook.sync("+uri+")");});
-                clearGlossData(uri);}}
+                metaBook.clearGlossData(uri);}}
         metaBook.clearOffline=clearOffline;
         
         function refreshOffline(){
@@ -354,131 +368,6 @@
 
         if (Trace.start>1) fdjtLog("Initialized DB");}
     metaBook.initDB=initDB;
-
-    /* Noting (and caching) glossdata */
-
-    var glossdata=metaBook.glossdata, glossdata_state={};
-    var createObjectURL=
-        ((window.URL)&&(window.URL.createObjectURL))||
-        ((window.webkitURL)&&(window.webkitURL.createObjectURL));
-    var Blob=window.Blob;
-
-    function setupGlossData(){
-        var cached=getLocal("glossdata("+mB.docuri+")",true);
-        var i=0, len=cached.length; while (i<len) 
-            glossdata_state[cached[i++]]="cached";}
-
-    function cacheGlossData(uri){
-        if (uri.search("https://glossdata.sbooks.net/")!==0) return;
-        var key="glossdata("+uri+")";
-        if (glossdata_state[key]) return;
-        else glossdata_state[key]="fetching";
-        var req=new XMLHttpRequest(), endpoint, rtype;
-        if ((!(Blob))||(!(createObjectURL))) {
-            // This endpoint returns a datauri as text
-            endpoint="https://glossdata.sbooks.net/U/"+
-                uri.slice("https://glossdata.sbooks.net/".length);
-            req.responseText=""; rtype="any";}
-        else {
-            endpoint=uri; req.responseType="blob";
-            rtype=req.responseType;}
-        if (Trace.glossdata)
-            fdjtLog("Fetching glossdata %s (%s) to cache locally",uri,rtype);
-        req.onreadystatechange=function () {
-            if ((req.readyState === 4)&&(req.status === 200)) try {
-                var local_uri=false, data_uri=false;
-                if (Trace.glossdata)
-                    fdjtLog("Glossdata from %s (%s) status %d",
-                            endpoint,rtype,req.status);
-                if (rtype!=="blob")
-                    data_uri=local_uri=req.responseText;
-                else if (createObjectURL) 
-                    local_uri=createObjectURL(req.response);
-                else local_uri=false;
-                if (local_uri) gotLocalURL(uri,local_uri);
-                if (data_uri) {
-                    glossdata_state[key]="caching";
-                    cacheDataURI(uri,data_uri);}
-                else {
-                    // Need to get a data uri
-                    var reader=new FileReader(req.response);
-                    glossdata_state[key]="reading";
-                    reader.onload=function(){
-                        try {
-                            if (!(local_uri)) gotLocalURL(uri,reader.result);
-                            glossdata_state[key]="caching";
-                            cacheDataURI(uri,reader.result);}
-                        catch (ex) {
-                            fdjtLog.warn("Error encoding %s from %s: %s",
-                                         uri,endpoint,ex);
-                            glossdata_state[key]=false;}};
-                    reader.readAsDataURL(req.response);}}
-            catch (ex) {
-                fdjtLog.warn("Error fetching %s via %s: %s",uri,endpoint,ex);
-                glossdata_state[key]=false;}};
-        req.open("GET",uri);
-        req.withCredentials=true;
-        req.send(null);}
-
-    function gotLocalURL(uri,local_url){
-        var waiting=mB.srcloading[uri];
-        glossdata[uri]=local_url;
-        if (waiting) {
-            var i=0, lim=waiting.length;
-            if (Trace.glossdata)
-                fdjtLog("Setting glossdata src for %d element(s)",lim);
-            while (i<lim) waiting[i++].src=local_url;
-            mB.srcloading[uri]=false;}}
-
-    function cacheDataURI(url,datauri){
-        var key="glossdata("+url+")";
-        if (metaBookDB) {
-            var txn=metaBookDB.transaction(["glossdata"],"readwrite");
-            var storage=txn.objectStore("glossdata");
-            var req=storage.put({url: url,datauri: datauri});
-            var completed=false;
-            req.onerror=function(event){
-                glossdata_state[key]=false; completed=true;
-                fdjtLog("Error saving %s in indexedDB: %o",
-                        url,event.target.errorCode);};
-            req.onsuccess=function(){
-                glossdata_state[key]="cached"; completed=true;
-                if (Trace.glossdata)
-                    fdjtLog("Saved glossdata for %s in IndexedDB",url);
-                glossDataSaved(url);};
-            if ((req.status==="done")&&(!(completed))) req.onsuccess();}
-        else {
-            fdjtState.setLocal(key,datauri);
-            glossDataSaved(url);}}
-
-    function glossDataSaved(url){
-        fdjtState.pushLocal("glossdata("+mB.docuri+")",url);
-        fdjtState.pushLocal("glossdata()",url);}
-
-    function clearGlossData(url){
-        var key=((url)?("glossdata("+url+")"):("glossdata()"));
-        var urls=getLocal(key,true);
-        if (urls) {
-            var i=0, lim=urls.length; while (i<lim) {
-                var gdurl=urls[i++]; dropLocal("glossdata("+gdurl+")");
-                if (metaBookDB) clearGlossDataFor(gdurl);}}
-        dropLocal(key);}
-    metaBook.clearGlossData=clearGlossData;
-
-    function clearGlossDataFor(url){
-        var txn=metaBookDB.transaction(["glossdata"],"readwrite");
-        var storage=txn.objectStore("glossdata");
-        var req=storage['delete'](url);
-        var completed=false;
-        req.onerror=function(event){
-            completed=true;
-            fdjtLog("Error clearing gloss data for %s: %s",
-                    url,event.target.errorCode);}; 
-        req.onsuccess=function(){
-            completed=true;
-            if (Trace.glossdata)
-                fdjtLog("Cleared gloss data for %s",url);};
-        if ((req.status==="done")&&(!(completed))) req.onsuccess();}
 
     /* Queries */
 

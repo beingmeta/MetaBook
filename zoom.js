@@ -41,9 +41,6 @@
     "use strict";
 
     var fdjtDOM=fdjt.DOM;
-    var fdjtState=fdjt.State;
-    var fdjtLog=fdjt.Log;
-    var metaBookDB=metaBook.metaBookDB;
 
     var mB=metaBook, $ID=fdjt.ID;
     var addClass=fdjtDOM.addClass;
@@ -165,43 +162,13 @@
             src_elt.src=mB.glossdata[url];
             placeMedia();}
         else if (src_elt) {
-            var cache_key="glossdata("+url+")";
-            var cache_val=fdjtState.getLocal(cache_key);
-            if (cache_val) {
-                if (cache_val.slice(0,5)==="data:")
-                    src_elt.src=cache_val;
-                else if (cache_val==="cached") {
-                    addClass($ID("METABOOKMEDIA"),"loadingcontent");
-                    addClass(src_elt,"loadingcontent");
-                    var txn=metaBookDB.transaction(["glossdata"]);
-                    var storage=txn.objectStore("glossdata");
-                    var req=storage.get(url);
-                    req.onsuccess=function(event){
-                        var target=event.target;
-                        var result=((target)&&(target.result));
-                        dropClass($ID("METABOOKMEDIA"),"loadingcontent");
-                        dropClass(src_elt,"loadingcontent");
-                        if ((result)&&(result.datauri)) {
-                            var objurl=mB.gotGlossData(url,result.datauri);
-                            src_elt.src=objurl;}
-                        else src_elt.src=url;
-                        placeMedia();};
-                    req.onerror=function(event){
-                        fdjtLog("Retrieval of %s from indexedDB failed: %o",
-                                url,event.errorCode);
-                        dropClass($ID("METABOOKMEDIA"),"loadingcontent");
-                        dropClass(src_elt,"loadingcontent");
-                        src_elt.src=url;
-                        placeMedia();};}
-                else if (metaBook.srcloading[url]) {
-                    metaBook.srcloading[url].push(src_elt);
-                    placeMedia();}
-                else {
-                    metaBook.srcloading[url]=[src_elt];
-                    placeMedia();}}
-            else {
-                src_elt.src=url;
-                placeMedia();}}
+            addClass($ID("METABOOKMEDIA"),"loadingcontent");
+            addClass(src_elt,"loadingcontent");
+            metaBook.getGlossData(url).then(function(val){
+                dropClass($ID("METABOOKMEDIA"),"loadingcontent");
+                dropClass(src_elt,"loadingcontent");
+                src_elt.src=val;
+                placeMedia();});}
         else placeMedia();}
     metaBook.showMedia=showMedia;
     function hideMedia(){
