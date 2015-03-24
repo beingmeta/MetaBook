@@ -60,6 +60,7 @@
 
     var getLocal=fdjtState.getLocal;
     var setLocal=fdjtState.setLocal;
+    var existsLocal=fdjtState.existsLocal;
     
     var mB=metaBook;
     var Trace=metaBook.Trace;
@@ -68,7 +69,7 @@
     metaBook.tagscores=new ObjectMap();
 
     function hasLocal(key){
-        if (mB.persist) return fdjtState.existsLocal(key);
+        if (mB.persist) return existsLocal(key);
         else return fdjtState.existsSession(key);}
     metaBook.hasLocal=hasLocal;
     function saveLocal(key,value,unparse){
@@ -76,8 +77,13 @@
         else fdjtState.setSession(key,value,unparse);}
     metaBook.saveLocal=saveLocal;
     function readLocal(key,parse){
-        if (mB.persist) return getLocal(key,parse)||
-            fdjtState.getSession(key,parse);
+        if (mB.persist) {
+            if (existsLocal(key))
+                return getLocal(key,parse);
+            else if (fdjtState.existsSession(key)) {
+                setLocal(key,fdjtState.getSession(key));
+                return getLocal(key,parse);}
+            else return false;}
         else return fdjtState.getSession(key,parse)||getLocal(key,parse);}
     metaBook.readLocal=readLocal;
     function clearLocal(key){
@@ -316,17 +322,41 @@
                 metaBook.cacheglosses=false;}}
         metaBook.setCacheGlosses=setCacheGlosses;
         
+        /* Setting persistence */
+
+        function setPersist(){
+            metaBook.persist=true;
+            var refuri=mB.refuri, docuri=mB.docuri;
+            // We also initialize .refuris/.docuris
+            var refuris=readLocal("mB.refuris",true);
+            var docuris=readLocal("mB.docuris",true);
+            if (!(refuris))
+                saveLocal("mB.refuris",[refuri],true);
+            else if (refuris.indexOf(refuri)<0) {
+                refuris.push(refuri);
+                saveLocal("mB.refuris",refuris,true);}
+            else {}
+            if (!(docuris))
+                saveLocal("mB.docuris",[docuri],true);
+            else if (docuris.indexOf(docuri)<0) {
+                docuris.push(docuri);
+                saveLocal("mB.docuris",docuris,true);}
+            else {}
+            if (mB.sourceid)
+                saveLocal("mB.sourceid("+docuri+")",mB.sourceid);}
+        metaBook.setPersist=setPersist;
+
         /* Clearing offline data */
 
         function clearOffline(uri){
             var dropLocal=fdjtState.dropLocal;
             if (!(uri)) {
-                var books=readLocal("mB.books",true);
+                var books=readLocal("mB.docuris",true);
                 if (books) {
                     var i=0, lim=books.length;
                     while (i<lim) clearOffline(books[i++]);}
                 dropLocal("mB.user");
-                dropLocal("mB.books");
+                dropLocal("mB.docuris");
                 // We clear layouts, because they might
                 //  contain personalized information
                 fdjt.CodexLayout.clearLayouts();

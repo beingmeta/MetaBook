@@ -73,7 +73,7 @@
     //  or the initial hash id from the URL (which was saved in
     //  metaBook.inithash).
     metaBook.initState=function initState() {
-        var uri=metaBook.docuri;
+        var uri=metaBook.docuri, refuri=metaBook.refuri;
         var state=readLocal("mB.state("+uri+")",true);
         var hash=metaBook.inithash;
         if (hash) {

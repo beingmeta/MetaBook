@@ -57,7 +57,7 @@
             return;}
         if (window._sbook_loadinfo!==info)
             metaBook.setConnected(true);
-        if (info.sticky) metaBook.persist=true;
+        if (info.sticky) metaBook.setPersist(true);
         if (!(metaBook.user)) {
             if (info.userinfo)
                 metaBook.setUser(

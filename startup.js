@@ -155,7 +155,7 @@ metaBook.Startup=
             // Figure out if we have a user and whether we can keep
             // user information
             if (getLocal("mB.user")) {
-                metaBook.persist=true;
+                metaBook.setPersist(true);
                 metaBook.userSetup();}
 
             // Initialize the book state (location, targets, etc)
@@ -664,15 +664,17 @@ metaBook.Startup=
         function readBookSettings(){
             // Basic stuff
             var refuri=_getsbookrefuri();
+            var docuri=_getsbookdocuri();
             var locuri=window.location.href;
             var hashpos=locuri.indexOf('#');
             if (hashpos>0) metaBook.locuri=locuri.slice(0,hashpos);
             else metaBook.locuri=locuri;
             document.body.refuri=metaBook.refuri=refuri;
-            metaBook.docuri=_getsbookdocuri();
             metaBook.topuri=document.location.href;
+            metaBook.docuri=docuri;
             
             var refuris=getLocal("mB.refuris",true)||[];
+            var docuris=getLocal("mB.docuris",true)||[];
 
             metaBook.sourceid=
                 getMeta("SBOOKS.sourceid")||getMeta("SBOOKS.fileid")||
@@ -710,7 +712,12 @@ metaBook.Startup=
             metaBook.sbooknoterefs=(((noterefspecs)&&(noterefspecs.length))?
                                     (fdjtDOM.sel(noterefspecs)):(false));
 
-            refuris.push(refuri);
+            if (refuris.indexOf(refuri)<0) {
+                refuris.push(refuri);
+                saveLocal("mB.refuris",refuris,true);}
+            if (docuris.indexOf(docuri)<0) {
+                docuris.push(docuri);
+                saveLocal("mB.docuris",docuris,true);}
 
             var docref=getMeta("SBOOKS.docref");
             if (docref) metaBook.docref=docref;
@@ -762,8 +769,7 @@ metaBook.Startup=
             if (!(metaBook.nologin)) {
                 metaBook.mycopyid=getMeta("SBOOKS.mycopyid")||
                     (getLocal("mycopy("+refuri+")"))||
-                    false;}
-            if (metaBook.persist) saveLocal("mB.refuris",refuris,true);}
+                    false;}}
 
         function setupDevice(){
             var root=document.documentElement||document.body;

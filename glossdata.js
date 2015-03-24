@@ -52,7 +52,7 @@
     var Blob=window.Blob;
 
     function setupGlossData(){
-        var cached=getLocal("glossdata("+mB.docuri+")",true);
+        var cached=getLocal("mB.glossdata("+mB.docuri+")",true);
         var i=0, len=cached.length; while (i<len) 
             glossdata_state[cached[i++]]="cached";}
     metaBook.setupGlossData=setupGlossData;
@@ -155,7 +155,7 @@
             mB.srcloading[uri]=false;}}
 
     function cacheDataURI(url,datauri){
-        var key="glossdata("+url+")";
+        var key="mB.glossdata("+url+")";
         metaBook.getDB().then(function(db){
             var txn=db.transaction(["glossdata"],"readwrite");
             var storage=txn.objectStore("glossdata");
@@ -175,12 +175,10 @@
 
     function glossDataSaved(url){
         if (Trace.glossdata) fdjtLog("GlossData cached for %s",url);
-        pushLocal("glossdata("+mB.docuri+")",url);
-        pushLocal("glossdata()",url);}
+        pushLocal("mB.glossdata("+mB.docuri+")",url);}
 
     function clearGlossData(url){
-        var key=((url)?("glossdata("+url+")"):("glossdata()"));
-        var urls=getLocal(key,true);
+        var key="mB.glossdata("+url+")", urls=getLocal(key,true);
         if ((urls)&&(urls.length)) {
             clearGlossDataCache(urls,key);}
         else dropLocal(key);}
