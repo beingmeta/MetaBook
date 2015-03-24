@@ -355,51 +355,77 @@
     /* Noting (and caching) glossdata */
 
     var glossdata=metaBook.glossdata;
+    var createObjectURL=
+        ((window.URL)&&(window.URL.createObjectURL))||
+        ((window.webkitURL)&&(window.webkitURL.createObjectURL));
+    var Blob=window.Blob;
 
-    function cacheGlossData(link){
-        if (link.search("https://glossdata.sbooks.net/")!==0) return;
-        var key="glossdata("+link+")";
+    function cacheGlossData(uri){
+        if (uri.search("https://glossdata.sbooks.net/")!==0) return;
+        var key="glossdata("+uri+")";
         if (fdjtState.getLocal(key)) return;
         else fdjtState.setLocal(key,"fetching");
-        var uri="https://glossdata.sbooks.net/U/"+
-            link.slice("https://glossdata.sbooks.net/".length);
-        var req=new XMLHttpRequest();
+        var req=new XMLHttpRequest(), endpoint, rtype;
+        if ((!(Blob))||(!(createObjectURL))) {
+            // This endpoint returns a datauri as text
+            endpoint="https://glossdata.sbooks.net/U/"+
+                uri.slice("https://glossdata.sbooks.net/".length);
+            req.responseText=""; rtype="any";}
+        else {
+            endpoint=uri; req.responseType="blob";
+            rtype=req.responseType;}
         if (Trace.glossdata)
-            fdjtLog("Fetching glossdata %s to cache locally",link);
+            fdjtLog("Fetching glossdata %s (%s) to cache locally",uri,rtype);
         req.onreadystatechange=function () {
-            if (req.readyState === 4) {
+            if ((req.readyState === 4)&&(req.status === 200)) try {
+                var local_uri=false, data_uri=false;
                 if (Trace.glossdata)
-                    fdjtLog("Glossdata from %s status %d",req.status);
-                var use_data=((req.status===200)?
-                              (gotGlossData(link,req.responseText)):
-                              (link));
-                var waiting=mB.srcloading[link];
-                if (waiting) {
-                    var i=0, lim=waiting.length;
-                    if (Trace.glossdata)
-                        fdjtLog("Setting glossdata src for %d element(s)",lim);
-                    while (i<lim) waiting[i++].src=use_data;}
-                if (req.status === 200) 
-                    storeGlossData(link,req.responseText);
-                else fdjtState.dropLocal(key);}
-            else {}};
+                    fdjtLog("Glossdata from %s (%s) status %d",
+                            endpoint,rtype,req.status);
+                if (rtype!=="blob")
+                    data_uri=local_uri=req.responseText;
+                else if (createObjectURL) 
+                    local_uri=createObjectURL(req.response);
+                else local_uri=false;
+                if (local_uri) gotLocalURL(uri,local_uri);
+                if (data_uri) cacheDataURI(uri,data_uri);
+                else {
+                    // Need to get a data uri
+                    var reader=new FileReader(req.response);
+                    reader.onload=function(){
+                        try {
+                            if (!(local_uri)) gotLocalURL(uri,reader.result);
+                            cacheDataURI(uri,reader.result);}
+                        catch (ex) {
+                            fdjtLog.warn("Error encoding %s from %s: %s",
+                                         uri,endpoint,ex);
+                            fdjtState.dropLocal(key);}};
+                    reader.readAsDataURL(req.response);}}
+            catch (ex) {
+                fdjtLog.warn("Error fetching %s via %s: %s",uri,endpoint,ex);
+                fdjtState.dropLocal(key);}};
         req.open("GET",uri);
         req.withCredentials=true;
         req.send(null);}
 
-    function gotGlossData(link,datauri){
-        var url=fdjtDOM.data2URL(datauri);
-        glossdata[link]=url;
-        return url;}
-    metaBook.gotGlossData=gotGlossData;
+    function gotLocalURL(uri,local_url){
+        var waiting=mB.srcloading[uri];
+        glossdata[uri]=local_url;
+        if (waiting) {
+            var i=0, lim=waiting.length;
+            if (Trace.glossdata)
+                fdjtLog("Setting glossdata src for %d element(s)",lim);
+            while (i<lim) waiting[i++].src=local_url;
+            mB.srcloading[uri]=false;}}
 
-    function storeGlossData(url,datauri){
+    function cacheDataURI(url,datauri){
         var key="glossdata("+url+")";
         if (metaBookDB) {
             var txn=metaBookDB.transaction(["glossdata"],"readwrite");
             var storage=txn.objectStore("glossdata");
             var req=storage.put({url: url,datauri: datauri});
             req.onerror=function(event){
+                fdjtState.dropLocal(key,"cached");
                 fdjtLog("Error saving %s in indexedDB: %o",
                         url,event.target.errorCode);};
             req.onsuccess=function(event){
@@ -424,6 +450,7 @@
                 var gdurl=urls[i++]; dropLocal("glossdata("+gdurl+")");
                 if (metaBookDB) clearGlossDataFor(gdurl);}}
         dropLocal(key);}
+    metaBook.clearGlossData=clearGlossData;
 
     function clearGlossDataFor(url){
         var txn=metaBookDB.transaction(["glossdata"],"readwrite");
