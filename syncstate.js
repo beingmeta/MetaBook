@@ -74,7 +74,7 @@
     //  metaBook.inithash).
     metaBook.initState=function initState() {
         var uri=metaBook.docuri;
-        var state=readLocal("metabook.state("+uri+")",true);
+        var state=readLocal("mB.state("+uri+")",true);
         var hash=metaBook.inithash;
         if (hash) {
             if (hash[0]==="#") hash=hash.slice(1);}
@@ -93,7 +93,7 @@
                 state.target=hash;
                 state.location=false;
                 state.changed=fdjtTime.tick;
-                saveLocal("metabook.state("+uri+")",state,true);}}
+                saveLocal("mB.state("+uri+")",state,true);}}
         if (state) metaBook.state=state;};
     
     // This records the current state of the app, bundled into an
@@ -131,7 +131,7 @@
         metaBook.state=state;
         var statestring=JSON.stringify(state);
         var uri=metaBook.docuri;
-        saveLocal("metabook.state("+uri+")",statestring);
+        saveLocal("mB.state("+uri+")",statestring);
         if ((!(syncing))&&(metaBook.locsync)&&(metaBook.user)&&
             ((!(metaBook.xstate))||(state.changed>metaBook.xstate.changed)))
             syncState(true);
@@ -190,7 +190,7 @@
     function clearState(){
         var uri=metaBook.docuri;
         metaBook.state=false;
-        clearLocal("metabook.state("+uri+")");
+        clearLocal("mB.state("+uri+")");
         metaBook.xstate=false;
     } metaBook.clearState=clearState;
 
@@ -200,7 +200,7 @@
         if (state.location) state.maxloc=location;
         state.reset=true;
         var statestring=JSON.stringify(state);
-        saveLocal("metabook.state("+uri+")",statestring);
+        saveLocal("mB.state("+uri+")",statestring);
         syncState(true);}
     metaBook.resetState=resetState;
 
@@ -392,7 +392,7 @@
             state.maxloc=xstate.maxloc;
             var statestring=JSON.stringify(state);
             var uri=metaBook.docuri;
-            saveLocal("metabook.state("+uri+")",statestring);}
+            saveLocal("mB.state("+uri+")",statestring);}
         else {}
         if (state.changed>=xstate.changed) {
             // The locally saved state is newer than the server,

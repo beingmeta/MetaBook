@@ -64,9 +64,9 @@
                     info.userinfo,info.outlets,info.layers,
                     info.sync);
             else {
-                if (getLocal("metabook.queued("+metaBook.refuri+")"))
+                if (getLocal("mB.queued("+metaBook.refuri+")"))
                     metaBook.glossdb.load(
-                        getLocal("metabook.queued("+metaBook.refuri+")",true));
+                        getLocal("mB.queued("+metaBook.refuri+")",true));
                 $ID("METABOOKCOVER").className="bookcover";
                 addClass(document.documentElement||document.body,
                          "_NOUSER");}
@@ -103,8 +103,8 @@
             metaBook.clearOffline();}
         info.loaded=fdjtTime();
         if ((!(metaBook.localglosses))&&
-            ((getLocal("metabook.sync("+refuri+")"))||
-             (getLocal("metabook.queued("+refuri+")"))))
+            ((getLocal("mB.sync("+refuri+")"))||
+             (getLocal("mB.queued("+refuri+")"))))
             initGlossesOffline();
         if (Trace.glosses) {
             fdjtLog("loadInfo for %d %sglosses and %d refs (sync=%d)",
@@ -289,7 +289,7 @@
         var refuri=metaBook.refuri;
         metaBook[name]=qids;
         if (metaBook.cacheglosses)
-            saveLocal("metabook."+name+"("+refuri+")",qids,true);}
+            saveLocal("mB."+name+"("+refuri+")",qids,true);}
     
     // Processes info loaded remotely
     function gotInfo(name,info,persist) {
@@ -310,7 +310,7 @@
                 if (persist) ref.save();
                 metaBook[name]=ref._id;
                 if (persist) saveLocal(
-                    "metabook."+name+"("+metaBook.refuri+")",ref._id,true);}}}
+                    "mB."+name+"("+metaBook.refuri+")",ref._id,true);}}}
 
     function initGlosses(glosses,etc,callback){
         if (typeof callback === "undefined") callback=true;

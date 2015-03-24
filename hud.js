@@ -378,7 +378,7 @@ metaBook.setMode=
 
         function showCover(){
             if (metaBook._setup)
-                fdjtState.dropLocal("metabook.opened("+metaBook.docuri+")");
+                fdjtState.dropLocal("mB.opened("+metaBook.docuri+")");
             setHUD(false);
             metaBook.closed=true;
             if (metaBook.covermode) {
@@ -389,7 +389,7 @@ metaBook.setMode=
         function hideCover(){
             if (metaBook._setup)
                 fdjtState.setLocal(
-                    "metabook.opened("+metaBook.docuri+")",fdjtTime());
+                    "mB.opened("+metaBook.docuri+")",fdjtTime());
             metaBook.closed=false;
             dropClass(document.body,"mbCOVER");
             if (metaBook.mode) {

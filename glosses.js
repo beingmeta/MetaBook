@@ -1292,9 +1292,9 @@
         var queued=metaBook.queued;
         queued.push(json.uuid);
         if (metaBook.cacheglosses) {
-            fdjtState.setLocal("metabook.params("+json.uuid+")",params);
+            fdjtState.setLocal("mB.params("+json.uuid+")",params);
             fdjtState.setLocal(
-                "metabook.queued("+metaBook.refuri+")",queued,true);}
+                "mB.queued("+metaBook.refuri+")",queued,true);}
         else queued_data[json.uuid]=params;
         // Now save it to the in-memory database
         var glossdata=
@@ -1364,7 +1364,7 @@
                 getAttribute("ajaxaction");
             var queued=metaBook.queued; var glossid=queued[0];
             var post_data=((metaBook.nocache)?((queued_data[glossid])):
-                           (fdjtState.getLocal("metabook.params("+glossid+")")));
+                           (fdjtState.getLocal("mB.params("+glossid+")")));
             if (post_data) {
                 var req=new XMLHttpRequest();
                 req.open('POST',ajax_uri);
@@ -1372,7 +1372,7 @@
                 req.onreadystatechange=function () {
                     if ((req.readyState === 4) &&
                         (req.status>=200) && (req.status<300)) {
-                        fdjtState.dropLocal("metabook.params("+glossid+")");
+                        fdjtState.dropLocal("mB.params("+glossid+")");
                         var pending=metaBook.queued;
                         if ((pending)&&(pending.length)) {
                             var pos=pending.indexOf(glossid);
@@ -1380,11 +1380,11 @@
                                 pending.splice(pos,1);
                                 if (metaBook.cacheglosses)
                                     fdjtState.setLocal(
-                                        "metabook.queued("+metaBook.refuri+")",pending,true);
+                                        "mB.queued("+metaBook.refuri+")",pending,true);
                                 metaBook.queued=pending;}}
                         addgloss_callback(req,false,false);
                         if (pending.length) setTimeout(writeQueuedGlosses,200);
-                        fdjtState.dropLocal("metabook.queued("+metaBook.refuri+")");}
+                        fdjtState.dropLocal("mB.queued("+metaBook.refuri+")");}
                     else if (req.readyState===4) {
                         metaBook.setConnected(false);}
                     else {}};

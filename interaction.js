@@ -1694,7 +1694,7 @@
         if (!((evt.shiftKey)||((evt.touches)&&(evt.touches.length>=2)))) {
             var opened=
                 metaBook.readLocal(
-                    "metabook.opened("+metaBook.docuri+")",
+                    "mB.opened("+metaBook.docuri+")",
                     true);
             if ((opened)&&((opened-fdjtTime())>(60*10*1000))) {
                 if ($ID("METABOOKCOVERHOLDER"))
@@ -1778,11 +1778,11 @@
             if ((now-devmode_click)<1000) {
                 if (mB.devmode)  {
                     metaBook.devmode=false;
-                    fdjtState.dropLocal("metabook.devmode");
+                    fdjtState.dropLocal("mB.devmode");
                     dropClass(root,"_DEVMODE");}
                 else {
                     metaBook.devmode=true;
-                    fdjtState.setLocal("metabook.devmode",true);
+                    fdjtState.setLocal("mB.devmode",true);
                     addClass(root,"_DEVMODE");}
                 devmode_click=false;}
             else devmode_click=now;}

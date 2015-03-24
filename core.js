@@ -284,7 +284,7 @@
 
         metaBook.queued=
             ((metaBook.cacheglosses)&&
-             (getLocal("metabook.queued("+metaBook.refuri+")",true)))||[];
+             (getLocal("mB.queued("+metaBook.refuri+")",true)))||[];
 
         function setCacheGlosses(value){
             var saveprops=metaBook.saveprops, uri=metaBook.docuri;
@@ -300,18 +300,18 @@
                     while (i<lim) {
                         var prop=saveprops[i++];
                         if (metaBook[prop]) saveLocal(
-                            "metabook."+prop+"("+uri+")",metaBook[prop],true);}
+                            "mB."+prop+"("+uri+")",metaBook[prop],true);}
                     metaBook.glossdb.save(true);
                     metaBook.sourcedb.save(true);
                     if ((metaBook.queued)&&(metaBook.queued.length)) 
                         metaBook.queued=metaBook.queued.concat(
-                            getLocal("metabook.queued("+uri+")",true)||[]);
+                            getLocal("mB.queued("+uri+")",true)||[]);
                     else metaBook.queued=
-                        getLocal("metabook.queued("+uri+")",true)||[];}
+                        getLocal("mB.queued("+uri+")",true)||[];}
                 metaBook.cacheglosses=true;}
             else {
                 clearOffline(metaBook.docuri);
-                if (uri) fdjtState.dropLocal("metabook.queued("+uri+")");
+                if (uri) fdjtState.dropLocal("mB.queued("+uri+")");
                 metaBook.queued=[];
                 metaBook.cacheglosses=false;}}
         metaBook.setCacheGlosses=setCacheGlosses;
@@ -321,41 +321,47 @@
         function clearOffline(uri){
             var dropLocal=fdjtState.dropLocal;
             if (!(uri)) {
-                dropLocal("metabook.user");
+                var books=readLocal("mB.books",true);
+                if (books) {
+                    var i=0, lim=books.length;
+                    while (i<lim) clearOffline(books[i++]);}
+                dropLocal("mB.user");
+                dropLocal("mB.books");
                 // We clear layouts, because they might
                 //  contain personalized information
                 fdjt.CodexLayout.clearLayouts();
                 fdjtState.clearLocal();
-                fdjtState.clearSession();
-                metaBook.clearGlossData();}
+                fdjtState.clearSession();}
             else {
                 if (typeof uri !== "string") uri=metaBook.docuri;
+                var sourceid=getLocal("mB.sourceid("+uri+")");
+                if (sourceid) metaBook.clearLayouts(sourceid);
                 metaBook.sync=false;
-                clearLocal("metabook.sources("+uri+")");
-                clearLocal("metabook.outlets("+uri+")");
-                clearLocal("metabook.layers("+uri+")");
-                clearLocal("metabook.etc("+uri+")");
-                clearLocal("metabook.sync("+uri+")");
+                clearLocal("mB.sources("+uri+")");
+                clearLocal("mB.outlets("+uri+")");
+                clearLocal("mB.layers("+uri+")");
+                clearLocal("mB.etc("+uri+")");
+                clearLocal("mB.sync("+uri+")");
                 // We don't currently clear sources when doing book
                 // specific clearing because they might be shared
                 // between books.  This is a bug.
                 metaBook.glossdb.clearOffline(function(){
-                    clearLocal("metabook.sync("+uri+")");});
+                    clearLocal("mB.sync("+uri+")");});
                 metaBook.clearGlossData(uri);}}
         metaBook.clearOffline=clearOffline;
         
         function refreshOffline(){
             var uri=metaBook.docuri;
             metaBook.sync=false;
-            clearLocal("metabook.sources("+uri+")");
-            clearLocal("metabook.outlets("+uri+")");
-            clearLocal("metabook.layers("+uri+")");
-            clearLocal("metabook.etc("+uri+")");
+            clearLocal("mB.sources("+uri+")");
+            clearLocal("mB.outlets("+uri+")");
+            clearLocal("mB.layers("+uri+")");
+            clearLocal("mB.etc("+uri+")");
             // We don't currently clear sources when doing book
             // specific clearing because they might be shared
             // between books
             metaBook.glossdb.clearOffline(function(){
-                clearLocal("metabook.sync("+uri+")");
+                clearLocal("mB.sync("+uri+")");
                 setTimeout(metaBook.updateInfo,25);});}
         metaBook.refreshOffline=refreshOffline;
 
@@ -791,7 +797,7 @@
             if ((onconnect)&&(onconnect.length)) {
                 var i=0; var lim=onconnect.length;
                 while (i<lim) (onconnect[i++])();}
-            if (fdjtState.getLocal("metabook.queued("+metaBook.refuri+")"))
+            if (fdjtState.getLocal("mB.queued("+metaBook.refuri+")"))
                 metaBook.writeQueuedGlosses();}
         if (((val)&&(!(metaBook.connected)))||
             ((!(val))&&(metaBook.connected)))

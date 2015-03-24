@@ -395,10 +395,6 @@
         metaBook.GoTo(target,"JumpTo");}
     metaBook.JumpTo=metaBookJumpTo;
 
-    function getTOCHead(id){
-        var elts=fdjtDOM.$("#METABOOKSTATICTOC div.head[NAME='SBR"+id+"']");
-        return ((elts)&&(elts.length===1)&&(elts[0]));}
-
     // This jumps and disables the HUD at the same time
     function metaBookGoTOC(target){
         if (target) metaBook.GoTo(target,"GoTOC");}

@@ -122,7 +122,7 @@ metaBook.Startup=
             /*
               if ((fdjtDevice.standalone)&&
               (fdjtDevice.ios)&&(fdjtDevice.mobile)&&
-              (!(getLocal("metabook.user")))&&
+              (!(getLocal("mB.user")))&&
               (fdjtState.getQuery("SBOOKS:AUTH-"))) {
               var authkey=fdjt.State.getQuery("SBOOKS:AUTH-");
               fdjtLog("Got auth key %s",authkey);
@@ -154,7 +154,7 @@ metaBook.Startup=
 
             // Figure out if we have a user and whether we can keep
             // user information
-            if (getLocal("metabook.user")) {
+            if (getLocal("mB.user")) {
                 metaBook.persist=true;
                 metaBook.userSetup();}
 
@@ -164,7 +164,7 @@ metaBook.Startup=
             // If we have no clue who the user is, ask right away (updateInfo())
             if (!((metaBook.user)||(window._sbook_loadinfo)||
                   (metaBook.userinfo)||(window._userinfo)||
-                  (getLocal("metabook.user")))) {
+                  (getLocal("mB.user")))) {
                 if (Trace.startup)
                     fdjtLog("No local user info, requesting from sBooks server %s",
                             mB.server);
@@ -261,7 +261,7 @@ metaBook.Startup=
                 (window.location.protocol==='https:'))
                 metaBook.root=https_root;
             // Whether to suppress login, etc
-            if ((getLocal("metabook.nologin"))||(getQuery("nologin")))
+            if ((getLocal("mB.nologin"))||(getQuery("nologin")))
                 metaBook.nologin=true;
             var sbooksrv=getMeta("SBOOKS.server")||getMeta("SBOOKSERVER");
             if (sbooksrv) metaBook.server=sbooksrv;
@@ -270,7 +270,7 @@ metaBook.Startup=
             else metaBook.server=lookupServer(document.domain);
             if (!(metaBook.server)) metaBook.server=metaBook.default_server;
 
-            if (fdjtState.getLocal("metabook.devmode")) {
+            if (fdjtState.getLocal("mB.devmode")) {
                 addClass(document.documentElement,"_DEVMODE");
                 metaBook.devmode=true;}
 
@@ -321,7 +321,7 @@ metaBook.Startup=
 
             // Setup the reticle (if desired)
             if ((typeof (body.style["pointer-events"])!== "undefined")&&
-                ((metaBook.demo)||(fdjtState.getLocal("metabook.demo"))||
+                ((metaBook.demo)||(fdjtState.getLocal("mB.demo"))||
                  (fdjtState.getCookie("sbooksdemo"))||
                  (getQuery("demo")))) {
                 fdjtUI.Reticle.setup();}
@@ -382,7 +382,7 @@ metaBook.Startup=
             if ((cur)&&(cur>val)) return cur;
             metaBook.sync=val;
             if (metaBook.persist)
-                saveLocal("metabook.sync("+metaBook.docuri+")",val);
+                saveLocal("mB.sync("+metaBook.docuri+")",val);
             return val;};
 
         function readTraceSettings(){
@@ -649,7 +649,7 @@ metaBook.Startup=
                 metaBook.hideCover();
             else if ((!(mode))&&(metaBook.user)) {
                 var opened=readLocal(
-                    "metabook.opened("+metaBook.docuri+")",true);
+                    "mB.opened("+metaBook.docuri+")",true);
                 if ((opened)&&((opened+((3600+1800)*1000))>fdjtTime()))
                     metaBook.hideCover();}
             if (fdjtDOM.vischange)
@@ -672,19 +672,19 @@ metaBook.Startup=
             metaBook.docuri=_getsbookdocuri();
             metaBook.topuri=document.location.href;
             
-            var refuris=getLocal("metabook.refuris",true)||[];
+            var refuris=getLocal("mB.refuris",true)||[];
 
             metaBook.sourceid=
                 getMeta("SBOOKS.sourceid")||getMeta("SBOOKS.fileid")||
                 metaBook.docuri;
             metaBook.sourcetime=fdjtTime.parse(getMeta("SBOOKS.sourcetime"));
-            var oldid=getLocal("metabook.sourceid("+metaBook.docuri+")");
+            var oldid=getLocal("mB.sourceid("+metaBook.docuri+")");
             if ((oldid)&&(oldid!==metaBook.sourceid)) {
-                var layouts=getLocal("metabook.layouts("+oldid+")");
+                var layouts=getLocal("mB.layouts("+oldid+")");
                 if ((layouts)&&(layouts.length)) {
                     var i=0, lim=layouts.length; while (i<lim) 
                         CodexLayout.dropLayout(layouts[i++]);}}
-            else saveLocal("metabook.sourceid("+metaBook.docuri+")",
+            else saveLocal("mB.sourceid("+metaBook.docuri+")",
                            metaBook.sourceid);
 
             var bookbuild=getMeta("SBOOKS.buildstamp");
@@ -763,7 +763,7 @@ metaBook.Startup=
                 metaBook.mycopyid=getMeta("SBOOKS.mycopyid")||
                     (getLocal("mycopy("+refuri+")"))||
                     false;}
-            if (metaBook.persist) saveLocal("metabook.refuris",refuris,true);}
+            if (metaBook.persist) saveLocal("mB.refuris",refuris,true);}
 
         function setupDevice(){
             var root=document.documentElement||document.body;

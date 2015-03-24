@@ -238,7 +238,7 @@ metaBook.Paginate=
             var max_layouts=3;
 
             function recordLayout(layout_id,source_id){
-                var key="metabook.layouts("+source_id+")";
+                var key="mB.layouts("+source_id+")";
                 var saved=getLocal(key,true);
                 if (!(saved)) setLocal(key,[layout_id],true);
                 else {
@@ -461,23 +461,24 @@ metaBook.Paginate=
             else if (typeof layout_id === "number")
                 layout_id=getLayoutID.apply(null,arguments);
             else {}
-            var layouts=getLocal("metabook.layouts("+metaBook.sourceid+")",true);
+            var layouts=getLocal("mB.layouts("+metaBook.sourceid+")",true);
             return ((layouts)&&(layouts.indexOf(layout_id)>=0));}
         metaBook.layoutCached=layoutCached;
         
         function clearLayouts(source_id){
-            if (typeof source_id === "undefined") source_id=metaBook.sourceid;
+            if (typeof source_id === "undefined")
+                source_id=metaBook.sourceid;
             if (source_id) {
-                var layouts=getLocal("metabook.layouts("+metaBook.sourceid+")",true);
+                var layouts=getLocal("mB.layouts("+source_id+")",true);
                 var i=0, lim=layouts.length; while (i<lim) {
                     var layout=layouts[i++];
                     fdjtLog("Dropping layout %s",layout);
                     CodexLayout.dropLayout(layout);}
-                fdjtState.dropLocal("metabook.layouts("+metaBook.sourceid+")");}
+                fdjtState.dropLocal("mB.layouts("+source_id+")");}
             else {
                 CodexLayout.clearLayouts();
                 CodexLayout.clearAll();
-                fdjtState.dropLocal(/^metabook.layouts\(/g);}}
+                fdjtState.dropLocal(/^mB.layouts\(/g);}}
         metaBook.clearLayouts=clearLayouts;
 
         function getLayoutArgs(){
@@ -628,7 +629,7 @@ metaBook.Paginate=
             // We track the sourceid to know when, for example, any
             //  cached layouts need to be invalidated.
             var saved_sourceid=
-                fdjtState.getLocal("metabook.sourceid("+metaBook.refuri+")");
+                fdjtState.getLocal("mB.sourceid("+metaBook.refuri+")");
             if ((saved_sourceid)&&(sourceid)&&(sourceid!==sourceid)) {
                 var layouts=fdjtState.getLocal("fdjtmetaBook.layouts",true);
                 var kept=[];
@@ -644,7 +645,7 @@ metaBook.Paginate=
                 else fdjtState.dropLocal("fdjtmetaBook.layouts",kept);}
             
             if (sourceid)
-                fdjtState.setLocal("metabook.sourceid("+metaBook.refuri+")",
+                fdjtState.setLocal("mB.sourceid("+metaBook.refuri+")",
                                    sourceid);
             
             var args={page_height: height,page_width: width,
