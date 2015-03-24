@@ -77,6 +77,16 @@
             else {
                 endpoint=uri; req.responseType="blob";
                 rtype=req.responseType;}
+            // We provide credentials in the query string because we
+            //  need to have .withCredentials be false to avoid some
+            //  CORS-related errors on redirects to sites like S3.
+            if (fdjt.State.getCookie("SBOOKS:AUTH")) 
+                endpoint=endpoint+"?SBOOKS:AUTH="+
+                encodeURIComponent(fdjt.State.getCookie("SBOOKS:AUTH"));
+            else if (fdjt.State.getCookie("SBOOKS:AUTH-"))
+                endpoint=endpoint+"?SBOOKS:AUTH-="+
+                encodeURIComponent(fdjt.State.getCookie("SBOOKS:AUTH-"));
+            else {}
             if (Trace.glossdata)
                 fdjtLog("Fetching glossdata %s (%s) to cache locally",uri,rtype);
             req.onreadystatechange=function () {
@@ -112,8 +122,8 @@
                 catch (ex) {
                     fdjtLog.warn("Error fetching %s via %s: %s",uri,endpoint,ex);
                     glossdata_state[uri]=false;}};
-            req.open("GET",uri);
-            req.withCredentials=true;
+            req.open("GET",endpoint);
+            // req.withCredentials=true;
             req.send(null);}
         return new Promise(caching);}
     metaBook.cacheGlossData=cacheGlossData;
