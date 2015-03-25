@@ -31,6 +31,7 @@
 
 */
 /* jshint browser: true */
+/* globals Promise */
 
 /* Initialize these here, even though they should always be
    initialized before hand.  This will cause various code checkers to
@@ -253,8 +254,10 @@
                             if (info) addTags(
                                 info,tags,fragslot,maker_knodule);}}}},
                            "initgloss");
-            if ((metaBook.user)&&(mB.persist)&&(metaBook.cacheglosses))
-                glossdb.storage=window.localStorage;}
+            if ((metaBook.user)&&(mB.persist)&&(metaBook.cacheglosses)) {
+                if (mB.useidb)
+                    getDB(function(db){glossdb.storage=db;});
+                else glossdb.storage=localStorage;}}
         
         function Gloss(){return Ref.apply(this,arguments);}
         Gloss.prototype=new Ref();
@@ -304,12 +307,16 @@
             var saveprops=metaBook.saveprops, uri=metaBook.docuri;
             if (value) {
                 if (metaBook.user) {
-                    var storage=((mB.persist)?(window.localStorage):
-                                 (window.sessionStorage));
-                    if (!(metaBook.sourcedb.storage))
-                        metaBook.sourcedb.storage=storage;
-                    if (!metaBook.glossdb.storage)
-                        metaBook.glossdb.storage=storage;
+                    if (mB.useidb) getDB(function(db){
+                        metaBook.sourcedb.storage=db;
+                        metaBook.glossdb.storage=db;});
+                    else {
+                        var storage=((mB.persist)?(window.localStorage):
+                                     (window.sessionStorage));
+                        if (!(metaBook.sourcedb.storage))
+                            metaBook.sourcedb.storage=storage;
+                        if (!metaBook.glossdb.storage)
+                            metaBook.glossdb.storage=storage;}
                     var props=metaBook.saveprops, i=0, lim=props.length;
                     while (i<lim) {
                         var prop=saveprops[i++];
