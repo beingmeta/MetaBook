@@ -34,6 +34,8 @@
 #METABOOKFRAME {
     /* font-family: 'Open Sans', Arial, Helvetica, sans-serif, sans; */
     font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif, sans;}
+html._HAVEOPENSANS #METABOOKFRAME {
+    font-family: 'Open Sans', Verana, Tahoma, Arial, Helvetica, sans-serif;}
 html._DYSLEXICAL #METABOOKFRAME, html._DYSLEXICAL .fdjtdialog {
     font-family: 'Open Dyslexic', serif;}
 .wf-inactive #METABOOKFRAME {
