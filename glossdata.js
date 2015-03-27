@@ -73,10 +73,8 @@
                 // This endpoint returns a datauri as text
                 endpoint="https://glossdata.sbooks.net/U/"+
                     uri.slice("https://glossdata.sbooks.net/".length);
-                req.responseText=""; rtype="any";}
-            else {
-                endpoint=uri; req.responseType="blob";
-                rtype=req.responseType;}
+                rtype="";}
+            else {endpoint=uri; rtype="blob";}
             // We provide credentials in the query string because we
             //  need to have .withCredentials be false to avoid some
             //  CORS-related errors on redirects to sites like S3.
@@ -94,7 +92,7 @@
                     var local_uri=false, data_uri=false;
                     if (Trace.glossdata)
                         fdjtLog("Glossdata from %s (%s) status %d",
-                                endpoint,rtype,req.status);
+                                endpoint,rtype||"any",req.status);
                     if (rtype!=="blob")
                         data_uri=local_uri=req.responseText;
                     else if (createObjectURL) 
@@ -123,6 +121,7 @@
                     fdjtLog.warn("Error fetching %s via %s: %s",uri,endpoint,ex);
                     glossdata_state[uri]=false;}};
             req.open("GET",endpoint);
+            req.responseType=rtype;
             // req.withCredentials=true;
             req.send(null);}
         return new Promise(caching);}
