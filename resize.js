@@ -51,17 +51,21 @@
     var resize_default=false;
     
     function resizeUI(wait){
+        function resizing(done){
+            setTimeout(function(){
+                var adjstart=fdjt.Time();
+                var hud=$ID("METABOOKHUD");
+                var cover=$ID("METABOOKCOVER");
+                if (cover) mB.resizeCover(cover);
+                if (hud) mB.resizeHUD(hud);
+                if (done) done();
+                if ((hud)||(cover))
+                    fdjtLog("Resized UI in %fsecs",
+                            ((fdjt.Time()-adjstart)/1000));},
+                       100);}
         if (!(wait)) wait=100;
-        setTimeout(function(){
-            var adjstart=fdjt.Time();
-            var hud=$ID("METABOOKHUD");
-            var cover=$ID("METABOOKCOVER");
-            if (cover) mB.resizeCover(cover);
-            if (hud) mB.resizeHUD(hud);
-            if ((hud)||(cover))
-                fdjtLog("Resized UI in %fsecs",
-                        ((fdjt.Time()-adjstart)/1000));},
-                   100);}
+        return new Promise(resizing);}
+
     metaBook.resizeUI=resizeUI;
 
     function metabookResize(){

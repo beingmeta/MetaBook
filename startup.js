@@ -224,7 +224,6 @@ metaBook.Startup=
                     var i=0, lim=delayed.length;
                     while (i<lim) {delayed[i](); i++;}}
                 else delayed();}
-            dropSplashPage();
             if (Trace.startup)
                 fdjtLog("Done with sync startup");}
 
@@ -429,8 +428,8 @@ metaBook.Startup=
             // This is all of the startup that we need to do synchronously
             syncStartup();
 
-            metaBook.resizeUI();
-
+            metaBook.resizeUI().then(function(){dropSplashPage();});
+            
             // The rest of the stuff we timeslice
             fdjtAsync.timeslice
             ([  // Scan the DOM for metadata.  This is surprisingly
