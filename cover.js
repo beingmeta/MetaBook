@@ -118,7 +118,8 @@
             fdjtDOM.stripIDs(coverpage);
             coverpage.id="METABOOKCOVERPAGE";}
         else if (metaBook.coverimage) {
-            var coverimage=fdjtDOM.Image(metaBook.covermage);
+            var coverimage=fdjtDOM.Image(metaBook.coverimage);
+            coverimage.id="METABOOKCOVERIMAGE";
             coverpage=fdjtDOM("div#METABOOKCOVERPAGE",coverimage);}
         else coverpage=false;
         if (coverpage) {
@@ -371,7 +372,7 @@
         if (value) addClass(root,"_SHOWCONSOLE");
         else dropClass(root,"_SHOWCONSOLE");
         var controls=$ID("METABOOKCOVERCONTROLS");
-        fdjtDOM.adjustFontSize(controls);
+        if (controls) fdjtDOM.adjustFontSize(controls);
         fdjt.Async(function(){metaBook.updateSettings(name,value);});});
 
 }());
