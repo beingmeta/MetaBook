@@ -95,6 +95,12 @@ metaBook.Startup=
                 fdjtLog.apply(null,arguments);}
         metaBook.startupMessage=startupMessage;
 
+        function dropSplashPage(){
+            var splash=$ID("METABOOKSPLASHPAGE");
+            if ((splash)&&(splash.parentNode))
+                splash.parentNode.removeChild(splash);}
+        metaBook.dropSplashPage=dropSplashPage;
+
         function run_inits(){
             var inits=metaBook.inits;
             var i=0, lim=inits.length;
@@ -218,6 +224,7 @@ metaBook.Startup=
                     var i=0, lim=delayed.length;
                     while (i<lim) {delayed[i](); i++;}}
                 else delayed();}
+            dropSplashPage();
             if (Trace.startup)
                 fdjtLog("Done with sync startup");}
 
@@ -661,6 +668,9 @@ metaBook.Startup=
         
         var default_config=metaBook.default_config;
 
+        function getRelLink(relname){
+            return getLink(relname,false,true,false,true);}
+
         function readBookSettings(){
             // Basic stuff
             var refuri=_getsbookrefuri();
@@ -722,17 +732,16 @@ metaBook.Startup=
             var docref=getMeta("SBOOKS.docref");
             if (docref) metaBook.docref=docref;
 
-            var coverpage=getLink("SBOOKS.coverpage",false,true)||
-                getLink("coverpage",false,true);
+            var coverpage=
+                getRelLink("SBOOKS.coverpage")||getRelLink("coverpage");
             if (coverpage) metaBook.coverpage=coverpage;
-            var coverimage=getLink("SBOOKS.coverimage",false,true)||
-                getLink("coverimage",false,true);
+            var coverimage=
+                getRelLink("SBOOKS.coverimage")||getRelLink("coverimage");
             if (coverimage) metaBook.coverimage=coverimage;
-            var thumbnail=getLink("SBOOKS.thumbnail",false,true)||
-                getLink("thumbnail",false,true);
+            var thumbnail=
+                getRelLink("SBOOKS.thumbnail")||getRelLink("thumbnail");
             if (thumbnail) metaBook.thumbnail=thumbnail;
-            var icon=getLink("SBOOKS.icon",false,true)||
-                getLink("icon",false,true);
+            var icon=getRelLink("SBOOKS.icon")||getRelLink("icon");
             if (icon) metaBook.icon=icon;
             
             var baseid=getMeta("SBOOKS.id")||
