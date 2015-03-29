@@ -288,6 +288,14 @@
             cancel(evt);
             return;}
 
+        if (mB.passage_menu) {
+            if (Trace.gestures)
+                fdjtLog("body_tapped %o closing menu %o",
+                        evt,mB.passage_menu);
+            if (mB.TapHold.body) metaBook.TapHold.body.abort();
+            fdjtUI.cancel(evt);
+            return closePassageMenu(evt);}
+
         if (mB.glosstarget) {
             var glossform=metaBook.glossform;
             if (hasParent(target,mB.glosstarget)) {
@@ -597,7 +605,7 @@
         var spec={choices: choices,
                   spec: "div.fdjtdialog.metabooktaptap",
                   style: "width: "+(max*0.8)+"em"};
-        fdjtUI.choose(spec);}
+        metaBook.passage_menu=fdjtUI.choose(spec);}
 
     function addOptions(passage,choices){
         var scan=passage; while (scan) {
@@ -611,6 +619,20 @@
                 choices.push(opt);}
             scan=scan.parentNode;}}
     
+    function closePassageMenu(evt){
+        evt=evt||window.event;
+        if (!(mB.passage_menu)) return false;
+        if (evt) {
+            var target=fdjtUI.T(evt);
+            if ((mB.passage_menu)&&(hasParent(target,mB.passage_menu)))
+                return false;}
+        var menu=mB.passage_menu;
+        mB.passage_menu=false;
+        fdjt.Dialog.close(menu);
+        if (evt) fdjtUI.cancel(evt);
+        return true;}
+    metaBook.closePassageMenu=closePassageMenu;
+
     function makeOpener(url){
         return function (){window.open(url);};}
     /*
@@ -630,6 +652,7 @@
     var body_tapstart=false;
     function body_touchstart(evt){
         evt=evt||window.event;
+        body_tapstart=false;
         if (mB.zoomed) return;
         var target=fdjtUI.T(evt);
         if (target.id!=="METABOOKBODY") return;
@@ -640,8 +663,9 @@
         if (mB.zoomed) return;
         var target=fdjtUI.T(evt);
         if (target.id!=="METABOOKBODY") return;
-        if ((body_tapstart)&&(true) //((fdjtTime()-body_tapstart)<1000)
-           ) {
+        // If the touch is directly over the BODY, treat it as a
+        // paging gesture
+        if ((body_tapstart)&&((fdjtTime()-body_tapstart)<1000)) {
             if (mB.TapHold.body) metaBook.TapHold.body.abort();
             fdjtUI.cancel(evt);
             var x=(evt.clientX)||
