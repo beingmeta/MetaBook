@@ -60,8 +60,8 @@ var _checkOpenSans=
         style1.zIndex=style2.zIndex='500';
         style1.opacity=style2.opacity=0.0;
         style1.fontSize=style2.fontSize="250px";
-        style1.fontFamily="'Open Sans','Comic Sans MS','Comic Sans',Arial,Sans";
-        style1.fontFamily="'Comic Sans MS','Comic Sans',Arial,Sans";
+        style1.fontFamily="'Open Sans','Comic Sans MS','Comic Sans',Serif";
+        style2.fontFamily="'Comic Sans MS','Comic Sans',Serif"
         div1.id="METABOOK_FONTCHECK1";
         div2.id="METABOOK_FONTCHECK2";
         div1.className=div2.className="_ignoreme";
