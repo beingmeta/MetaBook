@@ -28,11 +28,10 @@
           <input type="RADIO" NAME="ATTACHTYPE" VALUE="body"
                  onchange="metaBook.UI.changeAttachment(event);"/>
           Body</span>
-        <span class="checkspan disabled"
+        <span class="checkspan"
               title="Attach audio or video recorded on this device">
           <input type="RADIO" NAME="ATTACHTYPE" VALUE="capture"
-                 onchange="metaBook.UI.changeAttachment(event);"
-                 disabled="DISABLED"/>
+                 onchange="metaBook.UI.changeAttachment(event);"/>
           Capture</span>
       </td>
       <th class="button">
@@ -71,6 +70,13 @@
                placeholder="a URL to attach"/>
       </td>
     </tr>
+    <tr class="capturefile">
+      <th>Capture</th>
+      <td id="METABOOKCAPTUREFILE" class="nofile" colspan="2">
+	<button NAME="CAPTURE" VALUE="AUDIO">Audio</button>
+	<button NAME="CAPTURE" VALUE="VIDEO">Video</button>
+	<button NAME="CAPTURE" VALUE="IMAGE">Photo</button>
+    </td></tr>
     <tr class="uploadfile">
       <th>Upload<input TYPE="FILE" NAME="UPLOAD" ID="METABOOKFILEINPUT"/></th>
       <td id="METABOOKATTACHFILE" class="nofile" colspan="2">
@@ -86,3 +92,11 @@
     </tbody>
   </table>
 </form>
+<!--
+    /* Emacs local variables
+    ;;;  Local variables: ***
+    ;;;  compile-command: "cd ../..; make" ***
+    ;;;  indent-tabs-mode: nil ***
+    ;;;  End: ***
+    */
+  -->
