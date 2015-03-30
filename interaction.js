@@ -274,7 +274,13 @@
             fdjt.UI.cancel(evt);
             return false;}
 
-        if (hasParent(target,".glossmark")) {
+        if (hasClass(document.body,"mbSHOWHELP")) {
+            dropClass(document.body,"mbSHOWHELP");
+            cancel(evt);
+            return;}
+
+        if ((hasParent(target,".glossmark"))||
+            (handle_content_click(target))) {
             cancel(evt);
             return false;}
 
@@ -282,33 +288,31 @@
             metaBook.clearFocus(mB.textinput);
             cancel(evt);
             return;}
-
-        if (hasClass(document.body,"mbSHOWHELP")) {
-            dropClass(document.body,"mbSHOWHELP");
-            cancel(evt);
-            return;}
-
+        
         if (mB.passage_menu) {
             if (Trace.gestures)
                 fdjtLog("body_tapped %o closing menu %o",
                         evt,mB.passage_menu);
             if (mB.TapHold.body) metaBook.TapHold.body.abort();
-            fdjtUI.cancel(evt);
+            cancel(evt);
             return closePassageMenu(evt);}
+
+        if (mB.skimming) {
+            if (hasClass("METABOOKSKIMMER","expanded")) 
+                dropClass("METABOOKSKIMMER","expanded");
+            else metaBook.setHUD(false);
+            cancel(evt);
+            return;}
 
         if (mB.glosstarget) {
             var glossform=metaBook.glossform;
             if (hasParent(target,mB.glosstarget)) {
-                metaBook.setMode("addgloss",false);}
-            else metaBook.closeGlossForm(glossform);}
-
-        if (mB.skimming) {
-            fdjtUI.cancel(evt);
-            if (hasClass("METABOOKSKIMMER","expanded")) 
-                dropClass("METABOOKSKIMMER","expanded");
-            else metaBook.setHUD(false);
-            return;}
-
+                metaBook.setMode("addgloss",false);
+                cancel(evt); return;}
+            else {
+                metaBook.closeGlossForm(glossform);
+                cancel(evt); return;}}
+        
         if ((mB.hudup)||(mB.mode)) {
             metaBook.setMode(false); metaBook.setHUD(false);
             if ($ID("METABOOKOPENGLOSSMARK")) {
@@ -319,18 +323,7 @@
             clicked=fdjtTime();
             // if (getTarget(target)) metaBook.setTarget(false);
             return false;}
-
-        // If we're in a glossmark, let its handler apply
-        if (hasParent(target,".glossmark")) {
-            fdjtUI.cancel(evt);
-            return false;}
-
-        // Various kinds of content click handling (anchors, details,
-        // asides, etc)
-        if (handle_body_click(target)) {
-            fdjtUI.cancel(evt);
-            return false;}
-
+        
         if ($ID("METABOOKOPENGLOSSMARK")) {
             $ID("METABOOKOPENGLOSSMARK").id="";
             if (mB.target) metaBook.clearHighlights(mB.target);
@@ -374,7 +367,7 @@
 
     var MetaBookSlice=metaBook.Slice;
 
-    function handle_body_click(target){
+    function handle_content_click(target){
         // Assume 1s gaps are spurious
         if ((clicked)&&((fdjtTime()-clicked)<1000)) return true;
 
@@ -779,7 +772,7 @@
         // This avoids double-handling of clicks
         if ((clicked)&&((fdjtTime()-clicked)<3000))
             fdjtUI.cancel(evt);
-        else if (handle_body_click(target)) {
+        else if (handle_content_click(target)) {
             fdjtUI.cancel(evt);
             return;}
         else if (isClickable(target)) return;
