@@ -707,10 +707,10 @@
             fdjtDOM.addListener(document,fdjtDOM.vischange,
                                 updateKludgeTimer);
         updateKludgeTimer();}
+    /*
     if ((!(fdjt.device.standalone))&&(fdjt.device.mobilesafari))
         fdjt.addInit(setupKludgeTimer,"setupKludgeTimer");
-    
-
+    */
     
     var isEmpty=fdjtString.isEmpty;
 
