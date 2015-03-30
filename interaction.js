@@ -771,6 +771,7 @@
             metaBook.setGlossMode(form.className);}}
     metaBook.initGlossMode=initGlossMode;
 
+    /*
     function body_click(evt){
         evt=evt||window.event;
         if (mB.zoomed) return;
@@ -783,6 +784,7 @@
             return;}
         else if (isClickable(target)) return;
         else fdjtUI.cancel(evt);}
+    */
 
     /* TOC handlers */
 
@@ -1952,7 +1954,7 @@
                    touchstart: body_touchstart,
                    touchend: body_touchend,
                    touchmove: noDefault,
-                   click: body_click},
+                   click: cancel},
          hud: {touchend: handleXTarget, tap: handleXTarget},
          toc: {tap: toc_tapped,hold: toc_held,
                slip: toc_slipped, release: toc_released,
