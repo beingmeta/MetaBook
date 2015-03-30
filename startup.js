@@ -122,19 +122,6 @@ metaBook.Startup=
                     mB.root||metaBook.appsource||"somewhere");
             if ($ID("METABOOKBODY")) metaBook.body=$ID("METABOOKBODY");
 
-            /* This was for a problem with saving documents as webapps under
-               iOS, where the webapp doesn't get the authentication cookies
-               of the saved app.  This may no longer be neccessary. */
-            /*
-              if ((fdjtDevice.standalone)&&
-              (fdjtDevice.ios)&&(fdjtDevice.mobile)&&
-              (!(getLocal("mB.user")))&&
-              (fdjtState.getQuery("SBOOKS:AUTH-"))) {
-              var authkey=fdjt.State.getQuery("SBOOKS:AUTH-");
-              fdjtLog("Got auth key %s",authkey);
-              metaBook.authkey=authkey;}
-            */
-
             // Check for any trace settings passed as query arguments
             if (getQuery("cxtrace")) readTraceSettings();
             
