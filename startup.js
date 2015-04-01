@@ -557,11 +557,17 @@ metaBook.Startup=
             if (h7.length) addTOCLevel(h7,"7");}
 
         function scanDOM(){
+            if ((Trace.startup)||(Trace.domscan))
+                fdjtLog("Starting DOM scan with %o",metaBook.content);
             var scanmsg=$ID("METABOOKSTARTUPSCAN");
             addClass(scanmsg,"running");
-            var metadata=new metaBook.DOMScan(metaBook.content,metaBook.refuri+"#");
+            var metadata=new metaBook.DOMScan(
+                metaBook.content,metaBook.refuri+"#");
             metaBook.docinfo=metadata;
             metaBook.ends_at=metaBook.docinfo._maxloc;
+            if ((Trace.startup)||(Trace.domscan))
+                fdjtLog("Done with DOM scan yielding %o",
+                        metadata);
             dropClass(scanmsg,"running");
             if ((metaBook.state)&&(metaBook.state.target)&&
                 (!((metaBook.state.location)))) {
