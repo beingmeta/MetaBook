@@ -66,6 +66,8 @@
     var mB=metaBook;
     var Trace=metaBook.Trace;
 
+    var indexedDB=window.indexedDB||idbModules.indexedDB;
+
     metaBook.tagweights=new ObjectMap();
     metaBook.tagscores=new ObjectMap();
 
@@ -103,9 +105,11 @@
     function getDB(){
         function gettingdb(resolve,reject){
             if (metaBookDB) resolve(metaBookDB);
-            else {
+            else if (indexedDB) {
                 dbwait.push(resolve);
-                if (reject) dbfail.push(reject);}}
+                if (reject) dbfail.push(reject);}
+            else if (reject) reject(false);
+            else return;}
         return new Promise(gettingdb);}
     metaBook.getDB=getDB;
 
@@ -256,7 +260,7 @@
                            "initgloss");
             if ((metaBook.user)&&(mB.persist)&&(metaBook.cacheglosses)) {
                 if (mB.useidb)
-                    getDB(function(db){glossdb.storage=db;});
+                    getDB().then(function(db){glossdb.storage=db;});
                 else glossdb.storage=localStorage;}}
         
         function Gloss(){return Ref.apply(this,arguments);}
@@ -307,7 +311,7 @@
             var saveprops=metaBook.saveprops, uri=metaBook.docuri;
             if (value) {
                 if (metaBook.user) {
-                    if (mB.useidb) getDB(function(db){
+                    if (mB.useidb) getDB().then(function(db){
                         metaBook.sourcedb.storage=db;
                         metaBook.glossdb.storage=db;});
                     else {
@@ -712,6 +716,8 @@
         fdjt.addInit(setupKludgeTimer,"setupKludgeTimer");
     */
     
+    /* Utility functions */
+
     var isEmpty=fdjtString.isEmpty;
 
     function notEmpty(arg){
