@@ -31,7 +31,7 @@
 
 */
 /* jshint browser: true */
-/* globals Promise */
+/* globals Promise, idbModules */
 
 /* Initialize these here, even though they should always be
    initialized before hand.  This will cause various code checkers to
