@@ -1668,7 +1668,7 @@
 
     function metabookvischange(evt){
         evt=evt||window.event;
-        if (document[fdjtDOM.ishidden]) {
+        if (document[fdjtDOM.isHidden]) {
             if (metaBook.previewing) metaBook.stopPreview();}}
 
     /* Rules */
