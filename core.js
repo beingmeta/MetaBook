@@ -105,7 +105,7 @@
     function getDB(){
         function gettingdb(resolve,reject){
             if (metaBookDB) resolve(metaBookDB);
-            else if (indexedDB) {
+            else if ((indexedDB)&&(!(mB.noidb))) {
                 dbwait.push(resolve);
                 if (reject) dbfail.push(reject);}
             else if (reject) reject(false);
@@ -127,7 +127,7 @@
             waiting[i++](ex);}
 
     
-    if (window.indexedDB) {
+    if ((indexedDB)&&(!(mB.noidb))) {
         var req=window.indexedDB.open("metaBook",1);
         req.onerror=function(event){
             notDB("opening","metaBook",event.errorCode);};
@@ -149,6 +149,7 @@
             db.createObjectStore("sources",{keyPath: "_id"});
             db.createObjectStore("docs",{keyPath: "_id"});
             db.createObjectStore("glosses",{keyPath: "glossid"});};}
+    else fdjt.CodexLayout.useIndexedDB(false);
 
     /* Initialize the runtime for the core databases */
 
@@ -259,7 +260,7 @@
                                 info,tags,fragslot,maker_knodule);}}}},
                            "initgloss");
             if ((metaBook.user)&&(mB.persist)&&(metaBook.cacheglosses)) {
-                if (mB.useidb)
+                if ((mB.useidb)&&(!(mB.noidb)))
                     getDB().then(function(db){glossdb.storage=db;});
                 else glossdb.storage=localStorage;}}
         
@@ -311,9 +312,10 @@
             var saveprops=metaBook.saveprops, uri=metaBook.docuri;
             if (value) {
                 if (metaBook.user) {
-                    if (mB.useidb) getDB().then(function(db){
-                        metaBook.sourcedb.storage=db;
-                        metaBook.glossdb.storage=db;});
+                    if ((mB.useidb)&&(!(mB.noidb)))
+                        getDB().then(function(db){
+                            metaBook.sourcedb.storage=db;
+                            metaBook.glossdb.storage=db;});
                     else {
                         var storage=((mB.persist)?(window.localStorage):
                                      (window.sessionStorage));
