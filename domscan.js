@@ -90,7 +90,8 @@ metaBook.DOMScan=(function(){
         var scanstate=
             {curlevel: 0,idserial:0,location: 0,
              nodecount: 0,eltcount: 0,headcount: 0,
-             tagstack: [],taggings: [],allinfo: [],locinfo: [], idmap: idmap,
+             tagstack: [],taggings: [],allinfo: [],
+             locinfo: [], idmap: idmap,
              idstate: {prefix: false,count: 0},
              idstack: [{prefix: false,count: 0}],
              pool: metaBook.docdb};
@@ -218,12 +219,13 @@ metaBook.DOMScan=(function(){
                 var scan=curhead;
                 var scaninfo=curinfo;
                 var scanlevel=curinfo.level;
-                /* Climb the stack of headers, closing off entries and setting up
-                   prev/next pointers where needed. */
+                /* Climb the stack of headers, closing off entries and
+                   setting up prev/next pointers where needed. */
                 while (scaninfo) {
                     if (Trace.domscan>2)
-                        fdjtLog("Finding head@%d: scan=%o, info=%j, sbook_head=%o, cmp=%o",
-                                scanlevel,scan||false,scaninfo,(scanlevel<level));
+                        fdjtLog("Finding head@%d: s=%o, i=%j, sh=%o, cmp=%o",
+                                scanlevel,scan||false,scaninfo,
+                                (scanlevel<level));
                     if (scanlevel<level) break;
                     if (level===scanlevel) {
                         headinfo.prev=scaninfo;
@@ -234,7 +236,7 @@ metaBook.DOMScan=(function(){
                     scan=scaninfo.elt||document.getElementById(scaninfo.frag);
                     scanlevel=((scaninfo)?(scaninfo.level):(0));}
                 if (Trace.domscan>2)
-                    fdjtLog("Found parent: up=%o, upinfo=%o, atlevel=%d, sbook_head=%o",
+                    fdjtLog("Found parent: up=%o, info=%o, leel=%d, sh=%o",
                             scan||false,scaninfo,scaninfo.level,scaninfo.head);
                 /* We've found the enclosing head for this head, so we
                    establish the links. */
@@ -279,15 +281,23 @@ metaBook.DOMScan=(function(){
             else {}
             var tag=child.tagName, classname=child.className;
             var id=child.id;
+            
             if (id) id=child.getAttribute('data-tocid')||id;
-            if ((metaBook.ignore)&&(metaBook.ignore.match(child))) return;
+
+            if ((metaBook.ignore)&&(metaBook.ignore.match(child)))
+                return;
+            
             if ((rootns)&&(child.namespaceURI!==rootns)) return;
+            
             if ((classname)&&
                 ((typeof classname !== "string")||
                  (classname.search(/\b(sbookignore|metabookignore)\b/)>=0)))
                 return;
-            if ((child.metabookui)||((id)&&(id.search("METABOOK")===0))) return;
-
+            
+            if ((child.metabookui)||
+                ((id)&&(id.search("METABOOK")===0)))
+                return;
+            
             if (Trace.domscan>3)
                 fdjtLog("Scanning %o level=%o, loc=%o, head=%o: %j",
                         child,curlevel,location,curhead,curinfo);
@@ -310,7 +320,8 @@ metaBook.DOMScan=(function(){
                             fdjtLog.warn("Duplicate WSN ID %s: %s",
                                          wsnid,text);}
                         id=child.id=wsnid; idmap[wsnid]=child;}}}
-            else if ((id)&&(metaBook.baseid)&&(id.search(metaBook.baseid)!==0))
+            else if ((id)&&(metaBook.baseid)&&
+                     (id.search(metaBook.baseid)!==0))
                 id=false;
             else if (!(id)) {}
             else if (!(idmap[id])) idmap[id]=child;
@@ -341,7 +352,8 @@ metaBook.DOMScan=(function(){
                 var notoc=scanstate.notoc;
                 var headinfo=tocinfo.head;
                 scanstate.curinfo=headinfo;
-                scanstate.curhead=headinfo.elt||document.getElementById(headinfo.frag);
+                scanstate.curhead=headinfo.elt||
+                    document.getElementById(headinfo.frag);
                 scanstate.curlevel=headinfo.level;
                 scanstate.notoc=true;
                 var toc_children=child.childNodes;
@@ -368,12 +380,14 @@ metaBook.DOMScan=(function(){
                 docinfo[child.id]=info;
             if (info) {
                 info.starts_at=scanstate.location;
-                info.sbookhead=curhead.getAttribute('data-tocid')||curhead.id;
+                info.sbookhead=
+                    curhead.getAttribute('data-tocid')||curhead.id;
                 info.headstart=curinfo.starts_at;}
             // Set the first content node
             if ((id)&&(info)&&(!start)) metaBook.start=start=child;
             // And the initial content level
-            if ((info)&&(toclevel)&&(!(info.toclevel))) info.toclevel=toclevel;
+            if ((info)&&(toclevel)&&(!(info.toclevel)))
+                info.toclevel=toclevel;
             if ((id)&&(info)) {
                 var tags=
                     ((child.getAttributeNS)&&
@@ -391,7 +405,8 @@ metaBook.DOMScan=(function(){
                 info.head=curinfo; info.indexRef('head',curinfo);}
             else {}
 
-            if (((classname)&&(classname.search(/\bsbookterminal\b/)>=0))||
+            if (((classname)&&
+                 (classname.search(/\bsbookterminal\b/)>=0))||
                 ((classname)&&(metaBook.terminals)&&
                  (metaBook.terminals.match(child)))) {
                 scanstate.location=scanstate.location+textWidth(child);}
