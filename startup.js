@@ -1059,13 +1059,16 @@ metaBook.Startup=
 
         function timeDOM(x){
             var elt;
-            if (typeof x === "string")
-                elt=fdjtDOM("time",x);
-            else elt=fdjtDOM("time",x.toString());
-            if (typeof x === "string")
-                elt.setAttribute("datetime",x);
-            else elt.setAttribute("datetime",x.toISOString());
-            return elt;}
+            try {
+                if (typeof x === "string")
+                    elt=fdjtDOM("time",x);
+                else elt=fdjtDOM("time",x.toString());
+                if (typeof x === "string")
+                    elt.setAttribute("datetime",x);
+                else elt.setAttribute("datetime",x.toISOString());
+                return elt;}
+            catch (ex) {
+                return document.createTextNode("??time??");}}
 
         function setupZoom(){
             var zoom=metaBook.Zoom=fdjtDOM(
