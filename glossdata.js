@@ -78,15 +78,12 @@
             // We provide credentials in the query string because we
             //  need to have .withCredentials be false to avoid some
             //  CORS-related errors on redirects to sites like S3.
-            if (fdjt.State.getCookie("SBOOKS:AUTH")) 
-                endpoint=endpoint+"?SBOOKS:AUTH="+
-                encodeURIComponent(fdjt.State.getCookie("SBOOKS:AUTH"));
-            else if (fdjt.State.getCookie("SBOOKS:AUTH-"))
-                endpoint=endpoint+"?SBOOKS:AUTH-="+
-                encodeURIComponent(fdjt.State.getCookie("SBOOKS:AUTH-"));
-            else {}
-            if (Trace.glossdata)
-                fdjtLog("Fetching glossdata %s (%s) to cache locally",uri,rtype);
+            var bookie=mB.bookie;
+            if (bookie) {
+                endpoint=endpoint+"?BOOKIE="+encodeURIComponent(bookie)+
+                    "&DOC="+encodeURIComponent(mB.docref);}
+            if (Trace.glossdata) {
+                fdjtLog("Fetching glossdata %s (%s) to cache locally",uri,rtype);}
             req.onreadystatechange=function () {
                 if ((req.readyState === 4)&&(req.status === 200)) try {
                     var local_uri=false, data_uri=false;

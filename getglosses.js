@@ -58,6 +58,7 @@
         if (window._sbook_loadinfo!==info)
             metaBook.setConnected(true);
         if (info.sticky) metaBook.setPersist(true);
+        if (info.bookie) gotBookie(info.bookie);
         if (!(metaBook.user)) {
             if (info.userinfo)
                 metaBook.setUser(
@@ -127,6 +128,7 @@
         if (info.sources) gotInfo("sources",info.sources,keepdata);
         if (info.outlets) gotInfo("outlets",info.outlets,keepdata);
         if (info.layers) gotInfo("layers",info.layers,keepdata);
+        if (info.bookie) gotBookie(info.bookie);
         metaBook.addOutlets2UI(info.outlets);
         if ((info.sync)&&((!(metaBook.sync))||(info.sync>=metaBook.sync))) {
             metaBook.setSync(info.sync);}
@@ -172,8 +174,6 @@
             ((new Date(metaBook.sync*1000)).toString());
         function gotInfo(req){
             updating=false;
-            // No longer needed, we should have our own authentication keys
-            // metaBook.authkey=false;
             var response=JSON.parse(req.responseText);
             if ((response.glosses)&&(response.glosses.length))
                 fdjtLog("Received %d glosses from the server",
@@ -291,7 +291,7 @@
         if (metaBook.cacheglosses)
             saveLocal("mB."+name+"("+refuri+")",qids,true);}
     
-    // Processes info loaded remotely
+    // Processes loaded info asynchronously
     function gotInfo(name,info,persist) {
         if (info) {
             if (info instanceof Array) {
@@ -384,6 +384,28 @@
                         metaBook.glossdb.allrefs.length,
                         metaBook.sourcedb.allrefs.length);});}
     metaBook.initGlossesOffline=initGlossesOffline;
+
+    function gotBookie(string){
+        if (!(string)) return;
+        if (string===mB.bookie) return;
+        var tickmatch=/:x(\d+)/.exec(string);
+        var tick=(tickmatch)&&(tickmatch.length>1)&&(parseInt(tickmatch[1]));
+        var expires=(tick)&&(new Date(tick*1000));
+        if ((Trace.glosses>1)||(Trace.glossdata))
+            fdjtLog("gotBookie: %s/%s, cur=%s/%s",
+                    string,expires,metaBook.bookie,metaBook.bookie_expires);
+        if (!(expires)) {
+            metaBook.ubookie=string;
+            metaBook.saveLocal("ubookie("+mB.docuri+")",string);}
+        if ((!(metaBook.bookie))||
+            ((!(metaBook.bookie_expires))&&(expires))||
+            ((metaBook.bookie_expires)&&(expires)&&
+             (expires>metaBook.bookie_expires))) {
+            metaBook.bookie=string; metaBook.bookie_expires=expires;
+            metaBook.saveLocal("bookie("+mB.docuri+")",string);}
+        else {}}
+    metaBook.gotBookie=gotBookie;
+
 })();
 
 /* Emacs local variables
