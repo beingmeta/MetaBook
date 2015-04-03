@@ -128,7 +128,11 @@
         var media_target=$ID("METABOOKMEDIATARGET");
         var media_elt=false, src_elt=false;
         function placeMedia(){
-            if (media_elt) fdjt.DOM.replace(media_target,media_elt);
+            if (media_elt) {
+                // if mediaTarget doesn't have a parent node,
+                // it's been replaced, so we don't do anything
+                if (media_target.parentNode)
+                    fdjt.DOM.replace(media_target,media_elt);}
             else $ID("METABOOKMEDIA").appendChild(media_target);
             addClass(document.body,"mbMEDIA");}
         if (metaBook.showing===url) {
