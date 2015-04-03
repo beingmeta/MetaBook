@@ -54,6 +54,7 @@ metaBook.Startup=
         var fdjtDevice=fdjt.device;
         var fdjtState=fdjt.State;
         var fdjtAsync=fdjt.Async;
+        var fdjtAjax=fdjt.Ajax;
         var fdjtTime=fdjt.Time;
         var fdjtLog=fdjt.Log;
         var fdjtDOM=fdjt.DOM;
@@ -153,6 +154,8 @@ metaBook.Startup=
 
             // Initialize the book state (location, targets, etc)
             metaBook.initState(); metaBook.syncState();
+
+            mB.gotBookie(mB.readLocal("bookie("+mB.docuri+")"));
 
             // If we have no clue who the user is, ask right away (updateInfo())
             if (!((metaBook.user)||(window._sbook_loadinfo)||
@@ -262,6 +265,7 @@ metaBook.Startup=
                 metaBook.server=fdjtState.getCookie("SBOOKSERVER");
             else metaBook.server=lookupServer(document.domain);
             if (!(metaBook.server)) metaBook.server=metaBook.default_server;
+            updateServerInfo(metaBook.server);
 
             if (fdjtState.getLocal("mB.devmode")) {
                 addClass(document.documentElement,"_DEVMODE");
@@ -942,6 +946,35 @@ metaBook.Startup=
             else i++;
             return false;}
 
+        function gotServerInfo(data){
+            var host_spec="<span class='host'>"+metaBook.server+"</span>";
+            if ((metaBook.server_info)&&
+                (metaBook.server_info.ip!==data.ip))
+                fdjtLog.warn(
+                    "Server %s IP change from %s to %s:\n\t%j\n\t%j",
+                    metaBook.server,metaBook.server_info.ip,data.ip,
+                    metaBook.server_info,data);
+            if (data.servername!==metaBook.server)
+                host_spec=host_spec+" / "+
+                "<span class='host'>"+data.servername+"</span>";
+            if (data.hostname!==data.servername)
+                host_spec=host_spec+" / "+
+                "<span class='host'>"+data.hostname+"</span>";
+            host_spec=host_spec+" / "+"<span class='host'>"+data.ip+"</span>";
+            metaBook.server_info=data;
+            var info=fdjt.DOM.$(".metabookserverinfo");
+            var i=0, lim=info.length; while (i<lim) {
+                info[i++].innerHTML="<strong>Glosses</strong> from "+host_spec;}}
+
+        function fetchServerInfo(){
+            var servername=metaBook.server;
+            fdjtDOM.removeListener(window,"online",fetchServerInfo);
+            fdjtAjax.jsonCall(gotServerInfo,"https://"+servername+"/_info");}
+        function updateServerInfo(){
+            if (navigator.onLine) fetchServerInfo();
+            else fdjtDOM.addListener(window,"online",fetchServerInfo);}
+        metaBook.updateServerInfo=updateServerInfo;
+        
         function hasTOCLevel(elt){
             if ((elt.toclevel)||
                 ((elt.getAttributeNS)&&
