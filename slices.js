@@ -111,8 +111,8 @@ metaBook.Slice=(function () {
                     ((score)&&(showscore(info,score,query))),
                     (((info.maker)||(info.tstamp))?(showglossinfo(info)):
                      (showdocinfo(info))),
-                    ((note_len>0)&&
-                     (fdjtDOM("span.note",convertNote(info.note))))," ",
+                    ((note_len>0)&&(info.maker)&&(showmaker(info.maker))),
+                    ((note_len>0)&&(shownote(info)))," ",
                     ((excerpt_len>0)&&(showexcerpts(info.excerpt)))," ",
                     ((info.detail)&&(fdjtDOM("span.glossbody","More")))," ",
                     (((info.alltags)||(info.tags))&&(showtags(info,query)))," ",
@@ -158,6 +158,18 @@ metaBook.Slice=(function () {
             var close=note.indexOf('}');
             return metaBook.md2DOM(note.slice(close+1),true);}
         else return note;}
+    function shownote(gloss){
+        return fdjtDOM("span.note",convertNote(gloss.note));}
+
+    function showmaker(gloss){
+        var maker=gloss.maker;
+        if (maker._live)
+            return fdjtDOM("span.maker",maker.name||"From");
+        else {
+            var temp=fdjtDOM("span.maker","From");
+            maker.load.then(function(m){
+                if (m.name) temp.innerHTML=m.name;});
+            return temp;}}
 
     var isArray=Array.isArray;
 
@@ -319,49 +331,28 @@ metaBook.Slice=(function () {
                 "span.score",partial,"(",score,"/",query.max_score,staricon,")");
         else return fdjtDOM("span.score",partial,"(",score,staricon,")");}
     function showglossinfo(info) {
-        var user=info.maker;
-        var userinfo=(user)&&(metaBook.sourcedb.load(user));
+        var maker=info.maker, makerid=(info.maker._id)||(info.maker);
+        var can_edit=((maker===metaBook.user)||(maker===metaBook.user._id))||
+            (mB.outlets.indexOf(maker)>=0)||(mB.outlets.indexOf(makerid)>=0);
         var agestring=timestring(info.modified||info.created||info.tstamp);
         var age=fdjtDOM("span.age",agestring);
         age.title=fdjtTime.timeString(info.modified||info.created||info.tstamp);
         var tool=fdjtDOM(
             "span.tool",age," ",
-            fdjtDOM("span.label",
-                    (((user===metaBook.user)||(user===metaBook.user._id))?
-                     "modify":"respond")),
-            fdjtDOM.Image(
-                (((user===metaBook.user)||(user===metaBook.user._id))?
-                 (mbicon("gloss_edit_titled",64,64)):
-                 (mbicon("gloss_respond_titled",64,64))),
-                "img.button",
-                (((user===metaBook.user)||(user===metaBook.user._id))?
-                 ("edit"):("reply")),
-                (((user===metaBook.user)||(user===metaBook.user._id))?
-                 ("tap to edit this gloss, hold to reply"):
-                 ("relay/reply to this gloss"))),
+            fdjtDOM("span.label",((can_edit)?"modify":"respond")),
+            ((can_edit)?
+             (fdjtDOM.Image(mbicon("gloss_edit_titled",64,64),"img.button",
+                            "edit","tap to edit this gloss, hold to reply")):
+             (fdjtDOM.Image(mbicon("gloss_respond_titled",64,64),"img.button",
+                            "reply","relay/reply to this gloss"))),
             ((info.private)&&(fdjtDOM("span.private","Private"))));
         addListener(tool,"tap",glossaction);
         addListener(tool,"release",glossaction);
         
-        var picinfo=getpicinfo(info);
-        var overlay=getoverlay(info);
-        
-        var pic=((picinfo)?
-                 (fdjtDOM.Image(picinfo.src,picinfo.classname,picinfo.alt)):
-                 (getfakepic(info.maker,"div.sourcepic")));
+        var pic=getglosspic(info);
         if (pic) fdjtDOM.addListener(pic,"touchstart",fdjt.UI.noDefault);
 
-        return [pic,
-                ((overlay)&&(overlay.name)&&
-                 (fdjtDOM("span.overlay",(overlay.name)))),
-                /* ((overlay)&&(overlay.name)&&(" \u00b7 ")), */
-                (((!(overlay))&&(userinfo)&&
-                  ((userinfo.name)||(userinfo.userid)))&&
-                 (fdjtDOM("span.user",((userinfo.name)||(userinfo.userid))))),
-                ((!(overlay))&&(userinfo)&&
-                 ((userinfo.name)||(userinfo.userid))&&
-                 (" \u2014 ")),
-                tool];}
+        return [pic,tool];}
     function showdocinfo(info) {
         if (info) return false; else return false;}
 
@@ -377,60 +368,47 @@ metaBook.Slice=(function () {
             return false;}
         else return false;}
 
-    function getfakepic(maker,spec){
-        var userinfo=metaBook.sourcedb.loadref(maker);
-        var pic=fdjtDOM(spec||"div.sbooksourcepic",
-                        (((userinfo)&&(userinfo.name))?
-                         (fdjtString.getInitials(userinfo.name,1)):
+    var IMG=fdjtDOM.Image;
+
+    function getglosspic(gloss){
+        if (gloss.pic) 
+            return IMG(gloss.pic,"img.glosspic.glossicon",
+                       gloss.note||gloss.name);
+        if ((gloss.links)&&(gloss.links.icon))
+            return IMG(gloss.links.icon,"img.glosspic.glossicon");
+        else if ((gloss.maker)&&(gloss.maker._live)&&(gloss.maker.pic)) 
+            return IMG(gloss.maker.pic,"img.glosspic.userpic",
+                       gloss.maker.name);
+        else if ((gloss.maker)&&(gloss.maker._live)&&(gloss.maker.fbid))
+            return IMG("https://graph.facebook.com/"+
+                       gloss.maker.fbid+"/picture?type=square",
+                       "img.glosspic.userpic.fbpic",
+                       gloss.maker.name);
+        else if ((gloss.maker)&&(gloss.maker._live))
+            return fdjtDOM("div.glosspic.userpic.sbooknopic",
+                           ((gloss.maker.name)?
+                            (fdjtString.getInitials(gloss.maker.name,1)):
+                            "?"));
+        else if (gloss.maker) {
+            var temp=
+                fdjtDOM("div.glosspic.userpic.sbooknopic",
+                        ((gloss.maker.name)?
+                         (fdjtString.getInitials(gloss.maker.name,1)):
                          "?"));
-        addClass(pic,"sbooknopic");
-        return pic;}
-
-    function getpic(info){
-        if (info._pic) return info._pic;
-        else if (info.pic) {
-            info._pic=fdjtDOM.data2URL(info.pic);
-            return info._pic;}
-        else return false;}
-
-    function getpicinfo(info){
-        var i, lim;
-        if (info.pic) return {
-            src: getpic(info),alt: info.note||info.name};
-        if (info.sources) {
-            var sources=info.sources;
-            if (typeof sources==='string') sources=[sources];
-            i=0; lim=sources.length; while (i<lim) {
-                var source=metaBook.sourcedb.loadref(sources[i++]);
-                if ((source)&&(source.kind===':OVERLAY')&&(source.pic))
-                    return { src: getpic(source), alt: source.name,
-                             classname: "img.glosspic.sourcepic"};}}
-        if (info.links) {
-            var links=info.links;
-            i=0; lim=links.length; while (i<lim) {
-                var link=links[i++];
-                if (link.href.search(/\.(jpg|png|gif|jpeg)$/i)>0)
-                    return { src: link.href, alt: "graphic",
-                             classname: "img.glosspic"};}}
-        if (info.shared) {
-            var outlets=info.shared;
-            if (typeof outlets==='string') outlets=[outlets];
-            i=0; lim=outlets.length; while (i<lim) {
-                var outlet=metaBook.sourcedb.loadref(outlets[i++]);
-                if ((outlet)&&(outlet.kind===':LAYER')&&(outlet.pic))
-                    return { src: getpic(outlet), alt: outlet.name,
-                             classname: "img.glosspic.sourcepic"};}}
-        if (info.maker) {
-            var userinfo=metaBook.sourcedb.loadref(info.maker);
-            if (userinfo.pic)
-                return { src: getpic(userinfo), alt: userinfo.name,
-                         classname: "img.glosspic.userpic"};
-            else if (userinfo.fbid)
-                return {
-                    src: "https://graph.facebook.com/"+
-                        userinfo.fbid+"/picture?type=square",
-                    classname: "img.glosspic.userpic.fbpic"};
-            else return false;}
+            gloss.maker.load().then(function(maker){
+                var usepic=false;
+                if (!(maker._live)) usepic=false;
+                else if (maker.pic)
+                    usepic=IMG(gloss.maker.pic,"img.glosspic.userpic",
+                               gloss.maker.name);
+                else if (maker.fbid) 
+                    usepic=IMG("https://graph.facebook.com/"+
+                               gloss.maker.fbid+"/picture?type=square",
+                               "img.glosspic.userpic.fbpic",
+                               gloss.maker.name);
+                else {}
+                if (usepic) fdjtDOM.replace(temp,usepic);});
+            return temp;}
         else return false;}
 
     var months=["Jan","Feb","Mar","Apr","May","Jun",

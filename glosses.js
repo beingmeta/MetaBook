@@ -177,10 +177,13 @@
             arg=mbID(arg)||metaBook.glossdb.ref(arg)||false;
         if (!(arg)) return false;
         var gloss=((!(arg.nodeType))&&((arg.maker)||(arg.gloss))&&(arg));
-        if (!(gloss)) response=false;
-        else if ((arg.maker)&&(arg.maker!==metaBook.user))
-            response=true;
-        else {}
+        var maker=(gloss)&&gloss.maker, makerid=(maker)&&maker._id;
+        if (!(maker)) response=false;
+        else if ((maker===metaBook.user)||
+                 (makerid===metaBook.user._id)||
+                 (metaBook.outlets.indexOf(arg.maker)>=0)||
+                 (metaBook.outlets.indexOf(arg.maker._id)>=0)) {}
+        else reponse=false;
         var passage=((gloss)?(mbID(gloss.frag)):(arg));
         var passageid=((passage.codexbaseid)||(passage.id));
         var formid=((gloss)?
@@ -218,9 +221,15 @@
         getInput(form,"DOCTITLE").value=document.title;
         getInput(form,"DOCURI").value=document.location.href;
         getInput(form,"FRAG").value=passageid;
-        if (info.wsnid) getInput(form,"WSNID").value=info.wsnid;
-        if (metaBook.user) getInput(form,"MAKER").value=metaBook.user._id;
-        if (metaBook.mycopyid) getInput(form,"MYCOPYID").value=metaBook.mycopyid;
+        if (info.wsnid) {getInput(form,"WSNID").value=info.wsnid;}
+        if (metaBook.user) {
+            getInput(form,"MAKER").value=
+                ((gloss)&&(gloss.maker)&&(gloss.maker._id))||
+                metaBook.user._id;}
+        if (metaBook.mycopyid) {
+            getInput(form,"MYCOPYID").value=metaBook.mycopyid;}
+        if (metaBook.bookie) {
+            getInput(form,"BOOKIE").value=metaBook.bookie;}
         if (gloss) {
             var glossdate_elt=getChild(form,".glossdate");
             fdjtDOM(glossdate_elt,fdjtTime.shortString(gloss.created));
@@ -235,8 +244,8 @@
                 glossinput.value=gloss.note||"";
                 if (notespan) notespan.innerHTML=glossinput.value;}
             else glossinput.value="";}
-        if (metaBook.syncstamp)
-            getInput(form,"SYNC").value=(metaBook.syncstamp+1);
+        if (metaBook.syncstamp) {
+            getInput(form,"SYNC").value=(metaBook.syncstamp+1);}
         var menu=getChild(form,".addglossmenu");
         fdjt.UI.TapHold(menu,{override: true});
         var loc=getInput(form,"LOCATION");
@@ -292,7 +301,7 @@
                 if (typeof urlinfo === 'string') title=urlinfo;
                 else title=urlinfo.title;
                 addLink(form,url,title);}}
-        if (gloss) detail_elt.value=gloss.detail||"";
+        if (gloss) {detail_elt.value=gloss.detail||"";}
         if ((gloss)&&(gloss.share)) {
             var share=gloss.share;
             if (typeof share === 'string') share=[share];
@@ -307,22 +316,22 @@
             //  adding/setting the assigned outlets.
             resetOutlets(form);
             var shared=((gloss)&&(gloss.shared))||[];
-            if (typeof shared === 'string') shared=[shared];
+            if (typeof shared === 'string') {shared=[shared];}
             var outlet_i=0, n_outlets=shared.length;
-            while (outlet_i<n_outlets)
-                addOutlet(form,shared[outlet_i++],"SHARE",true);
+            while (outlet_i<n_outlets) {
+                addOutlet(form,shared[outlet_i++],"SHARE",true);}
             var private_span=getChild(form,".private");
             setCheckSpan(private_span,gloss.private);}
-        if (((gloss)&&(gloss.excerpt)))
-            metaBook.setExcerpt(form,gloss.excerpt,gloss.exoff);
+        if (((gloss)&&(gloss.excerpt))) {
+            metaBook.setExcerpt(form,gloss.excerpt,gloss.exoff);}
         var cancel_button=fdjtDOM.getChild(form,".cancelbutton");
-        if (cancel_button)
+        if (cancel_button) {
             fdjtDOM.addListener(
-                cancel_button,"click",cancelGloss_handler);
+                cancel_button,"click",cancelGloss_handler);}
         form.setAttribute("sbooksetup","yes");
         updateForm(form);
         var container=getParent(form,".metabookglossform");
-        if (container) dropClass(container,"modified");
+        if (container) {dropClass(container,"modified");}
         return form;}
 
     /***** Setting the gloss target ******/
