@@ -85,14 +85,16 @@ div.metabookcard > hr {
 .metabookcard .audience .outlet:before {
     content: "→ "; font-weight: bold;}
 
-.metabookcardbody {padding-top: 6px;}
+.metabookcardbody {padding-top: 2px;}
 .metabookcardbody:before, .metabookcard .metabookcardbody:after {
                               content: " "; display: table;}
 .metabookcardbody:after { clear: both; }
 
 .metabookcard .fdjtclearfloats { margin-bottom: 3px;}
 .metabookcardbody {
-    border-bottom: solid purple 2px;}
+    border-top: solid purple 2px;}
+.metabookcardbody:first-child .metabookcardbody {
+    border-top: 0px;}
 
 .metabookcard span.controller { cursor: pointer;}
 .metabookcard .info { 
@@ -101,17 +103,18 @@ div.metabookcard > hr {
     float: right; width: 40px;}
 .metabookcard .info span.score {
     color: gold; display: none;}
-.metabookcard span.tags { font-size: 80%; vertical-align: top;}
-.metabookcard span.tags img.tagicon { height: 3ex; width: auto;}
-.metabookcard span.tags span { vertical-align: top;}
+.metabookcard span.tags { 
+    font-size: 80%; padding-left: 1ex;}
+.metabookcard span.tags img.tagicon { 
+    height: 3ex; width: auto;
+    display: none;}
 .metabookcard span.tags span.sectname {
     font-style: italic; color: purple;}
 .metabookcard span.tags span.sectname.longterm {
     font-size: 80%; letter-spacing: -0.5px;}
 .metabookcard.gloss span.tags.fdjtexpanded { display: block;}
 .metabookcard span.tags.fdjtexpanded span.controller {
-    color: black; float: right;
-    vertical-align: top; margin-top: -0.5ex;}
+    color: black; float: right;}
 .metabookcard span.head {
     font-size: 75%;}
 .metabookcard span.headhead {
@@ -119,9 +122,7 @@ div.metabookcard > hr {
 .metabookcard span.controller {
     font-weight: bold; color: silver;
     white-space: nowrap;}
-.metabookcard span.note {
-    font-size: 110%; font-style: italic;
-    vertical-align: top;}
+.metabookcard span.note {font-style: italic;}
 .metabookcard span.excerpt { vertical-align: top; }
 .metabookcardbody img.glosspic,
 .metabookcardbody img.userpic,
@@ -129,7 +130,7 @@ div.metabookcard > hr {
     float: left; clear: left; margin-right: 3px;
     width: 50px; overflow: hidden; height: auto;
     /* This lines up with the padding on metabookcardbody */
-    margin-top: -6px;}
+    margin-top: -2px;}
 .metabookcardbody div.glosspic,
 .metabookcardbody div.userpic,
 .metabookcardbody div.sourcepic  {
@@ -140,7 +141,7 @@ div.metabookcard > hr {
     color: rgba(245, 245, 245, 0.56);
     text-stroke: 2px black; -webkit-text-stroke: 2px black;
     /* This lines up with the padding on metabookcardbody */
-    margin-top: -6px;}
+    margin-top: -2px;}
 .metabookcardbody div.userpic.sbooknopic,
 .metabookcardbody div.sourcepic.sbooknopic {
     background-image:
@@ -180,12 +181,12 @@ html._MOUSE .metabookcard .tool img:hover {opacity: 0.8;}
     -webkit-border-radius: 1ex; -khtml-border-radius: 1ex;
     -moz-border-radius: 1ex; -o-border-radius: 1ex;}
 .metabookcard .age {
-    color: rgb(18, 141, 238); font-weight: bold;
+    color: rgb(18, 141, 238); font-size: 80%;
+    padding-right: 0.5em; padding-left: 0.4ex; margin-top: -3px;
     vertical-align: top; 
-    padding-right: 0.5em; padding-left: 0.4ex; margin-top: -6px;
     clear: none;}
 .metabookcard.timeless .age { display: none;}
-.metabookcard.timeless .tool img { margin-top: -6px;}
+.metabookcard.timeless .tool img { margin-top: -3px;}
 .metabookcard a.deletebutton { 
     color: orange; text-decoration: none;
     padding-right: 3px;}
@@ -198,6 +199,13 @@ html._MOUSE .metabookcard .tool img:hover {opacity: 0.8;}
     font-style: italic; font-size: 80%;
     white-space: nowrap; padding: 2px; padding-top: 0px;
     color: lightblue;}
+
+.metabookcardbody span.maker {
+    color: black; font-weight: bold; padding-right: 1ex;}
+.metabookcardbody span.maker:after { content: ':'; }
+
+.metabookcardbody span.maker { display: none;}
+.metabookcard.personal span.maker { display: inline;}
 
 /* Emacs local variables
 ;;;  Local variables: ***

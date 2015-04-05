@@ -111,7 +111,7 @@ metaBook.Slice=(function () {
                     ((score)&&(showscore(info,score,query))),
                     (((info.maker)||(info.tstamp))?(showglossinfo(info)):
                      (showdocinfo(info))),
-                    ((note_len>0)&&(info.maker)&&(showmaker(info.maker))),
+                    ((note_len>0)&&(info.maker)&&(showmaker(info))),
                     ((note_len>0)&&(shownote(info)))," ",
                     ((excerpt_len>0)&&(showexcerpts(info.excerpt)))," ",
                     ((info.detail)&&(fdjtDOM("span.glossbody","More")))," ",
@@ -120,7 +120,7 @@ metaBook.Slice=(function () {
                     ((info.attachments)&&
                      (showlinks(info.attachments,"span.attachments")))," ",
                     ((shared)&&(shared.length)&&(showaudience(shared))));
-        var div=
+        var card=
             fdjtDOM(((info.maker) ?
                      "div.metabookcard.gloss" :
                      "div.metabookcard.passage"),
@@ -128,29 +128,30 @@ metaBook.Slice=(function () {
                     ((standalone)&&(makelocbar(target_info))),
                     body,
                     fdjtDOM("div.fdjtclearfloats"));
-        var makerinfo=(info.maker);
-        metaBook.sourcedb.load(info.maker);
-        var tstamp=info.tstamp||info.modified||info.created;
-        if (tstamp)
-            body.title=
-            "gloss from "+(((makerinfo)&&(makerinfo.name))||"someone")+
-            " at "+fdjtTime.shortString(tstamp);
-        else {} // div.title=metaBook.getTitle(target,true);
-        div.about="#"+info.frag;
-        div.setAttribute('data-passage',target_id);
-        div.setAttribute('data-location',target_info.starts_at);
-        if (head_info) div.setAttribute('data-tochead',head_info.frag);
+        if (info.maker) {
+            info.maker.load().then(function(makerinfo){
+                var tstamp=info.tstamp||info.modified||info.created;
+                if (!(makerinfo._live)) return;
+                if (makerinfo.kind!==':PERSON') return;
+                if (tstamp)
+                    body.title="gloss from "+((makerinfo.name)||"someone")+
+                    " at "+fdjtTime.shortString(tstamp);
+                else body.title="gloss from "+((makerinfo.name)||"someone");
+                addClass(card,"personal");});}
+        card.about="#"+info.frag;
+        card.setAttribute('data-passage',target_id);
+        card.setAttribute('data-location',target_info.starts_at);
+        if (head_info) card.setAttribute('data-tochead',head_info.frag);
         if ((info.maker)||(info.tstamp)) {
-            div.setAttribute('data-gloss',info._id);
+            card.setAttribute('data-gloss',info._id);
             if (info.tstamp)
-                div.setAttribute('data-timestamp',info.tstamp);}
-        if (score) div.setAttribute("data-searchscore",score);
-        // div.setAttribute('about',"#"+info.id);
-        if (idprefix) div.id=idprefix+info.id;
+                card.setAttribute('data-timestamp',info.tstamp);}
+        if (score) card.setAttribute("data-searchscore",score);
+        if (idprefix) card.id=idprefix+info.id;
         if (info._id) {
-            div.name=div.qref=info._id;
-            div.setAttribute("name",info._id);}
-        return div;}
+            card.name=card.qref=info._id;
+            card.setAttribute("name",info._id);}
+        return card;}
     metaBook.renderCard=renderCard;
     
     function convertNote(note){

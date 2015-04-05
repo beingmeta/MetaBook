@@ -949,10 +949,11 @@ metaBook.Startup=
         function gotServerInfo(data){
             var host_spec="<span class='host'>"+metaBook.server+"</span>";
             if ((metaBook.server_info)&&
-                (metaBook.server_info.ip!==data.ip))
+                (metaBook.server_info.serverip!==data.serverip))
                 fdjtLog.warn(
                     "Server %s IP change from %s to %s:\n\t%j\n\t%j",
-                    metaBook.server,metaBook.server_info.ip,data.ip,
+                    metaBook.server,
+                    metaBook.server_info.serverip,data.serverip,
                     metaBook.server_info,data);
             if (data.servername!==metaBook.server)
                 host_spec=host_spec+" / "+
@@ -960,7 +961,9 @@ metaBook.Startup=
             if (data.hostname!==data.servername)
                 host_spec=host_spec+" / "+
                 "<span class='host'>"+data.hostname+"</span>";
-            host_spec=host_spec+" / "+"<span class='host'>"+data.ip+"</span>";
+            if (data.serverip) {
+                host_spec=host_spec+" / "+
+                    "<span class='host'>"+data.serverip+"</span>";}
             metaBook.server_info=data;
             var info=fdjt.DOM.$(".metabookserverinfo");
             var i=0, lim=info.length; while (i<lim) {
