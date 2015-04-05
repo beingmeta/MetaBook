@@ -94,7 +94,7 @@ metaBook.Slice=(function () {
 
     function renderCard(info,query,idprefix,standalone){
         var target_id=(info.frag)||(info.id);
-        var target=((target_id)&&(mbID(target_id)));
+        // var target=((target_id)&&(mbID(target_id)));
         var target_info=metaBook.docinfo[target_id];
         if (!(target_info)) return false;
         var head_info=((target_info.level)?(target_info):(target_info.head));
@@ -125,7 +125,6 @@ metaBook.Slice=(function () {
                      "div.metabookcard.gloss" :
                      "div.metabookcard.passage"),
                     ((head)&&(makeTOCHead(head,((info.level)&&(info))))),
-                    ((head_info)&&(makeIDHead(target,head_info))),
                     ((standalone)&&(makelocbar(target_info))),
                     body,
                     fdjtDOM("div.fdjtclearfloats"));
@@ -565,17 +564,6 @@ metaBook.Slice=(function () {
                             basespan);
         tochead.title=makelocstring(info,false);
         return tochead;}
-
-    function makeIDHead(target,headinfo){
-        var info=metaBook.docinfo[target.id];
-        if (!(headinfo)) headinfo=info.head;
-        var idhead=fdjtDOM("div.idhead",
-                           makelocrule(info,headinfo),
-                           fdjtDOM("span.spacer",
-                                   ((info.level)?("\u00a7"):("\u00b6"))),
-                           fdjtDOM("span",sumText(target)));
-        idhead.title=makelocstring(info,headinfo);
-        return idhead;}
 
     /* Selecting a subset of glosses to display */
 
