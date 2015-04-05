@@ -334,7 +334,8 @@ metaBook.Slice=(function () {
     function showglossinfo(info) {
         var maker=info.maker, makerid=(info.maker._id)||(info.maker);
         var can_edit=((maker===metaBook.user)||(maker===metaBook.user._id))||
-            (mB.outlets.indexOf(maker)>=0)||(mB.outlets.indexOf(makerid)>=0);
+            ((mB.outlets)&&(mB.outlets.indexOf(maker)>=0))||
+            ((mB.outlets)&&(mB.outlets.indexOf(makerid)>=0));
         var agestring=timestring(info.modified||info.created||info.tstamp);
         var age=fdjtDOM("span.age",agestring);
         age.title=fdjtTime.timeString(info.modified||info.created||info.tstamp);
