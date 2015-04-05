@@ -91,12 +91,8 @@ div.metabookcard > hr {
 .metabookcardbody:after { clear: both; }
 
 .metabookcard .fdjtclearfloats { margin-bottom: 3px;}
-.metabookcard.gloss .metabookcardbody {
-    border-top: solid purple 2px;}
-.metabookcard.passage .metabookcardbody {
-    border-top: solid purple 1px;}
-.metabookslice > .metabookcard:first-child .metabookcardbody {
-    border-top-width: 0px;}
+.metabookcardbody {
+    border-bottom: solid purple 2px;}
 
 .metabookcard span.controller { cursor: pointer;}
 .metabookcard .info { 

@@ -91,8 +91,8 @@ div.metabooksources div.button.source {
 
 div.tochead { 
     position: relative; /* width: 100%; */
-    background-color: silver; color: blue;
-    border-top: solid lightblue 2px; border-bottom: solid lightblue 2px;
+    background-color: lightgray; color: blue;
+    border-top: solid black 2px; border-bottom: solid black 4px;
     text-align: left; vertical-align: middle;}
 div.tochead span.spacer, div.idhead span.spacer {
     font-size: 125%; font-weight: bold; font-style: italic;}
