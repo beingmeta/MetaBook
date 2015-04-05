@@ -93,7 +93,8 @@ div.metabookcard > hr {
 .metabookcard .fdjtclearfloats { margin-bottom: 3px;}
 .metabookcardbody {
     border-top: solid purple 2px;}
-.metabookcardbody:first-child .metabookcardbody {
+.metabookcard.slicenewhead .metabookcardbody,
+.metabookcard:first-child .metabookcardbody {
     border-top: 0px;}
 
 .metabookcard span.controller { cursor: pointer;}
