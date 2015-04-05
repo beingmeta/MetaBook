@@ -711,8 +711,7 @@
         if (adx>(ady*2)) {
             // Horizontal swipe
             if (dx<-(mB.minswipe||10)) {
-                if ((evt.ntouches>1)&&
-                    (mB.skimming))
+                if (evt.ntouches>1)
                     metaBook.skimForward(evt);
                 else if (evt.ntouches>1) {
                     if (!(headinfo)) metaBook.Forward(evt);
@@ -725,8 +724,7 @@
                     else metaBook.Forward(evt);}
                 else metaBook.Forward(evt);}
             else if (dx>(mB.minswipe||10)) {
-                if ((evt.ntouches>1)&&
-                    (mB.skimming))
+                if (evt.ntouches>1)
                     metaBook.skimBackward(evt);
                 else if (evt.ntouches>1) window.history.back();
                 else metaBook.Backward(evt);}}
