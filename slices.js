@@ -56,7 +56,6 @@ metaBook.Slice=(function () {
     var fdjtLog=fdjt.Log;
     var fdjtUI=fdjt.UI;
     var RefDB=fdjt.RefDB, Ref=RefDB.Ref;
-    var Pager=fdjt.Pager;
     var $=fdjtDOM.$, $ID=fdjt.ID;
 
     var mB=metaBook, mbID=mB.ID, Trace=mB.Trace;
@@ -617,8 +616,6 @@ metaBook.Slice=(function () {
         this.live=false; this.needupdate=false;
         this.addCards(cards);
         if (metaBook.touch) opts.packthresh=40;
-        if (!(opts.nopager))
-            this.pager=(opts.pager)||(new Pager(container,opts));
         if ((cards)&&(cards.length)) this.update();
         return this;}
 
@@ -679,12 +676,12 @@ metaBook.Slice=(function () {
             fdjtLog("Updating slice %o over %o",
                     this,this.container);
         var cards=this.cards, visible=[], shown=[];
-        var byfrag=this.byfrag, pager=this.pager;
+        var byfrag=this.byfrag;
         var container=this.container;
         cards.sort(this.sortfn);
         dropClass($(".slicenewpassage",container),"slicenewpassage");
         dropClass($(".slicenewhead",container),"slicenewhead");
-        this.container.innerHTML=""; if (pager) pager.reset();
+        this.container.innerHTML="";
         var head=false, passage=false;
         var frag=document.createDocumentFragment()||this.container;
         var i=0, lim=cards.length; while (i<lim) {
@@ -701,7 +698,6 @@ metaBook.Slice=(function () {
             visible.push(card);
             shown.push(card.dom);}
         if (frag!==this.container) this.container.appendChild(frag);
-        if (this.pager) this.pager.changed();
         this.visible=visible;
         this.shown=shown;
         this.needupdate=false;};
@@ -791,13 +787,11 @@ metaBook.Slice=(function () {
     /* Slice handlers */
 
     MetaBookSlice.prototype.setSkim=function setSkim(card){
-        var pager=this.pager;
         var visible=this.visible, shown=this.shown;
         var off=((card.nodeType)?(shown.indexOf(card)):(visible.indexOf(card)));
         if (off<0) return; else {
             card=shown[off];
             if (this.skimpoint) dropClass(this.skimpoint,"skimpoint");
-            if (pager) pager.setPage(card);
             this.skimpoint=card; this.skimpos=off;
             this.atStart=(off===0);
             this.atEnd=(off>=(visible.length-1));
@@ -856,12 +850,6 @@ metaBook.Slice=(function () {
             //  so we stop previewing and jump there We might try to
             //  figure out exactly which element was tapped somehow
             metaBook.stopPreview("slice_tapped",true);
-            fdjtUI.cancel(evt);
-            return;}
-        if (hasParent(target,".pagernav")) {
-            var pager=metaBook.pagers[metaBook.mode];
-            var pageno=pager.getNum(target);
-            pager.setPage(pageno-1);
             fdjtUI.cancel(evt);
             return;}
         if ((getParent(target,".ellipsis"))&&
@@ -924,17 +912,6 @@ metaBook.Slice=(function () {
     function slice_held(evt){
         evt=evt||window.event;
         var slice_target=fdjtUI.T(evt), card=getCard(slice_target);
-        if (hasParent(slice_target,".pagernav")) {
-            var pager=metaBook.pagers[metaBook.mode];
-            if (Trace.gestures)
-                fdjtLog("slice_held/pager %o: %o in %o",
-                        evt,slice_target,pager);
-            if (!(pager)) {fdjtUI.cancel(evt); return;}
-            var pageno=pager.getNum(fdjtUI.T(evt));
-            if ((typeof pageno === "number")&&(pageno>0))
-                pager.setPage(pageno-1);
-            fdjtUI.cancel(evt);
-            return;}
         if (Trace.gestures)
             fdjtLog("slice_held %o: %o, skimming=%o",
                     evt,card,metaBook.skimpoint);
@@ -1016,11 +993,10 @@ metaBook.Slice=(function () {
         fdjtUI.cancel(evt);}
 
     function slice_swiped(evt){
-        var pager=metaBook.pagers[metaBook.mode];
-        if (!(pager)) return;
         var dx=evt.deltaX, dy=evt.deltaY;
         var vw=fdjtDOM.viewWidth();
         var adx=((dx<0)?(-dx):(dx)), ady=((dy<0)?(-dy):(dy));
+        var pager=false;
         if (Trace.gestures)
             fdjtLog("slice_swiped d=%o,%o, ad=%o,%o, s=%o,%o vw=%o, n=%o",
                     dx,dy,adx,ady,evt.startX,evt.startY,vw,evt.ntouches);

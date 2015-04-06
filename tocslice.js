@@ -76,6 +76,7 @@ metaBook.TOCSlice=
             var start=headinfo.starts_at, end=headinfo.ends_at, sectlen=end-start;
             if ((headinfo.sub)&&(headinfo.sub.length)) {
                 var sub=headinfo.sub; var s=0, smax=sub.length;
+                addClass(tocbar,"fdjtpagehead");
                 while (s<smax) {
                     var subsect=sub[s++], brick=fdjtDOM("a.brick"); // ," "
                     var left=subsect.starts_at, size=subsect.ends_at-left;
@@ -121,14 +122,6 @@ metaBook.TOCSlice=
                 return new MetaBookTOC(rootinfo,dom);
             MetaBookSlice.call(this,dom);
             maketoc(this,rootinfo);
-            this.pager.badBreak=function(a,b){
-                var la=a.getAttribute("data-level");
-                var lb=b.getAttribute("data-level");
-                if ((la)&&(lb)) {
-                    la=parseInt(la); lb=parseInt(lb);
-                    if (la<lb) return true; else return false;}
-                else return false;};
-            this.pager.changed();
             return this;}
         MetaBookTOC.prototype=new MetaBookSlice();
 

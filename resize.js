@@ -36,6 +36,8 @@
 (function (){
     "use strict";
     var fdjtDOM=fdjt.DOM, fdjtLog=fdjt.Log, $ID=fdjt.ID;
+    var addClass=fdjtDOM.addClass;
+    var showPage=fdjt.showPage;
     var fdjtUI=fdjt.UI;
     var Trace=metaBook.Trace, mB=metaBook;
 
@@ -144,16 +146,17 @@
                 choosing_resize=fdjtUI.choose(spec,msg);}}}
     metaBook.resize=metabookResize;
 
-    function resizePagers(){
-        var pagers=metaBook.pagers;
-        for (var mode in pagers) {
-            if (pagers.hasOwnProperty(mode))
-                pagers[mode].resized();}}
-
     function resizeNow(evt){
         if (resizing) clearTimeout(resizing);
         resizing=false;
         metaBook.layout.onresize(evt);}
+
+    function resizePagers(){
+        var pagers=fdjtDOM.$(".fdjtpage");
+        var i=0, lim=pagers.length; while (i<lim) {
+            var pager=pagers[i++];
+            if (pager.offsetHeight) showPage.update(pager);
+            else addClass(pager,"needsresize");}}
 
     var sizeclass_regexp=/\b_(NARROW|WIDE|REALLYSHORT|SHORT|TALL)\b/g;
     function updateSizeClasses(){

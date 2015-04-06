@@ -88,6 +88,7 @@
     var mB=metaBook;
     var Trace=mB.Trace;
     var fdjtString=fdjt.String;
+    var showPage=fdjt.showPage;
     var fdjtState=fdjt.State;
     var fdjtTime=fdjt.Time;
     var fdjtLog=fdjt.Log;
@@ -1300,7 +1301,7 @@
         if (mB.skimming)
             skimForward(evt);
         else if ((mB.mode)&&(pagers[metaBook.mode]))
-            pagerForward(evt);
+            showPage.forward(pagers[metaBook.mode]);
         else if ((evt)&&(evt.shiftKey))
             skimForward(evt);
         else pageForward(evt);}
@@ -1314,7 +1315,7 @@
         if (mB.skimming)
             skimBackward(evt);
         else if ((mB.mode)&&(pagers[metaBook.mode]))
-            pagerBackward(evt);
+            showPage.backward(pagers[metaBook.mode]);
         else if ((evt)&&(evt.shiftKey))
             skimBackward();
         else pageBackward();}
@@ -1372,36 +1373,6 @@
             var newy=fdjtDOM.viewTop()-delta;
             window.scrollTo(fdjtDOM.viewLeft(),newy);}}
     metaBook.pageBackward=pageBackward;
-
-    function pagerForward(evt){
-        var pager=metaBook.pagers[metaBook.mode];
-        if (!(pager)) return;
-        evt=evt||window.event;
-        var now=fdjtTime();
-        if ((last_motion)&&((now-last_motion)<100)) return;
-        else last_motion=now;
-        dropClass(document.body,/\bmb(PAGE)?PREVIEW/g);
-        fdjtUI.cancel(evt);
-        if ((Trace.gestures)||(Trace.flips))
-            fdjtLog("pagerForward (on %o) %o %d/%d",
-                    evt,pager.root,pager.pageoff+1,pager.npages);
-        pager.forward();}
-    metaBook.pagerForward=pagerForward;
-
-    function pagerBackward(evt){
-        var pager=metaBook.pagers[metaBook.mode];
-        if (!(pager)) return;
-        evt=evt||window.event;
-        var now=fdjtTime();
-        if ((last_motion)&&((now-last_motion)<100)) return;
-        else last_motion=now;
-        dropClass(document.body,/\bmb(PAGE)?PREVIEW/g);
-        fdjtUI.cancel(evt);
-        if ((Trace.gestures)||(Trace.flips))
-            fdjtLog("pagerBackward (on %o) %o %d/%d",
-                    evt,pager.root,pager.pageoff+1,pager.npages);
-        pager.backward();}
-    metaBook.pagerBackward=pagerBackward;
 
     function skimForward(evt){
         var now=fdjtTime(), slice=metaBook[metaBook.mode];

@@ -249,7 +249,6 @@
         fdjtDOM.replace("METABOOKSEARCHRESULTS",results_panel);
         results.update();
         metaBook.searchresults=results;
-        metaBook.pagers.searchresults=results.pager;
         metaBook.setMode("searchresults");
         $ID("METABOOKSEARCHINPUT").blur();
         $ID("METABOOKSEARCHRESULTS").focus();}

@@ -171,7 +171,6 @@ metaBook.setMode=
 
             metaBook.allglosses=allglosses=
                 new metaBook.Slice(metaBook.DOM.allglosses);
-            metaBook.pagers.allglosses=metaBook.allglosses.pager;
             metaBook.allglosses.mode="allglosses";
             metaBook.glossdb.onAdd("maker",function(f,p,v){
                 metaBook.sourcedb.ref(v).oninit
@@ -330,7 +329,6 @@ metaBook.setMode=
             tocslice.update();
             metaBook.tocslice=tocslice;
             metaBook.statictoc=tocslice;
-            metaBook.pagers.statictoc=tocslice.pager;
             metaBook.setupGestures(panel);
             return tocslice;}
         metaBook.setupTOC=setupTOC;
@@ -351,7 +349,6 @@ metaBook.setMode=
                 addClass(document.body,"hudup");}
             else {
                 metaBook.hudup=false;
-                metaBook.scrolling=false;
                 if (metaBook.previewing)
                     metaBook.stopPreview("setHUD");
                 dropClass(document.body,"mbSHRINK");
@@ -411,14 +408,6 @@ metaBook.setMode=
         var metaBookCoverModes=/\b((welcome)|(help)|(layers)|(login)|(settings)|(cover)|(aboutsbooks)|(console)|(aboutbook)|(titlepage))\b/g;
         var metaBookSearchModes=/((refinesearch)|(searchresults)|(expandsearch))/;
         metaBook.searchModes=metaBookSearchModes;
-        var metabook_mode_scrollers=
-            {allglosses: "METABOOKALLGLOSSES",
-             searchresults: "METABOOKSEARCHRESULTS",
-             expandsearch: "METABOOKALLTAGS",
-             search: "METABOOKSEARCHCLOUD",
-             refinesearch: "METABOOKSEARCHCLOUD",
-             openglossmark: "METABOOKPOINTGLOSSES",
-             statictoc: "METABOOKSTATICTOC"};
         var metabook_mode_foci=
             {gotopage: "METABOOKPAGEINPUT",
              gotoloc: "METABOOKLOCINPUT",
@@ -496,13 +485,6 @@ metaBook.setMode=
                     (!($ID("SBOOKSAPP").src))&&
                     (!(metaBook.appinit)))
                     initIFrameApp();
-                // Update metaBook.scrolling which is the scrolling
-                // element in the HUD for this mode
-                if (typeof mode !== 'string')
-                    metaBook.scrolling=false;
-                else if (metabook_mode_scrollers[mode]) 
-                    metaBook.scrolling=(metabook_mode_scrollers[mode]);
-                else metaBook.scrolling=false;
 
                 if ((mode==='refinesearch')||
                     (mode==='searchresults')||
@@ -573,48 +555,28 @@ metaBook.setMode=
             if (mode==="statictoc") {
                 var headinfo=((metaBook.head)&&(metaBook.head.id)&&
                               (metaBook.docinfo[metaBook.head.id]));
-                var hhinfo=headinfo.head, pinfo=headinfo.prev;
                 var static_head=$ID("METABOOKSTATICTOC4"+headinfo.frag);
-                var static_hhead=
-                    ((hhinfo)&&($ID("METABOOKSTATICTOC4"+hhinfo.frag)));
-                var static_phead=
-                    ((pinfo)&&($ID("METABOOKSTATICTOC4"+pinfo.frag)));
-                if ((static_head)&&(static_head.scrollIntoView)) {
-                    if (static_hhead) static_hhead.scrollIntoView();
-                    if ((static_phead)&&(static_phead.scrollIntoViewIfNeeded))
-                        static_phead.scrollIntoViewIfNeeded();
-                    if (static_head.scrollIntoViewIfNeeded)
-                        static_head.scrollIntoViewIfNeeded();
-                    else static_head.scrollIntoView();}}
+                var toc=fdjt.ID("METABOOKSTATICTOC");
+                if (static_head.hidden)
+                    fdjt.showPage.showNode(toc,static_head);
+                else fdjt.showPage.check(toc);}
             else if (mode==="allglosses") {
                 var curloc=metaBook.location;
-                var allcards=metaBook.DOM.allglosses.childNodes;
-                var i=0, lim=allcards.length;
-                var card=false, lastcard=false, lasthead=false;
+                var glossdiv=fdjt.ID("METABOOKALLGLOSSES");
+                var allcards=glossdiv.childNodes;
+                var i=0, lim=allcards.length, card=false;
                 if (metaBook.allglosses) metaBook.allglosses.setLive(true);
                 while (i<lim) {
-                    var each=allcards[i++];
-                    if (each.nodeType!==1) continue;
-                    lastcard=card; card=each;
-                    if (hasClass(card,"newhead")) lasthead=card;
-                    var loc=card.getAttribute("data-location");
-                    if (loc) loc=parseInt(loc,10);
-                    if (loc>=curloc) break;}
-                if (i>=lim) card=lastcard=false;
-                if (metaBook.pagers.allglosses)
-                    (metaBook.pagers.allglosses).setPage(card);}
+                    card=allcards[i++];
+                    if (card.nodeType===1) {
+                        var loc=card.getAttribute("data-location");
+                        if (loc) loc=parseInt(loc,10); else continue;
+                        if (loc>=curloc) break;}}
+                if (card) fdjt.showPage.showNode(glossdiv,card);
+                else fdjt.showPage.check(glossdiv);}
+            else if (metaBook.pagers[mode])
+                fdjt.showPage.check(metaBook.pagers[mode]);
             else {}
-            
-            // This updates scroller dimensions, we delay it
-            //  because apparently, on some browsers, the DOM
-            //  needs to catch up with CSS
-            if ((metaBook.scrolling)&&(metaBook.iscroll)) {
-                var scroller=$ID(metaBook.scrolling);
-                if (Trace.iscroll)
-                    fdjtLog("Updating scroller for #%s s=%o",
-                            metaBook.scrolling,scroller);
-                setTimeout(function(){updateScroller(scroller);},
-                           2000);}
             
             // We autofocus any input element appropriate to the
             // mode
