@@ -55,6 +55,7 @@ metaBook.Slice=(function () {
     var fdjtDOM=fdjt.DOM;
     var fdjtLog=fdjt.Log;
     var fdjtUI=fdjt.UI;
+    var showPage=fdjt.showPage;
     var RefDB=fdjt.RefDB, Ref=RefDB.Ref;
     var $=fdjtDOM.$, $ID=fdjt.ID;
 
@@ -698,6 +699,7 @@ metaBook.Slice=(function () {
             visible.push(card);
             shown.push(card.dom);}
         if (frag!==this.container) this.container.appendChild(frag);
+        showPage.update(container);
         this.visible=visible;
         this.shown=shown;
         this.needupdate=false;};
@@ -996,7 +998,8 @@ metaBook.Slice=(function () {
         var dx=evt.deltaX, dy=evt.deltaY;
         var vw=fdjtDOM.viewWidth();
         var adx=((dx<0)?(-dx):(dx)), ady=((dy<0)?(-dy):(dy));
-        var pager=false;
+        var target=fdjtUI.T(evt);
+        var slice=getParent(target,".metabookslice");
         if (Trace.gestures)
             fdjtLog("slice_swiped d=%o,%o, ad=%o,%o, s=%o,%o vw=%o, n=%o",
                     dx,dy,adx,ady,evt.startX,evt.startY,vw,evt.ntouches);
@@ -1005,11 +1008,11 @@ metaBook.Slice=(function () {
             if (dx<(-(metaBook.minswipe||10))) {
                 if (metaBook.skimming)
                     metaBook.skimForward();
-                else pager.forward();}
+                else showPage.forward(slice);}
             else if (dx>(metaBook.minswipe||10)) {
                 if (metaBook.skimming)
                     metaBook.skimBackward();
-                pager.backward();}}
+                else showPage.backward(slice);}}
         else if (ady>(adx*2)) {
             // Vertical swipe
             if (!(metaBook.hudup)) {

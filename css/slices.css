@@ -57,16 +57,6 @@ div.metabookslice div.metabookcard.skimpoint .metabookcardbody {
 div.metabookslice div.metabookcard.skimpoint .fdjtclearfloats {
     margin-bottom: 0px;}
 
-div.metabookslice.pager div.pagernav {
-    border-bottom: solid black 1px;}
-html._TOUCH div.metabookslice.pager div.pagernav {
-    font-size: 200%;}
-div.metabookslice.pager.hudpanel div.pagernav {
-    position: absolute; bottom: 0px;
-    border-top: solid black 1px;}
-div.metabookslice.pager.hudpanel div.pagernav>span {
-    border-bottom: 0px; border-top: solid black 1ex;}
-
 /* METABOOKSOURCES */
 
 div.metabooksources {}
@@ -150,8 +140,7 @@ div.metabookslice div.metabookcard div.tochead { display: none; }
 div.metabookslice div.metabookcard div.idhead { display: none; }
 
 div.metabookslice div.metabookcard.slicenewhead div.tochead,
-div.metabookslice div.metabookcard.fdjtstartofpage div.tochead,
-div.metabookslice  div.pagerblock > div.metabookcard:first-child div.tochead {
+div.metabookslice div.metabookcard.fdjtstartofpage div.tochead {
     display: block; }
 
 div.metabookslice div.metabookcard.fdjtstartofpage div.tochead {

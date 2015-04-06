@@ -286,8 +286,6 @@ metaBook.Startup=
             fdjtDOM(document.head,style);
             metaBook.stylesheet=style.sheet;
 
-            if (Trace.pagers) fdjt.Pager.prototype.trace=Trace.pagers;
-
             // This initializes the book tools
             //  (the HUD/Heads Up Display and the cover)
             metaBook.initHUD();

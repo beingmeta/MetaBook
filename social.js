@@ -233,7 +233,7 @@
                     var starts=range.startContainer;
                     if (!(hasClass(starts,"mbhighlightexcerpt"))) {
                         fdjtUI.Highlight(range,"mbhighlightexcerpt");}}}}
-        var slice=new MetaBookSlice(slicediv,glosses,sort_point_glosses,{nopager: true});
+        var slice=new MetaBookSlice(slicediv,glosses,sort_point_glosses);
         var hudwrapper=fdjtDOM("div.hudpanel#METABOOKPOINTGLOSSES",slicediv);
         metaBook.openglossmark=slice;
         if (point) {
