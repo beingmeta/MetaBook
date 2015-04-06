@@ -182,8 +182,9 @@
         else if ((maker===metaBook.user)||
                  (makerid===metaBook.user._id)||
                  (metaBook.outlets.indexOf(arg.maker)>=0)||
-                 (metaBook.outlets.indexOf(arg.maker._id)>=0)) {}
-        else reponse=false;
+                 (metaBook.outlets.indexOf(arg.maker._id)>=0))
+            response=false;
+        else response=true;
         var passage=((gloss)?(mbID(gloss.frag)):(arg));
         var passageid=((passage.codexbaseid)||(passage.id));
         var formid=((gloss)?
@@ -1028,9 +1029,22 @@
                     getInput(form,"UUID").value,req.status,
                     getInput(form,"FRAG").value);
         dropClass(form.parentNode,"submitting");
+        if ((req.status<200)||(req.status>=300)) {
+            addClass(form.parentNode,"submitfailed");
+            if (req.status===403)
+                fdjt.Dialog.alert("Sorry, you you're not allowed to save this gloss");
+            else fdjt.Dialog.alert("There was a problem saving your gloss");
+            if ((form.parentNode)&&(form.parentNode))
+                fdjtDOM.remove(form.parentNode);
+            setGlossTarget(false);
+            metaBook.setTarget(false);
+            metaBook.setMode(false);
+            return;}
         if (keep)
             addClass(form.parentNode,"submitdone");
-        else addClass(form.parentNode,"submitclose");
+        else {
+            addClass(form.parentNode,"submitclose");
+            metaBook.setHUD(false,false);}
         var json=JSON.parse(req.responseText);
         var ref=metaBook.glossdb.Import(
             // item,rules,flags
