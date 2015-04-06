@@ -75,10 +75,29 @@
         if (mB.persist) return existsLocal(key);
         else return fdjtState.existsSession(key);}
     metaBook.hasLocal=hasLocal;
+
+    function elt_unparser(arg){
+        if (typeof arg === "string") return arg;
+        else if (arg._qid) return arg._qid;
+        else if (arg.getQID)
+            return (arg._qid=arg.getQID())||arg.toString();
+        else return JSON.stringify(arg);}
+    function unparser(arg){
+        if (typeof arg === "string") return arg;
+        else if (Array.isArray(arg)) {
+            var i=0, lim=arg.length; var result=[];
+            while (i<lim) {
+                var elt=arg[i++];
+                result.push(elt_unparser(elt));}
+            return JSON.stringify(result);}
+        else return elt_unparser(arg);}
+
     function saveLocal(key,value,unparse){
-        if (mB.persist) setLocal(key,value,unparse);
-        else fdjtState.setSession(key,value,unparse);}
+        if (unparse) value=unparser(value);
+        if (mB.persist) setLocal(key,value,false);
+        else fdjtState.setSession(key,value,false);}
     metaBook.saveLocal=saveLocal;
+
     function readLocal(key,parse){
         if (mB.persist) {
             if (existsLocal(key))
@@ -89,6 +108,7 @@
             else return false;}
         else return fdjtState.getSession(key,parse)||getLocal(key,parse);}
     metaBook.readLocal=readLocal;
+
     function clearLocal(key){
         fdjtState.dropLocal(key);
         fdjtState.dropSession(key);}
@@ -343,6 +363,17 @@
                 metaBook.cacheglosses=false;}}
         metaBook.setCacheGlosses=setCacheGlosses;
         
+        function saveProps(props_arg){
+            var uri=mB.docuri;
+            var props=(!(props_arg))?(metaBook.saveprops):
+                (Array.isArray(props_arg))?(props_arg):[props];
+            var i=0, lim=props.length;
+            while (i<lim) {
+                var prop=props[i++];
+                if (metaBook[prop]) saveLocal(
+                    "mB."+prop+"("+uri+")",metaBook[prop],true);}}
+        metaBook.saveProps=saveProps;
+
         /* Setting persistence */
 
         function setPersist(){

@@ -45,6 +45,12 @@
     var setLocal=fdjtState.setLocal;
     var saveLocal=mB.saveLocal;
 
+    function sourceref(arg){
+        if (arg instanceof Ref) return arg;
+        else if (typeof arg === "string")
+            return mB.sourcedb.ref(arg);
+        else return false;}
+
     function setUser(userinfo,outlets,layers,sync){
         var started=fdjtTime();
         var root=document.documentElement||document.body;
@@ -66,14 +72,15 @@
             metaBook.writeQueuedGlosses();
         metaBook.user=metaBook.sourcedb.Import(
             userinfo,false,RefDB.REFLOAD|RefDB.REFSTRINGS|RefDB.REFINDEX);
-        if (outlets) metaBook.outlets=outlets;
-        if (layers) metaBook.layers=layers;
+        if (outlets) metaBook.outlets=outlets.map(sourceref);
+        if (layers) metaBook.layers=layers.map(sourceref);
         // No callback needed
         metaBook.user.save();
         saveLocal("mB.user",metaBook.user._id);
         // We also save it locally so we can get it synchronously
         saveLocal(metaBook.user._id,metaBook.user.Export(),true);
         if (metaBook.locsync) metaBook.setConfig("locsync",true);
+        metaBook.saveProps();
         
         if (Trace.startup) {
             var now=fdjtTime();
@@ -284,9 +291,9 @@
             fdjtLog("initOffline userinfo=%j",userinfo);
         // Should these really be refs in sourcedb?
         var outlets=metaBook.outlets=
-            getLocal("mB.outlets("+refuri+")",true)||[];
+            (getLocal("mB.outlets("+refuri+")",true)||[]).map(sourceref);
         var layers=metaBook.layers=
-            getLocal("mB.layers("+refuri+")",true)||[];
+            (getLocal("mB.layers("+refuri+")",true)||[]).map(sourceref);
         if (userinfo) setUser(userinfo,outlets,layers,sync);
         if (nodeid) setNodeID(nodeid);}
     metaBook.initUserOffline=initUserOffline;
