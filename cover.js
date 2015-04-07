@@ -43,8 +43,6 @@
     var mB=metaBook, Trace=mB.Trace;
     var fixStaticRefs=metaBook.fixStaticRefs;
 
-    var IScroll=window.IScroll;
-
     var hasContent=fdjtDOM.hasContent;
     
     function hasAnyContent(n){return hasContent(n,true);}
@@ -74,15 +72,6 @@
                 fdjtUI.cancel(evt);
                 console_eval();
                 if (evt.shiftKey) input_console.value="";}}}
-
-    function setupScroller(div){
-        var c=fdjtDOM("div");
-        var children=div.childNodes; var cnodes=[];
-        var i=0, lim=children.length; while (i<lim)
-            cnodes.push(children[i++]);
-        i=0; while (i<lim) c.appendChild(cnodes[i++]);
-        div.appendChild(c);
-        return new IScroll(div);}
 
     function stripExplicitStyles(root){
         if ((root.id)&&(root.id.search("METABOOK")===0))
@@ -244,12 +233,6 @@
         if (metaBook.touch)
             fdjtDOM.addListener(cover,"touchstart",cover_clicked);
         else fdjtDOM.addListener(cover,"click",cover_clicked);
-        
-        if (metaBook.iscroll) {
-            if (blurb) metaBook.scrollers.about=setupScroller(blurb);
-            metaBook.scrollers.help=setupScroller(cover_help);
-            metaBook.scrollers.console=setupScroller(console);
-            metaBook.scrollers.settings=setupScroller(settings);}
         
         stripExplicitStyles(cover);
 

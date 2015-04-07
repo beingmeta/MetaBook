@@ -38,7 +38,6 @@
    files. */
 //var fdjt=((typeof fdjt !== "undefined")?(fdjt):({}));
 //var Knodule=((typeof Knodule !== "undefined")?(Knodule):({}));
-//var iScroll=((typeof iScroll !== "undefined")?(iScroll):({}));
 //var fdjtMap=fdjt.Map;
 
 var metaBook={
@@ -64,7 +63,7 @@ var metaBook={
     glossmodes: /(addtag)|(addoutlet)|(editdetail)|(hamburger)|(attach)/,
     // Various device properties which can effect behaviors
     fullheight: false, fullwidth: false, handheld: false,
-    updatehash: true, iscroll: false,
+    updatehash: true,
     // This tracks missing node identifiers
     missing_nodes: [],
     // Whether to cache layouts locally; the value is a threshold
@@ -95,8 +94,6 @@ var metaBook={
     mouse: true, touch: false, kbd: false,
     // Whether there is a keyboard
     keyboard: true,
-    // This is a table for iScroll scrollers, when used
-    scrollers: {},
     // This is a table for pager objects, by ID and mode
     pagers: {"allglosses": "METABOOKALLGLOSSES",
              "searchresults": "METABOOKSEARCHRESULTS",
@@ -196,7 +193,6 @@ var metaBook={
         messages: false,  // Whether to trace inter-window messages
         glossing: false,  // Whether to trace gloss adding or edition
         selection: false, // Whether to trace text selection events
-        iscroll: false,   // Whether to trace HUD scrolling with iScroll
         highlight: 0,     // Whether to trace highlighting
         indexing: 0,      // How much to trace document indexing
         gestures: 0}      // How much to trace gestures

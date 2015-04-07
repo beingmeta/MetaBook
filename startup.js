@@ -44,7 +44,6 @@
 //var fdjt=((typeof fdjt !== "undefined")?(fdjt):({}));
 //var metaBook=((typeof metaBook !== "undefined")?(metaBook):({}));
 //var Knodule=((typeof Knodule !== "undefined")?(Knodule):({}));
-//var iScroll=((typeof iScroll !== "undefined")?(iScroll):({}));
 
 metaBook.Startup=
     (function(){
@@ -796,18 +795,12 @@ metaBook.Startup=
                 metaBook.touch=true;
                 metaBook.keyboard=false;
                 viewportSetup();}
-            if ((device.android)&&(device.android>=3)) {
+            if (device.android) {
                 default_config.keyboardhelp=false;
-                metaBook.updatehash=false;
-                metaBook.iscroll=false;}
-            else if (device.android) {
-                default_config.keyboardhelp=false;
-                metaBook.updatehash=false;
-                metaBook.iscroll=true;}
+                metaBook.updatehash=false;}
             else if ((useragent.search("Safari/")>0)&&
                      (useragent.search("Mobile/")>0)) { 
                 hide_mobile_safari_address_bar();
-                metaBook.iscroll=false;
                 metaBook.updatehash=false;
                 // Animation seems to increase crashes in iOS
                 // metaBook.dontanimate=true;
@@ -823,11 +816,6 @@ metaBook.Startup=
                 fdjtDOM.addClass(root,"_MOUSE");
                 metaBook.ui="mouse";}
             else {}
-            if (metaBook.iscroll) {
-                fdjtDOM.addClass(root,"_ISCROLL");
-                device.iscroll=true;}
-            device.string=device.string+" "+
-                ((metaBook.iscroll)?("iScroll"):("nativescroll"));
             
             if (Trace.startup>1) {
                 fdjtLog("setupDevice done in %dms: %s/%dx%d %s",

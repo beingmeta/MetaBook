@@ -316,23 +316,6 @@ body.hudup #METABOOKHUD.allglosses.openheart #METABOOKHEARTBODY,
 body.hudup #METABOOKHUD.searchresults.openheart #METABOOKHEARTBODY {
     padding-top: 0px;}
 
-body.hudup._ISCROLL #METABOOKHUD.openheart #METABOOKHEARTBODY,
-body._ISCROLL #METABOOKHUD.addgloss.glossaddtag #METABOOKHEARTBODY,
-body._ISCROLL #METABOOKHUD.addgloss.glosstagging #METABOOKHEARTBODY,
-body._ISCROLL #METABOOKHUD.addgloss.glosstagoutlet #METABOOKHEARTBODY,
-body._ISCROLL #METABOOKHUD.addgloss.glosseditdetail #METABOOKHEARTBODY,
-body._ISCROLL #METABOOKHUD.addgloss.glossaddoutlet #METABOOKHEARTBODY,
-body._ISCROLL #METABOOKHUD.addgloss.glossattach #METABOOKHEARTBODY {
-    padding-top: 0px; padding-bottom: 0px;}
-body.hudup._ISCROLL #METABOOKHUD.openheart #METABOOKHEARTBODY #METABOOKHEARTCONTENT,
-body._ISCROLL #METABOOKHUD.addgloss.glossaddtag #METABOOKHEARTBODY #METABOOKHEARTCONTENT,
-body._ISCROLL #METABOOKHUD.addgloss.glosstagging #METABOOKHEARTBODY #METABOOKHEARTCONTENT,
-body._ISCROLL #METABOOKHUD.addgloss.glosstagoutlet #METABOOKHEARTBODY #METABOOKHEARTCONTENT,
-body._ISCROLL #METABOOKHUD.addgloss.glossaddoutlet #METABOOKHEARTBODY #METABOOKHEARTCONTENT,
-body._ISCROLL #METABOOKHUD.addgloss.glosseditdetail #METABOOKHEARTBODY #METABOOKHEARTCONTENT,
-body._ISCROLL #METABOOKHUD.addgloss.glossattach #METABOOKHEARTBODY #METABOOKHEARTCONTENT {
-    padding-top: 1em; padding-bottom: 1em;}
-
 #METABOOKHEARTBODY div.hudpanel > h1:first-child { margin-top: 0px;}
 
 #METABOOKHUD.addgloss.glossaddtag #METABOOKHEART,

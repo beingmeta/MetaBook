@@ -39,7 +39,6 @@
    files. */
 //var fdjt=((typeof fdjt !== "undefined")?(fdjt):({}));
 //var Knodule=((typeof Knodule !== "undefined")?(Knodule):({}));
-//var iScroll=((typeof iScroll !== "undefined")?(iScroll):({}));
 //var fdjtMap=fdjt.Map;
 
 (function(){

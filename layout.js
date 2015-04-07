@@ -46,7 +46,6 @@
 // var fdjt=((typeof fdjt !== "undefined")?(fdjt):({}));
 // var metaBook=((typeof metaBook !== "undefined")?(metaBook):({}));
 // var Knodule=((typeof Knodule !== "undefined")?(Knodule):({}));
-// var iScroll=((typeof iScroll !== "undefined")?(iScroll):({}));
 
 metaBook.Paginate=
     (function(){

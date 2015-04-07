@@ -45,7 +45,6 @@
 // var fdjt=((typeof fdjt !== "undefined")?(fdjt):({}));
 // var metaBook=((typeof metaBook !== "undefined")?(metaBook):({}));
 // var Knodule=((typeof Knodule !== "undefined")?(Knodule):({}));
-// var iScroll=((typeof iScroll !== "undefined")?(iScroll):({}));
 
 metaBook.setMode=
     (function(){
@@ -64,8 +63,6 @@ metaBook.setMode=
         var Trace=mB.Trace;
 
         var MetaBookTOC=mB.TOCSlice;
-
-        var IScroll=window.IScroll;
 
         // Helpful dimensions
         // Whether to call displaySync on mode changes
@@ -238,8 +235,6 @@ metaBook.setMode=
             var help=metaBook.DOM.help=$ID("METABOOKHELP");
             help.innerHTML=fixStaticRefs(metaBook.HTML.help);
 
-            metaBook.scrollers={};
-
             /* Setup clouds */
             var dom_gloss_cloud=$ID("METABOOKGLOSSCLOUD");
             metaBook.gloss_cloud=
@@ -248,7 +243,6 @@ metaBook.setMode=
                     fdjtUI.FDJT_COMPLETE_OPTIONS|
                         fdjtUI.FDJT_COMPLETE_CLOUD|
                         fdjtUI.FDJT_COMPLETE_ANYWORD);
-            updateScroller("METABOOKGLOSSCLOUD");
             metaBook.TapHold.gloss_cloud=new TapHold(metaBook.gloss_cloud.dom);
 
             metaBook.empty_cloud=
@@ -261,7 +255,6 @@ metaBook.setMode=
                 metaBook.empty_cloud.updated=function(){
                     metaBook.adjustCloudFont(this);};
             metaBook.DOM.empty_cloud=$ID("METABOOKALLTAGS");
-            updateScroller("METABOOKALLTAGS");
             metaBook.TapHold.empty_cloud=new TapHold(metaBook.empty_cloud.dom);
             
             var dom_share_cloud=$ID("METABOOKSHARECLOUD");
@@ -272,7 +265,6 @@ metaBook.setMode=
                         fdjtUI.FDJT_COMPLETE_CLOUD|
                         fdjtUI.FDJT_COMPLETE_ANYWORD);
             metaBook.DOM.share_cloud=dom_share_cloud;
-            updateScroller("METABOOKSHARECLOUD");
             metaBook.TapHold.share_cloud=new TapHold(metaBook.share_cloud.dom);
 
             fdjtDOM.setupCustomInputs($ID("METABOOKHUD"));
@@ -599,23 +591,6 @@ metaBook.setMode=
             else setTimeout(metaBook.focusBody,50);
             
             if (display_sync) metaBook.displaySync();}
-
-        function updateScroller(elt){
-            /* jshint newcap: false */
-            if (!(metaBook.iscroll)) return;
-            if ((elt)&&(Trace.scrolling))
-                fdjtLog("Updating scroller for %o",elt);
-            if (metaBook.heartscroller) metaBook.heartscroller.refresh();
-            else {
-                var heart=$ID("METABOOKHEARTBODY");
-                var contents=$ID("METABOOKHEARTCONTENT");
-                if (!(contents)) {
-                    contents=fdjtDOM("div#METABOOKHEARTCONTENT");
-                    fdjtDOM(contents,fdjtDOM.Array(heart.childNodes));
-                    fdjtDOM(heart,contents);}
-                metaBook.heartscroller=new IScroll(heart);
-                metaBook.heartscroller.refresh();}}
-        metaBook.UI.updateScroller=updateScroller;
 
         function metaBookHUDToggle(mode,keephud){
             if (!(metaBook.mode)) setMode(mode);
