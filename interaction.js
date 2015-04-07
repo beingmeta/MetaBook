@@ -186,7 +186,7 @@
             metaBook.TapHold.body=fdjtUI.TapHold(
                 $ID("METABOOKBODY"),
                 {override: true,noslip: true,id: "METABOOKBODY",
-                 maxtouches: 2,taptapmsecs: true,
+                 maxtouches: 3,taptapmsecs: true,
                  untouchable: externClickable,
                  movethresh: 10});
             addHandlers(metaBook.HUD,'hud');}
@@ -704,30 +704,24 @@
         var dx=evt.deltaX, dy=evt.deltaY;
         var vw=fdjtDOM.viewWidth();
         var adx=((dx<0)?(-dx):(dx)), ady=((dy<0)?(-dy):(dy));
-        var head=metaBook.head;
-        var headinfo=((head)&&(head.id)&&(mB.docinfo[head.id]));
         if (Trace.gestures)
             fdjtLog("swiped d=%o,%o, ad=%o,%o, s=%o,%o vw=%o, n=%o",
                     dx,dy,adx,ady,evt.startX,evt.startY,vw,evt.ntouches);
         if (adx>(ady*2)) {
             // Horizontal swipe
             if (dx<-(mB.minswipe||10)) {
-                if (evt.ntouches>1)
-                    metaBook.skimForward(evt);
+                if (evt.ntouches>2) window.history.forward();
                 else if (evt.ntouches>1) {
-                    if (!(headinfo)) metaBook.Forward(evt);
-                    else if ((headinfo.sub)&&(headinfo.sub.length)) 
-                        metaBook.GoTo(headinfo.sub[0].frag,"doubleswipe");
-                    else if (headinfo.next)
-                        metaBook.GoTo(headinfo.next.frag,"doubleswipe");
-                    else if (headinfo.head)
-                        metaBook.GoTo(headinfo.head.frag,"doubleswipe");
-                    else metaBook.Forward(evt);}
+                    if (mB.skimming)
+                        metaBook.skimForward(evt);
+                    else window.history.forward();}
                 else metaBook.Forward(evt);}
             else if (dx>(mB.minswipe||10)) {
-                if (evt.ntouches>1)
-                    metaBook.skimBackward(evt);
-                else if (evt.ntouches>1) window.history.back();
+                if (evt.ntouches>2) window.history.back();
+                else if (evt.ntouches>1) {
+                    if (mB.skimming)
+                        metaBook.skimBackward(evt);
+                    else window.history.back();}
                 else metaBook.Backward(evt);}}
         else if (ady>(adx*2)) {
             // Vertical swipe
