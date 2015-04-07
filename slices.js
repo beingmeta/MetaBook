@@ -101,7 +101,8 @@ metaBook.Slice=(function () {
         var head=((head_info)&&(mbID(head_info.frag)));
         var score=((query)&&(query.scores.get(info)));
         var excerpt_len=((info.excerpt)?(info.excerpt.length):(0));
-        var note_len=((info.note)?(info.note.length):(0));
+        var note=(info.note)&&(info.note.trim());
+        var note_len=(note)&&note.length;
         var overlay=getoverlay(info);
         var shared=(info.shared)||[];
         if (typeof shared === 'string') shared=[shared];

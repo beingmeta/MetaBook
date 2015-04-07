@@ -1032,7 +1032,8 @@
         if ((req.status<200)||(req.status>=300)) {
             addClass(form.parentNode,"submitfailed");
             if (req.status===403)
-                fdjt.Dialog.alert("Sorry, you you're not allowed to save this gloss");
+                fdjt.Dialog.alert(
+                    "Sorry, you're not allowed to save this gloss");
             else fdjt.Dialog.alert("There was a problem saving your gloss");
             if ((form.parentNode)&&(form.parentNode))
                 fdjtDOM.remove(form.parentNode);

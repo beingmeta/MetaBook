@@ -15,7 +15,8 @@ div.metabookcard {
     box-sizing: border-box;}
 div.metabookcard > div.idhead, div.metabookcard > div.tochead {
     max-height: 3ex; white-space: nowrap;
-    text-overflow: ellipsis; overflow: hidden;}
+    text-overflow: ellipsis; overflow: hidden;
+    line-height: 100%;}
 
 div.metabookcard > div.idhead { margin-left: -10px;}
 div.metabookcard > div.tochead { margin-left: -20px; }
@@ -124,7 +125,7 @@ div.metabookcard > hr {
     font-weight: bold; color: silver;
     white-space: nowrap;}
 .metabookcard span.note {font-style: italic;}
-.metabookcard span.excerpt { vertical-align: top; }
+.metabookcard span.excerpt { vertical-align: baseline; }
 .metabookcardbody img.glosspic,
 .metabookcardbody img.userpic,
 .metabookcardbody img.sourcepic  {
