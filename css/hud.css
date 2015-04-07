@@ -782,7 +782,6 @@ body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER {
 
 #METABOOKSKIMMER div.metabookcardbody {font-size: 75%;}
 #METABOOKSKIMMER.expanded div.metabookcardbody {font-size: 100%;}
-#METABOOKSKIMMER div.metabookcardbody img.button { display: none;}
 #METABOOKSKIMMER.expanded div.metabookcardbody img.button {
     display: inline-block;}
 
