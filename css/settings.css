@@ -210,6 +210,25 @@ form.metabooksettings div.metabookcopyright p {
 div.fdjtdialog.fdjtconfirm.mbsettings div.message {
     font-weight: normal;}
 
+/* Phone */
+@media only screen and /* (min-width: 320px) and */
+            (max-width: 480px) {
+    form.metabooksettings { font-size: 0.7rem;}
+    form.metabooksettings>div.fontsizes span.samples {
+        font-size: 100%;}
+    form.metabooksettings div.fontsizes span.checkspan span.sample {
+        padding-right: 0.3rem;}
+    form.metabooksettings .button, form.metabooksettings button {
+        font-size: 0.8rem;}
+    form.metabooksettings .label { font-size: 5vw;}
+    form.metabooksettings .label.smaller { font-size: 3vw;}
+    form.metabooksettings>div.checkspan,
+    form.metabooksettings>div.fontsizes {
+        font-size: 14px;}
+
+}
+
+
 /* Emacs local variables
 ;;;  Local variables: ***
 ;;;  compile-command: "cd ../..; make" ***

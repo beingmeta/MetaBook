@@ -293,10 +293,9 @@ div.metabooknotebody a.mbackref { float: left; margin-left: -3em;}
 /* Custom media rules */
 
 /* Phone */
-@media only screen and
-            (min-width: 320px) and
+@media only screen and /* (min-width: 320px) and */
             (max-width: 480px) {
-    #CODEXPAGE {top: 40px; bottom: 40px; left: 15px; right: 15px;}}
+    #CODEXPAGE {top: 10px; bottom: 30px; left: 5px; right: 5px;}}
 /* Tablet */
 @media only screen and
             (min-width: 480px) and
