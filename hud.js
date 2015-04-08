@@ -547,7 +547,7 @@ metaBook.setMode=
             if (mode==="statictoc") {
                 var headinfo=((metaBook.head)&&(metaBook.head.id)&&
                               (metaBook.docinfo[metaBook.head.id]));
-                var static_head=$ID("METABOOKSTATICTOC4"+headinfo.frag);
+                var static_head=$ID("MBTOC4"+headinfo.frag);
                 var toc=fdjt.ID("METABOOKSTATICTOC");
                 if (static_head.hidden)
                     fdjt.showPage.showNode(toc,static_head);

@@ -88,8 +88,7 @@
             fdjtLog("Setting location to %o",location);
         var info=metaBook.Info(metaBook.head);
         while (info) {
-            var tocelt=document.getElementById("METABOOKTOC4"+info.frag);
-            var statictocelt=document.getElementById("METABOOKSTATICTOC4"+info.frag);
+            var tocelt=document.getElementById("MBTOC4"+info.frag);
             var hinfo=info.head, hhlen=((hinfo)&&(hinfo.ends_at-hinfo.starts_at));
             var start=info.starts_at; var end=info.ends_at;
             var progress=((location-start)*100)/hhlen;
@@ -97,8 +96,6 @@
             if (tocelt) {
                 // tocelt.title=Math.round(progress)+"%";
                 bar=fdjtDOM.getFirstChild(tocelt,".progressbar");}
-            if (statictocelt) {
-                appbar=fdjtDOM.getFirstChild(statictocelt,".progressbar");}
             if (Trace.toc)
                 fdjtLog("For tocbar %o/%o loc=%o start=%o end=%o progress=%o",
                         bar,appbar,location,start,end,progress);

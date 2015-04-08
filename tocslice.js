@@ -93,6 +93,7 @@ metaBook.TOCSlice=
                 showsize.style.left=((rel_start/outer_length)*100)+"%";
                 elements.appendChild(showsize);}
             elements.appendChild(fdjtDOM("div.posbar"));
+            tocbar.id="MBTOC4"+headinfo.frag;
             tocbar.setAttribute("name","MBTOC4"+headinfo.frag);
             tocbar.setAttribute("data-passage",headinfo.frag);
             tocbar.setAttribute("data-location",headinfo.starts_at);

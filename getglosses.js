@@ -377,12 +377,13 @@
             fdjtLog("Starting initializing glosses from local storage");
         metaBook.sourcedb.load(true);
         var loading=metaBook.glossdb.load(true);
-        loading.then(function(){
-            if ((metaBook.glossdb.allrefs.length)||
-                (metaBook.sourcedb.allrefs.length))
-                fdjtLog("Initialized %d glosses (%d sources) from local storage",
-                        metaBook.glossdb.allrefs.length,
-                        metaBook.sourcedb.allrefs.length);});}
+        if (loading) 
+            loading.then(function(){
+                if ((metaBook.glossdb.allrefs.length)||
+                    (metaBook.sourcedb.allrefs.length))
+                    fdjtLog("Initialized %d glosses (%d sources) from local storage",
+                            metaBook.glossdb.allrefs.length,
+                            metaBook.sourcedb.allrefs.length);});}
     metaBook.initGlossesOffline=initGlossesOffline;
 
     function gotBookie(string){
