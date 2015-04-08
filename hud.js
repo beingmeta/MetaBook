@@ -549,9 +549,9 @@ metaBook.setMode=
                               (metaBook.docinfo[metaBook.head.id]));
                 var static_head=$ID("MBTOC4"+headinfo.frag);
                 var toc=fdjt.ID("METABOOKSTATICTOC");
+                fdjt.showPage.check(toc);
                 if (static_head.offsetHeight===0)
-                    fdjt.showPage.showNode(toc,static_head);
-                else fdjt.showPage.check(toc);}
+                    fdjt.showPage.showNode(toc,static_head);}
             else if (mode==="allglosses") {
                 var curloc=metaBook.location;
                 var glossdiv=fdjt.ID("METABOOKALLGLOSSES");
@@ -564,8 +564,9 @@ metaBook.setMode=
                         var loc=card.getAttribute("data-location");
                         if (loc) loc=parseInt(loc,10); else continue;
                         if (loc>=curloc) break;}}
-                if (card) fdjt.showPage.showNode(glossdiv,card);
-                else fdjt.showPage.check(glossdiv);}
+                fdjt.showPage.check(glossdiv);
+                if ((card)&&(card.offsetHeight===0))
+                    fdjt.showPage.showNode(glossdiv,card);}
             else if (metaBook.pagers[mode])
                 fdjt.showPage.check(metaBook.pagers[mode]);
             else {}
