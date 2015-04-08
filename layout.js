@@ -185,7 +185,7 @@ metaBook.Paginate=
 
             // Create a new layout
             var layout_args=getLayoutArgs();
-            if (init.hasOwnProperty("timeslice")) {
+            if ((init)&&(init.hasOwnProperty("timeslice"))) {
                 layout_args=init.timeslice;}
             
             var layout=new CodexLayout(layout_args);
