@@ -284,9 +284,9 @@ metaBook.Paginate=
                 
                 // Now walk the content
                 var content=metaBook.content;
-                var nodes=toArray(content.childNodes);
+                var roots=toArray(content.childNodes);
                 fdjtLog("Laying out %d root nodes into %dx%d pages (%s), id=%s, async=%s",
-                        nodes.length,layout.width,layout.height,
+                        roots.length,layout.width,layout.height,
                         (why||""),layout_id,
                         ((!(timeslice))?("no"):(fdjtString("%d(%d)",timeslice,timeskip))));
                 
@@ -299,9 +299,9 @@ metaBook.Paginate=
                 // Now reset the width
                 metaBook.content.style.width=saved_width;
                 
-                var i=0; var lim=nodes.length;
+                var root_i=0; var n_roots=roots.length;
                 function rootloop(){
-                    if (i>=lim) {
+                    if (root_i>=n_roots) {
                         layout.Finish();
                         layout_progress(layout);
                         var cachethresh=metaBook.cache_layout_thresh;
@@ -327,7 +327,7 @@ metaBook.Paginate=
                         if (async) setTimeout(checkLayout,100);
                         return false;}
                     else {
-                        var root=nodes[i++];
+                        var root=roots[root_i++];
                         if (((root.nodeType===3)&&(!(isEmpty(root.nodeValue))))||
                             ((root.nodeType===1)&&
                              (root.tagName!=='LINK')&&(root.tagName!=='META')&&
