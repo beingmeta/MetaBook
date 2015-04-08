@@ -185,6 +185,9 @@ metaBook.Paginate=
 
             // Create a new layout
             var layout_args=getLayoutArgs();
+            if (init.hasOwnProperty("timeslice")) {
+                layout_args=init.timeslice;}
+            
             var layout=new CodexLayout(layout_args);
             layout.bodysize=size; layout.bodyfamily=family;
             metaBook.layout=layout;
@@ -311,20 +314,18 @@ metaBook.Paginate=
                         if (metaBook.state)
                             metaBook.restoreState(metaBook.state,"layoutDone");
                         metaBook.layout.running=false;
-                        setTimeout(syncLayout,100);
+                        setTimeout(checkLayout,100);
                         return false;}
                     else {
                         var root=nodes[i++];
                         var timeslice=
-                            ((layout.hasOwnProperty('timeslice'))?
-                             (layout.timeslice):
-                             (CodexLayout.timeslice||100));
+                            ((layout.hasOwnProperty('timeslice'))?(layout.timeslice):
+                             (CodexLayout.timeslice));
                         var timeskip=
-                            ((layout.hasOwnProperty('timeskip'))?
-                             (layout.timeskip):
-                             (CodexLayout.timeskip||50));
-                        if (((root.nodeType===3)&&
-                             (!(isEmpty(root.nodeValue))))||
+                            ((typeof timeslice === "number")&&
+                             ((layout.hasOwnProperty('timeskip'))?(layout.timeskip):
+                              (CodexLayout.timeskip)));
+                        if (((root.nodeType===3)&&(!(isEmpty(root.nodeValue))))||
                             ((root.nodeType===1)&&
                              (root.tagName!=='LINK')&&(root.tagName!=='META')&&
                              (root.tagName!=='SCRIPT')&&(root.tagName!=='BASE'))) 
@@ -1163,13 +1164,17 @@ metaBook.Paginate=
             metaBook.Paginate(why,{forced: true});}
         metaBook.refreshLayout=refreshLayout;
         
-        function syncLayout(){
+        function syncLayout(why){
+            metaBook.Paginate(why,{forced: true,timeslice: false});}
+        metaBook.syncLayout=syncLayout;
+
+        function checkLayout(){
             var geom=getGeometry($ID("CODEXPAGE"),false,true);
             var height=geom.inner_height, width=geom.width;
             if ((metaBook.layout.height===height)&&
                 (metaBook.layout.width===width))
                 return;
-            else refreshLayout("sync_resize");}
+            else refreshLayout("checkLayout");}
 
         function displaySync(){
             if ((metaBook.pagecount)&&(metaBook.curpage))
