@@ -549,7 +549,7 @@ metaBook.setMode=
                               (metaBook.docinfo[metaBook.head.id]));
                 var static_head=$ID("MBTOC4"+headinfo.frag);
                 var toc=fdjt.ID("METABOOKSTATICTOC");
-                if (static_head.hidden)
+                if (static_head.offsetHeight===0)
                     fdjt.showPage.showNode(toc,static_head);
                 else fdjt.showPage.check(toc);}
             else if (mode==="allglosses") {
