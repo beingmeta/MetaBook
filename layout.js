@@ -186,11 +186,20 @@ metaBook.Paginate=
             // Create a new layout
             var layout_args=getLayoutArgs();
             if ((init)&&(init.hasOwnProperty("timeslice"))) {
-                layout_args=init.timeslice;}
+                layout_args.timeslice=init.timeslice;}
             
             var layout=new CodexLayout(layout_args);
             layout.bodysize=size; layout.bodyfamily=family;
             metaBook.layout=layout;
+
+            var timeslice=
+                ((layout.hasOwnProperty('timeslice'))?(layout.timeslice):
+                 (CodexLayout.timeslice));
+            var timeskip=
+                ((typeof timeslice === "number")&&
+                 ((layout.hasOwnProperty('timeskip'))?(layout.timeskip):
+                  (CodexLayout.timeskip)));
+            var async=(typeof timeslice === "number");
             
             var layout_id=layout.layout_id;
 
@@ -276,9 +285,10 @@ metaBook.Paginate=
                 // Now walk the content
                 var content=metaBook.content;
                 var nodes=toArray(content.childNodes);
-                fdjtLog("Laying out %d root nodes into %dx%d pages (%s), id=%s",
+                fdjtLog("Laying out %d root nodes into %dx%d pages (%s), id=%s, async=%s",
                         nodes.length,layout.width,layout.height,
-                        (why||""),layout_id);
+                        (why||""),layout_id,
+                        ((!(timeslice))?("no"):(fdjtString("%d(%d)",timeslice,timeskip))));
                 
                 layoutMessage("Starting new layout",0);
                 
@@ -314,27 +324,27 @@ metaBook.Paginate=
                         if (metaBook.state)
                             metaBook.restoreState(metaBook.state,"layoutDone");
                         metaBook.layout.running=false;
-                        setTimeout(checkLayout,100);
+                        if (async) setTimeout(checkLayout,100);
                         return false;}
                     else {
                         var root=nodes[i++];
-                        var timeslice=
-                            ((layout.hasOwnProperty('timeslice'))?(layout.timeslice):
-                             (CodexLayout.timeslice));
-                        var timeskip=
-                            ((typeof timeslice === "number")&&
-                             ((layout.hasOwnProperty('timeskip'))?(layout.timeskip):
-                              (CodexLayout.timeskip)));
                         if (((root.nodeType===3)&&(!(isEmpty(root.nodeValue))))||
                             ((root.nodeType===1)&&
                              (root.tagName!=='LINK')&&(root.tagName!=='META')&&
-                             (root.tagName!=='SCRIPT')&&(root.tagName!=='BASE'))) 
+                             (root.tagName!=='SCRIPT')&&(root.tagName!=='BASE'))) {
                             layout.addContent(root,timeslice,timeskip,
                                               layout.tracelevel,
-                                              layout_progress,rootloop);
-                        else return rootloop();}}
+                                              layout_progress,
+                                              ((async)&&(rootloop)));
+                            if (async) return rootloop;
+                            else return true;}
+                        else if (async) return rootloop();
+                        else return true;}}
 
-                rootloop();}
+                if (async) rootloop();
+                else {
+                    var running=true;
+                    while (running) running=rootloop();}}
             
             if ((metaBook.cache_layout_thresh)&&
                 (!((metaBook.forcelayout)))&&
@@ -352,8 +362,9 @@ metaBook.Paginate=
                             fdjtLog("Layout restore error: %o",ex);
                             return new_layout();}}).
                     catch(function(){return new_layout();});}
-            else {
-                setTimeout(new_layout,10);}}
+            else if (async) {
+                setTimeout(new_layout,10);}
+            else return new_layout();}
         metaBook.Paginate=Paginate;
 
         CodexLayout.prototype.onresize=function(){
@@ -1160,8 +1171,11 @@ metaBook.Paginate=
             return page;}
         metaBook.getPage=getPage;
         
-        function refreshLayout(why){
-            metaBook.Paginate(why,{forced: true});}
+        function refreshLayout(why,slice,skip){
+            var opts={forced: true};
+            if (slice) opts.timeslice=slice;
+            if (skip) opts.timeskip=skip;
+            metaBook.Paginate(why||"refreshLayout",opts);}
         metaBook.refreshLayout=refreshLayout;
         
         function syncLayout(why){
@@ -1169,6 +1183,7 @@ metaBook.Paginate=
         metaBook.syncLayout=syncLayout;
 
         function checkLayout(){
+            if (metaBook.layout.running) return;
             var geom=getGeometry($ID("CODEXPAGE"),false,true);
             var height=geom.inner_height, width=geom.width;
             if ((metaBook.layout.height===height)&&
