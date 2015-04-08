@@ -69,7 +69,6 @@
         else if (headinfo) {
             if (Trace.target)
                 metaBook.trace("metaBook.setHead",head);
-            metaBook.TOC.setHead(headinfo);
             window.title=headinfo.title+" ("+document.title+")";
             if (metaBook.head) dropClass(metaBook.head,"sbookhead");
             addClass(head,"sbookhead");

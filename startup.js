@@ -84,10 +84,6 @@ metaBook.Startup=
 
         /* Initialization */
         
-        function startupLog(){
-            if (!(Trace.startup)) return;
-            fdjtLog.apply(null,arguments);}
-
         function startupMessage(){
             if ((Trace.startup)&&
                 (typeof Trace.startup === "number")&&
@@ -425,7 +421,8 @@ metaBook.Startup=
                 //  cache it, though we could.
                 function(){
                     applyTOCRules();
-                    metadata=scanDOM();},
+                    metadata=scanDOM();
+                    metaBook.setupTOC(metadata[metaBook.content.id]);},
                 function(){
                     var hasText=fdjtDOM.hasText;
                     var rules=fdjtDOM.getMeta("SBOOKS.index",true);
@@ -471,21 +468,6 @@ metaBook.Startup=
                 function(){
                     if (metaBook.bypage) metaBook.Paginate("initial");
                     else addClass(document.body,"_SCROLL");},
-                // Build the display TOC, both the dynamic (top of
-                // display) and the static (inside the hudheart)
-                function(){
-                    var tocmsg=$ID("METABOOKSTARTUPTOC");
-                    var tocstart=fdjtTime();
-                    if (tocmsg) {
-                        tocmsg.innerHTML=fdjtString(
-                            "Building table of contents based on %d heads",
-                            metaBook.docinfo._headcount);
-                        addClass(tocmsg,"running");}
-                    metaBook.setupTOC(metadata[metaBook.content.id]);
-                    startupLog("Built tables of contents based on %d heads in %fms",
-                               metaBook.docinfo._headcount,
-                               fdjtTime()-tocstart);
-                    if (tocmsg) dropClass(tocmsg,"running");},
                 // Load all source (user,layer,etc) information
                 function(){
                     if (Trace.startup>1) fdjtLog("Loading sourcedb");
