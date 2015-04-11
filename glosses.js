@@ -879,9 +879,6 @@
                     else target.value=
                         text.slice(0,replace_start)+cloud.prefix+
                         text.slice(replace_end);
-                    setTimeout(function(){
-                        metaBook.UI.updateScroller("METABOOKGLOSSCLOUD");},
-                               100);
                     return;}
                 else if (evt.shiftKey) cloud.selectPrevious();
                 else cloud.selectNext();
@@ -1802,9 +1799,6 @@
                 (share_cloud.prefix!==content)) {
                 target.value=share_cloud.prefix;
                 fdjtDOM.cancel(evt);
-                setTimeout(function(){
-                    metaBook.UI.updateScroller("METABOOKGLOSSOUTLETS");},
-                           100);
                 return;}
             else if (evt.shiftKey) share_cloud.selectPrevious();
             else share_cloud.selectNext();}
@@ -1848,9 +1842,6 @@
                 (gloss_cloud.prefix!==content)) {
                 target.value=gloss_cloud.prefix;
                 fdjtDOM.cancel(evt);
-                setTimeout(function(){
-                    metaBook.UI.updateScroller("METABOOKGLOSSCLOUD");},
-                           100);
                 return;}
             else if (evt.shiftKey) gloss_cloud.selectPrevious();
             else gloss_cloud.selectNext();}

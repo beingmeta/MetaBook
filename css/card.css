@@ -86,9 +86,11 @@ div.metabookcard > hr {
 .metabookcard .audience .outlet:before {
     content: "→ "; font-weight: bold;}
 
-.metabookcardbody {padding-top: 2px;}
+.metabookcardbody {
+    color: rgba(0,0,0,0.9);
+    padding-top: 2px;}
 .metabookcardbody:before, .metabookcard .metabookcardbody:after {
-                              content: " "; display: table;}
+    content: " "; display: table;}
 .metabookcardbody:after { clear: both; }
 
 .metabookcard .fdjtclearfloats { margin-bottom: 3px;}
@@ -97,6 +99,13 @@ div.metabookcard > hr {
 .metabookcard.slicenewhead .metabookcardbody,
 .metabookcard:first-child .metabookcardbody {
     border-top: 0px;}
+
+.metabookcard span.sample {
+    display: inline-block; white-space: nowrap;
+    font-size: 80%; max-width: 50%;
+    overflow: hidden; text-overflow: ellipsis;}
+.metabookcard span.sample:before {
+    content: '¶'; font-weight: bold; color: steelblue;}
 
 .metabookcard span.controller { cursor: pointer;}
 .metabookcard .info { 

@@ -67,11 +67,11 @@ metaBook.TOCSlice=
 
         function tocBar(headinfo,context){
             var title=fdjtDOM("a.sectname",headinfo.title);
-            var elements=fdjtDOM("div.elements",
-                                 fdjtDOM("div.toctext",
-                                         ((context)&&(context.cloneNode(true))),
-                                         title));
-            var tocbar=fdjtDOM("div.mbtoc",elements);
+            var elements=fdjtDOM("div.elements");
+            var tocbar=fdjtDOM("div.mbtoc",elements,
+                               fdjtDOM("div.toctext",
+                                       ((context)&&(context.cloneNode(true))),
+                                       title));
             var start=headinfo.starts_at, end=headinfo.ends_at, sectlen=end-start;
             if ((headinfo.sub)&&(headinfo.sub.length)) {
                 var sub=headinfo.sub; var s=0, smax=sub.length;

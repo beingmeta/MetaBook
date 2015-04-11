@@ -307,9 +307,6 @@
                 (completions.prefix!==partial_string)) {
                 target.value=completions.prefix;
                 fdjtDOM.cancel(evt);
-                setTimeout(function(){
-                    metaBook.UI.updateScroller("METABOOKSEARCHCLOUD");},
-                           100);
                 completeinfo.selectNext();}
             else if (evt.shiftKey) completeinfo.selectPrevious();
             else completeinfo.selectNext();}
@@ -345,8 +342,7 @@
                  (input.value.length>4))) {
                 addRawText(cloud,input.value);
                 setTimeout(function(){cloud.complete(input.value);},50);}
-            else {}
-            metaBook.UI.updateScroller("METABOOKSEARCHCLOUD");});}
+            else {}});}
     metaBook.searchUpdate=searchUpdate;
 
     function addRawText(cloud,text,ptree,maxmatch){

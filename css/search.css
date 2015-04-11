@@ -156,7 +156,7 @@ body._ANIMATE .qtags {
         font-size: 250%;}}
 
 @media screen and (min-width: 1000px) {
-    #METABOOKHUD div.resultinfo span.stats { font-size: 2vw; }}
+    #METABOOKHUD div.resultinfo span.stats { font-size: 1.2vw; }}
 
 @media screen and (max-width: 640px) {
     #METABOOKHUD div.resultinfo span.stats { font-size: 3vw; }

@@ -362,10 +362,7 @@
         var completions=getParent(target,".completions");
         if (completions) {
             fdjtUI.cancel(evt);
-            fdjtDOM.toggleClass(completions,"showall");
-            setTimeout(function(){
-                metaBook.UI.updateScroller(completions);},
-                       100);}}
+            fdjtDOM.toggleClass(completions,"showall");}}
 
     /* Getting query cloud */
 
@@ -628,8 +625,7 @@
         metaBook.setQuery(metaBook.extendQuery(metaBook.query,value));}
 
     metaBook.UI.searchCloudToggle=function(){
-        fdjtDOM.toggleClass($ID('METABOOKSEARCHCLOUD'),'showall');
-        metaBook.UI.updateScroller($ID('METABOOKSEARCHCLOUD'));};
+        fdjtDOM.toggleClass($ID('METABOOKSEARCHCLOUD'),'showall');};
 
     function setCloudCues(cloud,tags){
         // Clear any current tagcues from the last gloss

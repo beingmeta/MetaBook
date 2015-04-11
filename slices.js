@@ -70,6 +70,8 @@ metaBook.Slice=(function () {
     var hasParent=fdjtDOM.hasParent;
     var getChild=fdjtDOM.getChild;
 
+    var stripMarkup=fdjtString.stripMarkup;
+
     var cancel=fdjtUI.cancel;
     
     var TOA=fdjtDOM.toArray;
@@ -104,6 +106,8 @@ metaBook.Slice=(function () {
         var note_len=(note)&&note.length;
         var overlay=getoverlay(info);
         var shared=(info.shared)||[];
+        var sample=(query)&&(!(standalone))&&(!(info.maker))&&
+            sampletext(mbID(target_id));
         if (typeof shared === 'string') shared=[shared];
         if (overlay) shared=RefDB.remove(shared,(overlay._qid||overlay._id));
         var body=
@@ -111,6 +115,7 @@ metaBook.Slice=(function () {
                     ((score)&&(showscore(info,score,query))),
                     (((info.maker)||(info.tstamp))?(showglossinfo(info)):
                      (showdocinfo(info))),
+                    (sample),
                     ((note_len>0)&&(info.maker)&&(showmaker(info))),
                     ((note_len>0)&&(shownote(info)))," ",
                     ((excerpt_len>0)&&(showexcerpts(info.excerpt)))," ",
@@ -154,6 +159,16 @@ metaBook.Slice=(function () {
         return card;}
     metaBook.renderCard=renderCard;
     
+    function sampletext(para,len){
+        if (!(len)) len=80;
+        if (!(para)) return false;
+        var fulltext=fdjtDOM.textify(para);
+        var sample=(para.title)||para.getAttribute("data-summary")||
+            ((fulltext.length<len)?(fulltext):(fulltext.slice(0,len)));
+        var span=fdjtDOM("span.sample",sample);
+        span.title=fulltext;
+        return span;}
+
     function convertNote(note){
         if (note.search(/^{(md|markdown)}/)===0) {
             var close=note.indexOf('}');
