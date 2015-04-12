@@ -342,8 +342,8 @@
             ((cY<50)||(cY>(fdjtDOM.viewHeight()-50)))) 
             metaBook.setHUD(true);
         else if (cX<(fdjtDOM.viewWidth()/3))
-            metaBook.Backward(evt);
-        else metaBook.Forward(evt);
+            pageBackward(evt,true);
+        else pageForward(evt,true);
         fdjtUI.cancel(evt); gesture_start=false;
         return;}
 
@@ -714,14 +714,20 @@
                     if (mB.skimming)
                         metaBook.skimForward(evt);
                     else window.history.forward();}
-                else metaBook.Forward(evt);}
+                else if ((mB.mode)&&(!(mB.skimming))&&
+                         (pagers[metaBook.mode]))
+                    showPage.forward(pagers[metaBook.mode]);
+                else pageForward(evt,true);}
             else if (dx>(mB.minswipe||10)) {
                 if (evt.ntouches>2) window.history.back();
                 else if (evt.ntouches>1) {
                     if (mB.skimming)
                         metaBook.skimBackward(evt);
                     else window.history.back();}
-                else metaBook.Backward(evt);}}
+                else if ((mB.mode)&&(!(mB.skimming))&&
+                         (pagers[metaBook.mode]))
+                    showPage.backward(pagers[metaBook.mode]);
+                else metaBook.pageBackward(evt,true);}}
         else if (ady>(adx*2)) {
             // Vertical swipe
             if (!(mB.hudup)) {
@@ -998,11 +1004,11 @@
             input.dispatchEvent(new_evt);
             fdjtUI.cancel(evt);
             return;}
-        else if (kc===34) metaBook.pageForward(evt);   /* page down */
-        else if (kc===33) metaBook.pageBackward(evt);  /* page up */
+        else if (kc===34) pageForward(evt);   /* page down */
+        else if (kc===33) pageBackward(evt);  /* page up */
         else if (kc===40) { /* arrow down */
             metaBook.setHUD(false);
-            metaBook.pageForward(evt);}
+            pageForward(evt);}
         else if (kc===38) {  /* arrow up */
             metaBook.setHUD(false);
             metaBook.pageBackward(evt);}
@@ -1317,13 +1323,14 @@
     function preview_touchmove_nodefault(evt){
         if (mB.previewing) fdjtUI.noDefault(evt);}
 
-    function pageForward(evt){
+    function pageForward(evt,clearmodes){
         evt=evt||window.event;
         dropClass(document.body,/\bmb(PAGE)?PREVIEW/g);
         var now=fdjtTime();
         if ((last_motion)&&((now-last_motion)<100)) return;
         else last_motion=now;
         dropClass(document.body,/\bmb(PAGE)?PREVIEW/g);
+        if (clearmodes) fdjt.Async(function(){mB.setHUD(false);});
         if (mB.readsound)
             fdjtDOM.playAudio("METABOOKPAGEORWARDAUDIO");
         if ((Trace.gestures)||(Trace.flips))
@@ -1343,12 +1350,13 @@
             window.scrollTo(fdjtDOM.viewLeft(),newy);}}
     metaBook.pageForward=pageForward;
 
-    function pageBackward(evt){
+    function pageBackward(evt,clearmodes){
         var now=fdjtTime();
         dropClass(document.body,/\bmb(PAGE)?PREVIEW/g);
         if ((last_motion)&&((now-last_motion)<100)) return;
         else last_motion=now;
         evt=evt||window.event;
+        if (clearmodes) fdjt.Async(function(){mB.setHUD(false);});
         if (mB.readsound)
             fdjtDOM.playAudio("METABOOKPAGEBACKWARDAUDIO");
         if ((Trace.gestures)||(Trace.flips))
@@ -1833,13 +1841,13 @@
          "#METABOOKHELP": {
              click: toggleHelp, mousedown: cancel,mouseup: cancel},
          "#METABOOKNEXTPAGE": {click: function(evt){
-             metaBook.pageForward(evt); cancel(evt);}},
+             pageForward(evt); cancel(evt);}},
          "#METABOOKPREVPAGE": {click: function(evt){
-             metaBook.pageBackward(evt); cancel(evt);}},
+             pageBackward(evt); cancel(evt);}},
          "#METABOOKNEXTSKIM": {click: function(evt){
-             metaBook.skimForward(evt); cancel(evt);}},
+             skimForward(evt); cancel(evt);}},
          "#METABOOKPREVSKIM": {click: function(evt){
-             metaBook.skimBackward(evt); cancel(evt);}},
+             skimBackward(evt); cancel(evt);}},
          "#METABOOKSHOWTEXT": {click: back_to_reading},
          "#METABOOKGLOSSDETAIL": {click: metaBook.UI.dropHUD},
          "#METABOOKNOTETEXT": {click: jumpToNote},
@@ -1946,13 +1954,13 @@
              tap: metaBook.UI.handlers.searchcloud_select,
              release: metaBook.UI.handlers.searchcloud_select},
          "#METABOOKNEXTPAGE": {touchstart: function(evt){
-             metaBook.pageForward(evt); cancel(evt);}},
+             pageForward(evt); cancel(evt);}},
          "#METABOOKPREVPAGE": {touchstart: function(evt){
-             metaBook.pageBackward(evt); cancel(evt);}},
+             pageBackward(evt); cancel(evt);}},
          "#METABOOKNEXTSKIM": {touchstart: function(evt){
-             metaBook.skimForward(evt); cancel(evt);}},
+             skimForward(evt); cancel(evt);}},
          "#METABOOKPREVSKIM": {touchstart: function(evt){
-             metaBook.skimBackward(evt); cancel(evt);}},
+             skimBackward(evt); cancel(evt);}},
          "#METABOOKHELP": {tap: toggleHelp, swipe: cancel},
          "#METABOOKHELPBUTTON": {
              tap: toggleHelp,
