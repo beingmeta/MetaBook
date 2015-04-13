@@ -239,12 +239,10 @@
             updateInfoJSONP(uri+((user)?(""):("&JUSTUSER=yes")),jsonp);
             return;}
         try { fdjtAjax(gotInfo,
-                       uri+"&CALLBACK=return"+
-                       ((user)?(""):("&JUSTUSER=yes")),
-                       [],
+                       uri+"&CALLBACK=return"+((user)?(""):("&JUSTUSER=yes")),[],
                        ajaxFailed,
                        ajax_headers,
-                       metaBook.update_timeout);}
+                       {timeout: metaBook.update_timeout});}
         catch (ex) {
             fdjtLog.warn(
                 "Ajax call to %s failed, falling back to JSONP",uri);

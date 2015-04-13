@@ -141,6 +141,9 @@ metaBook.Startup=
             // This sets various aspects of the environment
             readEnvSettings();
 
+            // Use the cached bookie if available
+            readBookie();
+
             // Figure out if we have a user and whether we can keep
             // user information
             if (getLocal("mB.user")) {
@@ -268,6 +271,14 @@ metaBook.Startup=
 
             // Get the settings for scanning the document structure
             getScanSettings();}
+
+        function readBookie(){
+            var string=readLocal("mB.bookie("+mB.docuri+")");
+            if (!(string)) return;
+            var tickmatch=/:x(\d+)/.exec(string);
+            var tick=(tickmatch)&&(tickmatch.length>1)&&(parseInt(tickmatch[1]));
+            var expires=(tick)&&(new Date(tick*1000));
+            if (expires>(new Date())) mB.gotBookie(string);}
 
         function setupApp(){
 
