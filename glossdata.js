@@ -145,9 +145,9 @@
                             if (bookie)
                                 setTimeout(function(){cacheGlossData(uri);},2000);});};});}
             else if ((mB.bookie)&&(mB.bookie_expires<(new Date())))
-                cacheGlossData(uri).then(resolved);
-            else mB.getBookie().then(function(bookie){
-                if (bookie) cacheGlossData(uri).then(resolved);});}
+                return cacheGlossData(uri).then(resolved);
+            else return mB.getBookie().then(function(bookie){
+                if (bookie) return cacheGlossData(uri).then(resolved);});}
         return new Promise(getting);}
     metaBook.getGlossData=getGlossData;
 

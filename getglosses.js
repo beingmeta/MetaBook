@@ -426,7 +426,7 @@
             else {
                 if (!(getting_bookie)) {
                     getting_bookie=fdjtTime();
-                    fdjtAjax.fetchText("https://auth.sbooks.net/bookie?DOC="+mB.docref).
+                    fdjtAjax.fetchText("https://auth.sbooks.net/getbookie?DOC="+mB.docref).
                         then(function(bookie){
                             gotBookie(bookie).then(function(){
                                 resolved(bookie);
