@@ -122,7 +122,14 @@
             // req.withCredentials=true;
             req.send(null);}
         return new Promise(caching);}
-    metaBook.cacheGlossData=cacheGlossData;
+
+    function needGlossData(uri){
+        if ((glossdata[uri])||(glossdata_state[uri]==="cached")) return;
+        if ((mB.bookie)&&(mB.bookie_expires<(new Date())))
+            cacheGlossData(uri);
+        else mB.getBookie().then(function(bookie){
+            if (bookie) cacheGlossData(uri);});}
+    metaBook.needGlossData=needGlossData;
 
     function getGlossData(uri){
         function getting(resolved){
