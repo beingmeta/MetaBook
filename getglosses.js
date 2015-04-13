@@ -419,21 +419,21 @@
     var getting_bookie=false;
 
     function getBookie(){
-        function getting(resolved){
+        function updatebookie(resolved){
             var now=new Date();
             if ((mB.bookie)&&(mB.bookie_expires>now))
-                resolved(mB.bookie);
-            else {
-                if (!(getting_bookie)) {
-                    getting_bookie=fdjtTime();
-                    fdjtAjax.fetchText("https://auth.sbooks.net/getbookie?DOC="+mB.docref).
-                        then(function(bookie){
-                            gotBookie(bookie).then(function(){
-                                resolved(bookie);
-                                getting_bookie=false;});});}
-                need_bookie.push(resolved);}}
-        return new Promise(getting);}
+                return resolved(mB.bookie);
+            else if (!(getting_bookie)) getFreshBookie();
+            need_bookie.push(resolved);}
+        return new Promise(updatebookie);}
     metaBook.getBookie=getBookie;
+
+    function getFreshBookie(){
+        if (getting_bookie) return;
+        getting_bookie=fdjtTime();
+        fdjtAjax.fetchText("https://auth.sbooks.net/getbookie?DOC="+mB.docref).
+            then(function(bookie){
+                gotBookie(bookie).then(function(){getting_bookie=false;});});}
 
 })();
 
