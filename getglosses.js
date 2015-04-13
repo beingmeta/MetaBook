@@ -386,26 +386,54 @@
                             metaBook.sourcedb.allrefs.length);});}
     metaBook.initGlossesOffline=initGlossesOffline;
 
+    var need_bookie=[];
+
     function gotBookie(string){
-        if (!(string)) return;
-        if (string===mB.bookie) return;
-        var tickmatch=/:x(\d+)/.exec(string);
-        var tick=(tickmatch)&&(tickmatch.length>1)&&(parseInt(tickmatch[1]));
-        var expires=(tick)&&(new Date(tick*1000));
-        if ((Trace.glosses>1)||(Trace.glossdata))
-            fdjtLog("gotBookie: %s/%s, cur=%s/%s",
-                    string,expires,metaBook.bookie,metaBook.bookie_expires);
-        if (!(expires)) {
-            metaBook.ubookie=string;
-            metaBook.saveLocal("ubookie("+mB.docuri+")",string);}
-        if ((!(metaBook.bookie))||
-            ((!(metaBook.bookie_expires))&&(expires))||
-            ((metaBook.bookie_expires)&&(expires)&&
-             (expires>metaBook.bookie_expires))) {
-            metaBook.bookie=string; metaBook.bookie_expires=expires;
-            metaBook.saveLocal("bookie("+mB.docuri+")",string);}
-        else {}}
+        function bookieupdate(resolve){
+            if (!(string)) return resolve(string);
+            if (string===mB.bookie) return resolve(string);
+            var tickmatch=/:x(\d+)/.exec(string);
+            var tick=(tickmatch)&&(tickmatch.length>1)&&(parseInt(tickmatch[1]));
+            var expires=(tick)&&(new Date(tick*1000));
+            if ((Trace.glosses>1)||(Trace.glossdata))
+                fdjtLog("gotBookie: %s/%s, cur=%s/%s",
+                        string,expires,metaBook.bookie,metaBook.bookie_expires);
+            if (!(expires)) {
+                metaBook.ubookie=string;
+                metaBook.saveLocal("ubookie("+mB.docuri+")",string);}
+            if ((!(metaBook.bookie))||
+                ((!(metaBook.bookie_expires))&&(expires))||
+                ((metaBook.bookie_expires)&&(expires)&&
+                 (expires>metaBook.bookie_expires))) {
+                metaBook.bookie=string; metaBook.bookie_expires=expires;
+                metaBook.saveLocal("bookie("+mB.docuri+")",string);}
+            else {}
+            if ((need_bookie)&&(need_bookie.length)) {
+                var needs=need_bookie; need_bookie=[];
+                return fdjtAsync.slowmap(function(fn){fn(string);},needs).
+                    then(function(){resolve(string);});}
+            else return resolve(string);}
+        return new Promise(bookieupdate);}
     metaBook.gotBookie=gotBookie;
+
+    var getting_bookie=false;
+
+    function getBookie(){
+        function getting(resolved){
+            var now=new Date();
+            if ((mB.bookie)&&(mB.bookie_expires>now))
+                resolved(mB.bookie);
+            else {
+                if (!(getting_bookie)) {
+                    getting_bookie=fdjtTime();
+                    fdjtAjax.fetchText("https://auth.sbooks.net/bookie?DOC="+mB.docref).
+                        then(function(bookie){
+                            gotBookie(bookie).then(function(){
+                                resolved(bookie);
+                                getting_bookie=false;});});}
+                need_bookie.push(resolved);}}
+        return new Promise(getting);}
+    metaBook.getBookie=getBookie;
 
 })();
 
