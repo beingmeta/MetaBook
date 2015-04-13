@@ -85,38 +85,39 @@
             if (Trace.glossdata) {
                 fdjtLog("Fetching glossdata %s (%s) to cache locally",uri,rtype);}
             req.onreadystatechange=function () {
-                if ((req.readyState === 4)&&(req.status === 200)) try {
-                    var local_uri=false, data_uri=false;
-                    if (Trace.glossdata)
-                        fdjtLog("Glossdata from %s (%s) status %d",
-                                endpoint,rtype||"any",req.status);
-                    if (rtype!=="blob")
-                        data_uri=local_uri=req.responseText;
-                    else if (createObjectURL) 
-                        local_uri=createObjectURL(req.response);
-                    else local_uri=false;
-                    if (local_uri) gotLocalURL(uri,local_uri,resolved);
-                    if (data_uri) {
-                        glossdata_state[uri]="caching";
-                        cacheDataURI(uri,data_uri);}
-                    else {
-                        // Need to get a data uri
-                        var reader=new FileReader(req.response);
-                        glossdata_state[uri]="reading";
-                        reader.onload=function(){
-                            try {
-                                if (!(local_uri))
-                                    gotLocalURL(uri,reader.result,resolved);
-                                glossdata_state[uri]="caching";
-                                cacheDataURI(uri,reader.result);}
-                            catch (ex) {
-                                fdjtLog.warn("Error encoding %s from %s: %s",
-                                             uri,endpoint,ex);
-                                glossdata_state[uri]=false;}};
-                        reader.readAsDataURL(req.response);}}
-                catch (ex) {
-                    fdjtLog.warn("Error fetching %s via %s: %s",uri,endpoint,ex);
-                    glossdata_state[uri]=false;}};
+                if ((req.readyState === 4)&&(req.status === 200)) {
+                    try {
+                        var local_uri=false, data_uri=false;
+                        if (Trace.glossdata)
+                            fdjtLog("Glossdata from %s (%s) status %d",
+                                    endpoint,rtype||"any",req.status);
+                        if (rtype!=="blob")
+                            data_uri=local_uri=req.responseText;
+                        else if (createObjectURL) 
+                            local_uri=createObjectURL(req.response);
+                        else local_uri=false;
+                        if (local_uri) gotLocalURL(uri,local_uri,resolved);
+                        if (data_uri) {
+                            glossdata_state[uri]="caching";
+                            cacheDataURI(uri,data_uri);}
+                        else {
+                            // Need to get a data uri
+                            var reader=new FileReader(req.response);
+                            glossdata_state[uri]="reading";
+                            reader.onload=function(){
+                                try {
+                                    if (!(local_uri))
+                                        gotLocalURL(uri,reader.result,resolved);
+                                    glossdata_state[uri]="caching";
+                                    cacheDataURI(uri,reader.result);}
+                                catch (ex) {
+                                    fdjtLog.warn("Error encoding %s from %s: %s",
+                                                 uri,endpoint,ex);
+                                    glossdata_state[uri]=false;}};
+                            reader.readAsDataURL(req.response);}}
+                    catch (ex) {
+                        fdjtLog.warn("Error fetching %s via %s: %s",uri,endpoint,ex);
+                        glossdata_state[uri]=false;}}};
             req.open("GET",endpoint);
             req.responseType=rtype;
             // req.withCredentials=true;
@@ -126,9 +127,10 @@
     function needGlossData(uri){
         if ((glossdata[uri])||(glossdata_state[uri]==="cached")) return;
         if ((mB.bookie)&&(mB.bookie_expires<(new Date())))
-            cacheGlossData(uri);
-        else mB.getBookie().then(function(bookie){
-            if (bookie) cacheGlossData(uri);});}
+            return cacheGlossData(uri);
+        else {
+            var req=mB.getBookie();
+            return req.then(function(bookie){if (bookie) cacheGlossData(uri);});}}
     metaBook.needGlossData=needGlossData;
 
     function getGlossData(uri){
