@@ -315,6 +315,8 @@
             sourcedb.oidrefs=true;
             sourcedb.addAlias("@1961/");
             sourcedb.addAlias(":@1961/");            
+            sourcedb.addAlias("@acc/");
+            sourcedb.addAlias(":@acc/");            
             sourcedb.forDOM=function(source){
                 var spec="span.source"+((source.kind)?".":"")+
                     ((source.kind)?(source.kind.slice(1).toLowerCase()):"");
