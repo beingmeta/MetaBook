@@ -243,7 +243,7 @@
                     var links=item.links; for (var link in links) {
                         if ((links.hasOwnProperty(link))&&
                             (cachelink.exec(link)))
-                            metaBook.getGlossData(link);}}
+                            metaBook.needGlossData(link);}}
                 if (maker) {
                     metaBook.addTag2Cloud(maker,metaBook.empty_cloud);
                     metaBook.UI.addGlossSource(maker,true);}
