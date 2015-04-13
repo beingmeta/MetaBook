@@ -317,6 +317,10 @@
             sourcedb.addAlias(":@1961/");            
             sourcedb.addAlias("@acc/");
             sourcedb.addAlias(":@acc/");            
+            sourcedb.onLoad(function initSource(item) {
+                if ((item.pic)&&(typeof item.pic === "string")&&
+                    (item.pic.search("data:")===0)) {
+                    item.pic=fdjtDOM.data2URL(item.pic);}});
             sourcedb.forDOM=function(source){
                 var spec="span.source"+((source.kind)?".":"")+
                     ((source.kind)?(source.kind.slice(1).toLowerCase()):"");
