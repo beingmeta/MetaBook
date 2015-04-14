@@ -617,7 +617,7 @@
                 else if (closest) return scan;
                 else if ((target)&&
                          ((scan.tagName==='SECTION')||
-                          ((scan.className)&&
+                          ((scan.className)&&(scan.className.search)&&
                            (scan.className.search(/\bhtml5section\b/i)>=0))))
                     return target;
                 else if ((target)&&(!(fdjt.DOM.isVisible(scan))))
@@ -701,6 +701,7 @@
        current location.  This IS passed to the homescreen
        standalone app, so we can use it to get a real authentication
        token.*/
+    /*
     function iosHomeKludge(){
         if ((!(metaBook.user))||(fdjt.device.standalone)||
             (!(fdjt.device.mobilesafari)))
@@ -749,7 +750,6 @@
             fdjtDOM.addListener(document,fdjtDOM.vischange,
                                 updateKludgeTimer);
         updateKludgeTimer();}
-    /*
     if ((!(fdjt.device.standalone))&&(fdjt.device.mobilesafari))
         fdjt.addInit(setupKludgeTimer,"setupKludgeTimer");
     */
