@@ -385,7 +385,7 @@
             if ((href[0]==="#")&&
                 (((rel)&&
                   (rel.search(/\b((sbooknote)|(footnote)|(endnote)|(note))\b/)>=0))||
-                 ((classname)&&
+                 ((classname)&&(classname.search)&&
                   (classname.search(/\b((sbooknote)|(sbooknoteref))\b/)>=0))||
                  ((mB.sbooknoterefs)&&(mB.sbooknoterefs.match(anchor))))) {
                 var note_node=getNoteNode(href.slice(1));

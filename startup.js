@@ -963,7 +963,7 @@ metaBook.Startup=
                  (elt.getAttributeNS('toclevel','http://sbooks.net/')))||
                 (elt.getAttribute('toclevel'))||
                 (elt.getAttribute('data-toclevel'))||
-                ((elt.className)&&
+                ((elt.className)&&(elt.className.search)&&
                  ((elt.className.search(/\bsbook\dhead\b/)>=0)||
                   (elt.className.search(/\bsbooknotoc\b/)>=0)||
                   (elt.className.search(/\bsbookignore\b/)>=0))))

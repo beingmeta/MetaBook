@@ -394,7 +394,8 @@ metaBook.DOMScan=(function(){
                     (child.getAttribute('tags'))||
                     (child.getAttribute('data-tags'));
                 if (tags) info.atags=tags.split(',');}
-            if (((classname)&&(classname.search(/\bsbookignore\b/)>=0))||
+            if (((classname)&&(classname.search)&&
+                 (classname.search(/\bsbookignore\b/)>=0))||
                 ((metaBook.ignore)&&(metaBook.ignore.match(child))))
                 return;
             if ((toclevel)&&(!(info.tocdone)))
@@ -404,7 +405,7 @@ metaBook.DOMScan=(function(){
                 info.head=curinfo; info.indexRef('head',curinfo);}
             else {}
 
-            if (((classname)&&
+            if (((classname)&&(classname.search)&&
                  (classname.search(/\bsbookterminal\b/)>=0))||
                 ((classname)&&(metaBook.terminals)&&
                  (metaBook.terminals.match(child)))) {
