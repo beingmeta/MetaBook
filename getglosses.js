@@ -31,6 +31,7 @@
 
 */
 /* jshint browser: true */
+/* globals Promise */
 
 // getglosses.js
 (function(){

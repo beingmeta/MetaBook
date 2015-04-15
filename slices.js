@@ -70,8 +70,6 @@ metaBook.Slice=(function () {
     var hasParent=fdjtDOM.hasParent;
     var getChild=fdjtDOM.getChild;
 
-    var stripMarkup=fdjtString.stripMarkup;
-
     var cancel=fdjtUI.cancel;
     
     var TOA=fdjtDOM.toArray;
