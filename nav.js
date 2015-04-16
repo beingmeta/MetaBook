@@ -50,19 +50,25 @@
 
     /* Navigation functions */
 
-    function setHead(head){
-        if (!(head)) return;
-        else if (typeof head === "string") 
+    function setHead(arg){
+        var head;
+        if (!(arg)) return;
+        else if (typeof arg === "string") 
             head=getHead(mbID(head))||metaBook.content;
-        else {}
+        else head=arg;
         var headid=head.codexbaseid||head.id;
         var headinfo=metaBook.docinfo[headid];
         while ((headinfo)&&(!(headinfo.level))) {
             headinfo=headinfo.head;
             headid=headinfo.frag;
             head=mbID(headid);}
-        if (Trace.nav)
-            fdjtLog("metaBook.setHead #%s",headid);
+        if ((Trace.nav>1)&&(headinfo))
+            fdjtLog("metaBook.setHead #%s %o from %o info=%o:\n%j",
+                    (headid||"none"),head,arg,headinfo,headinfo);
+        else if (Trace.nav)
+            fdjtLog("metaBook.setHead #%s %o from %o",
+                    (headid||"none"),head,arg);
+
         if (head===metaBook.head) {
             if (Trace.target) fdjtLog("Redundant SetHead");
             return;}
@@ -317,6 +323,11 @@
         var page=((metaBook.bypage)&&(metaBook.layout)&&
                   (metaBook.getPage(target,location)));
         var pageno=(page)&&(parseInt(page.getAttribute("data-pagenum"),10));
+        if (mB.Trace.nav)
+            fdjtLog("mB.GoTo(%s%s%s%s%s) %o location=%o page=%o pageno=%d arg=%o",
+                    caller||"",((caller)?(":"):("")),((istarget)?("t"):("")),
+                    ((savestate)?("s"):("")),((!(skiphist))?("h"):("")),
+                    target,((location)?(location):("none")),page,pageno,arg);
         if (!(target)) {
             if (metaBook.layout instanceof fdjt.CodexLayout)
                 metaBook.GoToPage(arg,caller,savestate);

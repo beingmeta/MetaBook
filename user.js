@@ -159,6 +159,7 @@
         var maker=fdjtDOM.getInput(form,"MAKER");
         if (maker) maker.value=metaBook.user._id;
         var pic=
+            (metaBook.user._pic)||
             (metaBook.user.pic)||
             ((metaBook.user.fbid)&&
              ("https://graph.facebook.com/"+metaBook.user.fbid+

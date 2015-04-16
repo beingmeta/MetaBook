@@ -54,6 +54,7 @@
     var fdjtUI=fdjt.UI;
     var RefDB=fdjt.RefDB, $ID=fdjt.ID;
 
+    var getInitials=fdjtString.getInitials;
     var hasClass=fdjtDOM.hasClass;
     var mbicon=metaBook.icon;
 
@@ -66,7 +67,7 @@
         if (withgloss) {
             var icon=$ID("SBOOKSOURCEICON"+humid);
             if (!(icon)) { // Add icon to the sources bar
-                var pic=(info.pic)||
+                var pic=(info._pic)||(info.pic)||
                     ((info.fbid)&&
                      ("https://graph.facebook.com/"+info.fbid+
                       "/picture?type=square"));
@@ -80,8 +81,7 @@
                 (pic,".button.source",info.name|info.kind,
                  ("click to show/hide glosses from "+info.name));
                 else {
-                    icon=fdjtDOM("div.button.source",
-                                 fdjtString.getInitials(info.name));}
+                    icon=fdjtDOM("div.button.source",getInitials(info.name));}
                 var title=
                     ((kind===':CIRCLE')?("the reading circle "):
                      (kind===':OVERLAY')?("the reading guide "):
@@ -90,6 +90,7 @@
                     ((info.about)?": ":"")+
                     ((info.about)?(info.about):"");
                 icon.title=title; icon.oid=info._id;
+                if (info.name) icon.alt=getInitials(info.name);
                 icon.id="SBOOKSOURCEICON"+humid;
                 fdjtDOM($ID("METABOOKSOURCES")," ",icon);}}
         return info;}
@@ -151,7 +152,7 @@
     metaBook.UI.handlers.sources_ontap=sources_ontap;
 
     function geticon(source){
-        return ((source.pic)||(source.fb_pic)||
+        return ((source._pic)||(source.pic)||(source.fb_pic)||
                 (source.twitter_pic)||(source.gplus_pic)||
                 ((source.fbid)&&
                  ("https://graph.facebook.com/"+

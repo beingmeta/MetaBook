@@ -70,6 +70,8 @@ metaBook.Slice=(function () {
     var hasParent=fdjtDOM.hasParent;
     var getChild=fdjtDOM.getChild;
 
+    var getInitials=fdjtString.getInitials;
+
     var cancel=fdjtUI.cancel;
     
     var TOA=fdjtDOM.toArray;
@@ -386,8 +388,8 @@ metaBook.Slice=(function () {
     var IMG=fdjtDOM.Image;
 
     function getglosspic(gloss){
-        if (gloss.pic) 
-            return IMG(gloss.pic,"img.glosspic.glossicon",
+        if (gloss._pic||gloss.pic) 
+            return IMG(gloss._pic||gloss.pic,"img.glosspic.glossicon",
                        gloss.note||gloss.name);
         if ((gloss.links)&&(gloss.links.icon))
             return IMG(gloss.links.icon,"img.glosspic.glossicon");
@@ -395,9 +397,9 @@ metaBook.Slice=(function () {
                    ((typeof gloss.maker === "string")?
                     (gloss.maker=mB.sourcedb.ref(gloss.maker)):
                     (gloss.maker)));
-        if ((maker)&&(maker._live)&&(maker.pic)) 
-            return IMG(gloss.maker.pic,"img.glosspic.userpic",
-                       gloss.maker.name);
+        if ((maker)&&(maker._live)&&((maker._pic)||maker.pic)) 
+            return IMG(maker._pic||maker.pic,"img.glosspic.userpic",
+                       maker.name);
         else if ((maker)&&(maker._live)&&(maker.fbid))
             return IMG("https://graph.facebook.com/"+
                        gloss.maker.fbid+"/picture?type=square",
@@ -406,7 +408,7 @@ metaBook.Slice=(function () {
         else if ((maker)&&(maker._live))
             return fdjtDOM("div.glosspic.userpic.sbooknopic",
                            ((gloss.maker.name)?
-                            (fdjtString.getInitials(gloss.maker.name,1)):
+                            (getInitials(gloss.maker.name,1)):
                             "?"));
         else if (maker) {
             var temp=
@@ -417,14 +419,18 @@ metaBook.Slice=(function () {
             maker.load().then(function(maker){
                 var usepic=false;
                 if (!(maker._live)) usepic=false;
-                else if (maker.pic)
-                    usepic=IMG(maker.pic,"img.glosspic.userpic",
-                               maker.name);
+                else if ((maker._pic)||(maker.pic))
+                    usepic=IMG(maker._pic||maker.pic,"img.glosspic.userpic",
+                               getInitials(gloss.maker.name,1),
+                               ((maker.about)?((maker.name)+": "+maker.about):
+                                (maker.name)));
                 else if (maker.fbid) 
                     usepic=IMG("https://graph.facebook.com/"+
                                maker.fbid+"/picture?type=square",
                                "img.glosspic.userpic.fbpic",
-                               maker.name);
+                               getInitials(gloss.maker.name,1),
+                               ((maker.about)?((maker.name)+": "+maker.about):
+                                (maker.name)));
                 else {}
                 if (usepic) fdjtDOM.replace(temp,usepic);});
             return temp;}
