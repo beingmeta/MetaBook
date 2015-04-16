@@ -188,7 +188,6 @@
                 $ID("METABOOKBODY"),
                 {override: true,noslip: true,id: "METABOOKBODY",
                  maxtouches: 3,taptapmsecs: true,
-                 untouchable: externClickable,
                  movethresh: 10});
             addHandlers(metaBook.HUD,'hud');}
         if (mode) {
@@ -2037,10 +2036,10 @@
          "#METABOOKCONSOLEBUTTON": {
              touchstart: cancel, touchend: consolefn},
          "#METABOOKREFRESHOFFLINE": {
-             touchstart: cancel, touchend: refreshOffline},
+             touchstart: refreshOffline, touchend: cancel},
          "#METABOOKREFRESHLAYOUT": {
-             touchstart: cancel, touchend: refreshLayout},
-         "#METABOOKRESETSYNC": {touchstart: cancel, touchend: resetState},
+             touchstart: refreshLayout, touchend: cancel},
+         "#METABOOKRESETSYNC": {touchend: cancel, touchstart: resetState},
          ".clearoffline": {touchstart: cancel, touchend: clearOffline},
          ".metabookclearmode": {touchstart: cancel, touchend: clearMode},
          "#METABOOKGOTOREFHELP": {touchstart: cancel, touchend: clearMode},
