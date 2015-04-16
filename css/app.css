@@ -880,7 +880,7 @@ span.bma {
     color: blue; }
 
 div.fdjtdialog.metabooktaptap .choices button {
-    width: 12em; max-height: 3em;}
+     width: 12em; max-height: 3em;}
 div.fdjtdialog.metabooktaptap .choices button.anchor {
     overflow: hidden; text-overflow: ellipsis; padding: 0px;
     line-height: 0.8;}
