@@ -162,16 +162,6 @@
         fdjtDOM.addListeners(node,mB.UI.handlers[mode][type]);}
     metaBook.UI.addHandlers=addHandlers;
 
-    function externClickable(evt){
-        var target=fdjtUI.T(evt);
-        var anchor=getParent(target,"A");
-        if ((anchor)&&(anchor.href)) {
-            if (anchor.href[0]==="#") return false;
-            else if (anchor.getAttribute("href")[0]==="#")
-                return false;
-            else return true;}
-        else return isClickable(evt);}
-
     function setupGestures(domnode){
         var mode=metaBook.ui;
         if (!(mode)) metaBook.ui=mode="mouse";
@@ -1053,11 +1043,18 @@
         else if (kc===39) metaBook.skimForward(evt); /* arrow right */
         // Don't interrupt text input for space, etc
         else if (fdjtDOM.isTextInput(fdjtDOM.T(evt))) return true;
-        else if (kc===32) // Space
-            metaBook.Forward(evt);
-        // backspace or delete
-        else if ((kc===8)||(kc===45))
-            metaBook.Backward(evt);
+        else if (kc===32) { // Space
+            if ((mB.mode)&&(!(mB.skimming))&&
+                (pagers[metaBook.mode]))
+                showPage.forward(pagers[metaBook.mode]);
+            else if (mB.skimming) pageForward(evt);
+            else pageForward(evt,true);}
+        else if ((kc===8)||(kc===45)) { // backspace or delete
+            if ((mB.mode)&&(!(mB.skimming))&&
+                (pagers[metaBook.mode]))
+                showPage.backward(pagers[metaBook.mode]);
+            else if (mB.skimming) pageBackward(evt);
+            else pageBackward(evt,true);}
         // Home goes to the current head.
         else if (kc===36) metaBook.JumpTo(mB.head);
         else if (mB.mode==="addgloss") {
