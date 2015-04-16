@@ -112,6 +112,8 @@
     var Selector=fdjtDOM.Selector;
 
     var isEmptyString=fdjtString.isEmpty;
+    var decodeEntities=fdjtString.decodeEntities;
+    var fillIn=fdjtString.fillIn;
 
     var getCard=metaBook.UI.getCard;
     var pagers=metaBook.pagers, mbDOM=metaBook.DOM;
@@ -260,10 +262,16 @@
         var sX=evt.screenX, sY=evt.screenY;
         var cX=evt.clientX, cY=evt.clientY;
         var now=fdjtTime(), touch=false;
+        var vw=fdjtDOM.viewWidth();
 
-        if (Trace.gestures)
-            fdjtLog("body_tapped %o c=%d,%d now=%o p=%o",
-                    evt,cX,cY,now,mB.previewing);
+        if ((evt.changedTouches)&&(evt.changedTouches.length)) {
+            touch=evt.changedTouches[0];
+            sX=touch.screenX; sY=touch.screenY;
+            cX=touch.clientX; cY=touch.clientY;}
+
+        if (Trace.gestures) {
+            fdjtLog("body_tapped %o c=%d,%d now=%o p=%o %s",
+                    evt,cX,cY,now,mB.previewing,(touch?("(touch)"):""));}
         
         // If we're previewing, stop it and go to the page we're
         //  previewing (which was touched)
@@ -300,6 +308,10 @@
         if (mB.skimming) {
             if (hasClass("METABOOKSKIMMER","expanded")) 
                 dropClass("METABOOKSKIMMER","expanded");
+            else if ((touch)&&(cX<vw/4)) 
+                pageBackward(evt,true);
+            else  if ((touch)&&(cX<vw/4)) 
+                pageForward(evt,true);
             else metaBook.setHUD(false);
             cancel(evt);
             return;}
@@ -331,17 +343,13 @@
             return;}
 
         // If we get here, we're doing a page flip
-        if ((evt.changedTouches)&&(evt.changedTouches.length)) {
-            touch=evt.changedTouches[0];
-            sX=touch.screenX; sY=touch.screenY;
-            cX=touch.clientX; cY=touch.clientY;}
         if (Trace.gestures)
             fdjtLog("body_tapped/fallthrough (%o) %o, m=%o, @%o,%o, vw=%o",
                     evt,target,mB.mode,cX,cY,fdjtDOM.viewWidth());
         if ((mB.fullheight)&&(!(mB.hudup))&&
             ((cY<50)||(cY>(fdjtDOM.viewHeight()-50)))) 
             metaBook.setHUD(true);
-        else if (cX<(fdjtDOM.viewWidth()/3))
+        else if (cX<(fdjtDOM.viewWidth()*0.4)) 
             pageBackward(evt,true);
         else pageForward(evt,true);
         fdjtUI.cancel(evt); gesture_start=false;
@@ -605,13 +613,37 @@
             var link=passage.getAttribute("data-xref");
             if (link) {
                 var space=link.indexOf(' ');
-                var label=((space>0)?(link.slice(space+1)):(link));
                 var href=((space>0)?(link.slice(0,space)):(link));
-                href=href.replace("{{ID}}",passage.id);
-                var opt={label: label, handler: makeOpener(href)};
+                var label=((space>0)?(link.slice(space+1)):(link));
+                var data={id:passage.id,docid:mB.docref,refuri:mB.refuri,
+                          docuri:mB.docuri};
+                if ((mB.user)&&(mB.user._id)) data.user=mB.user._id;
+                var opt={label: label, handler: makeOpener(fillIn(href,data))};
                 choices.push(opt);}
-            scan=scan.parentNode;}}
+            scan=scan.parentNode;}
+        var anchors=getChildren(passage,"a[href]");
+        var i=0, lim=anchors.length; while (i<lim) {
+            var anchor=anchors[i++];
+            var linkref=decodeEntities(anchor.getAttribute("href"));
+            var uselabel=anchor.title||(getAnchorContext(anchor));
+            var handler=((linkref.search("#")===0)?(makeGoTo(linkref)):
+                         (makeOpener(anchor.href)));
+            var anchor_opt={label: uselabel,handler: handler,
+                            classname: "anchor"};
+            choices.push(anchor_opt);}}
     
+    function getAnchorContext(anchor){
+        var frag=document.createDocumentFragment();
+        var context=fdjtDOM("span.anchorcontext");
+        frag.appendChild(fdjtDOM("span.anchortext",anchor.innerHTML));
+        frag.appendChild(context);
+        if (anchor.title) fdjtDOM(context,anchor.title);
+        else {
+            var next=anchor.nextSibling; while (next) {
+                context.appendChild(next.cloneNode(true));
+                next=next.nextSibling;}}
+        return frag;}
+
     function closePassageMenu(evt){
         evt=evt||window.event;
         if (!(mB.passage_menu)) return false;
@@ -625,6 +657,9 @@
         if (evt) fdjtUI.cancel(evt);
         return true;}
     metaBook.closePassageMenu=closePassageMenu;
+
+    function makeGoTo(href){
+        return function (){metaBook.GoTo(href);};}
 
     function makeOpener(url){
         return function (){window.open(url);};}
@@ -717,6 +752,7 @@
                 else if ((mB.mode)&&(!(mB.skimming))&&
                          (pagers[metaBook.mode]))
                     showPage.forward(pagers[metaBook.mode]);
+                else if (mB.skimming) pageForward(evt);
                 else pageForward(evt,true);}
             else if (dx>(mB.minswipe||10)) {
                 if (evt.ntouches>2) window.history.back();
@@ -727,6 +763,8 @@
                 else if ((mB.mode)&&(!(mB.skimming))&&
                          (pagers[metaBook.mode]))
                     showPage.backward(pagers[metaBook.mode]);
+                else if (mB.skimming)
+                    metaBook.pageBackward(evt);
                 else metaBook.pageBackward(evt,true);}}
         else if (ady>(adx*2)) {
             // Vertical swipe

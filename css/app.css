@@ -880,7 +880,14 @@ span.bma {
     color: blue; }
 
 div.fdjtdialog.metabooktaptap .choices button {
-    width: 12em;}
+    width: 12em; max-height: 3em;}
+div.fdjtdialog.metabooktaptap .choices button.anchor {
+    overflow: hidden; text-overflow: ellipsis; padding: 0px;
+    line-height: 0.8;}
+div.fdjtdialog.metabooktaptap .choices button.anchor .anchortext {
+    color: blue; font-size: 80%;}
+div.fdjtdialog.metabooktaptap .choices button.anchor .anchorcontext {
+    font-size: 50%;}
 
 /* Rules for page references */
 
