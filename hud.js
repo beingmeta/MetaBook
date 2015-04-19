@@ -232,6 +232,10 @@ metaBook.setMode=
             metaBook.TapHold.skimmer=
                 new TapHold(metaBook.DOM.skimmer,{taptapmsecs: 300});
             
+            metaBook.DOM.sources=$ID("METABOOKSOURCES");
+            metaBook.TapHold.sources=
+                new TapHold(metaBook.DOM.sources,{taptapmsecs: 300});
+
             var help=metaBook.DOM.help=$ID("METABOOKHELP");
             help.innerHTML=fixStaticRefs(metaBook.HTML.help);
 
