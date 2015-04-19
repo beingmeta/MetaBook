@@ -10,7 +10,7 @@ div.mbglosstarget {}
 
 div.metabookglossformbody {
     position: relative;
-    margin-left: 1ex;}
+    margin-left: 0.5ex; margin-right: 0.5ex;}
 
 #METABOOKADDGLOSS div.metabookglossform {
     box-sizing: border-box;
@@ -27,7 +27,7 @@ div.metabookglossform form div.textbox,
 div.metabookglossform form div.glossetc {
     max-height: 90%; font-size: 0.6em;
     clear: left; text-align: left;
-    padding-right: 3px; margin-right: 60px;
+    padding-right: 3px; margin-right: 50px;
     box-sizing: border-box;}
 div.metabookglossform.focused form div.textbox,
 div.metabookglossform.focused form div.glossetc {
@@ -36,7 +36,8 @@ div.metabookglossform form div.glossetc {
     padding-bottom: 0.5ex; overflow: hidden;}
 div.metabookglossform form div.textbox textarea,
 div.metabookglossform form div.textbox input[type="TEXT"] {
-    min-height: 1.5em; max-height: 3em; padding: 2px;}
+    min-height: 50px; /* This matches the height of the menu */
+    max-height: 3em; padding: 2px;}
 div.metabookglossform.focused form div.textbox textarea,
 div.metabookglossform.focused form div.textbox input[type="TEXT"] {
     max-height: inherit;}
@@ -611,12 +612,12 @@ div.metabookglossform form div.textbox {
 
 div.metabookglossform form div.addglossmenu {
     position: absolute; top: 0px; right: 0px;
-    width: 60px; margin-right: 5px; margin-left: 5px;
+    width: 50px;
     z-index: 800;}
 
 div.metabookglossform form div.addglossmenu > img {
     width: 50px; height: 50px; 
-    box-sizing: content-box;
+    box-sizing: border-box;
     display: none; }
 div.metabookglossform form div.addglossmenu > img.held {
     background-color: lightgreen; border-color: green;}
@@ -681,7 +682,7 @@ div.metabookglossform.glossadd
     display: none;}
 
 div.metabookglossform span.glossexposure {
-    margin-right: 1.2ex; margin-left: 0.5ex;
+    margin-right: 3px; margin-left: 0.5ex;
     float: right;}
 div.metabookglossform form div.glossetc .glossexposure .checkspan input {
     vertical-align: top;}
