@@ -1086,7 +1086,6 @@ metaBook.Slice=(function () {
                    swipe: slice_swiped,
                    slip: slice_slipped}});
 
-
     return MetaBookSlice;
 
 })();

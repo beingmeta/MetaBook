@@ -18,10 +18,9 @@ div.metabookslice input[TYPE="TEXT"] {
     cursor: text; }
 
 div.metabookslice div.metabookcard {
-    margin-left: 20px; margin-right: 3px;}
+    margin-left: 20px; margin-right: 0px;}
 div.metabookslice div.metabookcard.skimpoint {
-    margin-left: 0px; padding-left: 20px;
-    margin-right: 3px;}
+    margin-left: 0px; padding-left: 20px;}
 div.metabookslice.sourced div.metabookcard { display: none;}
 div.metabookslice.sourced div.metabookcard.sourced { display: block;}
 
