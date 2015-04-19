@@ -73,7 +73,7 @@
     //  or the initial hash id from the URL (which was saved in
     //  metaBook.inithash).
     metaBook.initState=function initState() {
-        var uri=metaBook.docuri, refuri=metaBook.refuri;
+        var uri=metaBook.docuri||metaBook.refuri;
         var state=readLocal("mB.state("+uri+")",true);
         var hash=metaBook.inithash;
         if (hash) {
@@ -97,10 +97,10 @@
         if (state) metaBook.state=state;};
     
     // This records the current state of the app, bundled into an
-    //  object and primarily consisting a location, a target, and
+    //  object. It primarily consists a location, a target, and
     //  the time it was last changed.
-    // Mechanically, this fills things out and stores the object
-    //  in metaBook.state as well as in local storage.  If the changed
+    // Mechanically, this procedure fills things out and stores the object
+    //  in both metaBook.state and local/session storage.  If the changed
     //  date is later than the current metaBook.xstate, it also does
     //  an Ajax call to update the server.
     // Finally, unless skiphist is true, it updates the browser
@@ -204,23 +204,34 @@
         syncState(true);}
     metaBook.resetState=resetState;
 
-    var last_sync=false;
+    var sync_req=false, sync_wait=false, last_sync=false;
     // Post the current state and update synced state from what's
     // returned
     function syncState(force){
+        var elapsed=(last_sync)?(fdjtTime.tick()-last_sync):(3600*24*365*10);
         if ((syncing)||(!(metaBook.locsync))) return;
         if (!(metaBook.user)) return;
-        if ((!(force))&&(last_sync)&&
-            ((fdjtTime.tick()-last_sync)<metaBook.sync_interval)) {
+        if (sync_req) {
+            fdjtLog("Skipping state sync because one is already in process");
+            if (sync_wait) clearTimeout(sync_wait);
+            setTimeout(function(){syncState(force);},15000);
+            return;}
+        if ((!(force))&&(elapsed<metaBook.sync_interval)) {
             if (Trace.state)
                 fdjtLog("Skipping state sync because it's too soon");
             return;}
-        if ((!(force))&&(metaBook.state)&&(last_sync)&&
+        if ((!(force))&&(metaBook.state)&&
             ((!(fdjtDOM.isHidden))||(document[fdjtDOM.isHidden]))&&
-            ((fdjtTime.tick()-last_sync)<(5*metaBook.sync_interval))) {
+            (elapsed<(5*metaBook.sync_interval))) {
             if (Trace.state)
                 fdjtLog("Skipping state sync because page is hidden");
             return;}
+        if (elapsed<metaBook.sync_min) {
+            sync_wait=setTimeout(
+                function(){syncState(force);},
+                metaBook.sync_min);
+            return;}
+        else if (sync_wait) {clearTimeout(sync_wait); sync_wait=false;} 
         if ((metaBook.locsync)&&(navigator.onLine)) {
             var uri=metaBook.docuri;
             var traced=(Trace.state)||(Trace.network);
@@ -259,7 +270,8 @@
             if (traced) fdjtLog("syncState(call) %s",sync_uri);
             try {
                 req.open("GET",sync_uri,true);
-                req.send();}
+                req.send();
+                sync_req=req;}
             catch (ex) {
                 try {
                     fdjtLog.warn(
@@ -275,7 +287,6 @@
                            metaBook.sync_pause);}}
     } metaBook.syncState=syncState;
 
-
     function syncTimeout(evt){
         evt=evt||window.event;
         fdjtLog.warn("Sync request timed out, pausing for %ds",
@@ -288,7 +299,7 @@
     var prompted=false;
 
     function freshState(evt){
-        var req=fdjtUI.T(evt);
+        var req=fdjtUI.T(evt); sync_req=false;
         var traced=(Trace.state)||(Trace.network);
         if (req.readyState===4) {
             if ((req.status>=200)&&(req.status<300)) {
