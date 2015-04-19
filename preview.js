@@ -38,7 +38,7 @@
     var dropClass=fdjtDOM.dropClass, addClass=fdjtDOM.addClass;
     var hasClass=fdjtDOM.hasClass;
     var mB=metaBook, mbID=mB.ID, getTarget=mB.getTarget;
-    var Trace=metaBook.Trace;
+    var Trace=mB.Trace;
     var mbGoTo=mB.GoTo;
 
     // Preview functions
@@ -51,7 +51,7 @@
             if (!(elt)) return;
             else preview_elt=elt;
             if (!(oldscroll)) oldscroll={x: 0,y: yoff};
-            var offinfo=fdjtDOM.getGeometry(elt,metaBook.content);
+            var offinfo=fdjtDOM.getGeometry(elt,mB.content);
             if (Trace.flips)
                 fdjtLog("startScrollPreview/%s to %d for %o",
                         caller||"nocaller",offinfo.top-100,elt);
@@ -79,16 +79,17 @@
         var i=0, lim=current.length; while (i<lim) {
             var p=current[i++];
             dropClass(p,"mbpreviewing");
-            metaBook.clearHighlights(p);}}
+            mB.clearHighlights(p);}}
 
     function startPreview(spec,caller){
         var target=((spec.nodeType)?(spec):(mbID(spec)));
         if ((Trace.flips)||(Trace.preview))
             fdjtLog("startPreview %o (%s)",target,caller);
-        if (target===metaBook.previewing) {}
-        else if (metaBook.layout instanceof fdjt.CodexLayout) {
-            var dups=((getTarget(target))&&(metaBook.getDups(target)));
-            metaBook.startPagePreview(target,caller);
+        if (target===mB.previewing) {}
+        if (mB.skimming) mB.stopSkimming();
+        if (mB.layout instanceof fdjt.CodexLayout) {
+            var dups=((getTarget(target))&&(mB.getDups(target)));
+            mB.startPagePreview(target,caller);
             addClass(target,"mbpreviewing");
             if (dups) addClass(dups,"mbpreviewing");}
         else {
@@ -103,22 +104,22 @@
     function stopPreview(caller,jumpto){
         clearPreview();
         if ((jumpto)&&(!(jumpto.nodeType)))
-            jumpto=metaBook.previewTarget||metaBook.previewing;
+            jumpto=mB.previewTarget||mB.previewing;
         if ((Trace.flips)||(Trace.preview))
             fdjtLog("stopPreview/%s jump to %o, pt=%o, p=%o",
                     caller||"nocaller",jumpto,
-                    metaBook.previewTarget,metaBook.previewing);
-        if (metaBook.layout instanceof fdjt.CodexLayout) {
-            metaBook.stopPagePreview(caller,jumpto);}
+                    mB.previewTarget,mB.previewing);
+        if (mB.layout instanceof fdjt.CodexLayout) {
+            mB.stopPagePreview(caller,jumpto);}
         else if (!(jumpto)) scrollPreview(false,caller);
-        else if (jumpto===metaBook.previewing) {
+        else if (jumpto===mB.previewing) {
             oldscroll=false; scrollPreview(false,caller);}
         else scrollPreview(false,caller);
-        metaBook.previewing=false; metaBook.previewTarget=false;
+        mB.previewing=false; mB.previewTarget=false;
         dropClass(document.body,"mbPREVIEW");
         dropClass(document.body,"mbPAGEPREVIEW");
         if (jumpto) {
-            if (metaBook.hudup) metaBook.setHUD(false);
+            if (mB.hudup) mB.setHUD(false);
             mbGoTo(jumpto);}
         return false;}
     metaBook.stopPreview=stopPreview;})();

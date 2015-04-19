@@ -1365,6 +1365,8 @@
         else last_motion=now;
         dropClass(document.body,/\bmb(PAGE)?PREVIEW/g);
         if (clearmodes) fdjt.Async(function(){mB.setHUD(false);});
+        else if (mB.skimming) dropClass("METABOOKSKIMMER","expanded");
+        else {}
         if (mB.readsound)
             fdjtDOM.playAudio("METABOOKPAGEORWARDAUDIO");
         if ((Trace.gestures)||(Trace.flips))
@@ -1391,6 +1393,8 @@
         else last_motion=now;
         evt=evt||window.event;
         if (clearmodes) fdjt.Async(function(){mB.setHUD(false);});
+        else if (mB.skimming) dropClass("METABOOKSKIMMER","expanded");
+        else {}
         if (mB.readsound)
             fdjtDOM.playAudio("METABOOKPAGEBACKWARDAUDIO");
         if ((Trace.gestures)||(Trace.flips))
