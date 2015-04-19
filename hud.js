@@ -706,6 +706,7 @@ metaBook.setMode=
                 var pct=((dir<0)?("-120%"):(dir>0)?("120%"):(false));
                 dropClass(skimmer,"expanded");
                 dropClass(skimmer,"transimate");
+                clone.id="METABOOKSKIM";
                 fdjtDOM.replace("METABOOKSKIM",clone);
                 if ((clone.offsetHeight)>skimmer.offsetHeight)
                     addClass(skimmer,"oversize");
