@@ -49,6 +49,9 @@ body._ANIMATE #METABOOKSKIMMER {
 
 .hudup #METABOOKTOPBAR {
     background-color: rgba(255,255,255,0.8);}
+.hudup #METABOOKHUD.openheart #METABOOKTOPBAR,
+.hudup #METABOOKHUD.openhead #METABOOKTOPBAR {
+    background-color: transparent;}
 
 #METABOOKSKIMMER.flash { background-color: silver;}
 #METABOOKSKIMMER.expanded {
@@ -169,6 +172,7 @@ body.hudup #METABOOKHUD.openhead.overtoc #METABOOKHEAD {
 #METABOOKFRAME > #METABOOKHUD.openhead > #METABOOKTOPBAR {
     z-index: -20; opacity: 0.7;}
 #METABOOKFRAME > #METABOOKHUD.openhead #METABOOKTOPCENTER,
+#METABOOKFRAME > #METABOOKHUD.openheart #METABOOKTOPCENTER,
 body.mbSKIMMING #METABOOKTOPCENTER {
     display: none;}
 
