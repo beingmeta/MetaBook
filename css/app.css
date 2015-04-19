@@ -794,9 +794,7 @@ body.openhud .mbhighlightpassage {
 body.mbSKIMMING .mbhighlightsearch,
 body.mbPREVIEW .mbhighlightsearch {
     background-color: gold;}
-.mbpreviewing {
-    color: rgb(122,34,95);
-    background-color: rgba(255,215,0,0.3);}
+.mbpreviewing {color: rgb(122,34,95);}
 section.mbpreviewing, div.html5section.mbpreviewing,
 section.mbpreviewing p, div.html5section.mbpreviewing p,
 section.mbpreviewing h1, div.html5section.mbpreviewing h1,

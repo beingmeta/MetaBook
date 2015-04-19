@@ -47,6 +47,9 @@ body._ANIMATE #METABOOKSKIMMER {
     -moz-transition-property: height; -moz-transition-duration: 0.3s;
     -o-transition-property: height; -o-transition-duration: 0.3s;}
 
+.hudup #METABOOKTOPBAR {
+    background-color: rgba(255,255,255,0.8);}
+
 #METABOOKSKIMMER.flash { background-color: silver;}
 #METABOOKSKIMMER.expanded {
     background-color: white;

@@ -18,8 +18,9 @@
 .mbtoc .context .tocpath { padding-left: 1ex; }
 .mbtoc .context {
     color: darkblue;
-    font-size: 60%;
-    float: right; }
+    font-size: 60%; line-height: 1.0; max-width: 50%;
+    text-align: right;
+    float: right;}
 .mbtocslice .mbtoc .context { display: none;}
 .mbtoc a.sectname { color: black; z-index: 50;}
 .mbtoc div.elements {
@@ -52,7 +53,6 @@
 
 #METABOOKSKIMMER .mbtoc {
     font-weight: bold; padding-top: 2px; height: 2em;}
-#METABOOKSKIMMER .mbtoc .context { font-size: 80%; }
 #METABOOKHUD.statictoc #METABOOKSKIMMER {
     background-color: rgba(70, 130, 180, 0.5);}
 

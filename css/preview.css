@@ -109,7 +109,8 @@ body.mbPREVIEW.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER {
     border-bottom-right-radius: 1ex;
     -webkit-border-bottom-right-radius: 1ex; 
     -moz-border-radius-bottomright: 1ex;
-    -o-border-radius-bottomright: 1ex;}
+    -o-border-radius-bottomright: 1ex;
+    font-size: 20px; font-size: 1.1rem;}
 #METABOOKPAGEBARHELP.helpbox p, #METABOOKSEETHRUHELP.helpbox p {
     margin: 0px; padding: 0px; text-align: center; text-indent: 0px;
     max-width: inherit;}
@@ -131,6 +132,11 @@ body.mbPREVIEW #METABOOKLOCOFF {
     pointer-events: none;}
 
 div.metabookhelp .result span { display: none; }
+
+@media screen and (max-width: 640px) {
+    #METABOOKPAGEBARHELP.helpbox, #METABOOKSEETHRUHELP.helpbox {
+        left: 10px; right: 10px;}
+}
 
 /* Emacs local variables
 ;;;  Local variables: ***
