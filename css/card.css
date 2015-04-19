@@ -7,8 +7,7 @@
 .metabookcard { 
     white-space: normal; clear: both;
     text-align: left; text-decoration: none;
-    text-align: left;
-    font-size: 90%;}
+    text-align: left;}
 
 div.metabookcard {
     margin-left: 20px; margin-right: 0px;
@@ -87,8 +86,7 @@ div.metabookcard > hr {
     content: "→ "; font-weight: bold;}
 
 .metabookcardbody {
-    color: rgba(0,0,0,0.9);
-    font-size: 80%; line-height: 100%;
+    color: rgba(0,0,0,0.9); line-height: 100%;
     padding-top: 2px;}
 .metabookcardbody:before, .metabookcard .metabookcardbody:after {
     content: " "; display: table;}
