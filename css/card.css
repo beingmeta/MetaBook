@@ -88,6 +88,7 @@ div.metabookcard > hr {
 
 .metabookcardbody {
     color: rgba(0,0,0,0.9);
+    font-size: 80%; line-height: 100%;
     padding-top: 2px;}
 .metabookcardbody:before, .metabookcard .metabookcardbody:after {
     content: " "; display: table;}
@@ -105,7 +106,8 @@ div.metabookcard > hr {
     font-size: 80%; max-width: 50%;
     overflow: hidden; text-overflow: ellipsis;}
 .metabookcard span.sample:before {
-    content: '¶'; font-weight: bold; color: steelblue;}
+    content: '¶'; font-weight: bold; color: steelblue;
+    font-size: 120%;}
 
 .metabookcard span.controller { cursor: pointer;}
 .metabookcard .info { 
