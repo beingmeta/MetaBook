@@ -14,7 +14,10 @@
     margin-bottom: 0.1em; border-bottom: solid transparent 0.2em;
     margin-right: 1ex;
     box-sizing: border-box;}
-.mbtoc.skimpoint { border-bottom-color: red;}
+div.metabookslice .mbtoc.skimpoint {
+    background-color: transparent;
+    border-bottom-color: red;}
+
 .mbtoc .context .tocpath { padding-left: 1ex; }
 .mbtoc .context {
     color: darkblue;
