@@ -55,7 +55,8 @@
     var RefDB=fdjt.RefDB, $ID=fdjt.ID;
 
     var getInitials=fdjtString.getInitials;
-    var hasClass=fdjtDOM.hasClass;
+    var addClass=fdjtDOM.addClass, dropClass=fdjtDOM.dropClass;
+    var hasClass=fdjtDOM.hasClass, toggleClass=fdjtDOM.toggleClass;
     var mbicon=metaBook.icon;
 
     /* Social UI components */
@@ -111,13 +112,13 @@
             fdjtDOM.cancel(evt);
             return;}
         var selected=fdjtDOM.$(".selected",sources);
-        fdjtDOM.toggleClass(selected,"selected");
-        fdjtDOM.addClass(target,"selected");
+        toggleClass(selected,"selected");
+        addClass(target,"selected");
         metaBook.UI.selectSources(metaBook.allglosses,false);
         fdjtDOM.cancel(evt);}
     metaBook.UI.handlers.everyone_ontap=everyone_ontap;
 
-    function sources_ontap(evt){
+    function sources_tapped(evt){
         evt=evt||window.event||null;
         // if (!(metaBook.user)) return;
         var target=fdjtDOM.T(evt);
@@ -126,30 +127,47 @@
         var sources=$ID("METABOOKSOURCES");
         var glosses=$ID("METABOOKALLGLOSSES");
         var new_sources=[];
-        if ((!(sources))||(!(glosses))||(!(target.oid)))
+        if ((!(sources))||(!(glosses))||(!(target))||(!(target.oid)))
             return; /* Warning? */
-        if ((evt.shiftKey)||(fdjtDOM.hasClass(target,"selected"))) {
-            fdjtDOM.toggleClass(target,"selected");
-            var selected=fdjtDOM.$(".selected",sources);
-            var i=0; var len=selected.length;
-            while (i<len) {
-                var oid=selected[i++].oid;
-                if (oid) new_sources.push(oid);}}
-        else {
-            var de_select=fdjtDOM.$(".selected",sources);
-            var d_i=0; var d_len=de_select.length;
-            while (d_i<d_len) fdjtDOM.dropClass(de_select[d_i++],"selected");
-            fdjtDOM.addClass(target,"selected");
-            new_sources=[target.oid];}
+        var selected=fdjtDOM.$(".selected",sources);
+        toggleClass(target,"selected");
+        if (!(evt.shiftKey)) dropClass(selected,"selected");
+        selected=fdjtDOM.$(".selected",sources);
+        var i=0, lim=selected.length; while (i<lim) {
+            new_sources.push(selected[i++].oid);}
         var everyone=fdjtDOM.$(".everyone",sources)[0];
         if (new_sources.length) {
-            if (everyone) fdjtDOM.dropClass(everyone,"selected");
+            if (everyone) dropClass(everyone,"selected");
             metaBook.UI.selectSources(metaBook.allglosses,new_sources);}
         else {
-            if (everyone) fdjtDOM.addClass(everyone,"selected");
+            if (everyone) addClass(everyone,"selected");
             metaBook.UI.selectSources(metaBook.allglosses,false);}
         fdjtDOM.cancel(evt);}
-    metaBook.UI.handlers.sources_ontap=sources_ontap;
+
+    function sources_taptap(evt){
+        evt=evt||window.event||null;
+        // if (!(metaBook.user)) return;
+        var target=fdjtDOM.T(evt);
+        // var sources=fdjtDOM.getParent(target,".metabooksources");
+        // var glosses=fdjtDOM.getParent(target,".sbookglosses");
+        var sources=$ID("METABOOKSOURCES");
+        var glosses=$ID("METABOOKALLGLOSSES");
+        var new_sources=[];
+        if ((!(sources))||(!(glosses))||(!(target))||(!(target.oid)))
+            return; /* Warning? */
+        var selected=fdjtDOM.$(".selected",sources);
+        toggleClass(target,"selected");
+        selected=fdjtDOM.$(".selected",sources);
+        var i=0, lim=selected.length; while (i<lim) {
+            new_sources.push(selected[i++].oid);}
+        var everyone=fdjtDOM.$(".everyone",sources)[0];
+        if (new_sources.length) {
+            if (everyone) dropClass(everyone,"selected");
+            metaBook.UI.selectSources(metaBook.allglosses,new_sources);}
+        else {
+            if (everyone) addClass(everyone,"selected");
+            metaBook.UI.selectSources(metaBook.allglosses,false);}
+        fdjtDOM.cancel(evt);}
 
     function geticon(source){
         return ((source._pic)||(source.pic)||(source.fb_pic)||
@@ -205,7 +223,7 @@
         wedge.setAttribute("data-images","");
         extendGlossmark(glossmark,glosses,wedge);
         metaBook.UI.addHandlers(glossmark,"glossmark");
-        fdjtDOM.addClass(passage,"glossed");
+        addClass(passage,"glossed");
         fdjtDOM.prepend(passage,glossmark);
         glossmark.name="METABOOK_GLOSSMARK_"+id;
         return glossmark;};
@@ -219,7 +237,7 @@
         var glossids=metaBook.glossdb.find('frag',id), glosses=[];
         var slicediv=fdjtDOM("div.metabookglosses.metabookslice");
         if ((!(glossids))||(!(glossids.length)))
-            fdjtDOM.addClass(slicediv,"noglosses");
+            addClass(slicediv,"noglosses");
         if (metaBook.target) metaBook.clearHighlights(metaBook.target);
         var i=0, lim=glossids.length; while (i<lim) {
             var glossref=metaBook.glossdb.ref(glossids[i++]);
@@ -336,6 +354,29 @@
         var hudwrapper=fdjtDOM("div.hudpanel#METABOOKPOINTGLOSSES",slicediv);
         fdjtDOM.replace("METABOOKPOINTGLOSSES",hudwrapper);}
     metaBook.clearGlossmark=clearGlossmark;
+
+    var cancel=fdjtUI.cancel;
+
+    fdjt.DOM.defListeners(
+        metaBook.UI.handlers.mouse,
+        {"#METABOOKSOURCES": {
+            tap: sources_tapped,taptap: sources_taptap},
+         "#METABOOKSOURCES .button.everyone": {
+             tap: function(evt){
+                 evt=evt||window.event;
+                 metaBook.UI.handlers.everyone_ontap(evt);
+                 fdjt.UI.cancel(event);}}});
+
+   fdjt.DOM.defListeners(
+        metaBook.UI.handlers.touch,
+       {"#METABOOKSOURCES": {
+            tap: sources_tapped,taptap: sources_taptap},
+        "#METABOOKSOURCES .button.everyone": {
+            touchstart: cancel,
+            touchend: function(evt){
+                evt=evt||window.event;
+                metaBook.UI.handlers.everyone_ontap(evt);
+                fdjt.UI.cancel(event);}}});
 
 })();
 

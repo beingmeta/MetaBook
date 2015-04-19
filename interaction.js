@@ -739,8 +739,10 @@
                         metaBook.skimForward(evt);
                     else window.history.forward();}
                 else if ((mB.mode)&&(!(mB.skimming))&&
-                         (pagers[metaBook.mode]))
-                    showPage.forward(pagers[metaBook.mode]);
+                         (pagers[metaBook.mode])) {
+                    if (evt.touches===2)
+                        showPage.fastFrward(pagers[metaBook.mode]);
+                    else showPage.forward(pagers[metaBook.mode]);}
                 else if (mB.skimming) pageForward(evt);
                 else pageForward(evt,true);}
             else if (dx>(mB.minswipe||10)) {
@@ -750,8 +752,10 @@
                         metaBook.skimBackward(evt);
                     else window.history.back();}
                 else if ((mB.mode)&&(!(mB.skimming))&&
-                         (pagers[metaBook.mode]))
-                    showPage.backward(pagers[metaBook.mode]);
+                         (pagers[metaBook.mode])) {
+                    if (evt.touches===2)
+                        showPage.fastBckward(pagers[metaBook.mode]);
+                    else showPage.backward(pagers[metaBook.mode]);}
                 else if (mB.skimming)
                     metaBook.pageBackward(evt);
                 else metaBook.pageBackward(evt,true);}}
@@ -1045,14 +1049,17 @@
         else if (fdjtDOM.isTextInput(fdjtDOM.T(evt))) return true;
         else if (kc===32) { // Space
             if ((mB.mode)&&(!(mB.skimming))&&
-                (pagers[metaBook.mode]))
-                showPage.forward(pagers[metaBook.mode]);
+                (pagers[metaBook.mode])) {
+                if (evt.shiftKey)
+                    showPage.fastForward(pagers[metaBook.mode]);
+                else showPage.forward(pagers[metaBook.mode]);}
             else if (mB.skimming) pageForward(evt);
             else pageForward(evt,true);}
         else if ((kc===8)||(kc===45)) { // backspace or delete
-            if ((mB.mode)&&(!(mB.skimming))&&
-                (pagers[metaBook.mode]))
-                showPage.backward(pagers[metaBook.mode]);
+            if ((mB.mode)&&(!(mB.skimming))&& (pagers[metaBook.mode])) {
+                if (evt.shiftKey)
+                    showPage.fastBackward(pagers[metaBook.mode]);
+                else showPage.backward(pagers[metaBook.mode]);}
             else if (mB.skimming) pageBackward(evt);
             else pageBackward(evt,true);}
         // Home goes to the current head.
@@ -1923,13 +1930,6 @@
              fdjt.UI.cancel(evt);
              return false;}},
          "#METABOOKSEARCHINFO": { click: metaBook.searchTags_onclick },
-         "#METABOOKSOURCES": {
-             click: metaBook.UI.handlers.sources_ontap},
-         "#METABOOKSOURCES .button.everyone": {
-             click: function(evt){
-                 evt=evt||window.event;
-                 metaBook.UI.handlers.everyone_ontap(evt);
-                 fdjt.UI.cancel(event);}},
          "#METABOOKINFOPANEL": {
              click: toggleDevMode},
          ".metabooksettings input[type='RADIO']": {
@@ -1966,8 +1966,6 @@
          "#METABOOKTOPBAR": {tap: raiseHUD},
          "#METABOOKSHOWCOVER": {
              tap: showcover_tapped, release: showcover_released},
-         "#METABOOKSOURCES": {
-             click: metaBook.UI.handlers.sources_ontap},
          "#METABOOKSEARCHINFO": { click: metaBook.searchTags_onclick },
          "#METABOOKPAGEFOOT": {},
          "#METABOOKPAGEREFTEXT": {tap: enterPageRef},
@@ -2066,12 +2064,6 @@
                  fdjt.UI.cancel(evt);
                  return false;}},
          summary: {touchmove: preview_touchmove_nodefault},
-         "#METABOOKSOURCES .button.everyone": {
-             touchstart: cancel,
-             touchend: function(evt){
-                 evt=evt||window.event;
-                 metaBook.UI.handlers.everyone_ontap(evt);
-                 fdjt.UI.cancel(event);}},
          "#METABOOKINFOPANEL": {
              touchstart: toggleDevMode},
          ".metabooksettings input[type='RADIO']": {
