@@ -21,9 +21,11 @@ div.metabookslice .mbtoc.skimpoint {
 .mbtoc .context .tocpath { padding-left: 1ex; }
 .mbtoc .context {
     color: darkblue;
-    font-size: 60%; line-height: 1.0; max-width: 50%;
+    font-size: 60%; line-height: 1.0; 
+    max-width: 35%; white-space: normal;
     text-align: right;
     float: right;}
+.mbtoc1 .context { display: none;}
 .mbtocslice .mbtoc .context { display: none;}
 .mbtoc a.sectname { color: black; z-index: 50;}
 .mbtoc div.elements {
