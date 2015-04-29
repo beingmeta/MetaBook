@@ -534,7 +534,8 @@ body.mbSKIMMING #METABOOKHUD img.hudbutton {
     opacity: 0.8; -webkit-opacity: 0.8;
     -moz-opacity: 0.8; -o-opacity: 0.8;}
 #METABOOKHUD.addgloss #METABOOKFOOT img.hudbutton[alt="save gloss"],
-body.mbSKIMMING #METABOOKHUD.searchresults img.hudbutton[hudmode="searchresults"],
+body.mbSKIMMING #METABOOKHUD.searchresults
+   img.hudbutton[hudmode="searchresults"],
 body.mbSKIMMING #METABOOKHUD.statictoc img.hudbutton[hudmode="statictoc"] {
     display: inline-block; }
 #METABOOKHUD.addgloss img.hudbutton[hudmode="allglosses"],
