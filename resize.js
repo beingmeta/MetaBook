@@ -52,21 +52,32 @@
 
     /* Whether to resize by default */
     var resize_default=false;
+    var ui_resize_wait=false, ui_resize_done=[];
+    var ui_width=false, ui_height=false;
     
     function resizeUI(wait){
         function resizing(done){
-            setTimeout(function(){
-                var adjstart=fdjt.Time();
-                var hud=$ID("METABOOKHUD");
-                var cover=$ID("METABOOKCOVER");
-                if (cover) mB.resizeCover(cover);
-                if (hud) mB.resizeHUD(hud);
-                if (done) done();
-                if ((hud)||(cover))
-                    fdjtLog("Resized UI in %fsecs",
-                            ((fdjt.Time()-adjstart)/1000));},
-                       100);}
-        if (!(wait)) wait=100;
+            if (ui_resize_wait) clearTimeout(ui_resize_wait);
+            ui_resize_wait=setTimeout(function(){
+                var h=fdjtDOM.viewHeight(), w=fdjtDOM.viewWidth();
+                if ((w!==ui_width)||(h!=ui_height)) {
+                    var adjstart=fdjt.Time();
+                    var hud=$ID("METABOOKHUD");
+                    var cover=$ID("METABOOKCOVER");
+                    ui_height=h; ui_width=w;
+                    if (cover) mB.resizeCover(cover);
+                    if (hud) mB.resizeHUD(hud);
+                    if ((hud)||(cover))
+                        fdjtLog("Resized UI in %fsecs, running %d callbacks",
+                                ((fdjt.Time()-adjstart)/1000),
+                                ui_resize_done.length);}
+                var when_done=ui_resize_done; 
+                ui_resize_wait=false; ui_resize_done=[];
+                var i=0, n=when_done.length;
+                while (i<n) when_done[i++]();},
+                                      wait);
+            ui_resize_done.push(done);}
+        if (typeof wait !== "number") wait=100;
         return new Promise(resizing);}
 
     metaBook.resizeUI=resizeUI;
