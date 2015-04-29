@@ -209,16 +209,19 @@ metaBook.Paginate=
                 layoutMessage("Using cached layout",0);
                 dropClass(document.body,"_SCROLL");
                 addClass(document.body,"_BYPAGE");
+                layout.started=fdjtTime();
                 layout.restoreLayout(content).then(finish_layout);}
             function finish_layout(layout) {
+                var started=layout.started;
                 $ID("CODEXPAGE").style.visibility='';
                 $ID("CODEXCONTENT").style.visibility='';
                 dropClass(document.body,"mbLAYOUT");
                 metaBook.layout=layout;
                 metaBook.pagecount=layout.pages.length;
                 if (Trace.startup)
-                    fdjtLog("Restored %d-page layout %s, adding glosses",
-                            layout.pages.length,layout_id);
+                    fdjtLog("Restored %d-page layout %s in %ds, adding glosses",
+                            layout.pages.length,layout_id,
+                            (fdjtTime()-started)/1000);
                 var lostids=layout.lostids, moved_ids=lostids._all_ids;
                 var i=0, lim=moved_ids.length;
                 while (i<lim) {
