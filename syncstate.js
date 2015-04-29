@@ -42,6 +42,7 @@
     var clearLocal=mB.clearLocal;
     var Trace=metaBook.Trace;
     var loc2pct=metaBook.location2pct;
+    var sync_count=0;
 
     var setTarget, setConnected, setConfig;
     function init_local(){
@@ -49,8 +50,6 @@
         setConnected=metaBook.setConnected;
         setConfig=metaBook.setConfig;}
     metaBook.inits.push(init_local);
-
-    
 
     /* Managing the reader state */
 
@@ -92,7 +91,7 @@
                 state.docuri=metaBook.docuri;
                 state.target=hash;
                 state.location=false;
-                state.changed=fdjtTime.tick;
+                state.changed=fdjtTime.tick();
                 saveLocal("mB.state("+uri+")",state,true);}}
         if (state) metaBook.state=state;};
     
@@ -300,7 +299,8 @@
 
     function freshState(evt){
         var req=fdjtUI.T(evt); sync_req=false;
-        var traced=(Trace.state)||(Trace.network);
+        var traced=(Trace.state)||(Trace.network)||
+            ((Trace.startup)&&(sync_count<1));
         if (req.readyState===4) {
             if ((req.status>=200)&&(req.status<300)) {
                 var rtext=req.responseText;
@@ -313,8 +313,8 @@
                                 evt,xstate,metaBook.state);
                     if (xstate.changed>(tick+300))
                         fdjtLog.warn(
-                            "Beware of oracles (future state date): %j ",
-                            xstate);
+                            "Beware of oracles (future state date): %j %s",
+                            xstate,new Date(xstate.changed*1000));
                     else if (!(metaBook.state)) {
                         metaBook.xstate=xstate;
                         restoreState(xstate);}
@@ -331,7 +331,8 @@
                     else {
                         metaBook.xstate=xstate;
                         prompted=fdjtTime.tick();
-                        metaBook.resolveXState(xstate);}}}
+                        metaBook.resolveXState(xstate);}}
+                sync_count++;}
             else if (traced)
                 fdjtLog("syncState(callback/error) %o %d %s",
                         evt,req.status,req.responseText);
