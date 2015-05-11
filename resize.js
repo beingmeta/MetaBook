@@ -60,7 +60,7 @@
             if (ui_resize_wait) clearTimeout(ui_resize_wait);
             ui_resize_wait=setTimeout(function(){
                 var h=fdjtDOM.viewHeight(), w=fdjtDOM.viewWidth();
-                if ((w!==ui_width)||(h!=ui_height)) {
+                if ((w!==ui_width)||(h!==ui_height)) {
                     var adjstart=fdjt.Time();
                     var hud=$ID("METABOOKHUD");
                     var cover=$ID("METABOOKCOVER");
