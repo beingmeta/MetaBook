@@ -118,13 +118,13 @@ metaBook.Slice=(function () {
                     (sample),
                     ((note_len>0)&&(info.maker)&&(showmaker(info))),
                     ((note_len>0)&&(shownote(info)))," ",
-                    ((excerpt_len>0)&&(showexcerpts(info.excerpt)))," ",
                     ((info.detail)&&(fdjtDOM("span.glossbody","More")))," ",
                     (((info.alltags)||(info.tags))&&(showtags(info,query)))," ",
                     ((info.links)&&(showlinks(info.links)))," ",
                     ((info.attachments)&&
                      (showlinks(info.attachments,"span.attachments")))," ",
-                    ((shared)&&(shared.length)&&(showaudience(shared))));
+                    ((shared)&&(shared.length)&&(showaudience(shared))),
+                    ((excerpt_len>0)&&(showexcerpts(info.excerpt)))," ");
         var card=
             fdjtDOM(((info.maker) ?
                      "div.metabookcard.gloss" :
