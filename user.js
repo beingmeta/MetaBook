@@ -103,6 +103,7 @@
     metaBook.setNodeID=setNodeID;
 
     function setupUI4User(){
+        if (metaBook._user_ui_setup) return;
         var i=0, lim;
         var root=document.documentElement||document.body;
         if (Trace.startup>1) fdjtLog("Starting UI setup for user");
