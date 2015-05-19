@@ -203,10 +203,10 @@
         var trimmed=fdjtString.trim(excerpt);
         var before=((trimmed.search(/[.,"']/)===0)?("(^|\\s)"):("\\b"));
         var after=((trimmed.search(/[.,"']$/)>0)?("($|\\s)"):("\\b"));
-        var pattern=fdjtDOM.textRegExp(trimmed,false,before,after);
+        var pattern=fdjtDOM.textRegExp(trimmed,false,true,before,after);
         var matches=fdjtDOM.findMatches(node,pattern,off||0,1);
         if ((!(matches))||(matches.length===0)) {
-            pattern=fdjtDOM.textRegExp(trimmed,true,before,after);
+            pattern=fdjtDOM.textRegExp(trimmed,true,true,before,after);
             matches=fdjtDOM.findMatches(node,pattern,off||0,1);}
         if ((matches)&&(matches.length)) return matches[0];
         // We could do this more intelligently
