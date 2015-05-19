@@ -793,21 +793,6 @@
             metaBook.setGlossMode(form.className);}}
     metaBook.initGlossMode=initGlossMode;
 
-    /*
-    function body_click(evt){
-        evt=evt||window.event;
-        if (mB.zoomed) return;
-        var target=fdjtUI.T(evt);
-        // This avoids double-handling of clicks
-        if ((clicked)&&((fdjtTime()-clicked)<3000))
-            fdjtUI.cancel(evt);
-        else if (handle_content_click(target)) {
-            fdjtUI.cancel(evt);
-            return;}
-        else if (isClickable(target)) return;
-        else fdjtUI.cancel(evt);}
-    */
-
     /* TOC handlers */
 
     function getAbout(elt){
@@ -1385,7 +1370,7 @@
             var newpage=false;
             if (mB.curpage>=pagemax) {}
             else metaBook.GoToPage(
-                newpage=metaBook.curpage+1,"pageForward",true,false);}
+                newpage=metaBook.curpage+1,"pageForward",true,true);}
         else {
             var delta=fdjtDOM.viewHeight()-50;
             if (delta<0) delta=fdjtDOM.viewHeight();
@@ -1412,7 +1397,7 @@
             if (mB.curpage===0) {}
             else {
                 newpage=metaBook.curpage-1;
-                metaBook.GoToPage(newpage,"pageBackward",true,false);}}
+                metaBook.GoToPage(newpage,"pageBackward",true,true);}}
         else {
             var delta=fdjtDOM.viewHeight()-50;
             if (delta<0) delta=fdjtDOM.viewHeight();
