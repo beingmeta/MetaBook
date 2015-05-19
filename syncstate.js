@@ -125,7 +125,7 @@
             state.maxloc=state.location;
         else if (!(state.maxloc)) state.maxloc=state.location;
         if (Trace.state)
-            fdjtLog("saveState skiphist=? force=? state=%j",
+            fdjtLog("saveState skiphist=%o force=%o state=%j",
                     skiphist,force,state);
         metaBook.state=state;
         var statestring=JSON.stringify(state);
