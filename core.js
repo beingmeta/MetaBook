@@ -622,6 +622,7 @@
                     return target;
                 else if ((target)&&(!(fdjt.DOM.isVisible(scan))))
                     return target;
+                else if (target) {}
                 else target=scan;}
             else {}
             scan=scan.parentNode;}
