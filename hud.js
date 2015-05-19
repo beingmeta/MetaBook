@@ -312,7 +312,7 @@ metaBook.setMode=
                 if (item.tstamp>metaBook.syncstamp)
                     metaBook.syncstamp=item.tstamp;}
             else {
-                fdjtLog("Gloss refers to nonexistent '%s': %o",item.frag,item);
+                fdjtLog("Gloss (add2UI) refers to nonexistent '%s': %o",item.frag,item);
                 return;}}
         metaBook.addGloss2UI=addGloss2UI;
 

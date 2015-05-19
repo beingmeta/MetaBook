@@ -223,7 +223,7 @@
             glossdb.onLoad(function initGloss(item) {
                 var info=metaBook.docinfo[item.frag];
                 if (!(info)) {
-                    fdjtLog("Gloss refers to nonexistent '%s': %o",
+                    fdjtLog("Gloss (onload) refers to nonexistent '%s': %o",
                             item.frag,item);
                     return;}
                 if ((info)&&(info.starts_at)) {
