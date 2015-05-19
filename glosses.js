@@ -433,7 +433,7 @@
         var start_target=getTarget(info.start,true);
         var new_target=((start_target)&&
                         (!(hasParent(metaBook.glosstarget,start_target)))&&
-                        (new_target));
+                        (start_target));
         if (new_target) {
             // When real_target is changed, we need to get a new EXOFF
             //  value, which we should probably get by passing real_target
