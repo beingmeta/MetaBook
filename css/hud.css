@@ -893,7 +893,7 @@ body.hudup #METABOOKHUD #METABOOKSKIMMER.sbookatstart img[alt="beginning"] {disp
 #METABOOKHUD #METABOOKSKIMMER.expanded div.gloss div.tochead {
     display: block;}
 
-#METABOOKSKIMMER.mbfoundhighlights .metabookcard .excerpt { display: none; }
+/* #METABOOKSKIMMER.mbfoundhighlights .metabookcard .excerpt { display: none; } */
 
 #METABOOKHUD div.hudpanel#METABOOKSKIMMER.expanded { max-height: inherit; }
 #METABOOKHUD #METABOOKSKIMMER.expanded img.glosspic {  height: inherit; }
