@@ -268,6 +268,40 @@ metaBook.Paginate=
                         saved=saved.slice(saved.length-max_layouts);}
                     setLocal(key,saved,true);}}
 
+            function finishPageInfo(page,layout){
+                var pages=layout.pages, pagenum=atoi(page.getAttribute("data-pagenum"),10);
+                var docinfo=mB.docinfo, curloc=false;
+                var lastid=getPageLastID(page);
+                var prevpage=
+                    (((pagenum)&&(pagenum>1))&&(pages[pagenum-2]));
+                if (lastid) page.setAttribute("data-lastid",lastid);
+                if ((!(page.getAttribute("data-sbookloc")))&&(prevpage)) {
+                    var prevlast=prevpage.getAttribute("data-lastid");
+                    var lastinfo=((prevlast)&&(docinfo[prevlast]));
+                    if (lastinfo) {
+                        curloc=lastinfo.starts_at;
+                        page.setAttribute("data-sbookloc",lastinfo.ends_at);}
+                    else {
+                        var prevoff=prevpage.getAttribute("data-sbookloc");
+                        if (prevoff)
+                            page.setAttribute("data-sbookloc",prevoff);
+                        else page.setAttribute("data-sbookloc","0");}}}
+
+            function getPageLastID(node,id) {
+                if (hasClass(node,"codexpage")) {}
+                else if ((node.id)&&(!(node.codexbaseid))&&
+                         (metaBook.docinfo[node.id]))
+                    id=node.id;
+                if (node.nodeType!==1) return id;
+                var children=node.childNodes;
+                if (children) {
+                    var i=0; var lim=children.length;
+                    while (i<lim) {
+                        var child=children[i++];
+                        if (child.nodeType===1) {
+                            id=getPageLastID(child,id);}}}
+                return id;}
+
             function new_layout(){
 
                 // Prepare to do the layout
@@ -307,6 +341,9 @@ metaBook.Paginate=
                     if (root_i>=n_roots) {
                         layout.Finish();
                         layout_progress(layout);
+                        var pages=layout.pages;
+                        var i=0, n=pages.length; while (i<n)
+                            finishPageInfo(pages[i++],layout);
                         var cachethresh=metaBook.cache_layout_thresh;
                         if (cachethresh) {
                             var elapsed=layout.done-layout.started;
@@ -524,15 +561,12 @@ metaBook.Paginate=
             var getChild=fdjtDOM.getChild;
             var stripMarkup=fdjtString.stripMarkup;
 
-            function setPageInfo(page,layout){
+            function finishedPage(page,layout){
                 var pages=layout.pages, pagenum=layout.pagenum;
                 var topnode=getPageTop(page);
                 var topid=topnode.codexbaseid||topnode.id;
-                var lastid=getPageLastID(page);
-                var prevpage=
-                    (((pagenum)&&(pagenum>1))&&(pages[pagenum-2]));
-                var staticref=getChild(
-                    page,".staticpageref,.sbookstaticpageref");
+                var prevpage=(((pagenum)&&(pagenum>1))&&(pages[pagenum-2]));
+                var staticref=getChild(page,".staticpageref,.sbookstaticpageref");
                 var curloc=false;
                 if (staticref) {
                     var pageref=staticref.getAttribute("data-pageref");
@@ -547,7 +581,6 @@ metaBook.Paginate=
                     var prevref=prevpage.getAttribute("data-staticpageref");
                     if (prevref)
                         page.setAttribute("data-staticpageref",prevref);}
-                if (lastid) page.setAttribute("data-lastid",lastid);
                 if (topnode) {
                     var topstart=mbID(topid);
                     var locoff=((topstart===topnode)?(0):
@@ -556,18 +589,6 @@ metaBook.Paginate=
                     curloc=info.starts_at+locoff;
                     if (topid) page.setAttribute("data-topid",topid);
                     page.setAttribute("data-sbookloc",curloc);}
-                else {
-                    if (prevpage) {
-                        var prevlast=prevpage.getAttribute("data-lastid");
-                        var lastinfo=((prevlast)&&(docinfo[prevlast]));
-                        if (lastinfo) {
-                            curloc=lastinfo.starts_at;
-                            page.setAttribute("data-sbookloc",lastinfo.ends_at);}
-                        else {
-                            var prevoff=prevpage.getAttribute("data-sbookloc");
-                            if (prevoff)
-                                page.setAttribute("data-sbookloc",prevoff);
-                            else page.setAttribute("data-sbookloc","0");}}}
                 if ((typeof curloc === "number")&&(pagenum)&&
                     (!(metaBook.curpage))&&(metaBook.state)&&
                     (goneto!==metaBook.state)&&
@@ -594,20 +615,6 @@ metaBook.Paginate=
                             var first=getPageTop(child);
                             if (first) return first;}}}
                 return last;}
-            function getPageLastID(node,id) {
-                if (hasClass(node,"codexpage")) {}
-                else if ((node.id)&&(!(node.codexbaseid))&&
-                         (metaBook.docinfo[node.id]))
-                    id=node.id;
-                if (node.nodeType!==1) return id;
-                var children=node.childNodes;
-                if (children) {
-                    var i=0; var lim=children.length;
-                    while (i<lim) {
-                        var child=children[i++];
-                        if (child.nodeType===1) {
-                            id=getPageLastID(child,id);}}}
-                return id;}
             
             function getDupNode(under,id){
                 var children;
@@ -671,7 +678,7 @@ metaBook.Paginate=
                       pagerule: metaBook.CSS.pagerule,
                       tracelevel: Trace.layout,
                       layout_id: layout_id,
-                      pagefn: setPageInfo,
+                      pagefn: finishedPage,
                       logfn: fdjtLog};
             fdjtDOM.replace("METABOOKPAGES",container);
             metaBook.pages=container;
