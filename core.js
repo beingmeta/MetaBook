@@ -331,10 +331,10 @@
 
         metaBook.queued=
             ((metaBook.cacheglosses)&&
-             (getLocal("mB("+metaBook.refuri+").queued",true)))||[];
+             (getLocal("mB("+metaBook.docid+").queued",true)))||[];
 
         function setCacheGlosses(value){
-            var saveprops=metaBook.saveprops, uri=metaBook.docuri;
+            var saveprops=metaBook.saveprops, docid=mB.docid;
             if (value) {
                 if (metaBook.user) {
                     if ((mB.useidb)&&(!(mB.noidb)))
@@ -352,18 +352,18 @@
                     while (i<lim) {
                         var prop=saveprops[i++];
                         if (metaBook[prop]) saveLocal(
-                            "mB"+"("+uri+")."+prop,metaBook[prop],true);}
+                            "mB"+"("+docid+")."+prop,metaBook[prop],true);}
                     metaBook.glossdb.save(true);
                     metaBook.sourcedb.save(true);
                     if ((metaBook.queued)&&(metaBook.queued.length)) 
                         metaBook.queued=metaBook.queued.concat(
-                            getLocal("mB("+uri+").queued",true)||[]);
+                            getLocal("mB("+docid+").queued",true)||[]);
                     else metaBook.queued=
-                        getLocal("mB("+uri+").queued",true)||[];}
+                        getLocal("mB("+docid+").queued",true)||[];}
                 metaBook.cacheglosses=true;}
             else {
                 clearOffline(metaBook.docuri);
-                if (uri) fdjtState.dropLocal("mB("+uri+").queued");
+                if (docid) fdjtState.dropLocal("mB("+docid+").queued");
                 metaBook.queued=[];
                 metaBook.cacheglosses=false;}}
         metaBook.setCacheGlosses=setCacheGlosses;
@@ -383,10 +383,11 @@
 
         function setPersist(){
             metaBook.persist=true;
-            var refuri=mB.refuri, docuri=mB.docuri;
+            var refuri=mB.refuri, docuri=mB.docuri, docid=mB.docid;
             // We also initialize .refuris/.docuris
             var refuris=readLocal("mB.refuris",true);
             var docuris=readLocal("mB.docuris",true);
+            var docids=readLocal("mB.docids",true);
             if (!(refuris))
                 saveLocal("mB.refuris",[refuri],true);
             else if (refuris.indexOf(refuri)<0) {
@@ -399,56 +400,63 @@
                 docuris.push(docuri);
                 saveLocal("mB.docuris",docuris,true);}
             else {}
+            if (!(docids))
+                saveLocal("mB.docids",[docid],true);
+            else if (docids.indexOf(docid)<0) {
+                docids.push(docid);
+                saveLocal("mB.docids",docids,true);}
+            else {}
             if (mB.sourceid)
-                saveLocal("mB("+docuri+").sourceid",mB.sourceid);}
+                saveLocal("mB("+mB.docid+").sourceid",mB.sourceid);}
         metaBook.setPersist=setPersist;
 
         /* Clearing offline data */
 
-        function clearOffline(uri){
+        function clearOffline(docid){
             var dropLocal=fdjtState.dropLocal;
-            if (!(uri)) {
-                var books=readLocal("mB.docuris",true);
+            if (!(docid)) {
+                var books=readLocal("mB.docids",true);
                 if (books) {
                     var i=0, lim=books.length;
                     while (i<lim) clearOffline(books[i++]);}
                 dropLocal("mB.user");
                 dropLocal("mB.docuris");
+                dropLocal("mB.docids");
                 // We clear layouts, because they might
                 //  contain personalized information
                 fdjt.CodexLayout.clearLayouts();
                 fdjtState.clearLocal();
                 fdjtState.clearSession();}
             else {
-                if (typeof uri !== "string") uri=metaBook.docuri;
-                var sourceid=getLocal("mB("+uri+").sourceid");
+                if (typeof docid !== "string") docid=metaBook.docid;
+                var sourceid=getLocal("mB("+docid+").sourceid");
                 if (sourceid) metaBook.clearLayouts(sourceid);
                 metaBook.sync=false;
-                clearLocal("mB("+uri+").sources");
-                clearLocal("mB("+uri+").outlets");
-                clearLocal("mB("+uri+").layers");
-                clearLocal("mB("+uri+").etc");
-                clearLocal("mB("+uri+").sync");
+                clearLocal("mB("+docid+").sources");
+                clearLocal("mB("+docid+").outlets");
+                clearLocal("mB("+docid+").layers");
+                clearLocal("mB("+docid+").etc");
+                clearLocal("mB("+docid+").sync");
                 // We don't currently clear sources when doing book
                 // specific clearing because they might be shared
                 // between books.  This is a bug.
                 metaBook.glossdb.clearOffline(function(){
-                    clearLocal("mB("+uri+").sync");});
-                metaBook.clearGlossData(uri);}}
+                    clearLocal("mB("+docid+").sync");});
+                metaBook.clearGlossData(docid);}}
         metaBook.clearOffline=clearOffline;
         
         function refreshOffline(){
-            var uri=metaBook.docuri;
+            var docid=metaBook.docid;
             metaBook.sync=false;
-            clearLocal("mB("+uri+").sources");
-            clearLocal("mB("+uri+").outlets");
-            clearLocal("mB("+uri+").layers");
-            clearLocal("mB("+uri+").etc");
+            clearLocal("mB("+docid+").sources");
+            clearLocal("mB("+docid+").outlets");
+            clearLocal("mB("+docid+").layers");
+            clearLocal("mB("+docid+").etc");
             // We don't currently clear sources when doing book
             // specific clearing because they might be shared
             // between books
             metaBook.glossdb.clearOffline(function(){
-                clearLocal("mB("+uri+").sync");
+                clearLocal("mB("+docid+").sync");
                 setTimeout(metaBook.updateInfo,25);});}
         metaBook.refreshOffline=refreshOffline;
 
@@ -887,7 +895,7 @@
             if ((onconnect)&&(onconnect.length)) {
                 var i=0; var lim=onconnect.length;
                 while (i<lim) (onconnect[i++])();}
-            if (fdjtState.getLocal("mB("+metaBook.refuri+").queued"))
+            if (fdjtState.getLocal("mB("+mB.docid+").queued"))
                 metaBook.writeQueuedGlosses();}
         if (((val)&&(!(metaBook.connected)))||
             ((!(val))&&(metaBook.connected)))

@@ -72,8 +72,7 @@
     //  or the initial hash id from the URL (which was saved in
     //  metaBook.inithash).
     metaBook.initState=function initState() {
-        var uri=metaBook.docuri||metaBook.refuri;
-        var state=readLocal("mB("+uri+").state",true);
+        var state=readLocal("mB("+mB.docid+").state",true);
         var hash=metaBook.inithash;
         if (hash) {
             if (hash[0]==="#") hash=hash.slice(1);}
@@ -92,7 +91,7 @@
                 state.target=hash;
                 state.location=false;
                 state.changed=fdjtTime.tick();
-                saveLocal("mB("+uri+").state",state,true);}}
+                saveLocal("mB("+mB.docid+").state",state,true);}}
         if (state) metaBook.state=state;};
     
     // This records the current state of the app, bundled into an
@@ -129,8 +128,7 @@
                     skiphist,force,state);
         metaBook.state=state;
         var statestring=JSON.stringify(state);
-        var uri=metaBook.docuri;
-        saveLocal("mB("+uri+").state",statestring);
+        saveLocal("mB("+mB.docid+").state",statestring);
         if ((!(syncing))&&(metaBook.locsync)&&(metaBook.user)&&
             ((!(metaBook.xstate))||(state.changed>metaBook.xstate.changed)))
             syncState(true);
@@ -187,19 +185,17 @@
     } metaBook.restoreState=restoreState;
 
     function clearState(){
-        var uri=metaBook.docuri;
         metaBook.state=false;
-        clearLocal("mB("+uri+").state");
+        clearLocal("mB("+mB.docid+").state");
         metaBook.xstate=false;
     } metaBook.clearState=clearState;
 
     function resetState(){
-        var uri=metaBook.docuri;
         var state=metaBook.state;
         if (state.location) state.maxloc=location;
         state.reset=true;
         var statestring=JSON.stringify(state);
-        saveLocal("mB("+uri+").state",statestring);
+        saveLocal("mB("+mB.docid+").state",statestring);
         syncState(true);}
     metaBook.resetState=resetState;
 
@@ -403,8 +399,7 @@
         else if (xstate.maxloc>state.maxloc) {
             state.maxloc=xstate.maxloc;
             var statestring=JSON.stringify(state);
-            var uri=metaBook.docuri;
-            saveLocal("mB("+uri+").state",statestring);}
+            saveLocal("mB("+mB.docid+").state",statestring);}
         else {}
         if (state.changed>=xstate.changed) {
             // The locally saved state is newer than the server,

@@ -650,7 +650,7 @@ metaBook.Paginate=
             // We track the sourceid to know when, for example, any
             //  cached layouts need to be invalidated.
             var saved_sourceid=
-                fdjtState.getLocal("mB("+metaBook.refuri+").sourceid");
+                fdjtState.getLocal("mB("+mB.docid+").sourceid");
             if ((saved_sourceid)&&(sourceid)&&(sourceid!==sourceid)) {
                 var layouts=fdjtState.getLocal("fdjtmetaBook.layouts",true);
                 var kept=[];
@@ -666,8 +666,7 @@ metaBook.Paginate=
                 else fdjtState.dropLocal("fdjtmetaBook.layouts",kept);}
             
             if (sourceid)
-                fdjtState.setLocal("mB("+metaBook.refuri+").sourceid",
-                                   sourceid);
+                fdjtState.setLocal("mB("+mB.docid+").sourceid",sourceid);
             
             var args={page_height: height,page_width: width,
                       orientation: fdjtDOM.getOrientation(window),

@@ -66,9 +66,9 @@
                     info.userinfo,info.outlets,info.layers,
                     info.sync);
             else {
-                if (getLocal("mB("+metaBook.refuri+").queued"))
+                if (getLocal("mB("+mB.docid+").queued"))
                     metaBook.glossdb.load(
-                        getLocal("mB("+metaBook.refuri+").queued",true));
+                        getLocal("mB("+mB.docid+").queued",true));
                 $ID("METABOOKCOVER").className="bookcover";
                 addClass(document.documentElement||document.body,
                          "_NOUSER");}
@@ -98,15 +98,14 @@
             // In this case, we put it in _sbook_new_loadinfo
             window._sbook_newinfo=info;
             return;}
-        var refuri=metaBook.refuri;
         if ((metaBook.persist)&&(metaBook.cacheglosses)&&
             (info)&&(info.userinfo)&&(metaBook.user)&&
             (info.userinfo._id!==metaBook.user._id)) {
             metaBook.clearOffline();}
         info.loaded=fdjtTime();
         if ((!(metaBook.localglosses))&&
-            ((getLocal("mB("+refuri+").sync"))||
-             (getLocal("mB("+refuri+").queued"))))
+            ((getLocal("mB("+mB.docid+").sync"))||
+             (getLocal("mB("+mB.docid+").queued"))))
             initGlossesOffline();
         if (Trace.glosses) {
             fdjtLog("loadInfo for %d %sglosses and %d refs (sync=%d)",

@@ -1314,7 +1314,7 @@
         if (metaBook.cacheglosses) {
             fdjtState.setLocal("mB("+json.uuid+").params",params);
             fdjtState.setLocal(
-                "mB("+metaBook.refuri+").queued",queued,true);}
+                "mB("+mB.docid+").queued",queued,true);}
         else queued_data[json.uuid]=params;
         // Now save it to the in-memory database
         var glossdata=
@@ -1400,11 +1400,11 @@
                                 pending.splice(pos,1);
                                 if (metaBook.cacheglosses)
                                     fdjtState.setLocal(
-                                        "mB("+metaBook.refuri+").queued",pending,true);
+                                        "mB("+mB.docid+").queued",pending,true);
                                 metaBook.queued=pending;}}
                         addgloss_callback(req,false,false);
                         if (pending.length) setTimeout(writeQueuedGlosses,200);
-                        fdjtState.dropLocal("mB("+metaBook.refuri+").queued");}
+                        fdjtState.dropLocal("mB("+mB.docid+").queued");}
                     else if (req.readyState===4) {
                         metaBook.setConnected(false);}
                     else {}};

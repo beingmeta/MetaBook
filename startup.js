@@ -156,7 +156,7 @@ metaBook.Startup=
             // Initialize the book state (location, targets, etc)
             metaBook.initState(); metaBook.syncState();
 
-            mB.gotMyCopyId(mB.readLocal("mB("+mB.docuri+").mycopyid"));
+            mB.gotMyCopyId(mB.readLocal("mB("+mB.docid+").mycopyid"));
 
             // If we have no clue who the user is, ask right away (updateInfo())
             if (!((metaBook.user)||(window._sbook_loadinfo)||
@@ -276,7 +276,7 @@ metaBook.Startup=
             getScanSettings();}
 
         function readMycopyid(){
-            var string=readLocal("mB("+mB.docuri+").mycopyid");
+            var string=readLocal("mB("+mB.docid+").mycopyid");
             if (!(string)) return;
             var tickmatch=/:x(\d+)/.exec(string);
             var tick=(tickmatch)&&(tickmatch.length>1)&&(parseInt(tickmatch[1]));
@@ -386,7 +386,7 @@ metaBook.Startup=
             if ((cur)&&(cur>val)) return cur;
             metaBook.sync=val;
             if (metaBook.persist)
-                saveLocal("mB("+metaBook.docuri+").sync",val);
+                saveLocal("mB("+mB.docid+").sync",val);
             return val;};
 
         function useTraceSettings(tracing){
@@ -644,7 +644,7 @@ metaBook.Startup=
                 metaBook.hideCover();
             else if ((!(mode))&&(metaBook.user)) {
                 var opened=readLocal(
-                    "mB("+metaBook.docuri+").opened",true);
+                    "mB("+mB.docid+").opened",true);
                 if ((opened)&&((opened+((3600+1800)*1000))>fdjtTime()))
                     metaBook.hideCover();}
             if (fdjtDOM.vischange)
@@ -673,18 +673,19 @@ metaBook.Startup=
             
             var refuris=getLocal("mB.refuris",true)||[];
             var docuris=getLocal("mB.docuris",true)||[];
+            var docids=getLocal("mB.docids",true)||[];
 
             metaBook.sourceid=
                 getMeta("SBOOKS.sourceid")||getMeta("SBOOKS.fileid")||
                 metaBook.docuri;
             metaBook.sourcetime=fdjtTime.parse(getMeta("SBOOKS.sourcetime"));
-            var oldid=getLocal("mB("+metaBook.docuri+").sourceid");
+            var oldid=getLocal("mB("+mB.docid+").sourceid");
             if ((oldid)&&(oldid!==metaBook.sourceid)) {
                 var layouts=getLocal("mB("+oldid+").layouts");
                 if ((layouts)&&(layouts.length)) {
                     var i=0, lim=layouts.length; while (i<lim) 
                         CodexLayout.dropLayout(layouts[i++]);}}
-            else saveLocal("mB("+metaBook.docuri+").sourceid",
+            else saveLocal("mB("+mB.docid+").sourceid",
                            metaBook.sourceid);
 
             var bookbuild=getMeta("SBOOKS.buildstamp");
@@ -717,8 +718,13 @@ metaBook.Startup=
                 docuris.push(docuri);
                 saveLocal("mB.docuris",docuris,true);}
 
-            var docref=getMeta("SBOOKS.docref");
-            if (docref) metaBook.docref=docref;
+            var docref=getMeta("SBOOKS.docref"), docid;
+            if (docref) metaBook.docid=metaBook.docref=docid=docref;
+            else metaBook.docid=docid=docuri;
+
+            if (docids.indexOf(docid)<0) {
+                docuris.push(docuri);
+                saveLocal("mB.docuris",docuris,true);}
 
             var coverpage=
                 getRelLink("SBOOKS.coverpage")||getRelLink("coverpage");

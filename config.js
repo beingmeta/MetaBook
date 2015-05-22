@@ -131,14 +131,14 @@
                 (!(getQuery(setting)))) {
                 saved[setting]=config[setting];}}
         if (Trace.config) fdjtLog("Saving config %o",saved);
-        saveLocal("mB("+mB.docuri+").config",JSON.stringify(saved));
+        saveLocal("mB("+mB.docid+").config",JSON.stringify(saved));
         saved_config=saved;}
     metaBook.saveConfig=saveConfig;
 
     function initConfig(){
         var setting, value, source, started=fdjtTime(); // changed=false;
-        var config=getLocal("mB("+mB.docuri+").config",true)||
-            fdjtState.getSession("mB("+mB.docuri+").config",
+        var config=getLocal("mB("+mB.docid+").config",true)||
+            fdjtState.getSession("mB("+mB.docid+").config",
                                  true);
         metaBook.postconfig=[];
         if (config) {

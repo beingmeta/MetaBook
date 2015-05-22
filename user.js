@@ -68,7 +68,7 @@
                 "Cached user information is newer (%o) than loaded (%o)",
                 cursync,sync);}
         if ((navigator.onLine)&&
-            (getLocal("mB("+metaBook.refuri+").queued")))
+            (getLocal("mB("+mB.docid+").queued")))
             metaBook.writeQueuedGlosses();
         metaBook.user=metaBook.sourcedb.Import(
             userinfo,false,RefDB.REFLOAD|RefDB.REFSTRINGS|RefDB.REFINDEX);
@@ -95,11 +95,10 @@
     metaBook.setUser=setUser;
     
     function setNodeID(nodeid){
-        var refuri=metaBook.refuri;
         if (!(metaBook.nodeid)) {
             metaBook.nodeid=nodeid;
             if ((nodeid)&&(metaBook.persist))
-                setLocal("mB("+refuri+").nodeid",nodeid,true);}}
+                setLocal("mB("+mB.docid+").nodeid",nodeid,true);}}
     metaBook.setNodeID=setNodeID;
 
     function setupUI4User(){
@@ -205,7 +204,7 @@
     function userSetup(){
         // Get any local sync information
         var sync=metaBook.sync=
-            getLocal("mB("+metaBook.refuri+").sync",true)||0;
+            getLocal("mB("+mB.docid+").sync",true)||0;
         var started=fdjtTime();
         var loadinfo=false, userinfo=false;
 
@@ -275,10 +274,9 @@
     metaBook.userSetup=userSetup;
 
     function initUserOffline(){
-        var refuri=metaBook.refuri;
         var user=getLocal("mB.user");
         var sync=metaBook.sync;
-        var nodeid=getLocal("mB("+refuri+").nodeid",true);
+        var nodeid=getLocal("mB("+mB.docid+").nodeid",true);
         // We store the information for the current user
         //  in both localStorage and in the "real" sourcedb.
         // We fetch the user from local storage because we
@@ -293,9 +291,9 @@
             fdjtLog("initOffline userinfo=%j",userinfo);
         // Should these really be refs in sourcedb?
         var outlets=metaBook.outlets=
-            (getLocal("mB("+refuri+").outlets",true)||[]).map(sourceref);
+            (getLocal("mB("+mB.docid+").outlets",true)||[]).map(sourceref);
         var layers=metaBook.layers=
-            (getLocal("mB("+refuri+").layers",true)||[]).map(sourceref);
+            (getLocal("mB("+mB.docid+").layers",true)||[]).map(sourceref);
         if (userinfo) setUser(userinfo,outlets,layers,sync);
         if (nodeid) setNodeID(nodeid);}
     metaBook.initUserOffline=initUserOffline;
