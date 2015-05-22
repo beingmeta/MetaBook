@@ -228,8 +228,8 @@
                 metaBook.user._id;}
         if (metaBook.mycopyid) {
             getInput(form,"MYCOPYID").value=metaBook.mycopyid;}
-        if (metaBook.bookie) {
-            getInput(form,"BOOKIE").value=metaBook.bookie;}
+        if (metaBook.mycopyid) {
+            getInput(form,"MYCOPYID").value=metaBook.mycopyid;}
         if (gloss) {
             var glossdate_elt=getChild(form,".glossdate");
             fdjtDOM(glossdate_elt,fdjtTime.shortString(gloss.created));
@@ -1312,9 +1312,9 @@
         var queued=metaBook.queued;
         queued.push(json.uuid);
         if (metaBook.cacheglosses) {
-            fdjtState.setLocal("mB.params("+json.uuid+")",params);
+            fdjtState.setLocal("mB("+json.uuid+").params",params);
             fdjtState.setLocal(
-                "mB.queued("+metaBook.refuri+")",queued,true);}
+                "mB("+metaBook.refuri+").queued",queued,true);}
         else queued_data[json.uuid]=params;
         // Now save it to the in-memory database
         var glossdata=
@@ -1384,7 +1384,7 @@
                 getAttribute("ajaxaction");
             var queued=metaBook.queued; var glossid=queued[0];
             var post_data=((metaBook.nocache)?((queued_data[glossid])):
-                           (fdjtState.getLocal("mB.params("+glossid+")")));
+                           (fdjtState.getLocal("mB("+glossid+").params")));
             if (post_data) {
                 var req=new XMLHttpRequest();
                 req.open('POST',ajax_uri);
@@ -1392,7 +1392,7 @@
                 req.onreadystatechange=function () {
                     if ((req.readyState === 4) &&
                         (req.status>=200) && (req.status<300)) {
-                        fdjtState.dropLocal("mB.params("+glossid+")");
+                        fdjtState.dropLocal("mB("+glossid+").params");
                         var pending=metaBook.queued;
                         if ((pending)&&(pending.length)) {
                             var pos=pending.indexOf(glossid);
@@ -1400,11 +1400,11 @@
                                 pending.splice(pos,1);
                                 if (metaBook.cacheglosses)
                                     fdjtState.setLocal(
-                                        "mB.queued("+metaBook.refuri+")",pending,true);
+                                        "mB("+metaBook.refuri+").queued",pending,true);
                                 metaBook.queued=pending;}}
                         addgloss_callback(req,false,false);
                         if (pending.length) setTimeout(writeQueuedGlosses,200);
-                        fdjtState.dropLocal("mB.queued("+metaBook.refuri+")");}
+                        fdjtState.dropLocal("mB("+metaBook.refuri+").queued");}
                     else if (req.readyState===4) {
                         metaBook.setConnected(false);}
                     else {}};

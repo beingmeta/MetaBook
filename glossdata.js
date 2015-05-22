@@ -53,7 +53,7 @@
     var Blob=window.Blob;
 
     function setupGlossData(){
-        var cached=getLocal("mB.glossdata("+mB.docuri+")",true);
+        var cached=getLocal("mB("+mB.docuri+").glossdata",true);
         var i=0, len=cached.length; while (i<len) 
             glossdata_state[cached[i++]]="cached";}
     metaBook.setupGlossData=setupGlossData;
@@ -79,9 +79,9 @@
             // We provide credentials in the query string because we
             //  need to have .withCredentials be false to avoid some
             //  CORS-related errors on redirects to sites like S3.
-            var bookie=mB.bookie;
-            if (bookie) {
-                endpoint=endpoint+"?BOOKIE="+encodeURIComponent(bookie)+
+            var mycopyid=mB.mycopyid;
+            if (mycopyid) {
+                endpoint=endpoint+"?MYCOPYID="+encodeURIComponent(mycopyid)+
                     "&DOC="+encodeURIComponent(mB.docref);}
             if (Trace.glossdata) {
                 fdjtLog("Fetching glossdata %s (%s) to cache locally",uri,rtype);}
@@ -127,11 +127,11 @@
 
     function needGlossData(uri){
         if ((glossdata[uri])||(glossdata_state[uri]==="cached")) return;
-        if ((mB.bookie)&&(mB.bookie_expires<(new Date())))
+        if ((mB.mycopyid)&&(mB.mycopyid_expires<(new Date())))
             return cacheGlossData(uri);
         else {
-            var req=mB.getBookie();
-            return req.then(function(bookie){if (bookie) cacheGlossData(uri);});}}
+            var req=mB.getMyCopyId();
+            return req.then(function(mycopyid){if (mycopyid) cacheGlossData(uri);});}}
     metaBook.needGlossData=needGlossData;
 
     function getGlossData(uri){
@@ -149,15 +149,15 @@
                         fdjtLog("Error getting %s from glossdata cache: %s",
                                 uri,ex);
                         glossdata_state[uri]=false;
-                        if ((mB.bookie)&&(mB.bookie_expires<(new Date())))
+                        if ((mB.mycopyid)&&(mB.mycopyid_expires<(new Date())))
                             setTimeout(function(){cacheGlossData(uri);},2000);
-                        else mB.getBookie().then(function(bookie){
-                            if (bookie)
+                        else mB.getMyCopyId().then(function(mycopyid){
+                            if (mycopyid)
                                 setTimeout(function(){cacheGlossData(uri);},2000);});};});}
-            else if ((mB.bookie)&&(mB.bookie_expires<(new Date())))
+            else if ((mB.mycopyid)&&(mB.mycopyid_expires<(new Date())))
                 return cacheGlossData(uri).then(resolved);
-            else return mB.getBookie().then(function(bookie){
-                if (bookie) return cacheGlossData(uri).then(resolved);});}
+            else return mB.getMyCopyId().then(function(mycopyid){
+                if (mycopyid) return cacheGlossData(uri).then(resolved);});}
         return new Promise(getting);}
     metaBook.getGlossData=getGlossData;
 
@@ -178,7 +178,7 @@
             mB.srcloading[uri]=false;}}
 
     function cacheDataURI(url,datauri){
-        var key="mB.glossdata("+url+")";
+        var key="mB("+url+").glossdata";
         metaBook.getDB().then(function(db){
             var txn=db.transaction(["glossdata"],"readwrite");
             var storage=txn.objectStore("glossdata");
@@ -198,10 +198,10 @@
 
     function glossDataSaved(url){
         if (Trace.glossdata) fdjtLog("GlossData cached for %s",url);
-        pushLocal("mB.glossdata("+mB.docuri+")",url);}
+        pushLocal("mB("+mB.docuri+").glossdata",url);}
 
     function clearGlossData(url){
-        var key="mB.glossdata("+url+")", urls=getLocal(key,true);
+        var key="mB("+url+").glossdata", urls=getLocal(key,true);
         if ((urls)&&(urls.length)) {
             clearGlossDataCache(urls,key);}
         else dropLocal(key);}

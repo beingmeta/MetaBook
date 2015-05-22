@@ -59,16 +59,16 @@
         if (window._sbook_loadinfo!==info)
             metaBook.setConnected(true);
         if (info.sticky) metaBook.setPersist(true);
-        if (info.bookie) gotBookie(info.bookie);
+        if (info.mycopyid) gotMyCopyId(info.mycopyid);
         if (!(metaBook.user)) {
             if (info.userinfo)
                 metaBook.setUser(
                     info.userinfo,info.outlets,info.layers,
                     info.sync);
             else {
-                if (getLocal("mB.queued("+metaBook.refuri+")"))
+                if (getLocal("mB("+metaBook.refuri+").queued"))
                     metaBook.glossdb.load(
-                        getLocal("mB.queued("+metaBook.refuri+")",true));
+                        getLocal("mB("+metaBook.refuri+").queued",true));
                 $ID("METABOOKCOVER").className="bookcover";
                 addClass(document.documentElement||document.body,
                          "_NOUSER");}
@@ -105,8 +105,8 @@
             metaBook.clearOffline();}
         info.loaded=fdjtTime();
         if ((!(metaBook.localglosses))&&
-            ((getLocal("mB.sync("+refuri+")"))||
-             (getLocal("mB.queued("+refuri+")"))))
+            ((getLocal("mB("+refuri+").sync"))||
+             (getLocal("mB("+refuri+").queued"))))
             initGlossesOffline();
         if (Trace.glosses) {
             fdjtLog("loadInfo for %d %sglosses and %d refs (sync=%d)",
@@ -129,7 +129,7 @@
         if (info.sources) gotInfo("sources",info.sources,keepdata);
         if (info.outlets) gotInfo("outlets",info.outlets,keepdata);
         if (info.layers) gotInfo("layers",info.layers,keepdata);
-        if (info.bookie) gotBookie(info.bookie);
+        if (info.mycopyid) gotMyCopyId(info.mycopyid);
         metaBook.addOutlets2UI(info.outlets);
         if ((info.sync)&&((!(metaBook.sync))||(info.sync>=metaBook.sync))) {
             metaBook.setSync(info.sync);}
@@ -288,7 +288,7 @@
         var refuri=metaBook.refuri;
         metaBook[name]=qids;
         if (metaBook.cacheglosses)
-            saveLocal("mB."+name+"("+refuri+")",qids,true);}
+            saveLocal("mB"+"("+refuri+")."+name,qids,true);}
     
     // Processes loaded info asynchronously
     function gotInfo(name,info,persist) {
@@ -309,7 +309,7 @@
                 if (persist) ref.save();
                 metaBook[name]=ref._id;
                 if (persist) saveLocal(
-                    "mB."+name+"("+metaBook.refuri+")",ref._id,true);}}}
+                    "mB"+"("+metaBook.refuri+")."+name,ref._id,true);}}}
 
     function initGlosses(glosses,etc,callback){
         if (typeof callback === "undefined") callback=true;
@@ -385,54 +385,54 @@
                             metaBook.sourcedb.allrefs.length);});}
     metaBook.initGlossesOffline=initGlossesOffline;
 
-    var need_bookie=[];
+    var need_mycopyid=[];
 
-    function gotBookie(string){
-        function bookieupdate(resolve){
+    function gotMyCopyId(string){
+        function mycopyidupdate(resolve){
             if (!(string)) return resolve(string);
-            if (string===mB.bookie) return resolve(string);
+            if (string===mB.mycopyid) return resolve(string);
             var tickmatch=/:x(\d+)/.exec(string);
             var tick=(tickmatch)&&(tickmatch.length>1)&&(parseInt(tickmatch[1]));
             var expires=(tick)&&(new Date(tick*1000));
             if ((Trace.glosses>1)||(Trace.glossdata))
-                fdjtLog("gotBookie: %s/%s, cur=%s/%s",
-                        string,expires,metaBook.bookie,metaBook.bookie_expires);
+                fdjtLog("gotMyCopyId: %s/%s, cur=%s/%s",
+                        string,expires,metaBook.mycopyid,metaBook.mycopyid_expires);
             if (!(expires)) {
-                metaBook.ubookie=string;
-                metaBook.saveLocal("ubookie("+mB.docuri+")",string);}
-            if ((!(metaBook.bookie))||
-                ((!(metaBook.bookie_expires))&&(expires))||
-                ((metaBook.bookie_expires)&&(expires)&&
-                 (expires>metaBook.bookie_expires))) {
-                metaBook.bookie=string; metaBook.bookie_expires=expires;
-                metaBook.saveLocal("bookie("+mB.docuri+")",string);}
+                metaBook.umycopyid=string;
+                metaBook.saveLocal("umycopyid("+mB.docuri+")",string);}
+            if ((!(metaBook.mycopyid))||
+                ((!(metaBook.mycopyid_expires))&&(expires))||
+                ((metaBook.mycopyid_expires)&&(expires)&&
+                 (expires>metaBook.mycopyid_expires))) {
+                metaBook.mycopyid=string; metaBook.mycopyid_expires=expires;
+                metaBook.saveLocal("mycopyid("+mB.docuri+")",string);}
             else {}
-            if ((need_bookie)&&(need_bookie.length)) {
-                var needs=need_bookie; need_bookie=[];
+            if ((need_mycopyid)&&(need_mycopyid.length)) {
+                var needs=need_mycopyid; need_mycopyid=[];
                 return fdjtAsync.slowmap(function(fn){fn(string);},needs).
                     then(function(){resolve(string);});}
             else return resolve(string);}
-        return new Promise(bookieupdate);}
-    metaBook.gotBookie=gotBookie;
+        return new Promise(mycopyidupdate);}
+    metaBook.gotMyCopyId=gotMyCopyId;
 
-    var getting_bookie=false;
+    var getting_mycopyid=false;
 
-    function getBookie(){
-        function updatebookie(resolved){
+    function getMyCopyId(){
+        function updatemycopyid(resolved){
             var now=new Date();
-            if ((mB.bookie)&&(mB.bookie_expires>now))
-                return resolved(mB.bookie);
-            else if (!(getting_bookie)) getFreshBookie();
-            need_bookie.push(resolved);}
-        return new Promise(updatebookie);}
-    metaBook.getBookie=getBookie;
+            if ((mB.mycopyid)&&(mB.mycopyid_expires>now))
+                return resolved(mB.mycopyid);
+            else if (!(getting_mycopyid)) getFreshMyCopyId();
+            need_mycopyid.push(resolved);}
+        return new Promise(updatemycopyid);}
+    metaBook.getMyCopyId=getMyCopyId;
 
-    function getFreshBookie(){
-        if (getting_bookie) return;
-        getting_bookie=fdjtTime();
-        fdjtAjax.fetchText("https://auth.sbooks.net/getbookie?DOC="+mB.docref).
-            then(function(bookie){
-                gotBookie(bookie).then(function(){getting_bookie=false;});});}
+    function getFreshMyCopyId(){
+        if (getting_mycopyid) return;
+        getting_mycopyid=fdjtTime();
+        fdjtAjax.fetchText("https://auth.sbooks.net/getmycopyid?DOC="+mB.docref).
+            then(function(mycopyid){
+                gotMyCopyId(mycopyid).then(function(){getting_mycopyid=false;});});}
 
 })();
 

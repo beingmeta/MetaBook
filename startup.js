@@ -68,6 +68,7 @@ metaBook.Startup=
 
         // Imported functions
         var getLocal=fdjtState.getLocal;
+        var getSession=fdjtState.getSession;
         var getQuery=fdjtState.getQuery;
         var getCookie=fdjtState.getCookie;
         var getMeta=fdjtDOM.getMeta;
@@ -118,8 +119,10 @@ metaBook.Startup=
                     mB.root||metaBook.appsource||"somewhere");
             if ($ID("METABOOKBODY")) metaBook.body=$ID("METABOOKBODY");
 
-            // Check for any trace settings passed as query arguments
-            if (getQuery("cxtrace")) readTraceSettings();
+            // Check for any trace settings
+            if (getQuery("mbtrace")) useTraceSettings(getQuery("mbtrace",true));
+            if (getSession("mbtrace")) useTraceSettings([getSession("mbtrace")]);
+            if (getLocal("mbtrace")) useTraceSettings([getLocal("mbtrace")]);
             
             // Get various settings for the sBook from the HTML
             // (META tags, etc), including settings or guidance for
@@ -141,8 +144,8 @@ metaBook.Startup=
             // This sets various aspects of the environment
             readEnvSettings();
 
-            // Use the cached bookie if available
-            readBookie();
+            // Use the cached mycopyid if available
+            readMycopyid();
 
             // Figure out if we have a user and whether we can keep
             // user information
@@ -153,7 +156,7 @@ metaBook.Startup=
             // Initialize the book state (location, targets, etc)
             metaBook.initState(); metaBook.syncState();
 
-            mB.gotBookie(mB.readLocal("bookie("+mB.docuri+")"));
+            mB.gotMyCopyId(mB.readLocal("mB("+mB.docuri+").mycopyid"));
 
             // If we have no clue who the user is, ask right away (updateInfo())
             if (!((metaBook.user)||(window._sbook_loadinfo)||
@@ -272,13 +275,13 @@ metaBook.Startup=
             // Get the settings for scanning the document structure
             getScanSettings();}
 
-        function readBookie(){
-            var string=readLocal("mB.bookie("+mB.docuri+")");
+        function readMycopyid(){
+            var string=readLocal("mB("+mB.docuri+").mycopyid");
             if (!(string)) return;
             var tickmatch=/:x(\d+)/.exec(string);
             var tick=(tickmatch)&&(tickmatch.length>1)&&(parseInt(tickmatch[1]));
             var expires=(tick)&&(new Date(tick*1000));
-            if (expires>(new Date())) mB.gotBookie(string);}
+            if (expires>(new Date())) mB.gotMyCopyId(string);}
 
         function setupApp(){
 
@@ -383,11 +386,10 @@ metaBook.Startup=
             if ((cur)&&(cur>val)) return cur;
             metaBook.sync=val;
             if (metaBook.persist)
-                saveLocal("mB.sync("+metaBook.docuri+")",val);
+                saveLocal("mB("+metaBook.docuri+").sync",val);
             return val;};
 
-        function readTraceSettings(){
-            var tracing=getQuery("cxtrace",true);
+        function useTraceSettings(tracing){
             var i=0; var lim=tracing.length;
             while (i<lim) {
                 var trace_spec=tracing[i++];
@@ -642,7 +644,7 @@ metaBook.Startup=
                 metaBook.hideCover();
             else if ((!(mode))&&(metaBook.user)) {
                 var opened=readLocal(
-                    "mB.opened("+metaBook.docuri+")",true);
+                    "mB("+metaBook.docuri+").opened",true);
                 if ((opened)&&((opened+((3600+1800)*1000))>fdjtTime()))
                     metaBook.hideCover();}
             if (fdjtDOM.vischange)
@@ -676,13 +678,13 @@ metaBook.Startup=
                 getMeta("SBOOKS.sourceid")||getMeta("SBOOKS.fileid")||
                 metaBook.docuri;
             metaBook.sourcetime=fdjtTime.parse(getMeta("SBOOKS.sourcetime"));
-            var oldid=getLocal("mB.sourceid("+metaBook.docuri+")");
+            var oldid=getLocal("mB("+metaBook.docuri+").sourceid");
             if ((oldid)&&(oldid!==metaBook.sourceid)) {
-                var layouts=getLocal("mB.layouts("+oldid+")");
+                var layouts=getLocal("mB("+oldid+").layouts");
                 if ((layouts)&&(layouts.length)) {
                     var i=0, lim=layouts.length; while (i<lim) 
                         CodexLayout.dropLayout(layouts[i++]);}}
-            else saveLocal("mB.sourceid("+metaBook.docuri+")",
+            else saveLocal("mB("+metaBook.docuri+").sourceid",
                            metaBook.sourceid);
 
             var bookbuild=getMeta("SBOOKS.buildstamp");
@@ -763,7 +765,7 @@ metaBook.Startup=
 
             if (!(metaBook.nologin)) {
                 metaBook.mycopyid=getMeta("SBOOKS.mycopyid")||
-                    (getLocal("mycopy("+refuri+")"))||
+                    (getLocal("mycopyid("+refuri+")"))||
                     false;}}
 
         function setupDevice(){

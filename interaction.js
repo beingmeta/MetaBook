@@ -1713,7 +1713,7 @@
         if (!((evt.shiftKey)||((evt.touches)&&(evt.touches.length>=2)))) {
             var opened=
                 metaBook.readLocal(
-                    "mB.opened("+metaBook.docuri+")",
+                    "mB("+metaBook.docuri+").opened",
                     true);
             if ((opened)&&((opened-fdjtTime())>(60*10*1000))) {
                 if ($ID("METABOOKCOVERHOLDER"))
