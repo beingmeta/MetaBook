@@ -369,14 +369,14 @@
         metaBook.setCacheGlosses=setCacheGlosses;
         
         function saveProps(props_arg){
-            var uri=mB.docuri;
+            var docid=mB.docid;
             var props=(!(props_arg))?(metaBook.saveprops):
                 (Array.isArray(props_arg))?(props_arg):[props];
             var i=0, lim=props.length;
             while (i<lim) {
                 var prop=props[i++];
                 if (metaBook[prop]) saveLocal(
-                    "mB"+"("+uri+")."+prop,metaBook[prop],true);}}
+                    "mB"+"("+docid+")."+prop,metaBook[prop],true);}}
         metaBook.saveProps=saveProps;
 
         /* Setting persistence */
