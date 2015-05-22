@@ -384,6 +384,7 @@
         function setPersist(){
             metaBook.persist=true;
             var refuri=mB.refuri, docuri=mB.docuri, docid=mB.docid;
+            saveLocal("mB("+docid+")",docuri);
             // We also initialize .refuris/.docuris
             var refuris=readLocal("mB.refuris",true);
             var docuris=readLocal("mB.docuris",true);
