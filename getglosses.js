@@ -284,10 +284,9 @@
             import_ref.save();
             qids.push(import_ref._id);}}
     function saveItems(qids,name){
-        var refuri=metaBook.refuri;
         metaBook[name]=qids;
         if (metaBook.cacheglosses)
-            saveLocal("mB"+"("+refuri+")."+name,qids,true);}
+            saveLocal("mB"+"("+mB.docid+")."+name,qids,true);}
     
     // Processes loaded info asynchronously
     function gotInfo(name,info,persist) {
@@ -307,8 +306,7 @@
                     RefDB.REFLOAD|RefDB.REFSTRINGS|RefDB.REFINDEX);
                 if (persist) ref.save();
                 metaBook[name]=ref._id;
-                if (persist) saveLocal(
-                    "mB"+"("+metaBook.refuri+")."+name,ref._id,true);}}}
+                if (persist) saveLocal("mB"+"("+mB.docid+")."+name,ref._id,true);}}}
 
     function initGlosses(glosses,etc,callback){
         if (typeof callback === "undefined") callback=true;
