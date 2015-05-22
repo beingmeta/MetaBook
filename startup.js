@@ -717,6 +717,7 @@ metaBook.Startup=
             if (docuris.indexOf(docuri)<0) {
                 docuris.push(docuri);
                 saveLocal("mB.docuris",docuris,true);}
+            saveLocal("mB("+docid+")._uri",docuri);
 
             var docref=getMeta("SBOOKS.docref"), docid;
             if (docref) metaBook.docid=metaBook.docref=docid=docref;
