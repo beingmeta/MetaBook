@@ -364,6 +364,15 @@
 
     var MetaBookSlice=metaBook.Slice;
 
+    var note_classes=
+        /\b(((sbook)|(book)|(mbook)|(metabook)|(foot)|(end)|())note)\b/;
+    var noteref_classes=
+        /\b((((sbook)|(book)|(meta))book)|(foot)|(end)|())(note|noteref)\b/;
+    var aside_rels=/\b((sidebar)|(breakout)|(tangent))\b/;
+    var iframe_rels=/\b((iframe)|(popin))\b/;
+    var iframe_classes=
+        /\b(()|(s)|(m)|(meta))book((iframe)|(popin))\b/;
+
     function handle_content_click(target){
         // Assume 1s gaps are spurious
         if ((clicked)&&((fdjtTime()-clicked)<1000)) return true;
@@ -375,49 +384,61 @@
         var anchor=getParent(target,"A"), href, elt=false;
         // If you tap on a relative anchor, move there using metaBook
         // rather than the browser default
+        var rel=anchor.rel, classname=anchor.className;
+        if (typeof classname !== "string") classname="";
+        if (typeof rel !== "string") rel="";
         if ((anchor)&&(anchor.href)&&(href=anchor.getAttribute("href"))) {
             if (Trace.gestures)
                 fdjtLog("ctouch: follow link %s",href);
-            var rel=anchor.rel, classname=anchor.className;
-            if ((href[0]==="#")&&
-                (((rel)&&
-                  (rel.search(/\b((sbooknote)|(footnote)|(endnote)|(note))\b/)>=0))||
-                 ((classname)&&(classname.search)&&
-                  (classname.search(/\b((sbooknote)|(sbooknoteref))\b/)>=0))||
-                 ((mB.sbooknoterefs)&&(mB.sbooknoterefs.match(anchor))))) {
-                var note_node=getNoteNode(href.slice(1));
-                var noteid=note_node.id;
-                metaBook.DOM.noteshud.innerHTML="";
-                var shownote=note_node.cloneNode(true);
-                fdjtDOM.stripIDs(shownote);
-                dropClass(shownote,/\bmetabook\S+/g);
-                addClass(shownote,"metabooknotebody");                
-                metaBook.DOM.noteshud.setAttribute("data-note",noteid||(href.slice(1)));
-                fdjtDOM.append(mbDOM.noteshud,shownote);
-                metaBook.setMode("shownote");
+            if (href[0]==="#") {
+                var idref=href.slice(1);
+                if (typeof classname !== "string") classname="";
+                if (typeof rel !== "string") rel="";
+                if ((rel.search(note_classes)>=0)||
+                    (classname.search(noteref_classes)>=0)||
+                    ((mB.sbooknoterefs)&&(mB.sbooknoterefs.match(anchor)))) {
+                    var note_node=getNoteNode(idref);
+                    var noteid=note_node.id;
+                    metaBook.DOM.noteshud.innerHTML="";
+                    var shownote=note_node.cloneNode(true);
+                    fdjtDOM.stripIDs(shownote);
+                    dropClass(shownote,/\bmetabook\S+/g);
+                    addClass(shownote,"metabooknotebody");                
+                    metaBook.DOM.noteshud.setAttribute(
+                        "data-note",noteid||idref);
+                    fdjtDOM.append(mbDOM.noteshud,shownote);
+                    metaBook.setMode("shownote");
+                    gesture_start=false;
+                    clicked=fdjtTime();
+                    return true;}
+                else if (rel.search(aside_rels)>=0) {
+                    var aside_target=$ID(idref);
+                    fdjtDOM.removeChildren(mbDOM.asidehud);
+                    fdjtDOM.append(mbDOM.asidehud,aside_target.cloneNode(true));
+                    metaBook.setMode("showaside");
+                    gesture_start=false;
+                    clicked=fdjtTime();
+                    return true;}
+                else if ((fn=metaBook.xtargets[idref])) {
+                    var fn=metaBook.xtargets[idref];
+                    gesture_start=false;
+                    clicked=fdjtTime();
+                    fn();
+                    return true;}
+                else if ((elt=resolve_anchor(idref))) {
+                    // It's an internal jump, so we follow that
+                    metaBook.JumpTo(elt);
+                    gesture_start=false;
+                    clicked=fdjtTime();
+                    return true;}
+                else {
+                    fdjtLog.warn("Couldn't resolve %s",idref);
+                    return true;}}
+            else if ((rel.search(iframe_rels))||
+                     (classname.search(iframe_classes))) {
                 gesture_start=false;
                 clicked=fdjtTime();
-                return true;}
-            else if ((href[0]==="#")&&(rel)&&
-                     (rel.search(/\b((sidebar)|(breakout)|(tangent))\b/)>=0)) {
-                var aside_target=$ID(href.slice(1));
-                fdjtDOM.removeChildren(mbDOM.asidehud);
-                fdjtDOM.append(mbDOM.asidehud,aside_target.cloneNode(true));
-                metaBook.setMode("showaside");
-                gesture_start=false;
-                clicked=fdjtTime();
-                return true;}
-            else if ((href[0]==='#')&&(fn=metaBook.xtargets[href.slice(1)])) {
-                var fn=metaBook.xtargets[href.slice(1)];
-                gesture_start=false;
-                clicked=fdjtTime();
-                fn();
-                return true;}
-            else if ((href[0]==='#')&&(elt=resolve_anchor(href.slice(1)))) {
-                // It's an internal jump, so we follow that
-                metaBook.JumpTo(elt);
-                gesture_start=false;
-                clicked=fdjtTime();
+                fdjtDOM.triggerClick(anchor);
                 return true;}
             else {
                 // We force links to leave the page, hoping people
@@ -426,7 +447,8 @@
                 if (!(anchor.target)) anchor.target="_blank";
                 gesture_start=false;
                 clicked=fdjtTime();
-                return false;}}
+                fdjtDOM.triggerClick(anchor);
+                return true;}}
 
         var details=getParent(target,"details,.html5details,.sbookdetails");
         if (details) {
@@ -1808,6 +1830,14 @@
         else devmode_click=fdjtTime();
         fdjtUI.cancel(evt);}
 
+    function cancelNotAnchor(evt){
+        var target=fdjt.UI.T(evt);
+        if (hasParent(target,"A[href]")) {
+            if ((clicked)&&((fdjtTime()-clicked)<2000)) 
+                fdjt.UI.cancel(evt);
+            return;}
+        else fdjt.UI.cancel(evt);}
+
     fdjt.DOM.defListeners(
         metaBook.UI.handlers.mouse,
         {window: {
@@ -1825,7 +1855,7 @@
                    release: body_released,
                    mousedown: body_touchstart,
                    mouseup: body_touchend,
-                   click: cancel},
+                   click: cancelNotAnchor},
          toc: {tap: toc_tapped,hold: toc_held,
                release: toc_released, slip: toc_slipped,
                mouseover: fdjtUI.CoHi.onmouseover,
