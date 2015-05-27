@@ -438,7 +438,6 @@
             else if ((rel.search(iframe_rels)>=0)||
                      (classname.search(iframe_classes)>=0)) {
                 gesture_start=false;
-                clicked=fdjtTime();
                 fdjtDOM.triggerClick(anchor);
                 return true;}
             else {
@@ -447,7 +446,6 @@
                 //  a little iframe in some circumstances
                 if (!(anchor.target)) anchor.target="_blank";
                 gesture_start=false;
-                clicked=fdjtTime();
                 fdjtDOM.triggerClick(anchor);
                 return true;}}
 
