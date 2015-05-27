@@ -434,8 +434,8 @@
                 else {
                     fdjtLog.warn("Couldn't resolve %s",idref);
                     return true;}}
-            else if ((rel.search(iframe_rels))||
-                     (classname.search(iframe_classes))) {
+            else if ((rel.search(iframe_rels)>=0)||
+                     (classname.search(iframe_classes)>=0)) {
                 gesture_start=false;
                 clicked=fdjtTime();
                 fdjtDOM.triggerClick(anchor);
