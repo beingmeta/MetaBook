@@ -1970,7 +1970,7 @@
                    touchstart: body_touchstart,
                    touchend: body_touchend,
                    touchmove: noDefault,
-                   click: cancel},
+                   click: cancelNotAnchor},
          hud: {touchend: handleXTarget, tap: handleXTarget},
          toc: {tap: toc_tapped,hold: toc_held,
                slip: toc_slipped, release: toc_released,
