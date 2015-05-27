@@ -178,8 +178,7 @@
                 $ID("METABOOKBODY"),
                 {override: true,noslip: true,id: "METABOOKBODY",
                  maxtouches: 3,taptapmsecs: true,
-                 movethresh: 10,untouchable: false,
-                 clickable: "a.extref"});
+                 movethresh: 10,untouchable: false});
             addHandlers(metaBook.HUD,'hud');}
         if (mode) {
             var handlers=metaBook.UI.handlers[mode];
