@@ -917,7 +917,9 @@ metaBook.Slice=(function () {
             metaBook.setMode("addgloss");
             return fdjtUI.cancel(evt);}
         else if (mB.mode==="openglossmark") {
-            goToGloss(card); return fdjtUI.cancel(evt);}
+            mB.clearGlossmark();
+            goToGloss(card); 
+            return fdjtUI.cancel(evt);}
         else if (getParent(target,".glossbody"))  {
             var detail=((gloss)&&(gloss.detail));
             if (!(detail)) return;

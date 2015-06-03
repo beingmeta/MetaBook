@@ -94,7 +94,7 @@ body.mbMEDIA #METABOOKBODY {
 body.hudup #METABOOKFRAME, body.mbCOVER #METABOOKFRAME,
 body.openhud #METABOOKFRAME, body.mbSKIMMING #METABOOKFRAME,
 body.mbSHOWHELP #METABOOKFRAME {
-    z-index: 50;}
+    z-index: 10;}
 
 /* Override simple stylesheet definitions in the metaBook frame */
 

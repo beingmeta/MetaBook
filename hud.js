@@ -487,8 +487,11 @@ metaBook.setMode=
                     (mode==='expandsearch'))
                     metaBook.search_mode=mode;
 
-                if ((mode==='addgloss')||(mode==="openglossmark")) 
+                if (mode==='addgloss') 
                     addClass(document.body,"openhud");
+                else if (mode==="openglossmark") {
+                    addClass(document.body,"openhud");
+                    addClass(document.body,"openglossmark");}
                 else if (nohud) {}
                 // And if we're not skimming, we just raise the hud
                 else setHUD(true);
@@ -521,8 +524,9 @@ metaBook.setMode=
                 metaBook.last_mode=metaBook.mode;
                 if (hasClass(document.body,"mbCOVER")) hideCover();
                 if ((metaBook.mode==="openglossmark")&&
-                    ($ID("METABOOKOPENGLOSSMARK")))
+                    ($ID("METABOOKOPENGLOSSMARK"))) {
                     $ID("METABOOKOPENGLOSSMARK").id="";
+                    dropClass(document.body,"openglossmark");}
                 if (metaBook.textinput) {
                     metaBook.setFocus(false);}
                 metaBook.focusBody();

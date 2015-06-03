@@ -31,9 +31,16 @@
 
 @charset "UTF-8";
 
-/* Style variants */
+#METABOOKBODY { z-index: 25;}
+body.hudup #METABOOKBODY, body.mbCOVER #METABOOKBODY,
+body.mbMEDIA #METABOOKBODY, body.mbZOOM #METABOOKBODY {
+    z-index: 0;}
 
 #METABOOKBODY {text-align: left;}
+
+#METABOOKBODY {pointer-events: none;}
+#METABOOKBODY #CODEXPAGE {pointer-events: all;}
+#METABOOKBODY #METABOOKPOINTGLOSSES {pointer-events: all;}
 
 /* This is typically a placeholder for the actual content of the book
    used as the source for layout. */

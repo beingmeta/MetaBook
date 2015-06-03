@@ -58,6 +58,7 @@
     var addClass=fdjtDOM.addClass, dropClass=fdjtDOM.dropClass;
     var hasClass=fdjtDOM.hasClass, toggleClass=fdjtDOM.toggleClass;
     var mbicon=metaBook.icon;
+    var mB=metaBook;
 
     /* Social UI components */
 
@@ -255,9 +256,12 @@
         var hudwrapper=fdjtDOM("div.hudpanel#METABOOKPOINTGLOSSES",slicediv);
         metaBook.openglossmark=slice;
         if (point) {
+            mB.setMode(false);
             hudwrapper.style.display='block';
             hudwrapper.style.opacity=0.0;
-            fdjtDOM.replace("METABOOKPOINTGLOSSES",hudwrapper);
+            if ($ID("METABOOKPOINTGLOSSES"))
+                fdjtDOM.replace("METABOOKPOINTGLOSSES",hudwrapper);
+            else mB.body.appendChild(hudwrapper);
             var geom=fdjtDOM.getGeometry(slicediv);
             var wgeom=fdjtDOM.getGeometry(hudwrapper);
             var pgeom=fdjtDOM.getGeometry(point);

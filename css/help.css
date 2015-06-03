@@ -201,7 +201,7 @@ body.mbSHOWHELP.mbPREVIEW #METABOOKHUD #METABOOKHUDHELP {
     -moz-opacity: 0.05;
     -o-opacity: 0.05;}
 
-body.mbSHOWHELP #METABOOKHUD.openglossmark #METABOOKPOINTGLOSSES {
+body.mbSHOWHELP.openglossmark #METABOOKPOINTGLOSSES {
     opacity: 0;}
 
 div.helpbox p {}

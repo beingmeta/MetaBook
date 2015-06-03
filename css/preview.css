@@ -69,7 +69,7 @@ body.mbPREVIEW #METABOOKHUD.searchresults #METABOOKSEARCH.hudpanel {
     -khtml-opacity: 0.05;
     -moz-opacity: 0.05;
     -o-opacity: 0.05;}
-body.mbPREVIEW #METABOOKHUD.openglossmark #METABOOKPOINTGLOSSES.hudpanel {
+body.mbPREVIEW.openglossmark #METABOOKPOINTGLOSSES.hudpanel {
     opacity: 0.05;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=5)";
     filter: alpha(opacity=5);
