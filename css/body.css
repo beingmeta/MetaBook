@@ -71,7 +71,7 @@
 #METABOOKBODY h1, #METABOOKBODY h2, #METABOOKBODY h3, #METABOOKBODY h4 {
     page-break-after: avoid;}
 
-body._MOUSE #METABOOKBODY a[href]:hover,
+html._MOUSE #METABOOKBODY a[href]:hover,
 #METABOOKBODY a[href]:active {
     color: blue; }
 
@@ -272,10 +272,10 @@ a[href].wikicon, a[href].wikiref.wikicon {
     background-size: contain;}
 html._NOSVG a[href].wikicon, html._NOSVG a[href].wikiref.wikicon {
     background-image: url(g/sbooks/wikipedia128w.png);}
-a[href].wikicon:hover, body._MOUSE a[href].wikicon:hover {
+a[href].wikicon:hover, html._MOUSE a[href].wikicon:hover {
     color: transparent; text-deocration: none;}
-body._MOUSE a[href].wikicon:hover,
-body._MOUSE a[href].wikicon.tapholding {
+html._MOUSE a[href].wikicon:hover,
+html._MOUSE a[href].wikicon.tapholding {
     background-color: rgba(0,0,255,0.2);
     border-color: blue;}
 

@@ -101,7 +101,7 @@ div.tochead hr {
     padding: 0px; margin: 0px;}
 div.tochead span { z-index: 10; position: relative;}
 div.tochead a { z-index: 10; color: blue;} 
-body._MOUSE div.tochead a:hover { z-index: 10; color: darkblue;} 
+html._MOUSE div.tochead a:hover { z-index: 10; color: darkblue;} 
 div.tochead hr[about] { cursor: crosshair;}
 
 div.idhead { 

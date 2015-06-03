@@ -58,7 +58,7 @@ body.mbPAGEREFS #METABOOKFOOT #METABOOKPAGEREFTEXT {display: inline-block;}
     -khtml-opacity: 0.01;
     -moz-opacity: 0.01;
     -o-opacity: 0.01;}
-body._MOUSE #METABOOKFOOT #METABOOKPAGELEAP:hover {
+html._MOUSE #METABOOKFOOT #METABOOKPAGELEAP:hover {
     opacity: 0.4;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
     filter: alpha(opacity=40);

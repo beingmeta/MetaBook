@@ -126,7 +126,7 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
     padding-left: 0.5ex; padding-right: 0.5ex; padding-bottom: 0.5ex;
     outline-width: 0px;
     cursor: pointer;}
-body._MOUSE #METABOOKCOVERCONTROLS span.control:hover,
+html._MOUSE #METABOOKCOVERCONTROLS span.control:hover,
 #METABOOKCOVERCONTROLS span.control:focus {
     text-decoration: underline;}
 
@@ -382,7 +382,7 @@ div#METABOOKOPENTAB {
     border-bottom-left-radius: 1ex; border-bottom-right-radius: 1ex;
     cursor: pointer;}
 body.mbSTARTUP div#METABOOKOPENTAB { display: none; }
-body._MOUSE #METABOOKOPENTAB:hover, #METABOOKOPENTAB.tapholdtarget {
+html._MOUSE #METABOOKOPENTAB:hover, #METABOOKOPENTAB.tapholdtarget {
     border-color: blue; border-style: dotted;}
 #METABOOKCOVERMESSAGE > div#METABOOKOPENTAB {
     width: 7em; color: white;}
