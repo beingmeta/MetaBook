@@ -759,8 +759,7 @@ metaBook.Startup=
             if (autofonts.length)
                 fdjt.DOM.autofont=fdjt.DOM.autofont+","+autofonts.join(",");
 
-            if (getMeta("METABOOK.forcelayout"))
-                default_config.forcelayout=true;
+            if (getMeta("METABOOK.forcelayout")) mB.forcelayout=true;
 
             var autotoc=getMeta("SBOOKS.autotoc");
             if (autotoc) {

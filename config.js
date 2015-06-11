@@ -200,7 +200,6 @@
     function metabookPropConfig(name,value){
         metaBook[name]=value;}
     metaBook.propConfig=metabookPropConfig;
-    metaBook.addConfig("forcelayout",metabookPropConfig);
 
     metaBook.addConfig("keyboardhelp",function(name,value){
         metaBook.keyboardhelp=value;
