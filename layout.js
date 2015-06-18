@@ -1016,15 +1016,19 @@ metaBook.Paginate=
         
         function GoToPage(spec,caller,savestate,skiphist){
             if (typeof savestate === 'undefined') savestate=true;
+
             if (metaBook.previewing) metaBook.stopPreview("GoToPage",false);
             dropClass(document.body,"mbSHOWHELP");
-            if (metaBook.clearGlossmark) metaBook.clearGlossmark();
-            if (metaBook.mode==="addgloss") metaBook.setMode(false,false);
+            metaBook.clearGlossmark();
+            
             var page=(metaBook.layout)&&
                 (metaBook.layout.getPage(spec)||metaBook.layout.getPage(1));
-            if (page) {
+            if (!(page)) return;
+            else if (hasClass(page,"curpage")) return;
+            else {
                 var pagenum=parseInt(page.getAttribute("data-pagenum"),10);
                 var dirclass=false;
+                if (metaBook.mode==="addgloss") metaBook.setMode(false,false);
                 if (savestate) metaBook.clearStateDialog();
                 if (Trace.flips)
                     fdjtLog("GoToPage/%s Flipping to %o (%d) for %o",

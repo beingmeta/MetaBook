@@ -383,7 +383,6 @@
             if (use_top<0) use_top=0;
             window.scrollTo(0,use_top);}
         if (metaBook.clearGlossmark) metaBook.clearGlossmark();
-        if (metaBook.mode==="addgloss") metaBook.setMode(false,false);
         metaBook.location=location;
     } metaBook.GoTo=metabookGoTo;
 
