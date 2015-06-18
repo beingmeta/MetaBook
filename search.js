@@ -150,6 +150,7 @@
             var entry=metaBook.cloudEntry(tag,false,false,"span.qelt");
             entry.appendChild(fdjtDOM("span.redx","x"));
             fdjtDOM(newtags,((i>0)&&("\u00a0\u00B7 ")),entry);
+            //fdjtDOM(newtags,((i>0)&&(" ")),entry);
             i++;}
         if (qtags.id) newtags.id=qtags.id;
         fdjtDOM.replace(qtags,newtags);

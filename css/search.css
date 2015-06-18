@@ -136,10 +136,11 @@ html._NOSVG div.resultinfo .qtags .qelt span.redx {
 #METABOOKHUD.searchresults #METABOOKSEARCHINFO {
     display: block;}
 #METABOOKSEARCHINFO .qtags {
-    box-sizing: border-box;
+    box-sizing: border-box; display: inline-block;
     padding-top: 0.5ex; padding-right: 1ex;
-    margin-left: 1em; margin-bottom: 0px;
+    margin-left: 3px; margin-bottom: 0px;
     height: 100%; vertical-align: top;
+    white-space: normal;
     clear: left;}
 .qtags span.variations { display: none; }
 .qtags span.elided { display: inline; }
@@ -160,7 +161,8 @@ body._ANIMATE .qtags {
 
 @media screen and (max-width: 640px) {
     #METABOOKHUD div.resultinfo span.stats { font-size: 3vw; }
-    div.resultinfo .stats > span > br { display: initial; }}
+    div.resultinfo .stats > span > br { display: initial; }
+    #METABOOKSEARCHINFO .qtags { max-width: 50%;}}
 
 @media screen and (max-width: 500px) {
     #METABOOKHUD div.resultinfo { font-size: 1rem; }}
