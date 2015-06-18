@@ -94,7 +94,7 @@ body.mbMEDIA #METABOOKBODY {
 body.hudup #METABOOKFRAME, body.mbCOVER #METABOOKFRAME,
 body.openhud #METABOOKFRAME, body.mbSKIMMING #METABOOKFRAME,
 body.mbSHOWHELP #METABOOKFRAME {
-    z-index: 10;}
+    z-index: 50;}
 
 /* Override simple stylesheet definitions in the metaBook frame */
 
@@ -309,7 +309,9 @@ body.mbMEDIA #METABOOKMEDIA iframe {
 #METABOOKBODY {
     position: fixed; overflow: visible;
     left: 0px; right: 0px; top: 0px; bottom: 0px;} /* z-index: -50; */
-#METABOOKBODY { background-color: #ffffff; color: #444; }
+#METABOOKBODY { background-color: transparent; color: black; }
+
+.metabookcontent { background-color: white; color: #444; }
 
 /* CODEXCONTENT is where linear content lives for scrolling layout.
    It is also used to determine the width of the content region
