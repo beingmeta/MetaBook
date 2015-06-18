@@ -1024,7 +1024,7 @@ metaBook.Paginate=
             var page=(metaBook.layout)&&
                 (metaBook.layout.getPage(spec)||metaBook.layout.getPage(1));
             if (!(page)) return;
-            else if (hasClass(page,"curpage")) return;
+            else if (page===curpage) return;
             else {
                 var pagenum=parseInt(page.getAttribute("data-pagenum"),10);
                 var dirclass=false;
