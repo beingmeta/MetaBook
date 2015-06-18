@@ -2139,10 +2139,8 @@
 
     function startGloss(passage){
         var selecting=metaBook.UI.selectText(passage);
-        if ((metaBook.TapHold.page)&&(metaBook.TapHold.page.abort))
-            metaBook.TapHold.page.abort();
-        if ((metaBook.TapHold.content)&&(metaBook.TapHold.page.content))
-            metaBook.TapHold.content.abort();
+        if ((metaBook.TapHold.body)&&(metaBook.TapHold.body.abort))
+            metaBook.TapHold.body.abort();
         metaBook.select_target=passage;
         selectors.push(selecting);
         selectors[passage.id]=selecting;
@@ -2201,10 +2199,8 @@
 
     function startSelect(passage,evt){
         var selecting=metaBook.UI.selectText(passage);
-        if ((metaBook.TapHold.page)&&(metaBook.TapHold.page.abort))
-            metaBook.TapHold.page.abort();
-        if ((metaBook.TapHold.content)&&(metaBook.TapHold.page.content))
-            metaBook.TapHold.content.abort();
+        if ((metaBook.TapHold.body)&&(metaBook.TapHold.body.abort))
+            metaBook.TapHold.body.abort();
         metaBook.select_target=passage;
         selectors.push(selecting);
         selectors[passage.id]=selecting;
