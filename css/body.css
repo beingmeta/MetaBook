@@ -82,11 +82,11 @@ html._MOUSE #METABOOKBODY a[href]:hover,
 #METABOOKBODY a[href]:active {
     color: blue; }
 
-#METABOOKBODY {
+#METABOOKBODY .metabookcontent {
     background-color: #ffffff; color: #111; }
-#METABOOKBODY.metabookcontrasthigh { color: #111; }
-#METABOOKBODY.metabookcontrastmedium { color: #444; }
-#METABOOKBODY.metabookcontrastlow {
+#METABOOKBODY.metabookcontrasthigh  .metabookcontent { color: #111; }
+#METABOOKBODY.metabookcontrastmedium .metabookcontent { color: #444; }
+#METABOOKBODY.metabookcontrastlow .metabookcontent {
     background-color: #e5e0d4; color: #333; }
 
 p { line-height: 1.2;}
@@ -336,21 +336,23 @@ div.metabooknotebody a.mbackref { float: left; margin-left: -3em;}
         margin-left: 0px; margin-right: 0px;}}
 
 @media (lightlevel: dim OR lightlevel: washed) {
-    #METABOOKBODY { background-color: #ffffff; color: #111; }
-    #METABOOKBODY.metabookcontrasthigh {
+    #METABOOKBODY .metabookcontent {
         background-color: #ffffff; color: #111; }
-    #METABOOKBODY.metabookcontrastmedium {
+    #METABOOKBODY.metabookcontrasthigh  .metabookcontent {
+        background-color: #ffffff; color: #111; }
+    #METABOOKBODY.metabookcontrastmedium  .metabookcontent {
         background-color: #ffffff; color: #444; }
-    #METABOOKBODY.metabookcontrastlow  {
+    #METABOOKBODY.metabookcontrastlow  .metabookcontent {
         background-color: #e5e0d4; color: #333; }}
 
 @media (lightlevel: bright) {
-    #METABOOKBODY { background-color: #ffffff; color: #444; }
-    #METABOOKBODY.metabookcontrasthigh {
-        background-color: #ffffff; color: #111; }
-    #METABOOKBODY.metabookcontrastmedium {
+    #METABOOKBODY  .metabookcontent {
         background-color: #ffffff; color: #444; }
-    #METABOOKBODY.metabookcontrastlow  {
+    #METABOOKBODY.metabookcontrasthigh .metabookcontent {
+        background-color: #ffffff; color: #111; }
+    #METABOOKBODY.metabookcontrastmedium  .metabookcontent {
+        background-color: #ffffff; color: #444; }
+    #METABOOKBODY.metabookcontrastlow   .metabookcontent {
         background-color: #e5e0d4; color: #333; }}
 
 /* Emacs local variables
