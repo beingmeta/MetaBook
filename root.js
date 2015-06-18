@@ -54,7 +54,7 @@ var metaBook={
     // For tracking UI state
     last_mode: false, last_heartmode: "about", demo: false,
     // Various default gesture timing parameters
-    taptapmsecs: 200, holdmsecs: 500, edgeclick: 50, pagesize: 250,
+    taptapmsecs: 200, holdmsecs: 300, edgeclick: 50, pagesize: 250,
     dontanimate: false, nativeselect: false,
     // Ignore swipes shorter than this:
     minswipe: 7,
