@@ -334,7 +334,8 @@ metaBook.setMode=
         function setHUD(flag,clearmode){
             if (typeof clearmode === 'undefined') clearmode=true;
             if ((Trace.gestures)||(Trace.mode))
-                fdjtLog("setHUD %o mode=%o hudup=%o bc=%o hc=%o",
+                fdjtLog("setHUD(%s) %o mode=%o hudup=%o bc=%o hc=%o",
+                        ((clearmode)?("clearmode"):("keepmode")),
                         flag,metaBook.mode,metaBook.hudup,
                         document.body.className,
                         metaBookHUD.className);
