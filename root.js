@@ -168,7 +168,7 @@ var metaBook={
         controlc: false},
     // What to trace, for debugging
     Trace: {
-        startup: 1,       // Whether to trace startup
+        startup: 0,       // Whether to trace startup
         config: 0,        // Whether to trace config setup/modification/etc
         mode: false,      // Whether to trace mode changes
         nav: false,       // Whether to trace book navigation
