@@ -123,6 +123,7 @@
         var gloss_cloud=metaBook.gloss_cloud;
         var searchlist=$ID("METABOOKSEARCHLIST");
         var knodeToOption=Knodule.knodeToOption;        
+        var tracelevel=Math.max(Trace.startup,Trace.clouds);
         
         /* Take the top dterms and make them into cues, so there's at
          * least *something* */
@@ -130,9 +131,8 @@
             var ref=knodule.ref(dterm), elts=empty_cloud.getByValue(ref);
             elts.map(function(elt){addClass(elt,"cue");});});
 
-        if (Trace.startup>1)
-            fdjtLog("Done populating clouds with %d tags",
-                    searchtags.length);
+        if (tracelevel)
+            fdjtLog("Done populating clouds with %d tags",searchtags.length);
         dropClass(document.body,"mbINDEXING");
         eq.cloud=empty_cloud;
         if (!(fdjtDOM.getChild(empty_cloud.dom,".showall")))
