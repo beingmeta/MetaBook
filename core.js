@@ -196,9 +196,11 @@
         
         var knodeToOption=Knodule.knodeToOption;
 
-        var cachelink=/^https:\/\/glossdata.sbooks.net\//;
+        var cachelink=/^https:\/\/glossdata.(sbooks\.net|metabooks\.net|beingmeta\.com)\//;
+        mB.cachelink=cachelink;
         
         var knodule_name=
+            fdjtDOM.getMeta("METABOOK.knodule")||
             fdjtDOM.getMeta("SBOOKS.knodule")||
             fdjtDOM.getMeta("~KNODULE")||
             refuri;
@@ -541,16 +543,20 @@
                      metaBook.target,metaBook.head,metaBook.skimpoint);}
     metaBook.trace=sbook_trace;
 
+    var uroot_pat=/https?:\/\/[^\/]+\/([^\/]+\/)*/;
+    var mbama=window._metabook_amalgam;
+
     // This is the hostname for the sbookserver.
     metaBook.server=false;
     // This is an array for looking up sbook servers.
-    metaBook.servers=[[/.sbooks.net$/g,"glosses.sbooks.net"]];
+    metaBook.servers=[[/.metabooks.net$/g,/.sbooks.net$/g,"glosses.sbooks.net"]];
     //metaBook.servers=[];
     // This is the default server
     metaBook.default_server="glosses.sbooks.net";
     // There be icons here!
-    metaBook.root=fdjtDOM.getLink("METABOOK.staticroot")||
-        "http://static.beingmeta.com/";
+    metaBook.root=
+        ((mbama)&&(uroot_pat.exec(mbama))&&((uroot_pat.exec(mbama))[0]))||
+        fdjtDOM.getLink("METABOOK.staticroot")||"http://static.beingmeta.com/";
     if (metaBook.root[metaBook.root.length-1]!=="/")
         metaBook.root=metaBook.root+"/";
     metaBook.withsvg=document.implementation.hasFeature(
@@ -573,6 +579,9 @@
             if (scan.getAttribute("data-refuri"))
                 return scan.getAttribute("data-refuri");
             else if ((scan.getAttributeNS)&&
+                     (scan.getAttributeNS("refuri","http://metabooks.net/")))
+                return scan.getAttributeNS("refuri","http://metabooks.net/");
+            else if ((scan.getAttributeNS)&&
                      (scan.getAttributeNS("refuri","http://sbooks.net/")))
                 return scan.getAttributeNS("refuri","http://sbooks.net/");
             else if (scan.getAttribute("refuri"))
@@ -587,6 +596,9 @@
             if (scan.getAttribute("data-docuri"))
                 return scan.getAttribute("data-docuri");
             else if ((scan.getAttributeNS)&&
+                     (scan.getAttributeNS("docuri","http://metabooks.net/")))
+                return scan.getAttributeNS("docuri","http://metabooks.net/");
+            else if ((scan.getAttributeNS)&&
                      (scan.getAttributeNS("docuri","http://sbooks.net/")))
                 return scan.getAttributeNS("docuri","http://sbooks.net/");
             else if (scan.getAttribute("docuri"))
@@ -597,7 +609,8 @@
 
     metaBook.getRefID=function(target){
         if (target.getAttributeNS)
-            return (target.getAttributeNS('sbookid','http://sbooks.net/'))||
+            return (target.getAttributeNS('sbookid','http://metabooks.net/'))||
+            (target.getAttributeNS('sbookid','http://sbooks.net/'))||
             (target.getAttributeNS('sbookid'))||
             (target.getAttributeNS('data-sbookid'))||
             (target.codexbaseid)||(target.id);
@@ -914,6 +927,8 @@
             else return elt.toclevel;}
         var attrval=
             ((elt.getAttributeNS)&&
+             (elt.getAttributeNS('toclevel','http://metabooks.net')))||
+            ((elt.getAttributeNS)&&
              (elt.getAttributeNS('toclevel','http://sbooks.net')))||
             (elt.getAttribute('toclevel'))||
             (elt.getAttribute('data-toclevel'));
@@ -922,13 +937,13 @@
             else return parseInt(attrval,10);}
         if (elt.className) {
             var cname=elt.className;
-            if (cname.search(/\bsbooknotoc\b/)>=0) return 0;
-            if (cname.search(/\bsbookignore\b/)>=0) return 0;
-            var tocloc=cname.search(/\bsbook\d+(head|sect)\b/);
+            if (cname.search(/\b(sbook|metabook|sb|mb)notoc\b/)>=0) return 0;
+            if (cname.search(/\b(sbook|metabook|sb|mb)ignore\b/)>=0) return 0;
+            var tocloc=cname.search(/\b(sbook|metabook|sb|mb)\d+(head|sect)\b/);
             if (tocloc>=0)
                 return parseInt(cname.slice(tocloc+5),10);
             else if ((typeof rel ==="number")&&
-                     (cname.search(/\bsbooksubhead\b/)>=0))
+                     (cname.search(/\b(sbook|metabook|sb|mb)subhead\b/)>=0))
                 return rel+1;
             else {}}
         if ((metaBook.notoc)&&(metaBook.notoc.match(elt))) return 0;
@@ -978,8 +993,8 @@
         "<span class='beingmeta'>being<span class='bmm'>m<span class='bme'>e<span class='bmt'>t<span class='bma'>a</span></span></span></span></span>";
     fdjtString.entities.sBooks="<span class='sbooks'><em>s</em>Books</span>";
     fdjtString.entities.sBook="<span class='sbooks'><em>s</em>Book</span>";
-    fdjtString.entities.metaBook=
-        "<span class='metabook'><span class='bmm'>m<span class='bme'>e<span class='bmt'>t<span class='bma'>a</span></span></span></span>Book<sub>β</sub></span>";
+    fdjtString.entities.metaBooks=
+        "<span class='metabook'><span class='bmm'>m<span class='bme'>e<span class='bmt'>t<span class='bma'>a</span></span></span></span>Books</span>";
     fdjtString.entities.metaBook=
         "<span class='metabook'><span class='bmm'>m<span class='bme'>e<span class='bmt'>t<span class='bma'>a</span></span></span></span>Book</span>";
 

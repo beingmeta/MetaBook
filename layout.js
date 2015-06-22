@@ -566,7 +566,7 @@ metaBook.Paginate=
                 var topnode=getPageTop(page);
                 var topid=topnode.codexbaseid||topnode.id;
                 var prevpage=(((pagenum)&&(pagenum>1))&&(pages[pagenum-2]));
-                var staticref=getChild(page,".staticpageref,.sbookstaticpageref");
+                var staticref=getChild(page,".staticpageref");
                 var curloc=false;
                 if (staticref) {
                     var pageref=staticref.getAttribute("data-pageref");
@@ -725,33 +725,20 @@ metaBook.Paginate=
             if ((abi)&&(abi.length)) args.avoidbreakinside=fdjtDOM.sel(abi);
 
             var fullpages=[".sbookfullpage",".sbooktitlepage",".sbookpage"].
-                concat(
-                    fdjtDOM.getMeta("SBOOKS.fullpage",true)).concat(
-                        fdjtDOM.getMeta("SBOOKS.fullpage",true)).concat(
-                            fdjtDOM.getMeta("sbookfullpage",true));
-            if ((fullpages)&&(fullpages.length))
-                args.fullpages=fdjtDOM.sel(fullpages);
+                concat(fdjtDOM.getMeta("codexfullpage",true));
+            args.fullpages=fdjtDOM.sel(fullpages);
             
-            var floatpages=[".sbookfloatpage"].concat(
-                fdjtDOM.getMeta("SBOOKS.floatpage",true)).concat(
-                    fdjtDOM.getMeta("SBOOKS.floatpage",true)).concat(
-                        fdjtDOM.getMeta("sbookfloatpage",true));
+            var floatpages=[".codexfloatpage"].concat(
+                fdjtDOM.getMeta("codexfloatpage",true));
             if ((floatpages)&&(floatpages.length))
                 args.floatpages=fdjtDOM.sel(floatpages);
             
-            var floating=[".sbookfloatpage"].concat(
-                fdjtDOM.getMeta("SBOOKS.floatpage",true)).concat(
-                    fdjtDOM.getMeta("SBOOKS.floatpage",true)).concat(
-                        fdjtDOM.getMeta("sbookfloatpage",true));
+            var floating=[".codexfloating",".codexfloat"].concat(
+                fdjtDOM.getMeta("codexfloat",true)).concat(
+                    fdjtDOM.getMeta("codexfloating",true));
             if ((floating)&&(floating.length))
                 args.floating=fdjtDOM.sel(floating);
 
-            var scaletopage=fdjtDOM.getMeta("sbookscaletopage",true);
-            if ((scaletopage)&&(scaletopage.length)) 
-                scaletopage.concat([".sbookscaletopage",".sbookpagescaled"]);
-            else scaletopage=[".sbookscaletopage",".sbookpagescaled"];
-            args.scaletopage=scaletopage=scaletopage;
-            
             if ((fdjtDOM.getMeta("metaBook.dontbreakblocks"))||
                 (fdjtDOM.getMeta("metaBook.keepblocks"))||
                 (fdjtDOM.getMeta("~=metaBook.dontbreakblocks"))||

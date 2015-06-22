@@ -93,7 +93,7 @@ p { line-height: 1.2;}
 #METABOOKPAGES .codexpage.metabookcoversize p { line-height: 1.05;}
 
 .metabookbody .titlepage, .metabookbody .sbooktitlepage,
-#METABOOKTITLEPAGE.sbooktitlepage {
+#METABOOKCOVERTITLE.sbooktitlepage {
     text-align: center;}
 
 .codexpage .sbookcover, .codexpage .sbookcoverpage,

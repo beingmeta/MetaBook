@@ -118,6 +118,8 @@ metaBook.DOMScan=(function(){
             var title=
                 (head.toctitle)||
                 ((head.getAttributeNS)&&
+                 (head.getAttributeNS('toctitle','http://metabooks.net')))||
+                ((head.getAttributeNS)&&
                  (head.getAttributeNS('toctitle','http://sbooks.net')))||
                 (head.getAttribute('toctitle'))||
                 (head.getAttribute('data-toctitle'))||
@@ -125,6 +127,8 @@ metaBook.DOMScan=(function(){
             if (!(title)) {
                 var head1=fdjtDOM.getFirstChild(head,"H1,H2,H3,H4,H5,H6");
                 if (head1) title=head1.toctitle||
+                    ((head1.getAttributeNS)&&
+                     (head1.getAttributeNS('toctitle','http://metabooks.net')))||
                     ((head1.getAttributeNS)&&
                      (head1.getAttributeNS('toctitle','http://sbooks.net')))||
                     (head1.getAttribute('toctitle'))||
@@ -389,6 +393,8 @@ metaBook.DOMScan=(function(){
                 info.toclevel=toclevel;
             if ((id)&&(info)) {
                 var tags=
+                    ((child.getAttributeNS)&&
+                     (child.getAttributeNS('tags','http://metabooks.net/')))||
                     ((child.getAttributeNS)&&
                      (child.getAttributeNS('tags','http://sbooks.net/')))||
                     (child.getAttribute('tags'))||

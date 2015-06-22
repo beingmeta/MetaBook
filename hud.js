@@ -182,11 +182,13 @@ metaBook.setMode=
                 if (Trace.messages)
                     fdjtLog("Got a message from %s with payload %o",
                             origin,evt.data);
-                if (origin.search(/https:\/\/[^\/]+.sbooks.net/)!==0) {
+                if (origin.search(/https:\/\/[^\/]+.(metabooks|sbooks).net/)!==0) {
                     fdjtLog.warn("Rejecting insecure message from %s",
                                  origin);
                     return;}
                 if (evt.data==="sbooksapp") {
+                    setMode("sbooksapp");}
+                else if (evt.data==="metabooksapp") {
                     setMode("sbooksapp");}
                 else if (evt.data==="loggedin") {
                     if (!(metaBook.user)) {
@@ -402,7 +404,7 @@ metaBook.setMode=
         var metabookHeartModes=/\b((statictoc)|(search)|(refinesearch)|(expandsearch)|(searchresults)|(allglosses)|(showaside)|(glossaddtag)|(glossaddtag)|(glossaddoutlet)|(glossdetail))\b/g;
         var metabookHeadModes=/\b((overtoc)|(search)|(refinesearch)|(expandsearch)|(searchresults)|(allglosses)|(addgloss)|(shownote))\b/g;
         var metaBookPopModes=/\b((glossdetail))\b/g;
-        var metaBookCoverModes=/\b((welcome)|(help)|(layers)|(login)|(settings)|(cover)|(aboutsbooks)|(console)|(aboutbook)|(titlepage))\b/g;
+        var metaBookCoverModes=/\b((welcome)|(help)|(layers)|(login)|(settings)|(cover)|(aboutsbooks)|(aboutmetabooks)|(console)|(aboutbook)|(titlepage))\b/g;
         var metaBookSearchModes=/((refinesearch)|(searchresults)|(expandsearch))/;
         metaBook.searchModes=metaBookSearchModes;
         var metabook_mode_foci=

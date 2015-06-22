@@ -120,11 +120,11 @@
             cover.setAttribute("data-defaultclass","titlepage");
             addClass(cover,"titlepage");
             addClass(controls,"nocoverpage");}
-        var titlepage=$ID("METABOOKTITLEPAGE");
+        var titlepage=$ID("METABOOKCOVERTITLE");
         if ((titlepage)&&(hasAnyContent(titlepage))) {
             titlepage=titlepage.cloneNode(true);
             titlepage.removeAttribute("style");
-            titlepage.id="METABOOKTITLEPAGE";}
+            titlepage.id="METABOOKCOVERTITLE";}
         else {
             titlepage=$ID("SBOOKSTITLEPAGE")||
                 $ID("SBOOKTITLEPAGE")||
@@ -136,11 +136,11 @@
                 fdjtDOM.addClass(titlepage,"sbooktitlepage");
                 fdjtDOM.stripIDs(titlepage);
                 titlepage.setAttribute("style","");
-                titlepage.id="METABOOKTITLEPAGE";}
+                titlepage.id="METABOOKCOVERTITLE";}
             else {
                 var info=metaBook.getBookInfo();
                 titlepage=fdjtDOM(
-                    "div#METABOOKTITLEPAGE.sbooktitlepage",
+                    "div#METABOOKCOVERTITLE.sbooktitlepage",
                     fdjtDOM("DIV.title",info.title),
                     fdjtDOM("DIV.credits",
                             ((info.byline)?(fdjtDOM("DIV.byline",info.byline)):
@@ -152,17 +152,17 @@
                              (fdjtDOM("P",info.publisher)))));}}
         if (titlepage) addToCover(cover,titlepage);
 
-        var creditspage=$ID("METABOOKCREDITSPAGE");
+        var creditspage=$ID("METABOOKCOVERCREDITS");
         if (creditspage)
             creditspage=creditspage.cloneNode(true);
         else {
-            creditspage=$ID("SBOOKSCREDITSPAGE")||$ID("CREDITSPAGE");
+            creditspage=$ID("METABOOKCOVERCREDITS")||$ID("SBOOKSCREDITSPAGE")||$ID("CREDITSPAGE");
             if (creditspage) {
                 creditspage=creditspage.cloneNode(true);
                 fdjtDOM.stripIDs(creditspage);
                 creditspage.removeAttribute("style");}}
         if ((creditspage)&&(hasAnyContent(creditspage))) {
-            var curcredits=cover.getElementById("METABOOKCREDITSPAGE");
+            var curcredits=cover.getElementById("METABOOKCOVERCREDITS");
             if (curcredits)
                 curcredits.parentNode.replaceChild(creditspage,curcredits);
             else cover.appendChild(creditspage);}
@@ -282,7 +282,7 @@
         fdjtDOM.adjustFontSize(userbox);
         // fdjt.DOM.resetFontSize(controls);
         // fdjt.DOM.resetFontSize(userbox);            
-        var covertitle=$ID("METABOOKTITLEPAGE");
+        var covertitle=$ID("METABOOKCOVERTITLE");
         if ((covertitle)&&
             (!(hasClass(covertitle,/\b(adjustfont|fdjtadjustfont)\b/))))
             fdjtDOM.adjustFontSize(covertitle);
@@ -293,8 +293,8 @@
     metaBook.resizeCover=resizeCover;
 
     var coverids={"coverpage": "METABOOKCOVERPAGE",
-                  "titlepage": "METABOOKTITLEPAGE",
-                  "creditspage": "METABOOKCREDITSPAGE",
+                  "titlepage": "METABOOKCOVERTITLE",
+                  "creditspage": "METABOOKCOVERCREDITS",
                   "blurb": "METABOOKBLURB",
                   "help": "METABOOKAPPHELP",
                   "settings": "METABOOKSETTINGS",

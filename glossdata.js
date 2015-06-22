@@ -60,7 +60,7 @@
 
     function cacheGlossData(uri){
         function caching(resolved){
-            if (uri.search("https://glossdata.sbooks.net/")!==0) return;
+            if (uri.search(mB.cachelink)!==0) return;
             if (glossdata[uri]) return resolved(glossdata[uri]);
             if (glossdata_state[uri]==="cached") return;
             else if (glossdata_state[uri]) {

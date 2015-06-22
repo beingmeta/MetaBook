@@ -229,10 +229,12 @@ metaBook.Startup=
             return false;}
 
         function showMessage(){
-            var message=fdjt.State.getCookie("SBOOKSPOPUP");
+            var message=fdjt.State.getCookie("METABOOKSPOPUP")||fdjt.State.getCookie("SBOOKSPOPUP");
             if (message) fdjt.UI.alertFor(10,message);
             fdjt.State.clearCookie("SBOOKSPOPUP","/","sbooks.net");
-            fdjt.State.clearCookie("SBOOKSMESSAGE","/","sbooks.net");}
+            fdjt.State.clearCookie("SBOOKSMESSAGE","/","sbooks.net");
+            fdjt.State.clearCookie("SBOOKSPOPUP","/","metabooks.net");
+            fdjt.State.clearCookie("SBOOKSMESSAGE","/","metabooks.net");}
 
         function readEnvSettings() {
 
@@ -245,6 +247,7 @@ metaBook.Startup=
             // First, define common schemas
             fdjtDOM.addAppSchema("SBOOK","http://sbooks.net/");
             fdjtDOM.addAppSchema("SBOOKS","http://sbooks.net/");
+            fdjtDOM.addAppSchema("METABOOKS","http://metabooks.net/");
             fdjtDOM.addAppSchema("metaBook","http://metabook.sbooks.net/");
             fdjtDOM.addAppSchema("DC","http://purl.org/dc/elements/1.1/");
             fdjtDOM.addAppSchema("DCTERMS","http://purl.org/dc/terms/");
@@ -260,8 +263,17 @@ metaBook.Startup=
             // Whether to suppress login, etc
             if ((getLocal("mB.nologin"))||(getQuery("nologin")))
                 metaBook.nologin=true;
-            var sbooksrv=getMeta("SBOOKS.server")||getMeta("SBOOKSERVER");
+            var sbooksrv=getMeta("MB.server")||getMeta("METABOOK.server")||
+                getMeta("GLOSSDB.server")||getMeta("GLOSSES.server")||
+                getMeta("SBOOKS.server")||getMeta("SBOOKSERVER")||
+                getMeta("GLOSSDB");
             if (sbooksrv) metaBook.server=sbooksrv;
+            else if (fdjtState.getCookie("METABOOKSERVER"))
+                metaBook.server=fdjtState.getCookie("METABOOKSERVER");
+            else if (fdjtState.getCookie("MBSERVER"))
+                metaBook.server=fdjtState.getCookie("MBSERVER");
+            else if (fdjtState.getCookie("GLOSSDB"))
+                metaBook.server=fdjtState.getCookie("GLOSSDB");
             else if (fdjtState.getCookie("SBOOKSERVER"))
                 metaBook.server=fdjtState.getCookie("SBOOKSERVER");
             else metaBook.server=lookupServer(document.domain);
@@ -635,10 +647,12 @@ metaBook.Startup=
                 else fdjtUI.alertFor(10,msg);}
             if ((msg=getCookie("APPMESSAGE"))) {
                 fdjtUI.alertFor(10,msg);
-                fdjtState.clearCookie("APPMESSAGE","sbooks.net","/");}
+                fdjtState.clearCookie("APPMESSAGE","sbooks.net","/");
+                fdjtState.clearCookie("APPMESSAGE","metabooks.net","/");}
             if ((msg=getCookie("SBOOKSMESSAGE"))) {
                 fdjtUI.alertFor(10,msg);
-                fdjtState.clearCookie("SBOOKSMESSAGE","sbooks.net","/");}
+                fdjtState.clearCookie("SBOOKSMESSAGE","sbooks.net","/");
+                fdjtState.clearCookie("METABOOKMESSAGE","metabooks.net","/");}
             if ((!(mode))&&(location.hash)&&(metaBook.state)&&
                 (location.hash.slice(1)!==metaBook.state.target))
                 metaBook.hideCover();
@@ -967,6 +981,8 @@ metaBook.Startup=
         
         function hasTOCLevel(elt){
             if ((elt.toclevel)||
+                ((elt.getAttributeNS)&&
+                 (elt.getAttributeNS('toclevel','http://metabooks.net/')))||
                 ((elt.getAttributeNS)&&
                  (elt.getAttributeNS('toclevel','http://sbooks.net/')))||
                 (elt.getAttribute('toclevel'))||

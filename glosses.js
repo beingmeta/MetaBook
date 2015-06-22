@@ -499,6 +499,7 @@
 
     function getTagline(target){
         var attrib=
+            target.getAttributeNS("tagline","https://metabooks.net/")||
             target.getAttributeNS("tagline","https://sbooks.net/")||
             target.getAttribute("data-tagline")||
             target.getAttribute("tagline");
