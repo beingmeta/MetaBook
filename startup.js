@@ -248,6 +248,7 @@ metaBook.Startup=
             fdjtDOM.addAppSchema("SBOOK","http://sbooks.net/");
             fdjtDOM.addAppSchema("SBOOKS","http://sbooks.net/");
             fdjtDOM.addAppSchema("METABOOKS","http://metabooks.net/");
+            fdjtDOM.addAppSchema("MB","http://metabooks.net/");
             fdjtDOM.addAppSchema("metaBook","http://metabook.sbooks.net/");
             fdjtDOM.addAppSchema("DC","http://purl.org/dc/elements/1.1/");
             fdjtDOM.addAppSchema("DCTERMS","http://purl.org/dc/terms/");
