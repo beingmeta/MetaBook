@@ -88,8 +88,8 @@
             var label_node=
                 getChild(notable,"label")||
                 getChild(notable,"summary")||
-                getChild(notable,".sbooklabel")||
-                getChild(notable,".sbooksummary");
+                getChild(notable,".html5label")||
+                getChild(notable,".html5summary");
             var anchor=fdjtDOM.Anchor(
                 "#"+noteid,"A.mbnoteref.sbooknoteref",
                 ((label_node)?(label_node.cloneNode(true)):
