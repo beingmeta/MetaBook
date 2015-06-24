@@ -539,47 +539,47 @@ metaBook.Startup=
                 var i=0, lim=nodes.length; while (i<lim) {
                     nodes[i++].setAttribute("data-toclevel",level);}}}
         function applyTOCRules(){
-            var h1=getMeta("TOC.head1")
-                .concat(getMeta("TOC.sect1"))
+            var h1=getMeta("TOC.head1",true,true)
+                .concat(getMeta("TOC.sect1",true,true))
                 .concat(getMeta("SBOOKS.h1",true,true))
                 .concat(getMeta("SBOOKS.head1",true,true))
                 .concat(getMeta("sbook1head",true));
             if (h1.length) addTOCLevel(h1,"1");
-            var h2=getMeta("TOC.head2")
-                .concat(getMeta("TOC.sect2"))
-                .getMeta("SBOOKS.h2",true,true)
+            var h2=getMeta("TOC.head2",true,true)
+                .concat(getMeta("TOC.sect2",true,true))
+                .concat(getMeta("SBOOKS.h2",true,true))
                 .concat(getMeta("SBOOKS.head2",true,true))
-                .concat(getMeta("sbook2head",true));
+                .concat(getMeta("sbook2head",true,true));
             if (h2.length) addTOCLevel(h2,"2");
-            var h3=getMeta("TOC.head3")
-                .concat(getMeta("TOC.sect3"))
-                .getMeta("SBOOKS.h3",true,true)
+            var h3=getMeta("TOC.head3",true,true)
+                .concat(getMeta("TOC.sect3",true,true))
+                .concat(getMeta("SBOOKS.h3",true,true))
                 .concat(getMeta("SBOOKS.head3",true,true))
                 .concat(getMeta("sbook3head",true));
             if (h3.length) addTOCLevel(h3,"3");
-            var h4=getMeta("TOC.head4")
-                .concat(getMeta("TOC.sect4"))
-                .getMeta("SBOOKS.h4",true,true)
+            var h4=getMeta("TOC.head4",true,true)
+                .concat(getMeta("TOC.sect4",true,true))
+                .concat(getMeta("SBOOKS.h4",true,true))
                 .concat(getMeta("SBOOKS.head4",true,true))
-                .concat(getMeta("sbook4head",true));
+                .concat(getMeta("sbook4head",true,true));
             if (h4.length) addTOCLevel(h4,"4");
-            var h5=getMeta("TOC.head5")
-                .concat(getMeta("TOC.sect5"))
-                .getMeta("SBOOKS.h5",true,true)
+            var h5=getMeta("TOC.head5",true,true)
+                .concat(getMeta("TOC.sect5",true,true))
+                .concat(getMeta("SBOOKS.h5",true,true))
                 .concat(getMeta("SBOOKS.head5",true,true))
-                .concat(getMeta("sbook5head",true));
+                .concat(getMeta("sbook5head",true,true));
             if (h5.length) addTOCLevel(h5,"5");
-            var h6=getMeta("TOC.head6")
-                .concat(getMeta("TOC.sect6"))
-                .getMeta("SBOOKS.h6",true,true)
+            var h6=getMeta("TOC.head6",true,true)
+                .concat(getMeta("TOC.sect6",true,true))
+                .concat(getMeta("SBOOKS.h6",true,true))
                 .concat(getMeta("SBOOKS.head6",true,true))
-                .concat(getMeta("sbook6head",true));
+                .concat(getMeta("sbook6head",true,true));
             if (h6.length) addTOCLevel(h6,"6");
-            var h7=getMeta("TOC.head7")
-                .concat(getMeta("TOC.sect7"))
-                .getMeta("SBOOKS.h7",true,true)
+            var h7=getMeta("TOC.head7",true,true)
+                .concat(getMeta("TOC.sect7",true,true))
+                .concat(getMeta("SBOOKS.h7",true,true))
                 .concat(getMeta("SBOOKS.head7",true,true))
-                .concat(getMeta("sbook7head",true));
+                .concat(getMeta("sbook7head",true,true));
             if (h7.length) addTOCLevel(h7,"7");}
 
         function scanDOM(){
