@@ -83,7 +83,9 @@
             //  and update the state.  If it hasn't changed, we assume
             //  that the stored state is still current and dated whenever
             //  it was last changed.
-            if (!((state)&&(state.target===hash))) {
+            if ((!(state))||
+                ((state.hash)&&(state.hash!==hash))||
+                ((!(state.hash))&&(state.target)&&(state.target!==hash))) {
                 if (!(state)) state={};
                 // Hash changed
                 state.refuri=metaBook.refuri;
@@ -123,6 +125,10 @@
         if ((state.maxloc)&&(state.maxloc<state.location))
             state.maxloc=state.location;
         else if (!(state.maxloc)) state.maxloc=state.location;
+        if ((window)&&(window.location)&&(window.location.hash)) {
+            var hash=window.location.hash;
+            if (hash[0]==='#') hash=hash.slice(1);
+            state.hash=hash;}
         if (Trace.state)
             fdjtLog("saveState skiphist=%o force=%o state=%j",
                     skiphist,force,state);
