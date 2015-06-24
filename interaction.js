@@ -1707,6 +1707,7 @@
     
     function toggleHelp(evt){
         evt=evt||window.event;
+        if (Trace.gestures) fdjtLog("toggleHelp %o",evt);
         cancel(evt);
         if (mB.cxthelp) {
             dropClass(document.body,"mbSHOWHELP");
@@ -1764,12 +1765,14 @@
     
     function raiseHUD(evt){
         evt=evt||window.event;
+        if (Trace.gestures) fdjtLog("raiseHUD %o",evt);
         setHUD(true);
         cancel(evt);
         return false;}
     metaBook.raiseHUD=raiseHUD;
     function lowerHUD(evt){
         evt=evt||window.event;
+        if (Trace.gestures) fdjtLog("lowerHUD %o",evt);
         setHUD(false);
         cancel(evt);
         return false;}
@@ -1777,9 +1780,11 @@
 
     function saveGloss(evt){
         evt=evt||window.event;
+        if (Trace.gestures) fdjtLog("saveGloss %o",evt);
         metaBook.submitGloss();}
     function refreshLayout(evt){
         evt=evt||window.event; cancel(evt);
+        if (Trace.gestures) fdjtLog("refreshLayout %o",evt);
         metaBook.refreshLayout();}
     function resetState(evt){
         evt=evt||window.event; cancel(evt);
@@ -1803,7 +1808,9 @@
              spec: "div.fdjtdialog.mbsettings"},
             "Reload all glosses and layers?");}
     function clearOffline(evt){
-        evt=evt||window.event; cancel(evt); metaBook.clearOffline();}
+        evt=evt||window.event; cancel(evt);
+        if (Trace.gestures) fdjtLog("clearOffline %o",evt);
+        metaBook.clearOffline();}
     function consolefn(evt){
         evt=evt||window.event; metaBook.consolefn(evt);}
 
@@ -1922,9 +1929,9 @@
              blur: function(){
                  fdjt.DOM.dropClass('METABOOKCONSOLEINPUT','uptop');}},
          "#METABOOKCONSOLEBUTTON": {click: consolefn},
-         "#METABOOKREFRESHOFFLINE": {click: refreshOffline},
-         "#METABOOKREFRESHLAYOUT": {click: refreshLayout},
-         "#METABOOKRESETSYNC": {click: resetState},
+         "#METABOOKREFRESHOFFLINE": {tap: refreshOffline},
+         "#METABOOKREFRESHLAYOUT": {tp: refreshLayout},
+         "#METABOOKRESETSYNC": {tap: resetState},
          ".clearoffline": {click: clearOffline},
          ".metabookclearmode": {click: clearMode},
          "#METABOOKGOTOREFHELP": {click: clearMode},
