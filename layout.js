@@ -149,10 +149,13 @@ metaBook.Paginate=
         function Paginate(why,init){
             if (((metaBook.layout)&&(!(metaBook.layout.done)))) return;
             if (!(why)) why="because";
+            if (Trace.layout)
+                fdjtLog("Starting pagination (%s) with %j",why,init);
             layoutMessage("Preparing your book",0);
             dropClass(document.body,"_SCROLL");
             addClass(document.body,"mbLAYOUT");
             scaleLayout(false);
+            if (Trace.layout) fdjtLog("Unscaled layout");
             var forced=((init)&&(init.forced));
             var geom=getGeometry($ID("CODEXPAGE"),false,true);
             var height=geom.inner_height, width=geom.width;
@@ -179,10 +182,12 @@ metaBook.Paginate=
                             current.layout_id);
                     return;}
                 // Repaginating, start with reversion
+                if (Trace.layout) fdjtLog("Reverting current layout");
                 metaBook.layout.Revert();
                 metaBook.layout=false;}
 
             // Resize the content
+            if (Trace.layout) fdjtLog("Sizing the content");
             metaBook.sizeContent();
 
             // Create a new layout
@@ -190,6 +195,7 @@ metaBook.Paginate=
             if ((init)&&(init.hasOwnProperty("timeslice"))) {
                 layout_args.timeslice=init.timeslice;}
             
+            if (Trace.layout) fdjtLog("Starting content layout");
             var layout=new CodexLayout(layout_args);
             layout.bodysize=size; layout.bodyfamily=family;
             metaBook.layout=layout;
