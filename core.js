@@ -549,10 +549,10 @@
     // This is the hostname for the sbookserver.
     metaBook.server=false;
     // This is an array for looking up sbook servers.
-    metaBook.servers=[[/.metabooks.net$/g,/.sbooks.net$/g,"glosses.sbooks.net"]];
+    metaBook.servers=[];
     //metaBook.servers=[];
     // This is the default server
-    metaBook.default_server="glosses.sbooks.net";
+    metaBook.default_server="glosses.bookhub.io";
     // There be icons here!
     metaBook.root=
         ((mbama)&&(uroot_pat.exec(mbama))&&((uroot_pat.exec(mbama))[0]))||
@@ -582,6 +582,9 @@
                      (scan.getAttributeNS("refuri","http://metabooks.net/")))
                 return scan.getAttributeNS("refuri","http://metabooks.net/");
             else if ((scan.getAttributeNS)&&
+                     (scan.getAttributeNS("refuri","http://beingmeta.com/METABOOK/")))
+                return scan.getAttributeNS("refuri","http://beingmeta.com/METABOOK/");
+            else if ((scan.getAttributeNS)&&
                      (scan.getAttributeNS("refuri","http://sbooks.net/")))
                 return scan.getAttributeNS("refuri","http://sbooks.net/");
             else if (scan.getAttribute("refuri"))
@@ -596,6 +599,9 @@
             if (scan.getAttribute("data-docuri"))
                 return scan.getAttribute("data-docuri");
             else if ((scan.getAttributeNS)&&
+                     (scan.getAttributeNS("docuri","http://beingmeta.com/METABOOK/")))
+                return scan.getAttributeNS("docuri","http://beingmeta.com/METABOOK/");
+            else if ((scan.getAttributeNS)&&
                      (scan.getAttributeNS("docuri","http://metabooks.net/")))
                 return scan.getAttributeNS("docuri","http://metabooks.net/");
             else if ((scan.getAttributeNS)&&
@@ -609,7 +615,8 @@
 
     metaBook.getRefID=function(target){
         if (target.getAttributeNS)
-            return (target.getAttributeNS('sbookid','http://metabooks.net/'))||
+            return (target.getAttributeNS('sbookid','http://beingmeta.com/METABOOK/'))||
+            (target.getAttributeNS('sbookid','http://metabooks.net/'))||
             (target.getAttributeNS('sbookid','http://sbooks.net/'))||
             (target.getAttributeNS('sbookid'))||
             (target.getAttributeNS('data-sbookid'))||
@@ -926,6 +933,10 @@
                 return false;}
             else return elt.toclevel;}
         var attrval=
+            ((elt.getAttributeNS)&&
+             (elt.getAttributeNS('toclevel','http://beingmeta.com/TOC/')))||
+            ((elt.getAttributeNS)&&
+             (elt.getAttributeNS('toclevel','http://beingmeta.com/METABOOK/')))||
             ((elt.getAttributeNS)&&
              (elt.getAttributeNS('toclevel','http://metabooks.net')))||
             ((elt.getAttributeNS)&&

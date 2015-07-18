@@ -427,7 +427,7 @@
     function getFreshMyCopyId(){
         if (getting_mycopyid) return;
         getting_mycopyid=fdjtTime();
-        fdjtAjax.fetchText("https://auth.sbooks.net/getmycopyid?DOC="+mB.docref).
+        fdjtAjax.fetchText("https://auth.bookhub.io/getmycopyid?DOC="+mB.docref).
             then(function(mycopyid){
                 gotMyCopyId(mycopyid).then(function(){getting_mycopyid=false;});});}
 

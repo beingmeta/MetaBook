@@ -240,7 +240,7 @@
             var refuri=
                 ((metaBook.target)&&(metaBook.getRefURI(metaBook.target)))||
                 (metaBook.refuri);
-            var sync_uri="https://sync.sbooks.net/v1/sync"+
+            var sync_uri="https://sync.bookhub.io/v1/sync"+
                 "?REFURI="+encodeURIComponent(refuri)+
                 "&DOCURI="+encodeURIComponent(metaBook.docuri)+
                 "&NOW="+fdjtTime.tick();

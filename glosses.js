@@ -499,6 +499,7 @@
 
     function getTagline(target){
         var attrib=
+            target.getAttributeNS("tagline","https://beingmeta.com/METABOOK/")||
             target.getAttributeNS("tagline","https://metabooks.net/")||
             target.getAttributeNS("tagline","https://sbooks.net/")||
             target.getAttribute("data-tagline")||
@@ -1915,7 +1916,7 @@
                                        "I have the right to use and share this ",
                                        "file according to the sBooks ",
                                        fdjtDOM.Anchor(
-                                           "https://www.sbooks.net/legalia/TOS/",
+                                           "https://www.bookhub.io/legalia/TOS/",
                                            "A[target='_blank']",
                                            "Terms of Service"),
                                        "."));
@@ -2035,7 +2036,7 @@
         var filename=file.name, filetype=file.type;
         // var reader=new FileReader();
         var savereq=new XMLHttpRequest();
-        var endpoint="https://glossdata.sbooks.net/"+
+        var endpoint="https://glossdata.bookhub.io/"+
             glossid+"/"+itemid+"/"+filename;
         var aborted=false, done=false;
         function attaching_file(resolve,reject){        

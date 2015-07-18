@@ -177,7 +177,7 @@
                 var idlink=idlinks[i++];
                 idlink.target='_blank';
                 idlink.title='click to edit your personal information';
-                idlink.href='https://auth.sbooks.net/my/profile';}}
+                idlink.href='https://my.bookhub.io/profile';}}
         if (metaBook.user.friends) {
             var friends=metaBook.user.friends; var sourcedb=metaBook.sourcedb;
             i=0; lim=friends.length; while (i<lim) {
