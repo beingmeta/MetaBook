@@ -196,7 +196,7 @@
         
         var knodeToOption=Knodule.knodeToOption;
 
-        var cachelink=/^https:\/\/glossdata.(sbooks\.net|metabooks\.net|beingmeta\.com)\//;
+        var cachelink=/^https:\/\/glossdata.(sbooks\.net|metabooks\.net|beingmeta\.com|bookhub\.io)\//;
         mB.cachelink=cachelink;
         
         var knodule_name=
@@ -243,6 +243,14 @@
                 var maker=(item.maker)&&(metaBook.sourcedb.ref(item.maker));
                 if (item.links) {
                     var links=item.links; for (var link in links) {
+                        if (!(links.hasOwnProperty(link))) continue;
+                        if (!(links[link])) continue;
+                        if (cachelink.exec(link)) {
+                            var newlink=link.replace("//glossdata.sbooks.net/","//glossdata.bookhub.io/");
+                            if (link!==newlink) {
+                                links[newlink]=links[link];
+                                delete links[link];
+                                link=newlink;}}
                         if ((links.hasOwnProperty(link))&&
                             (cachelink.exec(link)))
                             metaBook.needGlossData(link);}}

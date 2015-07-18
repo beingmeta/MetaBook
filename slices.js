@@ -290,7 +290,7 @@ metaBook.Slice=(function () {
             if (url[0]==='_') continue;
             var urlinfo=refs[url], elt=false;
             var openinbook=(url.search("https://glossdata.bookhub.io/")===0)||
-                (url.search("https://glossdata.sbooks.net/")===0)
+                (url.search("https://glossdata.sbooks.net/")===0)||
                 (url.search("resources/")===0);
             var title; var icon=false, type=false, useclass=false;
             if (!(openinbook)) {

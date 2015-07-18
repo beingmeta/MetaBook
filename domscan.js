@@ -401,10 +401,10 @@ metaBook.DOMScan=(function(){
                 info.toclevel=toclevel;
             if ((id)&&(info)) {
                 var tags=
-                    ((head.getAttributeNS)&&
-                     (head.getAttributeNS('tags','http://beingmeta.com/INDEX/')))||
-                    ((head.getAttributeNS)&&
-                     (head.getAttributeNS('tags','http://beingmeta.com/METABOOK/')))||
+                    ((child.getAttributeNS)&&
+                     (child.getAttributeNS('tags','http://beingmeta.com/INDEX/')))||
+                    ((child.getAttributeNS)&&
+                     (child.getAttributeNS('tags','http://beingmeta.com/METABOOK/')))||
                     ((child.getAttributeNS)&&
                      (child.getAttributeNS('tags','http://metabooks.net/')))||
                     ((child.getAttributeNS)&&
