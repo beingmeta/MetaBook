@@ -1045,7 +1045,7 @@ metaBook.Startup=
                 getMeta("sbooknotoc",true).concat(
                     getMeta("SBOOKS.notoc",true)).concat(
                         getMeta("SBOOKS.nothead",true)).concat(
-                            getMeta("sbooknothead"));
+                            getMeta("sbooknothead",true));
             if (notoc.length)
                 metaBook.notoc=new fdjtDOM.Selector(notoc);
             var terminal=getMeta("sbookterminal",true).concat(
