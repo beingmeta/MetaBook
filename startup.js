@@ -229,27 +229,27 @@ metaBook.Startup=
             return false;}
 
         function showMessage(){
-            var message=fdjt.State.getCookie("METABOOKSPOPUP")||fdjt.State.getCookie("SBOOKSPOPUP");
+            var message=fdjt.State.getCookie("APPMESSAGE");
             if (message) fdjt.UI.alertFor(10,message);
-            fdjt.State.clearCookie("SBOOKSPOPUP","/","sbooks.net");
-            fdjt.State.clearCookie("SBOOKSMESSAGE","/","sbooks.net");
-            fdjt.State.clearCookie("SBOOKSPOPUP","/","metabooks.net");
-            fdjt.State.clearCookie("SBOOKSMESSAGE","/","metabooks.net");}
+            fdjt.State.clearCookie("APPMESSAGE","/","bookhub.io");
+            fdjt.State.clearCookie("APPMESSAGE","/","sbooks.net");
+            fdjt.State.clearCookie("APPMESSAGE","/","metabooks.net");}
 
         function readEnvSettings() {
 
             // Initialize domain and origin for browsers which care
-            try {document.domain="sbooks.net";}
+            try {document.domain="bookhub.io";}
             catch (ex) {fdjtLog.warn("Error setting document.domain");}
-            try {document.origin="sbooks.net";}
+            try {document.origin="bookhub.io";}
             catch (ex) {fdjtLog.warn("Error setting document.origin");}
 
             // First, define common schemas
             fdjtDOM.addAppSchema("SBOOK","http://sbooks.net/");
             fdjtDOM.addAppSchema("SBOOKS","http://sbooks.net/");
-            fdjtDOM.addAppSchema("METABOOKS","http://metabooks.net/");
-            fdjtDOM.addAppSchema("MB","http://metabooks.net/");
-            fdjtDOM.addAppSchema("metaBook","http://metabook.sbooks.net/");
+            fdjtDOM.addAppSchema("METABOOK","http://beingmeta.com/METABOOK/");
+            fdjtDOM.addAppSchema("METABOOKS","http://beingmeta.com/METABOOK/");
+            fdjtDOM.addAppSchema("MB","http://beingmeta.com/METABOOK/");
+            fdjtDOM.addAppSchema("metaBook","http://beingmeta.com/METABOOK");
             fdjtDOM.addAppSchema("DC","http://purl.org/dc/elements/1.1/");
             fdjtDOM.addAppSchema("DCTERMS","http://purl.org/dc/terms/");
             fdjtDOM.addAppSchema("OLIB","http://openlibrary.org/");
@@ -665,12 +665,9 @@ metaBook.Startup=
                 else fdjtUI.alertFor(10,msg);}
             if ((msg=getCookie("APPMESSAGE"))) {
                 fdjtUI.alertFor(10,msg);
+                fdjtState.clearCookie("APPMESSAGE","bookhub.io","/");
                 fdjtState.clearCookie("APPMESSAGE","sbooks.net","/");
                 fdjtState.clearCookie("APPMESSAGE","metabooks.net","/");}
-            if ((msg=getCookie("SBOOKSMESSAGE"))) {
-                fdjtUI.alertFor(10,msg);
-                fdjtState.clearCookie("SBOOKSMESSAGE","sbooks.net","/");
-                fdjtState.clearCookie("METABOOKMESSAGE","metabooks.net","/");}
             if ((!(mode))&&(location.hash)&&(metaBook.state)&&
                 (location.hash.slice(1)!==metaBook.state.target))
                 metaBook.hideCover();
@@ -1000,9 +997,7 @@ metaBook.Startup=
         function hasTOCLevel(elt){
             if ((elt.toclevel)||
                 ((elt.getAttributeNS)&&
-                 (elt.getAttributeNS('toclevel','http://metabooks.net/')))||
-                ((elt.getAttributeNS)&&
-                 (elt.getAttributeNS('toclevel','http://sbooks.net/')))||
+                 (elt.getAttributeNS('toclevel','http://beingmeta.com/TOC/')))||
                 (elt.getAttribute('toclevel'))||
                 (elt.getAttribute('data-toclevel'))||
                 ((elt.className)&&(elt.className.search)&&
@@ -1050,7 +1045,7 @@ metaBook.Startup=
                 getMeta("sbooknotoc",true).concat(
                     getMeta("SBOOKS.notoc",true)).concat(
                         getMeta("SBOOKS.nothead",true)).concat(
-                            getMeta("sbooknothead"));
+                            getMeta("sbooknothead",true));
             if (notoc.length)
                 metaBook.notoc=new fdjtDOM.Selector(notoc);
             var terminal=getMeta("sbookterminal",true).concat(

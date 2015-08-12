@@ -4,6 +4,8 @@
 		 "indexedDB": false, "exports": false,
 		 "Knodule": false, "KNode": false,
 		 "iScroll": false, "metaBook": false},
+//    "maxdepth": 5,
+//    "maxcomplexity": 6,
     "strict": true,
     "eqeqeq": true,
     "noempty": false,

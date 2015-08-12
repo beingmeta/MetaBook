@@ -72,8 +72,8 @@
             var req=new XMLHttpRequest(), endpoint, rtype;
             if ((!(Blob))||(!(createObjectURL))) {
                 // This endpoint returns a datauri as text
-                endpoint="https://glossdata.sbooks.net/U/"+
-                    uri.slice("https://glossdata.sbooks.net/".length);
+                endpoint="https://glossdata.bookhub.io/U/"+
+                    uri.slice("https://glossdata.bookhub.io/".length);
                 rtype="";}
             else {endpoint=uri; rtype="blob";}
             // We provide credentials in the query string because we

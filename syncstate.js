@@ -210,7 +210,7 @@
     // returned
     function syncState(force){
         var elapsed=(last_sync)?(fdjtTime.tick()-last_sync):(3600*24*365*10);
-        if ((syncing)||(!(metaBook.locsync))) return;
+        if ((syncing)||((!(force))&&(!(metaBook.locsync)))) return;
         if (!(metaBook.user)) return;
         if (sync_req) {
             fdjtLog("Skipping state sync because one is already in process");
@@ -227,10 +227,10 @@
             if (Trace.state)
                 fdjtLog("Skipping state sync because page is hidden");
             return;}
-        if (elapsed<metaBook.sync_min) {
+        if ((!(force))&&(elapsed<(metaBook.sync_min))) {
             sync_wait=setTimeout(
                 function(){syncState(force);},
-                metaBook.sync_min);
+                1000*metaBook.sync_min);
             return;}
         else if (sync_wait) {clearTimeout(sync_wait); sync_wait=false;} 
         if ((metaBook.locsync)&&(navigator.onLine)) {
@@ -240,7 +240,7 @@
             var refuri=
                 ((metaBook.target)&&(metaBook.getRefURI(metaBook.target)))||
                 (metaBook.refuri);
-            var sync_uri="https://sync.sbooks.net/v1/sync"+
+            var sync_uri="https://sync.bookhub.io/v1/sync"+
                 "?REFURI="+encodeURIComponent(refuri)+
                 "&DOCURI="+encodeURIComponent(metaBook.docuri)+
                 "&NOW="+fdjtTime.tick();
@@ -278,14 +278,14 @@
                     fdjtLog.warn(
                         "Sync request %s returned status %d %j, pausing for %ds",
                         uri,req.status,JSON.parse(req.responseText),
-                        metaBook.sync_pause/1000);}
+                        metaBook.sync_pause);}
                 catch (err) {
                     fdjtLog.warn(
                         "Sync request %s returned status %d, pausing for %ds",
                         uri,req.status,metaBook.sync_pause/1000);}
                 metaBook.locsync=false;
                 setTimeout(function(){metaBook.locsync=true;},
-                           metaBook.sync_pause);}}
+                           1000*metaBook.sync_pause);}}
     } metaBook.syncState=syncState;
 
     function syncTimeout(evt){
@@ -295,7 +295,7 @@
         metaBook.locsync=false;
         setTimeout(function(){
             metaBook.locsync=true;},
-                   metaBook.sync_pause);}
+                   1000*metaBook.sync_pause);}
 
     var prompted=false;
 

@@ -118,6 +118,10 @@ metaBook.DOMScan=(function(){
             var title=
                 (head.toctitle)||
                 ((head.getAttributeNS)&&
+                 (head.getAttributeNS('toctitle','http://beingmeta.com/TOC/')))||
+                ((head.getAttributeNS)&&
+                 (head.getAttributeNS('toctitle','http://beingmeta.com/METABOOK/')))||
+                ((head.getAttributeNS)&&
                  (head.getAttributeNS('toctitle','http://metabooks.net')))||
                 ((head.getAttributeNS)&&
                  (head.getAttributeNS('toctitle','http://sbooks.net')))||
@@ -127,6 +131,10 @@ metaBook.DOMScan=(function(){
             if (!(title)) {
                 var head1=fdjtDOM.getFirstChild(head,"H1,H2,H3,H4,H5,H6");
                 if (head1) title=head1.toctitle||
+                    ((head1.getAttributeNS)&&
+                     (head1.getAttributeNS('toctitle','http://beingmeta.com/TOC/')))||
+                    ((head1.getAttributeNS)&&
+                     (head1.getAttributeNS('toctitle','http://beingmeta.com/METABOOK/')))||
                     ((head1.getAttributeNS)&&
                      (head1.getAttributeNS('toctitle','http://metabooks.net')))||
                     ((head1.getAttributeNS)&&
@@ -393,6 +401,10 @@ metaBook.DOMScan=(function(){
                 info.toclevel=toclevel;
             if ((id)&&(info)) {
                 var tags=
+                    ((child.getAttributeNS)&&
+                     (child.getAttributeNS('tags','http://beingmeta.com/INDEX/')))||
+                    ((child.getAttributeNS)&&
+                     (child.getAttributeNS('tags','http://beingmeta.com/METABOOK/')))||
                     ((child.getAttributeNS)&&
                      (child.getAttributeNS('tags','http://metabooks.net/')))||
                     ((child.getAttributeNS)&&
