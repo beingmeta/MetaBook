@@ -79,7 +79,7 @@ metaBook.DOMScan=(function(){
         docinfo._heads=allheads;
         docinfo._ids=allids;
 
-        if (!(root.id)) root.id="SBOOKROOT";
+        if (!(root.id)) root.id="METABOOKROOT";
         if ((Trace.startup>1)||(Trace.domscan)) {
             if (root.id) 
                 fdjtLog("Scanning %s#%s for structure and metadata",
@@ -117,28 +117,12 @@ metaBook.DOMScan=(function(){
         function getTitle(head) {
             var title=
                 (head.toctitle)||
-                ((head.getAttributeNS)&&
-                 (head.getAttributeNS('toctitle','http://beingmeta.com/TOC/')))||
-                ((head.getAttributeNS)&&
-                 (head.getAttributeNS('toctitle','http://beingmeta.com/METABOOK/')))||
-                ((head.getAttributeNS)&&
-                 (head.getAttributeNS('toctitle','http://metabooks.net')))||
-                ((head.getAttributeNS)&&
-                 (head.getAttributeNS('toctitle','http://sbooks.net')))||
                 (head.getAttribute('toctitle'))||
                 (head.getAttribute('data-toctitle'))||
                 (head.title);
             if (!(title)) {
                 var head1=fdjtDOM.getFirstChild(head,"H1,H2,H3,H4,H5,H6");
                 if (head1) title=head1.toctitle||
-                    ((head1.getAttributeNS)&&
-                     (head1.getAttributeNS('toctitle','http://beingmeta.com/TOC/')))||
-                    ((head1.getAttributeNS)&&
-                     (head1.getAttributeNS('toctitle','http://beingmeta.com/METABOOK/')))||
-                    ((head1.getAttributeNS)&&
-                     (head1.getAttributeNS('toctitle','http://metabooks.net')))||
-                    ((head1.getAttributeNS)&&
-                     (head1.getAttributeNS('toctitle','http://sbooks.net')))||
                     (head1.getAttribute('toctitle'))||
                     (head1.getAttribute('data-toctitle'))||
                     (head1.title);
@@ -265,7 +249,7 @@ metaBook.DOMScan=(function(){
             headinfo.heads=newheads;
             headinfo.indexRef('heads',newheads);
             if (Trace.domscan>2)
-                fdjtLog("@%d: Found head=%o, headinfo=%o, sbook_head=%o",
+                fdjtLog("@%d: Found head=%o, headinfo=%o, book_head=%o",
                         scanstate.location,head,headinfo,headinfo.head);
             /* Update the toc state */
             scanstate.curhead=head;
@@ -302,7 +286,7 @@ metaBook.DOMScan=(function(){
             
             if ((classname)&&
                 ((typeof classname !== "string")||
-                 (classname.search(/\b(sbookignore|metabookignore)\b/)>=0)))
+                 (classname.search(/\b(metabookignore)\b/)>=0)))
                 return;
             
             if ((child.metabookui)||
@@ -391,7 +375,7 @@ metaBook.DOMScan=(function(){
                 docinfo[child.id]=info;
             if (info) {
                 info.starts_at=scanstate.location;
-                info.sbookhead=
+                info.bookhead=
                     curhead.getAttribute('data-tocid')||curhead.id;
                 info.headstart=curinfo.starts_at;}
             // Set the first content node
@@ -400,16 +384,7 @@ metaBook.DOMScan=(function(){
             if ((info)&&(toclevel)&&(!(info.toclevel)))
                 info.toclevel=toclevel;
             if ((id)&&(info)) {
-                var tags=
-                    ((child.getAttributeNS)&&
-                     (child.getAttributeNS('tags','http://beingmeta.com/INDEX/')))||
-                    ((child.getAttributeNS)&&
-                     (child.getAttributeNS('tags','http://beingmeta.com/METABOOK/')))||
-                    ((child.getAttributeNS)&&
-                     (child.getAttributeNS('tags','http://metabooks.net/')))||
-                    ((child.getAttributeNS)&&
-                     (child.getAttributeNS('tags','http://sbooks.net/')))||
-                    (child.getAttribute('tags'))||
+                var tags=(child.getAttribute('tags'))||
                     (child.getAttribute('data-tags'));
                 if (tags) info.atags=tags.split(',');}
             if (((classname)&&(classname.search)&&
@@ -498,7 +473,7 @@ metaBook.DOMScan=(function(){
     MetaBookDOMScan.prototype.toJSON=function(){
         var rep={constructor: "metaBook.DOMScan",
                  frag: this.frag,
-                 head: this.sbookhead,
+                 head: this.bookhead,
                  start: this.starts_at,
                  end: this.ends_at};
         if (this.WSNID) rep.WSNID=this.WSNID;

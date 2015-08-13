@@ -76,8 +76,8 @@
             if (Trace.target)
                 metaBook.trace("metaBook.setHead",head);
             window.title=headinfo.title+" ("+document.title+")";
-            if (metaBook.head) dropClass(metaBook.head,"sbookhead");
-            addClass(head,"sbookhead");
+            if (metaBook.head) dropClass(metaBook.head,"bookhead");
+            addClass(head,"bookhead");
             metaBook.setLocation(metaBook.location);
             metaBook.head=mbID(headid);
             metaBook.TOC.setHead(headinfo);}
@@ -173,7 +173,7 @@
             dropClass(targets,"mbnewtarget");},
                    3000);
         fdjtState.setCookie(
-            "mbtarget",targetid||target.getAttribute('data-sbookid'));
+            "mbtarget",targetid||target.getAttribute('data-bookid'));
         metaBook.target=primary;
         if (metaBook.UI.setTarget) metaBook.UI.setTarget(primary);
         if (metaBook.empty_cloud)

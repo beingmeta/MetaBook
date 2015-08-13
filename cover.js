@@ -126,8 +126,8 @@
             titlepage.removeAttribute("style");
             titlepage.id="METABOOKCOVERTITLE";}
         else {
-            titlepage=$ID("SBOOKSTITLEPAGE")||
-                $ID("SBOOKTITLEPAGE")||
+            titlepage=$ID("METABOOKTITLEPAGE")||
+                $ID("PUBTOOLTITLEPAGE")||
                 $ID("TITLEPAGE");
             if (titlepage) {
                 titlepage=titlepage.cloneNode(true);
@@ -175,17 +175,11 @@
             blurb.id="METABOOKBLURB";
             blurb.removeAttribute("style");}
         else {
-            var about_book=$ID("SBOOKABOUTPAGE")||
-                $ID("SBOOKABOUTBOOK")||
-                $ID("SBOOKSABOUTPAGE")||
-                $ID("SBOOKSABOUTBOOK");
-            var about_author=$ID("SBOOKABOUTAUTHOR")||
-                $ID("SBOOKABOUTORIGIN")||
-                $ID("SBOOKAUTHORPAGE")||
-                $ID("SBOOKSAUTHORPAGE")||
-                $ID("SBOOKABOUTAUTHORS")||
-                $ID("SBOOKSABOUTAUTHORS")||
-                $ID("SBOOKSABOUTAUTHOR");
+            var about_book=$ID("METABOOKABOUTPAGE")||
+                $ID("METABOOKABOUTBOOK")||
+                $ID("PUBTOOLABOUTBOOK");
+            var about_author=$ID("METABOOKABOUTAUTHOR")||
+                $ID("PUBTOOLABOUTAUTHOR");
             if ((about_book)||(about_author)) {
                 blurb=fdjtDOM(
                     "div#METABOOKBLURB.metabookblurb.scrolling",

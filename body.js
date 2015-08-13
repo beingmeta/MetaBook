@@ -76,10 +76,10 @@
         // Move all the notes together
         var notesblock=$ID("SBOOKNOTES")||
             fdjtDOM("div.sbookbackmatter#SBOOKNOTES");
-        applyMetaClass("sbooknote");
-        applyMetaClass("sbooknote","SBOOKS.note");
-        addClass(fdjtDOM.$("span[data-type='footnote']"),"sbooknote");
-        var allnotes=getChildren(content,".sbooknote");
+        applyMetaClass("htmlbooknote");
+        applyMetaClass("htmlbooknote","METABOOK.booknotes");
+        addClass(fdjtDOM.$("span[data-type='footnote']"),"htmlbooknote");
+        var allnotes=getChildren(content,".htmlbooknote");
         i=0; lim=allnotes.length; while (i<lim) {
             var notable=allnotes[i++]; var counter=note_counter++;
             var noteid="METABOOKNOTE"+counter;
@@ -91,21 +91,21 @@
                 getChild(notable,".html5label")||
                 getChild(notable,".html5summary");
             var anchor=fdjtDOM.Anchor(
-                "#"+noteid,"A.mbnoteref.sbooknoteref",
+                "#"+noteid,"A.mbnoteref.htmlnoteref",
                 ((label_node)?(label_node.cloneNode(true)):
                  (label_text)));
             var backlink=fdjtDOM.Anchor(
-                "#"+refid,"A.mbackref",
+                "#"+refid,"A.htmlackref",
                 ((label_node)?(label_node.cloneNode(true)):
                  (label_text)));
             anchor.id=refid;
             fdjtDOM.replace(notable,anchor);
-            dropClass(notable,"sbooknote");
+            dropClass(notable,"booknote");
             var noteblock=
                 ((notable.tagName==='SPAN')?
-                 fdjtDOM("div.metabooknotebody",
+                 fdjtDOM("div.booknotebody",
                          backlink,toArray(notable.childNodes)):
-                 fdjtDOM("div.metabooknotebody",backlink,notable));
+                 fdjtDOM("div.booknotebody",backlink,notable));
             noteblock.id=noteid;
             fdjtDOM.append(notesblock,noteblock,"\n");}
         

@@ -196,12 +196,13 @@
         
         var knodeToOption=Knodule.knodeToOption;
 
+
         var cachelink=/^https:\/\/glossdata.(sbooks\.net|metabooks\.net|beingmeta\.com|bookhub\.io)\//;
         mB.cachelink=cachelink;
         
         var knodule_name=
             fdjtDOM.getMeta("METABOOK.knodule")||
-            fdjtDOM.getMeta("SBOOKS.knodule")||
+            fdjtDOM.getMeta("PUBTOOL.knodule")||
             fdjtDOM.getMeta("~KNODULE")||
             refuri;
         metaBook.knodule=new Knodule(knodule_name);
@@ -246,7 +247,8 @@
                         if (!(links.hasOwnProperty(link))) continue;
                         if (!(links[link])) continue;
                         if (cachelink.exec(link)) {
-                            var newlink=link.replace("//glossdata.sbooks.net/","//glossdata.bookhub.io/");
+                            var newlink=link.replace(
+                                "//glossdata.sbooks.net/","//glossdata.bookhub.io/");
                             if (link!==newlink) {
                                 links[newlink]=links[link];
                                 delete links[link];
@@ -586,15 +588,6 @@
         while ((scan)&&(scan!==document)) {
             if (scan.getAttribute("data-refuri"))
                 return scan.getAttribute("data-refuri");
-            else if ((scan.getAttributeNS)&&
-                     (scan.getAttributeNS("refuri","http://metabooks.net/")))
-                return scan.getAttributeNS("refuri","http://metabooks.net/");
-            else if ((scan.getAttributeNS)&&
-                     (scan.getAttributeNS("refuri","http://beingmeta.com/METABOOK/")))
-                return scan.getAttributeNS("refuri","http://beingmeta.com/METABOOK/");
-            else if ((scan.getAttributeNS)&&
-                     (scan.getAttributeNS("refuri","http://sbooks.net/")))
-                return scan.getAttributeNS("refuri","http://sbooks.net/");
             else if (scan.getAttribute("refuri"))
                 return scan.getAttribute("refuri");
             else scan=scan.parentNode;}
@@ -606,15 +599,6 @@
         while ((scan)&&(scan!==document)) {
             if (scan.getAttribute("data-docuri"))
                 return scan.getAttribute("data-docuri");
-            else if ((scan.getAttributeNS)&&
-                     (scan.getAttributeNS("docuri","http://beingmeta.com/METABOOK/")))
-                return scan.getAttributeNS("docuri","http://beingmeta.com/METABOOK/");
-            else if ((scan.getAttributeNS)&&
-                     (scan.getAttributeNS("docuri","http://metabooks.net/")))
-                return scan.getAttributeNS("docuri","http://metabooks.net/");
-            else if ((scan.getAttributeNS)&&
-                     (scan.getAttributeNS("docuri","http://sbooks.net/")))
-                return scan.getAttributeNS("docuri","http://sbooks.net/");
             else if (scan.getAttribute("docuri"))
                 return scan.getAttribute("docuri");
             else scan=scan.parentNode;}
@@ -623,11 +607,8 @@
 
     metaBook.getRefID=function(target){
         if (target.getAttributeNS)
-            return (target.getAttributeNS('sbookid','http://beingmeta.com/METABOOK/'))||
-            (target.getAttributeNS('sbookid','http://metabooks.net/'))||
-            (target.getAttributeNS('sbookid','http://sbooks.net/'))||
-            (target.getAttributeNS('sbookid'))||
-            (target.getAttributeNS('data-sbookid'))||
+            return (target.getAttributeNS('bookid'))||
+            (target.getAttributeNS('data-bookid'))||
             (target.codexbaseid)||(target.id);
         else return target.id;};
 
@@ -734,7 +715,7 @@
        to the home screen loses any authentication information
        (cookies, etc) that the original page might have had.  To
        avoid forcing the user to login again, we store the current
-       SBOOKS:AUTH- token (the encrypted authentication token that
+       BOOKHUB:AUTH- token (the encrypted authentication token that
        can travel in the clear) in the .search (query string) of the
        current location.  This IS passed to the homescreen
        standalone app, so we can use it to get a real authentication
@@ -744,7 +725,7 @@
         if ((!(metaBook.user))||(fdjt.device.standalone)||
             (!(fdjt.device.mobilesafari)))
             return;
-        var auth=fdjtState.getCookie("SBOOKS:AUTH-");
+        var auth=fdjtState.getCookie("BOOKHUB:AUTH-");
         if (!(auth)) return;
         var eauth=encodeURIComponent(auth);
         var url=location.href, qmark=url.indexOf('?'), hashmark=url.indexOf('#');
@@ -753,10 +734,10 @@
         var query=((qmark<0)?(""):(hashmark<0)?(url.slice(qmark)):
                    (url.slice(qmark+1,hashmark)));
         var hash=((hashmark<0)?(""):(url.slice(hashmark)));
-        var old_query=false, new_query="SBOOKS%3aAUTH-="+eauth;
+        var old_query=false, new_query="BOOKHUB%3aAUTH-="+eauth;
         if (query.length<=2) query="?"+new_query;
-        else if (query.search("SBOOKS%3aAUTH-=")>=0) {
-            var auth_start=query.search("SBOOKS%3aAUTH-=");
+        else if (query.search("BOOKHUB%3aAUTH-=")>=0) {
+            var auth_start=query.search("BOOKHUB%3aAUTH-=");
             var before=query.slice(0,auth_start);
             var auth_len=query.slice(auth_start).search('&');
             var after=((auth_len<0)?(""):(query.slice(auth_start+auth_len)));
@@ -940,16 +921,7 @@
                 elt.toclevel=false;
                 return false;}
             else return elt.toclevel;}
-        var attrval=
-            ((elt.getAttributeNS)&&
-             (elt.getAttributeNS('toclevel','http://beingmeta.com/TOC/')))||
-            ((elt.getAttributeNS)&&
-             (elt.getAttributeNS('toclevel','http://beingmeta.com/METABOOK/')))||
-            ((elt.getAttributeNS)&&
-             (elt.getAttributeNS('toclevel','http://metabooks.net')))||
-            ((elt.getAttributeNS)&&
-             (elt.getAttributeNS('toclevel','http://sbooks.net')))||
-            (elt.getAttribute('toclevel'))||
+        var attrval=(elt.getAttribute('toclevel'))||
             (elt.getAttribute('data-toclevel'));
         if (attrval) {
             if (attrval==='none') return false;
