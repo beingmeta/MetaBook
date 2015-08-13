@@ -401,7 +401,7 @@
                 if (typeof rel !== "string") rel="";
                 if ((rel.search(note_classes)>=0)||
                     (classname.search(noteref_classes)>=0)||
-                    ((mB.sbooknoterefs)&&(mB.sbooknoterefs.match(anchor)))) {
+                    ((mB.noterefspecs)&&(mB.noterefspecs.match(anchor)))) {
                     var note_node=getNoteNode(idref);
                     var noteid=note_node.id;
                     metaBook.DOM.noteshud.innerHTML="";
@@ -497,11 +497,11 @@
                     else i++;}}}
         if (!(elt)) return;
         var scan=elt, style=fdjtDOM.getStyle(elt), block=false;
-        var notespec=metaBook.sbooknotes;
+        var notespecs=metaBook.notespecs;
         while (scan) {
             if (scan===body) break;
             else if (scan===db) break;
-            else if ((notespec)&&(notespec.match(scan))) return scan;
+            else if ((notespecs)&&(notespecs.match(scan))) return scan;
             else if (block) {}
             else if (style.display==='block') {block=scan; style=false;}
             else {}
