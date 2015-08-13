@@ -1006,9 +1006,9 @@ metaBook.Startup=
                 $ID("METABOOKSTART")||$ID("BOOKSTART");
             var i=0; while (i<9) {
                 var body=document.body;
-                var rules=getMeta("TOC.head"+i,true).
-                    getMeta("TOC.sect"+i,true).
-                    getMeta("tochead"+i,true);
+                var rules=getMeta("TOC.head"+i,true)
+                    .concat(getMeta("TOC.sect"+i,true))
+                    .concat(getMeta("tochead"+i,true));
                 if ((rules)&&(rules.length)) {
                     var j=0; var lim=rules.length; while (j<lim) {
                         var elements=fdjtDOM.getChildren(body,rules[j++]);
