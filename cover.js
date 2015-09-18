@@ -101,15 +101,10 @@
             if (!(hasAnyContent(coverpage))) {
                 coverpage.removeAttribute("style");
                 coverpage=false;}}
-        else if ((coverpage=$ID("SBOOKCOVERPAGE"))) {
-            coverpage=coverpage.cloneNode(true);
-            coverpage.removeAttribute("style");
-            fdjtDOM.stripIDs(coverpage);
-            coverpage.id="METABOOKCOVERPAGE";}
         else if (metaBook.coverimage) {
             var coverimage=fdjtDOM.Image(metaBook.coverimage);
             coverimage.id="METABOOKCOVERIMAGE";
-            coverpage=fdjtDOM("div#METABOOKCOVERPAGE",coverimage);}
+            coverpage=fdjtDOM("div.flap#METABOOKCOVERPAGE",coverimage);}
         else coverpage=false;
         if (coverpage) {
             cover.setAttribute("data-defaultclass","coverpage");
@@ -120,11 +115,11 @@
             cover.setAttribute("data-defaultclass","titlepage");
             addClass(cover,"titlepage");
             addClass(controls,"nocoverpage");}
-        var titlepage=$ID("METABOOKCOVERTITLE");
+        var titlepage=$ID("METABOOKTITLE");
         if ((titlepage)&&(hasAnyContent(titlepage))) {
             titlepage=titlepage.cloneNode(true);
             titlepage.removeAttribute("style");
-            titlepage.id="METABOOKCOVERTITLE";}
+            titlepage.id="METABOOKTITLE";}
         else {
             titlepage=$ID("METABOOKTITLEPAGE")||
                 $ID("PUBTOOLTITLEPAGE")||
@@ -136,11 +131,11 @@
                 fdjtDOM.addClass(titlepage,"sbooktitlepage");
                 fdjtDOM.stripIDs(titlepage);
                 titlepage.setAttribute("style","");
-                titlepage.id="METABOOKCOVERTITLE";}
+                titlepage.id="METABOOKTITLE";}
             else {
                 var info=metaBook.getBookInfo();
                 titlepage=fdjtDOM(
-                    "div#METABOOKCOVERTITLE.sbooktitlepage",
+                    "div#METABOOKTITLE.flap",
                     fdjtDOM("DIV.title",info.title),
                     fdjtDOM("DIV.credits",
                             ((info.byline)?(fdjtDOM("DIV.byline",info.byline)):
@@ -152,17 +147,17 @@
                              (fdjtDOM("P",info.publisher)))));}}
         if (titlepage) addToCover(cover,titlepage);
 
-        var creditspage=$ID("METABOOKCOVERCREDITS");
+        var creditspage=$ID("METABOOKCREDITS");
         if (creditspage)
             creditspage=creditspage.cloneNode(true);
         else {
-            creditspage=$ID("METABOOKCOVERCREDITS")||$ID("SBOOKSCREDITSPAGE")||$ID("CREDITSPAGE");
+            creditspage=$ID("METABOOKCREDITS")||$ID("SBOOKSCREDITSPAGE")||$ID("CREDITSPAGE");
             if (creditspage) {
                 creditspage=creditspage.cloneNode(true);
                 fdjtDOM.stripIDs(creditspage);
                 creditspage.removeAttribute("style");}}
         if ((creditspage)&&(hasAnyContent(creditspage))) {
-            var curcredits=cover.getElementById("METABOOKCOVERCREDITS");
+            var curcredits=cover.getElementById("METABOOKCREDITS");
             if (curcredits)
                 curcredits.parentNode.replaceChild(creditspage,curcredits);
             else cover.appendChild(creditspage);}
@@ -182,24 +177,24 @@
                 $ID("PUBTOOLABOUTAUTHOR");
             if ((about_book)||(about_author)) {
                 blurb=fdjtDOM(
-                    "div#METABOOKBLURB.metabookblurb.scrolling",
+                    "div#METABOOKBLURB.flap.metabookblurb.scrolling",
                     "\n",about_book,"\n",about_author,"\n");}
             else blurb=false;}
         if (blurb) addToCover(cover,blurb);
         
         var settings=fdjtDOM(
-            "div#METABOOKSETTINGS.scrolling");
+            "div#METABOOKSETTINGS.flap.scrolling");
         settings.innerHTML=fixStaticRefs(metaBook.HTML.settings);
         metaBook.DOM.settings=settings;
         if (settings) addToCover(cover,settings);
         
         var cover_help=fdjtDOM(
-            "div#METABOOKAPPHELP.metabookhelp.scrolling");
+            "div#METABOOKAPPHELP.flap.metabookhelp.scrolling");
         cover_help.innerHTML=fixStaticRefs(metaBook.HTML.help);
         if (cover_help) addToCover(cover,cover_help);
         
         var console=metaBook.DOM.console=
-            fdjtDOM("div#METABOOKCONSOLE.metabookconsole.scrolling");
+            fdjtDOM("div#METABOOKCONSOLE.flap.metabookconsole.scrolling");
         if (Trace.startup>2) fdjtLog("Setting up console %o",console);
         console.innerHTML=fixStaticRefs(metaBook.HTML.console);
         metaBook.DOM.input_console=input_console=
@@ -210,8 +205,8 @@
         input_console.onkeypress=consoleinput_keypress;
         if (console) addToCover(cover,console);
         
-        var layers=fdjtDOM("div#METABOOKLAYERS");
-        var sbooksapp=fdjtDOM("iframe#SBOOKSAPP");
+        var layers=fdjtDOM("div#METABOOKLAYERS.flap");
+        var sbooksapp=fdjtDOM("iframe#BOOKHUBAPP");
         sbooksapp.setAttribute("frameborder",0);
         sbooksapp.setAttribute("scrolling","auto");
         layers.appendChild(sbooksapp);
@@ -276,7 +271,7 @@
         fdjtDOM.adjustFontSize(userbox);
         // fdjt.DOM.resetFontSize(controls);
         // fdjt.DOM.resetFontSize(userbox);            
-        var covertitle=$ID("METABOOKCOVERTITLE");
+        var covertitle=$ID("METABOOKTITLE");
         if ((covertitle)&&
             (!(hasClass(covertitle,/\b(adjustfont|fdjtadjustfont)\b/))))
             fdjtDOM.adjustFontSize(covertitle);
@@ -287,8 +282,8 @@
     metaBook.resizeCover=resizeCover;
 
     var coverids={"coverpage": "METABOOKCOVERPAGE",
-                  "titlepage": "METABOOKCOVERTITLE",
-                  "creditspage": "METABOOKCOVERCREDITS",
+                  "titlepage": "METABOOKTITLE",
+                  "creditspage": "METABOOKCREDITS",
                   "blurb": "METABOOKBLURB",
                   "help": "METABOOKAPPHELP",
                   "settings": "METABOOKSETTINGS",
@@ -318,7 +313,7 @@
             else scan=scan.parentNode;}
         var mode=scan.getAttribute("data-mode");
         if ((mode==="layers")&&
-            (!($ID("SBOOKSAPP").src))&&
+            (!($ID("BOOKHUBAPP").src))&&
             (!(metaBook.appinit)))
             metaBook.initIFrameApp();
 

@@ -434,7 +434,7 @@ metaBook.setMode=
                 metaBook.popmode=false;
                 fn();}
             if ((mode==="layers")&&
-                (!($ID("SBOOKSAPP").src))&&
+                (!($ID("BOOKHUBAPP").src))&&
                 (!(metaBook.appinit)))
                 metaBook.initIFrameApp();
             if ((metaBook.mode==="addgloss")&&(mode!=="addgloss")&&
@@ -481,7 +481,7 @@ metaBook.setMode=
                 // If we're switching to the inner app but the iframe
                 //  hasn't been initialized, we do it now.
                 if ((mode==="sbooksapp")&&
-                    (!($ID("SBOOKSAPP").src))&&
+                    (!($ID("BOOKHUBAPP").src))&&
                     (!(metaBook.appinit)))
                     initIFrameApp();
 
@@ -649,7 +649,7 @@ metaBook.setMode=
             if (document.location.hash) {
                 appuri=appuri+"&HASH="+document.location.hash.slice(1);}
 
-            var app=$ID("SBOOKSAPP");
+            var app=$ID("BOOKHUBAPP");
             app.src=appuri;
             iframe_app_init=true;}
         metaBook.initIFrameApp=initIFrameApp;

@@ -1,47 +1,48 @@
 <div id="METABOOKCOVERMESSAGE" class="controls">
   <div id="METABOOKOPENTAB"
        style="width: 7em; margin-left: auto; margin-right: auto; color: white; background-color: gray; margin-top: 0.2ex; padding:  0px 1em 0px 1em; border: solid transparent 2px; font-variant: small-caps; border-radius: 1ex; box-sizing: border-box;">
-    Open</div>
-  <div id="METABOOKREADYMESSAGE"
+    Open
+  </div>
+  <div id="METABOOKREADYMESSAGE" class="message"
        style="width: 7em; margin-left: auto; margin-right: auto; color: white; background-color: gray; margin-top: 0.2ex; padding:  0px 1em 0px 1em; border: solid transparent 2px; font-variant: small-caps; border-radius: 1ex; box-sizing: border-box;">
     Loading
   </div>
-  <div id="METABOOKBUSYMESSAGE"
+  <div id="METABOOKBUSYMESSAGE" class="message"
        style="width: 7em; margin-left: auto; margin-right: auto; color: white; background-color: gray; margin-top: 0.7ex; padding:  0px 1em 0px 1em; border: solid transparent 2px; font-variant: small-caps; border-radius: 1ex; box-sizing: border-box;">
     Busy
   </div>
-  <div class="metabookstatus" id="METABOOKLAYOUTMESSAGE">
+  <div class="metabookstatus" id="METABOOKLAYOUTMESSAGE" class="message">
     <div class="metabookprogressbox"><div class="indicator"></div></div>
     <div class="message" style="font-size: 24px; font-size: 5vmin;"></div>
   </div>
-  <div class="metabookstatus" id="METABOOKINDEXMESSAGE">
+  <div class="metabookstatus" id="METABOOKINDEXMESSAGE" class="message">
     <div class="metabookprogressbox"><div class="indicator"></div></div>
     <div class="message" style="font-size: 24px; font-size: 5vmin;"></div>
   </div>
-  <div class="metabookstatus" id="METABOOKGLOSSMESSAGE">
+  <div class="metabookstatus" id="METABOOKGLOSSMESSAGE" class="message">
     <div class="metabookprogressbox"><div class="indicator"></div></div>
     <div class="message" style="font-size: 24px; font-size: 5vmin;"></div>
   </div>
 </div>
-<div id="METABOOKCOVERPAGE"
+<div id="METABOOKCOVERPAGE" class="flap"
      style="position: absolute; top: 75px; left: 50px; right: 50px; width: auto; bottom: 100px; height: auto; overflow: hidden;">
   <img src="{{coverimage|}}" alt="{{covertext|}}"
        style="max-width: 95%; width: auto; height: 90%;"
        id="METABOOKCOVERIMAGE"/>
 </div>
-<div id="METABOOKCOVERTITLE" class="metabooktitlepage"
+<div id="METABOOKTITLE" class="flap"
      style="position: absolute; top: 75px; left: 50px; right: 50px; width: auto; bottom: 100px; height: auto; overflow: hidden;">
 </div>
-<div id="METABOOKCOVERCREDITS"
+<div id="METABOOKCREDITS" class="flap metabookcredits"
      style="position: absolute; top: 75px; left: 50px; right: 50px; width: auto; bottom: 100px; height: auto; overflow: hidden;">
 </div>
-<div id="METABOOKBLURB" class="scrolling"
+<div id="METABOOKBLURB" class="scrolling flap"
      style="position: absolute; top: 50px; left: 50px; right: 50px; width: auto; bottom: 100px; height: auto;">
 </div>
-<div id="METABOOKAPPHELP" class="metabookhelp scrolling"
+<div id="METABOOKAPPHELP" class="metabookhelp scrolling flap"
      style="position: absolute; top: 75px; left: 50px; right: 50px; width: auto; bottom: 100px; height: auto;">
   <h1><span class="adjustfont">Welcome to the &metaBook; web-based
-  e-reader</span></h1>
+      e-reader</span></h1>
   
   <p>You're using &metaBook;, a web-based e-reader created to deepen
     reading and engagement while connecting to networks of knowledge,
@@ -50,17 +51,17 @@
     natural to navigate, annotate, search, and personalize.</p>
   <div id="METABOOKCOVERHELP"></div>
 </div>
-<div id="METABOOKSETTINGS" class="scrolling"
+<div id="METABOOKSETTINGS" class="scrolling flap"
      style="position: absolute; top: 50px; left: 50px; right: 50px; width: auto; bottom: 100px; height: auto;">
 </div>
-<div id="METABOOKCONSOLE" class="scrolling"
+<div id="METABOOKCONSOLE" class="scrolling flap"
      style="position: absolute; top: 75px; left: 50px; right: 50px; width: auto; bottom: 100px; height: auto;">
 </div>
-<div id="METABOOKLAYERS" class="scrolling"
+<div id="METABOOKLAYERS" class="scrolling flap"
      style="position: absolute; top: 75px; left: 50px; right: 50px; width: auto; bottom: 100px; height: auto;">
-  <iframe name="SBOOKSAPP" id="SBOOKSAPP" frameborder="0" scrolling="auto"></iframe>
+  <iframe name="BOOKHUBAPP" id="BOOKHUBAPP" frameborder="0" scrolling="auto"></iframe>
 </div>
-<div id="METABOOKCOVERCONTROLS"
+<div id="METABOOKCOVERCONTROLS" 
      style="position: absolute; bottom: 40px; left: 50px; right: 50px; width: auto; height: 60px; top: auto; font-size: 0.8em; font-size: 1.5rem; font-size: 3vw;">
   <span class="control" data-mode="coverpage" title="see the cover"
         tabindex="1">
