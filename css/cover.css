@@ -455,10 +455,6 @@ body.mbBUSY #METABOOKCOVERMESSAGE div.message#METABOOKREADYMESSAGE {
     #METABOOKSETTINGS table.settings th {
         white-space: normal; font-size: 80%; max-width: 10ex;}
 
-    #METABOOKCOVER div.userbox span.text {display: none;}
-    #METABOOKCOVER div.userbox a.sbookslogo { float: left; display: inline-block;}
-    #METABOOKCOVER div.userbox a.sbooks { display: none;}
-    #METABOOKCOVER div.userbox a.metabookusername { float: right;}
 }
 
 /* Phone */
@@ -476,6 +472,11 @@ body.mbBUSY #METABOOKCOVERMESSAGE div.message#METABOOKREADYMESSAGE {
     html._TOUCH #METABOOKSETTINGS {  font-size: 0.9em; }
     html._TOUCH #METABOOKSETTINGS table.settings {  font-size: 1em; }
     
+    #METABOOKCOVER div.userbox a.metabookusername { float: right;}
+    #METABOOKCOVER div.userbox span.text { display: none;}
+    #METABOOKCOVER div.userbox span.bookplate a { display: none;}
+
+
     #METABOOKCOVER > #METABOOKCOVERCONTROLS {
         height: 80px; white-space: normal; }
 
