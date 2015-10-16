@@ -905,6 +905,7 @@ metaBook.Slice=(function () {
                 fdjtUI.cancel(evt);
                 return;}}
         var card=getCard(target);
+        if (!(card)) return;
         var passage=mbID(card.getAttribute("data-passage"));
         var glossid=card.getAttribute("data-gloss");
         var gloss=((glossid)&&(metaBook.glossdb.ref(glossid)));
