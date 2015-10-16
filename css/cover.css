@@ -220,7 +220,7 @@ body.mbREADY #METABOOKCOVER.coverpage #METABOOKOPENTAB {
   display: none;}
 #METABOOKCOVER.coverpage div.flap#METABOOKCOVERPAGE,
 #METABOOKCOVER.bookcover div.flap#METABOOKCOVERPAGE {
-   top: 0px;}
+   top: 0px; bottom: 100px;}
 
 
 #METABOOKCOVER.bookcover .control[data-mode='coverpage'],

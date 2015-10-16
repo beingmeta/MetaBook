@@ -5,7 +5,7 @@
   <div class="fontsizes body"
        title="Set the font sizes used for the body text.">
     <span class="label" id="METABOOKBODYSIZELABEL">
-      Body size<br/>
+      Body text<br/>
       <button name="REFRESH" value="Layout"
               id="METABOOKREFRESHLAYOUT">
         <img src="{{bmg}}metabook/refresh.svgz" alt="Update">
@@ -33,24 +33,7 @@
         <span class="sample tiny">Aa</span></span>
     </span>
   </div>
-  <!--
-  <div class="checkspans fontfamily"
-       title="Set the font sizes used for the body text.">
-    <span class="label smaller">Font family</span>
-    <span class="checkspan sanserif">
-      <input TYPE="RADIO" NAME="bodyfamily"
-             VALUE="sanserif"/>
-      <span class="sample sanserif">Sans</span></span>
-    <span class="checkspan serif">
-      <input TYPE="RADIO" NAME="bodyfamily" 
-             VALUE="serif"/>
-      <span class="sample serif">Serif</span></span>
-    <span class="checkspan lowcontrast">
-      <input TYPE="RADIO" NAME="bodyfamily"
-             VALUE="opendyslexic"/>
-      <span class="sample opendyslexic">Open Dyslexic</span></span>
-  </div>
-  -->
+  <div class="clearfloats"></div>
   <div class="contrast checkspans"
        title="Select the contrast level for body text">
     <span class="label smaller">Text Contrast</span>
@@ -67,6 +50,7 @@
              VALUE="low"/>
       <span class="sample">Low</span></span>
   </div>
+  <div class="clearfloats"></div>
   <div class="textlayout checkspans">
     <span class="label smaller">Layout</span>
     <span class="checkspans">
@@ -84,6 +68,7 @@
         hybrid (<em>scrollio</em>)</span>
     </span>
   </div>
+  <div class="clearfloats"></div>
   <div class="also checkspans">
     <span class="label smaller">Other Options</span>
     <span class="checkspan opendyslexical"
@@ -99,9 +84,10 @@
       <input TYPE="CHECKBOX" NAME="textjustify" VALUE="yes"/>
       Justify paragraphs</span>
   </div>
+  <div class="clearfloats"></div>
   <div class="fontsizes device"
        title="Set the font sizes used by the interface components of metaBook">
-    <span class="label">App font</span>
+    <span class="label">Application</span>
     <span class="samples">
       <span class="checkspan">
         <input TYPE="RADIO" NAME="uisize" VALUE="large"/>
@@ -114,6 +100,7 @@
         <span class="sample small">Aa</span></span>
     </span>
   </div>
+  <div class="clearfloats"></div>
   <div class="animation">
     <span class="label smaller">Animate</span>
     <span class="checkspan">
@@ -123,6 +110,7 @@
       <input TYPE="CHECKBOX" NAME="animatehud" VALUE="yes"/>
       <span class="text">interface (overlays, controls, etc)</span></span>
   </div>
+  <div class="clearfloats"></div>
   <div class="header dataheader cf">
     <button NAME="CLEARDATA" VALUE="ALL">Erase all</button>
     <span class="label">Storage</span>
@@ -137,6 +125,7 @@
     <span class="text">
       Sync your <strong>reading location</strong> with other devices</span>
   </div>
+  <div class="clearfloats"></div>
   <div class="checkspan saveglosses cf">
     <button id="METABOOKREFRESHOFFLINE" class="refresh floatright"
             title="Reload glosses and layers for this book from the cloud.">
@@ -147,11 +136,13 @@
       Save copies of <strong>glosses</strong>
       and <strong>layers</strong> on this device</span>
   </div>
+  <div class="clearfloats"></div>
   <div class="checkspan showconsole cf">
     <span class="label">Developer</span>
     <input TYPE="CHECKBOX" NAME="showconsole" VALUE="yes"/>
     <span class="text">Show the application console</span>
   </div>
+  <div class="clearfloats"></div>
   <div class="info" id="METABOOKINFOPANEL">
     <span class="label">Info</span>
     <p class="metabookrefinfo"></p>

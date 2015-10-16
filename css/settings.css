@@ -139,6 +139,10 @@ form.metabooksettings div.checkspans .checkspan {
 form.metabooksettings div.checkspans .checkspan.ischecked {
     font-weight: normal; color: black;}
 
+form.metabooksettings div.fontsizes span.label {
+    line-height: 1;}
+form.metabooksettings div.fontsizes button {
+    margin-bottom: 1ex;}
 form.metabooksettings div.fontsizes span.checkspan {
     border-bottom: transparent solid 3px;}
 form.metabooksettings div.fontsizes span.checkspan span.sample {
