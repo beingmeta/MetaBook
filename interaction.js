@@ -1929,9 +1929,9 @@
              blur: function(){
                  fdjt.DOM.dropClass('METABOOKCONSOLEINPUT','uptop');}},
          "#METABOOKCONSOLEBUTTON": {click: consolefn},
-         "#METABOOKREFRESHOFFLINE": {tap: refreshOffline},
-         "#METABOOKREFRESHLAYOUT": {tp: refreshLayout},
-         "#METABOOKRESETSYNC": {tap: resetState},
+         "#METABOOKREFRESHOFFLINE": {click: refreshOffline},
+         "#METABOOKREFRESHLAYOUT": {click: refreshLayout},
+         "#METABOOKRESETSYNC": {click: resetState},
          ".clearoffline": {click: clearOffline},
          ".metabookclearmode": {click: clearMode},
          "#METABOOKGOTOREFHELP": {click: clearMode},
