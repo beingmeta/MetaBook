@@ -388,7 +388,7 @@ metaBook.DOMScan=(function(){
                     (child.getAttribute('data-tags'));
                 if (tags) info.atags=tags.split(',');}
             if (((classname)&&(classname.search)&&
-                 (classname.search(/\bsbookignore\b/)>=0))||
+                 (classname.search(/\b(sbook|pubtool)ignore\b/)>=0))||
                 ((metaBook.ignore)&&(metaBook.ignore.match(child))))
                 return;
             if ((toclevel)&&(!(info.tocdone)))
@@ -399,7 +399,7 @@ metaBook.DOMScan=(function(){
             else {}
 
             if (((classname)&&(classname.search)&&
-                 (classname.search(/\bsbookterminal\b/)>=0))||
+                 (classname.search(/\b(sbook|pubtool)terminal\b/)>=0))||
                 ((classname)&&(metaBook.terminals)&&
                  (metaBook.terminals.match(child)))) {
                 scanstate.location=scanstate.location+textWidth(child);}

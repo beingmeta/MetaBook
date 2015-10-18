@@ -986,9 +986,9 @@ metaBook.Startup=
                 (elt.getAttribute('toclevel'))||
                 (elt.getAttribute('data-toclevel'))||
                 ((elt.className)&&(elt.className.search)&&
-                 ((elt.className.search(/\bsbook\dhead\b/)>=0)||
-                  (elt.className.search(/\bsbooknotoc\b/)>=0)||
-                  (elt.className.search(/\bsbookignore\b/)>=0))))
+                 ((elt.className.search(/\b(sbook|pubtool)\dhead\b/)>=0)||
+                  (elt.className.search(/\b(sbook|pubtool)notoc\b/)>=0)||
+                  (elt.className.search(/\b(sbook|pubtool)ignore\b/)>=0))))
                 return true;
             else return false;}
         metaBook.hasTOCLevel=hasTOCLevel;

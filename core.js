@@ -542,7 +542,7 @@
 
     var trace1="%s %o in %o: mode%s=%o, target=%o, head=%o skimming=%o";
     var trace2="%s %o: mode%s=%o, target=%o, head=%o skimming=%o";
-    function sbook_trace(handler,cxt){
+    function metabook_trace(handler,cxt){
         var target=((cxt.nodeType)?(cxt):(fdjtUI.T(cxt)));
         if (target)
             fdjtLog(trace1,handler,cxt,target,
@@ -551,14 +551,14 @@
         else fdjtLog(trace2,handler,cxt,
                      ((metaBook.skimpoint)?("(skimming)"):""),metaBook.mode,
                      metaBook.target,metaBook.head,metaBook.skimpoint);}
-    metaBook.trace=sbook_trace;
+    metaBook.trace=metabook_trace;
 
     var uroot_pat=/https?:\/\/[^\/]+\/([^\/]+\/)*/;
     var mbama=window._metabook_amalgam;
 
-    // This is the hostname for the sbookserver.
+    // This is the hostname for the gloss server
     metaBook.server=false;
-    // This is an array for looking up sbook servers.
+    // This is an array for looking up gloss servers.
     metaBook.servers=[];
     //metaBook.servers=[];
     // This is the default server
