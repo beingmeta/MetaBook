@@ -456,10 +456,18 @@
             dups,{ontap: gloss_selecting_ontap,
                   onrelease: ((opts)&&(opts.onrelease)),
                   onslip: ((opts)&&(opts.onslip)),
+                  // onstart: select_start,
+                  // onstop: select_end,
+                  loupe: false,
                   fortouch: metaBook.touch,
                   holdmsecs: 150,
                   movethresh: 250});}
     metaBook.UI.selectText=selectText;
+
+    /*
+    function select_start(){addClass(document.body,"_SELECTING");}
+    function select_end(){dropClass(document.body,"_SELECTING");}
+    */
 
     function gloss_selecting_ontap(evt){
         evt=evt||window.event;

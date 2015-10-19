@@ -45,6 +45,16 @@ body.hudup div.metabookglossform form div.glossetc,
 body div.metabookglossform.focused form div.glossetc {
     min-height: 1.5ex;}
 
+body._SELECTING div.metabookglossform form div.textbox,
+body._SELECTING div.metabookglossform form div.addglossmenu {
+    display: none;}
+body._SELECTING div.metabookglossform form div.glossetc {
+    display: block;}
+body._SELECTING div.metabookglossform form div.glossetc > * {
+    visibility: hidden;}
+body._SELECTING div.metabookglossform form div.glossetc > *.excerpt {
+    visibility: visible;}
+
 body div.metabookglossform form div.glossetc {
     display: none;}
 body.hudup div.metabookglossform form div.glossetc,
