@@ -35,6 +35,7 @@ html._MOUSE #METABOOKHUD a.brick:hover { text-decoration: none;}
 #METABOOKSKIMMER {
     position: absolute; left: 60px; right: 60px; z-index: 100;
     border: solid steelblue 4px; padding: 0px; font-size: 70%;
+    background-color: white;
     max-height: 75px;}
 html._TOUCH #METABOOKSKIMMER,
 html._TOUCH #METABOOKSKIMMER div.mbtoc,
@@ -399,8 +400,14 @@ body.hudup #METABOOKHUD div.hudpanel {
     -moz-opacity: 0.98;
     -o-opacity: 0.98;}
 
+body.mbSKIMMING #METABOOKHUD.openheart #METABOOKHEART,
+body.hudup.mbSKIMMING #METABOOKHUD.openheart #METABOOKHEART {
+    display: none;}
+
 body.mbSKIMMING #METABOOKHUD.allglosses #METABOOKSOURCES,
-body.mbSKIMMING #METABOOKHUD.searchresults #METABOOKSEARCH {
+body.mbSKIMMING #METABOOKHUD.searchresults #METABOOKSEARCH,
+body.mbSKIMMING #METABOOKHUD.allglosses #METABOOKALLGLOSSES.hudpanel ,
+body.mbSKIMMING #METABOOKHUD.searchresults #METABOOKSEARCHRESULTS.hudpanel {
     display: none; }
 
 /* Heart rules */
