@@ -759,8 +759,8 @@ metaBook.setMode=
 
         function skimMode(slice,expanded){
             var body=document.body, skimmer=$ID("METABOOKSKIMMER");
-            addClass(body,"mbSKIMMING");
             setHUD(false,false);
+            addClass(body,"mbSKIMMING");
             if (expanded) addClass(skimmer,"expanded");
             else dropClass(skimmer,"expanded");
             // This all makes sure that the >| and |< buttons
