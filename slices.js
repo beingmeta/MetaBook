@@ -767,7 +767,8 @@ metaBook.Slice=(function () {
         var byid=this.byid, cards=this.cards;
         var i=0, lim=adds.length;
         while (i<lim) {
-            var add=adds[i++], info=false, card, id, about=false, replace=false;
+            var add=adds[i++], info=false, card, id, about=false;
+            var push=true, replace=false;
             if ((add.about)&&(add.dom)) {
                 info=add; card=add.dom;}
             if ((add.nodeType)&&(add.nodeType===1)&&
@@ -780,7 +781,8 @@ metaBook.Slice=(function () {
                 else card=add;}
             else if (add instanceof Ref) {
                 id=add._qid||add.getQID(); about=add;
-                if (byid[id]) {info=byid[id]; card=info.dom;}
+                if (byid[id]) {
+                    info=byid[id]; card=info.dom; push=false;}
                 else card=this.renderCard(add);}
             else {}
             if (!(card)) continue;
@@ -806,7 +808,8 @@ metaBook.Slice=(function () {
                     info.hidden=false;
                 else info.hidden=true;}
             if (replace) this.container.replaceChild(card,replace);
-            else cards.push(info);}
+            else if (push) cards.push(info);
+            else {}}
         this.needupdate=true;
         if (this.live) this.refresh();};
 
