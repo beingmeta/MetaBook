@@ -398,6 +398,16 @@ metaBook.DOMScan=(function(){
                 info.head=curinfo; info.indexRef('head',curinfo);}
             else {}
 
+            if (info) {
+                var altids=child.getAttribute("data-altid");
+                if (altids) {
+                    altids=altids.split(" ");
+                    var alti=0, altlen=altids.length;
+                    while (alti<altlen) {
+                        var altid=altids[alti++];
+                        if (docinfo[altid]) {}
+                        else docinfo[altid]=info;}}}
+
             if (((classname)&&(classname.search)&&
                  (classname.search(/\b(sbook|pubtool)terminal\b/)>=0))||
                 ((classname)&&(metaBook.terminals)&&
