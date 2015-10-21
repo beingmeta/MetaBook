@@ -675,6 +675,8 @@ metaBook.setMode=
             else {}}
         metaBook.stopSkimming=stopSkimming;
         
+        var rAF=fdjtDOM.requestAnimationFrame;
+
         function metaBookSkimTo(card,dir,expanded){
             var skimmer=$ID("METABOOKSKIMMER");
             var skimpoint=metaBook.skimpoint;
@@ -690,11 +692,9 @@ metaBook.setMode=
             if ((slice.mode)&&(mB.mode!==slice.mode))
                 mB.setMode(slice.mode);
             var passage=mbID(cardinfo.passage||cardinfo.id);
-            var i=0, lim=0;
             if (typeof dir !== "number") dir=0;
             if (typeof expanded === "undefined")
                 expanded=hasClass(skimmer,"expanded");
-            addClass(document.body,"mbSKIMMING");
             if (hasParent(card,metaBook.DOM.allglosses))
                 metaBook.skimming=metaBook.allglosses;
             else if (hasParent(card,$ID("METABOOKSEARCHRESULTS")))
@@ -702,7 +702,6 @@ metaBook.setMode=
             else if (hasParent(card,$ID("METABOOKSTATICTOC")))
                 metaBook.skimming=metaBook.statictoc;
             else metaBook.skimming=true;
-            setHUD(false,false);
             if (Trace.mode)
                 fdjtLog("metaBookSkim() %o (card=%o) mode=%o scn=%o/%o dir=%o",
                         passage,card,
@@ -716,7 +715,7 @@ metaBook.setMode=
                 var clone=card.cloneNode(true);
                 var pct=((dir<0)?("-120%"):(dir>0)?("120%"):(false));
                 dropClass(skimmer,"expanded");
-                dropClass(skimmer,"transimate");
+                //dropClass(skimmer,"transimate");
                 clone.id="METABOOKSKIM";
                 fdjtDOM.replace("METABOOKSKIM",clone);
                 if ((clone.offsetHeight)>skimmer.offsetHeight)
@@ -726,7 +725,7 @@ metaBook.setMode=
                     dropClass(skimmer,"transanimate");
                     fdjtDOM.removeListener(
                         skimmer,"transitionend",dropTransAnimate);};
-                if ((skimpoint)&&(pct)) {
+                if ((false)&&(skimpoint)&&(pct)) {
                     skimmer.style[fdjtDOM.transform]=
                         "translate("+pct+",0)";
                     setTimeout(function(){
@@ -750,21 +749,35 @@ metaBook.setMode=
                 if (card) addClass(card,"skimpoint");
                 metaBook.skimpoint=card;}
             else {}
-            if (expanded) addClass("METABOOKSKIMMER","expanded");
-            else dropClass("METABOOKSKIMMER","expanded");
+            metaBook.GoTo(passage,"Skim");
+            setSkimTarget(passage);
+            highlightSkimTarget(passage,card);
+            skimMode(slice,expanded);}
+        metaBook.SkimTo=function(card,dir,expanded){
+            rAF(function(){metaBookSkimTo(card,dir,expanded);});};
+        metaBook.SkimTo=metaBookSkimTo;
+
+        function skimMode(slice,expanded){
+            var body=document.body, skimmer=$ID("METABOOKSKIMMER");
+            addClass(body,"mbSKIMMING");
+            setHUD(false,false);
+            if (expanded) addClass(skimmer,"expanded");
+            else dropClass(skimmer,"expanded");
             // This all makes sure that the >| and |< buttons
             // appear appropriately
             if (slice.atEnd)
-                addClass(document.body,"mbSKIMEND");
-            else dropClass(document.body,"mbSKIMEND");
+                addClass(body,"mbSKIMEND");
+            else dropClass(body,"mbSKIMEND");
             if (slice.atStart)
-                addClass(document.body,"mbSKIMSTART");
-            else dropClass(document.body,"mbSKIMSTART");
-            var highlights=[];
+                addClass(body,"mbSKIMSTART");
+            else dropClass(body,"mbSKIMSTART");
+            dropClass(skimmer,"mbfoundhighlights");}
+        function setSkimTarget(passage,card){
             if (metaBook.target)
                 metaBook.clearHighlights(metaBook.getDups(metaBook.target));
-            dropClass("METABOOKSKIMMER","mbfoundhighlights");
-            metaBook.setTarget(passage);
+            metaBook.setTarget(passage);}
+        function highlightSkimTarget(passage,card){
+            var highlights=[];
             if ((card)&&(hasClass(card,"gloss"))) {
                 var glossinfo=metaBook.glossdb.ref(card.name);
                 if (glossinfo.excerpt) {
@@ -785,7 +798,7 @@ metaBook.setMode=
                     var info=metaBook.docinfo[target.id];
                     var terms=metaBook.query.tags;
                     var spellings=info.knodeterms;
-                    i=0; lim=terms.length;
+                    var i=0, lim=terms.length;
                     if (lim===0)
                         addClass(metaBook.getDups(target),
                                  "mbhighlightpassage");
@@ -793,8 +806,7 @@ metaBook.setMode=
                         var term=terms[i++];
                         var h=metaBook.highlightTerm(term,target,info,spellings);
                         highlights=highlights.concat(h);}}}
-            metaBook.GoTo(passage,"Skim");}
-        metaBook.SkimTo=metaBookSkimTo;
+            else {}}
 
         function getSlice(card){
             var cur_slice=mB[mB.mode];
