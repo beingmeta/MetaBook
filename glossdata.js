@@ -150,10 +150,12 @@
                                 uri,ex);
                         glossdata_state[uri]=false;
                         if ((mB.mycopyid)&&(mB.mycopyid_expires<(new Date())))
-                            setTimeout(function(){cacheGlossData(uri);},2000);
+                            setTimeout(function(){cacheGlossData(uri);},
+                                       2000);
                         else mB.getMyCopyId().then(function(mycopyid){
                             if (mycopyid)
-                                setTimeout(function(){cacheGlossData(uri);},2000);});};});}
+                                setTimeout(function(){cacheGlossData(uri);},
+                                           2000);});};});}
             else if ((mB.mycopyid)&&(mB.mycopyid_expires<(new Date())))
                 return cacheGlossData(uri).then(resolved);
             else return mB.getMyCopyId().then(function(mycopyid){
