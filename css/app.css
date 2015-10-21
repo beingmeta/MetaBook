@@ -45,30 +45,9 @@ body.mbLAYOUT #CODEXCONTENT { display: none;}
 
 /* The page content gets a little transparent when the HUD comes up*/
 body._ANIMATE.hudup #CODEXPAGE {
-    transition-property: opacity;
-    -webkit-transition-property: opacity;
-    -moz-transition-property: opacity;
-    -o-transition-property: opacity;
-    transition-duration: 0.2s; 
-    -webkit-transition-duration: 0.2s;
-    -o-transition-duration: 0.2s;
-    -moz-duration: 0.2s;}
-body.hudup #CODEXPAGE {
-    opacity: 0.8;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
-    filter: alpha(opacity=80);
-    -webkit-opacity: 0.80;
-    -khtml-opacity: 0.80;
-    -moz-opacity: 0.80;
-    -o-opacity: 0.80;}
-body.hudup.mbPREVIEW #CODEXPAGE {
-    opacity: 1;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-    filter: alpha(opacity=100);
-    -webkit-opacity: 1;
-    -khtml-opacity: 1;
-    -moz-opacity: 1;
-    -o-opacity: 1;}
+    transition-property: opacity; transition-duration: 0.2s;}
+body.hudup #CODEXPAGE {opacity: 0.8;}
+body.hudup.mbPREVIEW #CODEXPAGE {opacity: 1;}
 
 /* When the page is shrunk, the border is visible */
 body.mbPREVIEW #CODEXPAGE, body.mbSHRINK #CODEXPAGE  {
@@ -77,32 +56,16 @@ body.mbPREVIEW #CODEXPAGE, body.mbSHRINK #CODEXPAGE  {
 /* This is for page shrinking when appropriate */
 body._ANIMATE #CODEXPAGE {
     transition-property: opacity,transform;
-    -webkit-transition-property: -webkit-opacity,-webkit-transform;
-    -moz-transition-property: -moz-opacity,-moz-transform;
-    -o-transition-property: -o-opacity,-o-transform;
-    transition-duration: 0.25s; -webkit-transition-duration: 0.25s;
-    -moz-duration: 0.25s; -o-transition-duration: 0.25s;}
-body #CODEXPAGE {
-    transform: scale(1,1); -webkit-transform:scale(1,1);
-    -moz-transform: scale(1,1); -o-transform:scale(1,1);}
-body._NOSHRINK #CODEXPAGE {
-    transform: inherit; -webkit-transform: inherit;
-    -moz-transform: inherit; -o-transform: inherit;}
-body.mbSHRINK #CODEXPAGE, body.mbPREVIEW #CODEXPAGE,
-body.mbSKIMMING #CODEXPAGE {
-    transform-origin: center center;
-    -webkit-transform-origin: center center;
-    -moz-transform-origin: center center;
-    -o-transform: center center;}
+    transition-duration: 0.25s;}
+body #CODEXPAGE {transform: scale(1,1);}
 
-body._ANIMATE._NOSHRINK #CODEXPAGE .codexpage {
-    transform: inherit; -webkit-transform: inherit;
-    -moz-transform: inherit; -o-transform: inherit;}
-body.mbSHRINK #CODEXPAGE .codexpage,
-body.mbPREVIEW #CODEXPAGE .codexpage,
-body.mbSKIMMING #CODEXPAGE .codexpage {
-    transform: scale(0.98,0.98); -webkit-transform:scale(0.98,0.98);
-    -moz-transform: scale(0.98,0.98); -o-transform:scale(0.98,0.98);}
+body.mbSHRINK #CODEXPAGE, body.mbPREVIEW #CODEXPAGE,
+body.mbSKIMMING #CODEXPAGE {transform-origin: center center;}
+
+body.mbSKIMMING._NOSHRINK #CODEXPAGE .codexpage,
+body.mbPREVIEW._NOSHRINK #CODEXPAGE .codexpage,
+body.mbSHRINK._NOSHRINK #CODEXPAGE .codexpage {
+    transform: inherit;}
 
 #CODEXPAGE #METABOOKPAGES {
     position: absolute;

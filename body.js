@@ -78,13 +78,15 @@
             fdjtDOM("div.sbookbackmatter#SBOOKNOTES");
         applyMetaClass("htmlbooknote");
         applyMetaClass("htmlbooknote","METABOOK.booknotes");
-        addClass(fdjtDOM.$("span[data-type='footnote']"),"htmlbooknote");
+        addClass(fdjtDOM.$("span[data-type='footnote']"),
+                 "htmlbooknote");
         var allnotes=getChildren(content,".htmlbooknote");
         i=0; lim=allnotes.length; while (i<lim) {
             var notable=allnotes[i++]; var counter=note_counter++;
             var noteid="METABOOKNOTE"+counter;
             var refid="METABOOKNOTE"+counter+"_ref";
-            var label_text=notable.getAttribute("data-label")||(""+counter);
+            var label_text=notable.getAttribute("data-label")||
+                (""+counter);
             var label_node=
                 getChild(notable,"label")||
                 getChild(notable,"summary")||
@@ -117,7 +119,8 @@
                 // Copy all of the content nodes
                 var child=children[i++];
                 if (child.nodeType!==1) content.appendChild(child);
-                else if ((child.id)&&(child.id.search("METABOOK")===0)) {}
+                else if ((child.id)&&
+                         (child.id.search("METABOOK")===0)) {}
                 else if (/(META|LINK|SCRIPT)/gi.test(child.tagName)) {}
                 else content.appendChild(child);}}
 
@@ -217,7 +220,8 @@
             metaBook.CSS.pagerule.style.height=inner_height+"px";}
         else metaBook.CSS.pagerule=fdjtDOM.addCSSRule(
             "div.codexpage",
-            "width: "+inner_width+"px; "+"height: "+inner_height+"px;");
+            "width: "+inner_width+"px; "+
+                "height: "+inner_height+"px;");
         if (metaBook.CSS.glossmark_rule) {
             metaBook.CSS.glossmark_rule.style.marginRight=
                 (-glossmark_offset)+"px";}
@@ -272,8 +276,10 @@
             if (bgcolor.search(/,\s*0\s*\)/)>0) bgcolor='white';
             else {
                 bgcolor=bgcolor.replace("rgba","rgb");
-                bgcolor=bgcolor.replace(/,\s*((\d+)|(\d+.\d+))\s*\)/,")");}}
-        else if (bgcolor==="transparent") bgcolor="white";}
+                bgcolor=bgcolor.replace(
+                        /,\s*((\d+)|(\d+.\d+))\s*\)/,")");}}
+        else if (bgcolor==="transparent") bgcolor="white";
+        else {}}
 })();
 
 /* Emacs local variables
