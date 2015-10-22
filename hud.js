@@ -555,6 +555,13 @@ metaBook.setMode=
                         mode,metaBook.mode,document.body.className);
             fdjtDOM.dropClass(metaBookHUD,metaBookModes);
             fdjtDOM.addClass(metaBookHUD,mode);
+
+            if ((mode!=="openglossmark")&&
+                (metaBook.mode==="openglossmark")) {
+                if ($ID("METABOOKOPENGLOSSMARK"))
+                    $ID("METABOOKOPENGLOSSMARK").id="";
+                dropClass(document.body,"openglossmark");}
+            
             if (mode==="statictoc") {
                 var headinfo=((metaBook.head)&&(metaBook.head.id)&&
                               (metaBook.docinfo[metaBook.head.id]));

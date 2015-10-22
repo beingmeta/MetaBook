@@ -234,7 +234,7 @@
     function showGlossmark(target,point) {
         var id=target.codexbaseid||target.id;
         if (!(id)) return;
-        var dups=metaBook.getDups(target.id);
+        var dups=metaBook.getDups(id);
         var glossids=metaBook.glossdb.find('frag',id), glosses=[];
         var slicediv=fdjtDOM("div.metabookglosses.metabookslice");
         if ((!(glossids))||(!(glossids.length)))

@@ -287,7 +287,7 @@
             return false;}
 
         if ((mB.touch)&&(mB.textinput)) {
-            metaBook.clearFocus(mB.textinput);
+            mB.clearFocus(mB.textinput);
             cancel(evt);
             return;}
         
