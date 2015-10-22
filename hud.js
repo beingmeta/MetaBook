@@ -738,11 +738,11 @@ metaBook.setMode=
                                0);}
                 slice.setSkim(card);
                 if (slice.atStart)
-                    $ID("METABOOKSKIMINDEX").innerHTML="";
-                else $ID("METABOOKSKIMINDEX").innerHTML=""+(slice.skimpos);
+                    $ID("METABOOKSKIMLEFT").innerHTML="";
+                else $ID("METABOOKSKIMLEFT").innerHTML=""+(slice.skimpos);
                 if (slice.atEnd)
-                    $ID("METABOOKSKIMLIMIT").innerHTML="";
-                else $ID("METABOOKSKIMLIMIT").innerHTML=
+                    $ID("METABOOKSKIMRIGHT").innerHTML="";
+                else $ID("METABOOKSKIMRIGHT").innerHTML=
                     ""+(slice.visible.length-slice.skimpos-1);
                 // This marks where we are currently skimming
                 if (skimpoint) dropClass(skimpoint,"skimpoint");

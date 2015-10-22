@@ -252,15 +252,9 @@
             fdjtDOM("div#SBOOKBOTTOMLEADING.leading.bottom"," ");
         topleading.metabookui=true; bottomleading.metabookui=true;
         
-        var controls=fdjtDOM("div#METABOOKPAGECONTROLS");
-        var holder=fdjtDOM("div");
-        holder.innerHTML=fixStaticRefs(metaBook.HTML.pageleft);
-        var nodes=toArray(holder.childNodes);
-        var i=0, lim=nodes.length;
-        while (i<lim) controls.appendChild(nodes[i++]);
-        holder.innerHTML=fixStaticRefs(metaBook.HTML.pageright);
-        nodes=toArray(holder.childNodes); i=0; lim=nodes.length;
-        while (i<lim) controls.appendChild(nodes[i++]);
+        var page_right=fdjtDOM("div.mbpagecontrol#MBPAGERIGHT");
+        var page_left=fdjtDOM("div.mbpagecontrol#MBPAGELEFT");
+        var controls=fdjtDOM("div#METABOOKPAGECONTROLS",page_left,page_right);
 
         fdjtDOM.prepend(document.body,controls);
 

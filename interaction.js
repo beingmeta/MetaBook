@@ -1906,14 +1906,16 @@
              slip: function(evt){setHelp(false); cancel(evt);}},
          "#METABOOKHELP": {
              click: toggleHelp, mousedown: cancel,mouseup: cancel},
-         "#METABOOKNEXTPAGE": {click: function(evt){
-             pageForward(evt); cancel(evt);}},
-         "#METABOOKPREVPAGE": {click: function(evt){
-             pageBackward(evt); cancel(evt);}},
-         "#METABOOKNEXTSKIM": {click: function(evt){
-             skimForward(evt); cancel(evt);}},
-         "#METABOOKPREVSKIM": {click: function(evt){
-             skimBackward(evt); cancel(evt);}},
+         "#MBPAGERIGHT": {click: function(evt){
+             if (hasClass(document.body,"mbSKIMMING"))
+                 skimForward(evt);
+             else pageForward(evt); 
+             cancel(evt);}},
+         "#MBPAGELEFT": {click: function(evt){
+             if (hasClass(document.body,"mbSKIMMING"))
+                 skimBackward(evt);
+             else pageBackward(evt); 
+             cancel(evt);}},
          "#METABOOKSHOWTEXT": {click: back_to_reading},
          "#METABOOKGLOSSDETAIL": {click: metaBook.UI.dropHUD},
          "#METABOOKNOTETEXT": {click: jumpToNote},
@@ -2010,14 +2012,16 @@
          ".searchcloud": {
              tap: metaBook.UI.handlers.searchcloud_select,
              release: metaBook.UI.handlers.searchcloud_select},
-         "#METABOOKNEXTPAGE": {touchstart: function(evt){
-             pageForward(evt); cancel(evt);}},
-         "#METABOOKPREVPAGE": {touchstart: function(evt){
-             pageBackward(evt); cancel(evt);}},
-         "#METABOOKNEXTSKIM": {touchstart: function(evt){
-             skimForward(evt); cancel(evt);}},
-         "#METABOOKPREVSKIM": {touchstart: function(evt){
-             skimBackward(evt); cancel(evt);}},
+         "#MBPAGERIGHT": {touchstart: function(evt){
+             if (hasClass(document.body,"mbSKIMMING"))
+                 skimForward(evt);
+             else pageForward(evt); 
+             cancel(evt);}},
+         "#MBPAGELEFT": {touchstart: function(evt){
+             if (hasClass(document.body,"mbSKIMMING"))
+                 skimBackward(evt);
+             else pageBackward(evt); 
+             cancel(evt);}},
          "#METABOOKHELP": {tap: toggleHelp, swipe: cancel},
          "#METABOOKHELPBUTTON": {
              tap: toggleHelp,

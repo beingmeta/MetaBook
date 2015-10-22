@@ -61,10 +61,7 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
 #METABOOKHUD.openglossmark, body.mbSHOWHELP #METABOOKHUD {
     z-index: 100; }
 
-#METABOOKCOVER .fdjtfontwrapper {
-    backface-visibility: hidden;
-    perspective: 1000;
-    transform: translateZ(0);}
+#METABOOKCOVER .fdjtfontwrapper {}
 
 #METABOOKCOVER div.flap {
     position: absolute;

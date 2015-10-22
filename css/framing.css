@@ -124,6 +124,38 @@ html._TOUCH #METABOOKFRAME > #METABOOKHUD > #METABOOKTOPBAR,
 html._TOUCH #METABOOKFRAME > #METABOOKHUD > #METABOOKFOOT {
     pointer-events: all;}
 
+/* Page controls */
+
+div.mbpagecontrol {
+    position: absolute; width: 50px; height: 50px; bottom: 50%;
+    background-size: 50px 50px;  background-repeat: no-repeat;
+    cursor: pointer; z-index: 500;
+    opacity: 0.1;}
+body._ANIMATE img.metabookskimbutton {
+    transition-property: opacity,background-color;
+    transition-duration: 0.2s;}
+
+body.hudup div.mbpagecontrol { opacity: 0.5; }
+html._MOUSE body.hudup div.mbpagecontrol:hover { opacity: 0.8; }
+
+div#MBPAGERIGHT.mbpagecontrol {
+    background-image: url(/static/g/metabook/page_right.svgz);
+    background-position: center right;
+    text-align: right; right: 0px;}
+div#MBPAGELEFT.mbpagecontrol {
+    background-image: url(/static/g/metabook/page_left.svgz);
+    background-position: center left;
+    text-align: left; left: 0px;}
+
+body.mbSKIMMING div#MBPAGERIGHT.mbpagecontrol {
+    background-image: url(/static/g/metabook/skim_right.svgz);}
+body.mbSKIMMING.mbSKIMEND div#MBPAGERIGHT.mbpagecontrol {
+    background-image: url(/static/g/metabook/skim_right_stop.svgz);}
+body.mbSKIMMING div#MBPAGELEFT.mbpagecontrol {
+    background-image: url(/static/g/metabook/skim_left.svgz);}
+body.mbSKIMMING.mbSKIMSTART div#MBPAGELEFT.mbpagecontrol {
+    background-image: url(/static/g/metabook/skim_left_stop.svgz);}
+
 /* The COVER contains the usual wrapping elements for the book
    (coverpage, title, blurbs, etc) and also contains elements which
    aren't part of physical books: settings, layer management, and
