@@ -781,7 +781,7 @@ metaBook.setMode=
                 addClass(body,"mbSKIMSTART");
             else dropClass(body,"mbSKIMSTART");
             dropClass(skimmer,"mbfoundhighlights");}
-        function setSkimTarget(passage,card){
+        function setSkimTarget(passage){
             if (metaBook.target)
                 metaBook.clearHighlights(metaBook.getDups(metaBook.target));
             metaBook.setTarget(passage);}

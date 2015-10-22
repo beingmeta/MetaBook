@@ -45,7 +45,6 @@
 
     var mB=metaBook, Trace=metaBook.Trace;
     var applyMetaClass=mB.applyMetaClass;
-    var fixStaticRefs=mB.fixStaticRefs;
     /* Initializing the body and content */
     var note_counter=1;
     
