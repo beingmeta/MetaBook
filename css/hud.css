@@ -170,8 +170,6 @@ body.hudup #METABOOKHEAD {display: block;}
 body.hudup #METABOOKHUD.openhead.overtoc #METABOOKHEAD {
     border-color: transparent;}
 
-#METABOOKFRAME > #METABOOKHUD.openhead > #METABOOKTOPBAR {
-    z-index: -20; opacity: 0.7;}
 #METABOOKFRAME > #METABOOKHUD.openhead #METABOOKTOPCENTER,
 #METABOOKFRAME > #METABOOKHUD.openheart #METABOOKTOPCENTER,
 body.mbSKIMMING #METABOOKTOPCENTER {
@@ -503,43 +501,26 @@ img.hudbutton {
     -khtml-opacity: 0.02;
     -moz-opacity: 0.02;
     -o-opacity: 0.02;}
-html._MOUSE .hudbutton:hover,
-html._MOUSE #METABOOKTOPBAR:hover .hudbutton,
-html._MOUSE #METABOOKFOOT:hover .hudbutton,
-#METABOOKHUD .tapholding .hudbutton {
-    opacity: 0.50;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-    filter: alpha(opacity=50);
-    -webkit-opacity: 0.50;
-    -khtml-opacity: 0.50;
-    -moz-opacity: 0.50;
-    -o-opacity: 0.50;}
-html._MOUSE #METABOOKTOPBAR:hover .hudbutton:hover,
-html._MOUSE #METABOOKFOOT:hover .hudbutton:hover {
-    opacity: 0.75;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
-    filter: alpha(opacity=75);
-    -webkit-opacity: 0.75;
-    -khtml-opacity: 0.75;
-    -moz-opacity: 0.75;
-    -o-opacity: 0.75;}
-    
+html._MOUSE not(body.hudup) .hudbutton:hover,
+html._MOUSE not(body.hudup) #METABOOKTOPBAR:hover .hudbutton,
+html._MOUSE not(body.hudup) #METABOOKFOOT:hover .hudbutton,
+#METABOOKHUD not(body.hudup) .tapholding .hudbutton,
+html._MOUSE not(body.mbSKIMMING) .hudbutton:hover,
+html._MOUSE not(body.mbSKIMMING) #METABOOKTOPBAR:hover .hudbutton,
+html._MOUSE not(body.mbSKIMMING) #METABOOKFOOT:hover .hudbutton,
+#METABOOKHUD not(body.mbSKIMMING) .tapholding .hudbutton {
+    opacity: 0.50;}
+html._MOUSE not(body.hudup) #METABOOKTOPBAR:hover .hudbutton:hover,
+html._MOUSE not(body.hudup) #METABOOKFOOT:hover .hudbutton:hover,
+html._MOUSE not(body.mbSKIMMING) #METABOOKTOPBAR:hover .hudbutton:hover,
+html._MOUSE not(body.mbSKIMMING) #METABOOKFOOT:hover .hudbutton:hover {
+    opacity: 0.75;}
 
 body.mbSKIMMING img.hudbutton {
-    opacity: 0.80;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
-    filter: alpha(opacity=80);
-    -webkit-opacity: 0.80;
-    -khtml-opacity: 0.80;
-    -moz-opacity: 0.80;
-    -o-opacity: 0.80;}
+    opacity: 0.80;}
 .hudbutton {
     transition-property: width, height, opacity;
-    transition-duration: 0.2s;
-    -moz-transition-property: width, height, opacity;
-    -moz-transition-duration: 0.2s;
-    -webkit-transition-property: width, height, opacity;
-    -webkit-transition-duration: 0.2s;}
+    transition-duration: 0.2s;}
 
 #METABOOKTOPBAR img.hudbutton[hudmode="allglosses"],
 #METABOOKTOPBAR img.hudbutton[hudmode="help"] {
@@ -695,13 +676,8 @@ html._NOUSER a.logout {
 
 body.hudup #METABOOKHUD { }
 body.hudup .hudbutton {
-    opacity: 0.50;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-    filter: alpha(opacity=50);
-    -webkit-opacity: 0.50;
-    -khtml-opacity: 0.50;
-    -moz-opacity: 0.50;
-    -o-opacity: 0.50;}
+    background-color: white;}
+body.hudup .hudbutton {opacity: 0.9;}
 body.hudup #CODEXPAGE p, body.hudup #CODEXPAGE div { cursor: pointer;}
 
 /* METABOOKPOINTGLOSSES rules */

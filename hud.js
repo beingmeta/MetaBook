@@ -738,21 +738,23 @@ metaBook.setMode=
                                0);}
                 slice.setSkim(card);
                 if (slice.atStart)
-                    $ID("METABOOKSKIMLEFT").innerHTML="";
-                else $ID("METABOOKSKIMLEFT").innerHTML=""+(slice.skimpos);
+                    $ID("MBPAGELEFT").innerHTML="";
+                else $ID("MBPAGELEFT").innerHTML=
+                    "<span>-"+(slice.skimpos)+"</span>";
                 if (slice.atEnd)
-                    $ID("METABOOKSKIMRIGHT").innerHTML="";
-                else $ID("METABOOKSKIMRIGHT").innerHTML=
-                    ""+(slice.visible.length-slice.skimpos-1);
+                    $ID("MBPAGERIGHT").innerHTML="";
+                else $ID("MBPAGERIGHT").innerHTML=
+                    "<span>"+(slice.visible.length-slice.skimpos-1)+
+                    "+</span>";
                 // This marks where we are currently skimming
                 if (skimpoint) dropClass(skimpoint,"skimpoint");
                 if (card) addClass(card,"skimpoint");
                 metaBook.skimpoint=card;}
             else {}
+            skimMode(slice,expanded);
             metaBook.GoTo(passage,"Skim");
             setSkimTarget(passage);
-            highlightSkimTarget(passage,card);
-            skimMode(slice,expanded);}
+            highlightSkimTarget(passage,card);}
         metaBook.SkimTo=function(card,dir,expanded){
             rAF(function(){metaBookSkimTo(card,dir,expanded);});};
         metaBook.SkimTo=metaBookSkimTo;

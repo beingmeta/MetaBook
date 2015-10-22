@@ -110,6 +110,7 @@ body.mbSHOWHELP #METABOOKFRAME {
 #METABOOKHUD {
     position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px;
     width: 100%; height: 100%;
+    transform: translateZ(0);
     pointer-events: none;}
 #METABOOKFRAME > #METABOOKHUD > div {
     pointer-events: all;}
@@ -127,24 +128,32 @@ html._TOUCH #METABOOKFRAME > #METABOOKHUD > #METABOOKFOOT {
 /* Page controls */
 
 div.mbpagecontrol {
-    position: absolute; width: 50px; height: 50px; bottom: 50%;
-    background-size: 50px 50px;  background-repeat: no-repeat;
-    cursor: pointer; z-index: 500;
-    opacity: 0.1;}
-body._ANIMATE img.metabookskimbutton {
+    position: absolute; bottom: 50%;
+    background-size: contain;  background-repeat: no-repeat;
+    height: 50px; width: 50px;
+    font-size: 24px; font-weight: bold; padding-top: 20px;
+    cursor: pointer; 
+    opacity: 0;}
+div.mbpagecontrol > span { visibility: hidden; }
+body._ANIMATE div.mbpagecontrol {
     transition-property: opacity,background-color;
     transition-duration: 0.2s;}
 
-body.hudup div.mbpagecontrol { opacity: 0.5; }
-html._MOUSE body.hudup div.mbpagecontrol:hover { opacity: 0.8; }
+body.mbSKIMMING div.mbpagecontrol,
+html._MOUSE body.hudup div.mbpagecontrol:hover {
+    opacity: 0.8; }
+
+body.mbSKIMMING div.mbpagecontrol > span {
+    visibility: visible;
+    z-index: 500;}
 
 div#MBPAGERIGHT.mbpagecontrol {
     background-image: url(/static/g/metabook/page_right.svgz);
-    background-position: center right;
+    background-position: center right; padding-right: 3px;
     text-align: right; right: 0px;}
 div#MBPAGELEFT.mbpagecontrol {
     background-image: url(/static/g/metabook/page_left.svgz);
-    background-position: center left;
+    background-position: center left; padding-left: 3px;
     text-align: left; left: 0px;}
 
 body.mbSKIMMING div#MBPAGERIGHT.mbpagecontrol {
