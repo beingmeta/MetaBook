@@ -133,7 +133,7 @@
         if ((info.sync)&&((!(metaBook.sync))||(info.sync>=metaBook.sync))) {
             metaBook.setSync(info.sync);}
         metaBook.loaded=info.loaded=fdjtTime();
-        if (metaBook.allglosses) metaBook.allglosses.update();
+        //if (metaBook.allglosses) metaBook.allglosses.update();
         if (metaBook.whenloaded) {
             var whenloaded=metaBook.whenloaded;
             metaBook.whenloaded=false;

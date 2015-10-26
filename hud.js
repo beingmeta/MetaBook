@@ -324,7 +324,6 @@ metaBook.setMode=
             var panel=fdjtDOM("div#METABOOKSTATICTOC.metabookslice.mbtocslice.hudpanel");
             fdjtDOM.replace("METABOOKSTATICTOC",panel);
             var tocslice=new MetaBookTOC(root_info,panel);
-            tocslice.update();
             metaBook.tocslice=tocslice;
             metaBook.statictoc=tocslice;
             metaBook.setupGestures(panel);
