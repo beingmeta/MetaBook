@@ -82,6 +82,9 @@ metaBook.TOCSlice=
                     brick.name="MBTOC4"+subsect.frag;
                     brick.style.left=(((left-start)/sectlen)*100)+"%";
                     brick.style.width=(((size)/sectlen)*100)+"%";
+                    // - Not currently used, since it's generally not
+                    //   mouse sensitive
+                    // if (subsect.title) brick.title=subsect.title;
                     elements.appendChild(brick);}}
             else {
                 var parent=headinfo.head;
