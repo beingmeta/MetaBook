@@ -271,7 +271,7 @@
         //  previewing (which was touched)
         if (mB.previewing) {
             var jumpto=getTarget(target);
-            metaBook.stopPreview("body_tapped/stop_preview",jumpto||true);
+            mB.stopPreview("body_tapped/stop_preview",jumpto||true);
             fdjtUI.TapHold.clear();
             cancel(evt);
             return false;}
@@ -300,8 +300,8 @@
             return closePassageMenu(evt);}
 
         if (mB.skimming) {
-            if (hasClass("METABOOKSKIMMER","expanded")) 
-                dropClass("METABOOKSKIMMER","expanded");
+            if (mB.hudup)
+                setHUD(false,false);
             else if ((touch)&&(cX<vw/4)) 
                 pageBackward(evt,true);
             else  if ((touch)&&(cX<vw/4)) 
@@ -551,9 +551,8 @@
             return;}
         if (mB.skimming) {
             cancel(evt);
-            if (hasClass("METABOOKSKIMMER","expanded")) 
-                dropClass("METABOOKSKIMMER","expanded");
-            else setHUD(false);
+            mB.stopSkimming();
+            setHUD(false);
             mB.TapHold.body.abort();
             return;}
         mB.startSelect(passage,evt);
@@ -568,7 +567,7 @@
                     document.body.className,mB.HUD.className,
                     target,mB.glosstarget);
         if (hasParent(target,"IMG,AUDIO,VIDEO,OBJECT")) {
-            metaBook.startZoom(getParent(target,"IMG,AUDIO,VIDEO,OBJECT"));
+            mB.startZoom(getParent(target,"IMG,AUDIO,VIDEO,OBJECT"));
             cancel(evt);
             return;}
         if (mB.glosstarget) {
@@ -583,7 +582,7 @@
         var choices=[
             {label: "Add Gloss",
              handler: function(){
-                 metaBook.startGloss(passage);},
+                 mB.startGloss(passage);},
              isdefault: true}];
         /*
           if (window.ClipboardEvent) {
@@ -595,13 +594,13 @@
         if (true) choices.push(
             {label: "Zoom content",
              handler: function(){
-                 metaBook.startZoom(passage);
+                 mB.startZoom(passage);
                  cancel(evt);
                  return;}});
         addOptions(passage,choices);
         if (choices.length===1) {
             cancel(evt);
-            metaBook.startGloss(passage);
+            mB.startGloss(passage);
             return;}
         cancel(evt);
         choices.push(
@@ -719,7 +718,7 @@
         var target=fdjtUI.T(evt), children=false;
         if (Trace.gestures) fdjtLog("body_released %o",evt);
         if (mB.previewing) {
-            metaBook.stopPreview("body_released");
+            mB.stopPreview("body_released");
             cancel(evt);
             return;}
         else if (hasParent(target,"A")) {
@@ -740,7 +739,7 @@
             if (mB.glossform)
                 metaBook.glossform.id="METABOOKLIVEGLOSS";
             if (mB.mode!=="addgloss") setMode("addgloss");}
-        else metaBook.startAddGloss(passage,((evt.shiftKey)&&("addtag")),evt);}
+        else mB.startAddGloss(passage,((evt.shiftKey)&&("addtag")),evt);}
 
     function body_swiped(evt){
         if (mB.zoomed) return;
@@ -796,7 +795,7 @@
                     // On the right, up, show GLOSSES
                     setMode("allglosses");
                 else if ((dy>0)&&(metaBook.skimming)) {
-                    metaBook.stopSkimming();}
+                    mB.stopSkimming();}
                 else if (dy>0) {
                     metaBook.clearStateDialog();
                     metaBook.showCover();}
@@ -844,7 +843,7 @@
             //  the user really meant to tap on the body underneath,
             //  so we stop previewing and jump there We might try to
             //  figure out exactly which element was tapped somehow
-            metaBook.stopPreview("toc_tapped");
+            mB.stopPreview("toc_tapped");
             cancel(evt);
             return;}
         var about=getAbout(tap_target);
@@ -878,7 +877,7 @@
             var spanbar=getParent(about,".spanbar")||getChild(toc,".spanbar");
             addClass(spanbar,"metabookvisible");
             addClass(toc,"metabookheld");
-            metaBook.startPreview(mbID(ref),"toc_held");
+            mB.startPreview(mbID(ref),"toc_held");
             return cancel(evt);}
         else if (Trace.gestures) fdjtLog("toc_held %o noabout", evt);
         else {}}
@@ -900,12 +899,12 @@
             dropClass(spanbar,"metabookvisible");
             dropClass(toc,"metabookheld");
             if (mB.previewing)
-                metaBook.stopPreview("toc_released");}
+                mB.stopPreview("toc_released");}
         else if (Trace.gestures) {
             fdjtLog("toc_released %o noabout",evt);
-            metaBook.stopPreview("toc_released");}
+            mB.stopPreview("toc_released");}
         else {
-            metaBook.stopPreview("toc_released");}
+            mB.stopPreview("toc_released");}
         cancel(evt);}
     function toc_touchtoo(evt){
         evt=evt||window.event;
@@ -913,9 +912,9 @@
         if (!(mB.previewing)) return;
         else if (Trace.gestures) {
             fdjtLog("toc_touchtoo %o noabout",evt);
-            metaBook.stopPreview("toc_touchtoo",true);}
+            mB.stopPreview("toc_touchtoo",true);}
         else {
-            metaBook.stopPreview("toc_touchtoo",true);}
+            mB.stopPreview("toc_touchtoo",true);}
         cancel(evt);}
     function toc_slipped(evt){
         evt=evt||window.event;
@@ -924,7 +923,7 @@
             slip_timer=false;
             if (Trace.gestures)
                 fdjtLog("toc_slipped/timeout %o",evt);
-            metaBook.stopPreview("toc_slipped");});}
+            mB.stopPreview("toc_slipped");});}
 
     /* Highlighting terms in passages (for skimming, etc) */
 
@@ -994,7 +993,7 @@
         // fdjtLog("sbook_onkeydown %o",evt);
         if (evt.keyCode===27) { /* Escape works anywhere */
             if (mB.previewing) {
-                metaBook.stopPreview("escape_key");
+                mB.stopPreview("escape_key");
                 fdjtUI.TapHold.clear();}
             dropClass(document.body,"mbZOOM");
             dropClass(document.body,"mbMEDIA");
@@ -1013,14 +1012,14 @@
         else if (hasClass(document.body,"mbZOOM"))
             return;
         else if ((mB.controlc)&&(evt.ctrlKey)&&((kc===99)||(kc===67))) {
-            if (mB.previewing) metaBook.stopPreview("onkeydown",true);
+            if (mB.previewing) mB.stopPreview("onkeydown",true);
             fdjtUI.TapHold.clear();
             setMode("console");
             cancel(evt);}
         else if ((evt.altKey)||(evt.ctrlKey)||(evt.metaKey)) return true;
         else if (mB.previewing) {
             // Any key stops a preview and goes to the target
-            metaBook.stopPreview("onkeydown",true);
+            mB.stopPreview("onkeydown",true);
             fdjtUI.TapHold.clear();
             setHUD(false);
             cancel(evt);
@@ -1484,12 +1483,6 @@
         evt=evt||window.event;
         var target=fdjtUI.T(evt);
         if (isClickable(target)) return;
-        if ((getParent(target,".ellipsis"))&&
-            ((getParent(target,".elision"))||
-             (getParent(target,".delision")))){
-            fdjtDOM.toggleClass("METABOOKSKIMMER","expanded");
-            cancel(evt);
-            return;}
         if ((getParent(target,".tool"))) {
             var card=getCard(target);
             if ((card)&&((card.name)||(card.getAttribute("name")))) {
@@ -1498,7 +1491,7 @@
                 if (!(gloss)) return;
                 var form=metaBook.setGlossTarget(gloss);
                 if (!(form)) return;
-                metaBook.stopSkimming();
+                mB.stopSkimming();
                 setMode("addgloss");
                 return;}
             else return;}
@@ -1519,15 +1512,13 @@
             var anchor=getParent(target,".tocref");
             var href=(anchor)&&(anchor.getAttribute("data-tocref"));
             if (href) metaBook.GoTOC(href);
-            else toggleClass("METABOOKSKIMMER","expanded");}
-        else toggleClass("METABOOKSKIMMER","expanded");
+            else toggleClass("METABOOKSKIMMER","expanded");
+            return;}
+        if (mB.hudup) mB.stopSkimming();
+        else setHUD(true,false);
         cancel(evt);
         return;}
 
-    function skimmer_taptap(evt){
-        metaBook.stopSkimming();
-        cancel(evt);}
-    
     function skimmer_swiped(evt){
         var dx=evt.deltaX, dy=evt.deltaY;
         var vw=fdjtDOM.viewWidth();
@@ -1600,7 +1591,7 @@
         var target=fdjtUI.T(evt);
         if (Trace.gestures) fdjtLog("head_tap %o t=%o",evt,target);
         if (mB.previewing) {
-            metaBook.stopPreview("head_tap");
+            mB.stopPreview("head_tap");
             cancel(evt);
             return;}
         if (fdjtUI.isClickable(target)) return;
@@ -1622,7 +1613,7 @@
     function foot_tap(evt){
         if (Trace.gestures) fdjtLog("foot_tap %o",evt);
         if (mB.previewing) {
-            metaBook.stopPreview("foot_tap");
+            mB.stopPreview("foot_tap");
             cancel(evt);
             return;}
         if ((isClickable(evt))||(hasParent(fdjtUI.T(evt),"hudbutton")))
@@ -1683,7 +1674,7 @@
         var target=((evt.nodeType)?(evt):(fdjtUI.T(evt)));
         var input=getParent(target,'textarea');
         if ((metaBook.previewing)&&(target===window))
-            metaBook.stopPreview();
+            mB.stopPreview();
         if (!(input)) input=getParent(target,'input');
         if ((!(input))||(typeof input.type !== "string")||
             (input.type.search(fdjtDOM.text_types)!==0))
@@ -1694,12 +1685,12 @@
     function metabookmouseout(evt){
         var target=fdjtUI.T(evt);
         if ((target===window)||(target===document.documentElement)) {
-            if (metaBook.previewing) metaBook.stopPreview();}}
+            if (metaBook.previewing) mB.stopPreview();}}
 
     function metabookvischange(evt){
         evt=evt||window.event;
         if (document[fdjtDOM.isHidden]) {
-            if (metaBook.previewing) metaBook.stopPreview();}}
+            if (metaBook.previewing) mB.stopPreview();}}
 
     /* Rules */
 
@@ -1767,7 +1758,7 @@
             metaBook.page_turner=false;
             return;}
         if (mB.select_target) {
-            metaBook.startAddGloss(
+            mB.startAddGloss(
                 metaBook.select_target,
                 ((evt.shiftKey)&&("addtag")),evt);
             metaBook.select_target=false;}}
@@ -1895,7 +1886,6 @@
          "#METABOOKLOCOFF": {tap: enterLocation},
          // Return to skimmer
          "#METABOOKSKIMMER": {tap: skimmer_tapped,
-                              taptap: skimmer_taptap,
                               swipe: skimmer_swiped},
          // Expanding/contracting the skimmer
          // Raise and lower HUD
@@ -2005,7 +1995,6 @@
          // Return to skimming
          "#METABOOKSKIMMER": {
              tap: skimmer_tapped,
-             taptap: skimmer_taptap,
              swipe: skimmer_swiped},
          // Expanding/contracting the skimmer
          // Raise and lower HUD

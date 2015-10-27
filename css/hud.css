@@ -54,13 +54,13 @@ body._ANIMATE #METABOOKSKIMMER {
     background-color: transparent;}
 
 #METABOOKSKIMMER.flash { background-color: silver;}
-#METABOOKSKIMMER.expanded {
+.hudup #METABOOKSKIMMER {
     background-color: white;
     max-height: inherit; }
 #METABOOKSKIMMER .tochead {
     background-color: steelblue; color: white;
     font-weight: bold; max-height: 4ex;}
-#METABOOKSKIMMER.expanded .tochead {max-height: inherit;}
+.hudup #METABOOKSKIMMER .tochead {max-height: inherit;}
 #METABOOKSKIMMER .tochead a { color: white;}
 #METABOOKSKIMMER .tochead hr {
     color: rgb(33, 106, 129); background-color: rgb(33, 106, 129);}
@@ -198,9 +198,9 @@ body.hudup #METABOOKHUD #METABOOKFOOT { height: 50px;}
     height: 50px;}
 
 #METABOOKHUD.openhead #METABOOKHEAD {max-height: 50%;}
-#METABOOKHUD.openglossmark #METABOOKSKIMMER.expanded,
-body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER.expanded,
-body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER.expanded {
+.hudup #METABOOKHUD.openglossmark #METABOOKSKIMMER,
+body.hudup.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER,
+body.hudup .mbSKIMMING #METABOOKHUD #METABOOKSKIMMER {
     height: auto; max-height: 50%; overflow: visible;}
 
 #METABOOKHEART {
@@ -738,13 +738,13 @@ body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER {
     -o-opacity: 0.90;
     max-height: 50px;}
 
-#METABOOKHUD #METABOOKSKIMMER.expanded, body.hudup #METABOOKSKIMMER.expanded,
-#METABOOKHEAD #METABOOKSKIMMER.expanded {
+.hudup #METABOOKHUD #METABOOKSKIMMER,
+.hudup #METABOOKHEAD #METABOOKSKIMMER {
     max-height: inherit; overflow: auto;}
 
-#METABOOKSKIMMER.expanded .ellipsis .elided { display: inline; }
-#METABOOKSKIMMER.expanded .ellipsis .elision,
-#METABOOKSKIMMER.expanded .ellipsis .delision {
+body.hudup #METABOOKSKIMMER .ellipsis .elided { display: inline; }
+body.hudup #METABOOKSKIMMER .ellipsis .elision,
+body.hudup #METABOOKSKIMMER .ellipsis .delision {
     display: none;}
 
 /* This is the twisty control */
@@ -752,15 +752,15 @@ body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER {
     position: absolute; left: 0px; top: 1.5em;}
 #METABOOKSKIMMER span.expander img { width: 40px; height: 40px;}
 #METABOOKSKIMMER span.expander img[alt='-'] { display: none;}
-#METABOOKSKIMMER.expanded span.expander img[alt='-'] { display: inline;}
-#METABOOKSKIMMER.expanded span.expander img[alt='+'] { display: none;}
+body.hudup #METABOOKSKIMMER span.expander img[alt='-'] { display: inline;}
+body.hudup #METABOOKSKIMMER span.expander img[alt='+'] { display: none;}
 
 #METABOOKSKIMMER span.expander {display: none;}
 
 #METABOOKSKIMMER #METABOOKSKIMCONTROLS .expanded { display: none;}
-#METABOOKSKIMMER.expanded #METABOOKSKIMCONTROLS .expanded {
+body.hudup #METABOOKSKIMMER #METABOOKSKIMCONTROLS .expanded {
     display: inline;}
-#METABOOKSKIMMER.expanded #METABOOKSKIMCONTROLS .collapsed {
+body.hudup #METABOOKSKIMMER #METABOOKSKIMCONTROLS .collapsed {
     display: none;}
 
 #METABOOKSKIMMER div.tochead, #METABOOKPOINTGLOSSES div.tochead {
@@ -768,8 +768,8 @@ body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER {
 #METABOOKPOINTGLOSSES div.tochead { display: none; }
 
 #METABOOKSKIMMER div.metabookcardbody {font-size: 75%;}
-#METABOOKSKIMMER.expanded div.metabookcardbody {font-size: 100%;}
-#METABOOKSKIMMER.expanded div.metabookcardbody img.button {
+body.hudup #METABOOKSKIMMER div.metabookcardbody {font-size: 100%;}
+body.hudup #METABOOKSKIMMER div.metabookcardbody img.button {
     display: inline-block;}
 
 #METABOOKSKIMMER div.metabookcard.gloss > div.tochead,
@@ -866,11 +866,11 @@ body.hudup #METABOOKHUD #METABOOKSKIMMER.sbookatend img[alt="end"] {display: blo
 body.hudup #METABOOKHUD #METABOOKSKIMMER.sbookatstart img[alt="prev"] {display: none;}
 body.hudup #METABOOKHUD #METABOOKSKIMMER.sbookatstart img[alt="beginning"] {display: block;}
 
-#METABOOKHUD #METABOOKSKIMMER.expanded .controller,
-#METABOOKHUD #METABOOKSKIMMER.expanded span.whenexpanded {
+body.hudup #METABOOKHUD #METABOOKSKIMMER .controller,
+body.hudup #METABOOKHUD #METABOOKSKIMMER span.whenexpanded {
     display: inline;}
-#METABOOKHUD #METABOOKSKIMMER.expanded .controller,
-#METABOOKHUD #METABOOKSKIMMER.expanded span.whencollapsed {
+body.hudup #METABOOKHUD #METABOOKSKIMMER .controller,
+body.hudup #METABOOKHUD #METABOOKSKIMMER span.whencollapsed {
     display: none;}
 
 #METABOOKSKIMMER div.metabookcard,
@@ -886,13 +886,13 @@ body.hudup #METABOOKHUD #METABOOKSKIMMER.sbookatstart img[alt="beginning"] {disp
 #METABOOKHUD #METABOOKSKIMMER div.gloss div.tochead,
 #METABOOKPOINTGLOSSES div.tochead {
     display: none;}
-#METABOOKHUD #METABOOKSKIMMER.expanded div.gloss div.tochead {
+body.hudup #METABOOKHUD #METABOOKSKIMMER div.gloss div.tochead {
     display: block;}
 
 /* #METABOOKSKIMMER.mbfoundhighlights .metabookcard .excerpt { display: none; } */
 
-#METABOOKHUD div.hudpanel#METABOOKSKIMMER.expanded { max-height: inherit; }
-#METABOOKHUD #METABOOKSKIMMER.expanded img.glosspic {  height: inherit; }
+body.hudup #METABOOKHUD div.hudpanel#METABOOKSKIMMER { max-height: inherit; }
+body.hudup #METABOOKHUD #METABOOKSKIMMER img.glosspic {  height: inherit; }
 
 #METABOOKFRAME._ANIMATE #METABOOKHUD #METABOOKSKIMMER {
     transition-property: background-color;

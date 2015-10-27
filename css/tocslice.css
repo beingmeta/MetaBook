@@ -79,8 +79,10 @@ div.metabookslice .mbtoc.skimpoint {
 
 #METABOOKSKIMMER .mbtoc {
     font-weight: bold; padding-top: 2px; height: 2em;}
-#METABOOKHUD.statictoc #METABOOKSKIMMER {
+body.hudup #METABOOKHUD.statictoc #METABOOKSKIMMER {
     background-color: rgba(70, 130, 180, 0.5);}
+body.hudup #METABOOKHUD.statictoc #METABOOKSKIMMER .mbtoc .context {
+    color: white;}
 
 #METABOOKSKIMMER .mbtoc .elements .brick,
 #METABOOKSKIMMER .mbtoc .elements .showsize {
@@ -92,10 +94,10 @@ div.metabookslice .mbtoc.skimpoint {
     vertical-align: bottom;
     font-size: 120%;}
 
-#METABOOKSKIMMER .mbtoc.mbtoc1, #METABOOKSKIMMER .mbtoc.mbtoc2,
-#METABOOKSKIMMER .mbtoc.mbtoc3, #METABOOKSKIMMER .mbtoc.mbtoc4,
-#METABOOKSKIMMER .mbtoc.mbtoc5, #METABOOKSKIMMER .mbtoc.mbtoc6 {
-    margin-left: 1ex; font-size: 100%;}
+#METABOOKSKIMMER .mbtoc {
+    margin-left: 1ex; font-size: 80%;}
+body.hudup #METABOOKSKIMMER .mbtoc {
+    font-size: 100%;}
 
 html._TOUCH #METABOOKHUD #METABOOKSTATICTOC.metabookslice {
     font-size: 100%; }

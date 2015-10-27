@@ -342,8 +342,6 @@ metaBook.setMode=
                         metaBookHUD.className);
             if (flag) {
                 metaBook.hudup=true;
-                dropClass(document.body,"mbSKIMMING");
-                metaBook.skimming=false;
                 addClass(document.body,"hudup");}
             else {
                 metaBook.hudup=false;
@@ -685,7 +683,7 @@ metaBook.setMode=
         
         var rAF=fdjtDOM.requestAnimationFrame;
 
-        function metaBookSkimTo(card,dir,expanded){
+        function metaBookSkimTo(card,dir){
             var skimmer=$ID("METABOOKSKIMMER");
             var skimpoint=metaBook.skimpoint;
             var slice=getSlice(card);
@@ -701,8 +699,6 @@ metaBook.setMode=
                 mB.setMode(slice.mode);
             var passage=mbID(cardinfo.passage||cardinfo.id);
             if (typeof dir !== "number") dir=0;
-            if (typeof expanded === "undefined")
-                expanded=hasClass(skimmer,"expanded");
             if (hasParent(card,metaBook.DOM.allglosses))
                 metaBook.skimming=metaBook.slices.allglosses;
             else if (hasParent(card,$ID("METABOOKSEARCHRESULTS")))
@@ -722,7 +718,6 @@ metaBook.setMode=
             if (skimpoint!==card) {
                 var clone=card.cloneNode(true);
                 var pct=((dir<0)?("-120%"):(dir>0)?("120%"):(false));
-                dropClass(skimmer,"expanded");
                 //dropClass(skimmer,"transimate");
                 clone.id="METABOOKSKIM";
                 fdjtDOM.replace("METABOOKSKIM",clone);
@@ -759,20 +754,17 @@ metaBook.setMode=
                 if (card) addClass(card,"skimpoint");
                 metaBook.skimpoint=card;}
             else {}
-            skimMode(slice,expanded);
+            skimMode(slice);
             metaBook.GoTo(passage,"Skim");
             setSkimTarget(passage);
             highlightSkimTarget(passage,card);}
-        metaBook.SkimTo=function(card,dir,expanded){
-            rAF(function(){metaBookSkimTo(card,dir,expanded);});};
+        metaBook.SkimTo=function(card,dir){
+            rAF(function(){metaBookSkimTo(card,dir);});};
         metaBook.SkimTo=metaBookSkimTo;
 
-        function skimMode(slice,expanded){
+        function skimMode(slice){
             var body=document.body, skimmer=$ID("METABOOKSKIMMER");
-            setHUD(false,false);
             addClass(body,"mbSKIMMING");
-            if (expanded) addClass(skimmer,"expanded");
-            else dropClass(skimmer,"expanded");
             // This all makes sure that the >| and |< buttons
             // appear appropriately
             if (slice.atEnd)
