@@ -937,8 +937,8 @@
                      (cname.search(/\b(sbook|metabook|sb|mb)subhead\b/)>=0))
                 return rel+1;
             else {}}
-        if ((metaBook.notoc)&&(metaBook.notoc.match(elt))) return 0;
-        if ((metaBook.ignore)&&(metaBook.ignore.match(elt))) return 0;
+        if ((mB.notoc)&&(mB.notoc.match(elt))) return 0;
+        if ((mB.ignore)&&(mB.ignore.match(elt))) return 0;
         if ((typeof metaBook.autotoc !== 'undefined')&&(!(metaBook.autotoc)))
             return false;
         if ((elt.tagName==='HGROUP')||(elt.tagName==='HEADER'))
