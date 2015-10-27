@@ -41,9 +41,9 @@ div.metabookslice .mbtoc.skimpoint {
     color: black; z-index: 50;
     white-space: normal;}
 .mbtoc div.elements {
-    position: relative; overflow: visible;
-    margin: 0px; padding: 0px; border: 0px;
-    z-index: -50;}
+    transform: translate(0,0); overflow: visible;
+    margin: 0px; padding: 0px; border: 0px; height: 1.5em;
+    z-index: -50; margin-left: 2em;}
 .mbtoc a.brick {
     position: absolute; display: inline-block;
     box-sizing: border-box;
@@ -54,10 +54,15 @@ div.metabookslice .mbtoc.skimpoint {
 .mbtoc a.brick.cohi, .mbtoc.cohi a.showsize {
     background-color: gold;}
 .mbtoc .toctext {
+    position: relative; height: 0px; overflow: visible;
     pointer-events: none;
     z-index: 100; }
-.mbtoc.cohi a.sectname {
-    color: darkblue;}
+.mbtoc.cohi {
+    border-bottom-color: gold;}
+.mbtoc.cohi a.sectname, .mbtoc.cohi a.sectname:visited,
+#METABOOKHEARTBODY .mbtoc.cohi a.sectname:visited,
+#METABOOKHEARTBODY .mbtoc.cohi a.sectname {
+    color: black;}
 .mbtoc a.showsize {
     position: absolute; display: inline-block;
     box-sizing: border-box;

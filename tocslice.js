@@ -68,11 +68,13 @@ metaBook.TOCSlice=
         function tocBar(headinfo,context){
             var title=fdjtDOM("a.sectname",headinfo.title);
             var elements=fdjtDOM("div.elements");
-            var tocbar=fdjtDOM("div.mbtoc",elements,
+            var tocbar=fdjtDOM("div.mbtoc",
                                fdjtDOM("div.toctext",
                                        ((context)&&(context.cloneNode(true))),
-                                       title));
-            var start=headinfo.starts_at, end=headinfo.ends_at, sectlen=end-start;
+                                       title),
+                               elements);
+            var start=headinfo.starts_at, end=headinfo.ends_at;
+            var sectlen=end-start;
             if ((headinfo.sub)&&(headinfo.sub.length)) {
                 var sub=headinfo.sub; var s=0, smax=sub.length;
                 addClass(tocbar,"fdjtpagehead");
@@ -113,7 +115,8 @@ metaBook.TOCSlice=
             if (card) {
                 slice.addCards([card]);
                 slice.container.appendChild(bar);}
-            context=fdjtDOM("span.context",fdjtDOM("span.tocpath","§",headinfo.title));
+            context=fdjtDOM("span.context",
+                            fdjtDOM("span.tocpath","§",headinfo.title));
             if ((headinfo.sub)&&(headinfo.sub.length)) {
                 var sub=headinfo.sub;
                 var s=0, slim=sub.length; while (s<slim) {
@@ -140,7 +143,7 @@ metaBook.TOCSlice=
                     addClass(ref,"mblivetoc");
                     if (head===headinfo) addClass(ref,"mbcurtoc");}
                 head=head.head;}
-            var toc=metaBook.statictoc;
+            var toc=metaBook.slices.statictoc;
             if (toc) {
                 var info=toc.byfrag[headinfo.frag];
                 if (info) toc.setSkim(info.dom);}};

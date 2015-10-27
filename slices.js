@@ -636,8 +636,8 @@ metaBook.Slice=(function () {
         metaBook.UI.addHandlers(container,'summary');
         this.container=container; this.cards=[];
         if (sortfn) this.sortfn=sortfn;
-        this.byid=new fdjt.RefMap();
-        this.byfrag=new fdjt.RefMap();
+        this.byid=new fdjt.StringMap();
+        this.byfrag=new fdjt.RefMap(mB.docinfo);
         this.live=false; this.needupdate=false;
         this.addCards(cards);
         if (metaBook.touch) opts.packthresh=40;
@@ -789,6 +789,8 @@ metaBook.Slice=(function () {
             if (!(about)) about=RefDB.resolve(id);
             if (!(info)) 
                 byid[id]=info={added: fdjtTime(),id: id,about: about};
+            else if (!(byid[id])) byid[id]=info;
+            else {}
             info.dom=card;
             if (card.getAttribute("data-location"))
                 info.location=parseInt(card.getAttribute("data-location"),10);
@@ -907,7 +909,10 @@ metaBook.Slice=(function () {
             if (cancel) {
                 fdjtUI.cancel(evt);
                 return;}}
-        var card=getCard(target);
+        var card;
+        if ((target.name)&&(document.getElementById(target.name)))
+            card=getCard(document.getElementById(target.name))||(getCard(target));
+        else card=getCard(target);
         if (!(card)) return;
         var passage=mbID(card.getAttribute("data-passage"));
         var glossid=card.getAttribute("data-gloss");
@@ -1072,11 +1077,11 @@ metaBook.Slice=(function () {
 
     function goToGloss(card){
         var glossid=card.getAttribute("data-gloss");
-        var glosscard=(glossid)&&(mB.allglosses.byid[glossid]);
+        var glosscard=(glossid)&&(mB.slices.allglosses.byid[glossid]);
         if (glosscard) {
             metaBook.setMode("allglosses");
             fdjt.Async(function(){
-                mB.allglosses.setSkim(glosscard);});}}
+                mB.slices.allglosses.setSkim(glosscard);});}}
     
     fdjt.DOM.defListeners(
         metaBook.UI.handlers.mouse,
