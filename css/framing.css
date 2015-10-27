@@ -112,17 +112,10 @@ body.mbSHOWHELP #METABOOKFRAME {
     width: 100%; height: 100%;
     transform: translateZ(0);
     pointer-events: none;}
-#METABOOKFRAME > #METABOOKHUD > div {
-    pointer-events: all;}
-html._TOUCH #METABOOKFRAME > #METABOOKHUD > div {
-    pointer-events: none;}
-html._TOUCH body.mbSHOWHELP #METABOOKFRAME > #METABOOKHUD > div.metabookhelp {
-    pointer-events: all;}
-html._TOUCH body.mbSHOWHELP #METABOOKBODY {
-    pointer-events: none;}
-
-html._TOUCH #METABOOKFRAME > #METABOOKHUD > #METABOOKTOPBAR,
-html._TOUCH #METABOOKFRAME > #METABOOKHUD > #METABOOKFOOT {
+#METABOOKFOOT, #METABOOKTOPBAR > *,
+body.mbSKIMMING #METABOOKSKIMMER,
+#METABOOKHUD.openheart #METABOOKHEART,
+#METABOOKHUD.openhead #METABOOKHEAD {
     pointer-events: all;}
 
 /* Page controls */
