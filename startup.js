@@ -1025,7 +1025,8 @@ metaBook.Startup=
             if (ignore.length)
                 metaBook.ignore=new fdjtDOM.Selector(ignore);
             var notoc=getMeta("tocheadnone",true)
-                .concat(getMeta("TOC.ignore",true));
+                .concat(getMeta("TOC.ignore",true))
+                .concat(getMeta("PUBTOOL.nothead",true));
             if (notoc.length)
                 metaBook.notoc=new fdjtDOM.Selector(notoc);
             var terminal=getMeta("htmlbookterminal",true)
@@ -1035,10 +1036,11 @@ metaBook.Startup=
                 metaBook.terminals=new fdjtDOM.Selector(terminal.length);
             var focus=getMeta("htmlbooktarget",true)
                 .concat(getMeta("METABOOK.target",true))
-                .concat(getMeta("METABOOK.idify",true));
+                .concat(getMeta("METABOOK.idify",true))
+                .concat(getMeta("PUBTOOL.idify",true));
             if (focus.length)
                 metaBook.focus=new fdjtDOM.Selector(focus);
-            var nofocus=getMeta("htmlbooktarget",true).
+            var nofocus=getMeta("htmlbooknotarget",true).
                 concat(getMeta("METABOOK.notarget",true));
             if (nofocus.length)
                 metaBook.nofocus=new fdjtDOM.Selector(nofocus);}
