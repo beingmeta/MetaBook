@@ -1472,6 +1472,14 @@
         return next;}
     metaBook.skimBackward=skimBackward;
 
+    /* Idea for new skimmer rules:
+       Skimming with the hud up leaves the skimmer expanded
+       By default, skimming starts with the hudup
+       Tap on the skimmer raises the hud if it's not up, returns to the slice
+         if it is.
+       Tap on the body when skimming with the hud up drops the hud.
+    */
+
     function skimmer_tapped(evt){
         evt=evt||window.event;
         var target=fdjtUI.T(evt);
@@ -1480,7 +1488,6 @@
             ((getParent(target,".elision"))||
              (getParent(target,".delision")))){
             fdjtDOM.toggleClass("METABOOKSKIMMER","expanded");
-            // fdjtUI.Ellipsis.toggle(target);
             cancel(evt);
             return;}
         if ((getParent(target,".tool"))) {
