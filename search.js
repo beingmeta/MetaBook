@@ -248,7 +248,7 @@
         results_panel.id="METABOOKSEARCHRESULTS";
         fdjtDOM.replace("METABOOKSEARCHRESULTS",results_panel);
         results.update();
-        metaBook.searchresults=results;
+        mB.slices.searchresults=results;
         metaBook.setMode("searchresults");
         $ID("METABOOKSEARCHINPUT").blur();
         $ID("METABOOKSEARCHRESULTS").focus();}

@@ -135,16 +135,16 @@ var metaBook={
     Debug: {},
     /* This is where HTML source strings for UI components are placed */
     HTML: {},
-    /* This is where we store pointers into the DOM, CSS, and TapHold objects */
-    DOM: {}, CSS: {}, TapHold: {},
+    /* This is where we store pointers into various global state objects */
+    DOM: {}, CSS: {}, TapHold: {}, slices: {},
     /* XTARGETS are procedures linked to fragment ids */
     xtargets: {},
     // Where various event timestamps are stored
     Timeline: {},
     // Word/phrase indexing structures
     allterms: [], prefixes: {},
-    // These are prefixes or Regexps for URLs which should be opened "in the book"
-    //  when they're linked in glosses
+    // These are prefixes or Regexps for URLs which should be opened
+    //  "in the book" when they're linked in glosses
     openinbook: ["https://www.youtube.com/"],
     // These are elements, indexed by URL, whose content is being
     // loaded to cache locally

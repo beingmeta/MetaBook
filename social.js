@@ -115,7 +115,7 @@
         var selected=fdjtDOM.$(".selected",sources);
         toggleClass(selected,"selected");
         addClass(target,"selected");
-        metaBook.UI.selectSources(metaBook.allglosses,false);
+        metaBook.UI.selectSources(metaBook.slices.allglosses,false);
         fdjtDOM.cancel(evt);}
     metaBook.UI.handlers.everyone_ontap=everyone_ontap;
 
@@ -139,10 +139,10 @@
         var everyone=fdjtDOM.$(".everyone",sources)[0];
         if (new_sources.length) {
             if (everyone) dropClass(everyone,"selected");
-            metaBook.UI.selectSources(metaBook.allglosses,new_sources);}
+            metaBook.UI.selectSources(metaBook.slices.allglosses,new_sources);}
         else {
             if (everyone) addClass(everyone,"selected");
-            metaBook.UI.selectSources(metaBook.allglosses,false);}
+            metaBook.UI.selectSources(metaBook.slices.allglosses,false);}
         fdjtDOM.cancel(evt);}
 
     function sources_taptap(evt){
@@ -164,10 +164,10 @@
         var everyone=fdjtDOM.$(".everyone",sources)[0];
         if (new_sources.length) {
             if (everyone) dropClass(everyone,"selected");
-            metaBook.UI.selectSources(metaBook.allglosses,new_sources);}
+            metaBook.UI.selectSources(metaBook.slices.allglosses,new_sources);}
         else {
             if (everyone) addClass(everyone,"selected");
-            metaBook.UI.selectSources(metaBook.allglosses,false);}
+            metaBook.UI.selectSources(metaBook.slices.allglosses,false);}
         fdjtDOM.cancel(evt);}
 
     function geticon(source){

@@ -133,7 +133,8 @@
         if ((info.sync)&&((!(metaBook.sync))||(info.sync>=metaBook.sync))) {
             metaBook.setSync(info.sync);}
         metaBook.loaded=info.loaded=fdjtTime();
-        //if (metaBook.allglosses) metaBook.allglosses.update();
+        if (metaBook.slices.allglosses)
+            metaBook.slices.allglosses.update();
         if (metaBook.whenloaded) {
             var whenloaded=metaBook.whenloaded;
             metaBook.whenloaded=false;
@@ -285,8 +286,8 @@
             qids.push(import_ref._id);}}
     function saveItems(qids,name){
         metaBook[name]=qids;
-        if (metaBook.cacheglosses)
-            saveLocal("mB"+"("+mB.docid+")."+name,qids,true);}
+        if (metaBook.cacheglosses) saveLocal(
+            "mB"+"("+mB.docid+")."+name,qids,true);}
     
     // Processes loaded info asynchronously
     function gotInfo(name,info,persist) {
@@ -306,7 +307,8 @@
                     RefDB.REFLOAD|RefDB.REFSTRINGS|RefDB.REFINDEX);
                 if (persist) ref.save();
                 metaBook[name]=ref._id;
-                if (persist) saveLocal("mB"+"("+mB.docid+")."+name,ref._id,true);}}}
+                if (persist) saveLocal(
+                    "mB"+"("+mB.docid+")."+name,ref._id,true);}}}
 
     function initGlosses(glosses,etc,callback){
         if (typeof callback === "undefined") callback=true;

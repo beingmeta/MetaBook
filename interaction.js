@@ -1429,7 +1429,7 @@
     metaBook.pageBackward=pageBackward;
 
     function skimForward(evt){
-        var now=fdjtTime(), slice=metaBook[metaBook.mode];
+        var now=fdjtTime(), slice=metaBook.slices[metaBook.mode];
         if ((Trace.gestures)||(Trace.nav))
             fdjtLog("skimForward %o: mode=%s",evt,mB.mode);
         dropClass(document.body,/\bmb(PAGE)?PREVIEW/g);
@@ -1452,7 +1452,7 @@
     metaBook.skimForward=skimForward;
 
     function skimBackward(evt){
-        var now=fdjtTime(), slice=metaBook[metaBook.mode];
+        var now=fdjtTime(), slice=metaBook.slices[metaBook.mode];
         if ((Trace.gestures)||(Trace.nav))
             fdjtLog("skimBackward %o: mode=%s",evt,mB.mode);
         dropClass(document.body,/\bmb(PAGE)?PREVIEW/g);

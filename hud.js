@@ -166,9 +166,9 @@ metaBook.setMode=
             if ((Trace.startup>2)&&(metaBook.DOM.allglosses))
                 fdjtLog("Setting up gloss UI %o",allglosses);
 
-            metaBook.allglosses=allglosses=
+            metaBook.slices.allglosses=allglosses=
                 new metaBook.Slice(metaBook.DOM.allglosses);
-            metaBook.allglosses.mode="allglosses";
+            metaBook.slices.allglosses.mode="allglosses";
             metaBook.glossdb.onAdd("maker",function(f,p,v){
                 metaBook.sourcedb.ref(v).oninit
                 (metaBook.UI.addGlossSource,"newsource");});
@@ -325,7 +325,7 @@ metaBook.setMode=
             fdjtDOM.replace("METABOOKSTATICTOC",panel);
             var tocslice=new MetaBookTOC(root_info,panel);
             metaBook.tocslice=tocslice;
-            metaBook.statictoc=tocslice;
+            metaBook.slices.statictoc=tocslice;
             metaBook.setupGestures(panel);
             return tocslice;}
         metaBook.setupTOC=setupTOC;
@@ -574,7 +574,8 @@ metaBook.setMode=
                 var glossdiv=fdjt.ID("METABOOKALLGLOSSES");
                 var allcards=glossdiv.childNodes;
                 var i=0, lim=allcards.length, card=false;
-                if (metaBook.allglosses) metaBook.allglosses.setLive(true);
+                if (metaBook.slices.allglosses)
+                    metaBook.slices.allglosses.setLive(true);
                 while (i<lim) {
                     card=allcards[i++];
                     if (card.nodeType===1) {
@@ -588,8 +589,7 @@ metaBook.setMode=
                 fdjt.showPage.check(metaBook.pagers[mode]);
             else {}
             
-            // We autofocus any input element appropriate to the
-            // mode
+            // We autofocus any input element appropriate to the mode
             if (metabook_mode_foci[mode]) {
                 var mode_focus=metabook_mode_foci[metaBook.mode];
                 var mode_input=
@@ -608,6 +608,8 @@ metaBook.setMode=
             // Moving the focus back to the body lets keys work
             else setTimeout(metaBook.focusBody,50);
             
+            if (mB.slices[mode]) mB.slices[mode].setLive(true);
+
             if (display_sync) metaBook.displaySync();}
 
         function metaBookHUDToggle(mode,keephud){
@@ -702,11 +704,11 @@ metaBook.setMode=
             if (typeof expanded === "undefined")
                 expanded=hasClass(skimmer,"expanded");
             if (hasParent(card,metaBook.DOM.allglosses))
-                metaBook.skimming=metaBook.allglosses;
+                metaBook.skimming=metaBook.slices.allglosses;
             else if (hasParent(card,$ID("METABOOKSEARCHRESULTS")))
-                metaBook.skimming=metaBook.searchresults;
+                metaBook.skimming=mB.slices.searchresults;
             else if (hasParent(card,$ID("METABOOKSTATICTOC")))
-                metaBook.skimming=metaBook.statictoc;
+                metaBook.skimming=metaBook.slices.statictoc;
             else metaBook.skimming=true;
             if (Trace.mode)
                 fdjtLog("metaBookSkim() %o (card=%o) mode=%o scn=%o/%o dir=%o",
@@ -799,7 +801,8 @@ metaBook.setMode=
                 else if (card.about[0]==="#")
                     addClass(metaBook.getDups(card.about.slice(1)),
                              "mbhighlightpassage");
-                else addClass(metaBook.getDups(card.about),"mbhighlightpassage");}
+                else addClass(metaBook.getDups(card.about),
+                              "mbhighlightpassage");}
             else if ((card)&&(getParent(card,".sbookresults"))) {
                 var about=card.about, target=mbID(about);
                 if (target) {
@@ -817,20 +820,20 @@ metaBook.setMode=
             else {}}
 
         function getSlice(card){
-            var cur_slice=mB[mB.mode];
+            var cur_slice=mB.slices[mB.mode];
             if ((cur_slice)&&(cur_slice.getInfo(card)))
                 return cur_slice;
             else if (card.nodeType) {
                 if (hasParent(card,mB.DOM.allglosses))
-                    return mB.allglosses;
+                    return mB.slices.allglosses;
                 else if (hasParent(card,$ID("SBOOKSEARCHRESULTS")))
                     return mB.searchresults;
                 else return false;}
             else if (typeof card === "string") {
                 if (mB.glossdb.probe(card))
-                    return mB.allglosses;
+                    return mB.slices.allglosses;
                 else if (mB.docinfo[card])
-                    return mB.statictoc;
+                    return mB.slices.statictoc;
                 else return false;}
             else return false;}
 

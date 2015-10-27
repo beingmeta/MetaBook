@@ -26,15 +26,15 @@ html._NOUSER a.logout {display: none;}
 
 /* METABOOKHEARTBODY content rules */
 
-#METABOOKHUD #METABOOKHEARTBODY a,
-#METABOOKHUD #METABOOKHEARTBODY a:visited { 
+#METABOOKHEARTBODY a,
+#METABOOKHEARTBODY a:visited { 
     color: darkblue; text-decoration: none;}
-html._MOUSE #METABOOKHUD #METABOOKHEARTBODY a:hover {
+html._MOUSE #METABOOKHEARTBODY a:hover {
     text-decoration: underline;}
-#METABOOKHUD #METABOOKHEARTBODY .flyleafplate a,
-#METABOOKHUD #METABOOKHEARTBODY .flyleafplate a:visited {
+#METABOOKHEARTBODY .flyleafplate a,
+#METABOOKHEARTBODY .flyleafplate a:visited {
     text-decoration: none; color: blue;}
-html._MOUSE #METABOOKHUD #METABOOKHEARTBODY .flyleafplate a:hover {
+html._MOUSE #METABOOKHEARTBODY .flyleafplate a:hover {
     text-decoration: underline;}
 
 #METABOOKHUD #METABOOKABOUTBOOK.hudpanel { text-align: left;}
