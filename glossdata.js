@@ -59,7 +59,7 @@
     metaBook.setupGlossData=setupGlossData;
 
     function cacheGlossData(uri){
-        function caching(resolved){
+        function caching(resolved,rejected){
             if (uri.search(mB.cachelink)!==0) return;
             if (glossdata[uri]) return resolved(glossdata[uri]);
             if (glossdata_state[uri]==="cached") return;
@@ -118,21 +118,51 @@
                             reader.readAsDataURL(req.response);}}
                     catch (ex) {
                         fdjtLog.warn("Error fetching %s via %s: %s",uri,endpoint,ex);
-                        glossdata_state[uri]=false;}}};
+                        glossdata_state[uri]=false;
+                        if (rejected) rejected(ex);}}
+                else if (req.readyState === 4) {
+                    fdjtLog.warn("Error (%d) fetching %s via %s",
+                                 req.status,uri,endpoint);
+                    glossdata_state[uri]=false;
+                    if (rejected) rejected(req);}};
             req.open("GET",endpoint);
             req.responseType=rtype;
             // req.withCredentials=true;
             req.send(null);}
         return new Promise(caching);}
 
+    var glossdata_wait=600;
+    var glossdata_timer=false;
+    var need_glossdata=[];
+
     function needGlossData(uri){
         if ((glossdata[uri])||(glossdata_state[uri]==="cached")) return;
+        if (!(navigator.onLine)) {
+            if (need_glossdata.length===0) 
+                fdjt.DOM.addListener(window,"online",load_glossdata);
+            if (need_glossdata.indexOf(uri)<0) need_glossdata.push(uri);
+            return;}
         if ((mB.mycopyid)&&(mB.mycopyid_expires<(new Date())))
-            return cacheGlossData(uri);
+            return cacheGlossData(uri).catch(function(){delay_glossdata(uri);});
         else {
             var req=mB.getMyCopyId();
-            return req.then(function(mycopyid){if (mycopyid) cacheGlossData(uri);});}}
+            return req.then(function(mycopyid){if (mycopyid) cacheGlossData(uri);})
+                .catch(function(){delay_glossdata(uri);});}}
     metaBook.needGlossData=needGlossData;
+    
+    function delay_glossdata(uri){
+        need_glossdata.push(uri);
+        if (!(glossdata_timer))
+            glossdata_timer=setTimeout(load_glossdata,glossdata_wait);}
+
+    function load_glossdata(){
+        if ((navigator.onLine)&&(need_glossdata.length)) {
+            if (glossdata_timer) {
+                clearTimeout(glossdata_timer); glossdata_timer=false;}
+            var needed=need_glossdata; need_glossdata=[];
+            var i=0, lim=needed.length; while (i<lim) {
+                needGlossData(needed[i++]);}}}
+        
 
     function getGlossData(uri){
         function getting(resolved){
