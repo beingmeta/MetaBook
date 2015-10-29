@@ -81,10 +81,6 @@ body._FULLHEIGHT #METABOOKTOPBAR {height: 20px;}
 body._FULLHEIGHT #METABOOKTOPBAR.tapholding,
 body._FULLHEIGHT.hudup #METABOOKTOPBAR {height: 50px;}
 
-html._TOUCH body.hudup #METABOOKFRAME > #METABOOKHUD > div,
-html._TOUCH #METABOOKFRAME > #METABOOKHUD.addgloss > div,
-html._TOUCH body.mbSKIMMING #METABOOKFRAME > #METABOOKHUD > #METABOOKSKIMMER {
-    pointer-events: all;}
 html._TOUCH body.hudup #METABOOKFRAME > #METABOOKHUD > div.helphud {
     background-color: ivory;}
 

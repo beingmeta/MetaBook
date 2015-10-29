@@ -112,11 +112,13 @@ body.mbSHOWHELP #METABOOKFRAME {
     width: 100%; height: 100%;
     transform: translateZ(0);
     pointer-events: none;}
-#METABOOKFOOT, #METABOOKTOPBAR > *,
+#METABOOKFOOT, #METABOOKTOPBAR,
 body.mbSKIMMING #METABOOKSKIMMER,
 #METABOOKHUD.openheart #METABOOKHEART,
 #METABOOKHUD.openhead #METABOOKHEAD {
     pointer-events: all;}
+#METABOOKHUD.openhead #METABOOKTOPBAR {
+    pointer-events: none;}
 
 /* Page controls */
 
