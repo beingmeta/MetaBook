@@ -160,7 +160,7 @@ var metaBook={
         uisize: 'normal',dyslexical: false,
         animatecontent: true,animatehud: true,
         hidesplash: false,keyboardhelp: true,
-        holdmsecs: 500,wandermsecs: 1500,taptapmsecs: 200,
+        holdmsecs: 300,wandermsecs: 1500,taptapmsecs: 200,
         locsync: true, syncinterval: 60, checksync: 15*60,
         glossupdate: 5*60,cacheglosses: true,
         soundeffects: false, buzzeffects: false,
