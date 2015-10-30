@@ -93,7 +93,7 @@ body.mbMEDIA #METABOOKBODY {
 
 body.hudup #METABOOKFRAME, body.mbCOVER #METABOOKFRAME,
 body.openhud #METABOOKFRAME, body.mbSKIMMING #METABOOKFRAME,
-body.mbSHOWHELP #METABOOKFRAME {
+body.mbPREVIEW #METABOOKFRAME, body.mbSHOWHELP #METABOOKFRAME {
     z-index: 50;}
 
 /* Override simple stylesheet definitions in the metaBook frame */
@@ -112,13 +112,15 @@ body.mbSHOWHELP #METABOOKFRAME {
     width: 100%; height: 100%;
     transform: translateZ(0);
     pointer-events: none;}
+#METABOOKHUD.openhead #METABOOKTOPBAR {
+    pointer-events: none;}
+
 #METABOOKFOOT, #METABOOKTOPBAR,
 body.mbSKIMMING #METABOOKSKIMMER,
 #METABOOKHUD.openheart #METABOOKHEART,
-#METABOOKHUD.openhead #METABOOKHEAD {
+#METABOOKHUD.openhead #METABOOKHEAD,
+#METABOOKHUD.openhead #METABOOKTOPBAR .hudbutton {
     pointer-events: all;}
-#METABOOKHUD.openhead #METABOOKTOPBAR {
-    pointer-events: none;}
 
 /* Page controls */
 
