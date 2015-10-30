@@ -218,12 +218,6 @@ div.searchbox div.query span.dterm {
 
 /* The HUD */
 
-/* "Leading" to fill out the top and bottom */
-
-div.leading { height: 50px; width: 100%;}
-#SBOOKTOPLEADING { height: 50px; width: 100%;}
-#SBOOKBOTTOMLEADING { height: 50px; width: 100%;}
-
 /* Margins */
 
 body.sbookpagevertical { overflow: hidden;}
