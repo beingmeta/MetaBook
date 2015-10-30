@@ -1,15 +1,15 @@
-Search results aren't paged
+x Search results aren't paged
 Short screen in glosses when paging backwards to start
 Adjust font in skimmer
 x Clear search shouldn't autofocus
 Messy recovery from soft keyboard resize
 Right edge swipe down doesn't always invoke search
-TOC button doesn't work when search mode is up (overlay?)
+x TOC button doesn't work when search mode is up (overlay? -- page itself, pointer-events: none on TOPBAR)
 x Double tap menu shows markup from anchor labels
 Draw attention to pagebar help until moving
 Some pagebar interactions don't exit preview
-Pagebar preview puts number under preview body
-Make preview body larger
+x Pagebar preview puts number under preview body
+x Make preview body larger
 No real TOC for touch book
 x Animate pagebar position
 Get something loupish for selection
