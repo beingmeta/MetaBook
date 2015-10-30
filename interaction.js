@@ -636,14 +636,25 @@
             var uselabel=anchor.title||(getAnchorContext(anchor));
             var handler=((linkref.search("#")===0)?(makeGoTo(linkref)):
                          (makeOpener(anchor.href)));
-            var anchor_opt={label: uselabel,handler: handler,
+            var anchor_opt={handler: handler,
                             classname: "anchor"};
+            if (typeof uselabel === "string") anchor_opt.label=uselabel;
+            else if (uselabel.nodeType) {
+                anchor_opt.dom=uselabel;
+                anchor_opt.label=fdjtDOM.textify(uselabel);}
+            else {}
             choices.push(anchor_opt);}}
     
     function getAnchorContext(anchor){
         var frag=document.createDocumentFragment();
         var context=fdjtDOM("span.anchorcontext");
-        frag.appendChild(fdjtDOM("span.anchortext",anchor.innerHTML));
+        if ((anchor.childNodes.length===1)&&
+            (anchor.childNodes[0].nodeType===3))
+            frag.appendChild(fdjtDOM(
+                "span.anchortext",anchor.childNodes[0].nodeValue));
+        else {
+            var text=fdjtDOM("span.anchortext");
+            text.innerHTML=anchor.innerHTML;}
         frag.appendChild(context);
         if (anchor.title) fdjtDOM(context,anchor.title);
         else {
