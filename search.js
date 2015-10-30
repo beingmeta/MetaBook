@@ -247,9 +247,9 @@
         addClass(results_panel,"hudpanel");
         results_panel.id="METABOOKSEARCHRESULTS";
         fdjtDOM.replace("METABOOKSEARCHRESULTS",results_panel);
-        results.update();
         mB.slices.searchresults=results;
         metaBook.setMode("searchresults");
+        results.update();
         $ID("METABOOKSEARCHINPUT").blur();
         $ID("METABOOKSEARCHRESULTS").focus();}
     metaBook.showSearchResults=showSearchResults;
