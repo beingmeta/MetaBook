@@ -233,7 +233,7 @@
             shrinkrule=fdjtDOM.addCSSRule(
                 "body.mbSHRINK #CODEXPAGE,body.mbPREVIEW #CODEXPAGE, body.mbSKIMMING #CODEXPAGE", "");
             metaBook.CSS.shrinkrule=shrinkrule;}
-        var sh=view_height-150;
+        var sh=view_height-100; // 150 (trying smaller)
         var vs=(sh/geom.height);
         if (vs>1) vs=1;
         shrinkrule.style[fdjtDOM.transform]="scale("+vs+","+vs+")";
@@ -246,11 +246,6 @@
     /* Margin creation */
 
     function initMargins(){
-        var topleading=fdjtDOM("div#SBOOKTOPLEADING.leading.top"," ");
-        var bottomleading=
-            fdjtDOM("div#SBOOKBOTTOMLEADING.leading.bottom"," ");
-        topleading.metabookui=true; bottomleading.metabookui=true;
-        
         var page_right=fdjtDOM("div.mbpagecontrol#MBPAGERIGHT");
         var page_left=fdjtDOM("div.mbpagecontrol#MBPAGELEFT");
         var controls=fdjtDOM("div#METABOOKPAGECONTROLS",page_left,page_right);
