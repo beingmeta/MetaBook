@@ -1,8 +1,24 @@
-Attachment uploads
-[4Jan2013] Show personal highlights
-[4Jan2013] Typing with open gloss focuses and expands
-[4Jan2013] Move shared and post into glossetc
-Add delete button to cover
-Store DOCINFO in IndexedDB for better searches
-[4Jan2013] Async, post onload autoindex loading
+Search results aren't paged
+Short screen in glosses when paging backwards to start
+Adjust font in skimmer
+x Clear search shouldn't autofocus
+Messy recovery from soft keyboard resize
+Right edge swipe down doesn't always invoke search
+TOC button doesn't work when search mode is up (overlay?)
+x Double tap menu shows markup from anchor labels
+Draw attention to pagebar help until moving
+Some pagebar interactions don't exit preview
+Pagebar preview puts number under preview body
+Make preview body larger
+No real TOC for touch book
+x Animate pagebar position
+Get something loupish for selection
+Selection often picks wrong endpoint to move
+Page breaks appear between open parens and markup
+Have deleted or save/discard in pagehead with timeout or alternative button
+Tweak hold interval, buzz when hold registers?
+Scale tag cloud to fit, provide pinch and pan to navigate.
+Provide max font for cloud term scaling.
+x Make HUD buttons 60x60.
+
 
