@@ -24,7 +24,7 @@ html._MOUSE #METABOOKHUD a.brick:hover { text-decoration: none;}
 
 #METABOOKHEAD {
     position: absolute; left: 60px; right: 60px; z-index: 80;
-    min-height: 50px; max-height: 60px; padding: 0px;
+    min-height: 60px; max-height: 60px; padding: 0px;
     background-color: transparent; 
     border: solid transparent 0px;}
 #METABOOKTOPBAR, #METABOOKFOOT {
@@ -308,7 +308,7 @@ body.hudup #METABOOKHUD.openheart #METABOOKHEART,
 body.hudup #METABOOKHUD.openheart.allglosses #METABOOKHEARTBODY div.hudpanel,
 body.hudup #METABOOKHUD.openheart.searchresults
      #METABOOKHEARTBODY div.hudpanel {
-    padding-bottom: 0px; border-bottom: 0px; margin-bottom: 0px;}
+    padding-bottom: 1em; border-bottom: 0px; margin-bottom: 0px;}
 body.hudup #METABOOKHUD.openheart #METABOOKHEARTBODY div.hudpanel,
 #METABOOKHUD.addgloss.glossaddtag #METABOOKHEARTBODY div.hudpanel,
 #METABOOKHUD.addgloss.glosstagging #METABOOKHEARTBODY div.hudpanel,
