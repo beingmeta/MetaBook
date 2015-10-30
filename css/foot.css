@@ -148,10 +148,11 @@ body.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR
 #METABOOKFOOT #METABOOKPAGEBAR #METABOOKPAGEPROGRESS {
     box-sizing: content-box; border-right: solid darkblue 2px;
     position: absolute; bottom: 0px; left: 0px;
-    width: 33%; height: 100%; 
+    width: 33%; height: 100%; z-index: 15;
     background-color: transparent;
     pointer-events: none;
-    z-index: 15;}
+    transition-property: width; 
+    transition-duration: 1s;}
 #METABOOKFOOT #METABOOKPAGEBAR .metabooksectmarker {
     box-sizing: content-box;
     position: absolute; bottom: 0px; left: 10%; width: 0%;
