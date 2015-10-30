@@ -24,7 +24,7 @@ html._MOUSE #METABOOKHUD a.brick:hover { text-decoration: none;}
 
 #METABOOKHEAD {
     position: absolute; left: 60px; right: 60px; z-index: 80;
-    min-height: 50px; max-height: 70px; padding: 0px;
+    min-height: 50px; max-height: 60px; padding: 0px;
     background-color: transparent; 
     border: solid transparent 0px;}
 #METABOOKTOPBAR, #METABOOKFOOT {
@@ -81,7 +81,8 @@ body.hudup #METABOOKHEAD .hudpanel {
 
 body._FULLHEIGHT #METABOOKTOPBAR {height: 20px;}
 body._FULLHEIGHT #METABOOKTOPBAR.tapholding,
-body._FULLHEIGHT.hudup #METABOOKTOPBAR {height: 60px;}
+body._FULLHEIGHT.hudup #METABOOKTOPBAR {
+    height: 50px;}
 
 html._TOUCH body.hudup #METABOOKFRAME > #METABOOKHUD > div.helphud {
     background-color: ivory;}
@@ -488,9 +489,9 @@ div.completions.hudpanel .normal { line-height: 250%;}
 /* HUD buttons */
 
 img.hudbutton {
-    position: absolute; width: 60px; height: 60px;
+    position: absolute; width: 50px; height: 50px;
     border: solid transparent 2px;
-    box-sizing: border-box;}
+    box-sizing: content-box;}
 .hudbutton {
     opacity: 0.02;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=02)";
@@ -502,17 +503,18 @@ img.hudbutton {
 html._MOUSE not(body.hudup) .hudbutton:hover,
 html._MOUSE not(body.hudup) #METABOOKTOPBAR:hover .hudbutton,
 html._MOUSE not(body.hudup) #METABOOKFOOT:hover .hudbutton,
-#METABOOKHUD not(body.hudup) .tapholding .hudbutton,
 html._MOUSE not(body.mbSKIMMING) .hudbutton:hover,
 html._MOUSE not(body.mbSKIMMING) #METABOOKTOPBAR:hover .hudbutton,
-html._MOUSE not(body.mbSKIMMING) #METABOOKFOOT:hover .hudbutton,
-#METABOOKHUD not(body.mbSKIMMING) .tapholding .hudbutton {
+html._MOUSE not(body.mbSKIMMING) #METABOOKFOOT:hover .hudbutton {
     opacity: 0.50;}
 html._MOUSE not(body.hudup) #METABOOKTOPBAR:hover .hudbutton:hover,
 html._MOUSE not(body.hudup) #METABOOKFOOT:hover .hudbutton:hover,
 html._MOUSE not(body.mbSKIMMING) #METABOOKTOPBAR:hover .hudbutton:hover,
 html._MOUSE not(body.mbSKIMMING) #METABOOKFOOT:hover .hudbutton:hover {
     opacity: 0.75;}
+
+/* #METABOOKHUD .tapholding .hudbutton {opacity: 0.50;} */
+#METABOOKHUD .hudbutton.tapholdtarget {opacity: 0.50;}
 
 body.mbSKIMMING img.hudbutton {
     opacity: 0.80;}
@@ -623,7 +625,6 @@ body._ANIMATE #METABOOKTOOLTAB {
 html._NOSVG #METABOOKTOOLTAB {
     background-image: url(g/metabook/downbar128w.png);}
 .hudup #METABOOKTOOLTAB, .mbcover #METABOOKTOOLTAB { display: none;}
-#METABOOKTOPBAR.tapholding #METABOOKTOOLTAB { display: none; }
 
 #METABOOKSHOWCOVER {
     white-space: nowrap;

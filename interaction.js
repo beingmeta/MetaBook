@@ -1903,7 +1903,7 @@
          "#METABOOKPAGEHEAD": {click: head_tap},
          "#METABOOKTABS": {click: head_tap},
          "#METABOOKHEAD": {click: head_tap},
-         "#METABOOKPAGEFOOT": {tap: foot_tap},
+         "#METABOOKFOOT": {tap: foot_tap},
          ".searchcloud": {
              tap: metaBook.UI.handlers.searchcloud_select,
              release: metaBook.UI.handlers.searchcloud_select},
@@ -1998,7 +1998,6 @@
          "#METABOOKSHOWCOVER": {
              tap: showcover_tapped, release: showcover_released},
          "#METABOOKSEARCHINFO": { click: metaBook.searchTags_onclick },
-         "#METABOOKPAGEFOOT": {},
          "#METABOOKPAGEREFTEXT": {tap: enterPageRef},
          "#METABOOKPAGENOTEXT": {tap: enterPageNum},
          "#METABOOKLOCPCT": {tap: enterPercentage},
