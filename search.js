@@ -385,7 +385,8 @@
             input.value="";
             metaBook.empty_cloud.clearSelection();
             metaBook.empty_cloud.complete("");}
-        input.focus();}
+        // input.focus();
+    }
     metaBook.UI.handlers.clearSearch=clearSearch;
     
     metaBook.toggleSearch=function(evt){
