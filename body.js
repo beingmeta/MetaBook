@@ -233,7 +233,7 @@
             shrinkrule=fdjtDOM.addCSSRule(
                 "body.mbSHRINK #CODEXPAGE,body.mbPREVIEW #CODEXPAGE, body.mbSKIMMING #CODEXPAGE", "");
             metaBook.CSS.shrinkrule=shrinkrule;}
-        var sh=view_height-100; // 150 (trying smaller)
+        var sh=view_height-150;
         var vs=(sh/geom.height);
         if (vs>1) vs=1;
         shrinkrule.style[fdjtDOM.transform]="scale("+vs+","+vs+")";
