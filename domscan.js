@@ -360,16 +360,27 @@ metaBook.DOMScan=(function(){
                 scanstate.curlevel=curlevel; scanstate.notoc=notoc;
                 scanstate.curhead=curhead; scanstate.curinfo=curinfo;
                 return;}
-            var toclevel=((id)&&(getLevel(child,curlevel)));
+            var toclevel=getLevel(child,curlevel), info=false;
+            if ((toclevel)&&(!(id))) {
+                var parent=child.parentNode;
+                info=((parent.id)&&(docinfo[parent.id]))||
+                    ((parent.getAttribute("data-tocid"))&&
+                     (docinfo[parent.getAttribute("data-tocid")]));
+                if (info) {
+                    id=info.frag;
+                    info.toclevel=toclevel; 
+                    if ((child.title)&&(!(info.title)))
+                        info.title=child.title;}}
+            else if (!(id)) {}
+            else if ((info=docinfo[id])) {}
+            else {
+                allids.push(id); info=new ScanInfo(id,scanstate);
+                docinfo[id]=info; info.elt=child;}
             // The header functionality is handled by its surrounding
             // section (which should have a toclevel of its own)
             if ((scanstate.notoc)||(tag==='header')) {
                 scanstate.notoc=true; toclevel=0;}
             scanstate.eltcount++;
-            var info=(id&&(docinfo[id]));
-            if ((!(info))&&(id)) {
-                allids.push(id); info=new ScanInfo(id,scanstate);
-                docinfo[id]=info; info.elt=child;}
             if ((info)&&(id)&&(child.id)&&(child.id!==id))
                 // Store info under both ID and TOCID if different
                 docinfo[child.id]=info;
