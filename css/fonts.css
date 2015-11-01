@@ -31,14 +31,15 @@
 
 @charset "UTF-8";
 
-#METABOOKFRAME {
+#METABOOKPAGECONTROLS, #METABOOKFRAME {
     /* font-family: 'Open Sans', Arial, Helvetica, sans-serif, sans; */
     font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif, sans;}
-html._HAVEOPENSANS #METABOOKFRAME {
+html._HAVEOPENSANS #METABOOKFRAME, html._HAVEOPENSANS #METABOOKPAGECONTROLS {
     font-family: 'Open Sans', Verdana, Tahoma, Arial, Helvetica, sans-serif;}
-html._DYSLEXICAL #METABOOKFRAME, html._DYSLEXICAL .fdjtdialog {
+html._DYSLEXICAL #METABOOKFRAME, html._DYSLEXICAL .fdjtdialog,
+html._DYSLEXICAL #METABOOKPAGECONTROLS {
     font-family: 'Open Dyslexic', serif;}
-.wf-inactive #METABOOKFRAME {
+.wf-inactive #METABOOKFRAME, .wf-inactive #METABOOKPAGECONTROLS {
     font-family: Arial, Helvetica, sans-serif, sans;}
 
 #METABOOKBODY, #METABOOKFRAME #METABOOKABOUT, span.excerpt {
@@ -62,4 +63,3 @@ html._DYSLEXICAL #METABOOKBODY li, .dyslexical li {
 ;;;  indent-tabs-mode: nil ***
 ;;;  End: ***
 */
-
