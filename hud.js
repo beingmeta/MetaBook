@@ -99,6 +99,7 @@ metaBook.setMode=
                 frame=fdjtDOM("div#METABOOKFRAME");
                 fdjtDOM.prepend(document.body,frame);}
             addClass(frame,"metabookframe");
+            addClass(frame,"tapholdcontext");
             frame.appendChild(messages); frame.appendChild(hud);
             if (metaBook.getConfig("uisize"))
                 addClass(frame,"metabookuifont"+metaBook.getConfig("uisize"));
@@ -564,25 +565,17 @@ metaBook.setMode=
                               (metaBook.docinfo[metaBook.head.id]));
                 var static_head=$ID("MBTOC4"+headinfo.frag);
                 var toc=fdjt.ID("METABOOKSTATICTOC");
-                fdjt.showPage.check(toc);
-                if (static_head.offsetHeight===0)
-                    fdjt.showPage.showNode(toc,static_head);}
-            else if (mode==="allglosses") {
+                if (hasClass(toc,"mbsyncslice")) {
+                    fdjt.showPage.check(toc);
+                    if (static_head.offsetHeight===0)
+                        fdjt.showPage.showNode(toc,static_head);}}
+            else if (mB.slices[mode]) {
                 var curloc=metaBook.location;
-                var glossdiv=fdjt.ID("METABOOKALLGLOSSES");
-                var allcards=glossdiv.childNodes;
-                var i=0, lim=allcards.length, card=false;
-                if (metaBook.slices.allglosses)
-                    metaBook.slices.allglosses.setLive(true);
-                while (i<lim) {
-                    card=allcards[i++];
-                    if (card.nodeType===1) {
-                        var loc=card.getAttribute("data-location");
-                        if (loc) loc=parseInt(loc,10); else continue;
-                        if (loc>=curloc) break;}}
-                fdjt.showPage.check(glossdiv);
-                if ((card)&&(card.offsetHeight===0))
-                    fdjt.showPage.showNode(glossdiv,card);}
+                var slice=mB.slices[mode];
+                var slicediv=slice.container;
+                slice.setLive(true);
+                if (hasClass(slicediv,"mbsyncslice"))
+                    slice.setLocation(curloc);}
             else if (metaBook.pagers[mode])
                 fdjt.showPage.check(metaBook.pagers[mode]);
             else {}
@@ -795,7 +788,7 @@ metaBook.setMode=
                              "mbhighlightpassage");
                 else addClass(metaBook.getDups(card.about),
                               "mbhighlightpassage");}
-            else if ((card)&&(getParent(card,".sbookresults"))) {
+            else if ((card)&&(getParent(card,".searchslice"))) {
                 var about=card.about, target=mbID(about);
                 if (target) {
                     var info=metaBook.docinfo[target.id];
@@ -818,7 +811,7 @@ metaBook.setMode=
             else if (card.nodeType) {
                 if (hasParent(card,mB.DOM.allglosses))
                     return mB.slices.allglosses;
-                else if (hasParent(card,$ID("SBOOKSEARCHRESULTS")))
+                else if (hasParent(card,$ID("METABOOKSEARCHRESULTS")))
                     return mB.searchresults;
                 else return false;}
             else if (typeof card === "string") {

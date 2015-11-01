@@ -820,13 +820,16 @@ metaBook.Slice=(function () {
     MetaBookSlice.prototype.setSkim=function setSkim(card){
         var visible=this.visible, shown=this.shown;
         var off=((card.nodeType)?(shown.indexOf(card)):(visible.indexOf(card)));
+        var dom=((card.nodeType)?(card):(card.dom));
         if (off<0) return; else {
             card=shown[off];
             if (this.skimpoint) dropClass(this.skimpoint,"skimpoint");
             this.skimpoint=card; this.skimpos=off;
             this.atStart=(off===0);
             this.atEnd=(off>=(visible.length-1));
-            addClass(card,"skimpoint");
+            addClass(dom,"skimpoint");
+            if (dom.offsetHeight===0) 
+                showPage.showNode(this.container,dom);
             return card;}};
     MetaBookSlice.prototype.forward=
         function skimForward(card){
@@ -856,9 +859,9 @@ metaBook.Slice=(function () {
         else return false;};
 
     MetaBookSlice.prototype.setLocation=function setSliceLocation(location){
-        var visible=this.visible; var i=0, lim=visible.length;
+        var cards=this.cards; var i=0, lim=cards.length;
         while (i<lim) {
-            var card=visible[i];
+            var card=cards[i];
             if (typeof card.location !== "number") {i++; continue;}
             else if (card.location>=location) {
                 this.setSkim(card);
@@ -914,6 +917,8 @@ metaBook.Slice=(function () {
             card=getCard(document.getElementById(target.name))||(getCard(target));
         else card=getCard(target);
         if (!(card)) return;
+        var slice=getParent(card,".metabookslice");
+        addClass(slice,"mbsyncslice");
         var passage=mbID(card.getAttribute("data-passage"));
         var glossid=card.getAttribute("data-gloss");
         var gloss=((glossid)&&(metaBook.glossdb.ref(glossid)));
@@ -986,7 +991,7 @@ metaBook.Slice=(function () {
                     show_target=getTargetDup(starts,passage);
                 fdjtUI.Highlight(range,"mbhighlightexcerpt");}}
 
-        if (getParent(card,".sbookresults")) {
+        if (getParent(card,".searchslice")) {
             // It's a search result, so highlight any matching terms
             var terms=metaBook.query.tags;
             var info=metaBook.docinfo[passageid];
@@ -1043,11 +1048,15 @@ metaBook.Slice=(function () {
             if (dx<(-(metaBook.minswipe||10))) {
                 if (metaBook.skimming)
                     metaBook.skimForward();
-                else showPage.forward(slice);}
+                else {
+                    dropClass(slice,"myslicesync");
+                    showPage.forward(slice);}}
             else if (dx>(metaBook.minswipe||10)) {
                 if (metaBook.skimming)
                     metaBook.skimBackward();
-                else showPage.backward(slice);}}
+                else {
+                    dropClass(slice,"mbyslicesync");
+                    showPage.backward(slice);}}}
         else if (ady>(adx*2)) {
             // Vertical swipe
             if (!(metaBook.hudup)) {
