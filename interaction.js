@@ -771,9 +771,8 @@
                 else if ((mB.mode)&&(!(mB.skimming))&&
                          (pagers[metaBook.mode])) {
                     if (evt.touches===2)
-                        showPage.fastFrward(pagers[metaBook.mode]);
+                        showPage.fastForward(pagers[metaBook.mode]);
                     else showPage.forward(pagers[metaBook.mode]);}
-                else if (mB.skimming) pageForward(evt);
                 else pageForward(evt,true);}
             else if (dx>(mB.minswipe||10)) {
                 if (evt.ntouches>2) window.history.back();
@@ -786,8 +785,6 @@
                     if (evt.touches===2)
                         showPage.fastBckward(pagers[metaBook.mode]);
                     else showPage.backward(pagers[metaBook.mode]);}
-                else if (mB.skimming)
-                    metaBook.pageBackward(evt);
                 else metaBook.pageBackward(evt,true);}}
         else if (ady>(adx*2)) {
             // Vertical swipe
@@ -1068,14 +1065,12 @@
                 if (evt.shiftKey)
                     showPage.fastForward(pagers[metaBook.mode]);
                 else showPage.forward(pagers[metaBook.mode]);}
-            else if (mB.skimming) pageForward(evt);
             else pageForward(evt,true);}
         else if ((kc===8)||(kc===45)) { // backspace or delete
             if ((mB.mode)&&(!(mB.skimming))&& (pagers[metaBook.mode])) {
                 if (evt.shiftKey)
                     showPage.fastBackward(pagers[metaBook.mode]);
                 else showPage.backward(pagers[metaBook.mode]);}
-            else if (mB.skimming) pageBackward(evt);
             else pageBackward(evt,true);}
         // Home goes to the current head.
         else if (kc===36) metaBook.JumpTo(mB.head);
@@ -1390,7 +1385,6 @@
         dropClass(document.body,/\bmb(PAGE)?PREVIEW/g);
         if ((clearmodes)&&((mB.hudup)||(mB.mode)))
             fdjt.Async(function(){mB.setHUD(false);});
-        else if (mB.skimming) dropClass("METABOOKSKIMMER","expanded");
         else {}
         if (mB.readsound)
             fdjtDOM.playAudio("METABOOKPAGEORWARDAUDIO");
@@ -1418,7 +1412,6 @@
         else last_motion=now;
         evt=evt||window.event;
         if (clearmodes) fdjt.Async(function(){mB.setHUD(false);});
-        else if (mB.skimming) dropClass("METABOOKSKIMMER","expanded");
         else {}
         if (mB.readsound)
             fdjtDOM.playAudio("METABOOKPAGEBACKWARDAUDIO");
