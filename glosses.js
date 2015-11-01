@@ -458,7 +458,7 @@
                   onslip: ((opts)&&(opts.onslip)),
                   // onstart: select_start,
                   // onstop: select_end,
-                  loupe: false,
+                  loupe: metaBook.touch||metaBook.useloupe,
                   fortouch: metaBook.touch,
                   holdmsecs: 150,
                   movethresh: 250});}
