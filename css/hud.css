@@ -73,7 +73,7 @@ body._ANIMATE #METABOOKSKIMMER {
 body.hudup #METABOOKHUD.openheart #METABOOKHEAD {
     max-height: 100px; height: auto;}
 body.hudup #METABOOKHUD.openheart.openhead #METABOOKHEAD {
-    max-height: 100px; min-height: 50px; height: auto;}
+    max-height: 100px; min-height: 60px; height: auto;}
 body._FULLHEIGHT.hudup #METABOOKHEAD {
     background-color: transparent;}
 body.hudup #METABOOKHEAD .hudpanel {
@@ -1188,9 +1188,9 @@ body.hudup img.metabookpagebutton {
 
 @media screen and (max-width: 640px) {
     .hudup img.hudbutton {
-        width: 60px; height: 60px;}
+        width: 50px; height: 50px;}
     .hudup #METABOOKSHOWCOVER img {
-        width: 60px; height: 60px;}
+        width: 50px; height: 50px;}
     body #METABOOKFRAME > #METABOOKHUD > #METABOOKTOPBAR {
         height: 60px; max-height: 60px;}
 
@@ -1199,7 +1199,7 @@ body.hudup img.metabookpagebutton {
     img.hudbutton.tapholdtarget,
     ._TOUCH #METABOOKTOPBAR.tapholding
     img.hudbutton.tapholdtarget {
-        width: 60px; height: 60px;}
+        width: 50px; height: 50px;}
 
     #METABOOKSHOWCOVER {
         width: 50px; color: transparent;
