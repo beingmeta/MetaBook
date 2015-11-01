@@ -77,7 +77,7 @@ metaBook.TOCSlice=
             var sectlen=end-start;
             if ((headinfo.sub)&&(headinfo.sub.length)) {
                 var sub=headinfo.sub; var s=0, smax=sub.length;
-                addClass(tocbar,"fdjtpagehead");
+                // addClass(tocbar,"fdjtpagehead");
                 while (s<smax) {
                     var subsect=sub[s++], brick=fdjtDOM("a.brick"); // ," "
                     var left=subsect.starts_at, size=subsect.ends_at-left;
