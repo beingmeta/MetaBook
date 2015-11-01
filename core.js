@@ -941,11 +941,9 @@
         if ((mB.ignore)&&(mB.ignore.match(elt))) return 0;
         if ((typeof metaBook.autotoc !== 'undefined')&&(!(metaBook.autotoc)))
             return false;
-        if ((elt.tagName==='HGROUP')||(elt.tagName==='HEADER'))
-            return getFirstTocLevel(elt,true);
         if (elt.tagName.search(/H\d/)===0)
             return parseInt(elt.tagName.slice(1,2),10);
-        else return false;}
+        return false;}
 
     function getFirstTocLevel(node,notself){
         if (node.nodeType!==1) return false;
