@@ -408,7 +408,7 @@
             return new SearchResults(query);
         this.query=query; this.results=query.results;
         return MetaBookSlice.call(
-            this,fdjtDOM("div.metabookslice.sbookresults"),this.results);}
+            this,fdjtDOM("div.metabookslice.mbsyncslice.searchslice"),this.results);}
     metaBook.SearchResults=SearchResults;
 
     SearchResults.prototype=new MetaBookSlice();
