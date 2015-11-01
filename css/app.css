@@ -160,12 +160,6 @@ span.note.ellipsis span.elision, span.note.ellipsis span.delision {
 .fdjtselectstart, .fdjtselectend {
     box-shadow: 0px 0px 0.5ex 0.5ex rgba(255, 215, 0, 0.33);}
 
-.fdjtselecting .fdjtselected {
-    background-color: rgba(255,255,0,0.5); }
-.fdjtselecting .fdjtselectstart, .fdjtselecting .fdjtselectend {
-    background-color: rgba(255,215,0,0.5); }
-
-
 #METABOOKBODY .fdjtselectwrap {
     background-color: transparent; }
 
