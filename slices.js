@@ -828,7 +828,7 @@ metaBook.Slice=(function () {
             this.atStart=(off===0);
             this.atEnd=(off>=(visible.length-1));
             addClass(dom,"skimpoint");
-            if (dom.offsetHeight===0) 
+            if ((this.container.offsetHeight)&&(dom.offsetHeight===0))
                 showPage.showNode(this.container,dom);
             return card;}};
     MetaBookSlice.prototype.forward=
