@@ -755,6 +755,8 @@ div.metabookglossform.submitclose form > div.messageoverlay {
         width: 40px; height: 40px; margin-left: 0px;}}
 
 @media screen and (max-width: 500px) {
+    #METABOOKHEAD, #METABOOKHUD.openhead #METABOOKHEAD {
+        left: 5px; right: 5px;}
     #METABOOKHUD.addgloss img.hudbutton[alt="toc"],
     #METABOOKHUD.addgloss img.hudbutton[alt="search"] {
         display: none;}}

@@ -293,18 +293,6 @@ body.hudup #METABOOKHUD.openheart #METABOOKHEART,
     border-radius: 0px;
     top: 3ex;}
 
-/*
-#METABOOKHUD.addgloss.glossaddtag #METABOOKHEARTBODY,
-#METABOOKHUD.addgloss.glosstagging #METABOOKHEARTBODY,
-#METABOOKHUD.addgloss.glosstagoutlet #METABOOKHEARTBODY,
-#METABOOKHUD.addgloss.glosseditdetail #METABOOKHEARTBODY,
-#METABOOKHUD.addgloss.glossaddoutlet #METABOOKHEARTBODY,
-#METABOOKHUD.addgloss.glossattach #METABOOKHEARTBODY {
-    margin-bottom: 1.5ex; margin-top: 1.5ex; 
-    padding-bottom: 1em; padding-top: 1ex;
-    margin-right: 1px;}
-*/
-
 body.hudup #METABOOKHUD.openheart.allglosses #METABOOKHEARTBODY div.hudpanel,
 body.hudup #METABOOKHUD.openheart.searchresults
      #METABOOKHEARTBODY div.hudpanel {
@@ -1257,8 +1245,6 @@ body.hudup img.metabookpagebutton {
 /* Phone */
 @media only screen and /* (min-width: 320px) and */
             (max-width: 480px) {
-    #METABOOKHEAD, #METABOOKHUD.openhead #METABOOKHEAD {
-        left: 5px; right: 5px;}
     body.mbSKIMMING .hudbutton,
     body.hudup.mbSKIMMING .hudbutton, 
     body.mbSKIMMING #METABOOKSHOWTEXT,

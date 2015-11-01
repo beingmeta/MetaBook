@@ -1499,6 +1499,10 @@
         var target=fdjtUI.T(evt);
         var alt=target.alt;
         
+        if (slip_timeout) {
+            clearTimeout(slip_timeout); 
+            slip_timeout=false;}
+
         if (!(alt)) return;
 
         if (slip_timeout) {
@@ -1547,6 +1551,8 @@
         dropClass(target,"held");
         if (!(slip_timeout)) {
             slip_timeout=setTimeout(function(){
+                slip_timeout=false;
+                dropClass(menu,"held");
                 dropClass(menu,"expanded");},
                                     500);}}
 

@@ -1,5 +1,5 @@
 x Search results aren't paged
-Short screen in glosses when paging backwards to start
+x Short screen in glosses when paging backwards to start
 Adjust font in skimmer
 x Clear search shouldn't autofocus
 Messy recovery from soft keyboard resize
@@ -19,6 +19,4 @@ Have deleted or save/discard in pagehead with timeout or alternative button
 Tweak hold interval, buzz when hold registers?
 Scale tag cloud to fit, provide pinch and pan to navigate.
 Provide max font for cloud term scaling.
-x Make HUD buttons 60x60.
-
-
+xx Make HUD buttons 60x60.
