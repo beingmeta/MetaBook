@@ -859,14 +859,18 @@ metaBook.Slice=(function () {
         else return false;};
 
     MetaBookSlice.prototype.setLocation=function setSliceLocation(location){
-        var cards=this.cards; var i=0, lim=cards.length;
+        var cards=this.cards; var i=0, lim=cards.length, last_card=false;
         while (i<lim) {
             var card=cards[i];
             if (typeof card.location !== "number") {i++; continue;}
-            else if (card.location>=location) {
+            else if (card.location===location) {
                 this.setSkim(card);
                 return;}
-            else {i++; continue;}}};
+            else if (card.location>location) {
+                if (last_card) this.setSkim(last_card);
+                else this.setSkim(card);
+                return;}
+            else {last_card=card; i++; continue;}}};
 
     function getCard(target){
         if ((hasClass(target,"metabookcard"))||(hasClass(target,"mbtoc")))
@@ -1083,6 +1087,30 @@ metaBook.Slice=(function () {
         else {}}
 
     metaBook.UI.getCard=getCard;
+
+    metaBook.updateSkimmer=function updateSkimmer(){
+        if (mB.skimming) {
+            var skim=$ID("METABOOKSKIM"), skimpoint;
+            mB.skimming.setLocation(mB.location);
+            if (mB.skimming!==mB.slices.statictoc) { 
+                skimpoint=mB.skimming.skimpoint;
+                var pid=(skimpoint)&&(skimpoint.getAttribute("data-passage"));
+                var dups=(pid)&&(mB.getDups(pid)), found=false;
+                var i=0, lim=dups.length; while (i<lim) {
+                    if (found) i++;
+                    else if (hasParent(dups[i],".curpage")) 
+                        found=dups[i++];
+                    else i++;}
+                if (!(found)) {
+                    mB.setMode(false);
+                    return;}}
+            else skimpoint=mB.skimming.skimpoint;
+            if (!(skimpoint)) mB.setMode(false);
+            var curname=skim.getAttribute("name"), newname=skimpoint.getAttribute("name");
+            if (curname===newname) return;
+            var clone=skimpoint.cloneNode(true);
+            if (clone.id) clone.id="METABOOKSKIM";
+            fdjtDOM.replace(skim,clone);}};
 
     function goToGloss(card){
         var glossid=card.getAttribute("data-gloss");
