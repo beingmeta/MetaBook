@@ -132,6 +132,7 @@ metaBook.TOCSlice=
         MetaBookTOC.setHead=function setHead(headinfo){
             dropClass($(".mblivetoc"),"mblivetoc");
             dropClass($(".mbcurtoc"),"mbcurtoc");
+            if (!(headinfo)) return;
             var head=headinfo;
             while (head) {
                 var refs=document.getElementsByName("MBTOC4"+head.frag);

@@ -84,7 +84,7 @@
         else {
             if (Trace.target)
                 metaBook.trace("metaBook.setFalseHead",head);
-            metaBook.TOC.setHead(headinfo);
+            metaBook.TOC.setHead(false);
             metaBook.head=false;}}
     metaBook.setHead=setHead;
 
@@ -316,7 +316,7 @@
         else {}
         var info=(target)&&
             metaBook.docinfo[target.getAttribute("data-baseid")||target.id];
-        if ((location)&&(info.ends_at)&&(info.starts_at)&&
+        if ((location)&&(info)&&(info.ends_at)&&(info.starts_at)&&
             ((location>(info.ends_at))||(location<(info.starts_at))))
             // Why does this happen???
             location=false;
