@@ -720,12 +720,12 @@
        current location.  This IS passed to the homescreen
        standalone app, so we can use it to get a real authentication
        token.*/
-    /*
     function iosHomeKludge(){
         if ((!(metaBook.user))||(fdjt.device.standalone)||
-            (!(fdjt.device.mobilesafari)))
+            (!(fdjt.device.mobilesafari))||
+            (!(mB.mycopyid)))
             return;
-        var auth=fdjtState.getCookie("BOOKHUB:AUTH-");
+        var auth=mB.mycopyid;
         if (!(auth)) return;
         var eauth=encodeURIComponent(auth);
         var url=location.href, qmark=url.indexOf('?'), hashmark=url.indexOf('#');
@@ -734,10 +734,10 @@
         var query=((qmark<0)?(""):(hashmark<0)?(url.slice(qmark)):
                    (url.slice(qmark+1,hashmark)));
         var hash=((hashmark<0)?(""):(url.slice(hashmark)));
-        var old_query=false, new_query="BOOKHUB%3aAUTH-="+eauth;
+        var old_query=false, new_query="MYCOPYID="+eauth;
         if (query.length<=2) query="?"+new_query;
-        else if (query.search("BOOKHUB%3aAUTH-=")>=0) {
-            var auth_start=query.search("BOOKHUB%3aAUTH-=");
+        else if (query.search("MYCOPYID=")>=0) {
+            var auth_start=query.search("MYCOPYID=");
             var before=query.slice(0,auth_start);
             var auth_len=query.slice(auth_start).search('&');
             var after=((auth_len<0)?(""):(query.slice(auth_start+auth_len)));
@@ -771,7 +771,6 @@
         updateKludgeTimer();}
     if ((!(fdjt.device.standalone))&&(fdjt.device.mobilesafari))
         fdjt.addInit(setupKludgeTimer,"setupKludgeTimer");
-    */
     
     /* Utility functions */
 

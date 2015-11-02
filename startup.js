@@ -156,7 +156,9 @@ metaBook.Startup=
             // Initialize the book state (location, targets, etc)
             metaBook.initState(); metaBook.syncState();
 
-            mB.gotMyCopyId(mB.readLocal("mB("+mB.docid+").mycopyid"));
+            var mycopyid=mB.readLocal("mB("+mB.docid+").mycopyid")||
+                fdjtState.getQuery("MYCOPYID");
+            mB.gotMyCopyId(mycopyid);
 
             // If we have no clue who the user is, ask right away (updateInfo())
             if (!((metaBook.user)||(window._sbook_loadinfo)||

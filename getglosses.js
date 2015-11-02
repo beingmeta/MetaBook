@@ -60,6 +60,8 @@
             metaBook.setConnected(true);
         if (info.sticky) metaBook.setPersist(true);
         if (info.mycopyid) gotMyCopyId(info.mycopyid);
+        else if (info.mycopy) gotMyCopyId(info.mycopy);
+        else {}
         if (!(metaBook.user)) {
             if (info.userinfo)
                 metaBook.setUser(
@@ -83,7 +85,7 @@
             metaBook.setupUI4User();}
         if (info.mycopyid) {
             if ((metaBook.mycopyid)&&
-                (info.mycopid!==metaBook.mycopyid))
+                (info.mycopyid!==metaBook.mycopyid))
                 fdjtLog.warn("Mismatched mycopyids");
             else metaBook.mycopyid=info.mycopyid;}
         if (!(metaBook.docinfo)) { /* Scan not done */
@@ -229,8 +231,6 @@
                 uri=uri+"&GLOSS="+glosses[i++];}
         if (metaBook.mycopyid)
             uri=uri+"&MCOPYID="+encodeURIComponent(metaBook.mycopyid);
-        if (metaBook.authkey)
-            uri=uri+"&SBOOKS%3aAUTH-="+encodeURIComponent(metaBook.authkey);
         if (metaBook.sync) uri=uri+"&SYNC="+(metaBook.sync+1);
         if (user) uri=uri+"&SYNCUSER="+user._id;
         if ((!(user))&&(Trace.startup))
