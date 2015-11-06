@@ -9,7 +9,7 @@ body.mbPREVIEW { cursor: crosshair; }
 body.mbPREVIEW #METABOOKHEAD { display: none; }
 body.mbPREVIEW #METABOOKHUD.openhead #METABOOKHEAD { display: none; }
 
-body.mbPREVIEW #METABOOKTOPBAR { display: none; }
+body.mbPREVIEW #METABOOKMENU { display: none; }
 
 body.mbPREVIEW #METABOOKHUD.openhead.overtoc #METABOOKHEAD {
     display: block; }

@@ -113,14 +113,13 @@ body._FULLHEIGHT #METABOOKFRAME {
     width: 100%; height: 100%;
     transform: translateZ(0);
     pointer-events: none;}
-#METABOOKHUD.openhead #METABOOKTOPBAR {
-    pointer-events: none;}
+/* #METABOOKHUD.openhead #METABOOKMENU {pointer-events: none;} */
 
-#METABOOKFOOT, #METABOOKTOPBAR,
+/* #METABOOKHUD.openhead #METABOOKMENU .hudbutton */
+#METABOOKFOOT, #METABOOKMENU,
 body.mbSKIMMING #METABOOKSKIMMER,
 #METABOOKHUD.openheart #METABOOKHEART,
-#METABOOKHUD.openhead #METABOOKHEAD,
-#METABOOKHUD.openhead #METABOOKTOPBAR .hudbutton {
+#METABOOKHUD.openhead #METABOOKHEAD {
     pointer-events: all;}
 
 /* Page controls */

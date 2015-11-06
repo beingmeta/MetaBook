@@ -48,6 +48,8 @@
     /* Initializing the body and content */
     var note_counter=1;
     
+    var fixStaticRefs=metaBook.fixStaticRefs;
+    
     function getBGColor(arg){
         var color=fdjtDOM.getStyle(arg).backgroundColor;
         if (!(color)) return false;
@@ -181,6 +183,11 @@
                 addClass(cxbody,"metabookbodyspacing"+metaBook.bodyspacing);
             body.appendChild(cxbody);}
         else metaBook.body.appendChild(page);
+
+        var menu=metaBook.menu=fdjtDOM("div#METABOOKMENU");
+        menu.innerHTML=fixStaticRefs(metaBook.HTML.menu);
+        fdjtDOM.prepend($ID("METABOOKBODY"),menu);
+
         // Initialize the margins
         initMargins();
         if (Trace.startup>1)

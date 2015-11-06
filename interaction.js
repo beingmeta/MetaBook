@@ -184,6 +184,11 @@
                 {override: true,noslip: true,id: "METABOOKBODY",
                  maxtouches: 3,taptapmsecs: true,
                  movethresh: 10,untouchable: false});
+            metaBook.TapHold.menu=fdjtUI.TapHold(
+                $ID("METABOOKMENU"),
+                {override: true,noslip: true,id: "METABOOKMENU",
+                 maxtouches: 3,taptapmsecs: false,
+                 movethresh: 10,untouchable: false});
             addHandlers(metaBook.HUD,'hud');}
         if (mode) {
             var handlers=metaBook.UI.handlers[mode];
@@ -1878,7 +1883,7 @@
                      mouseout: glossmark_hoverdone},
          hud: {click: handleXTarget, tap: handleXTarget},
          "#METABOOKSTARTPAGE": {click: metaBook.UI.dropHUD},
-         "#METABOOKTOPBAR": {tap: raiseHUD},
+         "#METABOOKMENU": {tap: raiseHUD},
          "#METABOOKSHOWCOVER": {
              tap: showcover_tapped, release: showcover_released},
          "#METABOOKHUDHELP": {click: metaBook.UI.dropHUD},
@@ -1987,7 +1992,7 @@
                touchmove: preview_touchmove_nodefault},
          glossmark: {touchstart: glossmark_tapped,touchend: cancel},
          "#METABOOKSTARTPAGE": {touchend: metaBook.UI.dropHUD},
-         "#METABOOKTOPBAR": {tap: raiseHUD},
+         "#METABOOKMENU": {tap: raiseHUD},
          "#METABOOKSHOWCOVER": {
              tap: showcover_tapped, release: showcover_released},
          "#METABOOKSEARCHINFO": { click: metaBook.searchTags_onclick },

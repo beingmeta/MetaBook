@@ -1,0 +1,158 @@
+/* -*- Mode: CSS; character-encoding: utf-8; -*- */
+
+/* Copyright (C) 2009-2015 beingmeta, inc. */
+
+@charset "UTF-8";
+
+#METABOOKMENU {
+    position: absolute; 
+    top: 0px; left: 0px; right: 0px; height: 60px; z-index: 20;
+    text-align: center; padding: 0px; max-height: 60px;}
+
+#METABOOKMENU { opacity: 0.05;}
+.hudup #METABOOKMENU, 
+.mbMENU #METABOOKMENU, 
+#METABOOKMENU.tapholding,
+html._MOUSE #METABOOKMENU:hover { 
+    opacity: 0.8;
+    z-index: 200;}
+
+#METABOOKTOOLTAB { display: none; }
+.hudup #METABOOKTOOLTAB,
+.mbMENU #METABOOKTOOLTAB,
+#METABOOKMENU.tapholding #METABOOKTOOLTAB { 
+    display: inline-block; }
+.hudup #METABOOKBREVET,
+.mbMENU #METABOOKBREVET
+#METABOOKMENU.tapholding #METABOOKBREVET { 
+    display: none; }
+
+#METABOOKMENU .hudbutton { opacity: 0.9; display: none;}
+#METABOOKTOOLTAB .hudbutton { display: none;}
+
+.hudup #METABOOKMENU {
+    background-color: rgba(255,255,255,0.8);}
+/*
+.hudup #METABOOKHUD.openheart #METABOOKMENU,
+.hudup #METABOOKHUD.openhead #METABOOKMENU {
+    background-color: transparent;}
+*/
+
+body._FULLHEIGHT #METABOOKMENU {height: 20px;}
+body._FULLHEIGHT #METABOOKMENU.tapholding,
+body._FULLHEIGHT.hudup #METABOOKMENU {
+    height: 50px;}
+
+html._MOUSE not(body.hudup) #METABOOKMENU:hover .hudbutton,
+html._MOUSE not(body.mbSKIMMING) #METABOOKMENU:hover .hudbutton {
+    opacity: 0.50;}
+html._MOUSE not(body.hudup) #METABOOKMENU:hover .hudbutton:hover,
+html._MOUSE not(body.mbSKIMMING) #METABOOKMENU:hover .hudbutton:hover {
+    opacity: 0.75;}
+
+#METABOOKMENU .topleft { left: 0px; top: 0px;}
+#METABOOKMENU .topright { right: 0px; top: 0px;}
+#METABOOKMENU img.hudbutton[hudmode="allglosses"],
+#METABOOKMENU img.hudbutton[hudmode="help"] {
+    top: 0px; display: none;}
+#METABOOKMENU img.hudbutton[hudmode="allglosses"] {right: 70px;}
+#METABOOKMENU img.hudbutton[hudmode="help"] {left: 70px;}
+
+#METABOOKTOOLTAB {
+    text-align: center; max-height: 100%;
+    display: none;}
+#METABOOKMENU.tapholding #METABOOKTOOLTAB,
+.hudup #METABOOKTOOLTAB {
+    display: inline-block;}
+
+#METABOOKTOOLTAB .hudbutton {
+    position: static;}
+#METABOOKTOOLTAB .hudbutton.left {
+    float: left; margin-right: 1ex; display: inline-block;}
+#METABOOKTOOLTAB .hudbutton.right {
+    float: right; margin-left: 1ex; display: inline-block;}
+
+#METABOOKBREVET {
+    box-sizing: border-box; -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    display: inline-block; height: 24px; width: 64px; 
+    margin: 0px; padding: 2px; padding-top: 0px;
+    border: solid transparent 1px; border-top: 0px;
+    pointer-events: none;
+    background-size: contain; background-repeat: no-repeat;
+    background-position: top center;
+    vertical-align: top;
+    opacity: 0.15;}
+body._ANIMATE #METABOOKBREVET {
+    transition-property: background-color;
+    transition-duration: 0.2s;}
+#METABOOKBREVET {
+    background-image: url(g/metabook/downbar.svgz);}
+html._NOSVG #METABOOKBREVET {
+    background-image: url(g/metabook/downbar128w.png);}
+.hudup #METABOOKBREVET, .mbcover #METABOOKBREVET { display: none;}
+
+#METABOOKSHOWCOVER {
+    white-space: nowrap;
+    box-sizing: border-box; -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 5em; height: 50px; font-size: 45px; line-height: 1.0;
+    margin: 0px; margin-left: auto; margin-right: auto;
+    padding:  0px 1em 0px 1em;
+    border: solid transparent 2px; border-top: 0px;
+    background-color: gray; color: white;
+    font-variant: small-caps; font-weight: bold;
+    border-bottom-left-radius: 1ex; border-bottom-right-radius: 1ex;
+    cursor: pointer;}
+#METABOOKSHOWCOVER {
+    pointer-events: none;
+    display: none;}
+#METABOOKSHOWCOVER img {
+    height: 1.2em; width: auto;
+    float: left;}
+
+.hudup #METABOOKSHOWCOVER,
+#METABOOKMENU.tapholding #METABOOKSHOWCOVER {
+    pointer-events: all;
+    display: inline-block;}
+
+body.mbPREVIEW.hudup #METABOOKSHOWCOVER {
+    pointer-events: none;
+    display: none;}
+
+@media screen and (max-width: 640px) {
+    .hudup #METABOOKSHOWCOVER img {
+        width: 50px; height: 50px;}
+
+    #METABOOKMENU.tapholding img.hudbutton,
+    img.hudbutton.tapholdtarget,
+    ._TOUCH #METABOOKMENU.tapholding
+    img.hudbutton.tapholdtarget {
+        width: 50px; height: 50px;}
+
+    #METABOOKSHOWCOVER {
+        width: 50px; color: transparent;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        background-size: contain; background-repeat: no-repeat;
+        background-position: top center;
+        background-image: url(g/metabook/book.svgz);}
+    ._NOSVG #METABOOKSHOWCOVER {
+        background-image: url(g/metabook/book50x50.png);}
+
+    body.mbSKIMMING #METABOOKMENU {
+        display: none;}
+}
+
+media only screen and /* (min-width: 320px) and */
+            (max-width: 480px) {
+    #METABOOKTOOLTAB .hudbutton { display: inline-block;}
+}
+
+/* Emacs local variables
+;;;  Local variables: ***
+;;;  compile-command: "cd ../..; make" ***
+;;;  indent-tabs-mode: nil ***
+;;;  End: ***
+*/
+

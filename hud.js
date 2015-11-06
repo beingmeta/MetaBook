@@ -118,9 +118,8 @@ metaBook.setMode=
             gloss_attach.innerHTML=fixStaticRefs(metaBook.HTML.attach);
             metaBook.DOM.heart=heart;
             // Other HUD parts
-            metaBook.DOM.top=$ID("METABOOKHEAD");
+            metaBook.DOM.head=$ID("METABOOKHEAD");
             metaBook.DOM.heart=$ID("METABOOKHEARTBODY");
-            metaBook.DOM.head=$ID("METABOOKTOPBAR");
             metaBook.DOM.foot=$ID("METABOOKFOOT");
             metaBook.DOM.tabs=$ID("METABOOKTABS");
 
