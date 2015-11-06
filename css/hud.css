@@ -481,6 +481,8 @@ body.hudup .hudbutton.tapholdtarget {
 
 html._MOUSE .hudbutton:hover, .hudbutton.tapholdtarget {
     border-style: dotted; border-color: blue;}
+html._MOUSE img.hudbutton:hover, img.hudbutton.tapholdtarget {
+    background-color: rgba(255,255,240,0.9);}
 
 #METABOOKFOOT img.hudbutton[hudmode="searchresults"],
 #METABOOKFOOT img.hudbutton[hudmode="statictoc"],

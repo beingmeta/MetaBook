@@ -361,6 +361,7 @@ metaBook.setMode=
                     dropClass(document.body,"mbSKIMMING");
                     dropClass(document.body,"mbSKIMSTART");
                     dropClass(document.body,"mbSKIMEND");
+                    addClass(document.body,"mbNOMODE");
                     metaBook.skimming=false;
                     metaBook.mode=false;}
                 dropClass(document.body,"hudup");
@@ -438,6 +439,8 @@ metaBook.setMode=
             if ((metaBook.mode==="addgloss")&&(mode!=="addgloss")&&
                 (hasClass("METABOOKLIVEGLOSS","modified")))
                 metaBook.submitGloss($ID("METABOOKLIVEGLOSS"));
+            if (mode) dropClass(document.body,"mbNOMODE");
+            else addClass(document.body,"mbNOMODE");
             if (mode) {
                 if (mode==="search") mode=metaBook.search_mode||"refinesearch";
                 if (mode==="addgloss") {}
