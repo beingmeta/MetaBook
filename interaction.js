@@ -186,7 +186,7 @@
                  movethresh: 10,untouchable: false});
             metaBook.TapHold.menu=fdjtUI.TapHold(
                 $ID("METABOOKMENU"),
-                {override: true,noslip: true,id: "METABOOKMENU",
+                {override: true,noslip: false,id: "METABOOKMENU",
                  maxtouches: 3,taptapmsecs: false,
                  movethresh: 10,untouchable: false});
             addHandlers(metaBook.HUD,'hud');}
@@ -1213,6 +1213,8 @@
         if (reticle.live) reticle.flash();
         cancel(evt);
         if (!(mode)) return;
+        var mode_live=(hasClass(mB.HUD,mode))||
+            ((mode==="search")&&(hasClass(mB.HUD,mB.searchModes)));
         if ((evt.type==='click')||
             (evt.type==='tap')||
             (evt.type==='release')) {
@@ -1224,16 +1226,10 @@
                     setMode("allglosses"); return;}
                 else if (mode==="statictoc") {
                     setMode("statictoc"); return;}}
-            if ((mB.closed)?
-                (fdjtDOM.hasClass(mB.HUD,mode)):
-                (fdjtDOM.hasClass(mB.HUD,mode)))
-                setMode(false,true);
-            else if ((mode==="search")&&
-                     (fdjtDOM.hasClass(mB.HUD,mB.searchModes)))
-                setMode(false,true);
+            if ((hasClass(document.body,"mbSKIMMING"))&&(mode_live))
+                mB.stopSkimming();
+            else if (mode_live) setMode(false,true);
             else setMode(mode);}
-        else if (evt.type==="tap")
-            setHUD(true);
         else if (evt.type==="hold") 
             addClass(document.body,"_HOLDING");
         else dropClass(document.body,"_HOLDING");}

@@ -456,36 +456,31 @@ div.completions.hudpanel .normal { line-height: 250%;}
 
 /* HUD buttons */
 
-img.hudbutton {
+.hudbutton {
     position: absolute; width: 50px; height: 50px;
     border: solid transparent 2px;
+    background-color: transparent;
     box-sizing: content-box;}
 .hudbutton {
-    opacity: 0.02;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=02)";
-    filter: alpha(opacity=02);
-    -webkit-opacity: 0.02;
-    -khtml-opacity: 0.02;
-    -moz-opacity: 0.02;
-    -o-opacity: 0.02;}
+    transition-property: opacity;
+    transition-duration: 0.2s;}
+.hudbutton {opacity: 0.02;}
+
 html._MOUSE not(body.hudup) .hudbutton:hover,
 html._MOUSE not(body.hudup) #METABOOKFOOT:hover .hudbutton,
 html._MOUSE not(body.mbSKIMMING) .hudbutton:hover,
 html._MOUSE not(body.mbSKIMMING) #METABOOKFOOT:hover .hudbutton {
     opacity: 0.50;}
-html._MOUSE not(body.hudup) #METABOOKFOOT:hover .hudbutton:hover,
-html._MOUSE not(body.mbSKIMMING) #METABOOKFOOT:hover .hudbutton:hover {
-    opacity: 0.75;}
 
-#METABOOKHUD .tapholdtarget .hudbutton,
-#METABOOKHUD .tapholding .hudbutton {
-    opacity: 0.50;}
+body.hudup .hudbutton, .tapholding .hudbutton {
+    opacity: 0.8;}
 
-body.mbSKIMMING img.hudbutton {
-    opacity: 0.80;}
-.hudbutton {
-    transition-property: width, height, opacity;
-    transition-duration: 0.2s;}
+html._MOUSE body.hudup .hudbutton:hover,
+body.hudup .hudbutton.tapholdtarget {
+    opacity: 1.0;}
+
+html._MOUSE .hudbutton:hover, .hudbutton.tapholdtarget {
+    border-style: dotted; border-color: blue;}
 
 #METABOOKFOOT img.hudbutton[hudmode="searchresults"],
 #METABOOKFOOT img.hudbutton[hudmode="statictoc"],
@@ -504,41 +499,25 @@ body.mbSKIMMING #METABOOKHUD.searchresults img.hudbutton[hudmode="allglosses"],
 body.mbSKIMMING #METABOOKHUD.statictoc img.hudbutton[hudmode="allglosses"]{
     display: none; }
 
-body.hudup #METABOOKHUD img.hudbutton  {}
+body.hudup img.hudbutton  {}
 
-#METABOOKHUD .topleft {top: 0px; left: 0px; right: auto; bottom: auto;}
-#METABOOKHUD .topright {top: 0px; right: 0px; left: auto; bottom: auto;}
-#METABOOKHUD .botleft {bottom: 0px; left: 0px; right: auto; top: auto;}
-#METABOOKHUD .botright {bottom: 0px; right: 0px; left: auto; top: auto;}
+.hudbutton.topleft {top: 0px; left: 0px; right: auto; bottom: auto;}
+.hudbutton.topright {top: 0px; right: 0px; left: auto; bottom: auto;}
+.hudbutton.botleft {bottom: 0px; left: 0px; right: auto; top: auto;}
+.hudbutton.botright {bottom: 0px; right: 0px; left: auto; top: auto;}
 
-#METABOOKHUD img.topleft {
+img.hudbutton.topleft {
     border-top-width: 0px; border-left-width: 0px;
-    border-bottom-right-radius: 6px;
-    -o-border-bottom-right-radius: 6px; 
-    -webkit-border-bottom-right-radius: 6px; 
-    -moz-border-radius-bottomright: 6px;
-    -o-border-radius-bottomright: 6px;}
-#METABOOKHUD img.topright {
+    border-bottom-right-radius: 6px;}
+img.hudbutton.topright {
     border-top-width: 0px; border-right-width: 0px;
-    border-bottom-left-radius: 6px;
-    -o-border-bottom-left-radius: 6px; 
-    -webkit-border-bottom-left-radius: 6px; 
-    -moz-border-radius-bottomleft: 6px;
-    -o-border-radius-bottomleft: 6px;}
-#METABOOKHUD img.botleft {
+    border-bottom-left-radius: 6px;}
+img.hudbutton.botleft {
     border-bottom-width: 0px; border-left-width: 0px;
-    border-top-right-radius: 6px;
-    -o-border-top-right-radius: 6px; 
-    -webkit-border-top-right-radius: 6px; 
-    -moz-border-radius-topright: 6px;
-    -o-border-radius-topright: 6px;}
-#METABOOKHUD img.botright {
+    border-top-right-radius: 6px;}
+img.hudbutton.botright {
     border-bottom-width: 0px; border-right-width: 0px;
-    border-top-left-radius: 6px;
-    -o-border-top-left-radius: 6px; 
-    -webkit-border-top-left-radius: 6px; 
-    -moz-border-radius-topleft: 6px;
-    -o-border-radius-topleft: 6px;}
+    border-top-left-radius: 6px;}
 
 img.closebutton, img.metabookpagebutton, img.metabookskimbutton, img.hudbutton {
     cursor: pointer; z-index: 500;}
@@ -571,9 +550,6 @@ html._NOUSER a.logout {
 /* HUDUP rules */
 
 body.hudup #METABOOKHUD { }
-body.hudup .hudbutton {
-    background-color: white;}
-body.hudup .hudbutton {opacity: 0.9;}
 body.hudup #CODEXPAGE p, body.hudup #CODEXPAGE div { cursor: pointer;}
 
 /* METABOOKPOINTGLOSSES rules */
@@ -1048,18 +1024,6 @@ body._FULLHEIGHT.hudup #METABOOKFOOT {
 
 /* Hover rules */
 
-.hudbutton.tapholdtarget,
-.tapholding .hudbutton.tapholdtarget,
-.tapholding .hudbutton.tapholding {
-    border-color: blue; border-style: dotted;
-    opacity: 0.80;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
-    filter: alpha(opacity=80);
-    -webkit-opacity: 0.80;
-    -khtml-opacity: 0.80;
-    -moz-opacity: 0.80;
-    -o-opacity: 0.80;}
-
 html._MOUSE body:not(.hudup) #METABOOKHUD:hover #METABOOKSHOWCOVER {
     display: inline-block;
     pointer-events: all;}
@@ -1068,13 +1032,7 @@ html._MOUSE body:not(.hudup) #METABOOKHUD:hover #METABOOKBREVET {
 
 html._MOUSE img.metabookpagebutton:hover,
 body.hudup img.metabookpagebutton {
-    opacity: 0.7;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
-    filter: alpha(opacity=70);
-    -webkit-opacity: 0.70;
-    -khtml-opacity: 0.70;
-    -moz-opacity: 0.70;
-    -o-opacity: 0.70; }
+    opacity: 0.7;}
 
 /* Media rules */
 

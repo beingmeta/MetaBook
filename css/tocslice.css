@@ -22,9 +22,10 @@ div.metabookslice .mbtoc.skimpoint {
 
 .mbtoc .context .tocpath { padding-left: 1ex; }
 .mbtoc .context {
-    color: silver;
+    color: black;
     font-size: 60%; line-height: 1.0;
     max-width: 35%; white-space: normal;
+    padding-right: 0.5ex;
     text-align: right;
     float: right;}
 .mbtoc1 .context { display: none;}
@@ -78,7 +79,8 @@ div.metabookslice .mbtoc.skimpoint {
 .mbtoc.mbtoc4.fdjtoversize { font-size: 70%;}
 
 #METABOOKSKIMMER .mbtoc {
-    font-weight: bold; padding-top: 2px; height: 2em;}
+    font-weight: bold; padding-top: 2px; height: 2em;
+    border-bottom: 0px;}
 body.hudup #METABOOKHUD.statictoc #METABOOKSKIMMER {
     background-color: rgba(70, 130, 180, 0.5);}
 body.hudup #METABOOKHUD.statictoc #METABOOKSKIMMER .mbtoc .context {
