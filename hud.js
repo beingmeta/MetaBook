@@ -342,6 +342,7 @@ metaBook.setMode=
                         metaBookHUD.className);
             if (flag) {
                 metaBook.hudup=true;
+                dropClass(document.body,/\b(openhud|openglossmark)\b/g);
                 addClass(document.body,"hudup");}
             else {
                 metaBook.hudup=false;
