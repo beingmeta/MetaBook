@@ -77,7 +77,7 @@ metaBook.TOCSlice=
             var sectlen=end-start;
             if ((headinfo.sub)&&(headinfo.sub.length)) {
                 var sub=headinfo.sub; var s=0, smax=sub.length;
-                // addClass(tocbar,"fdjtpagehead");
+                addClass(tocbar,"mbtocbranch");
                 while (s<smax) {
                     var subsect=sub[s++], brick=fdjtDOM("a.brick"); // ," "
                     var left=subsect.starts_at, size=subsect.ends_at-left;
@@ -86,15 +86,15 @@ metaBook.TOCSlice=
                     brick.style.width=(((size)/sectlen)*100)+"%";
                     if (subsect.title) brick.title=subsect.title;
                     elements.appendChild(brick);}}
-            else {
-                var parent=headinfo.head;
-                var rel_start=headinfo.starts_at-parent.starts_at;
-                var outer_length=parent.ends_at-parent.starts_at;
-                var inner_length=headinfo.ends_at-headinfo.starts_at;
-                var showsize=fdjtDOM("a.showsize");
-                showsize.style.width=((inner_length/outer_length)*100)+"%";
-                showsize.style.left=((rel_start/outer_length)*100)+"%";
-                elements.appendChild(showsize);}
+            var parent=headinfo.head;
+            var rel_start=headinfo.starts_at-parent.starts_at;
+            var outer_length=parent.ends_at-parent.starts_at;
+            var inner_length=headinfo.ends_at-headinfo.starts_at;
+            var showsize=fdjtDOM("a.showsize");
+            addClass(tocbar,"mbtocleaf");
+            showsize.style.width=((inner_length/outer_length)*100)+"%";
+            showsize.style.left=((rel_start/outer_length)*100)+"%";
+            elements.appendChild(showsize);
             elements.appendChild(fdjtDOM("div.posbar"));
             tocbar.id="MBTOC4"+headinfo.frag;
             tocbar.setAttribute("name","MBTOC4"+headinfo.frag);

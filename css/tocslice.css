@@ -78,6 +78,8 @@ div.metabookslice .mbtoc.skimpoint {
 .mbtoc.mbtoc4 { margin-left: 6em; font-size: 80%;}
 .mbtoc.mbtoc4.fdjtoversize { font-size: 70%;}
 
+.mbtoc a.brick { display: none; }
+
 #METABOOKSKIMMER .mbtoc {
     font-weight: bold; padding-top: 2px; height: 2em;
     border-bottom: 0px;}
