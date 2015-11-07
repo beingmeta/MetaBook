@@ -147,7 +147,7 @@ div.metabookslice div.metabookcard.fdjtstartofpage div.tochead {
 #METABOOKSKIMMER div.metabookcard div.idhead {
     border-bottom: 0px;}
 
-@media (pointer: coarse) and (max-width: 650px) {
+@media (pointer: coarse) and (min-width: 400px) {
     div.metabookslice div.metabookcard { font-size: 120%; }
 }
 

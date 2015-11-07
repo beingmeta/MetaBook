@@ -1103,6 +1103,11 @@ body.hudup img.metabookpagebutton {
     body.hudup.mbSKIMMING #METABOOKSHOWTEXT {
         display: none; }
 
+    html._TOUCH #METABOOKHUD .metabookslice {
+        font-size: 16px; font-size: 1rem;}
+    html._TOUCH div.fdjtpageinfo {
+        font-size: 150%;}
+
     #METABOOKHEARTBODY { font-size: 60%;}
     #METABOOKPOINTGLOSSES.hudpanel {
         max-width: 90%; min-width: inherit;
