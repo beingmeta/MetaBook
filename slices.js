@@ -957,6 +957,7 @@ metaBook.Slice=(function () {
             return fdjtUI.cancel(evt);}}
     function slice_held(evt){
         evt=evt||window.event;
+        mB.slipTimeout(false);
         var slice_target=fdjtUI.T(evt), card=getCard(slice_target);
         if (Trace.gestures)
             fdjtLog("slice_held %o: %o, skimming=%o",
@@ -1021,12 +1022,13 @@ metaBook.Slice=(function () {
         fdjtUI.cancel(evt);}
     function slice_slipped(evt){
         evt=evt||window.event;
-        var rel=evt.relatedTarget||fdjtUI.T(evt);
-        if (!(hasParent(rel,".metabookslice"))) {
-            metaBook.slipTimeout(function(){
-                if (Trace.gestures)
-                    fdjtLog("slice_slipped/timeout %o",evt);
-                metaBook.stopPreview("slice_slipped");});}}
+        var rel=evt.relatedTarget;
+        if (Trace.gestures)
+            fdjtLog("slice_slipped %o to %o",evt,rel);
+        if (!((rel)&&(hasParent(rel,".metabookslice"))))
+            mB.slipTimeout(function(){
+                if (Trace.gestures) fdjtLog("slice_slipped/timeout %o",evt);
+                metaBook.stopPreview("slice_slipped");});}
     function slice_touchtoo(evt){
         evt=evt||window.event;
         metaBook.previewTimeout(false);
