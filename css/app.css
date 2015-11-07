@@ -839,6 +839,36 @@ div.fdjtdialog.metabooktaptap .choices button.anchor .anchorcontext {
     font-weight: normal; font-style: normal;
     display: none;}
 
+/* Custom dialog rules */
+
+div.fdjtdialog.savegloss {
+    top: 0px; left: 50px; right: 50px; height: 2em;
+    border-top: 0px; border-radius: 1ex;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    width: inherit; max-width: inherit;
+    padding: 0px 1em 1ex 1ex;
+    font-size: 1.5rem;
+    text-align: left;}
+div.fdjtdialog.savegloss div.choices {
+    position: absolute; right: 1ex; top: 0px;
+    margin-top: 0px; padding-top: 3px;
+    text-align: right;}
+div.fdjtdialog.savegloss div.choices button {
+    font-weight: bold; }
+div.fdjtdialog.savegloss.closing .countdown {
+    display: inline-block;}
+div.fdjtdialog.savegloss .message {
+    display: inline-block;}
+div.fdjtdialog.savegloss .countdown {
+    position: static; background-color: ivory;
+    padding: 0px 1ex; border-radius: 0.5ex;
+    margin-top: 3px; margin-right: 1ex;}
+div.fdjtdialog.savegloss.closing button[value="SAVE"] {
+    display: none; }
+div.fdjtdialog.savegloss.closing button[value="DISCARD"] {
+    background-color: red; }
+
 /* Media rules */
 
 @media (max-width: 500px) {

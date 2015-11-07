@@ -2190,7 +2190,7 @@
     
     function saveGlossDialog(){
         // This prompts for updating the layout
-        var msg=fdjtDOM("div.message","Save gloss?");
+        var msg=fdjtDOM("div.message","Saving gloss");
         saving_dialog=true;
         // When a choice is made, it becomes the default
         // When a choice is made to not resize, the
@@ -2200,8 +2200,10 @@
              handler: function(){
                  metaBook.submitGloss();
                  saving_dialog=false;},
+             value: "SAVE",
              isdefault: true},
             {label: "Discard",
+             value: "DISCARD",
              handler: function(){
                  metaBook.cancelGloss();
                  saving_dialog=false;}}];
