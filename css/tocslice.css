@@ -101,16 +101,19 @@ body.hudup #METABOOKHUD.statictoc #METABOOKSKIMMER .mbtoc .context {
 body.hudup #METABOOKSKIMMER .mbtoc {
     font-size: 100%;}
 
-html._TOUCH #METABOOKHUD #METABOOKSTATICTOC.metabookslice {
-    font-size: 100%; }
-html._TOUCH .mbtoc.mbtoc2 { margin-left: 1em;}
-html._TOUCH .mbtoc.mbtoc3 { margin-left: 2em;}
-html._TOUCH .mbtoc.mbtoc4 { margin-left: 3em;}
-
-#METABOOKSTATICTOC {padding-left: 1em; padding-right: 1em;}
+#METABOOKSTATICTOC {
+    padding-left: 1em; padding-right: 1em;}
 
 html._MOUSE .mbtocslice .mbtoc:hover {
     border-bottom-color: silver;}
+
+@media (max-width: 600px) {
+    .mbtoc.mbtoc2 { margin-left: 1em;}
+    .mbtoc.mbtoc3 { margin-left: 2em;}
+    .mbtoc.mbtoc4 { margin-left: 3em;}
+    #METABOOKSTATICTOC {
+        padding-left: 1ex; padding-right: 1ex;}
+}
 
 /* Emacs local variables
 ;;;  Local variables: ***

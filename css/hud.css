@@ -19,6 +19,10 @@ html._MOUSE #METABOOKHUD a.brick:hover { text-decoration: none;}
 #METABOOKHUD .metabookhelp, #METABOOKHUD .helpbox,
 #METABOOKHUD .metabookslice {
     font-size: 16px; font-size: 1rem;}
+html._TOUCH #METABOOKHUD .metabookhelp,
+html._TOUCH #METABOOKHUD .helpbox,
+html._TOUCH #METABOOKHUD .metabookslice {
+    font-size: 24px; font-size: 1.5rem;}
 
 /* Major HUD components, head and heart */
 

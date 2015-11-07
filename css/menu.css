@@ -56,13 +56,21 @@ html._MOUSE not(body.mbSKIMMING) #METABOOKMENU:hover .hudbutton:hover {
 #METABOOKMENU img.hudbutton[hudmode="help"] {
     top: 0px; display: none;}
 
+body._FULLHEIGHT.hudup.mbNOMODE #METABOOKMENU,
+body._FULLHEIGHT #METABOOKMENU.tapholding,
+html._MOUSE body._FULLHEIGHT .mbNOMODE #METABOOKMENU:hover { 
+    background-color: rgb(255,255,240);}
+
+
 #METABOOKCOVERTAB {
     text-align: center; max-height: 100%;
     display: none;}
+
 .hudup.mbNOMODE #METABOOKCOVERTAB,
 #METABOOKMENU.tapholding #METABOOKCOVERTAB,
 html._MOUSE .mbNOMODE #METABOOKMENU:hover #METABOOKCOVERTAB { 
-    display:inline-block;}
+    display: inline-block;}
+
 .hudup #METABOOKBREVET,
 #METABOOKMENU.tapholding #METABOOKBREVET,
 html._MOUSE .mbNOMODE #METABOOKMENU:hover #METABOOKBREVET { 
