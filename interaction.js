@@ -1021,7 +1021,8 @@
             return;}
         else if ((target.tagName==="TEXTAREA")||
                  (target.tagName==="INPUT")||
-                 (target.tagName==="BUTTON"))
+                 (target.tagName==="BUTTON")||
+                 (target.isContentEditable))
             return;
         else if (hasClass(document.body,"mbZOOM"))
             return;
