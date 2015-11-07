@@ -123,7 +123,7 @@ metaBook.Slice=(function () {
                     ((info.links)&&(showlinks(info.links)))," ",
                     ((info.attachments)&&
                      (showlinks(info.attachments,"span.attachments")))," ",
-                    ((shared)&&(shared.length)&&(showaudience(shared))),
+                    ((shared)&&(shared.length>0)&&(showaudience(shared))),
                     ((excerpt_len>0)&&(showexcerpts(info.excerpt)))," ");
         var card=
             fdjtDOM(((info.maker) ?
