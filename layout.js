@@ -103,9 +103,7 @@ metaBook.Paginate=
                 fdjtDOM.replace(
                     "METABOOKPAGENOTEXT",
                     fdjtDOM("div.metabookpageno#METABOOKPAGENOTEXT",
-                            metaBook.curpage||"?",
-                            "/",pagenum," (",Math.floor(pct),
-                            "%)"));
+                            metaBook.curpage||"?","/",pagenum));
                 layoutMessage(fdjtString(
                     "Finished laying out %d %dx%d pages in %s",
                     pagenum,info.width,info.height,
