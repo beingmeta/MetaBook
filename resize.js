@@ -96,7 +96,9 @@
         if ((mB.touch)&&
             ((mB.textinput)||
              ((document.activeElement)&&
-              (document.activeElement.tagName==="INPUT")))) {
+              ((document.activeElement.tagName==="INPUT")||
+               (document.activeElement.tagName==="TEXTAREA")||
+               (document.activeElement.isContentEditable))))) {
             if (Trace.resize)
                 fdjtLog("Resize for soft keyboard, mostly ignoring");
             return;}
