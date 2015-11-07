@@ -747,7 +747,11 @@
         else query=query+"&"+new_query;
         if ((!(old_query))||(old_query!==new_query))
             history.replaceState(history.state,window.title,
-                                 base+query+hash);}
+                                 base+qstring(query)+hashstring(hash));}
+    function qstring(s){
+        if (s[0]==='?') return s; else return "?"+s;}
+    function hashstring(s){
+        if (s[0]==='#') return s; else return "#"+s;}
 
     var ios_kludge_timer=false;
     function updateKludgeTimer(){
@@ -943,20 +947,6 @@
         if (elt.tagName.search(/H\d/)===0)
             return parseInt(elt.tagName.slice(1,2),10);
         return false;}
-
-    function getFirstTocLevel(node,notself){
-        if (node.nodeType!==1) return false;
-        var level=((!(notself))&&(getLevel(node)));
-        if (level) return level;
-        var children=node.childNodes;
-        var i=0; var lim=children.length;
-        while (i<lim) {
-            var child=children[i++];
-            if (child.nodeType!==1) continue;
-            level=getFirstTocLevel(child);
-            if (level) return level;}
-        return false;}
-
     metaBook.getTOCLevel=getLevel;
     
     function getCoverPage(){
