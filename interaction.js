@@ -93,6 +93,7 @@
     var fdjtLog=fdjt.Log;
     var fdjtDOM=fdjt.DOM;
     var fdjtUI=fdjt.UI;
+    var fdjtAsync=fdjt.Async;
     var RefDB=fdjt.RefDB;
     var $ID=fdjt.ID;
     var mbID=metaBook.ID;
@@ -1599,7 +1600,8 @@
             mB.stopPreview("head_tap");
             cancel(evt);
             return;}
-        if (fdjtUI.isClickable(target)) return;
+        if (fdjtUI.isClickable(target))
+            return default_tap(evt);
         if (!((target===metaBook.DOM.head)||
               (target===metaBook.DOM.tabs)))
             return;
@@ -1723,14 +1725,31 @@
         return false;}
     metaBook.toggleHelp=toggleHelp;
 
-    function handleXTarget(evt){
+    function default_tap(evt){
         evt=evt||window.event;
-        var anchor=fdjtUI.T(evt);
-        if ((anchor.href)&&(anchor.href[0]==='#')&&
-            (mB.xtargets[anchor.href.slice(1)])) {
-            var fn=metaBook.xtargets[anchor.href.slice(1)];
-            cancel(evt);
-            fn();}}
+        var target=fdjtUI.T(evt);
+        if ((target.tagName==="TEXTAREA")||
+            ((target.tagName==="INPUT")&&
+             (target.type.search(fdjtDOM.text_input_types)>=0))) {
+            target.focus();
+            cancel(evt);}
+        else if ((target.tagName==="A")&&(target.href)) {
+            var href=target.href;
+            if (href[0]==='#') {
+                var id=href.slice(1), xt=mB.xtargets[id], elt;
+                if (xt) {cancel(evt); xt();}
+                else if ((elt=(mB.ID(id)))) {
+                    cancel(evt); fdjtAsync(function(){mB.GoTo(elt);});}
+                else {}}
+            else if ((mB.xrules)&&(mB.xrules.length>0)) {
+                var xrules=mB.xrules, r=0, nrules=xrules.length;
+                while (r<nrules) {
+                    var rule=xrules[r++];
+                    if ((href.search(rule.pattern)>=0)&&
+                        (rule.handler(href,target)))
+                        break;}}
+            else {}}
+        else {}}
 
     function showcover_tapped(evt){
         evt=evt||window.event;
@@ -1877,7 +1896,7 @@
                      click: cancel, mousedown: cancel,
                      mouseover: glossmark_hoverstart,
                      mouseout: glossmark_hoverdone},
-         hud: {click: handleXTarget, tap: handleXTarget},
+         hud: {click: default_tap, tap: default_tap},
          "#METABOOKSTARTPAGE": {click: metaBook.UI.dropHUD},
          "#METABOOKMENU": {tap: raiseHUD},
          "#METABOOKSHOWCOVER": {
@@ -1981,7 +2000,7 @@
                    touchend: body_touchend,
                    touchmove: noDefault,
                    click: cancelNotAnchor},
-         hud: {touchend: handleXTarget, tap: handleXTarget},
+         hud: {tap: default_tap},
          toc: {tap: toc_tapped,hold: toc_held,
                slip: toc_slipped, release: toc_released,
                touchtoo: toc_touchtoo,

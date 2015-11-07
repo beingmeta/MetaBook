@@ -139,6 +139,8 @@ var metaBook={
     DOM: {}, CSS: {}, TapHold: {}, slices: {},
     /* XTARGETS are procedures linked to fragment ids */
     xtargets: {},
+    /* XRULES are URL patterns tied to possible custom handlers */
+    xrules: [],
     // Where various event timestamps are stored
     Timeline: {},
     // Word/phrase indexing structures
