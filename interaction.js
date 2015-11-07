@@ -287,11 +287,6 @@
             cancel(evt);
             return;}
 
-        if ((hasParent(target,".glossmark"))||
-            (handle_content_click(target))) {
-            cancel(evt);
-            return false;}
-
         if ((mB.touch)&&(mB.textinput)) {
             mB.clearFocus(mB.textinput);
             cancel(evt);
@@ -341,6 +336,11 @@
             if (mB.target) metaBook.clearHighlights(mB.target);
             cancel(evt); gesture_start=false;
             return;}
+
+        if ((hasParent(target,".glossmark"))||
+            (handle_content_click(target))) {
+            cancel(evt);
+            return false;}
 
         // If we get here, we're doing a page flip
         if (Trace.gestures)
