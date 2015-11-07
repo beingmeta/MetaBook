@@ -102,7 +102,9 @@ body.hudup #METABOOKSKIMMER .mbtoc {
     font-size: 100%;}
 
 #METABOOKSTATICTOC {
-    padding-left: 1em; padding-right: 1em;}
+    box-sizing: border-box;
+    padding-left: 1em; padding-right: 1em;
+    padding-top: 1ex;}
 
 html._MOUSE .mbtocslice .mbtoc:hover {
     border-bottom-color: silver;}
