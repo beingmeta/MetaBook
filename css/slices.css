@@ -18,9 +18,9 @@ div.metabookslice input[TYPE="TEXT"] {
     cursor: text; }
 
 div.metabookslice div.metabookcard {
-    margin-left: 20px; margin-right: 0px;}
+    margin-left: 20px;}
 div.metabookslice div.metabookcard.skimpoint {
-    margin-left: 0px; padding-left: 20px;}
+    margin-left: 10px; padding-left: 10px;}
 div.metabookslice.sourced div.metabookcard { display: none;}
 div.metabookslice.sourced div.metabookcard.sourced { display: block;}
 
@@ -146,10 +146,6 @@ div.metabookslice div.metabookcard.fdjtstartofpage div.tochead {
     border-top: 0px; padding-left: 1em; padding-top: 0.25ex;}
 #METABOOKSKIMMER div.metabookcard div.idhead {
     border-bottom: 0px;}
-
-@media (pointer: coarse) and (min-width: 400px) {
-    div.metabookslice div.metabookcard { font-size: 120%; }
-}
 
 /* Emacs local variables
 ;;;  Local variables: ***

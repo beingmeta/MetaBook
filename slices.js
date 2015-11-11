@@ -918,7 +918,8 @@ metaBook.Slice=(function () {
                 return;}}
         var card;
         if ((target.name)&&(document.getElementById(target.name)))
-            card=getCard(document.getElementById(target.name))||(getCard(target));
+            card=getCard(document.getElementById(target.name))||
+            (getCard(target));
         else card=getCard(target);
         if (!(card)) return;
         var slice=getParent(card,".metabookslice");
