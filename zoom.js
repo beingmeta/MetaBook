@@ -172,7 +172,12 @@
                 dropClass($ID("METABOOKMEDIA"),"loadingcontent");
                 dropClass(src_elt,"loadingcontent");
                 src_elt.src=val;
-                placeMedia();});}
+                placeMedia();})
+            .catch(function(ex){
+                fdjt.Log("Couldn't fetch glossdata from %s: %o",url,ex);
+                metaBook.showing=url;
+                dropClass($ID("METABOOKMEDIA"),"loadingcontent");
+                dropClass(src_elt,"loadingcontent");});}
         else placeMedia();}
     metaBook.showMedia=showMedia;
     function hideMedia(){

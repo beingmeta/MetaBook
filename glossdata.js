@@ -146,7 +146,12 @@
             return cacheGlossData(uri).catch(function(){delay_glossdata(uri);});
         else {
             var req=mB.getMyCopyId();
-            return req.then(function(mycopyid){if (mycopyid) cacheGlossData(uri);})
+            return req.then(function(mycopyid){
+                if (mycopyid)
+                    return cacheGlossData(uri).catch(function(trouble){
+                        fdjtLog("Couldn't cache %s: %o",uri,trouble);
+                        delay_glossdata(uri);});
+                else delay_glossdata(uri);})
                 .catch(function(){delay_glossdata(uri);});}}
     metaBook.needGlossData=needGlossData;
     
@@ -162,34 +167,42 @@
             var needed=need_glossdata; need_glossdata=[];
             var i=0, lim=needed.length; while (i<lim) {
                 needGlossData(needed[i++]);}}}
-        
 
     function getGlossData(uri){
-        function getting(resolved){
+        function getting(resolved,failed){
             if (glossdata[uri]) resolved(glossdata[uri]);
             else if (glossdata_state[uri]==="cached")  {
-                metaBook.getDB().then(function(db){
+                return metaBook.getDB().then(function(db){
                     var txn=db.transaction(["glossdata"],"readwrite");
                     var storage=txn.objectStore("glossdata");
                     var req=storage.get(uri);
                     req.onsuccess=function(event){
                         var object=event.target.result;
-                        gotLocalURL(uri,object.datauri,resolved);};
+                        if (object)
+                            gotLocalURL(uri,object.datauri,resolved);
+                        else {
+                            fdjtLog("Corrupted local glossdata cache for %s",uri);
+                            glossdata_state[uri]=false;
+                            return fillCache(resolved,failed);}};
                     req.onerror=function(ex){
                         fdjtLog("Error getting %s from glossdata cache: %s",
                                 uri,ex);
                         glossdata_state[uri]=false;
-                        if ((mB.mycopyid)&&(mB.mycopyid_expires<(new Date())))
-                            setTimeout(function(){cacheGlossData(uri);},
-                                       2000);
-                        else mB.getMyCopyId().then(function(mycopyid){
-                            if (mycopyid)
-                                setTimeout(function(){cacheGlossData(uri);},
-                                           2000);});};});}
-            else if ((mB.mycopyid)&&(mB.mycopyid_expires<(new Date())))
-                return cacheGlossData(uri).then(resolved);
-            else return mB.getMyCopyId().then(function(mycopyid){
-                if (mycopyid) return cacheGlossData(uri).then(resolved);});}
+                        return fillCache(resolved,failed);};})
+                    .catch(failed);}
+            else return fillCache(resolved,failed);}
+        function fillCache(resolved,failed){
+            if ((mB.mycopyid)&&(mB.mycopyid_expires<(new Date())))
+                setTimeout(function(){
+                    cacheGlossData(uri).then(resolved).catch(failed);},
+                           2000);
+            else mB.getMyCopyId().then(function(mycopyid){
+                if (mycopyid)
+                    setTimeout(function(){
+                        cacheGlossData(uri).then(resolved).catch(failed);},
+                               2000);
+                else failed(new Error("Couldn't get MYCOPYID"));})
+                .catch(failed);}
         return new Promise(getting);}
     metaBook.getGlossData=getGlossData;
 
