@@ -131,7 +131,7 @@
             req.send(null);}
         return new Promise(caching);}
 
-    var glossdata_wait=600;
+    var glossdata_wait=60000;
     var glossdata_timer=false;
     var need_glossdata=[];
 
