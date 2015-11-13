@@ -587,6 +587,7 @@
             return;}
         var choices=[
             {label: "Add Gloss",
+             classname: "addgloss",
              handler: function(){
                  mB.startGloss(passage);},
              isdefault: true}];
@@ -599,6 +600,7 @@
         */
         if (true) choices.push(
             {label: "Zoom content",
+             classname: "zoomcontent",
              handler: function(){
                  mB.startZoom(passage);
                  cancel(evt);
@@ -611,13 +613,9 @@
         cancel(evt);
         choices.push(
             {label: "Cancel",
+             classname: "cancel",
              handler: function(){
                  metaBook.cancelGloss();}});
-        var max=0, i=0, lim=choices.length;
-        while (i<lim) {
-            var ch=choices[i++];
-            var len=ch.label.length;
-            if (len>max) max=len;}
         var spec={choices: choices,
                   spec: "div.fdjtdialog.metabooktaptap"};
         metaBook.passage_menu=fdjtUI.choose(spec);}
@@ -639,36 +637,14 @@
         var i=0, lim=anchors.length; while (i<lim) {
             var anchor=anchors[i++];
             var linkref=decodeEntities(anchor.getAttribute("href"));
-            var uselabel=anchor.title||(getAnchorContext(anchor));
             var handler=((linkref.search("#")===0)?(makeGoTo(linkref)):
                          (makeOpener(anchor.href)));
-            var anchor_opt={handler: handler,
+            var anchor_text=fdjtDOM("span.anchortext");
+            anchor_text.innerHTML=anchor.title||(anchor.innerHTML);
+            var anchor_opt={handler: handler,label: anchor_text,
                             classname: "anchor"};
-            if (typeof uselabel === "string") anchor_opt.label=uselabel;
-            else if (uselabel.nodeType) {
-                anchor_opt.dom=uselabel;
-                anchor_opt.label=fdjtDOM.textify(uselabel);}
-            else {}
             choices.push(anchor_opt);}}
     
-    function getAnchorContext(anchor){
-        var frag=document.createDocumentFragment();
-        var context=fdjtDOM("span.anchorcontext");
-        if ((anchor.childNodes.length===1)&&
-            (anchor.childNodes[0].nodeType===3))
-            frag.appendChild(fdjtDOM(
-                "span.anchortext",anchor.childNodes[0].nodeValue));
-        else {
-            var text=fdjtDOM("span.anchortext");
-            text.innerHTML=anchor.innerHTML;}
-        frag.appendChild(context);
-        if (anchor.title) fdjtDOM(context,anchor.title);
-        else {
-            var next=anchor.nextSibling; while (next) {
-                context.appendChild(next.cloneNode(true));
-                next=next.nextSibling;}}
-        return frag;}
-
     function closePassageMenu(evt){
         evt=evt||window.event;
         if (!(mB.passage_menu)) return false;
