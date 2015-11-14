@@ -111,11 +111,11 @@ metaBook.Startup=
             fdjtLog.console="METABOOKCONSOLELOG";
             fdjtLog.consoletoo=true;
             run_inits();
-            if (!(metaBook._setup_start)) metaBook._setup_start=new Date();
+            if (!(metaBook._setup_started)) metaBook._setup_started=new Date();
             metaBook.appsource=getSourceRef();
             fdjtLog("This is metaBook %s, built %s on %s, launched %s, from %s",
                     mB.version,mB.buildtime,mB.buildhost,
-                    mB._setup_start.toString(),
+                    mB._setup_started.toString(),
                     mB.root||metaBook.appsource||"somewhere");
             if ($ID("METABOOKBODY")) metaBook.body=$ID("METABOOKBODY");
 
@@ -415,7 +415,7 @@ metaBook.Startup=
         
         function metaBookStartup(force){
             var metadata=false;
-            if (metaBook._setup) return;
+            if (metaBook._started) return;
             if ((!force)&&(getQuery("nometabook"))) return;
             /* Cleanup, save initial hash location */
             if ((location.hash==="null")||(location.hash==="#null"))
@@ -617,7 +617,7 @@ metaBook.Startup=
             else {}
             if (mode) metaBook.setMode(mode);
             else mode=metaBook.mode;
-            metaBook._setup=new Date();
+            metaBook._started=new Date();
             metaBook._starting=false;
             if (metaBook.onsetup) {
                 var onsetup=metaBook.onsetup;
@@ -1152,11 +1152,18 @@ metaBook.Startup=
 
         /* Other setup */
         
-        metaBook.StartupHandler=function(){
-            metaBook.Startup();};
+        function startupHandler(){
+            if (mB._starting) return;
+            else if (mB._started) return;
+            else if (mB.delay_startup) {
+                if (typeof mB.delay_startup === "number")
+                    setTimeout(mB.Startup,mB.delay_startup);
+                else setTimeout(startupHandler,1000);}
+            else metaBook.Startup();}
+
+        metaBook.Setup=metaBook.StartupHandler=startupHandler;
 
         return metaBookStartup;})();
-metaBook.Setup=metaBook.StartupHandler;
 
 //fdjt.DOM.noautotweakfonts="Handled by metaBook";
 /*

@@ -47,6 +47,8 @@ var metaBook={
     useidb: false,noidb: false,
     user: false, loggedin: false, cxthelp: false,
     _setup: false,_user_setup: false,_gloss_setup: false,_social_setup: false,
+    // Whether (or how much) to delay actual startup (for debugging)
+    delay_startup: false,
     // Whether we have a real connection to the server
     connected: false,
     // Keeping track of paginated context

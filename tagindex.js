@@ -61,7 +61,7 @@
     function indexingDone(){
         if ((Trace.indexing)||(Trace.startup))
             fdjtLog("Content indexing is completed");
-        if (metaBook._setup) setupClouds();
+        if (metaBook._started) setupClouds();
         else metaBook.onsetup=setupClouds;}
     
     var cloud_setup_start=false;

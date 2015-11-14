@@ -372,7 +372,7 @@ metaBook.setMode=
         /* Opening and closing the cover */
 
         function showCover(){
-            if (metaBook._setup)
+            if (metaBook._started)
                 fdjtState.dropLocal("mB("+mB.docid+").opened");
             setHUD(false);
             metaBook.closed=true;
@@ -382,7 +382,7 @@ metaBook.setMode=
             addClass(document.body,"mbCOVER");}
         metaBook.showCover=showCover;
         function hideCover(){
-            if (metaBook._setup)
+            if (metaBook._started)
                 fdjtState.setLocal(
                     "mB("+mB.docid+").opened",fdjtTime());
             metaBook.closed=false;
