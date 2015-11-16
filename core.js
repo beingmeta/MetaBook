@@ -31,7 +31,7 @@
 
 */
 /* jshint browser: true */
-/* globals Promise, idbModules */
+/* globals Promise */
 
 /* Initialize these here, even though they should always be
    initialized before hand.  This will cause various code checkers to
@@ -65,7 +65,7 @@
     var mB=metaBook;
     var Trace=metaBook.Trace;
 
-    var indexedDB=window.indexedDB||idbModules.indexedDB;
+    var iDB=fdjt.iDB, indexedDB=iDB.indexedDB;
 
     metaBook.tagweights=new ObjectMap();
     metaBook.tagscores=new ObjectMap();
@@ -147,7 +147,7 @@
 
     
     if ((indexedDB)&&(!(mB.noidb))) {
-        var req=window.indexedDB.open("metaBook",1);
+        var req=indexedDB.open("metaBook",1);
         req.onerror=function(event){
             notDB("opening","metaBook",event.errorCode);};
         req.onsuccess=function(event) {
@@ -1011,6 +1011,7 @@
 })();
 
 fdjt.DOM.noautofontadjust=true;
+fdjt.CodexLayout.dbname="metaBook";
 
 
 /* Emacs local variables
