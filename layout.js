@@ -406,8 +406,8 @@ metaBook.Paginate=
                             return restore_layout(content,layout_id);}
                         catch (ex) {
                             fdjtLog("Layout restore error: %o",ex);
-                            return new_layout();}}).
-                    catch(function(){return new_layout();});}
+                            return new_layout();}})
+                    .catch(function(){return new_layout();});}
             else if (async) {
                 setTimeout(new_layout,10);}
             else return new_layout();}
