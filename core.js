@@ -614,7 +614,7 @@
 
     function getTarget(scan,closest){
         scan=((scan.nodeType)?(scan):(scan.target||scan.srcElement||scan));
-        var target=false, id=false, targetids=metaBook.targetids;
+        var target=false, id=false, info=false, targetids=metaBook.targetids;
         var wsn_target=false;
         if (hasParent(scan,metaBook.HUD)) return false;
         else if (hasParent(scan,".metabookmargin")) return false;
@@ -622,7 +622,8 @@
             if (scan.metabookui) return false;
             else if ((scan===metaBook.docroot)||(scan===document.body))
                 return target;
-            else if ((id=(scan.codexbaseid||scan.id))&&(metaBook.docinfo[id])) {
+            else if ((id=(scan.codexbaseid||scan.id))&&(info=metaBook.docinfo[id])) {
+                id=info.frag||id;
                 if ((!(scan.codexbaseid))&&(id.search("METABOOKTMP")===0)) {}
                 else if ((target)&&(id.search("WSN_")===0)) {}
                 else if (id.search("WSN_")===0) wsn_target=scan;
