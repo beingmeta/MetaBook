@@ -275,7 +275,7 @@ metaBook.DOMScan=(function(){
             else if (child.nodeType!==1) return 0;
             else {}
             var tag=child.tagName, classname=child.className;
-            var id=id=child.getAttribute('data-tocid')||id;
+            var id=child.getAttribute('data-tocid')||id;
 
             if ((metaBook.ignore)&&(metaBook.ignore.match(child)))
                 return;
