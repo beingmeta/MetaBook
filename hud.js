@@ -724,9 +724,8 @@ metaBook.setMode=
                     dropClass(skimmer,"transanimate");
                     fdjtDOM.removeListener(
                         skimmer,"transitionend",dropTransAnimate);};
-                if ((false)&&(skimpoint)&&(pct)) {
-                    skimmer.style[fdjtDOM.transform]=
-                        "translate("+pct+",0)";
+                if ((skimpoint)&&(pct)) {
+                    skimmer.style[fdjtDOM.transform]="translate(0,-110%)";
                     setTimeout(function(){
                         addClass(skimmer,"transanimate");
                         fdjtDOM.addListener(
@@ -922,6 +921,8 @@ metaBook.setMode=
             fdjtDOM.addClass(document.body,"mbSHOWHELP");};
 
         return setMode;})();
+
+
 
 /* Emacs local variables
    ;;;  Local variables: ***

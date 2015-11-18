@@ -45,7 +45,7 @@ body.mbLAYOUT #CODEXCONTENT { display: none;}
 
 /* The page content gets a little transparent when the HUD comes up*/
 body._ANIMATE.hudup #CODEXPAGE {
-    transition-property: opacity; transition-duration: 0.2s;}
+    transition-property: opacity; transition-duration: 0.25s;}
 body.hudup #CODEXPAGE {opacity: 0.8;}
 body.hudup.mbPREVIEW #CODEXPAGE {opacity: 1;}
 

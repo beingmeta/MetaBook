@@ -1,0 +1,196 @@
+/* -*- Mode: CSS; character-encoding: utf-8; -*- */
+
+/* Copyright (C) 2009-2015 beingmeta, inc. */
+
+@charset "UTF-8";
+
+#METABOOKSKIMMER {
+    position: absolute;
+    top: 0px; left: 60px; right: 60px; z-index: 100;
+    background-color: white;
+    border: solid steelblue 4px;  border-top: 0px;
+    padding: 0px;
+    font-size: 70%;
+    max-height: 75px;
+    display: none;}
+html._TOUCH #METABOOKSKIMMER,
+html._TOUCH #METABOOKSKIMMER div.mbtoc,
+html._TOUCH #METABOOKSKIMMER div.metabookcard {
+    min-height: 50px;}
+body._ANIMATE #METABOOKSKIMMER {
+    transition-property: height; transition-duration: 0.3s;}
+
+#METABOOKSKIMMER.flash { background-color: silver;}
+.hudup #METABOOKSKIMMER {
+    background-color: white;
+    max-height: inherit; }
+#METABOOKSKIMMER .tochead {
+    background-color: steelblue; color: white;
+    max-height: 4ex;}
+.hudup #METABOOKSKIMMER .tochead {
+    max-height: inherit;
+    font-weight: bold;}
+#METABOOKSKIMMER .tochead a { color: white;}
+#METABOOKSKIMMER .tochead hr {
+    color: rgb(33, 106, 129); background-color: rgb(33, 106, 129);}
+
+
+body.hudup #METABOOKSKIMMER,
+body.hudup #METABOOKSKIMMER .metabookcard,
+body.hudup #METABOOKSKIMMER .metabookcardbody {
+    border-bottom-left-radius: 1ex;
+    border-bottom-right-radius: 1ex;}
+
+body._ANIMATE #METABOOKSKIMMER.transanimate {
+    transition-property: transform; 
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;}
+
+#METABOOKHUD.openglossmark #METABOOKSKIMMER,
+body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER,
+#METABOOKHUD.allglosses #METABOOKSKIMMER {
+    overflow: hidden;}
+
+.hudup #METABOOKHUD.openglossmark #METABOOKSKIMMER,
+body.hudup.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER,
+body.hudup .mbSKIMMING #METABOOKHUD #METABOOKSKIMMER {
+    height: auto; max-height: 50%; overflow: visible;}
+
+body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER {display: block;}
+body.mbSKIMMING #METABOOKHUD #METABOOKHEAD {display: none;}
+
+/* The METABOOKSKIMMER */
+
+body.mbPREVIEW #METABOOKHUD.allglosses #METABOOKSKIMMER,
+body.mbPREVIEW #METABOOKHUD.searchresults #METABOOKSKIMMER,
+body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER {
+    display: block; overflow: hidden; border-color: steelblue;
+    opacity: 0.90;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+    filter: alpha(opacity=90);
+    -webkit-opacity: 0.90;
+    -khtml-opacity: 0.90;
+    -moz-opacity: 0.90;
+    -o-opacity: 0.90;
+    max-height: 50px;}
+
+.hudup #METABOOKHUD #METABOOKSKIMMER,
+.hudup #METABOOKHEAD #METABOOKSKIMMER {
+    max-height: inherit; overflow: auto;}
+
+body.hudup #METABOOKSKIMMER .ellipsis .elided { display: inline; }
+body.hudup #METABOOKSKIMMER .ellipsis .elision,
+body.hudup #METABOOKSKIMMER .ellipsis .delision {
+    display: none;}
+
+/* This is the twisty control */
+#METABOOKSKIMMER span.expander {
+    position: absolute; left: 0px; top: 1.5em;}
+#METABOOKSKIMMER span.expander img { width: 40px; height: 40px;}
+#METABOOKSKIMMER span.expander img[alt='-'] { display: none;}
+body.hudup #METABOOKSKIMMER span.expander img[alt='-'] { display: inline;}
+body.hudup #METABOOKSKIMMER span.expander img[alt='+'] { display: none;}
+
+#METABOOKSKIMMER span.expander {display: none;}
+
+#METABOOKSKIMMER #METABOOKSKIMCONTROLS .expanded { display: none;}
+body.hudup #METABOOKSKIMMER #METABOOKSKIMCONTROLS .expanded {
+    display: inline;}
+body.hudup #METABOOKSKIMMER #METABOOKSKIMCONTROLS .collapsed {
+    display: none;}
+
+#METABOOKSKIMMER div.tochead, #METABOOKPOINTGLOSSES div.tochead {
+    border-top-width: 0px; border-bottom-width: 0px;}
+#METABOOKPOINTGLOSSES div.tochead { display: none; }
+
+#METABOOKSKIMMER div.metabookcardbody {font-size: 75%;}
+body.hudup #METABOOKSKIMMER div.metabookcardbody {font-size: 100%;}
+body.hudup #METABOOKSKIMMER div.metabookcardbody img.button {
+    display: inline-block;}
+
+#METABOOKSKIMMER div.metabookcard.gloss > div.tochead,
+#METABOOKSKIMMER div.metabookcard.gloss div.metabookcardbody {
+    margin-left: 50px;}
+#METABOOKSKIMMER div.metabookcard.gloss div.metabookcardbody {
+    padding-left: 4px;}
+#METABOOKSKIMMER div.metabookcard.gloss  > div.tochead {
+    padding-left: 0px;}
+#METABOOKSKIMMER div.metabookcard.gloss div.metabookcardbody img.glosspic,
+#METABOOKSKIMMER div.metabookcard.gloss div.metabookcardbody .sourcepic {
+    position: absolute; top: 0px; left: 0px; margin-top: 0px;}
+
+/* Skimmer rules */
+
+body.hudup #METABOOKHUD #METABOOKSKIMMER img[alt="beginning"],
+body.hudup #METABOOKHUD #METABOOKSKIMMER img[alt="prev"] {
+    position: absolute; left: 0px; top: 8px;}
+body.hudup #METABOOKHUD #METABOOKSKIMMER img[alt="end"], 
+body.hudup #METABOOKHUD #METABOOKSKIMMER img[alt="next"] {
+    position: absolute; right: 0px; top: 8px;}
+body.hudup #METABOOKHUD #METABOOKSKIMMER img[alt="beginning"],
+body.hudup #METABOOKHUD #METABOOKSKIMMER img[alt="end"] {
+    display: none;}
+body.hudup #METABOOKHUD #METABOOKSKIMMER img[alt="beginning"],
+body.hudup #METABOOKHUD #METABOOKSKIMMER img[alt="end"] {
+    z-index: 100;}
+body.hudup #METABOOKHUD #METABOOKSKIMMER.sbookatend img[alt="next"] {display: none;}
+body.hudup #METABOOKHUD #METABOOKSKIMMER.sbookatend img[alt="end"] {display: block;}
+body.hudup #METABOOKHUD #METABOOKSKIMMER.sbookatstart img[alt="prev"] {display: none;}
+body.hudup #METABOOKHUD #METABOOKSKIMMER.sbookatstart img[alt="beginning"] {display: block;}
+
+body.hudup #METABOOKHUD #METABOOKSKIMMER .controller,
+body.hudup #METABOOKHUD #METABOOKSKIMMER span.whenexpanded {
+    display: inline;}
+body.hudup #METABOOKHUD #METABOOKSKIMMER .controller,
+body.hudup #METABOOKHUD #METABOOKSKIMMER span.whencollapsed {
+    display: none;}
+
+#METABOOKSKIMMER div.metabookcard,
+#METABOOKSKIMMER div.metabookcard > div.tochead,
+#METABOOKSKIMMER div.metabookcard > div.idhead {
+    margin-left: 0px;}
+#METABOOKSKIMMER div.metabookcard {
+    min-height: 50px;}
+
+#METABOOKHUD #METABOOKSKIMMER div.idhead,
+#METABOOKPOINTGLOSSES div.idhead {
+    display: none;}
+#METABOOKHUD #METABOOKSKIMMER div.gloss div.tochead,
+#METABOOKPOINTGLOSSES div.tochead {
+    display: none;}
+body.hudup #METABOOKHUD #METABOOKSKIMMER div.gloss div.tochead {
+    display: block;}
+
+/* #METABOOKSKIMMER.mbfoundhighlights .metabookcard .excerpt { display: none; } */
+
+body.hudup #METABOOKHUD div.hudpanel#METABOOKSKIMMER { max-height: inherit; }
+body.hudup #METABOOKHUD #METABOOKSKIMMER img.glosspic {  height: inherit; }
+
+#METABOOKFRAME._ANIMATE #METABOOKHUD #METABOOKSKIMMER {
+    transition-property: background-color;
+    -o-transition-property: background-color;
+    -moz-transition-property: background-color;
+    -webkit-transition-property: background-color; 
+    transition-duration: 0.2s; -o-transition-duration: 0.2s;
+    -webkit-transition-duration: 0.2s; -moz-transition-duration: 0.2s;}
+#METABOOKHUD #METABOOKSKIMMER div.metabookcard span.glossinfo span.isclickable {
+    display: none;}
+
+/* Media rules */
+
+@media screen and (max-width: 640px) {
+    #METABOOKSKIMMER {
+        border-width: 2px;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+        padding-bottom: 0px;
+        left: 10px; right: 10px; }
+}
+
+/* Emacs local variables
+;;;  Local variables: ***
+;;;  compile-command: "cd ../..; make" ***
+;;;  indent-tabs-mode: nil ***
+;;;  End: ***
+*/
+
