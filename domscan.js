@@ -275,7 +275,7 @@ metaBook.DOMScan=(function(){
             else if (child.nodeType!==1) return 0;
             else {}
             var tag=child.tagName, classname=child.className;
-            var id=child.getAttribute('data-tocid')||id;
+            var id=child.getAttribute('data-tocid')||child.id;
 
             if ((metaBook.ignore)&&(metaBook.ignore.match(child)))
                 return;
@@ -400,7 +400,7 @@ metaBook.DOMScan=(function(){
                  (classname.search(/\b(sbook|pubtool)ignore\b/)>=0))||
                 ((metaBook.ignore)&&(metaBook.ignore.match(child))))
                 return;
-            if ((toclevel)&&(!(info.tocdone)))
+            if (toclevel)
                 handleHead(child,id,docinfo,scanstate,toclevel,
                            curhead,curinfo,curlevel);
             else if (info) {
