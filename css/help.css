@@ -68,13 +68,12 @@ div.helpbox p img.screengrab {
 body.mbSHOWHELP #METABOOKHELPCONTENT { z-index: 500; }
 body.mbSHOWHELP #METABOOKHUD img.hudbutton#METABOOKHELPBUTTON {
     background-color: silver; border-color: black;
-    opacity: 0.9;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
-    filter: alpha(opacity=90);
-    -webkit-opacity: 0.90;
-    -khtml-opacity: 0.90;
-    -moz-opacity: 0.90;
-    -o-opacity: 0.90;}
+    opacity: 0.9;}
+
+#METABOOKHELP h1 {
+    font-size: 1.5em;
+    text-align: center;
+    margin-bottom: 1ex;}
 
 body.hudup.mbSHOWHELP #METABOOKHUD img.hudbutton#METABOOKHELPBUTTON {
     background-color: silver; border-color: black;}
@@ -136,22 +135,21 @@ body.mbSHOWHELP.hudup #METABOOKFOOT #METABOOKPAGEBAR {opacity: 0.1;}
 
 #METABOOKHUD div.helpbox {
     border-color: black; z-index: 250;}
-body.mbSHOWHELP #METABOOKHUD .helphud,
-body.mbSHOWHELP #METABOOKHUD div.metabookhelp {display: block;}
+body.mbSHOWHELP #METABOOKHUD .hudtip,
 body.mbSHOWHELP #METABOOKHUD .hudbutton {
     opacity: 0.5;}
 body.mbSHOWHELP #METABOOKHUD.addgloss div.metabookhelp, 
 body.mbSHOWHELP.hudup #METABOOKHUD div.metabookhelp, 
 body.mbSHOWHELP.mbSHRINK #METABOOKHUD div.metabookhelp,
 body.mbSHOWHELP.mbPREVIEW #METABOOKHUD div.metabookhelp,
-body.mbSHOWHELP.hudup #METABOOKHUD.openhud .helphud,
-body.mbSHOWHELP.hudup #METABOOKHUD.openheart .helphud,
+body.mbSHOWHELP.hudup #METABOOKHUD.openhud .hudtip,
+body.mbSHOWHELP.hudup #METABOOKHUD.openheart .hudtip,
 body.mbSHOWHELP.mbSKIMMING #METABOOKHUD div.metabookhelp,
-body.mbSHOWHELP.mbSKIMMING #METABOOKHUD .helphud,
-body.mbSHOWHELP #METABOOKHUD.addgloss .helphud,
-body.mbSHOWHELP #METABOOKHUD.statictoc .helphud,
-body.mbSHOWHELP.mbSHRINK #METABOOKHUD .helphud,
-body.mbSHOWHELP.mbPREVIEW #METABOOKHUD .helphud {
+body.mbSHOWHELP.mbSKIMMING #METABOOKHUD .hudtip,
+body.mbSHOWHELP #METABOOKHUD.addgloss .hudtip,
+body.mbSHOWHELP #METABOOKHUD.statictoc .hudtip,
+body.mbSHOWHELP.mbSHRINK #METABOOKHUD .hudtip,
+body.mbSHOWHELP.mbPREVIEW #METABOOKHUD .hudtip {
     display: none;}
 body.mbSHOWHELP.hudup #METABOOKHUD.splash div.metabookhelp {
     display: block;}
@@ -243,7 +241,7 @@ div.helpbox blockquote p {
 
 /* Help HUD */
 
-#METABOOKHUD .helphud {
+#METABOOKHUD .hudtip {
     position: absolute; background-color: ivory; z-index: 100;
 
     border: solid black 1px; padding: 3px; border-radius: 6px;
@@ -251,23 +249,23 @@ div.helpbox blockquote p {
     -moz-border-radius: 6px; -webkit-border-radius: 6px; 
     font-size: initial;
     display: none;}
-#METABOOKHUD .helphud.topleft {top: 3px; left: 60px; text-align: right;}
-#METABOOKHUD .helphud.topright {top: 3px; right: 60px; text-align: left;}
-#METABOOKHUD .helphud.botleft {bottom: 25px; left: 60px; text-align: right;}
-#METABOOKHUD .helphud.botright {bottom: 25px; right: 60px; text-align: left;}
-#METABOOKHUD .helphud.topcenter {
+#METABOOKHUD .hudtip.topleft {top: 3px; left: 60px; text-align: right;}
+#METABOOKHUD .hudtip.topright {top: 3px; right: 60px; text-align: left;}
+#METABOOKHUD .hudtip.botleft {bottom: 25px; left: 60px; text-align: right;}
+#METABOOKHUD .hudtip.botright {bottom: 25px; right: 60px; text-align: left;}
+#METABOOKHUD .hudtip.topcenter {
     top: 0px; width: 50%; left: 25%; right: 25%; text-align: center;
     border-top-left-radius: 0px; border-top-right-radius: 0px;
     -o-border-top-left-radius: 0px; -o-border-top-right-radius: 0px; 
     -webkit-border-top-left-radius: 0px; -webkit-border-top-right-radius: 0px; 
     -o-border-radius-topleft: 0px; -oborder-radius-topright: 0px;}
 
-#METABOOKHUD .helphud.botcenter {
+#METABOOKHUD .hudtip.botcenter {
     bottom: 25px;
     width: 50%; left: 25%; right: 25%;
     text-align: center;}
 
-#METABOOKHUD div.helphud.leftmiddle {
+#METABOOKHUD div.hudtip.leftmiddle {
     position: absolute; max-width: 50px; padding-left: 3px;
     top: 40%; left: 0px; text-align: left; padding-right: 2px;
     border-top-left-radius: 0px; border-bottom-left-radius: 0px;
@@ -275,7 +273,7 @@ div.helpbox blockquote p {
     -webkit-border-top-left-radius: 0px; -webkit-border-bottom-left-radius: 0px; 
     -moz-border-radius-topleft: 0px; -moz-border-radius-bottomleft: 0px;}
 
-#METABOOKHUD div.helphud.rightmiddle {
+#METABOOKHUD div.hudtip.rightmiddle {
     position: absolute; max-width: 50px; padding-right: 3px;
     top: 40%; right: 0px; text-align: right; padding-left: 2px;
     border-top-right-radius: 0px; border-bottom-right-radius: 0px;
@@ -283,13 +281,13 @@ div.helpbox blockquote p {
     -webkit-border-top-right-radius: 0px; -webkit-border-bottom-right-radius: 0px; 
     -moz-border-radius-topright: 0px; -moz-border-radius-bottomright: 0px;}
 
-.helphud span.arrow { font-weight: bold; vertical-align: top;}
-.helphud.topleft span.arrow { float: left;}
-.helphud.topright span.arrow { float: right;}
-.helphud.botleft span.arrow { float: left;}
-.helphud.botright span.arrow { float: right;}
+.hudtip span.arrow { font-weight: bold; vertical-align: top;}
+.hudtip.topleft span.arrow { float: left;}
+.hudtip.topright span.arrow { float: right;}
+.hudtip.botleft span.arrow { float: left;}
+.hudtip.botright span.arrow { float: right;}
 
-div.metabookhelp div.helphud#HIDETHISHELP {
+div.metabookhelp div.hudtip#HIDETHISHELP {
     position: absolute;
     top: 40px; right: 4px; width: 70px;}
 
@@ -364,6 +362,16 @@ div.metabookhelp img.narrowimage, div.metabookhelp img.wideimage {
 
 div.metabookhelp img.narrowimage { display: none;}
 
+body.mbSHOWHELP.mbNOMODE div#METABOOKHELP {
+    pointer-events: all;
+    display: block;
+    opacity: 1.0;}
+body.mbSHOWHELP.mbNOMODE #METABOOKHUD .hudtip {
+    display: inline-block;
+    opacity: 1;}
+body.mbSHOWHELP #METABOOKMENU {
+    opacity: 1; height: 50px; z-index: 100;}
+
 div#METABOOKHELP table.textual { font-size: 120%;}
 div.metabookhelp table.textual td {padding-left: 3px;}
 div.metabookhelp .glossbarbox {
@@ -394,7 +402,7 @@ div.metabookhelp .glossbarbox {
 #METABOOKCOVER div.metabookhelp#METABOOKAPPHELP,
 #METABOOKHUD div.metabookhelp#METABOOKHELP {
     padding-bottom: 1.5em; }
-.metabookhelp h1, #METABOOKHELP h1 {
+.metabookhelp h1 {
     text-align: center; margin-bottom: 1ex;}
 #METABOOKAPPHELP table, .metabookhelp p {
     margin-left: auto; margin-right: auto;
@@ -483,11 +491,11 @@ div.metabookhelp .glossbarbox {
     div.metabookhelp img.wideimage { display: none;}
         #METABOOKHUD div.metabookhelp.hudpanel {
         left: 5px; right: 5px; top: 60px; bottom: 60px;}
-    #METABOOKHUD div.helphud.rightmiddle,
-    #METABOOKHUD div.helphud.leftmiddle {
+    #METABOOKHUD div.hudtip.rightmiddle,
+    #METABOOKHUD div.hudtip.leftmiddle {
         display: none;}
-    #METABOOKHUD div.helphud.botright,
-    #METABOOKHUD div.helphud.botleft {
+    #METABOOKHUD div.hudtip.botright,
+    #METABOOKHUD div.hudtip.botleft {
         bottom: 3px; }
     div.helpbox blockquote {
         margin-left: 2px; margin-right: 2px;}
@@ -497,10 +505,10 @@ div.metabookhelp .glossbarbox {
 }
 
 @media screen and (max-width: 500px) {
-    body.mbSHOWHELP #METABOOKHUD div.helphud { display: none; }
-    #METABOOKHUD div.helphud.topcenter { 
+    body.mbSHOWHELP #METABOOKHUD div.hudtip { display: none; }
+    #METABOOKHUD div.hudtip.topcenter { 
         top: 50px; width: auto; left: 60px; right: 60px;} 
-    #METABOOKHUD div.helphud.botcenter { 
+    #METABOOKHUD div.hudtip.botcenter { 
         bottom: 100px; width: auto; left: 60px; right: 60px;}
     body.mbPREVIEW.mbPAGEPREVIEW #METABOOKPAGEBARHELP,
     body.mbPREVIEW #METABOOKSEETHRUHELP {

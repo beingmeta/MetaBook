@@ -1879,7 +1879,7 @@
          "#METABOOKSHOWCOVER": {
              tap: showcover_tapped, release: showcover_released},
          "#METABOOKHUDHELP": {click: metaBook.UI.dropHUD},
-         ".helphud": {click: metaBook.UI.dropHUD},
+         ".hudtip": {click: metaBook.UI.dropHUD},
          ".metabookheart": {tap: flyleaf_tap},
          "#METABOOKPAGEREFTEXT": {tap: enterPageRef},
          "#METABOOKPAGENOTEXT": {tap: enterPageNum},

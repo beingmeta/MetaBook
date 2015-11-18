@@ -343,7 +343,8 @@ metaBook.setMode=
             if (flag) {
                 metaBook.hudup=true;
                 dropClass(document.body,/\b(openhud|openglossmark)\b/g);
-                addClass(document.body,"hudup");}
+                addClass(document.body,"hudup");
+                if (!(mB.mode)) addClass(document.body,"mbNOMODE");}
             else {
                 metaBook.hudup=false;
                 if (metaBook.previewing)

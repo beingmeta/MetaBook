@@ -90,6 +90,11 @@ body.mbMEDIA #METABOOKFRAME, body.hudup.mbMEDIA #METABOOKFRAME {
     opacity: 0.0; z-index: -100; pointer-events: none;}
 body.mbMEDIA #METABOOKBODY {
     pointer-events: none;}
+body.hudup #CODEXPAGE, body.hudup #CODEXCONTENT {
+    opacity: 0.5;}
+body.hudup.mbPREVIEW #CODEXPAGE, body.hudup.mbPREVIEW #CODEXCONTENT,
+body.hudup.mbSKIMMING #CODEXPAGE, body.hudup.mbSKIMMING #CODEXCONTENT {
+    opacity: 1;}
 
 body.hudup #METABOOKFRAME, body.mbCOVER #METABOOKFRAME,
 body.openhud #METABOOKFRAME, body.mbSKIMMING #METABOOKFRAME,

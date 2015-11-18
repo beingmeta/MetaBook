@@ -48,7 +48,7 @@ body._FULLHEIGHT.hudup #METABOOKHEAD {
 body.hudup #METABOOKHEAD .hudpanel {
     background-color: rgba(255,255,240,0.6);}
 
-html._TOUCH body.hudup #METABOOKFRAME > #METABOOKHUD > div.helphud {
+html._TOUCH body.hudup #METABOOKFRAME > #METABOOKHUD > div.hudtip {
     background-color: ivory;}
 
 #METABOOKHEAD {top: 0px; border-top: 0px;}
@@ -570,7 +570,7 @@ body.hudup.openglossmark div.hudpanel#METABOOKPOINTGLOSSES {
     z-index: 100; }
 body.hudup #METABOOKHUD.overtoc div.hudpanel#METABOOKTOC { overflow: hidden; }
 
-body.hudup #METABOOKHUD.help div.helphud { display: block;}
+body.hudup #METABOOKHUD.help div.hudtip { display: block;}
 
 #METABOOKHUD .completions { line-height: 150%;}
 #METABOOKHUD .completions .words {
