@@ -35,13 +35,16 @@ html._MOUSE #METABOOKMENU.tapholding:hover {
 
 body._FULLHEIGHT #METABOOKMENU {
     height: 20px;}
-body._FULLHEIGHT #METABOOKMENU.tapholding,
-body._FULLHEIGHT.hudup #METABOOKMENU {
-    border-bottom: solid black 1px;
-    height: 55px; max-height: 60px;}
 
-body._FULLHEIGHT #METABOOKMENU {
-    background-color: rgba(255,255,240,0.9);}
+body._FULLHEIGHT.hudup #METABOOKMENU,
+html._MOUSE body._FULLHEIGHT #METABOOKMENU:hover,
+body._FULLHEIGHT #METABOOKMENU.tapholding {
+    height: 50px;}
+
+html._MOUSE body._FULLHEIGHT #METABOOKMENU:hover,
+body._FULLHEIGHT #METABOOKMENU.tapholding {
+    background-color: rgba(255,255,240,0.9);
+    border-bottom: solid ivory 3px;}
 
 html._MOUSE not(body.hudup) #METABOOKMENU:hover .hudbutton,
 html._MOUSE not(body.mbSKIMMING) #METABOOKMENU:hover .hudbutton {

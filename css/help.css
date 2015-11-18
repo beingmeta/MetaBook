@@ -65,6 +65,7 @@ div.helpbox img.inline { background-color: gray; }
 div.helpbox p img.screengrab {
     float: right; height: 2em;}
 
+body.mbSHOWHELP #METABOOKHELPCONTENT { z-index: 500; }
 body.mbSHOWHELP #METABOOKHUD img.hudbutton#METABOOKHELPBUTTON {
     background-color: silver; border-color: black;
     opacity: 0.9;
@@ -106,16 +107,32 @@ div.helpbox img.closebutton, div.metabookhelp img.closebutton {
 div.helpbox th.helptext, div.metabookhelp th.helptext {
     text-indent: 0px;}
 
-div.helpbox.atfoot {
-    bottom: 0px; max-height: 45%; height: auto;
+div#METABOOKHUDHELP {
+    position: absolute;
+    bottom: 0px; 
+    left: 75px; 
+    right: 75px;
+    width: auto; 
+    height: auto;
+    z-index: 500;
     border-bottom: 0px;
-    border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;
-    -o-border-bottom-left-radius: 0px; -o-border-bottom-right-radius: 0px; 
-    -webkit-border-bottom-left-radius: 0px;
-    -webkit-border-bottom-right-radius: 0px; 
-    -moz-border-radius-bottomleft: 0px;
-    -moz-border-radius-bottomright: 0px;
-    left: 75px; right: 75px; width: auto;}
+    border-bottom-left-radius: 0px; 
+    border-bottom-right-radius: 0px;
+    display: none;}
+
+div#METABOOKHUDHELP div.helpbox {
+    position: static;
+    border: 0px; 
+    border-radius: 0px;
+    padding: 0px;}
+
+body.mbSHOWHELP #METABOOKHUDHELP,
+body.mbSHOWHELP #METABOOKHUD.addgloss #METABOOKHUDHELP { 
+    pointer-events: all;
+    display: block; 
+    opacity: 0.9;}
+body.hudup.metabookhelp #METABOOKHUDHELP { display: block; }
+body.mbSHOWHELP.hudup #METABOOKFOOT #METABOOKPAGEBAR {opacity: 0.1;}
 
 #METABOOKHUD div.helpbox {
     border-color: black; z-index: 250;}
@@ -138,12 +155,6 @@ body.mbSHOWHELP.mbPREVIEW #METABOOKHUD .helphud {
     display: none;}
 body.mbSHOWHELP.hudup #METABOOKHUD.splash div.metabookhelp {
     display: block;}
-#METABOOKHUDHELP { z-index: 500; display: none;}
-body.mbSHOWHELP #METABOOKHUDHELP { display: block; }
-body.hudup.metabookhelp #METABOOKHUDHELP { display: block; }
-body.mbSHOWHELP.hudup #METABOOKFOOT #METABOOKPAGEBAR {opacity: 0.1;}
-
-body.mbSHOWHELP #METABOOKHUD.addgloss #METABOOKHUDHELP { display: block; }
 
 body.mbSHOWHELP.hudup #METABOOKHUD.overtoc #METABOOKTOCHELP.helpbox,
 body.mbSHOWHELP #METABOOKHUD.addgloss #METABOOKADDGLOSSHELP.helpbox,
