@@ -235,6 +235,13 @@ body.hudup #METABOOKHUD.openheart #METABOOKHEART,
     border-radius: 0px;
     top: 3ex;}
 
+#METABOOKHUD.refinesearch.emptysearch #METABOOKRIBBON,
+#METABOOKHUD.expandsearch.emptysearch #METABOOKRIBBON {
+        height: 3ex;}
+#METABOOKHUD.refinesearch.emptysearch #METABOOKHEARTBODY,
+#METABOOKHUD.expandsearch.emptysearch #METABOOKHEARTBODY {
+        top: 1.5ex;}
+
 body.hudup #METABOOKHUD.openheart.allglosses #METABOOKHEARTBODY div.hudpanel,
 body.hudup #METABOOKHUD.openheart.searchresults
      #METABOOKHEARTBODY div.hudpanel {
@@ -920,6 +927,13 @@ body.hudup img.metabookpagebutton {
     #METABOOKHUD.glossaddtag #METABOOKHEARTBODY,
     #METABOOKHUD.glossaddoutlet #METABOOKHEARTBODY {
         top: 62px;}
+
+    #METABOOKHUD.refinesearch.emptysearch #METABOOKRIBBON,
+    #METABOOKHUD.expandsearch.emptysearch #METABOOKRIBBON {
+        height: 30px;}
+    #METABOOKHUD.refinesearch.emptysearch #METABOOKHEARTBODY,
+    #METABOOKHUD.expandsearch.emptysearch #METABOOKHEARTBODY {
+        top: 32px;}
 
     img.metabookclosehud#METABOOKSTOPSKIM {
         bottom: 50px; top: auto;}

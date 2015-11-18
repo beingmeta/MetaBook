@@ -384,21 +384,11 @@
             setQuery(metaBook.empty_query);
             input.value="";
             metaBook.empty_cloud.clearSelection();
-            metaBook.empty_cloud.complete("");}
+            metaBook.empty_cloud.complete("");
+            metaBook.setMode("refinesearch");}
         // input.focus();
     }
     metaBook.UI.handlers.clearSearch=clearSearch;
-    
-    metaBook.toggleSearch=function(evt){
-        evt=evt||window.event;
-        if ((metaBook.mode==="refinesearch")||
-            (metaBook.mode==="searchresults"))
-            metaBook.setMode(false);
-        else {
-            metaBook.setMode("refinesearch");
-            if (!(metaBook.touch))
-                $ID("METABOOKSEARCHINPUT").focus();}
-        fdjtUI.cancel(evt);};
     
     /* Search result listings */
 
