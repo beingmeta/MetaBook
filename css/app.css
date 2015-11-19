@@ -148,7 +148,7 @@ span.note.ellipsis span.elision, span.note.ellipsis span.delision {
     background-color: transparent;
     border: 0px transparent;}
 #METABOOKFRAME input[TYPE="TEXT"] {
-    box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;
+    box-sizing: border-box;
     padding-left: 0.3ex;}
 
 /* Fuzzy selections */
@@ -751,7 +751,7 @@ section.mbpreviewing h7, div.html5section.mbpreviewing h7 {
     color: rgb(122,34,95); } 
 
 .mbexcerpt {
-    text-shadow: 0.2ex 0.2ex rgba(255, 215, 0, 0.53);}
+    text-shadow: 0.2ex 0.2ex 2px rgba(255, 215, 0, 0.53);}
 
 /* Startup messages */
 

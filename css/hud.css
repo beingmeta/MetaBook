@@ -16,7 +16,10 @@ html._MOUSE #METABOOKHUD a.brick:hover { text-decoration: none;}
 #METABOOKFRAME.metabookuifontnormal #METABOOKHUD { font-size: 3em; }
 #METABOOKFRAME.metabookuifontsmall #METABOOKHUD { font-size: 1.5em; }
 
-#METABOOKHUD .metabookhelp, #METABOOKHUD .helpbox,
+#METABOOKHUD .metabookhelp {
+    font-size: 3vh;}
+
+#METABOOKHUD .helpbox,
 #METABOOKHUD .metabookslice {
     font-size: 16px; font-size: 1rem;}
 html._TOUCH #METABOOKHUD .metabookhelp,

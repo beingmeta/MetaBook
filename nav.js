@@ -95,13 +95,14 @@
         var info=metaBook.Info(metaBook.head);
         while (info) {
             var tocelt=document.getElementById("MBTOC4"+info.frag);
-            var hinfo=info.head, hhlen=((hinfo)&&(hinfo.ends_at-hinfo.starts_at));
+            var hinfo=info.head;
+            var hhlen=((hinfo)&&(hinfo.ends_at-hinfo.starts_at));
             var start=info.starts_at; var end=info.ends_at;
             var progress=((location-start)*100)/hhlen;
             var bar=false, appbar=false;
             if (tocelt) {
                 // tocelt.title=Math.round(progress)+"%";
-                bar=fdjtDOM.getFirstChild(tocelt,".progressbar");}
+                bar=fdjtDOM.getFirstChild(tocelt,".posbar");}
             if (Trace.toc)
                 fdjtLog("For tocbar %o/%o loc=%o start=%o end=%o progress=%o",
                         bar,appbar,location,start,end,progress);
@@ -109,20 +110,6 @@
                 if (bar) bar.style.width=(progress)+"%";
                 if (appbar) appbar.style.width=(progress)+"%";}
             info=info.head;}
-        var spanbars=fdjtDOM.$(".spanbar");
-        var i=0; while (i<spanbars.length) {
-            var spanbar=spanbars[i++];
-            var width=spanbar.ends-spanbar.starts;
-            var ratio=(location-spanbar.starts)/width;
-            if (Trace.toc)
-                fdjtLog("ratio for spanbar %o[%d] is %o [%o,%o,%o]",
-                        spanbar,spanbar.childNodes[0].childNodes.length,
-                        ratio,spanbar.starts,location,spanbar.ends);
-            if ((ratio>=0) && (ratio<=1)) {
-                var progressbox=fdjtDOM.$(".progressbox",spanbar);
-                if (progressbox.length>0) {
-                    progressbox=progressbox[0];
-                    progressbox.style.left=((Math.round(ratio*10000))/100)+"%";}}}
         metaBook.location=location;}
     metaBook.setLocation=setLocation;
 

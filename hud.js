@@ -725,7 +725,7 @@ metaBook.setMode=
                     dropClass(skimmer,"transanimate");
                     fdjtDOM.removeListener(
                         skimmer,"transitionend",dropTransAnimate);};
-                if ((skimpoint)&&(pct)) {
+                if ((false)&&(skimpoint)&&(pct)) {
                     skimmer.style[fdjtDOM.transform]="translate(0,-110%)";
                     setTimeout(function(){
                         addClass(skimmer,"transanimate");

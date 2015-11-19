@@ -94,8 +94,8 @@ metaBook.TOCSlice=
             addClass(tocbar,"mbtocleaf");
             showsize.style.width=((inner_length/outer_length)*100)+"%";
             showsize.style.left=((rel_start/outer_length)*100)+"%";
-            elements.appendChild(showsize);
             elements.appendChild(fdjtDOM("div.posbar"));
+            elements.appendChild(showsize);
             tocbar.id="MBTOC4"+headinfo.frag;
             tocbar.setAttribute("name","MBTOC4"+headinfo.frag);
             tocbar.setAttribute("data-passage",headinfo.frag);

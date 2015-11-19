@@ -61,9 +61,11 @@ div.helpbox p img.left {
     margin-left: -70px;
     vertical-align: top;}
 div.helpbox kbd { font-weight: bold; }
-div.helpbox img.inline { background-color: gray; }
+div.helpbox img.inline { background-color: white; }
 div.helpbox p img.screengrab {
     float: right; height: 2em;}
+
+img.inlineright { float: right; max-height: 2em;}
 
 body.mbSHOWHELP #METABOOKHELPCONTENT { z-index: 500; }
 body.mbSHOWHELP #METABOOKHUD img.hudbutton#METABOOKHELPBUTTON {
@@ -71,9 +73,7 @@ body.mbSHOWHELP #METABOOKHUD img.hudbutton#METABOOKHELPBUTTON {
     opacity: 0.9;}
 
 #METABOOKHELP h1 {
-    font-size: 1.5em;
-    text-align: center;
-    margin-bottom: 1ex;}
+    font-size: 1.3em; text-align: center;}
 
 body.hudup.mbSHOWHELP #METABOOKHUD img.hudbutton#METABOOKHELPBUTTON {
     background-color: silver; border-color: black;}
@@ -129,15 +129,17 @@ body.mbSHOWHELP #METABOOKHUDHELP,
 body.mbSHOWHELP #METABOOKHUD.addgloss #METABOOKHUDHELP { 
     pointer-events: all;
     display: block; 
-    opacity: 0.9;}
-body.hudup.metabookhelp #METABOOKHUDHELP { display: block; }
+    opacity: 1;}
 body.mbSHOWHELP.hudup #METABOOKFOOT #METABOOKPAGEBAR {opacity: 0.1;}
+body.mbSHOWHELP.mbNOMODE #METABOOKHUDHELP {
+    display: none;}
 
 #METABOOKHUD div.helpbox {
     border-color: black; z-index: 250;}
 body.mbSHOWHELP #METABOOKHUD .hudtip,
 body.mbSHOWHELP #METABOOKHUD .hudbutton {
     opacity: 0.5;}
+
 body.mbSHOWHELP #METABOOKHUD.addgloss div.metabookhelp, 
 body.mbSHOWHELP.hudup #METABOOKHUD div.metabookhelp, 
 body.mbSHOWHELP.mbSHRINK #METABOOKHUD div.metabookhelp,
@@ -249,6 +251,7 @@ div.helpbox blockquote p {
     -moz-border-radius: 6px; -webkit-border-radius: 6px; 
     font-size: initial;
     display: none;}
+#METABOOKHUD .hudtip span.arrow { display: none; }
 #METABOOKHUD .hudtip.topleft {top: 3px; left: 60px; text-align: right;}
 #METABOOKHUD .hudtip.topright {top: 3px; right: 60px; text-align: left;}
 #METABOOKHUD .hudtip.botleft {bottom: 25px; left: 60px; text-align: right;}
@@ -261,7 +264,7 @@ div.helpbox blockquote p {
     -o-border-radius-topleft: 0px; -oborder-radius-topright: 0px;}
 
 #METABOOKHUD .hudtip.botcenter {
-    bottom: 25px;
+    bottom: 40px;
     width: 50%; left: 25%; right: 25%;
     text-align: center;}
 
@@ -326,7 +329,7 @@ div.metabookhelp td {
 
 div.metabookhelp h1 {
     margin-top: 3px !important;
-    margin-bottom: 0.5ex !important;
+    margin-bottom: 1.5ex !important;
     padding-top: 0px !important;}
 
 div.metabookhelp .action {
@@ -379,9 +382,9 @@ div.metabookhelp .glossbarbox {
     padding-right: 2px; border-right: solid blue 3px; margin-right: 4px;
     max-width: 3px; width: 3px; height: 2em;}
 
-#METABOOKHUD div.metabookhelp.hudpanel {
+div#METABOOKHELP {
     position: absolute; text-align: left;
-    top: 50px; bottom: 80px; left: 80px; right: 80px; 
+    top: 100px; bottom: 125px; left: 80px; right: 80px; 
     height: auto; width: auto;
     padding: 0px;
     padding-right: 1ex; padding-right: 2vw;
@@ -396,7 +399,8 @@ div.metabookhelp .glossbarbox {
     -webkit-opacity: 0.98;
     -khtml-opacity: 0.98;
     -moz-opacity: 0.98;
-    -o-opacity: 0.98;}
+    -o-opacity: 0.98;
+    display: none;}
 #METABOOKHUD #METABOOKHELP.hudpanel { overflow: auto;}
 
 #METABOOKCOVER div.metabookhelp#METABOOKAPPHELP,
@@ -406,10 +410,15 @@ div.metabookhelp .glossbarbox {
     text-align: center; margin-bottom: 1ex;}
 #METABOOKAPPHELP table, .metabookhelp p {
     margin-left: auto; margin-right: auto;
-    margin-top: 0.5ex; margin-bottom: 1ex;
+    margin-top: 1ex; margin-bottom: 1.5em;
     max-width: 40em; clear: both;}
 .metabookhelp p img.floatleft, .metabookhelp p img.floatright {
   max-width: 20%; max-height: 3em; width: auto; height: auto;}
+
+.metabookhelp .fdjtselected {
+    background-color: rgba(255,255,0,0.7); }
+.metabookhelp .fdjtselectstart, .metabookhelp .fdjtselectend {
+    background-color: rgba(255,215,0,0.7); }
 
 .metabookhelp p { color: rgb(60,60,60); }
 .metabookhelp p strong {

@@ -12,13 +12,26 @@
     font-size: 100%; line-height: 125%;
     white-space: nowrap; overflow: hidden;
     margin-bottom: 0.1em; margin-right: 1ex;
-    border-bottom: solid transparent 0.2em;
+    border-bottom: solid transparent 0.1em;
     box-sizing: border-box;}
-.mbtoc { height: 1.5em; }
-.mbtoc
-div.metabookslice .mbtoc.skimpoint {
+.mbtoc { height: 1.3em; }
+div.metabookslice .mbtoc.mblivetoc {
+    border-bottom-color: red;
+    border-bottom-style: dotted;}
+div.metabookslice .mbtoc.mblivetoc.mbcurtoc {
+    border-bottom-style: solid;}
+div.metabookslice .mbtoc.skimpoint,
+div.metabookslice .mbtoc.mbcurtoc {
+    background-color: transparent;}
+
+.mbtoc div.posbar {
+    position: absolute; left: 0px; top: 0px;
     background-color: transparent;
-    border-bottom-color: red;}
+    box-sizing: content-box; height: 100%; z-index: 50;
+    border: 0px; border-right: solid red 2px;
+    display: none;}
+.mbtoc.mblivetoc div.posbar {
+    display: block;}
 
 .mbtoc .context .tocpath { padding-left: 1ex; }
 .mbtoc .context {
@@ -43,7 +56,7 @@ div.metabookslice .mbtoc.skimpoint {
     white-space: normal;}
 .mbtoc div.elements {
     transform: translate(0,0); overflow: visible;
-    margin: 0px; padding: 0px; border: 0px; height: 1.5em;
+    margin: 0px; padding: 0px; border: 0px; height: 1.3em;
     z-index: -50; margin-left: 2em;}
 .mbtoc a.brick {
     position: absolute; display: inline-block;
@@ -52,14 +65,12 @@ div.metabookslice .mbtoc.skimpoint {
     background-color: lightblue;
     opacity: 0.8;
     height: 1.25em;}
-.mbtoc a.brick.cohi, .mbtoc.cohi a.showsize {
-    background-color: gold;}
+/* .mbtoc a.brick.cohi, .mbtoc.cohi a.showsize {background-color: gold;} */
 .mbtoc .toctext {
     position: relative; height: 0px; overflow: visible;
     pointer-events: none;
     z-index: 100; }
-.mbtoc.cohi {
-    border-bottom-color: gold;}
+/* .mbtoc.cohi {border-bottom-color: gold;} */
 .mbtoc.cohi a.sectname, .mbtoc.cohi a.sectname:visited,
 #METABOOKHEARTBODY .mbtoc.cohi a.sectname:visited,
 #METABOOKHEARTBODY .mbtoc.cohi a.sectname {
@@ -67,7 +78,7 @@ div.metabookslice .mbtoc.skimpoint {
 .mbtoc a.showsize {
     position: absolute; display: inline-block;
     box-sizing: border-box;
-    background-color: lightblue;
+    background-color: silver;
     height: 1.2em; }
 .mbtoc.mbtoc1 { font-size: 120%;}
 .mbtoc.mbtoc1.fdjtoversize { font-size: 105%;}
