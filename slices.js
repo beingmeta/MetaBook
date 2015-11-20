@@ -757,13 +757,14 @@ metaBook.Slice=(function () {
         this.needupdate=true;
         this.update();};
 
-    MetaBookSlice.prototype.addCards=function addCards(adds){
+    MetaBookSlice.prototype.addCards=function addCards(adds,scores){
         if (!(adds)) return;
         if (!(adds instanceof Array)) adds=[adds];
         if (adds.length===0) return;
+        if (!(scores)) scores=this.scores||false;
         if (metaBook.Trace.slices) 
-            fdjtLog("Adding %d cards to slice %o",
-                    adds.length,this.container);
+            fdjtLog("Adding %d cards to slice %o with scores %o",
+                    adds.length,this.container,scores);
         var byid=this.byid, cards=this.cards;
         var i=0, lim=adds.length;
         while (i<lim) {
@@ -772,7 +773,7 @@ metaBook.Slice=(function () {
             if ((add.about)&&(add.dom)) {
                 info=add; card=add.dom;}
             if ((add.nodeType)&&(add.nodeType===1)&&
-                     (hasClass(add,"metabookcard"))) {
+                (hasClass(add,"metabookcard"))) {
                 card=add; id=add.name||add.getAttribute("name");
                 if (!(id)) continue;
                 if ((info=byid[id])) {
@@ -791,6 +792,8 @@ metaBook.Slice=(function () {
                 byid[id]=info={added: fdjtTime(),id: id,about: about};
             else if (!(byid[id])) byid[id]=info;
             else {}
+            if ((scores)&&(scores.get(add)))
+                info.score=scores.get(add);
             info.dom=card;
             if (card.getAttribute("data-location"))
                 info.location=parseInt(card.getAttribute("data-location"),10);

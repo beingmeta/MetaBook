@@ -397,6 +397,7 @@
         if (!(this instanceof SearchResults))
             return new SearchResults(query);
         this.query=query; this.results=query.results;
+        this.scores=query.scores;
         return MetaBookSlice.call(
             this,fdjtDOM("div.metabookslice.mbsyncslice.searchslice"),
             this.results);}
