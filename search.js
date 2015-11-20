@@ -398,29 +398,30 @@
             return new SearchResults(query);
         this.query=query; this.results=query.results;
         return MetaBookSlice.call(
-            this,fdjtDOM("div.metabookslice.mbsyncslice.searchslice"),this.results);}
+            this,fdjtDOM("div.metabookslice.mbsyncslice.searchslice"),
+            this.results);}
     metaBook.SearchResults=SearchResults;
 
     SearchResults.prototype=new MetaBookSlice();
     SearchResults.prototype.renderCard=function renderSearchResult(result){
         return metaBook.renderCard(result,this.query);};
     SearchResults.prototype.sortfn=function searchResultsSortFn(x,y){
-        if (x.score) {
-            if (y.score) {
-                if (x.score===y.score) {
-                    if (x.location) {
-                        if (y.location) {
-                            if (x.location===y.location) {
-                                if (x.timestamp) {
-                                    if (y.timestamp)
-                                        return x.timestamp-y.timestamp;
-                                    else return -1;}
-                                else return 1;}
-                            else return x.location-y.location;}
-                        else return -1;}}
-                else return (y.score-x.score);}
-            else return -1;}
-        else return 1;};
+        if ((typeof x.score === "number")&&(typeof y.score === "number")) {
+            if (x.score!==y.score) return y.score-x.score;}
+        else if (typeof x.score === "number") return -1;
+        else if (typeof y.score === "number") return 1;
+        else {}
+        if ((typeof x.location === "number")&&(typeof y.location === "number")) {
+            if (x.location!==y.location) return x.location-y.location;}
+        else if (typeof x.location === "number") return -1;
+        else if (typeof y.location === "number") return 1;
+        else {}
+        if ((typeof x.timestamp === "number")&&(typeof y.timestamp === "number")) {
+            if (x.timestamp!==y.timestamp) return x.timestamp-y.timestamp;}
+        else if (typeof x.timestamp === "number") return -1;
+        else if (typeof y.timestamp === "number") return 1;
+        else {}
+        return 0;};
 
     /* Show search results */
 
