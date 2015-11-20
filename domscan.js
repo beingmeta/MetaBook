@@ -64,6 +64,7 @@ metaBook.DOMScan=(function(){
         var stdspace=fdjtString.stdspace;
         var getStyle=fdjtDOM.getStyle;
         var rootns=root.namespaceURI;
+        var baseid=mB.baseid;
         
         var idmap={};
         
@@ -264,6 +265,7 @@ metaBook.DOMScan=(function(){
             var curhead=scanstate.curhead;
             var curinfo=scanstate.curinfo;
             var curlevel=scanstate.curlevel;
+            if (!(baseid)) baseid=mB.baseid;
             scanstate.nodecount++;
             // Location tracking and TOC building
             if (child.nodeType===3) {
@@ -275,7 +277,9 @@ metaBook.DOMScan=(function(){
             else if (child.nodeType!==1) return 0;
             else {}
             var tag=child.tagName, classname=child.className;
-            var id=child.getAttribute('data-tocid')||child.id;
+            var id=child.id;
+            if (!((id)&&(id.search(baseid)===0)))
+                id=child.getAttribute('data-tocid')||child.id;
 
             if ((metaBook.ignore)&&(metaBook.ignore.match(child)))
                 return;
@@ -295,7 +299,7 @@ metaBook.DOMScan=(function(){
                 fdjtLog("Scanning %o level=%o, loc=%o, head=%o: %j",
                         child,curlevel,location,curhead,curinfo);
 
-            if ((!(id))&&(!(metaBook.baseid))) {
+            if ((!(id))&&(!(baseid))) {
                 // If there isn't a known BASEID, we generate
                 //  ids for block level elements using WSN.
                 var wsn=false;
@@ -304,17 +308,16 @@ metaBook.DOMScan=(function(){
                              /block|list-item|table|table-row/)===0))&&
                     ((child.childNodes)&&(child.childNodes.length))&&
                     (wsn=md5ID(child))) {
-                    var baseid="WSN_"+wsn, wsnid=baseid, count=1;
-                    if (baseid!=="WSN_") {
+                    var wbaseid="WSN_"+wsn, wsnid=wbaseid, count=1;
+                    if (wbaseid!=="WSN_") {
                         while ((document.getElementById[wsnid])||(idmap[wsnid]))
-                            wsnid=baseid+"_"+(count++);
-                        if (baseid!==wsnid) {
+                            wsnid=wbaseid+"_"+(count++);
+                        if (wbaseid!==wsnid) {
                             var text=fdjtDOM.textify(child);
                             fdjtLog.warn("Duplicate WSN ID %s: %s",
                                          wsnid,text);}
                         id=child.id=wsnid; idmap[wsnid]=child;}}}
-            else if ((id)&&(metaBook.baseid)&&
-                     (id.search(metaBook.baseid)!==0))
+            else if ((id)&&(baseid)&&(id.search(baseid)!==0))
                 id=false;
             else if (!(id)) {}
             else if (!(idmap[id])) idmap[id]=child;
@@ -373,15 +376,18 @@ metaBook.DOMScan=(function(){
             else if ((info=docinfo[id])) {}
             else {
                 allids.push(id); info=new ScanInfo(id,scanstate);
-                docinfo[id]=info; info.elt=child;}
+                if (docinfo[id]!==info) window.alert("Wrong");
+                docinfo[id]=info;
+                info.elt=child;}
             // The header functionality is handled by its surrounding
             // section (which should have a toclevel of its own)
             if ((scanstate.notoc)||(tag==='header')) {
                 scanstate.notoc=true; toclevel=0;}
             scanstate.eltcount++;
-            if ((info)&&(id)&&(child.id)&&(child.id!==id))
+            if ((info)&&(id)&&(child.id)&&(child.id!==id)) {
                 // Store info under both ID and TOCID if different
-                docinfo[child.id]=info;
+                info.addAlias(child.id);
+                docinfo[child.id]=info;}
             if (info) {
                 info.starts_at=scanstate.location;
                 info.bookhead=
@@ -415,7 +421,9 @@ metaBook.DOMScan=(function(){
                     while (alti<altlen) {
                         var altid=altids[alti++];
                         if (docinfo[altid]) {}
-                        else docinfo[altid]=info;}}}
+                        else {
+                            info.addAlias(altid);
+                            docinfo[altid]=info;}}}}
 
             if (((classname)&&(classname.search)&&
                  (classname.search(/\b(sbook|pubtool)terminal\b/)>=0))||
