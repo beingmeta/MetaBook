@@ -223,7 +223,8 @@ metaBook.DOMScan=(function(){
                                 scanlevel,scan||false,scaninfo,
                                 (scanlevel<level));
                     if (scanlevel<level) break;
-                    if (level===scanlevel) {
+                    else if (scaninfo===rootinfo) break;
+                    else if (level===scanlevel) {
                         headinfo.prev=scaninfo;
                         scaninfo.next=headinfo;}
                     scaninfo.ends_at=scanstate.location;
@@ -317,8 +318,7 @@ metaBook.DOMScan=(function(){
                             fdjtLog.warn("Duplicate WSN ID %s: %s",
                                          wsnid,text);}
                         id=child.id=wsnid; idmap[wsnid]=child;}}}
-            else if ((id)&&(baseid)&&(id.search(baseid)!==0))
-                id=false;
+            // else if ((id)&&(baseid)&&(id.search(baseid)!==0)) id=false;
             else if (!(id)) {}
             else if (!(idmap[id])) idmap[id]=child;
             else if (idmap[id]!==child) {
@@ -364,7 +364,9 @@ metaBook.DOMScan=(function(){
             var toclevel=getLevel(child,curlevel), info=false;
             if ((toclevel)&&(!(id))) {
                 var parent=child.parentNode;
-                info=((parent.id)&&(docinfo[parent.id]))||
+                var plevel=getLevel(parent);
+                if (typeof plevel !== "number")
+                    info=((parent.id)&&(docinfo[parent.id]))||
                     ((parent.getAttribute("data-tocid"))&&
                      (docinfo[parent.getAttribute("data-tocid")]));
                 if (info) {
