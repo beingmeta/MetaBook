@@ -92,7 +92,7 @@ div.metabookslice .mbtoc.mbcurtoc {
 .mbtoc a.brick { display: none; }
 
 #METABOOKSKIMMER .mbtoc {
-    font-weight: bold; padding-top: 2px; height: 2em;
+    font-weight: bold; padding-top: 2px; height: fit-content;
     border-bottom: 0px;}
 body.hudup #METABOOKHUD.statictoc #METABOOKSKIMMER {
     background-color: rgba(70, 130, 180, 0.5);}
