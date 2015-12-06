@@ -125,10 +125,10 @@ var metaBook={
     update_timeout: 30*1000,    // Timeout on requests
     update_pause: 30*60*1000,   // Interval to sleep on error or timeout
     // State sync settings (in milliseconds):
-    sync_interval: 180, // Interval between sync checks
-    sync_min: 10, // Minimum interval between sync checks
-    sync_timeout: 10,    // Timeout on sync requests
-    sync_pause: 15*60, // Interval to sleep on error or timeout
+    sync_interval: 180000, // Interval between sync checks
+    sync_min: 10000, // Minimum interval between sync checks
+    sync_timeout: 15000,    // Timeout on sync requests
+    sync_pause: 5*60*1000, // Interval to sleep on error or timeout
     // Various handlers, settings, and status information for the
     // metaBook interface
     UI: {
