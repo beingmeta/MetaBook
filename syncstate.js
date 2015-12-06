@@ -230,10 +230,10 @@
         if ((!(force))&&(elapsed<(metaBook.sync_min))) {
             sync_wait=setTimeout(
                 function(){syncState(force);},
-                1000*metaBook.sync_min);
+                metaBook.sync_min);
             return;}
         else if (sync_wait) {clearTimeout(sync_wait); sync_wait=false;} 
-        if ((metaBook.locsync)&&(navigator.onLine)) {
+        if (((force)||(metaBook.locsync))&&(navigator.onLine)) {
             var uri=metaBook.docuri;
             var traced=(Trace.state)||(Trace.network);
             var state=metaBook.state;
@@ -285,7 +285,7 @@
                         uri,req.status,metaBook.sync_pause/1000);}
                 metaBook.locsync=false;
                 setTimeout(function(){metaBook.locsync=true;},
-                           1000*metaBook.sync_pause);}}
+                           metaBook.sync_pause);}}
     } metaBook.syncState=syncState;
 
     function syncTimeout(evt){
@@ -295,7 +295,7 @@
         metaBook.locsync=false;
         setTimeout(function(){
             metaBook.locsync=true;},
-                   1000*metaBook.sync_pause);}
+                   metaBook.sync_pause);}
 
     var prompted=false;
 
