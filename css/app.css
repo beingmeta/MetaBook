@@ -627,7 +627,8 @@ div.metabookglossform form table td textarea { width: 100%;}
 
 div.codexpage {
     position: absolute;
-    box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    transform: translateZ(0);
     display: none;}
 div.codexpage {
     padding: 2px;
@@ -684,9 +685,10 @@ div.codexpage.newpage.curpage, div.codexpage.oldpage.curpage {
 
 /* Sliding page turns */
 
-body._ANIMATE div.codexpage { transform: translate(0px,0px); }
+body._ANIMATE div.codexpage { 
+    transform: translate(0px,0px) translateZ(0); }
 body._ANIMATE div.codexpage.previewpage {
-    transform: translate(0px,0px); }
+    transform: translate(0px,0px) translateZ(0); }
 
 div.codexpage.newpage { z-index: 100; }
 

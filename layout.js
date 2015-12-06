@@ -794,7 +794,8 @@ metaBook.Paginate=
                 metaBook.CSS.resizerule=cheaprule=fdjtDOM.addCSSRule(
                     s+", body._ANIMATE.mbPREVIEW "+s,"");}
             cheaprule.style[fdjtDOM.transformOrigin]="left top";
-            cheaprule.style[fdjtDOM.transform]="scale("+scale+","+scale+")";
+            cheaprule.style[fdjtDOM.transform]=
+                "scale("+scale+","+scale+") translateZ(0)";
             var nwidth=lwidth*scale, nheight=lheight*scale;
             // If the width has shrunk (it can't have grown), that means
             //  that there is an additional left margin, so we move the page
