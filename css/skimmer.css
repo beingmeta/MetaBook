@@ -16,7 +16,7 @@
 html._TOUCH #METABOOKSKIMMER,
 html._TOUCH #METABOOKSKIMMER div.mbtoc,
 html._TOUCH #METABOOKSKIMMER div.metabookcard {
-    min-height: 50px;}
+    min-height: 30px;}
 body._ANIMATE #METABOOKSKIMMER {
     transition-property: height; transition-duration: 0.3s;}
 
