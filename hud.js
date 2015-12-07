@@ -75,7 +75,7 @@ metaBook.setMode=
         var hasParent=fdjtDOM.hasParent;
         var hasSuffix=fdjtString.hasSuffix;
 
-        var fixStaticRefs=metaBook.fixStaticRefs;
+        var fixStaticRefs=mB.fixStaticRefs;
 
         var metaBookHUD=false;
 
@@ -91,7 +91,7 @@ metaBook.setMode=
             if (Trace.startup>2) fdjtLog("Initializing HUD layout");
             metaBook.HUD=metaBookHUD=hud=
                 fdjtDOM("div#METABOOKHUD.metabookhud");
-            hud.innerHTML=fixStaticRefs(metaBook.HTML.hud);
+            hud.innerHTML=fixStaticRefs(mB.HTML.hud);
             hud.metabookui=true;
             fdjtDOM.append(messages);
             if ($ID("METABOOKFRAME")) frame=$ID("METABOOKFRAME");
@@ -101,21 +101,21 @@ metaBook.setMode=
             addClass(frame,"metabookframe");
             addClass(frame,"tapholdcontext");
             frame.appendChild(messages); frame.appendChild(hud);
-            if (metaBook.getConfig("uisize"))
-                addClass(frame,"metabookuifont"+metaBook.getConfig("uisize"));
+            if (mB.getConfig("uisize"))
+                addClass(frame,"metabookuifont"+mB.getConfig("uisize"));
             metaBook.Frame=frame;
             // Fill in the HUD help
             var hudhelp=$ID("METABOOKHUDHELP");
-            hudhelp.innerHTML=fixStaticRefs(metaBook.HTML.hudhelp);
+            hudhelp.innerHTML=fixStaticRefs(mB.HTML.hudhelp);
             // Fill in the HUD help
             var helptext=$ID("METABOOKAPPHELP");
-            helptext.innerHTML=fixStaticRefs(metaBook.HTML.help);
+            helptext.innerHTML=fixStaticRefs(mB.HTML.help);
             // Setup heart
             var heart=$ID("METABOOKHEARTBODY");
-            heart.innerHTML=fixStaticRefs(metaBook.HTML.heart);
+            heart.innerHTML=fixStaticRefs(mB.HTML.heart);
             metaBook.DOM.heart=heart;
             var gloss_attach=$ID("METABOOKGLOSSATTACH");
-            gloss_attach.innerHTML=fixStaticRefs(metaBook.HTML.attach);
+            gloss_attach.innerHTML=fixStaticRefs(mB.HTML.attach);
             metaBook.DOM.heart=heart;
             // Other HUD parts
             metaBook.DOM.head=$ID("METABOOKHEAD");
@@ -131,19 +131,19 @@ metaBook.setMode=
             
             // Initialize search UI
             var search=$ID("METABOOKSEARCH");
-            search.innerHTML=fixStaticRefs(metaBook.HTML.searchbox);
-            addClass(metaBook.HUD,"emptysearch");
+            search.innerHTML=fixStaticRefs(mB.HTML.searchbox);
+            addClass(mB.HUD,"emptysearch");
 
             // Setup addgloss prototype
             var addgloss=$ID("METABOOKADDGLOSSPROTOTYPE");
-            addgloss.innerHTML=fixStaticRefs(metaBook.HTML.addgloss);
+            addgloss.innerHTML=fixStaticRefs(mB.HTML.addgloss);
 
             metaBook.UI.addHandlers(hud,"hud");
 
             if (Trace.startup>1)
                 fdjtLog("Created basic HUD in %dms",fdjtTime()-started);
 
-            if (!(metaBook.svg)) {
+            if (!(mB.svg)) {
                 var images=fdjtDOM.getChildren(hud,"img");
                 var i=0; var lim=images.length;
                 if (Trace.startup) fdjtLog("Switching images to SVG");
@@ -157,24 +157,24 @@ metaBook.setMode=
 
             metaBook.hudtick=fdjtTime();
 
-            fdjtDOM.setInputs(".metabookrefuri",metaBook.refuri);
-            fdjtDOM.setInputs(".metabookdocuri",metaBook.docuri);
-            fdjtDOM.setInputs(".metabooktopuri",metaBook.topuri);
+            fdjtDOM.setInputs(".metabookrefuri",mB.refuri);
+            fdjtDOM.setInputs(".metabookdocuri",mB.docuri);
+            fdjtDOM.setInputs(".metabooktopuri",mB.topuri);
             
             // Initialize gloss UI
             metaBook.DOM.allglosses=$ID("METABOOKALLGLOSSES");
-            if ((Trace.startup>2)&&(metaBook.DOM.allglosses))
+            if ((Trace.startup>2)&&(mB.DOM.allglosses))
                 fdjtLog("Setting up gloss UI %o",allglosses);
 
             metaBook.slices.allglosses=allglosses=
-                new metaBook.Slice(metaBook.DOM.allglosses);
+                new mB.Slice(mB.DOM.allglosses);
             metaBook.slices.allglosses.mode="allglosses";
             metaBook.glossdb.onAdd("maker",function(f,p,v){
-                metaBook.sourcedb.ref(v).oninit
-                (metaBook.UI.addGlossSource,"newsource");});
+                mB.sourcedb.ref(v).oninit
+                (mB.UI.addGlossSource,"newsource");});
             metaBook.glossdb.onAdd("sources",function(f,p,v){
-                metaBook.sourcedb.ref(v).oninit
-                (metaBook.UI.addGlossSource,"newsource");});
+                mB.sourcedb.ref(v).oninit
+                (mB.UI.addGlossSource,"newsource");});
             metaBook.glossdb.onLoad(addGloss2UI);
             
             function messageHandler(evt){
@@ -191,28 +191,28 @@ metaBook.setMode=
                 else if (evt.data==="metabooksapp") {
                     setMode("sbooksapp");}
                 else if (evt.data==="loggedin") {
-                    if (!(metaBook.user)) {
-                        metaBook.userSetup();}}
+                    if (!(mB.user)) {
+                        mB.userSetup();}}
                 else if ((typeof evt.data === "string")&&
                          (evt.data.search("setuser=")===0)) {
-                    if (!(metaBook.user)) {
+                    if (!(mB.user)) {
                         metaBook.userinfo=JSON.parse(evt.data.slice(8));
-                        metaBook.loginUser(metaBook.userinfo);
-                        metaBook.setMode("welcome");
-                        metaBook.userSetup();}}
+                        mB.loginUser(mB.userinfo);
+                        setMode("welcome");
+                        mB.userSetup();}}
                 else if (evt.data.updateglosses) {
-                    metaBook.updateInfo();}
+                    mB.updateInfo();}
                 else if (evt.data.addlayer) {
-                    metaBook.updateInfo();}
+                    mB.updateInfo();}
                 else if ((evt.data.droplayer)||(evt.data.hidelayer)||
                          (evt.data.showlayer)) {
-                    metaBook.refreshOffline();}
+                    mB.refreshOffline();}
                 else if (evt.data.userinfo) {
-                    if (!(metaBook.user)) {
+                    if (!(mB.user)) {
                         metaBook.userinfo=evt.data.userinfo;
-                        metaBook.loginUser(metaBook.userinfo);
-                        metaBook.setMode("welcome");
-                        metaBook.userSetup();}}
+                        mB.loginUser(mB.userinfo);
+                        setMode("welcome");
+                        mB.userSetup();}}
                 else if (evt.data)
                     fdjtDOM("METABOOKINTRO",evt.data);
                 else {}}
@@ -227,19 +227,19 @@ metaBook.setMode=
                      taptapmsecs: 0,holdmsecs: 150,
                      minswipe:0});
             metaBook.TapHold.head=
-                new TapHold(metaBook.DOM.head,
+                new TapHold(mB.DOM.head,
                             {override: true,taptapmsecs: 0,
                              holdmsecs: 200});
             metaBook.DOM.skimmer=$ID("METABOOKSKIMMER");
             metaBook.TapHold.skimmer=
-                new TapHold(metaBook.DOM.skimmer,{taptapmsecs: 300});
+                new TapHold(mB.DOM.skimmer,{taptapmsecs: 300});
             
             metaBook.DOM.sources=$ID("METABOOKSOURCES");
             metaBook.TapHold.sources=
-                new TapHold(metaBook.DOM.sources,{taptapmsecs: 300});
+                new TapHold(mB.DOM.sources,{taptapmsecs: 300});
 
-            var help=metaBook.DOM.help=$ID("METABOOKHELP");
-            help.innerHTML=fixStaticRefs(metaBook.HTML.help);
+            var help=mB.DOM.help=$ID("METABOOKHELP");
+            help.innerHTML=fixStaticRefs(mB.HTML.help);
 
             /* Setup clouds */
             var dom_gloss_cloud=$ID("METABOOKGLOSSCLOUD");
@@ -249,7 +249,7 @@ metaBook.setMode=
                     fdjtUI.FDJT_COMPLETE_OPTIONS|
                         fdjtUI.FDJT_COMPLETE_CLOUD|
                         fdjtUI.FDJT_COMPLETE_ANYWORD);
-            metaBook.TapHold.gloss_cloud=new TapHold(metaBook.gloss_cloud.dom);
+            metaBook.TapHold.gloss_cloud=new TapHold(mB.gloss_cloud.dom);
 
             metaBook.empty_cloud=
                 new fdjtUI.Completions(
@@ -257,11 +257,11 @@ metaBook.setMode=
                     fdjtUI.FDJT_COMPLETE_OPTIONS|
                         fdjtUI.FDJT_COMPLETE_CLOUD|
                         fdjtUI.FDJT_COMPLETE_ANYWORD);
-            if (metaBook.adjustCloudFont)
+            if (mB.adjustCloudFont)
                 metaBook.empty_cloud.updated=function(){
-                    metaBook.adjustCloudFont(this);};
+                    mB.adjustCloudFont(this);};
             metaBook.DOM.empty_cloud=$ID("METABOOKALLTAGS");
-            metaBook.TapHold.empty_cloud=new TapHold(metaBook.empty_cloud.dom);
+            metaBook.TapHold.empty_cloud=new TapHold(mB.empty_cloud.dom);
             
             var dom_share_cloud=$ID("METABOOKSHARECLOUD");
             metaBook.share_cloud=
@@ -271,7 +271,7 @@ metaBook.setMode=
                         fdjtUI.FDJT_COMPLETE_CLOUD|
                         fdjtUI.FDJT_COMPLETE_ANYWORD);
             metaBook.DOM.share_cloud=dom_share_cloud;
-            metaBook.TapHold.share_cloud=new TapHold(metaBook.share_cloud.dom);
+            metaBook.TapHold.share_cloud=new TapHold(mB.share_cloud.dom);
 
             fdjtDOM.setupCustomInputs($ID("METABOOKHUD"));
 
@@ -280,7 +280,7 @@ metaBook.setMode=
         metaBook.initHUD=initHUD;
         
         function resizeHUD(){
-            fdjt.DOM.adjustFonts(metaBook.HUD);}
+            fdjt.DOM.adjustFonts(mB.HUD);}
         metaBook.resizeHUD=resizeHUD;
 
         /* Various UI methods */
@@ -290,28 +290,28 @@ metaBook.setMode=
                     "Warning: skipping gloss %o with no fragment identifier",
                     item.uuid);}
             else if (mbID(item.frag)) {
-                var addGlossmark=metaBook.UI.addGlossmark;
+                var addGlossmark=mB.UI.addGlossmark;
                 // Assume it belongs to the user if it doesn't say
-                if ((!(item.maker))&&(metaBook.user))
-                    item.maker=(metaBook.user);
+                if ((!(item.maker))&&(mB.user))
+                    item.maker=(mB.user);
                 allglosses.addCards(item);
-                var nodes=metaBook.getDups(item.frag);
+                var nodes=mB.getDups(item.frag);
                 addClass(nodes,"glossed");
                 var i=0, lim=nodes.length; while (i<lim) {
                     addGlossmark(nodes[i++],item);}
                 if (item.excerpt) {
-                    var range=metaBook.findExcerpt(
+                    var range=mB.findExcerpt(
                         nodes,item.excerpt,item.exoff);
                     if (range) {
                         fdjtUI.Highlight(
                             range,"mbexcerpt",
                             item.note,{"data-glossid":item._id});}}
                 if (item.tags) {
-                    var gloss_cloud=metaBook.gloss_cloud;
+                    var gloss_cloud=mB.gloss_cloud;
                     var tags=item.tags, j=0, n_tags=tags.length;
                     while (j<n_tags)
-                        metaBook.cloudEntry(tags[j++],gloss_cloud);}
-                if (item.tstamp>metaBook.syncstamp)
+                        mB.cloudEntry(tags[j++],gloss_cloud);}
+                if (item.tstamp>mB.syncstamp)
                     metaBook.syncstamp=item.tstamp;}
             else {
                 fdjtLog("Gloss (add2UI) refers to nonexistent '%s': %o",item.frag,item);
@@ -337,9 +337,9 @@ metaBook.setMode=
             if ((Trace.gestures)||(Trace.mode))
                 fdjtLog("setHUD(%s) %o mode=%o hudup=%o bc=%o hc=%o",
                         ((clearmode)?("clearmode"):("keepmode")),
-                        flag,metaBook.mode,metaBook.hudup,
+                        flag,mB.mode,mB.hudup,
                         document.body.className,
-                        metaBookHUD.className);
+                        hud.className);
             if (flag) {
                 metaBook.hudup=true;
                 dropClass(document.body,/\b(openhud|openglossmark)\b/g);
@@ -347,19 +347,19 @@ metaBook.setMode=
                 if (!(mB.mode)) addClass(document.body,"mbNOMODE");}
             else {
                 metaBook.hudup=false;
-                if (metaBook.previewing)
-                    metaBook.stopPreview("setHUD");
+                if (mB.previewing)
+                    mB.stopPreview("setHUD");
                 dropClass(document.body,"mbSHRINK");
                 if (clearmode) {
-                    if (metaBook.popmode) {
-                        var fn=metaBook.popmode;
-                        metaBook.popmode=false;
+                    if (mB.popmode) {
+                        var fn=mB.popmode;
+                        mB.popmode=false;
                         fn();}
-                    dropClass(metaBookHUD,"openheart");
-                    dropClass(metaBookHUD,"openhead");
-                    dropClass(metaBookHUD,"full");
-                    dropClass(metaBookHUD,metaBookModes);
-                    dropClass(metaBook.menu,metaBookModes);
+                    dropClass(hud,"openheart");
+                    dropClass(hud,"openhead");
+                    dropClass(hud,"full");
+                    dropClass(hud,metaBookModes);
+                    dropClass(mB.menu,metaBookModes);
                     dropClass(document.body,"mbSKIMMING");
                     dropClass(document.body,"mbSKIMSTART");
                     dropClass(document.body,"mbSKIMEND");
@@ -368,29 +368,29 @@ metaBook.setMode=
                     metaBook.mode=false;}
                 dropClass(document.body,"hudup");
                 dropClass(document.body,"openhud");
-                metaBook.focusBody();}}
+                mB.focusBody();}}
         metaBook.setHUD=setHUD;
 
         /* Opening and closing the cover */
 
         function showCover(){
-            if (metaBook._started)
+            if (mB._started)
                 fdjtState.dropLocal("mB("+mB.docid+").opened");
             setHUD(false);
             metaBook.closed=true;
-            if (metaBook.covermode) {
-                addClass(metaBook.cover,metaBook.covermode);
+            if (mB.covermode) {
+                addClass(mB.cover,mB.covermode);
                 metaBook.mode=metaBook.covermode;}
             addClass(document.body,"mbCOVER");}
         metaBook.showCover=showCover;
         function hideCover(){
-            if (metaBook._started)
+            if (mB._started)
                 fdjtState.setLocal(
                     "mB("+mB.docid+").opened",fdjtTime());
             metaBook.closed=false;
             dropClass(document.body,"mbCOVER");
-            if (metaBook.mode) {
-                metaBook.covermode=metaBook.mode;
+            if (mB.mode) {
+                metaBook.covermode=mB.mode;
                 metaBook.mode=false;
                 metaBook.cover.className="";}}
         metaBook.hideCover=hideCover;
@@ -417,76 +417,76 @@ metaBook.setMode=
              expandsearch: "METABOOKSEARCHINPUT"};
         
         function setMode(mode,nohud){
-            var oldmode=metaBook.mode, mode_focus, mode_input;
+            var oldmode=mB.mode, mode_focus, mode_input;
             if (typeof mode === 'undefined') return oldmode;
-            if (mode==='last') mode=metaBook.last_mode;
-            if ((!(mode))&&(metaBook.mode)&&
-                (metaBook.mode.search(metaBookPopModes)>=0))
-                mode=metaBook.last_mode;
+            if (mode==='last') mode=mB.last_mode;
+            if ((!(mode))&&(mB.mode)&&
+                (mB.mode.search(metaBookPopModes)>=0))
+                mode=mB.last_mode;
             if (mode==='none') mode=false;
-            if (mode==='heart') mode=metaBook.heart_mode||"statictoc";
+            if (mode==='heart') mode=mB.heart_mode||"statictoc";
             if (Trace.mode)
                 fdjtLog("setMode %o, cur=%o dbc=%o",
-                        mode,metaBook.mode,document.body.className);
-            if ((mode!==metaBook.mode)&&(metaBook.previewing))
-                metaBook.stopPreview("setMode");
-            if ((mode!==metaBook.mode)&&(metaBook.popmode)) {
-                var fn=metaBook.popmode;
-                metaBook.popmode=false;
+                        mode,mB.mode,document.body.className);
+            if ((mode!==mB.mode)&&(mB.previewing))
+                mB.stopPreview("setMode");
+            if ((mode!==mB.mode)&&(mB.popmode)) {
+                var fn=mB.popmode;
+                mB.popmode=false;
                 fn();}
             if ((mode==="layers")&&
                 (!($ID("BOOKHUBAPP").src))&&
-                (!(metaBook.appinit)))
-                metaBook.initIFrameApp();
-            if ((metaBook.mode==="addgloss")&&(mode!=="addgloss")&&
+                (!(mB.appinit)))
+                mB.initIFrameApp();
+            if ((mB.mode==="addgloss")&&(mode!=="addgloss")&&
                 (hasClass("METABOOKLIVEGLOSS","modified")))
-                metaBook.submitGloss($ID("METABOOKLIVEGLOSS"));
+                mB.submitGloss($ID("METABOOKLIVEGLOSS"));
             if (mode) dropClass(document.body,"mbNOMODE");
             else addClass(document.body,"mbNOMODE");
             if (mode) {
-                if (mode==="search") mode=metaBook.search_mode||"refinesearch";
+                if (mode==="search") mode=mB.search_mode||"refinesearch";
                 if (mode==="addgloss") {}
                 else dropClass(document.body,"mbSHRINK");
                 if (mode===true) {
                     /* True just puts up the HUD with no mode info */
-                    metaBook.hideCover();
-                    if (metabook_mode_foci[metaBook.mode]) {
-                        mode_focus=metabook_mode_foci[metaBook.mode];
+                    mB.hideCover();
+                    if (metabook_mode_foci[mB.mode]) {
+                        mode_focus=metabook_mode_foci[mB.mode];
                         mode_input=
                             (((mode_focus.search(/[.#]/))>=0)?
                              (fdjtDOM.$1(mode_focus)):($ID(mode_focus)));
                         mode_input.blur();}
-                    dropClass(metaBookHUD,metaBookModes);
+                    dropClass(hud,metaBookModes);
                     dropClass(mB.menu,metaBookModes);
                     metaBook.mode=false;
                     metaBook.last_mode=true;}
                 else if (typeof mode !== 'string') 
                     throw new Error('mode arg not a string');
                 else if (mode.search(metaBookCoverModes)>=0) {
-                    if (mode!==metaBook.mode) {
+                    if (mode!==mB.mode) {
                         $ID("METABOOKCOVER").className=mode;
                         metaBook.mode=mode;
                         metaBook.modechange=fdjtTime();}
                     if (mode==="console") fdjtLog.update();
                     showCover();
                     return;}
-                else if (mode===metaBook.mode) {}
+                else if (mode===mB.mode) {}
                 else {
-                    metaBook.hideCover();
+                    mB.hideCover();
                     metaBook.modechange=fdjtTime();
-                    if (metabook_mode_foci[metaBook.mode]) {
-                        mode_focus=metabook_mode_foci[metaBook.mode];
+                    if (metabook_mode_foci[mB.mode]) {
+                        mode_focus=metabook_mode_foci[mB.mode];
                         mode_input=
                             (((mode_focus.search(/[.#]/))>=0)?
                              (fdjtDOM.$1(mode_focus)):($ID(mode_focus)));
                         mode_input.blur();}
-                    if (mode!==metaBook.mode) metaBook.last_mode=metaBook.mode;
+                    if (mode!==mB.mode) metaBook.last_mode=mB.mode;
                     metaBook.mode=mode;}
                 // If we're switching to the inner app but the iframe
                 //  hasn't been initialized, we do it now.
                 if ((mode==="sbooksapp")&&
                     (!($ID("BOOKHUBAPP").src))&&
-                    (!(metaBook.appinit)))
+                    (!(mB.appinit)))
                     initIFrameApp();
 
                 if ((mode==='refinesearch')||
@@ -504,75 +504,75 @@ metaBook.setMode=
                 else setHUD(true);
                 // Actually change the class on the HUD object
                 if (mode===true) {
-                    dropClass(metaBookHUD,"openhead");
-                    dropClass(metaBookHUD,"openheart");
-                    fdjtDOM.swapClass(metaBookHUD,metaBookModes,"minimal");
+                    dropClass(hud,"openhead");
+                    dropClass(hud,"openheart");
+                    fdjtDOM.swapClass(hud,metaBookModes,"minimal");
                     fdjtDOM.swapClass(mB.menu,metaBookModes,"minimal");}
                 else if (mode==="addgloss") {
                     // addgloss has submodes which may specify the
                     //  open heart configuration
-                    addClass(metaBookHUD,"openhead");
-                    dropClass(metaBookHUD,"openheart");}
+                    addClass(hud,"openhead");
+                    dropClass(hud,"openheart");}
                 else {
                     if (mode.search(metabookHeartModes)<0) {
-                        dropClass(metaBookHUD,"openheart");}
+                        dropClass(hud,"openheart");}
                     if (mode.search(metabookHeadModes)<0)
-                        dropClass(metaBookHUD,"openhead");
+                        dropClass(hud,"openhead");
                     if (mode.search(metabookHeartModes)>=0) {
                         metaBook.heart_mode=mode;
-                        addClass(metaBookHUD,"openheart");}
+                        addClass(hud,"openheart");}
                     if (mode.search(metabookHeadModes)>=0) {
                         metaBook.head_mode=mode;
-                        addClass(metaBookHUD,"openhead");}}
+                        addClass(hud,"openhead");}}
                 changeMode(mode);}
             else {
                 // Clearing the mode is a lot simpler, in part because
                 //  setHUD clears most of the classes when it brings
                 //  the HUD down.
-                metaBook.last_mode=metaBook.mode;
+                metaBook.last_mode=mB.mode;
                 if (hasClass(document.body,"mbCOVER")) hideCover();
-                if ((metaBook.mode==="openglossmark")&&
+                if ((mB.mode==="openglossmark")&&
                     ($ID("METABOOKOPENGLOSSMARK"))) {
                     $ID("METABOOKOPENGLOSSMARK").id="";
                     dropClass(document.body,"openglossmark");}
-                if (metaBook.textinput) {
-                    metaBook.setFocus(false);}
-                metaBook.focusBody();
-                if (metaBook.skimpoint) {
-                    var dups=metaBook.getDups(metaBook.target);
-                    metaBook.clearHighlights(dups);
+                if (mB.textinput) {
+                    mB.setFocus(false);}
+                mB.focusBody();
+                if (mB.skimpoint) {
+                    var dups=mB.getDups(mB.target);
+                    mB.clearHighlights(dups);
                     dropClass(dups,"mbhighlightpassage");}
-                dropClass(metaBookHUD,"openheart");
-                dropClass(metaBookHUD,"openhead");
+                dropClass(hud,"openheart");
+                dropClass(hud,"openhead");
                 dropClass(document.body,"dimmed");
                 dropClass(document.body,"mbSHOWHELP");
                 dropClass(document.body,"mbPREVIEW");
                 dropClass(document.body,"mbSHRINK");
-                dropClass(metaBookHUD,metaBookModes);
+                dropClass(hud,metaBookModes);
                 dropClass(mB.menu,metaBookModes);
                 metaBook.cxthelp=false;
-                if (display_sync) metaBook.displaySync();
-                if (nohud) metaBook.setHUD(false);
+                if (display_sync) mB.displaySync();
+                if (nohud) mB.setHUD(false);
                 else setHUD(false);}}
         
         function changeMode(mode){      
             if (Trace.mode)
                 fdjtLog("changeMode %o, cur=%o dbc=%o",
-                        mode,metaBook.mode,document.body.className);
+                        mode,mB.mode,document.body.className);
             dropClass(mB.menu,metaBookModes);
-            dropClass(metaBookHUD,metaBookModes);
-            addClass(metaBookHUD,mode);
+            dropClass(hud,metaBookModes);
+            addClass(hud,mode);
             addClass(mB.menu,mode);
 
             if ((mode!=="openglossmark")&&
-                (metaBook.mode==="openglossmark")) {
+                (mB.mode==="openglossmark")) {
                 if ($ID("METABOOKOPENGLOSSMARK"))
                     $ID("METABOOKOPENGLOSSMARK").id="";
                 dropClass(document.body,"openglossmark");}
             
             if (mode==="statictoc") {
-                var headinfo=((metaBook.head)&&(metaBook.head.id)&&
-                              (metaBook.docinfo[metaBook.head.id]));
+                var headinfo=((mB.head)&&(mB.head.id)&&
+                              (mB.docinfo[mB.head.id]));
                 var static_head=$ID("MBTOC4"+headinfo.frag);
                 var toc=fdjt.ID("METABOOKSTATICTOC");
                 if (hasClass(toc,"mbsyncslice")) {
@@ -580,55 +580,55 @@ metaBook.setMode=
                     if (static_head.offsetHeight===0)
                         fdjt.showPage.showNode(toc,static_head);}}
             else if (mB.slices[mode]) {
-                var curloc=metaBook.location;
+                var curloc=mB.location;
                 var slice=mB.slices[mode];
                 var slicediv=slice.container;
                 slice.setLive(true);
                 if (hasClass(slicediv,"mbsyncslice"))
                     slice.setLocation(curloc);}
-            else if (metaBook.pagers[mode])
-                fdjt.showPage.check(metaBook.pagers[mode]);
+            else if (mB.pagers[mode])
+                fdjt.showPage.check(mB.pagers[mode]);
             else {}
             
             // We autofocus any input element appropriate to the mode
             if (metabook_mode_foci[mode]) {
-                var mode_focus=metabook_mode_foci[metaBook.mode];
+                var mode_focus=metabook_mode_foci[mB.mode];
                 var mode_input=
                     (((mode_focus.search(/[.#]/))>=0)?
                      (fdjtDOM.$1(mode_focus)):($ID(mode_focus)));
                 if ((mode_input)&&
-                    ((!(metaBook.touch))||
-                     (hasParent(mode_input,metaBook.DOM.foot)))) {
+                    ((!(mB.touch))||
+                     (hasParent(mode_input,mB.DOM.foot)))) {
                     setTimeout(function(){
-                        metaBook.setFocus(mode_input);},
+                        mB.setFocus(mode_input);},
                                50);}}
-            else if ((mode==="addgloss")&&(metaBook.glossform)) {
-                var glossform=metaBook.glossform;
-                var curglossmode=metaBook.getGlossMode(glossform);
-                metaBook.setGlossMode(curglossmode,glossform);}
+            else if ((mode==="addgloss")&&(mB.glossform)) {
+                var glossform=mB.glossform;
+                var curglossmode=mB.getGlossMode(glossform);
+                mB.setGlossMode(curglossmode,glossform);}
             // Moving the focus back to the body lets keys work
-            else setTimeout(metaBook.focusBody,50);
+            else setTimeout(mB.focusBody,50);
             
             if (mB.slices[mode]) mB.slices[mode].setLive(true);
 
-            if (display_sync) metaBook.displaySync();}
+            if (display_sync) mB.displaySync();}
 
-        function metaBookHUDToggle(mode,keephud){
-            if (!(metaBook.mode)) setMode(mode);
-            else if (mode===metaBook.mode)
+        function toggleMode(mode,keephud){
+            if (!(mB.mode)) setMode(mode);
+            else if (mode===mB.mode)
                 if (keephud) setMode(true); else setMode(false);
             else if ((mode==='heart')&&
-                     (metaBook.mode.search(metabookHeartModes)===0))
+                     (mB.mode.search(metabookHeartModes)===0))
                 if (keephud) setMode(true); else setMode(false);
             else setMode(mode);}
-        metaBook.toggleMode=metaBookHUDToggle;
+        metaBook.toggleMode=toggleMode;
 
         metaBook.dropHUD=function(){return setMode(false);};
         metaBook.toggleHUD=function(evt){
             evt=evt||window.event;
             if ((evt)&&(fdjtUI.isClickable(fdjtUI.T(evt)))) return;
-            fdjtLog("toggle HUD %o hudup=%o",evt,metaBook.hudup);
-            if (metaBook.hudup) setHUD(false,false);
+            fdjtLog("toggle HUD %o hudup=%o",evt,mB.hudup);
+            if (mB.hudup) setHUD(false,false);
             else setHUD(true);};
         
         /* The App HUD */
@@ -636,7 +636,7 @@ metaBook.setMode=
         var iframe_app_init=false;
         function initIFrameApp(){
             if (iframe_app_init) return;
-            if (metaBook.appinit) return;
+            if (mB.appinit) return;
             var query="";
             if (document.location.search) {
                 if (document.location.search[0]==="?")
@@ -644,8 +644,8 @@ metaBook.setMode=
                 else query=query+document.location.search;}
             if ((query.length)&&(query[query.length-1]!=="&"))
                 query=query+"&";
-            var refuri=metaBook.refuri;
-            var appuri="https://"+metaBook.server+"/flyleaf?"+query;
+            var refuri=mB.refuri;
+            var appuri="https://"+mB.server+"/flyleaf?"+query;
             if (query.search("REFURI=")<0)
                 appuri=appuri+"REFURI="+encodeURIComponent(refuri);
             if (query.search("TOPURI=")<0)
@@ -653,8 +653,8 @@ metaBook.setMode=
                 encodeURIComponent(document.location.href);
             if (document.title) {
                 appuri=appuri+"&DOCTITLE="+encodeURIComponent(document.title);}
-            if (metaBook.user) {
-                appuri=appuri+"&BOOKUSER="+encodeURIComponent(metaBook.user._id);}
+            if (mB.user) {
+                appuri=appuri+"&BOOKUSER="+encodeURIComponent(mB.user._id);}
             if (document.location.hash) {
                 appuri=appuri+"&HASH="+document.location.hash.slice(1);}
 
@@ -664,23 +664,23 @@ metaBook.setMode=
         metaBook.initIFrameApp=initIFrameApp;
 
         metaBook.selectApp=function(){
-            if (metaBook.mode==='sbooksapp') setMode(false);
+            if (mB.mode==='sbooksapp') setMode(false);
             else setMode('sbooksapp');};
 
         /* Skimming */
 
         function stopSkimming(){
             // Tapping the tochead returns to results/glosses/etc
-            var skimming=metaBook.skimpoint;
-            if (!(metaBook.skimming)) return;
+            var skimming=mB.skimpoint;
+            if (!(mB.skimming)) return;
             dropClass(document.body,"mbSKIMMING");
-            metaBook.skimming=false;
+            mB.skimming=false;
             if (getParent(skimming,$ID("METABOOKALLGLOSSES"))) 
-                metaBook.setMode("allglosses");
+                setMode("allglosses");
             else if (getParent(skimming,$ID("METABOOKSTATICTOC"))) 
-                metaBook.setMode("statictoc");
+                setMode("statictoc");
             else if (getParent(skimming,$ID("METABOOKSEARCHRESULTS"))) 
-                metaBook.setMode("searchresults");
+                setMode("searchresults");
             else {}}
         metaBook.stopSkimming=stopSkimming;
         
@@ -688,7 +688,7 @@ metaBook.setMode=
 
         function metaBookSkimTo(card,dir){
             var skimmer=$ID("METABOOKSKIMMER");
-            var skimpoint=metaBook.skimpoint;
+            var skimpoint=mB.skimpoint;
             var slice=getSlice(card);
             if (!(slice)) {
                 fdjtLog.warn("Can't determine slice for skimming to %o",card);
@@ -699,21 +699,21 @@ metaBook.setMode=
                 return;}
             else card=cardinfo.dom||card;
             if ((slice.mode)&&(mB.mode!==slice.mode))
-                mB.setMode(slice.mode);
+                setMode(slice.mode);
             var passage=mbID(cardinfo.passage||cardinfo.id);
             if (typeof dir !== "number") dir=0;
-            if (hasParent(card,metaBook.DOM.allglosses))
-                metaBook.skimming=metaBook.slices.allglosses;
+            if (hasParent(card,mB.DOM.allglosses))
+                metaBook.skimming=mB.slices.allglosses;
             else if (hasParent(card,$ID("METABOOKSEARCHRESULTS")))
                 metaBook.skimming=mB.slices.searchresults;
             else if (hasParent(card,$ID("METABOOKSTATICTOC")))
-                metaBook.skimming=metaBook.slices.statictoc;
-            else metaBook.skimming=true;
+                metaBook.skimming=mB.slices.statictoc;
+            else mB.skimming=true;
             if (Trace.mode)
                 fdjtLog("metaBookSkim() %o (card=%o) mode=%o scn=%o/%o dir=%o",
                         passage,card,
-                        metaBook.mode,metaBook.skimpoint,
-                        metaBook.target,
+                        mB.mode,mB.skimpoint,
+                        mB.target,
                         dir);
             // Copy the description of what we're skimming into the
             // skimmer (at the top of the page during skimming and
@@ -757,7 +757,7 @@ metaBook.setMode=
                 metaBook.skimpoint=card;}
             else {}
             skimMode(slice);
-            metaBook.GoTo(passage,"Skim");
+            mB.GoTo(passage,"Skim");
             setSkimTarget(passage);
             highlightSkimTarget(passage,card);}
         metaBook.SkimTo=function(card,dir){
@@ -777,39 +777,39 @@ metaBook.setMode=
             else dropClass(body,"mbSKIMSTART");
             dropClass(skimmer,"mbfoundhighlights");}
         function setSkimTarget(passage){
-            if (metaBook.target)
-                metaBook.clearHighlights(metaBook.getDups(metaBook.target));
-            metaBook.setTarget(passage);}
+            if (mB.target)
+                mB.clearHighlights(mB.getDups(mB.target));
+            mB.setTarget(passage);}
         function highlightSkimTarget(passage,card){
             var highlights=[];
             if ((card)&&(hasClass(card,"gloss"))) {
-                var glossinfo=metaBook.glossdb.ref(card.name);
+                var glossinfo=mB.glossdb.ref(card.name);
                 if (glossinfo.excerpt) {
-                    var searching=metaBook.getDups(passage.id);
-                    var range=metaBook.findExcerpt(
+                    var searching=mB.getDups(passage.id);
+                    var range=mB.findExcerpt(
                         searching,glossinfo.excerpt,glossinfo.exoff);
                     if (range) {
                         highlights=
                             fdjtUI.Highlight(range,"mbhighlightexcerpt");
                         addClass("METABOOKSKIMMER","mbfoundhighlights");}}
                 else if (card.about[0]==="#")
-                    addClass(metaBook.getDups(card.about.slice(1)),
+                    addClass(mB.getDups(card.about.slice(1)),
                              "mbhighlightpassage");
-                else addClass(metaBook.getDups(card.about),
+                else addClass(mB.getDups(card.about),
                               "mbhighlightpassage");}
             else if ((card)&&(getParent(card,".searchslice"))) {
                 var about=card.about, target=mbID(about);
                 if (target) {
-                    var info=metaBook.docinfo[target.id];
-                    var terms=metaBook.query.tags;
+                    var info=mB.docinfo[target.id];
+                    var terms=mB.query.tags;
                     var spellings=info.knodeterms;
                     var i=0, lim=terms.length;
                     if (lim===0)
-                        addClass(metaBook.getDups(target),
+                        addClass(mB.getDups(target),
                                  "mbhighlightpassage");
                     else while (i<lim) {
                         var term=terms[i++];
-                        var h=metaBook.highlightTerm(term,target,info,spellings);
+                        var h=mB.highlightTerm(term,target,info,spellings);
                         highlights=highlights.concat(h);}}}
             else {}}
 
@@ -833,10 +833,10 @@ metaBook.setMode=
 
         metaBook.addConfig("uisize",function(name,value){
             fdjtDOM.swapClass(
-                metaBook.Frame,/metabookuifont\w+/g,"metabookuifont"+value);
-            fdjt.Async(function(){metaBook.resizeUI();});
+                mB.Frame,/metabookuifont\w+/g,"metabookuifont"+value);
+            fdjt.Async(function(){mB.resizeUI();});
             fdjt.Async(function(){
-                metaBook.updateSettings(name,value);});});
+                mB.updateSettings(name,value);});});
         metaBook.addConfig("dyslexical",function(name,value){
             var root=document.documentElement||document.body;
             if ((value)&&(typeof value === 'string')&&
@@ -851,40 +851,40 @@ metaBook.setMode=
                 metaBook.dyslexical=false;
                 fdjtDOM.dropClass(root,"_DYSLEXICAL");}
             fdjt.Async(function(){
-                metaBook.resizeUI();
-                if (metaBook.layout) metaBook.Paginate("typechange");},
+                mB.resizeUI();
+                if (mB.layout) mB.Paginate("typechange");},
                        10);});
         metaBook.addConfig("animatecontent",function(name,value){
-            if (metaBook.dontanimate) {}
+            if (mB.dontanimate) {}
             else if (value) addClass(document.body,"_ANIMATE");
-            else dropClass(metaBook.page,"_ANIMATE");
+            else dropClass(mB.page,"_ANIMATE");
             fdjt.Async(function(){
-                metaBook.updateSettings(name,value);});});
+                mB.updateSettings(name,value);});});
         metaBook.addConfig("animatehud",function(name,value){
-            if (metaBook.dontanimate) {}
+            if (mB.dontanimate) {}
             else if (value) addClass("METABOOKFRAME","_ANIMATE");
             else dropClass("METABOOKFRAME","_ANIMATE");
             fdjt.Async(function(){
-                metaBook.updateSettings(name,value);});});
+                mB.updateSettings(name,value);});});
 
         /* Settings apply/save handlers */
 
         function keyboardHelp(arg,force){
             if (arg===true) {
-                if (metaBook.keyboardHelp.timer) {
-                    clearTimeout(metaBook.keyboardHelp.timer);
-                    metaBook.keyboardHelp.timer=false;}
+                if (mB.keyboardHelp.timer) {
+                    clearTimeout(mB.keyboardHelp.timer);
+                    mB.keyboardHelp.timer=false;}
                 dropClass("METABOOKKEYBOARDHELPBOX","closing");
                 dropClass("METABOOKKEYBOARDHELPBOX","closed");
                 return;}
             else if (arg===false) {
-                if (metaBook.keyboardHelp.timer) {
-                    clearTimeout(metaBook.keyboardHelp.timer);
-                    metaBook.keyboardHelp.timer=false;}
+                if (mB.keyboardHelp.timer) {
+                    clearTimeout(mB.keyboardHelp.timer);
+                    mB.keyboardHelp.timer=false;}
                 addClass("METABOOKKEYBOARDHELPBOX","closed");
                 dropClass("METABOOKKEYBOARDHELPBOX","closing");
                 return;}
-            if ((!force)&&(!(metaBook.keyboardhelp))) return;
+            if ((!force)&&(!(mB.keyboardhelp))) return;
             if (typeof arg === 'string') arg=$ID(arg);
             if ((!(arg))||(!(arg.nodeType))) return;
             var box=$ID("METABOOKKEYBOARDHELPBOX");
@@ -906,7 +906,7 @@ metaBook.setMode=
         /* Showing a particular gloss */
 
         metaBook.showGloss=function showGloss(uuid){
-            if (!(metaBook.glossdb.ref(uuid))) return false;
+            if (!(mB.glossdb.ref(uuid))) return false;
             var elts=document.getElementsByName(uuid);
             if (!(elts)) return false;
             else if (!(elts.length)) return false;
@@ -917,7 +917,7 @@ metaBook.setMode=
                     var src=elts[i++];
                     if (hasParent(src,allglosses)) {
                         setMode("allglosses");
-                        metaBook.SkimTo(src);
+                        mB.SkimTo(src);
                         return true;}}
                 return false;}};
 
