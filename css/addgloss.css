@@ -62,17 +62,10 @@ body.hudup div.metabookglossform.focused form div.glossetc{
     display: block;}
 
 #METABOOKADDGLOSS div.metabookglossform {
-    border-radius: 1ex; -webkit-border-radius: 1ex;
-    -o-border-radius: 1ex; -moz-border-radius: 1ex;
+    border-radius: 1ex;
     border-top-width: 0px;
     border-top-left-radius: 0px;
-    -webkit-border-top-left-radius: 0px; 
-    -moz-border-radius-topleft: 0px;
-    -o-border-radius-topleft: 0px; 
-    border-top-right-radius: 0px;
-    -webkit-border-top-right-radius: 0px; 
-    -moz-border-radius-topright: 0px;
-    -o-border-radius-topright: 0px;}
+    border-top-right-radius: 0px;}
 
 div.metabookglossform { display: none;}
 div.metabookglossform#METABOOKADDGLOSSPROTOTYPE { display: none;}
@@ -325,24 +318,21 @@ div.metabookglossform form div.glossetc span.checkspan input {}
 div.metabookglossform form .button {
     font-weight: bold; color: black; font-size: 24px; padding: 0px;
     border: solid black 2px; background-color: silver;
-    border-radius: 4px; -o-border-radius: 4px;
-    -moz-border-radius: 4px; -webkit-border-radius: 4px;
+    border-radius: 4px;
     text-align: center; vertical-align: top;
     cursor: pointer;}
 
 div.metabookglossform form div.glossetc > .button,
 div.metabookglossform form div.glossetc span > .button {
     border: darkblue solid 2px; cursor: pointer;
-    border-radius: 3px; -webkit-border-radius: 3px;
-    -moz-border-radius: 3px; -o-border-radius: 3px;}
+    border-radius: 3px;}
 
 div.metabookglossform form div.glossetc > span.modebuttons { float: right; }
 div.metabookglossform form div.glossetc > span.modebuttons img.button,
 div.metabookglossform form div.glossetc > span.modebuttons .button img {
     background-color: transparent; border-color: transparent;
     height: 40px; width: auto; margin-bottom: 3px;
-    border-radius: 6px; -webkit-border-radius: 6px;
-    -moz-border-radius: 6px; -o-border-radius: 6px;
+    border-radius: 6px;
     cursor: pointer;}
 
 div.metabookglossform form.editnote div.glossetc span .button[alt='note'],
@@ -353,11 +343,7 @@ div.metabookglossform form.attach div.glossetc span .button[alt='attach'] {
     height: 40px; width: 40px; background-color: silver;
     border: darkblue solid 2px;}
 #METABOOKFRAME._ANIMATE div.metabookglossform form div.glossetc span .button {
-    transition-property: opacity; transition-duration: 1s;
-    -o-transition-property: opacity; -o-transition-duration: 1s;
-    -moz-transition-property: opacity; -moz-transition-duration: 1s;
-    -khtml-transition-property: opacity; -khtml-transition-duration: 1s;
-    -webkit-transition-property: opacity; -webkit-transition-duration: 1s;}
+    transition-property: opacity; transition-duration: 1s;}
 
 div.metabookglossform form .submitbutton {
     float: right; text-align: center;
@@ -366,8 +352,7 @@ div.metabookglossform form .submitbutton {
 div.metabookglossform form .submitbutton .button {
     margin: 0px; padding: 0px; border: none;
     background-color: transparent;
-    border-radius: 0px; -webkit-border-radius: 0px;
-    -moz-border-radius: 0px; -o-border-radius: 0px;
+    border-radius: 0px;
     height: 100%; width: auto;}
 div.metabookglossform form .submitbutton .edit,
 div.metabookglossform form .submitbutton .reply {
@@ -406,28 +391,12 @@ div.metabookglossform .button.addbutton {
     float: right;}
 
 div.metabookglossform.submitting form > div {
-    opacity: 0.5;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-    filter: alpha(opacity=50);
-    -webkit-opacity: 0.50;
-    -khtml-opacity: 0.50;
-    -moz-opacity: 0.50;
-    -o-opacity: 0.50;}
+    opacity: 0.5;}
 div.metabookglossform.submitting td.button img {
-    opacity: 0.5;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-    filter: alpha(opacity=50);
-    -webkit-opacity: 0.50;
-    -khtml-opacity: 0.50;
-    -moz-opacity: 0.50;
-    -o-opacity: 0.50;}
+    opacity: 0.5;}
 
 #METABOOKFRAME._ANIMATE div.metabookglossform div.textbox {
-    transition-property: height; transition-duration: 2s;
-    -o-transition-property: height; -o-transition-duration: 2s;
-    -moz-transition-property: height; -moz-transition-duration: 2s;
-    -khtml-transition-property: height; -khtml-transition-duration: 2s;
-    -webkit-transition-property: height; -webkit-transition-duration: 2s;}
+    transition-property: height; transition-duration: 2s;}
 div.metabookglossform div.textbox input[type="TEXT"][name='TAG'] {
     background-image: url(g/metabook/tagicon.svgz);}
 div.metabookglossform div.textbox input[type="TEXT"][name='LINK'] {
@@ -456,12 +425,7 @@ div.completions#METABOOKSHARECLOUD > div {
 div.completions#METABOOKGLOSSCLOUD > div {
     margin-left: 50px; margin-right: 50px;}
 #METABOOKFRAME._ANIMATE div.completions#METABOOKSHARECLOUD {
-    transition-property: height;
-    -webkit-transition-property: height;
-    -moz-transition-property: height;
-    -o-transition-property: height;
-    transition-duration: 3s; -webkit-transition-duration: 3s;
-    -moz-duration: 3s; -o-transition-duration: 3s;}
+    transition-property: height; transition-duration: 3s;}
 body.hudup #METABOOKHUD.addgloss.glossaddoutlet
           div.completions#METABOOKSHARECLOUD {
     display: block;}
@@ -653,13 +617,7 @@ div.metabookglossform
 
 div.metabookglossform
   form div.addglossmenu.expanded > img {
-    display: block; opacity: 0.90;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
-    filter: alpha(opacity=90);
-    -webkit-opacity: 0.90;
-    -khtml-opacity: 0.90;
-    -moz-opacity: 0.90;
-    -o-opacity: 0.90;}
+    display: block; opacity: 0.90;}
 div.metabookglossform
   form div.addglossmenu.expanded > img.menutop {
     display: none;}
@@ -738,10 +696,7 @@ div.metabookglossform.submitclose form > div {
 div.metabookglossform.submitclose form div.glossetc {
     display: none;}
 #METABOOKFRAME._ANIMATE div.metabookglossform.submitclose form > div {
-    transition-property: opacity; transition-duration: 3s;
-    -webkit-transition-property: opacity; -webkit-transition-duration: 3s;
-    -moz-transition-property: opacity; -moz-transition-duration: 3s;
-    -o-transition-property: opacity; -o-transition-duration: 3s;}
+    transition-property: opacity; transition-duration: 3s;}
 div.metabookglossform.submitclose form > div.messageoverlay {
     opacity: 0.9;}
 

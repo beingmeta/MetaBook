@@ -49,8 +49,7 @@ body.mbMEDIA #METABOOKBODY, body.mbZOOM #METABOOKBODY {
 
 #CODEXPAGE { max-width: 40em;}
 #CODEXPAGE {
-    box-sizing: border-box; -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;}
+    box-sizing: border-box;}
 
 #METABOOKBODY {
     font-size: 2em;}
@@ -100,8 +99,7 @@ p { line-height: 1.2;}
 .codexpage .sbooktitlepage, .codexpage .sbookfullpage {
    page-break-before: always; page-break-after: always;
    page-break-inside: never;
-   box-sizing: border-box; -webkit-box-sizing: border-box;
-   -moz-box-sizing: border-box; -o-box-sizing: border-box;
+   box-sizing: border-box;
    height: 100%; width: 100%;
    text-align: center;}
 .codexpage.codexworkpage .sbookcover,

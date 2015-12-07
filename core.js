@@ -617,7 +617,6 @@
         var target=false, id=false, info=false, targetids=metaBook.targetids;
         var wsn_target=false;
         if (hasParent(scan,metaBook.HUD)) return false;
-        else if (hasParent(scan,".metabookmargin")) return false;
         else while (scan) {
             if (scan.metabookui) return false;
             else if ((scan===metaBook.docroot)||(scan===document.body))

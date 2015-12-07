@@ -55,9 +55,6 @@ body {
     width: inherit; margin-left: auto; margin-right: auto;
     /* We do our own selection handling, to be consistent */
     user-select: none;
-    -o-user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
     /* Disable tap highlighting */
     -webkit-tap-highlight-color: rgba(0,0,0,0.5);
 }
@@ -67,13 +64,11 @@ body {
 #METABOOKFRAME {
     position: fixed; top: 0px; bottom: 0px; left: 0px; right: 0px;
     width: 100%; height: 100%; line-height: normal;
-    box-sizing: border-box; -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box; -o-box-sizing: border-box;
+    box-sizing: border-box;
     pointer-events: none;
     z-index: 1;}
 #METABOOKFRAME > div, #METABOOKFRAME > div > div, #METABOOKFRAME > div > a {
-    box-sizing: border-box; -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box; -o-box-sizing: border-box;}
+    box-sizing: border-box;}
 .hudpanel a { 
     background-color: transparent; text-decoration: none;}
 #METABOOKCOVER a { color: lightblue; }
@@ -201,9 +196,7 @@ body.mbCOVER #METABOOKHUD, body.hudup.mbCOVER #METABOOKHUD {
     overflow-x: scroll; overflow-y: scroll;
     display: none; }
 #METABOOKZOOMBOX {
-    transform-origin: 0px 0px;
-    -webkit-transform-origin: 0px 0px;
-    -moz-transform-origin: 0px 0px;}
+    transform-origin: 0px 0px;}
 #METABOOKZOOMTARGET {
     display: inline-block; 
     font-size: 2em; font-size: 2rem;}
@@ -292,9 +285,7 @@ body.mbSHOWHELP.mbZOOM #METABOOKZOOMHELPTEXT { display: block; }
     overflow-x: scroll; overflow-y: scroll;
     display: none; }
 #METABOOKMEDIATARGET {
-    transform-origin: 0px 0px;
-    -webkit-transform-origin: 0px 0px;
-    -moz-transform-origin: 0px 0px;}
+    transform-origin: 0px 0px;}
 img#METABOOKMEDIATARGET {
     max-height: 90%; max-width: 90%;}
 
@@ -369,9 +360,6 @@ body.mbMEDIA #METABOOKMEDIA iframe {
     top: 50px; bottom: 50px;
     border: solid transparent 3px;
     border-radius: 18px;
-    -o-border-radius: 18px;
-    -moz-border-radius: 18px;
-    -webkit-border-radius: 18px;
     z-index: 50;}
 body.hudup #CODEXPAGE {z-index: 0;}
 

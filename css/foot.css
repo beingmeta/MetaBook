@@ -12,16 +12,8 @@
     margin-left: 20px; margin-right: 20px; border: 0px;
     cursor: crosshair;
     display: none;}
-body._BYPAGE #METABOOKFOOT #METABOOKPAGEBAR {
-    display: block;}
-body.hudup #METABOOKFOOT #METABOOKPAGEBAR {
-    opacity: 0.5;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
-    filter: alpha(opacity=70);
-    -webkit-opacity: 0.70;
-    -khtml-opacity: 0.70;
-    -moz-opacity: 0.70;
-    -o-opacity: 0.70;}
+body._BYPAGE #METABOOKFOOT #METABOOKPAGEBAR { display: block; }
+body.hudup #METABOOKFOOT #METABOOKPAGEBAR { opacity: 0.5; }
 span#METABOOKLOCPCT, span#METABOOKPAGENOTEXT, span#METABOOKPAGEREFTEXT {
     cursor: text;}
 #METABOOKFOOT #METABOOKPAGEBAR span#METABOOKLOCPCT {
@@ -43,37 +35,10 @@ body.mbPAGEREFS #METABOOKFOOT #METABOOKPAGEREFTEXT {display: inline-block;}
 */
 #METABOOKFOOT #METABOOKPAGEBAR div.progressbar {
     background-color: gray; border: solid black 1px; border-top-width: 0px;
-    z-index: 50; height: 100%; position: absolute; opacity: 0.5; 
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-    filter: alpha(opacity=50);
-    -webkit-opacity: 0.50;
-    -khtml-opacity: 0.50;
-    -moz-opacity: 0.50;
-    -o-opacity: 0.50;}
-#METABOOKFOOT #METABOOKPAGELEAP {
-    opacity: 0.001;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=1)";
-    filter: alpha(opacity=1);
-    -webkit-opacity: 0.01;
-    -khtml-opacity: 0.01;
-    -moz-opacity: 0.01;
-    -o-opacity: 0.01;}
-html._MOUSE #METABOOKFOOT #METABOOKPAGELEAP:hover {
-    opacity: 0.4;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
-    filter: alpha(opacity=40);
-    -webkit-opacity: 0.40;
-    -khtml-opacity: 0.40;
-    -moz-opacity: 0.40;
-    -o-opacity: 0.40;}
-body.hudup #METABOOKFOOT #METABOOKPAGELEAP {
-    opacity: 0.7;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
-    filter: alpha(opacity=70);
-    -webkit-opacity: 0.70;
-    -khtml-opacity: 0.70;
-    -moz-opacity: 0.70;
-    -o-opacity: 0.70;}
+    z-index: 50; height: 100%; position: absolute; opacity: 0.5;}
+#METABOOKFOOT #METABOOKPAGELEAP {opacity: 0.001;}
+html._MOUSE #METABOOKFOOT #METABOOKPAGELEAP:hover {opacity: 0.4;}
+body.hudup #METABOOKFOOT #METABOOKPAGELEAP {opacity: 0.7;}
 
 /* Page spans */
 
@@ -81,8 +46,7 @@ body.hudup #METABOOKFOOT #METABOOKPAGELEAP {
     position: absolute; bottom: 0px;
     font-size: 28px; line-height: 100%;
     width: 100%; height: 28px; 
-    box-sizing: border-box; -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box; -o-box-sizing: border-box;
+    box-sizing: border-box;
     border-top: solid black 1px; z-index: 50;
     pointer-events: none;}
 #METABOOKFOOT #METABOOKPAGEBAR div.textfoot > div {}
@@ -128,13 +92,7 @@ body.mbPREVIEW #METABOOKFOOT #METABOOKPAGEBAR
 body.mbPREVIEW #METABOOKFOOT #METABOOKPAGEBAR
    .metabookpagespans span.current {
     overflow: visible; visibility: visible; z-index: 60; color: black;
-    opacity: 1.0;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-    filter: alpha(opacity=100);
-    -webkit-opacity: 1.00;
-    -khtml-opacity: 1.00;
-    -moz-opacity: 1.00;
-    -o-opacity: 1.00;}
+    opacity: 1.0;}
 body.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR
   .metabookpagespans span.preview {
     background-color: gold; overflow: visible;
@@ -210,15 +168,8 @@ html._TOUCH #METABOOKFOOT.tapholding #METABOOKPAGEBAR {
     border: solid black 1px; 
     padding-left: 1em; padding-right: 1em;
     padding-top: 0.2ex; padding-bottom: 0px;
-    border-radius: 1ex; -o-border-radius: 1ex;
-    -moz-border-radius: 1ex; -webkit-border-radius: 1ex;
-    background-color: white; opacity: 0.70;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
-    filter: alpha(opacity=70);
-    -webkit-opacity: 0.70;
-    -khtml-opacity: 0.70;
-    -moz-opacity: 0.70;
-    -o-opacity: 0.70;}
+    border-radius: 1ex;
+    background-color: white; opacity: 0.70;}
 #METABOOKHUD #METABOOKSHOWTEXT span.stopskimming,
 #METABOOKHUD #METABOOKSHOWTEXT span.cancelgloss,
 #METABOOKHUD #METABOOKSHOWTEXT span.cancelchanges {

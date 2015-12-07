@@ -65,14 +65,8 @@ body.mbPREVIEW #METABOOKHUD.allglosses #METABOOKSKIMMER,
 body.mbPREVIEW #METABOOKHUD.searchresults #METABOOKSKIMMER,
 body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER {
     display: block; overflow: hidden; border-color: steelblue;
-    opacity: 0.90;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
-    filter: alpha(opacity=90);
-    -webkit-opacity: 0.90;
-    -khtml-opacity: 0.90;
-    -moz-opacity: 0.90;
-    -o-opacity: 0.90;
-    max-height: 50px;}
+    max-height: 50px;
+    opacity: 0.90;}
 
 .hudup #METABOOKHUD #METABOOKSKIMMER,
 .hudup #METABOOKHEAD #METABOOKSKIMMER {
@@ -167,12 +161,7 @@ body.hudup #METABOOKHUD div.hudpanel#METABOOKSKIMMER { max-height: inherit; }
 body.hudup #METABOOKHUD #METABOOKSKIMMER img.glosspic {  height: inherit; }
 
 #METABOOKFRAME._ANIMATE #METABOOKHUD #METABOOKSKIMMER {
-    transition-property: background-color;
-    -o-transition-property: background-color;
-    -moz-transition-property: background-color;
-    -webkit-transition-property: background-color; 
-    transition-duration: 0.2s; -o-transition-duration: 0.2s;
-    -webkit-transition-duration: 0.2s; -moz-transition-duration: 0.2s;}
+    transition-property: background-color; transition-duration: 0.2s; }
 #METABOOKHUD #METABOOKSKIMMER div.metabookcard span.glossinfo span.isclickable {
     display: none;}
 

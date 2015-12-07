@@ -84,19 +84,10 @@ body._SCROLL #CODEXCONTENT {
     max-width: inherit;}
 
 #CODEXCONTENT, #CODEXCONTENT p, #CODEXCONTENT div {
-    user-select: auto;
-    -o-user-select: auto;
-    -moz-user-select: auto;
-    -webkit-user-select: auto;}
+    user-select: auto;}
 
 body.mbSTARTUP #CODEXCONTENT {
-    opacity: 0.35;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=35)";
-    filter: alpha(opacity=35);
-    -webkit-opacity: 0.35;
-    -khtml-opacity: 0.35;
-    -moz-opacity: 0.35;
-    -o-opacity: 0.35;}
+    opacity: 0.35;}
 
 #CODEXPAGE #METABOOKPAGES #CODEXCONTENT {
     text-align: left;
@@ -107,10 +98,7 @@ body.mbSTARTUP #CODEXCONTENT {
 
 body._BYPAGE #CODEXPAGE #CODEXCONTENT .metabookpagebreak {
     column-break-before: always;
-    break-before: always;
-    -o-column-break-before: always;
-    -webkit-column-break-before: always;
-    -moz-column-break-before: always;}
+    break-before: always;}
 
 #METABOOKASIDE {
     position: absolute; z-index: -100;
@@ -122,10 +110,7 @@ body._BYPAGE #CODEXPAGE #CODEXCONTENT .metabookpagebreak {
     display: none;}
 
 body._ANIMATE body.metabookfixed div.codexpage {
-    transition-property: opacity; transition-duration: 0.5s;
-    -o-transition-property: opacity; -o-transition-duration: 0.5s;
-    -moz-transition-property: opacity; -moz-transition-duration: 0.5s;
-    -webkit-transition-property: opacity; -webkit-transition-duration: 0.5s;}
+    transition-property: opacity; transition-duration: 0.5s;}
 
 /* The content */
 
@@ -196,14 +181,6 @@ span.note.ellipsis span.elision, span.note.ellipsis span.delision {
 .glosslink.glossdata .linktext {
     text-decoration: overline;}
 
-/*
-div.searchbox div.query span.dterm {
-    padding-right: 0.35em; padding-left: 1ex;
-    padding-top: 0px; padding-bottom: 0px;
-    border-top-left-radius: 1ex; border-bottom-left-radius: 1ex;
-    color: darkblue; background-color: gold; border: solid yellow 2px;}
-*/
-
 /* Other default rules */
 
 .tapholdtarget { border-color: blue;}
@@ -216,20 +193,8 @@ div.searchbox div.query span.dterm {
 
 body.sbookpagevertical { overflow: hidden;}
 
-body div.metabookmargin {
-    position: absolute; display: block;
-    background-color: white; z-index: 200;}
-
-body.sbooknopage div.metabookmargin  { display: none;}
-
 #METABOOKPAGES.pageswitch {
-    opacity: 0.0001;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=1)";
-    filter: alpha(opacity=1);
-    -webkit-opacity: 0.0001;
-    -khtml-opacity: 0.0001;
-    -moz-opacity: 0.0001;
-    -o-opacity: 0.0001;}
+    opacity: 0.0001;}
 
 /* About information */
 
@@ -292,8 +257,7 @@ div.locbar hr {
     border-right: solid rgba(70,130,180,0.70) 6px;
     width: 0px; overflow: visible;
     width: 56px; height: 50px;
-    box-sizing: border-box; -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
+    box-sizing: border-box; 
     z-index: 50;}
 #CODEXPAGE .glossmark {margin-right: -50px;}
 body._NARROW div.fdjtselecting .glossmark {
@@ -305,33 +269,15 @@ html._MOUSE div.fdjtselecting .glossmark:hover > img {
 /* #CODEXCONTENT .glossmark { right: 5px;} */
 
 body .glossmark > img {
-    opacity: 0.01;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=01)";
-    filter: alpha(opacity=01);
-    -webkit-opacity: 0.01;
-    -khtml-opacity: 0.01;
-    -moz-opacity: 0.01;
-    -o-opacity: 0.01;}
+    opacity: 0.01;}
 
 html._MOUSE .glossmark:hover > img, html._MOUSE .glossmark.hover > img {
-    opacity: 0.50;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-    filter: alpha(opacity=50);
-    -webkit-opacity: 0.50;
-    -khtml-opacity: 0.50;
-    -moz-opacity: 0.50;
-    -o-opacity: 0.50;}
+    opacity: 0.50;}
 
 html._MOUSE .glossmark#METABOOKOPENGLOSSMARK > img,
 html._MOUSE .glossmark#METABOOKOPENGLOSSMARK:hover > img,
 html._MOUSE .glossmark#METABOOKOPENGLOSSMARK.hover > img {
-    opacity: 0.7;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
-    filter: alpha(opacity=70);
-    -webkit-opacity: 0.70;
-    -khtml-opacity: 0.70;
-    -moz-opacity: 0.70;
-    -o-opacity: 0.70;}
+    opacity: 0.7;}
 
 .glossmark img {
     position: static;
@@ -348,13 +294,7 @@ html._MOUSE .glossmark#METABOOKOPENGLOSSMARK.hover > img {
 
 body._ANIMATE .mbtarget, body.mbSHRINK .mbtarget {
     transition-property: color,background-color;
-    transition-duration: 6s;
-    -o-transition-property: color,background-color;
-    -o-transition-duration: 6s;
-    -moz-transition-property: color,background-color;
-    -moz-transition-duration: 6s;
-    -webkit-transition-property: color,background-color;
-    -webkit-transition-duration: 6s;}
+    transition-duration: 6s;}
 body.hudup .mbtarget, body.mbSHRINK .mbtarget {
     cursor: pointer;}
 body.hudup .mbtarget, body.mbSHRINK .mbtarget,
@@ -384,32 +324,10 @@ body._ANIMATE .glossmark > img {
 .mbtarget > .glossmark {
     border-right-color: blue;} /* double */
 
-html._MOUSE .glossmark:hover > img
-{
-    opacity: 0.9;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
-    filter: alpha(opacity=90);
-    -webkit-opacity: 0.90;
-    -khtml-opacity: 0.90;
-    -moz-opacity: 0.90;
-    -o-opacity: 0.90;}
+html._MOUSE .glossmark:hover > img { opacity: 0.9; }
 
-body.hudup .mbtarget > .glossmark > img {
-    opacity: 0.80;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
-    filter: alpha(opacity=80);
-    -webkit-opacity: 0.80;
-    -khtml-opacity: 0.80;
-    -moz-opacity: 0.80;
-    -o-opacity: 0.80;}
-body.openhud .mbtarget > .glossmark > img {
-    opacity: 0.40;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
-    filter: alpha(opacity=40);
-    -webkit-opacity: 0.40;
-    -khtml-opacity: 0.40;
-    -moz-opacity: 0.40;
-    -o-opacity: 0.40;}
+body.hudup .mbtarget > .glossmark > img {opacity: 0.80;}
+body.openhud .mbtarget > .glossmark > img { opacity: 0.40;}
 
 /* Not logged in conditionalization */
 
@@ -490,17 +408,8 @@ h1[toclevel='1'],h2[toclevel='1'] { page-break-before: always;}
 .sbookpage {
     display: block; 
     page-break-before: always;
-    -o-page-break-before: always;
-    -moz-page-break-before: always;
-    -webkit-page-break-before: always;
     page-break-after: always;
-    -o-page-break-after: always;
-    -moz-page-break-after: always;
-    -webkit-page-break-after: always;
-    page-break-inside: avoid;
-    -o-page-break-inside: avoid;
-    -moz-page-break-inside: avoid;
-    -webkit-page-break-inside: avoid;}
+    page-break-inside: avoid;}
 
 div.codexpage img.sbookpage {
     position: static; margin: auto;}
@@ -508,32 +417,10 @@ div.codexpage .sbookpage .sbookinfo {
     position: absolute; bottom: 0px; width: 100%;
     text-align: center;}
 
-.backmatter {
-    page-break-before: always;
-    -o-page-break-before: always;
-    -moz-page-break-before: always;
-    -webkit-page-break-before: always;}
-.frontmatter {
-    page-break-after: always;
-    -o-page-break-after: always;
-    -moz-page-break-after: always;
-    -webkit-page-break-after: always;}
-.gutenberg {
-    opacity: 0.5;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-    filter: alpha(opacity=50);
-    -webkit-opacity: 0.50;
-    -khtml-opacity: 0.50;
-    -moz-opacity: 0.50;
-    -o-opacity: 0.50;}
-html._MOUSE .gutenberg:hover {
-    opacity: 1.0;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-    filter: alpha(opacity=100);
-    -webkit-opacity: 1;
-    -khtml-opacity: 1;
-    -moz-opacity: 1;
-    -o-opacity: 1;}
+.backmatter {page-break-before: always;}
+.frontmatter {page-break-after: always;}
+.gutenberg {opacity: 0.5;}
+html._MOUSE .gutenberg:hover {opacity: 1.0;}
 
 .sbookfullpage, .sbookcover, .sbooktitlepage, .sbookpage, .sbookstandalone {
     margin-left: auto; margin-right: auto;
@@ -581,9 +468,7 @@ details > summary , .html5details > summary {
 #METABOOKBODY a.mbnoteref {
     font-size: 80%; vertical-align: super; margin-left: 0.5ex;
     color: darkblue; font-variant: small-caps;
-    border-radius: 1ex; -webkit-border-radius: 1ex;
-    -khtml-border-radius: 1ex; -moz-border-radius: 1ex;
-    -o-border-radius: 1ex;}
+    border-radius: 1ex;}
 html._MOUSE #METABOOKBODY a[rel='sbooknote']:hover,
 html._MOUSE #METABOOKBODY a[rel='footnote']:hover,
 html._MOUSE #METABOOKBODY a[rel='endnote']:hover {
@@ -646,42 +531,21 @@ div.codexpage.curpage.hidepage {display: none;}
 div.codexpage.curpage.hidepage.previewpage {display: block;}
 
 body._ANIMATE.mbPREVIEW div.codexpage {
-    transition-property: none !important;
-    -o-transition-property: none !important;
-    -moz-transition-property: none !important;
-    -webkit-transition-property: none !important;}
+    transition-property: none !important;}
 
 body._ANIMATE #CODEXPAGE div.codexpage {
-    transition-duration: 0.15s;
-    -o-transition-duration: 0.15s;
-    -moz-transition-duration: 0.15s;
-    -webkit-transition-duration: 0.15s;}
+    transition-duration: 0.15s;}
 
 body._ANIMATE div.codexpage {
-    transition-property: opacity,transform;
-    -o-transition-property: -o-opacity,-o-transform;
-    -moz-transition-property: -moz-opacity,-moz-transform;
-    -webkit-transition-property: -webkit-opacity,-webkit-transform;}
+    transition-property: opacity,transform;}
 
 /* Fade-in/fade-out page animation */
 
 div.codexpage, div.codexpage.newpage, div.codexpage.oldpage {
-    opacity: 0.0;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-    filter: alpha(opacity=0);
-    -webkit-opacity: 0.00;
-    -khtml-opacity: 0.00;
-    -moz-opacity: 0.00;
-    -o-opacity: 0.00;}
+    opacity: 0.0;}
 div.codexpage.curpage, div.codexpage.previewpage,
 div.codexpage.newpage.curpage, div.codexpage.oldpage.curpage {
-    opacity: 1; 
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-    filter: alpha(opacity=1);
-    -webkit-opacity: 1.00;
-    -khtml-opacity: 1.00;
-    -moz-opacity: 1.00;
-    -o-opacity: 1.00;}
+    opacity: 1; }
 
 /* Sliding page turns */
 
@@ -696,15 +560,9 @@ body._ANIMATE div.codexpage.newpage.onright {
     transform: translate(100%,0%);
     -webkit-transform: translate(100%,0%);}
 body._ANIMATE div.codexpage.newpage.onleft {
-    transform: translate(-100%,0%);
-    -webkit-transform: translate(-100%,0%);
-    -moz-transform: translate(-100%,0%);
-    -o-transform: translate(-100%,0%);}
+    transform: translate(-100%,0%);}
 body._ANIMATE div.codexpage.newpage.onright.curpage, div.codexpage.newpage.onleft.curpage {
-    transform: translate(0%,0%);
-    -webkit-transform: translate(0%,0%);
-    -moz-transform: translate(0%,0%);
-    -o-transform: translate(0%,0%);}
+    transform: translate(0%,0%);}
 
 /* Special rules for overriding properties on split (dup) passages */
 
@@ -761,21 +619,10 @@ section.mbpreviewing h7, div.html5section.mbpreviewing h7 {
     position: absolute; z-index: -50;
     top: 0px; left: 100px; right: 100px; height: 50px;
     opacity: 0.0;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-    filter: alpha(opacity=0);
-    -webkit-opacity: 0;
-    -khtml-opacity: 0;
-    -moz-opacity: 0;
-    -o-opacity: 0;
     display: none;}
 body._ANIMATE #METABOOKSTARTUPMESSAGES {
     transition-property: opacity;
-    transition-duration: 1s;
-    -webkit-transition-property: opacity; -webkit-transition-duration: 1s;
-    -o-transition-property: opacity;
-    -o-transition-duration: 1s;
-    -moz-transition-property: opacity;
-    -moz-transition-duration: 1s;}
+    transition-duration: 1s;}
 body.mbSTARTUP #METABOOKSTARTUPMESSAGES { display: block;}
 div.startupmessage { display: none;}
 div.startupmessage {
@@ -783,13 +630,7 @@ div.startupmessage {
     color: black; background-color: lightgray;}
 
 div.startupmessage.running {
-    z-index: 300; opacity: 1.0; 
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-    filter: alpha(opacity=100);
-    -webkit-opacity: 1.00;
-    -khtml-opacity: 1.00;
-    -moz-opacity: 1.00;
-    -o-opacity: 1.00;}
+    z-index: 300; opacity: 1.0;}
 
 
 /* Logotypes */

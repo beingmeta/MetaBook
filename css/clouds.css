@@ -7,13 +7,7 @@
 /* Tag clouds */
 
 div.completions .label {
-    float: left; opacity: 0.7;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
-    filter: alpha(opacity=70);
-    -webkit-opacity: 0.70;
-    -khtml-opacity: 0.70;
-    -moz-opacity: 0.70;
-    -o-opacity: 0.70;}
+    float: left; opacity: 0.7;}
 
 div.completions .cloudtoggle {
     float: right; display: none;}
@@ -29,8 +23,6 @@ div.completions.noinput .cloudtoggle {
     padding-left: 1.5em; padding-right: 1.5em;
     margin: 0.5em; margin-right: 5em;
     border: solid black 2px; border-radius: 6px;
-    -o-border-radius: 6px; -webkit-border-radius: 6px; 
-    -moz-border-radius: 6px;
     /* Hide this for now */
     display: none;}
 
@@ -39,8 +31,6 @@ div.completions.noinput .cloudtoggle {
     font-size: 24px; line-height: 100%; width: 60px; padding: 8px;
     margin-left: 6px; margin-right: 8px; margin-bottom: 6px; margin-top: 0px;
     border: solid black 2px; border-radius: 12px;
-    -o-border-radius: 12px; -webkit-border-radius: 12px; 
-    -moz-border-radius: 12px;
     cursor: pointer;}
 .cloud .showall { display: none; }
 .cloud.noinput .showall { display: block; }
@@ -67,10 +57,7 @@ html._MOUSE .cloud .showall:hover,
     font-weight: normal; font-style: italic;
     background-color: ivory; color: purple;
     padding: 0px; padding-left: 3px; padding-right: 3px; 
-    margin: 0px; margin-left: 3px; margin-right: 3px; 
-    -o-border-radius: 6px; 
-    -webkit-border-radius: 6px; 
-    -moz-border-radius: 6px; 
+    margin: 0px; margin-left: 3px; margin-right: 3px;
     border-radius: 6px;}
 .cloud .sectname .name,
 #METABOOKHUD .qtags span.sectname .name {

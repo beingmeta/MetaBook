@@ -215,8 +215,7 @@
 
     /* Navigation */
 
-    var sbookUIclasses=
-        /(\bhud\b)|(\bglossmark\b)|(\bleading\b)|(\bmetabookmargin\b)/;
+    var sbookUIclasses=/(\bhud\b)|(\bglossmark\b)|(\bleading\b)/;
 
     function inUI(elt){
         if (elt.metabookui) return true;

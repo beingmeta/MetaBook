@@ -11,8 +11,7 @@ div.searchbox { text-align: center;}
 
 div.searchbox div.query {
     text-align: left; 
-    box-sizing: border-box; -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box; -o-box-sizing: border-box;
+    box-sizing: border-box;
     width: 100%; max-height: 100%;
     margin-top: 0.2ex; 
     padding-top: 2px; padding-bottom: 3px;
@@ -26,20 +25,17 @@ div.searchbox div.query {
     display: none;}
 
 div.searchbox .metabookclearsearch {
-    box-sizing: border-box; -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box; -o-box-sizing: border-box;
+    box-sizing: border-box;
     border: solid transparent 2px;
     height: 2em; width: auto; padding-left: 1vw;
-    flex-grow: 0; -webkit-flex-grow: 0; -moz-flex-grow: 0;}
+    flex-grow: 0;}
 div.searchbox .metabookclearsearch.tapholdtarget {
     border-color: blue;}
 
 div.searchbox input[type='TEXT'] {
-    flex-grow: 1; -webkit-flex-grow: 1; -moz-flex-grow: 1;
-    max-height: 2em; margin-left: 1ex;}
+    flex-grow: 1; max-height: 2em; margin-left: 1ex;}
 div.searchbox input[type='TEXT'] {
-    border-radius: 0px; -webkit-border-radius: 0px;
-    -o-border-radius: 0px; -moz-border-radius: 0px;}
+    border-radius: 0px;}
 
 div.searchbox input[type='TEXT'][name='QTEXT'] {
     background-position: right top;
@@ -93,17 +89,13 @@ div.resultinfo .noquery { display: none;}
     display: -ms-flexbox;
     display: flex;}
 #METABOOKHUD div.resultinfo span.stats {
-    -webkit-flex-grow: 0; -moz-flex-grow: 0; -ms-flexbox-grow: 0;
     flex-grow: 0;
     font-size: 2vmin;}
 #METABOOKHUD div.resultinfo span.stats {
-    transition-property: none; -webkit-transition-property: none;
-    -moz-transition-property: none; -o-transition-property: none;}
+    transition-property: none;}
 
 #METABOOKHUD div.resultinfo span.qtags {
-    display: -webkit-flex; display: -ms-flexbox;
-    display: -moz-flex; display: flex;
-    -webkit-flex-grow: 1; -moz-flex-grow: 1; -ms-flexbox-grow: 1;
+    display: flex;
     flex-grow: 1;}
 
 div.resultinfo .qtags .qelt { 
@@ -147,10 +139,7 @@ html._NOSVG div.resultinfo .qtags .qelt span.redx {
 .qtags span.elision { display: none; }
 
 body._ANIMATE .qtags {
-    transition-property: font-size; transition-duration: 0.5s;
-    -webkit-transition-property: font-size; -webkit-transition-duration: 0.5s;
-    -moz-transition-property: font-size; -moz-transition-duration: 0.5s;
-    -o-transition-property: font-size; -o-transition-duration: 0.5s;}
+    transition-property: font-size; transition-duration: 0.5s;}
 
 @media (pointer: coarse) {
     div.searchbox div.query div.input input[type='TEXT'] {

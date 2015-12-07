@@ -34,13 +34,7 @@ div.metabookcard > div .audience span.count,
 div.metabookcard > div .links span.count {
     float: right; padding-left: 1ex;
     font-style: italic;
-    opacity: 0.70;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
-    filter: alpha(opacity=70);
-    -webkit-opacity: 0.70;
-    -khtml-opacity: 0.70;
-    -moz-opacity: 0.70;
-    -o-opacity: 0.70;}
+    opacity: 0.70;}
 
 div.metabookcard > hr {
     color: gold; background-color: gold; min-width: 3px; height: 100%;
@@ -189,8 +183,6 @@ html._MOUSE .metabookcard .tool img:hover {opacity: 0.8;}
     background-color: lightblue; color: black;
     padding: 2px; margin-top: 2px;
     border: solid darkblue 2px; border-radius: 1ex;
-    -webkit-border-radius: 1ex; -khtml-border-radius: 1ex;
-    -moz-border-radius: 1ex; -o-border-radius: 1ex;
     display: inline-block;}
 .metabookcard .age {
     color: rgb(18, 141, 238);
