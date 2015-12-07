@@ -99,6 +99,8 @@ body.hudup #METABOOKSKIMMER #METABOOKSKIMCONTROLS .collapsed {
 #METABOOKPOINTGLOSSES div.tochead { display: none; }
 
 #METABOOKSKIMMER div.metabookcardbody {font-size: 75%;}
+body.hudup.mbPREVIEW #METABOOKSKIMMER div.metabookcardbody {
+    font-size: 75%;}
 body.hudup #METABOOKSKIMMER div.metabookcardbody {font-size: 100%;}
 body.hudup #METABOOKSKIMMER div.metabookcardbody img.button {
     display: inline-block;}
