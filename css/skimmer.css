@@ -21,11 +21,12 @@ body._ANIMATE #METABOOKSKIMMER {
     transition-property: height; transition-duration: 0.3s;}
 
 #METABOOKSKIMMER.flash { background-color: silver;}
+.hudup #METABOOKSKIMMER { background-color: white; }
 .hudup #METABOOKSKIMMER {
-    background-color: white;
     max-height: inherit; }
 #METABOOKSKIMMER .tochead {
-    background-color: steelblue; color: white;
+    background-color: steelblue; color: white;}
+#METABOOKSKIMMER .tochead {
     max-height: 4ex;}
 .hudup #METABOOKSKIMMER .tochead {
     max-height: inherit;
@@ -33,7 +34,6 @@ body._ANIMATE #METABOOKSKIMMER {
 #METABOOKSKIMMER .tochead a { color: white;}
 #METABOOKSKIMMER .tochead hr {
     color: rgb(33, 106, 129); background-color: rgb(33, 106, 129);}
-
 
 body.hudup #METABOOKSKIMMER,
 body.hudup #METABOOKSKIMMER .metabookcard,
@@ -64,9 +64,11 @@ body.mbSKIMMING #METABOOKHUD #METABOOKHEAD {display: none;}
 body.mbPREVIEW #METABOOKHUD.allglosses #METABOOKSKIMMER,
 body.mbPREVIEW #METABOOKHUD.searchresults #METABOOKSKIMMER,
 body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER {
-    display: block; overflow: hidden; border-color: steelblue;
+    display: block; overflow: hidden; 
     max-height: 50px;
     opacity: 0.90;}
+body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER {
+    border-color: steelblue;}
 
 .hudup #METABOOKHUD #METABOOKSKIMMER,
 .hudup #METABOOKHEAD #METABOOKSKIMMER {

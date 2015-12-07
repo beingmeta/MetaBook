@@ -218,8 +218,8 @@ div.helpbox blockquote p {
 /* Help HUD */
 
 #METABOOKHUD .hudtip {
-    position: absolute; background-color: ivory; z-index: 100;
-
+    position: absolute; background-color: rgba(120, 152, 179, 0.5); z-index: 100;
+    box-sizing: border-box;
     border: solid black 1px; padding: 3px; border-radius: 6px;
     border-radius: 6px;
     font-size: initial;
@@ -238,7 +238,7 @@ div.helpbox blockquote p {
 
 #METABOOKHUD .hudtip.botcenter {
     bottom: 40px;
-    width: 50%; left: 25%; right: 25%;
+    width: 60%; left: 20%; right: 20%;
     text-align: center;}
 
 #METABOOKHUD div.hudtip.leftmiddle {
@@ -312,7 +312,7 @@ div.metabookhelp table th, div.metabookhelp table td {
     padding-bottom: 0px; padding-top: 0px;}
 div.metabookhelp table th { padding-right: 0.5ex;}
 div.metabookhelp table th img {
-    background-color: ivory; padding: 0px;
+    background-color: rgba(120, 152, 179, 0.5); padding: 0px;
     height: 3em; width: auto;
     vertical-align: top;}
 div.metabookhelp table tbody tr:first-child th,
@@ -336,6 +336,8 @@ body.mbSHOWHELP.mbNOMODE div#METABOOKHELP {
     pointer-events: all;
     display: block;
     opacity: 1.0;}
+body.mbSHOWHELP.mbNOMODE div#METABOOKBODY { opacity: 0.5;}
+body.mbSHOWHELP.mbNOMODE #METABOOKBREVET { display: none; }
 body.mbSHOWHELP.mbNOMODE #METABOOKHUD .hudtip {
     display: inline-block;
     opacity: 1;}
@@ -351,7 +353,7 @@ div.metabookhelp .glossbarbox {
 
 div#METABOOKHELP {
     position: absolute; text-align: left;
-    top: 100px; bottom: 125px; left: 80px; right: 80px; 
+    top: 75px; bottom: 125px; left: 80px; right: 80px; 
     height: auto; width: auto;
     padding: 0px;
     padding-right: 1ex; padding-right: 2vw;

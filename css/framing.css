@@ -70,7 +70,8 @@ body {
 #METABOOKFRAME > div, #METABOOKFRAME > div > div, #METABOOKFRAME > div > a {
     box-sizing: border-box;}
 .hudpanel a { 
-    background-color: transparent; text-decoration: none;}
+    background-color: transparent; 
+    text-decoration: none;}
 #METABOOKCOVER a { color: lightblue; }
 
 body.hudup #METABOOKFRAME, body.mbCOVER #METABOOKFRAME,
@@ -217,7 +218,8 @@ body.mbZOOM #METABOOKZOOM {
     z-index: 100; opacity: 0.5;
     pointer-events: none;}
 #METABOOKZOOMCONTROLS > * {
-    pointer-events: all;
+    pointer-events: all;}
+#METABOOKZOOMCONTROLS > * {
     background-color: ivory;}
 
 #METABOOKZOOMCLOSE {
@@ -294,6 +296,8 @@ body.mbMEDIA #METABOOKMEDIA {
     height: auto; width: auto; z-index: 100;
     background-color: rgba(0,0,0,0.5);
     display: block;}
+body.mbMEDIA #METABOOKMEDIA {
+    background-color: rgba(0,0,0,0.5);}
 body.mbMEDIA #METABOOKMEDIA #METABOOKMEDIATARGET {
     background-color: rgba(0,0,0,1); z-index: 150;}
 

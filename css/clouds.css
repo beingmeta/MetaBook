@@ -17,7 +17,7 @@ div.completions.noinput .cloudtoggle {
 #METABOOKHUD div.completions {
     text-align: center; display: none;}
 #METABOOKHUD div.completions div.doc {
-    background-color: ivory; text-align: left;
+    text-align: left;
     font-size: 80%; line-height: 100%;
     font-style: italic; color: black;
     padding-left: 1.5em; padding-right: 1.5em;
@@ -25,13 +25,15 @@ div.completions.noinput .cloudtoggle {
     border: solid black 2px; border-radius: 6px;
     /* Hide this for now */
     display: none;}
-
+#METABOOKHUD div.completions div.doc {
+    background-color: rgba(120, 152, 179, 0.5);}
 .cloud .showall {
-    background-color: lightgray; float: right;
     font-size: 24px; line-height: 100%; width: 60px; padding: 8px;
     margin-left: 6px; margin-right: 8px; margin-bottom: 6px; margin-top: 0px;
     border: solid black 2px; border-radius: 12px;
-    cursor: pointer;}
+    cursor: pointer;
+    float: right;}
+.cloud .showall { background-color: lightgray; }
 .cloud .showall { display: none; }
 .cloud.noinput .showall { display: block; }
 
@@ -43,7 +45,9 @@ html._MOUSE .cloud .showall:hover,
 .cloud.showall .showmore {display: none;}
 
 .completions.cloud .completion.selected {
-    text-decoration: none;
+    text-decoration: none;}
+
+.completions.cloud .completion.selected {
     outline: solid rgba(128,0,128,0.7) 2px;
     background-color: rgba(128,0,128,0.4);}
 
@@ -55,11 +59,12 @@ html._MOUSE .cloud .showall:hover,
 #METABOOKHUD .cloud .sectname, #METABOOKHUD .qtags .sectname {
     white-space: nowrap;
     font-weight: normal; font-style: italic;
-    background-color: ivory; color: purple;
     padding: 0px; padding-left: 3px; padding-right: 3px; 
     margin: 0px; margin-left: 3px; margin-right: 3px;
     border-radius: 6px;}
 .cloud .sectname .name,
+#METABOOKHUD .cloud .sectname, #METABOOKHUD .qtags .sectname {
+    background-color: rgba(120, 152, 179, 0.5); color: purple;}
 #METABOOKHUD .qtags span.sectname .name {
     font-size: 80%;}
 .cloud .sectname .name.ellipsis,

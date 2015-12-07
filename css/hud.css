@@ -47,10 +47,10 @@ body.hudup #METABOOKHUD.openheart #METABOOKHEAD {
 body.hudup #METABOOKHUD.openheart.openhead #METABOOKHEAD {
     max-height: 100px; min-height: 60px; height: auto;}
 body.hudup #METABOOKHEAD .hudpanel {
-    background-color: rgba(255,255,240,0.6);}
+    background-color: rgba(120, 152, 179, 0.8);}
 
 html._TOUCH body.hudup #METABOOKFRAME > #METABOOKHUD > div.hudtip {
-    background-color: ivory;}
+    background-color: rgba(120, 152, 179, 0.5);}
 
 #METABOOKHEAD {top: 0px; border-top: 0px;}
 #METABOOKFOOT {bottom: 0px; border-bottom: 0px;}
@@ -83,7 +83,7 @@ html._TOUCH body.hudup #METABOOKFRAME > #METABOOKHUD > div.hudtip {
 #METABOOKHUD.openhead #METABOOKHEAD {
     max-height: inherit; opacity: 1.0; 
     left: 60px; right: 60px; width: auto;
-    background-color: ivory;}
+    background-color: rgba(120, 152, 179, 0.5);}
 body.hudup #METABOOKHEAD {display: block;}
 #METABOOKHUD.openhead #METABOOKHEAD {
     border-color: blue; height: auto;}
@@ -104,7 +104,7 @@ body.hudup #METABOOKHUD.openhead #METABOOKHEAD .hudpanel {
 body.hudup #METABOOKHUD #METABOOKFOOT { height: 60px;}
 #METABOOKHUD.openfoot #METABOOKFOOT
 {
-    background-color: ivory; border-color: darkblue;
+    background-color: rgba(120, 152, 179, 0.5); border-color: darkblue;
     height: 60px;}
 
 #METABOOKHUD.openhead #METABOOKHEAD {max-height: 50%;}
@@ -120,7 +120,7 @@ body.hudup #METABOOKHUD #METABOOKFOOT { height: 60px;}
     display: none;}
 #METABOOKHEART {
     background-color: white;
-    background-color: ivory;
+    background-color: rgba(120, 152, 179, 0.5);
     background-color: whitesmoke;
     border-color: rgba(70, 130, 180, 0.54);}
 
@@ -133,11 +133,11 @@ body.hudup #METABOOKHUD #METABOOKFOOT { height: 60px;}
 #METABOOKHUD #METABOOKRIBBON {
     position: absolute;
     top: 0px; left: 0px; right: 0px; height: 0px; z-index: 50;
-    background-color: ivory;
+    background-color: rgba(120, 152, 179, 0.5);
     font-size: 50%;}
 #METABOOKHUD #METABOOKHEARTBODY {
     position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;
-    background-color: ivory;}
+    background-color: rgba(120, 152, 179, 0.5);}
 #METABOOKHUD #METABOOKHEARTBODY div.hudpanel {
     background-color: transparent;
     padding-bottom: 20px;}
@@ -145,7 +145,8 @@ body.hudup #METABOOKHUD #METABOOKFOOT { height: 60px;}
 #METABOOKHUD #METABOOKHEARTBODY {
     overflow: auto;
     -webkit-overflow-scrolling: touch;
-    background-color: ivory; z-index: 0;
+    background-color: rgba(120, 152, 179, 0.5);
+    z-index: 0;
     border-radius: 1ex;}
 #METABOOKHUD.statictoc #METABOOKHEARTBODY,
 #METABOOKHUD.allglosses #METABOOKHEARTBODY,
@@ -341,7 +342,7 @@ div.completions.hudpanel .normal { line-height: 250%;}
 .hudbutton {
     position: absolute; width: 50px; height: 50px;
     border: solid transparent 2px;
-    background-color: transparent;
+    background-color: rgba(115, 146, 156, 0.3);
     box-sizing: content-box;}
 .hudbutton {
     transition-property: opacity;

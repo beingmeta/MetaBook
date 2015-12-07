@@ -100,10 +100,11 @@ html._NOSVG #METABOOKBREVET {
     width: 5em; height: 50px; font-size: 45px; line-height: 1.0;
     margin: 0px; margin-left: auto; margin-right: auto;
     padding:  0px 1em 0px 1em;
-    background-color: gray; color: white;
     font-variant: small-caps; font-weight: bold;
     border-bottom-left-radius: 1ex; border-bottom-right-radius: 1ex;
     cursor: pointer;}
+#METABOOKSHOWCOVER {
+    background-color: gray; color: white;}
 #METABOOKSHOWCOVER img {
     height: 1.2em; width: auto;
     float: left;}
@@ -124,10 +125,12 @@ html._NOSVG #METABOOKBREVET {
         border-bottom-right-radius: 5px;
         background-size: contain; background-repeat: no-repeat;
         background-position: top center;
-        background-image: url(g/metabook/book.svgz);
-        background-color: transparent;}
+        background-image: url(g/metabook/book.svgz);}
     ._NOSVG #METABOOKSHOWCOVER {
         background-image: url(g/metabook/book50x50.png);}
+
+    #METABOOKSHOWCOVER {
+        background-color: transparent;}
 
     body.mbSKIMMING #METABOOKMENU {
         display: none;}

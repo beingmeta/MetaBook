@@ -61,11 +61,13 @@ form.metabooksettings h1 a.logout {
 form.metabooksettings h1 a.logout:visited {color: red;}
 
 form.metabooksettings h1 .button {
-    font-weight: bold; color: white; background-color: silver;
+    font-weight: bold; 
     margin-left: 6px; padding: 4px;
     border: solid gray 2px;
     border-radius: 5px;
     float: right;}
+form.metabooksettings h1 .button {
+    color: white; background-color: silver;}
 html._MOUSE form.metabooksettings h1 .button:hover {
     border-color: black;}
 form.metabooksettings .button.exit {

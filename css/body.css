@@ -266,6 +266,7 @@ body #METABOOKBODY #CODEXPAGE .codexpage .codexdup {
 a[href].sbookextlink, a[href].sbextref, a[href].extlink, a[href].extref {
     text-decoration: underline;}
 
+/*
 .wikicon { float: right; }
 a[href].wikicon, a[href].wikiref.wikicon {
     display: inline-block;
@@ -291,6 +292,7 @@ a[href].wikiref, a[href].sbwikiref {
     background-size: 1em;}
 html._NOSVG a[href].wikiref, html._NOSVG a[href].sbwikiref {
     background-image: url(g/metabook/wikipedia64w.png);}
+*/
 
 div.metabooknotebody { margin-left: 3em;}
 div.metabooknotebody a.mbackref { float: left; margin-left: -3em;}

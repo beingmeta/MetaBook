@@ -118,7 +118,7 @@ metaBook.Slice=(function () {
                     (sample),
                     ((note_len>0)&&(info.maker)&&(showmaker(info))),
                     ((note_len>0)&&(shownote(info)))," ",
-                    ((info.detail)&&(fdjtDOM("span.glossbody","More")))," ",
+                    ((info.detail)&&(fdjtDOM("span.showdetail","More")))," ",
                     (((info.alltags)||(info.tags))&&(showtags(info,query)))," ",
                     ((info.links)&&(showlinks(info.links)))," ",
                     ((info.attachments)&&
@@ -943,7 +943,7 @@ metaBook.Slice=(function () {
             mB.clearGlossmark();
             goToGloss(card); 
             return fdjtUI.cancel(evt);}
-        else if (getParent(target,".glossbody"))  {
+        else if (getParent(target,".showdetail"))  {
             var detail=((gloss)&&(gloss.detail));
             if (!(detail)) return;
             else if (detail[0]==='<')

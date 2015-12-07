@@ -26,9 +26,6 @@ div.metabookslice.sourced div.metabookcard.sourced { display: block;}
 
 div.metabookslice.onepassage .tocblock .tochead {display:none;}
 
-div.metabookslice .metabookcard div.glossbody { 
-    display: none; color: ivory; clear: both;}
-div.metabookslice .showdetail div.glossbody { display: block;}
 div.metabookslice div.xrefs { display: none;}
 div.metabookslice .showxrefs div.xrefs { display: block;}
 div.metabookslice div.xrefs a { display: block;}
@@ -77,9 +74,9 @@ div.metabooksources div.button.source {
 
 div.tochead { 
     position: relative; /* width: 100%; */
-    background-color: lightgray; color: blue;
     border-top: solid black 2px; border-bottom: solid black 4px;
     text-align: left; vertical-align: middle;}
+div.tochead { background-color: lightgray; color: blue; }
 div.tochead span.spacer, div.idhead span.spacer {
     font-size: 125%; font-weight: bold; font-style: italic;}
 div.tochead .paratext {
@@ -89,10 +86,11 @@ div.tochead span.head {
 div.tochead span.headtext {
     white-space: nowrap; font-size: 90%;}
 div.tochead hr {
-    color: lightblue; background-color: ivory; min-width: 3px;
+    min-width: 3px;
     border: none; border-right: solid gold 1px; border-left: solid gold 1px;
     position: absolute; left: 0px; top: 0px; height: 100%; z-index: 1;
     padding: 0px; margin: 0px;}
+div.tochead hr { background-color: rgba(120, 152, 179, 0.5); color: lightblue; }
 div.tochead span { z-index: 10; position: relative;}
 div.tochead a { z-index: 10; color: blue;} 
 html._MOUSE div.tochead a:hover { z-index: 10; color: darkblue;} 
@@ -100,15 +98,17 @@ div.tochead hr[about] { cursor: crosshair;}
 
 div.idhead { 
     position: relative; white-space: nowrap; /* width: 100%; */
-    background-color: silver; color: black;
     text-align: left; vertical-align: middle;
     border-bottom: solid purple 2px;
     overflow: hidden;}
+div.idhead {
+    background-color: silver; color: black;}
 div.idhead hr {
-    color: lightblue; background-color: lightblue;
     border: 0px; padding: 0px; margin: 0px; min-width: 3px;
     border-right: solid gold 1px; border-left: solid gold 1px; 
     position: absolute; left: 0px; top: 0px; height: 100%;}
+div.idhead hr {
+    color: lightblue; background-color: lightblue;}
 div.idhead span {
     z-index: 10; opacity: 0.75;}
 div.idhead div {
