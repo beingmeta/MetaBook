@@ -493,12 +493,13 @@ div.completions#METABOOKSEARCHCLOUD { display: none;}
 body.hudup #METABOOKHUD.addgloss .hudbutton {
     opacity: 0.15;}
 
-#METABOOKHUD.allglosses .hudbutton[alt='allglosses'],
-#METABOOKHUD.refinesearch .hudbutton[alt='search'],
-#METABOOKHUD.expandsearch .hudbutton[alt='search'],
-#METABOOKHUD.searchresults .hudbutton[alt='search'] {
-    border-color: darkblue;
-    background-color: silver;}
+.statictoc .hudbutton[alt='toc'],
+.allglosses .hudbutton[alt='allglosses'],
+.refinesearch .hudbutton[alt='search'],
+.expandsearch .hudbutton[alt='search'],
+.searchresults .hudbutton[alt='search'] {
+    border-color: darkblue !important;
+    background-color: rgba(141,168,191, 0.8) !important;}
 
 #METABOOKPOINTGLOSSES div.idhead,
 #METABOOKPOINTGLOSSES div.tochead {

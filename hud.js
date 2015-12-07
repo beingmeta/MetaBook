@@ -359,6 +359,7 @@ metaBook.setMode=
                     dropClass(metaBookHUD,"openhead");
                     dropClass(metaBookHUD,"full");
                     dropClass(metaBookHUD,metaBookModes);
+                    dropClass(metaBook.menu,metaBookModes);
                     dropClass(document.body,"mbSKIMMING");
                     dropClass(document.body,"mbSKIMSTART");
                     dropClass(document.body,"mbSKIMEND");
@@ -456,6 +457,7 @@ metaBook.setMode=
                              (fdjtDOM.$1(mode_focus)):($ID(mode_focus)));
                         mode_input.blur();}
                     dropClass(metaBookHUD,metaBookModes);
+                    dropClass(mB.menu,metaBookModes);
                     metaBook.mode=false;
                     metaBook.last_mode=true;}
                 else if (typeof mode !== 'string') 
@@ -504,7 +506,8 @@ metaBook.setMode=
                 if (mode===true) {
                     dropClass(metaBookHUD,"openhead");
                     dropClass(metaBookHUD,"openheart");
-                    fdjtDOM.swapClass(metaBookHUD,metaBookModes,"minimal");}
+                    fdjtDOM.swapClass(metaBookHUD,metaBookModes,"minimal");
+                    fdjtDOM.swapClass(mB.menu,metaBookModes,"minimal");}
                 else if (mode==="addgloss") {
                     // addgloss has submodes which may specify the
                     //  open heart configuration
@@ -546,6 +549,7 @@ metaBook.setMode=
                 dropClass(document.body,"mbPREVIEW");
                 dropClass(document.body,"mbSHRINK");
                 dropClass(metaBookHUD,metaBookModes);
+                dropClass(mB.menu,metaBookModes);
                 metaBook.cxthelp=false;
                 if (display_sync) metaBook.displaySync();
                 if (nohud) metaBook.setHUD(false);
@@ -555,8 +559,10 @@ metaBook.setMode=
             if (Trace.mode)
                 fdjtLog("changeMode %o, cur=%o dbc=%o",
                         mode,metaBook.mode,document.body.className);
-            fdjtDOM.dropClass(metaBookHUD,metaBookModes);
-            fdjtDOM.addClass(metaBookHUD,mode);
+            dropClass(mB.menu,metaBookModes);
+            dropClass(metaBookHUD,metaBookModes);
+            addClass(metaBookHUD,mode);
+            addClass(mB.menu,mode);
 
             if ((mode!=="openglossmark")&&
                 (metaBook.mode==="openglossmark")) {
