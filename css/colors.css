@@ -110,8 +110,7 @@ div.metabookcard > hr {
     background-color: red; color: white;}
 .metabookcard .links a {color: blue;}
 .metabookcard .links span.mbmedia { background-color: lightgray; }
-.metabookcard span.tribe { color: darkblue; }
-.metabookcard span.audience .outlet { color: forestgreen; }
+.metabookcard span.audience .outlet { color: #127112; }
 .metabookcardbody {
     color: rgba(0,0,0,0.9); }
 .metabookcard span.glossbody {
@@ -277,7 +276,7 @@ form.metabooksettings .button.exit {
 /* slices.css */
 
 div.metabookslice div.skimpoint {
-    background-color: rgba(70, 130, 180, 0.5);}
+    background-color: hsla(207,44%,90%,0.7);}
 div.metabooksources img.button.everyone.selected { background-color: silver; }
 div.metabooksources img.button.source.selected,
 div.metabooksources div.button.source.selected {

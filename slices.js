@@ -971,6 +971,8 @@ metaBook.Slice=(function () {
         if ((card.getAttribute("data-gloss"))&&
             (mB.mode==="openglossmark")) {
             goToGloss(card); return fdjtUI.cancel(evt);}
+        var slice=mB.getSlice(card);
+        if (slice) slice.setSkim(card);
         // Put a clone of the card in the skimmer
         var clone=card.cloneNode(true);
         clone.id="METABOOKSKIM"; fdjtDOM.replace("METABOOKSKIM",clone);

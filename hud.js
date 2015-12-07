@@ -830,6 +830,7 @@ metaBook.setMode=
                     return mB.slices.statictoc;
                 else return false;}
             else return false;}
+        metaBook.getSlice=getSlice;
 
         metaBook.addConfig("uisize",function(name,value){
             fdjtDOM.swapClass(
