@@ -115,9 +115,7 @@ body._ANIMATE body.metabookfixed div.codexpage {
 /* The content */
 
 span.excerpt {
-    color: gray;
-    font-family: times,serif; line-height: 1.0;
-    background-color: rgba(255,255,0,0.5);}
+    font-family: times,serif; line-height: 1.0;}
 span.excerpt span.content { font-size: 80%; display: none;}
 .showexcerpt span.excerpt span.content { display: inline;}
 .showexcerpt span.excerpt span.ellipsis { display: none;}
@@ -152,40 +150,24 @@ span.note.ellipsis span.elision, span.note.ellipsis span.delision {
 
 .dterm {
     padding-right: 0.2ex; padding-left: 0.35em; 
-    color: darkblue; background-color: gold;
     border: solid yellow 2px;}
 .dterm, .rawterm {
     white-space: nowrap;}
 .dterm sub, .dterm sup {padding-left: 0.1ex;}
 .dterm sup {
-    font-size: 100%; font-weight: bold; color: black;
-    top: -0.2ex;}
+    font-size: 100%; font-weight: bold; top: -0.2ex;}
 
-.dterm.weak {
-    background-color: rbga(0,0,0,0.8);}
-.rootform {
-    color: rbga(0,0,0,0.8); font-weight: bold;}
-.rawterm, .rootform {
-    color: black;}
 .rootform { font-weight: bold; }
 
 /* Gloss links */
 
 .glosslink {
-    background-color: lightblue;
     border: solid blue 1px;
     padding-right: 1ex; border-radius: 1ex;}
-.glosslink .linktext { color: blue; }
 .glosslink .linktext {
     text-decoration: underline;}
 .glosslink.glossdata .linktext {
     text-decoration: overline;}
-
-/* Other default rules */
-
-.tapholdtarget { border-color: blue;}
-.fdjtselecting .tapholdtarget { border-color: none;}
-#METABOOKPAGEBAR .tapholdtarget { border-color: none;}
 
 /* The HUD */
 
@@ -236,13 +218,12 @@ html._TOUCH img.touchicon { display: inline;}
 html._TOUCH img.mouseicon { display: none;}
 
 div.locbar {
-    background-color: ivory;
     width: 100%; clear: both;
     min-height: 6px; height: 6px;
     border: 0px; margin: 0px; padding: 0px;
     margin-bottom: 2px;}
 div.locbar hr {
-    color: red; background-color: white; min-width: 3px;
+    min-width: 3px;
     border-right: solid gold 1px; border-left: solid gold 1px;
     position: relative; left: 0px; width: 100%; height: 100%;
     border: 0px; padding: 0px; margin: 0px;}
@@ -482,11 +463,6 @@ html._MOUSE a[href]:hover {text-decoration: underline;}
 #METABOOKBODY a.extref[href], #METABOOKBODY a.sbextref[href] {
     color: blue; text-decoration: underline;}
 
-html._MOUSE a[href].extref:hover, html._MOUSE a[href].sbextref:hover,
-a[href].extref.tapholding, html._MOUSE a[href].sbextref.tapholding,
-.tapholding > a[href].extref, .tapholding > a[href].sbextref { 
-    background-color: rgba(0,0,255,0.3);}
-
 /* Block elements */
 
 #METABOOKBODY #SBOOKDETAILS,
@@ -585,34 +561,6 @@ img.metabookcoverpage {
     width: auto; height: auto;
     margin: auto;}
 
-/* Highlighting */
-
-body.mbSKIMMING .mbhighlightexcerpt,
-body.mbPREVIEW .mbhighlightexcerpt,
-body.openhud .mbhighlightexcerpt {
-    background-color: yellow;}
-body.mbSKIMMING .mbhighlightpassage,
-body.mbPREVIEW .mbhighlightpassage,
-body.openhud .mbhighlightpassage {
-    background-color: rgba(255, 255, 0, 0.21);}
-body.mbSKIMMING .mbhighlightsearch,
-body.mbPREVIEW .mbhighlightsearch {
-    background-color: gold;}
-.mbpreviewing {color: rgb(122,34,95);}
-section.mbpreviewing, div.html5section.mbpreviewing,
-section.mbpreviewing p, div.html5section.mbpreviewing p,
-section.mbpreviewing h1, div.html5section.mbpreviewing h1,
-section.mbpreviewing h2, div.html5section.mbpreviewing h2,
-section.mbpreviewing h3, div.html5section.mbpreviewing h3,
-section.mbpreviewing h4, div.html5section.mbpreviewing h4,
-section.mbpreviewing h5, div.html5section.mbpreviewing h5,
-section.mbpreviewing h6, div.html5section.mbpreviewing h6,
-section.mbpreviewing h7, div.html5section.mbpreviewing h7 {
-    color: rgb(122,34,95); } 
-
-.mbexcerpt {
-    text-shadow: 0.2ex 0.2ex 2px rgba(255, 215, 0, 0.53);}
-
 /* Startup messages */
 
 #METABOOKSTARTUPMESSAGES {
@@ -627,7 +575,7 @@ body.mbSTARTUP #METABOOKSTARTUPMESSAGES { display: block;}
 div.startupmessage { display: none;}
 div.startupmessage {
     text-align: center; font-size: 20px; font-weight: bold;
-    color: black; background-color: lightgray;}
+    color: black;}
 
 div.startupmessage.running {
     z-index: 300; opacity: 1.0;}

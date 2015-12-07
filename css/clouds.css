@@ -25,8 +25,6 @@ div.completions.noinput .cloudtoggle {
     border: solid black 2px; border-radius: 6px;
     /* Hide this for now */
     display: none;}
-#METABOOKHUD div.completions div.doc {
-    background-color: rgba(141,168,191, 0.5);}
 .cloud .showall {
     font-size: 24px; line-height: 100%; width: 60px; padding: 8px;
     margin-left: 6px; margin-right: 8px; margin-bottom: 6px; margin-top: 0px;
@@ -53,7 +51,7 @@ html._MOUSE .cloud .showall:hover,
 
 .cloud span.sep { 
     font-size: 200%; font-weight: bold; 
-    color: purple; vertical-align: middle;}
+    vertical-align: middle;}
 .completion.cloudroot, .completion.cloudroot.weak {
     cursor: default; opacity: 0.25;}
 #METABOOKHUD .cloud .sectname, #METABOOKHUD .qtags .sectname {
@@ -63,8 +61,6 @@ html._MOUSE .cloud .showall:hover,
     margin: 0px; margin-left: 3px; margin-right: 3px;
     border-radius: 6px;}
 .cloud .sectname .name,
-#METABOOKHUD .cloud .sectname, #METABOOKHUD .qtags .sectname {
-    background-color: rgba(141,168,191, 0.5); color: purple;}
 #METABOOKHUD .qtags span.sectname .name {
     font-size: 80%;}
 .cloud .sectname .name.ellipsis,
@@ -113,8 +109,6 @@ html._MOUSE .cloud .showall:hover,
 .cloud span.dterm.longterm {
     border-top-left-radius: 1ex;
     border-bottom-left-radius: 1ex;}
-
-.cloud.working { background-color: lightgray; }
 
 .cloud.working .completion, .cloud.working .completion.displayed,
 .cloud.working .completion, .cloud.working .completion.displayed {

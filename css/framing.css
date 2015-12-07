@@ -294,7 +294,6 @@ img#METABOOKMEDIATARGET {
 body.mbMEDIA #METABOOKMEDIA {
     min-width: 100%; min-height: 100%;
     height: auto; width: auto; z-index: 100;
-    background-color: rgba(0,0,0,0.5);
     display: block;}
 body.mbMEDIA #METABOOKMEDIA {
     background-color: rgba(0,0,0,0.5);}

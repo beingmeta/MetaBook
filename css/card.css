@@ -41,8 +41,6 @@ div.metabookcard > hr {
     border-right: solid gold 1px; border-left: solid gold 1px;
     position: absolute; left: 0px; 
     border: 0px; padding: 0px; margin: 0px;}
-div.metabookcard > hr {
-    color: gold; background-color: gold;}
 
 .metabookcard a.ref {
     display: block; font-weight: normal;}
@@ -63,8 +61,6 @@ div.metabookcard > hr {
     vertical-align: top;
     padding-right: 3px; padding-left: 3px;
     font-weight: bold; font-variant: small-caps;}
-.metabookcard .private {
-    background-color: red; color: white;}
 .metabookcard .links a {
     color: blue; text-decoration: underline;
     white-space: nowrap;}
@@ -78,7 +74,6 @@ div.metabookcard > hr {
 .metabookcard span.audience .outlet,
 .metabookcard span.audience .tribe {
     font-size: 90%; font-style: italic; padding-right: 1ex;}
-.metabookcard span.audience .outlet { color: slategray; }
 .metabookcard span.audience .outlet { color: forestgreen; }
 .metabookcard .audience .outlet:before {
     content: "→ "; font-weight: bold;}

@@ -20,15 +20,9 @@ div.metabookslice .mbtoc.mblivetoc {
     border-bottom-style: dotted;}
 div.metabookslice .mbtoc.mblivetoc.mbcurtoc {
     border-bottom-style: solid;}
-/* 
-div.metabookslice .mbtoc.skimpoint,
-div.metabookslice .mbtoc.mbcurtoc {
-  background-color: transparent;} 
-*/
 
 .mbtoc div.posbar {
     position: absolute; left: 0px; top: 0px;
-    /* background-color: transparent; */
     box-sizing: content-box; height: 100%; z-index: 50;
     border: 0px; border-right: solid red 2px;
     display: none;}
@@ -54,7 +48,7 @@ div.metabookslice .mbtoc.mbcurtoc {
     color: black; z-index: 50;
     display: block;}
 .mbtoc.fdjtoversize a.sectname {
-    color: black; z-index: 50;
+    z-index: 50;
     white-space: normal;}
 .mbtoc div.elements {
     transform: translate(0,0); overflow: visible;
@@ -66,24 +60,14 @@ div.metabookslice .mbtoc.mbcurtoc {
     border: 0px;
     opacity: 0.8;
     height: 1.25em;}
-.mbtoc a.brick {
-    border-right: solid gray 1px;
-    background-color: lightblue;}
 .mbtoc .toctext {
     position: relative; height: 0px; overflow: visible;
     pointer-events: none;
     z-index: 100; }
-/* .mbtoc.cohi {border-bottom-color: gold;} */
-.mbtoc.cohi a.sectname, .mbtoc.cohi a.sectname:visited,
-#METABOOKHEARTBODY .mbtoc.cohi a.sectname:visited,
-#METABOOKHEARTBODY .mbtoc.cohi a.sectname {
-    color: black;}
 .mbtoc a.showsize {
     position: absolute; display: inline-block;
     box-sizing: border-box;
     height: 1.2em; }
-.mbtoc a.showsize {
-    background-color: rgba(211, 211, 211, 0.7);}
 .mbtoc.mbtoc1 { font-size: 120%;}
 .mbtoc.mbtoc1.fdjtoversize { font-size: 105%;}
 .mbtoc.mbtoc2 { margin-left: 2em; font-size: 110%;}
@@ -98,10 +82,6 @@ div.metabookslice .mbtoc.mbcurtoc {
 #METABOOKSKIMMER .mbtoc {
     font-weight: bold; padding-top: 2px; height: fit-content;
     border-bottom: 0px;}
-body.hudup #METABOOKHUD.statictoc #METABOOKSKIMMER {
-    background-color: rgba(70, 130, 180, 0.5);}
-body.hudup #METABOOKHUD.statictoc #METABOOKSKIMMER .mbtoc .context {
-    color: white;}
 
 #METABOOKSKIMMER .mbtoc .elements .brick,
 #METABOOKSKIMMER .mbtoc .elements .showsize {
@@ -122,9 +102,6 @@ body.hudup #METABOOKSKIMMER .mbtoc {
     box-sizing: border-box;
     padding-left: 1em; padding-right: 1em;
     padding-top: 1ex;}
-
-html._MOUSE .mbtocslice .mbtoc:hover {
-    border-bottom-color: white;}
 
 @media (max-width: 600px) {
     .mbtoc.mbtoc2 { margin-left: 1em;}

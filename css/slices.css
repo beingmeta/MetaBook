@@ -31,8 +31,6 @@ div.metabookslice .showxrefs div.xrefs { display: block;}
 div.metabookslice div.xrefs a { display: block;}
 div.metabookslice div.metabookcard span.tags span.other { display: none;}
 
-div.metabookslice div.skimpoint {
-    background-color: rgba(70, 130, 180, 0.5);}
 div.metabookslice div.skimpoint.metabookcard {}
 div.metabookslice div.skimpoint.metabookcard .tool {
     font-size: 47%; font-weight: bold;}
@@ -57,13 +55,9 @@ div.metabooksources img.button {
     height: 50px; width: auto; max-width: 50px; border-radius: 10%;
     box-sizing: border-box;}
 div.metabooksources img.button.everyone {}
-div.metabooksources img.button.everyone.selected { background-color: silver; }
 div.metabooksources .button {
     border: solid transparent 2px;
     margin: 0px; margin-left: 2px; margin-right: 2px;}
-div.metabooksources img.button.source.selected,
-div.metabooksources div.button.source.selected {
-    border-color: blue;}
 div.metabooksources div.button.source {
     min-height: 50px; min-width: 50px; display: inline;
     height: 50px; width: 50px; font-size: 32px;
@@ -90,7 +84,6 @@ div.tochead hr {
     border: none; border-right: solid gold 1px; border-left: solid gold 1px;
     position: absolute; left: 0px; top: 0px; height: 100%; z-index: 1;
     padding: 0px; margin: 0px;}
-div.tochead hr { background-color: rgba(141,168,191, 0.5); color: lightblue; }
 div.tochead span { z-index: 10; position: relative;}
 div.tochead a { z-index: 10; color: blue;} 
 html._MOUSE div.tochead a:hover { z-index: 10; color: darkblue;} 
@@ -101,14 +94,10 @@ div.idhead {
     text-align: left; vertical-align: middle;
     border-bottom: solid purple 2px;
     overflow: hidden;}
-div.idhead {
-    background-color: silver; color: black;}
 div.idhead hr {
     border: 0px; padding: 0px; margin: 0px; min-width: 3px;
     border-right: solid gold 1px; border-left: solid gold 1px; 
     position: absolute; left: 0px; top: 0px; height: 100%;}
-div.idhead hr {
-    color: lightblue; background-color: lightblue;}
 div.idhead span {
     z-index: 10; opacity: 0.75;}
 div.idhead div {

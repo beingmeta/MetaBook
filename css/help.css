@@ -61,7 +61,6 @@ div.helpbox p img.left {
     margin-left: -70px;
     vertical-align: top;}
 div.helpbox kbd { font-weight: bold; }
-div.helpbox img.inline { background-color: white; }
 div.helpbox p img.screengrab {
     float: right; height: 2em;}
 
@@ -217,7 +216,7 @@ div.helpbox blockquote p {
 /* Help HUD */
 
 #METABOOKHUD .hudtip {
-    position: absolute; background-color: rgba(141,168,191, 0.5); z-index: 100;
+    position: absolute; z-index: 100;
     box-sizing: border-box;
     border: solid black 1px; padding: 3px; border-radius: 6px;
     border-radius: 6px;
@@ -403,9 +402,8 @@ div#METABOOKHELP {
 #METABOOKHUD #METABOOKKEYBOARDHELPBOX.hudpanel {
     position: absolute; text-align: center;
     top: 150px; left: 75px; right: 75px;
-    font-size: 120%; background-color: lightgray; color: black; 
+    font-size: 120%; 
     border-radius: 1ex;
-    border: solid gray 4px;
     opacity: 0.95;} 
 
 #METABOOKHUD #METABOOKKEYBOARDHELPBOX #METABOOKKEYBOARDHELP {
