@@ -32,7 +32,7 @@ div.metabookglossform div.messageoverlay {
 /* app.css */
 
 span.excerpt {
-    color: gray;
+    color: hsla(0%,0%,15%,1);
     background-color: rgba(255,255,0,0.5);}
 
 .dterm {color: darkblue; background-color: gold; }
