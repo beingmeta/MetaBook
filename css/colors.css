@@ -213,7 +213,9 @@ html._TOUCH body.hudup #METABOOKFRAME > #METABOOKHUD > div.hudtip {
 #METABOOKHUD #METABOOKRIBBON {
     background-color: rgba(141,168,191, 0.5);}
 .hudbutton {
-    background-color: rgba(115, 146, 156, 0.3);}
+    background-color: rgba(255, 255, 255, 0.1);}
+.hudup .hudbutton {
+    background-color: rgba(255, 255, 255, 0.9);}
 html._MOUSE .hudbutton:hover, .hudbutton.tapholdtarget {
     border-style: dotted; border-color: blue;}
 html._MOUSE img.hudbutton:hover, img.hudbutton.tapholdtarget {
@@ -222,6 +224,7 @@ html._MOUSE img.hudbutton:hover, img.hudbutton.tapholdtarget {
     background-color: rgba(255,255,255,0.5);
     z-index: 100; }
 
+#METABOOKHUD.statictoc .hudbutton[alt='toc'],
 #METABOOKHUD.allglosses .hudbutton[alt='allglosses'],
 #METABOOKHUD.refinesearch .hudbutton[alt='search'],
 #METABOOKHUD.expandsearch .hudbutton[alt='search'],
@@ -310,3 +313,11 @@ div.metabookslice .mbtoc.mblivetoc {
 
 html._MOUSE .mbtocslice .mbtoc:hover {
     border-bottom-color: white;}
+
+/* Emacs local variables
+;;;  Local variables: ***
+;;;  compile-command: "cd ../..; make" ***
+;;;  indent-tabs-mode: nil ***
+;;;  End: ***
+*/
+
