@@ -1097,7 +1097,6 @@
         76: "gotoloc",108: "gotoloc",
         70: "searching",
         100: "device",68: "device",
-        110: "overtoc",78: "overtoc",
         116: "statictoc",84: "statictoc", 72: "help", 
         103: "allglosses",71: "allglosses",
         67: "console", 99: "console"};

@@ -76,7 +76,7 @@ div.tochead {
     position: relative; /* width: 100%; */
     border-top: solid black 2px; border-bottom: solid black 4px;
     text-align: left; vertical-align: middle;}
-div.tochead { background-color: lightgray; color: blue; }
+div.tochead { background-color: whitesmoke; color: blue; }
 div.tochead span.spacer, div.idhead span.spacer {
     font-size: 125%; font-weight: bold; font-style: italic;}
 div.tochead .paratext {
@@ -90,7 +90,7 @@ div.tochead hr {
     border: none; border-right: solid gold 1px; border-left: solid gold 1px;
     position: absolute; left: 0px; top: 0px; height: 100%; z-index: 1;
     padding: 0px; margin: 0px;}
-div.tochead hr { background-color: rgba(120, 152, 179, 0.5); color: lightblue; }
+div.tochead hr { background-color: rgba(141,168,191, 0.5); color: lightblue; }
 div.tochead span { z-index: 10; position: relative;}
 div.tochead a { z-index: 10; color: blue;} 
 html._MOUSE div.tochead a:hover { z-index: 10; color: darkblue;} 

@@ -26,7 +26,7 @@ div.completions.noinput .cloudtoggle {
     /* Hide this for now */
     display: none;}
 #METABOOKHUD div.completions div.doc {
-    background-color: rgba(120, 152, 179, 0.5);}
+    background-color: rgba(141,168,191, 0.5);}
 .cloud .showall {
     font-size: 24px; line-height: 100%; width: 60px; padding: 8px;
     margin-left: 6px; margin-right: 8px; margin-bottom: 6px; margin-top: 0px;
@@ -64,7 +64,7 @@ html._MOUSE .cloud .showall:hover,
     border-radius: 6px;}
 .cloud .sectname .name,
 #METABOOKHUD .cloud .sectname, #METABOOKHUD .qtags .sectname {
-    background-color: rgba(120, 152, 179, 0.5); color: purple;}
+    background-color: rgba(141,168,191, 0.5); color: purple;}
 #METABOOKHUD .qtags span.sectname .name {
     font-size: 80%;}
 .cloud .sectname .name.ellipsis,

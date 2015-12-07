@@ -8,8 +8,8 @@
     position: absolute;
     top: 0px; left: 60px; right: 60px; z-index: 100;
     background-color: white;
-    border: solid steelblue 4px;  border-top: 0px;
-    padding: 0px;
+    border: solid steelblue 2px;  border-top: 0px;
+    padding: 2px;
     font-size: 70%;
     max-height: 75px;
     display: none;}
@@ -21,7 +21,10 @@ body._ANIMATE #METABOOKSKIMMER {
     transition-property: height; transition-duration: 0.3s;}
 
 #METABOOKSKIMMER.flash { background-color: silver;}
-.hudup #METABOOKSKIMMER { background-color: white; }
+.hudup #METABOOKSKIMMER { 
+    border: solid steelblue 4px;  border-top: 0px;
+    background-color: white; 
+    padding: 0px;}
 .hudup #METABOOKSKIMMER {
     max-height: inherit; }
 #METABOOKSKIMMER .tochead {
@@ -35,9 +38,9 @@ body._ANIMATE #METABOOKSKIMMER {
 #METABOOKSKIMMER .tochead hr {
     color: rgb(33, 106, 129); background-color: rgb(33, 106, 129);}
 
-body.hudup #METABOOKSKIMMER,
-body.hudup #METABOOKSKIMMER .metabookcard,
-body.hudup #METABOOKSKIMMER .metabookcardbody {
+#METABOOKSKIMMER,
+#METABOOKSKIMMER .metabookcard,
+#METABOOKSKIMMER .metabookcardbody {
     border-bottom-left-radius: 1ex;
     border-bottom-right-radius: 1ex;}
 

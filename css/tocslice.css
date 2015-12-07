@@ -69,7 +69,6 @@ div.metabookslice .mbtoc.mbcurtoc {
 .mbtoc a.brick {
     border-right: solid gray 1px;
     background-color: lightblue;}
-/* .mbtoc a.brick.cohi, .mbtoc.cohi a.showsize {background-color: gold;} */
 .mbtoc .toctext {
     position: relative; height: 0px; overflow: visible;
     pointer-events: none;
@@ -84,7 +83,7 @@ div.metabookslice .mbtoc.mbcurtoc {
     box-sizing: border-box;
     height: 1.2em; }
 .mbtoc a.showsize {
-    background-color: rgba(115, 146, 156, 0.82);}
+    background-color: rgba(211, 211, 211, 0.7);}
 .mbtoc.mbtoc1 { font-size: 120%;}
 .mbtoc.mbtoc1.fdjtoversize { font-size: 105%;}
 .mbtoc.mbtoc2 { margin-left: 2em; font-size: 110%;}
@@ -125,7 +124,7 @@ body.hudup #METABOOKSKIMMER .mbtoc {
     padding-top: 1ex;}
 
 html._MOUSE .mbtocslice .mbtoc:hover {
-    border-bottom-color: silver;}
+    border-bottom-color: white;}
 
 @media (max-width: 600px) {
     .mbtoc.mbtoc2 { margin-left: 1em;}

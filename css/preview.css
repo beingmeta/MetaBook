@@ -11,16 +11,6 @@ body.mbPREVIEW #METABOOKHUD.openhead #METABOOKHEAD { display: none; }
 
 body.mbPREVIEW #METABOOKMENU { display: none; }
 
-body.mbPREVIEW #METABOOKHUD.openhead.overtoc #METABOOKHEAD {
-    display: block; }
-
-body.mbPREVIEW #METABOOKHUD.overtoc #METABOOKHEAD,
-body.mbPREVIEW #METABOOKHUD.overtoc #METABOOKFOOT {
-    background-color: transparent;
-    border-color: transparent;}
-body.mbPREVIEW #METABOOKHUD.overtoc #METABOOKHEAD .hudpanel {
-    background-color: transparent;}
-
 body.mbPREVIEW #METABOOKHUD.allglosses #METABOOKSKIMMER,
 body.mbPREVIEW #METABOOKHUD.searchresults #METABOOKSKIMMER {
     display: block;}
