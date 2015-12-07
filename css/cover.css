@@ -97,7 +97,7 @@ body.mbREADY.mbLAYOUT #METABOOKCOVERMESSAGE { display: block;}
 
 #METABOOKCOVERCONTROLS {
     white-space: nowrap;
-    font-size: 20px; font-size: 1.5rem; font-size: 3vw;}
+    font-size: 20px; font-size: 1.5rem; font-size: 5vw;}
 
 #METABOOKCOVERCONTROLS {
     box-sizing: border-box;
@@ -346,7 +346,7 @@ html._SHOWCONSOLE .control[alt='Console'] {display: none;}
     margin: 0px; margin-top: 0.25ex; margin-right: 0.25ex;
     background-color: silver;
     float: right;}
-#METABOOKCONSOLE #METABOOKCONSOLEINPUT textarea { width: 90%;}
+#METABOOKCONSOLE #METABOOKCONSOLEINPUT textarea { width: 80%;}
 html._TOUCH #METABOOKCONSOLE #METABOOKCONSOLEINPUT.uptop {
     position: absolute;
     top: 5px; left: 10%; right: 10%; width: 90%;
@@ -500,7 +500,10 @@ body.mbBUSY #METABOOKCOVERMESSAGE div.message#METABOOKREADYMESSAGE {
         width: 48%; font-size: 16px; font-size: 1rem;
         display: inline-block;}
     #METABOOKCOVER div.loginbox form input[TYPE="TEXT"]:focus {
-        width: 100%; max-width: 100%; z-index: 100;}}
+        width: 100%; max-width: 100%; z-index: 100;}
+    #METABOOKCONSOLE #METABOOKCONSOLEINPUT { margin-left: 1em; }
+    #METABOOKCONSOLE #METABOOKCONSOLEINPUT textarea { width: 70%;}
+}
 
 /* Emacs local variables
 ;;;  Local variables: ***

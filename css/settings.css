@@ -135,7 +135,7 @@ form.metabooksettings div.checkspans .checkspan.ischecked {
 form.metabooksettings div.fontsizes span.label {
     line-height: 1;}
 form.metabooksettings div.fontsizes button {
-    margin-bottom: 1ex;}
+    margin-bottom: 1ex; margin-top: 0.5ex;}
 form.metabooksettings div.fontsizes span.checkspan {
     border-bottom: transparent solid 3px;}
 form.metabooksettings div.fontsizes span.checkspan span.sample {
@@ -223,6 +223,12 @@ div.fdjtdialog.fdjtconfirm.mbsettings div.message {
     form.metabooksettings>div.fontsizes {
         font-size: 14px;}
 
+}
+
+@media only screen and (max-width: 650px) {
+    form.metabooksettings>div.fontsizes span.samples { font-size: 100%; }
+    form.metabooksettings .button, form.metabooksettings button {
+        font-size: 1rem;}
 }
 
 
