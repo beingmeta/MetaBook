@@ -181,7 +181,6 @@ html._MOUSE .metabookcard .tool img:hover {opacity: 0.8;}
     border: solid darkblue 2px; border-radius: 1ex;
     display: inline-block;}
 .metabookcard .age {
-    color: rgb(18, 141, 238);
     padding-right: 0.5em; padding-left: 0.4ex; margin-top: -3px;
     vertical-align: top; 
     clear: none;}

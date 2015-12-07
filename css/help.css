@@ -64,6 +64,15 @@ div.helpbox kbd { font-weight: bold; }
 div.helpbox p img.screengrab {
     float: right; height: 2em;}
 
+#METABOOKHUD .metabookhelp {
+    font-size: 3vh;}
+
+#METABOOKHUD .helpbox {
+    font-size: 16px; font-size: 1rem;}
+html._TOUCH #METABOOKHUD .metabookhelp,
+html._TOUCH #METABOOKHUD .helpbox {
+    font-size: 24px; font-size: 1.5rem;}
+
 img.inlineright { float: right; max-height: 2em;}
 
 body.mbSHOWHELP #METABOOKHELPCONTENT { z-index: 500; }
@@ -446,6 +455,10 @@ div#METABOOKHELP {
     div.helpbox blockquote p {
         margin-right: 0px; margin-left: 1ex; text-indent: -1ex;}
     div.helpbox.atfoot { left: 55px; right: 55px;}
+
+    html._TOUCH #METABOOKHUD .metabookhelp,
+    html._TOUCH #METABOOKHUD .helpbox {
+        font-size: 18px; font-size: 1.25rem;}
 }
 
 @media screen and (max-width: 500px) {

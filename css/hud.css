@@ -19,13 +19,10 @@ html._MOUSE #METABOOKHUD a.brick:hover { text-decoration: none;}
 #METABOOKHUD .metabookhelp {
     font-size: 3vh;}
 
-#METABOOKHUD .helpbox,
 #METABOOKHUD .metabookslice {
     font-size: 16px; font-size: 1rem;}
-html._TOUCH #METABOOKHUD .metabookhelp,
-html._TOUCH #METABOOKHUD .helpbox,
 html._TOUCH #METABOOKHUD .metabookslice {
-    font-size: 24px; font-size: 1.5rem;}
+    font-size: 18px; font-size: 1.25rem;}
 
 /* Major HUD components, head and heart */
 
@@ -307,9 +304,6 @@ body.mbSKIMMING #METABOOKHUD.searchresults #METABOOKSEARCHRESULTS.hudpanel {
     position: absolute; display: block; overflow: hidden;
     top: 0px; bottom: 0px; left: 0px; right: 0px;
     opacity: 0.98;}
-
-html._TOUCH .metabookcard .age {
-    font-size: 125%; padding-bottom: 2px;}
 
 div.completions.hudpanel { line-height: 120%;}
 div.completions.hudpanel .prime { line-height: 250%;}

@@ -8,7 +8,7 @@
     position: absolute;
     top: 0px; left: 60px; right: 60px; z-index: 100;
     border: solid steelblue 2px;  border-top: 0px;
-    padding: 2px;
+    padding: 2px; padding-top: 0px;
     font-size: 70%;
     max-height: 75px;
     display: none;}
@@ -21,8 +21,7 @@ body._ANIMATE #METABOOKSKIMMER {
 
 #METABOOKSKIMMER.flash { background-color: silver;}
 .hudup #METABOOKSKIMMER { 
-    border: solid steelblue 4px;  border-top: 0px;
-    background-color: white; 
+    border: solid steelblue 4px;  border-top: 0px; 
     padding: 0px;}
 .hudup #METABOOKSKIMMER {
     max-height: inherit; }
