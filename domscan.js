@@ -222,13 +222,14 @@ metaBook.DOMScan=(function(){
                         fdjtLog("Finding head@%d: s=%o, i=%j, sh=%o, cmp=%o",
                                 scanlevel,scan||false,scaninfo,
                                 (scanlevel<level));
-                    if (scanlevel<level) break;
+                    if (scanlevel<=level) break;
                     else if (scaninfo===rootinfo) break;
                     else if (level===scanlevel) {
                         headinfo.prev=scaninfo;
                         scaninfo.next=headinfo;}
                     scaninfo.ends_at=scanstate.location;
                     scanstate.tagstack=scanstate.tagstack.slice(0,-1);
+                    if (level===scanlevel) break;
                     scaninfo=scaninfo.head;
                     scan=scaninfo.elt||document.getElementById(scaninfo.frag);
                     scanlevel=((scaninfo)?(scaninfo.level):(0));}
@@ -260,6 +261,24 @@ metaBook.DOMScan=(function(){
             if (headinfo)
                 headinfo.ends_at=scanstate.location+textWidth(head);
             scanstate.location=scanstate.location+textWidth(head);}
+
+        function assignWSN(child){
+            var wsn=false; var tag=child.tagName;
+            if (((tag.search(/p|h\d|blockquote|li/i)===0)||
+                 (getStyle(child).display.search(
+                         /block|list-item|table|table-row/)===0))&&
+                ((child.childNodes)&&(child.childNodes.length))&&
+                (wsn=md5ID(child))) {
+                var wbaseid="WSN_"+wsn, wsnid=wbaseid, count=1;
+                if (wbaseid!=="WSN_") {
+                    while ((idmap[wsnid])||(document.getElementById(wsnid)))
+                        wsnid=wbaseid+"_"+(count++);
+                    if (wbaseid!==wsnid) {
+                        var text=fdjtDOM.textify(child);
+                        fdjtLog.warn("Duplicate WSN ID %s: %s",
+                                     wsnid,text);}
+                    child.id=wsnid; idmap[wsnid]=child;
+                    return wsnid;}}}
 
         function scanner(child,scanstate,docinfo){
             var location=scanstate.location;
@@ -303,21 +322,7 @@ metaBook.DOMScan=(function(){
             if ((!(id))&&(!(baseid))) {
                 // If there isn't a known BASEID, we generate
                 //  ids for block level elements using WSN.
-                var wsn=false;
-                if (((tag.search(/p|h\d|blockquote|li/i)===0)||
-                     (getStyle(child).display.search(
-                             /block|list-item|table|table-row/)===0))&&
-                    ((child.childNodes)&&(child.childNodes.length))&&
-                    (wsn=md5ID(child))) {
-                    var wbaseid="WSN_"+wsn, wsnid=wbaseid, count=1;
-                    if (wbaseid!=="WSN_") {
-                        while ((document.getElementById[wsnid])||(idmap[wsnid]))
-                            wsnid=wbaseid+"_"+(count++);
-                        if (wbaseid!==wsnid) {
-                            var text=fdjtDOM.textify(child);
-                            fdjtLog.warn("Duplicate WSN ID %s: %s",
-                                         wsnid,text);}
-                        id=child.id=wsnid; idmap[wsnid]=child;}}}
+                id=assignWSN(child);}
             // else if ((id)&&(baseid)&&(id.search(baseid)!==0)) id=false;
             else if (!(id)) {}
             else if (!(idmap[id])) idmap[id]=child;
@@ -363,18 +368,12 @@ metaBook.DOMScan=(function(){
                 return;}
             var toclevel=getLevel(child,curlevel), info=false;
             if ((toclevel)&&(!(id))) {
-                var parent=child.parentNode;
-                var plevel=getLevel(parent);
-                if (typeof plevel !== "number")
-                    info=((parent.id)&&(docinfo[parent.id]))||
-                    ((parent.getAttribute("data-tocid"))&&
-                     (docinfo[parent.getAttribute("data-tocid")]));
-                if (info) {
-                    id=info.frag;
-                    info.toclevel=toclevel; 
-                    if ((child.title)&&(!(info.title)))
-                        info.title=child.title;}}
-            else if (!(id)) {}
+                id=assignWSN(child);
+                allids.push(id); info=new ScanInfo(id,scanstate);
+                if (docinfo[id]!==info) window.alert("Wrong");
+                docinfo[id]=info;
+                info.elt=child;}
+            if (!(id)) {}
             else if ((info=docinfo[id])) {}
             else {
                 allids.push(id); info=new ScanInfo(id,scanstate);
@@ -408,7 +407,7 @@ metaBook.DOMScan=(function(){
                  (classname.search(/\b(sbook|pubtool)ignore\b/)>=0))||
                 ((metaBook.ignore)&&(metaBook.ignore.match(child))))
                 return;
-            if (toclevel)
+            if ((id)&&(toclevel))
                 handleHead(child,id,docinfo,scanstate,toclevel,
                            curhead,curinfo,curlevel);
             else if (info) {
