@@ -257,7 +257,8 @@ form.metabooksettings .button.exit {
 /* slices.css */
 
 div.metabookslice div.skimpoint {
-    background-color: hsla(207,44%,90%,0.7);}
+    /* background-color: hsla(207,44%,90%,0.7); */
+    background-color: hsla(0, 44%, 90%, 0.7);}
 div.metabooksources img.button.everyone.selected { background-color: silver; }
 div.metabooksources img.button.source.selected,
 div.metabooksources div.button.source.selected {
