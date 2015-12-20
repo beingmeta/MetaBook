@@ -104,12 +104,12 @@ body.hudup #METABOOKSKIMMER div.metabookcardbody {font-size: 100%;}
 body.hudup #METABOOKSKIMMER div.metabookcardbody img.button {
     display: inline-block;}
 
-#METABOOKSKIMMER div.metabookcard.gloss > div.tochead,
+#METABOOKSKIMMER div.metabookcard.gloss div.tochead,
 #METABOOKSKIMMER div.metabookcard.gloss div.metabookcardbody {
     margin-left: 50px;}
 #METABOOKSKIMMER div.metabookcard.gloss div.metabookcardbody {
     padding-left: 4px;}
-#METABOOKSKIMMER div.metabookcard.gloss  > div.tochead {
+#METABOOKSKIMMER div.metabookcard.gloss div.tochead {
     padding-left: 0px;}
 #METABOOKSKIMMER div.metabookcard.gloss div.metabookcardbody img.glosspic,
 #METABOOKSKIMMER div.metabookcard.gloss div.metabookcardbody .sourcepic {
@@ -141,9 +141,12 @@ body.hudup #METABOOKHUD #METABOOKSKIMMER .controller,
 body.hudup #METABOOKHUD #METABOOKSKIMMER span.whencollapsed {
     display: none;}
 
+#METABOOKSKIMMER div.tochead, #METABOOKSKIMMER div.idhead {
+    border-bottom: solid black 1px;}
+
 #METABOOKSKIMMER div.metabookcard,
-#METABOOKSKIMMER div.metabookcard > div.tochead,
-#METABOOKSKIMMER div.metabookcard > div.idhead {
+#METABOOKSKIMMER div.metabookcard div.tochead,
+#METABOOKSKIMMER div.metabookcard div.idhead {
     margin-left: 0px;}
 #METABOOKSKIMMER div.metabookcard {
     min-height: 50px;}

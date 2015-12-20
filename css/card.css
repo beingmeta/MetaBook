@@ -12,16 +12,16 @@
 div.metabookcard {
     margin-left: 20px; margin-right: 0px;
     box-sizing: border-box;}
-div.metabookcard > div.idhead, div.metabookcard > div.tochead {
+div.metabookcard > div.idhead, div.metabookcard div.tochead {
     max-height: 3ex; white-space: nowrap;
     text-overflow: ellipsis; overflow: hidden;
     line-height: 100%;}
 
-div.metabookcard > div.idhead { margin-left: -10px;}
-div.metabookcard > div.tochead { margin-left: -20px; }
+div.metabookcard div.idhead { margin-left: -10px;}
+div.metabookcard div.tochead { margin-left: -20px; }
 
-#METABOOKHUD.openglossmark div.metabookcard > div.idhead { display: none;}
-#METABOOKHUD.openglossmark div.metabookcard > div.tochead { display: none;}
+#METABOOKHUD.openglossmark div.metabookcard div.idhead { display: none;}
+#METABOOKHUD.openglossmark div.metabookcard div.tochead { display: none;}
 
 /* Sbook notes */
 
