@@ -135,7 +135,9 @@ body._ANIMATE div.mbpagecontrol {
     transition-property: opacity,background-color;
     transition-duration: 0.2s;}
 
-body.mbSKIMMING div.mbpagecontrol,
+body.mbSKIMMING div.mbpagecontrol {
+    opacity: 0.4;}
+body.mbSKIMMING.hudup div.mbpagecontrol,
 html._MOUSE body.hudup div.mbpagecontrol:hover {
     opacity: 0.8; }
 
