@@ -863,6 +863,9 @@ metaBook.Slice=(function () {
 
     MetaBookSlice.prototype.setLocation=function setSliceLocation(location){
         var cards=this.cards; var i=0, lim=cards.length, last_card=false;
+        if ((this.skimpos)&&(this.cards[this.skimpos])&&
+            ((this.cards[this.skimpos].location)===location))
+            return;
         while (i<lim) {
             var card=cards[i];
             if (typeof card.location !== "number") {i++; continue;}
