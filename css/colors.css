@@ -256,6 +256,7 @@ form.metabooksettings .button.exit {
 
 /* slices.css */
 
+body.hudup #METABOOKSKIMMER div.metabookcard,
 div.metabookslice div.skimpoint {
     /* background-color: hsla(207,44%,90%,0.7); */
     background-color: hsla(0, 44%, 90%, 0.7);}
