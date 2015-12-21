@@ -1203,10 +1203,14 @@
                     setMode("allglosses"); return;}
                 else if (mode==="statictoc") {
                     setMode("statictoc"); return;}}
-            if ((hasClass(document.body,"mbSKIMMING"))&&(mode_live))
-                mB.stopSkimming();
-            else if (mode_live) setMode(false,true);
-            else setMode(mode);}
+            if (mode_live) {
+                if (hasClass(document.body,"mbSKIMMING"))
+                    mB.stopSkimming();
+                else setMode(false,true);}
+            else {
+                if (hasClass(document.body,"mbSKIMMING"))
+                    mB.stopSkimming();
+                setMode(mode);}}
         else if (evt.type==="hold") 
             addClass(document.body,"_HOLDING");
         else dropClass(document.body,"_HOLDING");}
