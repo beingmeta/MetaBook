@@ -254,11 +254,11 @@ div.metabookhelp .result {color: rgba(0,0,0,1);}
 /* search.css */
 
 div.resultinfo .stats > span {
-    background-color: white;}
+    background-color: silver;}
 #METABOOKHUD.refinesearch div.resultinfo span.refinecount, 
 #METABOOKHUD.expandsearch div.resultinfo span.showalltags,
 #METABOOKHUD.searchresults div.resultinfo span.resultcount {
-    font-weight: bold; background-color: silver; cursor: default;}
+    font-weight: bold; background-color: white; cursor: default;}
 
 /* settings.css */
 
