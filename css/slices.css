@@ -20,12 +20,11 @@ div.metabookslice input[TYPE="TEXT"] {
 div.metabookslice div.metabookcard {
     margin-left: 20px;}
 div.metabookslice div.metabookcard.skimpoint {
-    margin-left: 10px; padding-left: 10px;
-    border-left-color: darkblue;}
+    margin-left: 10px; padding-left: 10px; padding-bottom: 1ex;
+    border-left-color: darkblue;
+    font-size: 110%;}
 div.metabookslice.sourced div.metabookcard { display: none;}
 div.metabookslice.sourced div.metabookcard.sourced { display: block;}
-div.metabookslice div.metabookcard.skimpoint {
-    font-size: 120%;}
 
 div.metabookslice.onepassage .tocblock .tochead {display:none;}
 
