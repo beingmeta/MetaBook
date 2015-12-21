@@ -122,6 +122,7 @@
     var submitEvent=fdjtUI.submitEvent;
     var noDefault=fdjt.UI.noDefault;
     var cancel=fdjt.UI.cancel;
+    var noBubble=fdjt.UI.noBubble;
 
     var reticle=fdjtUI.Reticle;
 
@@ -1038,8 +1039,16 @@
         else if (kc===38) {  /* arrow up */
             setHUD(false);
             metaBook.pageBackward(evt);}
-        else if (kc===37) metaBook.skimBackward(evt); /* arrow left */
-        else if (kc===39) metaBook.skimForward(evt); /* arrow right */
+        else if (kc===37) {  /* arrow left */
+            if ((mB.mode)&&(!(mB.skimming))&&
+                (pagers[metaBook.mode]))
+                showPage.fastBackward(pagers[metaBook.mode]);                
+            else metaBook.skimBackward(evt);}
+        else if (kc===39) {  /* arrow right */
+            if ((mB.mode)&&(!(mB.skimming))&&
+                (pagers[metaBook.mode]))
+                showPage.fastForward(pagers[metaBook.mode]);                
+            else metaBook.skimForward(evt);}
         // Don't interrupt text input for space, etc
         else if (fdjtDOM.isTextInput(fdjtDOM.T(evt))) return true;
         else if (kc===32) { // Space
@@ -1712,7 +1721,7 @@
             ((target.tagName==="INPUT")&&
              (target.type.search(fdjtDOM.text_input_types)>=0))) {
             target.focus();
-            cancel(evt);}
+            noBubble(evt);}
         else if ((target.tagName==="A")&&(target.href)) {
             var href=target.href;
             if (href[0]==='#') {
