@@ -187,9 +187,6 @@ div.metabookglossform.focused .glossetc .excerpt {
 div.metabookglossform.private .checkspan.postgloss {
     display: none;}
 
-body.hudup div.metabookglossform form .excerpt {
-    display: inline-block; }
-
 div.metabookglossform .checkspan.postgloss {}
 div.metabookglossform .checkspan.postgloss input[type='checkbox'] {
     vertical-align: bottom; height: 1em; width: 1em;}
