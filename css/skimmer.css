@@ -37,7 +37,8 @@ body._ANIMATE #METABOOKSKIMMER {
 #METABOOKSKIMMER .metabookcard,
 #METABOOKSKIMMER .metabookcardbody {
     border-bottom-left-radius: 1ex;
-    border-bottom-right-radius: 1ex;}
+    border-bottom-right-radius: 1ex;
+    border-left: 0px;}
 
 body._ANIMATE #METABOOKSKIMMER.transanimate {
     transition-property: transform; 

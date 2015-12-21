@@ -23,7 +23,9 @@ body.mbMEDIA #METABOOKMEDIA #METABOOKMEDIATARGET {
     background-color: rgba(141,168,191, 0.9);
     border-color: rgba(70, 130, 180, 0.54);}
 
-body.hudup #METABOOKSKIMMER,
+body.hudup #METABOOKSKIMMER {
+    background-color: hsla(0, 44%, 90%, 0.7);}
+
 body #METABOOKHUD.openhead.addgloss #METABOOKHEAD, 
 body.hudup #METABOOKHUD.openhead #METABOOKHEAD {
     background-color: rgba(141,168,191, 0.95);}
