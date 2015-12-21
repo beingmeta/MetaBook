@@ -40,10 +40,6 @@
 #METABOOKHUD #METABOOKHELP {}
 #METABOOKHUD div.helpbox {}
 
-#METABOOKHUDHELP div.helpbox {
-    overflow: hidden;
-    font-size: 1rem;}
-
 div.helpbox p {
     margin-top: 1ex; margin-bottom: 1ex;
     margin-left: 1em; margin-right: 1em;
@@ -76,19 +72,12 @@ html._TOUCH #METABOOKHUD .helpbox {
 img.inlineright { float: right; max-height: 2em;}
 
 body.mbSHOWHELP #METABOOKHELPCONTENT { z-index: 500; }
-body.mbSHOWHELP #METABOOKHUD img.hudbutton#METABOOKHELPBUTTON {
-    background-color: silver; border-color: black;
-    opacity: 0.9;}
 
 #METABOOKHELP h1 {
     font-size: 1.3em; text-align: center;}
 
-body.hudup.mbSHOWHELP #METABOOKHUD img.hudbutton#METABOOKHELPBUTTON {
-    background-color: silver; border-color: black;}
-
 div.helpbox {
     position: absolute;
-    background-color: silver; color: black;
     padding: 1ex; padding-top: 0.5ex; border: solid transparent 3px;
     border-radius: 1ex;
     z-index: -250;
@@ -119,11 +108,10 @@ div#METABOOKHUDHELP {
     border-bottom-right-radius: 0px;
     display: none;}
 
-div#METABOOKHUDHELP div.helpbox {
-    position: static;
-    border: 0px; 
-    border-radius: 0px;
-    padding: 0px;}
+#METABOOKHUDHELP div.helpbox {
+    position: static; overflow: auto; font-size: 1rem;
+    border: 0px; border-radius: 0px;
+    padding: 0px; padding-bottom: 1em;}
 
 body.mbSHOWHELP #METABOOKHUDHELP,
 body.mbSHOWHELP #METABOOKHUD.addgloss #METABOOKHUDHELP { 
@@ -134,8 +122,7 @@ body.mbSHOWHELP.hudup #METABOOKFOOT #METABOOKPAGEBAR {opacity: 0.1;}
 body.mbSHOWHELP.mbNOMODE #METABOOKHUDHELP {
     display: none;}
 
-#METABOOKHUD div.helpbox {
-    border-color: black; z-index: 250;}
+#METABOOKHUD div.helpbox {z-index: 250;}
 body.mbSHOWHELP #METABOOKHUD .hudtip,
 body.mbSHOWHELP #METABOOKHUD .hudbutton {
     opacity: 0.5;}
@@ -168,7 +155,7 @@ body.mbSHOWHELP #METABOOKHUD.expandsearch #METABOOKSEARCHINPUTHELP.helpbox,
 body.mbSHOWHELP #METABOOKHUD.searchresults #METABOOKSEARCHRESULTSHELP.helpbox,
 body.mbSHOWHELP #METABOOKHUD.allglosses #METABOOKALLGLOSSESHELP.helpbox,
 body.mbSHOWHELP #METABOOKHUD.statictoc #METABOOKSTATICTOCHELP.helpbox {
-    border-color: black; z-index: 500; display: block; opacity: 0.9;
+    z-index: 500; display: block; opacity: 0.9;
     display: block;}
 
 body.mbSHOWHELP.mbSKIMMING #METABOOKHUD.searchresults
@@ -188,7 +175,7 @@ body.mbSHOWHELP.mbSKIMMING #METABOOKHUD.allglosses
 #METABOOKHUD.gotopage #METABOOKGOTOPAGEHELP.helpbox,
 #METABOOKHUD.gotoloc #METABOOKGOTOLOCHELP.helpbox,
 #METABOOKHUD.gotoref #METABOOKGOTOREFHELP.helpbox {
-    border-color: black; z-index: 260; opacity: 0.9; }
+    z-index: 260; opacity: 0.9; }
 
 body.mbSHOWHELP.mbPREVIEW #METABOOKHUD #METABOOKHUDHELP {
     opacity: 0.05;}
@@ -199,7 +186,6 @@ body.mbSHOWHELP.openglossmark #METABOOKPOINTGLOSSES {
 div.helpbox p {}
 
 div.helpbox h3, div.helpbox h2 { margin-top: 0px;}
-div.helpbox .clicktarget { color: lightblue; }
 div.helpbox img.screenshot {
     width: 80%; margin-left: 10%; margin-right: 10%;}
 div.helpbox img.screenshot.right {
@@ -300,39 +286,15 @@ span.metabooktogglehelp {
 body.NOSVG span.metabooktogglehelp {
     background-image: url(g/metabook/hide_help64x64.png);}
 
-div.metabookhelp td {
-    color: rgba(0,0,0,0.75);}
-
 div.metabookhelp h1 {
     margin-top: 3px !important;
     margin-bottom: 1.5ex !important;
     padding-top: 0px !important;}
 
-div.metabookhelp .action {
-    color: darkblue;}
 div.metabookhelp .result {
-    font-style: italic; color: rgba(0,0,0,1);}
+    font-style: italic;}
 div.metabookhelp td dfn {
     color: rgba(0,0,0,1);}
-div.metabookhelp > table, div.metabookhelp > div > table {
-    margin-left: 2%; margin-right: 2%; width: 96%;
-    margin-top: 1em;}
-div.metabookhelp table th, div.metabookhelp table td {
-    padding-bottom: 0px; padding-top: 0px;}
-div.metabookhelp table th { padding-right: 0.5ex;}
-div.metabookhelp table th img {
-    background-color: rgba(141,168,191, 0.5); padding: 0px;
-    height: 3em; width: auto;
-    vertical-align: top;}
-div.metabookhelp table tbody tr:first-child th,
-div.metabookhelp table tbody tr:first-child td {
-    padding-top: 1ex; }
-div.metabookhelp table table {
-    margin-left: 2%; margin-right: 2%;}
-div.metabookhelp table td.icon { width: 32px;}
-div.metabookhelp table td.icon img { width: 32px;}
-div.metabookhelp table td.textleft { text-align: left;}
-div.metabookhelp table td.textright { text-align: right;}
 
 div.metabookhelp .result span { display: none; }
 
@@ -367,9 +329,7 @@ div#METABOOKHELP {
     padding: 0px;
     padding-right: 1ex; padding-right: 2vw;
     padding-left: 1ex; padding-left: 2vw;
-    background-color: lightgray; color: black;
     border-radius: 1ex;
-    border: solid gray 4px;
     opacity: 0.98;
     display: none;}
 #METABOOKHUD #METABOOKHELP.hudpanel { overflow: auto;}
@@ -386,8 +346,10 @@ div#METABOOKHELP {
 .metabookhelp p img.floatleft, .metabookhelp p img.floatright {
   max-width: 20%; max-height: 3em; width: auto; height: auto;}
 
-.metabookhelp .fdjtselected {
+.metabookhelp .fdjtselected,
+.helpbox .fdjtselected {
     background-color: rgba(255,255,0,0.7); }
+.helpbox .fdjtselectstart, .helpbox .fdjtselectend,
 .metabookhelp .fdjtselectstart, .metabookhelp .fdjtselectend {
     background-color: rgba(255,215,0,0.7); }
 

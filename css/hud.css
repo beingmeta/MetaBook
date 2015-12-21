@@ -41,7 +41,7 @@ html._TOUCH #METABOOKHUD .metabookslice {
     border-width: 2px;}
 body.hudup #METABOOKHUD.openhead #METABOOKHEAD {
     background-color: rgba(141,168,191, 0.8);
-    max-height: 100px; height: auto;}
+    max-height: 50%; height: auto;}
 body.hudup #METABOOKHUD.openheart.openhead #METABOOKHEAD {
     min-height: 60px;}
 body.hudup #METABOOKHEAD .hudpanel {background-color: transparent;}

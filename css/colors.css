@@ -219,11 +219,24 @@ body.hudup.mbSHOWHELP #METABOOKHUD img.hudbutton#METABOOKHELPBUTTON {
 div.helpbox {
     background-color: silver; color: black;}
 #METABOOKHUD .hudtip {
-    background-color: rgba(141,168,191, 0.5);}
-div.metabookhelp table th img {
-    background-color: rgba(141,168,191, 0.5);}
+    background-color: rgba(141,168,191, 0.8);}
 div#METABOOKHELP {
-    background-color: lightgray; color: black;}
+    background-color: lightgray; color: black;
+    border: solid gray 4px;}
+
+body.mbSHOWHELP #METABOOKHUD img.hudbutton#METABOOKHELPBUTTON {
+    background-color: silver; border-color: black;
+    opacity: 0.9;}
+body.hudup.mbSHOWHELP #METABOOKHUD img.hudbutton#METABOOKHELPBUTTON {
+    background-color: silver; border-color: black;}
+
+div.helpbox {
+    background-color: silver; color: black;
+    border-color: blue;}
+div.helpbox .clicktarget { color: lightblue; }
+
+div.metabookhelp .action {color: darkblue;}
+div.metabookhelp .result {color: rgba(0,0,0,1);}
 
 .metabookhelp .fdjtselected {
     background-color: rgba(255,255,0,0.7); }
