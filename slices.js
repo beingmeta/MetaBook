@@ -641,7 +641,8 @@ metaBook.Slice=(function () {
         this.live=false; this.needupdate=false;
         this.addCards(cards);
         if (metaBook.touch) opts.packthresh=40;
-        if ((cards)&&(cards.length)) this.update();
+        if ((cards)&&(cards.length)&&(container.parentNode))
+            this.update();
         return this;}
 
     MetaBookSlice.prototype.setLive=function setSliceLive(flag){

@@ -95,6 +95,7 @@
             metaBook.qstring="";
             return;}
         else dropClass(metaBook.HUD,"emptysearch");
+        mB.empty_cloud.complete("");
         var qstring=query.getString();
         if (qstring!==metaBook.qstring) {
             displayQuery(query,$ID("METABOOKSEARCH"));
