@@ -636,7 +636,7 @@ div.fdjtdialog.fdjtconfirm.metabooktaptap div.choices {
 /* Custom dialog rules */
 
 div.fdjtdialog.savegloss {
-    top: 0px; left: 50px; right: 50px; height: 2em;
+    top: 0px; left: 50px; right: 50px; height: 3.5em;
     border-top: 0px; border-radius: 1ex;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
@@ -649,7 +649,7 @@ div.fdjtdialog.savegloss div.choices {
     margin-top: 0px; padding-top: 3px;
     text-align: right;}
 div.fdjtdialog.savegloss div.choices button {
-    font-weight: bold; }
+    font-weight: bold; margin-top: 0.5ex;}
 div.fdjtdialog.savegloss.closing .countdown {
     display: inline-block;}
 div.fdjtdialog.savegloss .message {
