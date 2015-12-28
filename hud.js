@@ -182,9 +182,9 @@ metaBook.setMode=
                 if (Trace.messages)
                     fdjtLog("Got a message from %s with payload %o",
                             origin,evt.data);
-                if (origin.search(/https:\/\/[^\/]+.(metabooks|sbooks).net/)!==0) {
-                    fdjtLog.warn("Rejecting insecure message from %s",
-                                 origin);
+                if (origin.search(/https:\/\/[^\/]+.(bookhub\.io|metabooks\.net|sbooks\.net)/)!==0) {
+                    fdjtLog.warn("Rejecting insecure message from %s: %s",
+                                 origin,evt.data);
                     return;}
                 if (evt.data==="sbooksapp") {
                     setMode("sbooksapp");}
