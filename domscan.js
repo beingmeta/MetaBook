@@ -222,15 +222,17 @@ metaBook.DOMScan=(function(){
                         fdjtLog("Finding head@%d: s=%o, i=%j, sh=%o, cmp=%o",
                                 scanlevel,scan||false,scaninfo,
                                 (scanlevel<level));
-                    if (scanlevel<level) break;
+                    if ((!(scanlevel))||(scanlevel<level)) break;
                     else if (scaninfo===rootinfo) break;
-                    else if ((scaninfo.head)&&(scaninfo.head.level)&&
-                             (scaninfo.head.level>=level)) {
+                    else if ((scaninfo.head)&&
+                             (scaninfo.head.level)&&
+                             (scaninfo.head.level>=scanlevel)) {
                         // The head hierarchy is really messed up, so 
                         // don't keep iterating.
                         fdjtLog.warn("Corrupted TOCINFO at %o",head);
                         break;}
                     else if (level===scanlevel) {
+                        // Link up prev/next when popping up a level
                         headinfo.prev=scaninfo;
                         scaninfo.next=headinfo;}
                     scaninfo.ends_at=scanstate.location;
