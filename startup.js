@@ -780,9 +780,12 @@ metaBook.Startup=
                 else metaBook.autotoc=false;}
 
             if (!(metaBook.nologin)) {
-                metaBook.mycopyid=getMeta("BOOKHUB.mycopyid")||
+                var mycopyid=getMeta("BOOKHUB.mycopyid")||
                     (getLocal("mycopyid("+refuri+")"))||
-                    false;}}
+                    false;
+                if ((mycopyid)&&(mycopyid!==mB.mycopid)) 
+                    if (mB.iosAuthKludge) mB.iosAuthKludge();
+                mB.mycopyid=mycopyid;}}
 
         function setupDevice(){
             var root=document.documentElement||document.body;

@@ -720,13 +720,13 @@
        current location.  This IS passed to the homescreen
        standalone app, so we can use it to get a real authentication
        token.*/
-    function iosHomeKludge(){
+    function iosAuthKludge(){
         if ((!(metaBook.user))||(fdjt.device.standalone)||
-            (!(fdjt.device.mobilesafari))||
-            (!(mB.mycopyid)))
+            (!(fdjt.device.mobilesafari)))
             return;
         var auth=mB.mycopyid;
         if (!(auth)) return;
+        if (mB.iOSKludge===auth) return; else mB.iOSKludge=auth;
         var eauth=encodeURIComponent(auth);
         var url=location.href, qmark=url.indexOf('?'), hashmark=url.indexOf('#');
         var base=((qmark<0)?((hashmark<0)?(url):(url.slice(0,hashmark))):
@@ -765,13 +765,14 @@
                 if ((metaBook.user)&&(!(fdjt.device.standalone))&&
                     (!(document[fdjtDOM.isHidden]))&&
                     (fdjt.device.mobilesafari))
-                    iosHomeKludge();},
+                    iosAuthKludge();},
                         300000);}
     function setupKludgeTimer(){
         updateKludgeTimer();
         if (fdjtDOM.isHidden)
             fdjtDOM.addListener(document,fdjtDOM.vischange,
                                 updateKludgeTimer);
+        metaBook.iosAuthKludge=iosAuthKludge;
         updateKludgeTimer();}
     if ((!(fdjt.device.standalone))&&(fdjt.device.mobilesafari))
         fdjt.addInit(setupKludgeTimer,"setupKludgeTimer");

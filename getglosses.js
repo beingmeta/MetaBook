@@ -87,7 +87,9 @@
             if ((metaBook.mycopyid)&&
                 (info.mycopyid!==metaBook.mycopyid))
                 fdjtLog.warn("Mismatched mycopyids");
-            else metaBook.mycopyid=info.mycopyid;}
+            if (info.mycopyid!==metaBook.mycopyid) {
+                metaBook.mycopyid=info.mycopyid;
+                if (mB.iosAuthKludge) mB.iosAuthKludge();}}
         if (!(metaBook.docinfo)) { /* Scan not done */
             metaBook.scandone=function(){loadInfo(info);};
             return;}
@@ -404,7 +406,8 @@
                 ((metaBook.mycopyid_expires)&&(expires)&&
                  (expires>metaBook.mycopyid_expires))) {
                 metaBook.mycopyid=string; metaBook.mycopyid_expires=expires;
-                metaBook.saveLocal("mycopyid("+mB.docuri+")",string);}
+                metaBook.saveLocal("mycopyid("+mB.docuri+")",string);
+                if (mB.iosAuthKludge) mB.iosAuthKludge();}
             else {}
             if ((need_mycopyid)&&(need_mycopyid.length)) {
                 var needs=need_mycopyid; need_mycopyid=[];
