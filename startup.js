@@ -240,8 +240,6 @@ metaBook.Startup=
             // Initialize domain and origin for browsers which care
             try {document.domain="bookhub.io";}
             catch (ex) {fdjtLog.warn("Error setting document.domain");}
-            try {document.origin="bookhub.io";}
-            catch (ex) {fdjtLog.warn("Error setting document.origin");}
 
             // First, define common schemas
             fdjtDOM.addAppSchema("METABOOK","http://metabook.bookhub.io/");
