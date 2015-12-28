@@ -158,7 +158,7 @@ form.metabooksettings > div.checkspan input[type='RADIO'],
 form.metabooksettings > div.checkspan input[type='CHECKBOX'] { 
     float: left; width: 1.2em; height: 1.2em; 
     margin-right: 1ex;}
-form.metabooksettings div.checkspan span.text {
+form.metabooksettings div.checkspan span.checktext {
     color: gray; font-size: 120%;}
 form.metabooksettings div.checkspan input {}
 
@@ -173,7 +173,7 @@ html._SHOWCONSOLE form.metabooksettings > div.showconsole{
 #METABOOKCOVER form.metabooksettings a,
 form.metabooksettings a {
     color: blue; }
-form.metabooksettings span.opendyslexical span.text {
+form.metabooksettings span.opendyslexical span.checktext {
     font-family: 'Open Dyslexic', serif;}
 
 form.metabooksettings div.fontfamily {}
