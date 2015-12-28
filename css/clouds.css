@@ -93,7 +93,7 @@ html._MOUSE .cloud .showall:hover,
 
 .cloud .variation { 
     font-size: 70%; color: purple; font-style: italic;}
-.cloud > .rawterm > .text, .cloud > .rootform > .text {
+.cloud > .rawterm > .termtext, .cloud > .rootform > .termtext {
     font-size: 70%;}
 
 .cloud .nomatchmsg {
