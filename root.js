@@ -187,7 +187,7 @@ var metaBook={
         savegloss: 0,     // When glosses are saved to the server
         glosses: 0,       // How much we're tracing gloss processing
         addgloss: 0,      // Note whenever a gloss post completes
-        glossdata: 1,     // Whether to trace caching/retrieval of glossdata
+        glossdata: 0,     // Whether to trace caching/retrieval of glossdata
         slices: 0,        // How much to trace slice creation and layout
         pagers: 0,        // How much to trace Pager layout
         layout: 0,        // How much to trace document layout
