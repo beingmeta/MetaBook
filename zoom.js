@@ -78,30 +78,57 @@
         if (evt) fdjt.UI.cancel(evt);}
     metaBook.stopZoom=stopZoom;
 
+    function setZoom(scale) {
+        var mz=$ID("METABOOKZOOM");
+        var zb=$ID("METABOOKZOOMBOX");
+        var rx=mz.scrollLeft/mz.scrollWidth;
+        var ry=mz.scrollTop/mz.scrollHeight;
+        if (!(scale)) {
+            zb.style[fdjt.DOM.transform]="";}
+        else {
+            metaBook.zoomscale=scale;
+            zb.style[fdjt.DOM.transform]="scale("+scale+")";}
+        mz.scrollLeft=rx*mz.scrollWidth;
+        mz.scrollTop=ry*mz.scrollHeight;}
+    function zoom(adjust){
+        var zb=$ID("METABOOKZOOMBOX");
+        if (!(adjust)) {
+            zb.style[fdjt.DOM.transform]="";}
+        else setZoom((metaBook.zoomscale||1)*adjust);}
+
     function zoomIn(evt){
-        evt=evt||window.event;
-        var zb=$ID("METABOOKZOOMBOX");
-        var scale=metaBook.zoomscale;
-        if (!(scale)) scale=metaBook.zoomscale=1.0;
-        scale=scale*1.1;
-        metaBook.zoomscale=scale;
-        zb.style[fdjt.DOM.transform]="scale("+scale+")";
-        fdjt.UI.cancel(evt);}
+        evt=evt||window.event; zoom(1.1); fdjt.UI.cancel(evt);}
     function zoomOut(evt){
-        evt=evt||window.event;
-        var zb=$ID("METABOOKZOOMBOX");
-        var scale=metaBook.zoomscale;
-        if (!(scale)) scale=metaBook.zoomscale=1.0;
-        scale=scale/1.1;
-        metaBook.zoomscale=scale;
-        zb.style[fdjt.DOM.transform]="scale("+scale+")";
-        fdjt.UI.cancel(evt);}
+        evt=evt||window.event; zoom(1/1.1); fdjt.UI.cancel(evt);}
     function unZoom(evt){
-        evt=evt||window.event;
-        var zb=$ID("METABOOKZOOMBOX");
-        zb.style[fdjt.DOM.transform]="";
-        metaBook.zoomscale=false;
-        fdjt.UI.cancel(evt);}
+        evt=evt||window.event; zoom(false); fdjt.UI.cancel(evt);}
+
+    var d_start, d_last, cg_x, cg_y;
+    function zoom_touchstart(evt){
+        if ((evt)&&(evt.touches)&&(evt.touches.length===2)) {
+            var touches=evt.touches, touch1=touches[0], touch2=touches[1];
+            var x1=touch1.touchX, y1=touch1.touchY;
+            var x2=touch2.touchX, y2=touch2.touchY;
+            var dx=x2-x1, dy=y2-y1;
+            var d=Math.sqrt((dx*dx)+(dy*dy));
+            cg_x=(x1+x2)/2; cg_y=(y1+y2)/2;
+            d_last=d_start=d;}}
+    function zoom_touchmove(evt){
+        if ((evt)&&(evt.touches)&&(evt.touches.length===2)) {
+            var zb=$ID("METABOOKZOOMBOX");
+            var touches=evt.touches, touch1=touches[0], touch2=touches[1];
+            var x1=touch1.touchX, y1=touch1.touchY;
+            var x2=touch2.touchX, y2=touch2.touchY;
+            var dx=x2-x1, dy=y2-y1;
+            var d=Math.sqrt((dx*dx)+(dy*dy));
+            zb.style[fdjt.DOM.transform]=
+                "scale("+(d/d_start)+") scale ("+(mB.zoomscale||1)+")";
+            cg_x=(x1+x2)/2; cg_y=(y1+y2)/2;
+            d_last=d;}}
+    function zoom_touchend(evt){
+        if ((evt)&&(evt.touches)&&(evt.touches.length===2)) {
+            zoom(d_last/d_start);
+            d_last=d_start=false;}}
 
     fdjt.DOM.defListeners(
         metaBook.UI.handlers.mouse,
@@ -113,11 +140,15 @@
 
     fdjt.DOM.defListeners(
         metaBook.UI.handlers.touch,
-        {"#METABOOKZOOMCLOSE": {click: metaBook.stopZoom},
+        {"#METABOOKZOOM": {
+            touchstart: zoom_touchstart,
+            touchmove: zoom_touchmove,
+            touchend: zoom_touchend},
+         "#METABOOKZOOMCLOSE": {click: metaBook.stopZoom},
          "#METABOOKZOOMHELP": {click: metaBook.toggleHelp},
-         "#METABOOKZOOMIN": {click: zoomIn},
-         "#METABOOKZOOMOUT": {click: zoomOut},
-         "#METABOOKUNZOOM": {click: unZoom}});
+         "#METABOOKZOOMIN": {touchend: zoomIn},
+         "#METABOOKZOOMOUT": {touchend: zoomOut},
+         "#METABOOKUNZOOM": {touchend: unZoom}});
 
     // Not yet implemented, but the idea is to save some number of
     // audio/video/iframe elements to make restoring them faster.
