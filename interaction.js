@@ -988,6 +988,7 @@
                 fdjtUI.TapHold.clear();}
             dropClass(document.body,"mbZOOM");
             dropClass(document.body,"mbMEDIA");
+            mB.zoomed=false;
             if (mB.mode==="addgloss") metaBook.cancelGloss();
             if (mB.mode) {
                 metaBook.last_mode=metaBook.mode;
