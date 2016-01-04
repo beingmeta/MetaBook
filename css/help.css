@@ -307,6 +307,7 @@ body.mbSHOWHELP.mbNOMODE div#METABOOKHELP {
     pointer-events: all;
     display: block;
     opacity: 1.0;}
+body.mbSHOWHELP.mbNOMODE.hudup { display: none; }
 body.mbSHOWHELP.mbNOMODE div#METABOOKBODY { opacity: 0.5;}
 body.mbSHOWHELP.mbNOMODE #METABOOKBREVET { display: none; }
 body.mbSHOWHELP.mbNOMODE #METABOOKHUD .hudtip {
@@ -321,6 +322,9 @@ div.metabookhelp .glossbarbox {
     display: inline-block; float: right; text-align: right;
     padding-right: 2px; border-right: solid blue 3px; margin-right: 4px;
     max-width: 3px; width: 3px; height: 2em;}
+div.metabookhelp p.glossexample {
+    text-indent: 0px; text-align: right;
+    padding-right: 6px; border-right: solid blue 4px;}
 
 div#METABOOKHELP {
     position: absolute; text-align: left;
@@ -345,6 +349,8 @@ div#METABOOKHELP {
     max-width: 40em; clear: both;}
 .metabookhelp p img.floatleft, .metabookhelp p img.floatright {
   max-width: 20%; max-height: 3em; width: auto; height: auto;}
+
+#METABOOKCOVER p.helphelp { display: none; }
 
 .metabookhelp .fdjtselected,
 .helpbox .fdjtselected {
