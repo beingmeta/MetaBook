@@ -977,11 +977,10 @@
 
     // We use keydown to handle navigation functions and keypress
     //  to handle mode changes
-    function onkeydown(evt){
+    function mb_onkeydown(evt){
         evt=evt||window.event||null;
         var kc=evt.keyCode;
         var target=fdjtUI.T(evt);
-        // fdjtLog("sbook_onkeydown %o",evt);
         if (evt.keyCode===27) { /* Escape works anywhere */
             if (mB.previewing) {
                 mB.stopPreview("escape_key");
@@ -1002,17 +1001,17 @@
                  (target.tagName==="BUTTON")||
                  (target.isContentEditable))
             return;
-        else if (hasClass(document.body,"mbZOOM"))
-            return;
-        else if ((mB.controlc)&&(evt.ctrlKey)&&((kc===99)||(kc===67))) {
-            if (mB.previewing) mB.stopPreview("onkeydown",true);
+        if (Trace.gestures)
+            fdjtLog("metabook_keydown %o: %o on %o",evt,kc,target);
+        if ((mB.controlc)&&(evt.ctrlKey)&&((kc===99)||(kc===67))) {
+            if (mB.previewing) mB.stopPreview("mb_onkeydown",true);
             fdjtUI.TapHold.clear();
             setMode("console");
             cancel(evt);}
         else if ((evt.altKey)||(evt.ctrlKey)||(evt.metaKey)) return true;
         else if (mB.previewing) {
             // Any key stops a preview and goes to the target
-            mB.stopPreview("onkeydown",true);
+            mB.stopPreview("mb_onkeydown",true);
             fdjtUI.TapHold.clear();
             setHUD(false);
             cancel(evt);
@@ -1021,6 +1020,11 @@
             metaBook.clearStateDialog();
             metaBook.hideCover();
             cancel(evt);
+            return false;}
+        else if (hasClass(document.body,"mbZOOM")) {
+            if (kc===34) fdjtDOM.pageScroll($ID("METABOOKZOOM"),1);
+            else if (kc===33) fdjtDOM.pageScroll($ID("METABOOKZOOM"),-1);
+            else {}
             return false;}
         else if (mB.glossform) {
             var input=fdjt.DOM.getInput(mB.glossform,"NOTE");
@@ -1089,12 +1093,12 @@
 
     // At one point, we had the shift key temporarily raise/lower the HUD.
     //  We might do it again, so we keep this definition around
-    function onkeyup(evt){
+    function mb_onkeyup(evt){
         evt=evt||window.event||null;
         if (fdjtDOM.isTextInput(fdjtDOM.T(evt))) return true;
         else if ((evt.ctrlKey)||(evt.altKey)||(evt.metaKey)) return true;
         else {}}
-    metaBook.UI.handlers.onkeyup=onkeyup;
+    metaBook.UI.handlers.onkeyup=mb_onkeyup;
 
     /* Keypress handling */
 
@@ -1112,14 +1116,16 @@
         67: "console", 99: "console"};
 
     // Handle mode changes
-    function onkeypress(evt){
+    function mb_onkeypress(evt){
         var modearg=false; 
         evt=evt||window.event||null;
         var ch=evt.charCode||evt.keyCode;
-        // metaBook.trace("sbook_onkeypress",evt);
-        if (fdjtDOM.isTextInput(fdjtDOM.T(evt))) return true;
+        var target=fdjtDOM.T(evt);
+        if (fdjtDOM.isTextInput(target)) return true;
         else if ((evt.altKey)||(evt.ctrlKey)||(evt.metaKey)) return true;
-        else if ((ch===72)||(ch===104)) { // 'H' or 'h'
+        if (Trace.gestures)
+            fdjtLog("metabook_onkeypress %o: %o on %o",evt,ch,target);
+        if ((ch===72)||(ch===104)) { // 'H' or 'h'
             metaBook.clearStateDialog();
             metaBook.hideCover();
             fdjtDOM.toggleClass(document.body,'metabookhelp');
@@ -1128,6 +1134,10 @@
             metaBook.clearStateDialog();
             metaBook.toggleCover();
             return false;}
+        else if (hasClass(document.body,"mbZOOM")) {
+            if (ch===43) /*+*/ { return mB.zoom(1.1);}
+            else if (ch===45) /*-*/ {return mB.zoom(0.9);}
+            else modearg=modechars[ch];}
         else modearg=modechars[ch];
         if (modearg==="openheart")
             modearg=metaBook.last_heartmode||"about";
@@ -1142,7 +1152,7 @@
             metaBook.setFocus($ID("METABOOKSEARCHINPUT"));
         else metaBook.clearFocus($ID("METABOOKSEARCHINPUT"));
         fdjtDOM.cancel(evt);}
-    metaBook.UI.handlers.onkeypress=onkeypress;
+    metaBook.UI.handlers.onkeypress=mb_onkeypress;
 
     function goto_keypress(evt){
         evt=evt||window.event||null;
@@ -1656,7 +1666,7 @@
             target.blur();}}
     metaBook.clearFocus=clearFocus;
 
-    function metabookfocus(evt){
+    function mb_onfocus(evt){
         evt=evt||window.event;
         var target=fdjtUI.T(evt);
         var input=getParent(target,'textarea');
@@ -1665,8 +1675,8 @@
             (input.type.search(fdjtDOM.text_types)!==0))
             return;
         setFocus(input);}
-    metaBook.UI.focus=metabookfocus;
-    function metabookblur(evt){
+    metaBook.UI.focus=mb_onfocus;
+    function mb_onblur(evt){
         evt=evt||window.event;
         var target=((evt.nodeType)?(evt):(fdjtUI.T(evt)));
         var input=getParent(target,'textarea');
@@ -1677,7 +1687,7 @@
             (input.type.search(fdjtDOM.text_types)!==0))
             return;
         clearFocus(input);}
-    metaBook.UI.blur=metabookblur;
+    metaBook.UI.blur=mb_onblur;
 
     function metabookmouseout(evt){
         var target=fdjtUI.T(evt);
@@ -1859,12 +1869,12 @@
     fdjt.DOM.defListeners(
         metaBook.UI.handlers.mouse,
         {window: {
-            keyup: onkeyup,
-            keydown: onkeydown,
-            keypress: onkeypress,
-            focus: metabookfocus,
+            keyup: mb_onkeyup,
+            keydown: mb_onkeydown,
+            keypress: mb_onkeypress,
+            focus: mb_onfocus,
             mouseout: metabookmouseout,
-            blur: metabookblur},
+            blur: mb_onblur},
          "#METABOOKBODY": {
              mouseup: global_mouseup},
          content: {tap: body_tapped,
@@ -1975,12 +1985,12 @@
     fdjt.DOM.defListeners(
         metaBook.UI.handlers.touch,
         {window: {
-            keyup: onkeyup,
-            keydown: onkeydown,
-            keypress: onkeypress,
+            keyup: mb_onkeyup,
+            keydown: mb_onkeydown,
+            keypress: mb_onkeypress,
             touchmove: preview_touchmove_nodefault,
-            focus: metabookfocus,
-            blur: metabookblur},
+            focus: mb_onfocus,
+            blur: mb_onblur},
          content: {tap: body_tapped,
                    hold: body_held,
                    taptap: body_taptap,

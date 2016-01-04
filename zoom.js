@@ -129,6 +129,7 @@
     function zoom(adjust){
         if (!(adjust)) setZoom(false);
         else setZoom((metaBook.zoomscale||1)*adjust);}
+    metaBook.zoom=zoom;
 
     function zoomIn(evt){
         evt=evt||window.event; zoom(1.1); fdjt.UI.cancel(evt);}
