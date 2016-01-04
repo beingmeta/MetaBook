@@ -200,7 +200,8 @@ body.mbCOVER #METABOOKHUD, body.hudup.mbCOVER #METABOOKHUD {
     overflow-x: scroll; overflow-y: scroll;
     display: none; }
 #METABOOKZOOMBOX {
-    transform-origin: 0px 0px;}
+    transform-origin: top center;
+    z-index: 50;}
 #METABOOKZOOMTARGET {
     display: inline-block; 
     font-size: 2em; font-size: 2rem;}
@@ -218,7 +219,8 @@ body.mbZOOM #METABOOKZOOM {
     position: fixed;
     top: 0px; left: 0px; height: 100%; width: 100%;
     text-align: center; vertical-align: middle;
-    z-index: 100; opacity: 0.5;
+    z-index: 100; opacity: 0.7;
+    transform: translateZ(0);
     pointer-events: none;}
 #METABOOKZOOMCONTROLS > * {
     pointer-events: all;}

@@ -200,6 +200,7 @@ var metaBook={
         selection: false, // Whether to trace text selection events
         highlight: 0,     // Whether to trace highlighting
         indexing: 0,      // How much to trace document indexing
+        zoom: 0,          // How much to trace image zooming
         gestures: 0}      // How much to trace gestures
 };
 
