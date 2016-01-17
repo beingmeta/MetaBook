@@ -46,7 +46,7 @@
 //var Knodule=((typeof Knodule !== "undefined")?(Knodule):({}));
 
 metaBook.Startup=
-    (function(){
+    (function doStartup(){
         "use strict";
 
         var fdjtString=fdjt.String;
@@ -455,6 +455,14 @@ metaBook.Startup=
                         var node=nodes[i++];
                         if (hasText(node)) index.indexText(node);}
                     index.finishIndex();},
+                // Now you're ready to lay out the book, which is
+                //  timesliced and runs on its own.  We wait to do
+                //  this until we've scanned the DOM because we may
+                //  use results of DOM scanning in layout (for example,
+                //  heading information).
+                function doLayout(){
+                    if (metaBook.bypage) metaBook.Paginate("initial");
+                    else addClass(document.body,"_SCROLL");},
                 function buildTagIndex(){
                     var toSet=RefDB.toSet;
                     var docdb=metaBook.docdb;
@@ -469,25 +477,6 @@ metaBook.Startup=
                     var n=0, nids=allids.length; while (n<nids) {
                         var id=allids[n++], doc=docinfo[id];
                         if (doc) doc.strings=toSet(idterms[id]);}},
-                /*
-                function(){
-                    var six=docdb.addIndex('sectag',RefDB.StringMap);
-                    var i=0, lim=allinfo.length; while (i<lim) {
-                        var node=allinfo[i++], heads=node.heads;
-                        if (node.sectag) six.add(node.sectag,node);
-                        var h=0, nheads=heads.length;
-                        while (h<nheads) {
-                            if (heads[h].sectag)
-                                six.add(node.sectag,node);}}},
-                */
-                // Now you're ready to lay out the book, which is
-                //  timesliced and runs on its own.  We wait to do
-                //  this until we've scanned the DOM because we may
-                //  use results of DOM scanning in layout (for example,
-                //  heading information).
-                function doLayout(){
-                    if (metaBook.bypage) metaBook.Paginate("initial");
-                    else addClass(document.body,"_SCROLL");},
                 // Load all source (user,layer,etc) information
                 function loadSourceDB(){
                     if (Trace.startup>1) fdjtLog("Loading sourcedb");
@@ -495,7 +484,7 @@ metaBook.Startup=
                 // Read knowledge bases (knodules) used by the book
                 ((Knodule)&&(Knodule.HTML)&&
                  (Knodule.HTML.Setup)&&(metaBook.knodule)&&
-                 (function(){
+                 (function setupKnodule(){
                      var knomsg=$ID("METABOOKSTARTUPKNO");
                      var knodetails=$ID("METABOOKSTARTUPKNODETAILS");
                      if (knodetails) {
@@ -507,7 +496,7 @@ metaBook.Startup=
                      Knodule.HTML.Setup(metaBook.knodule);
                      dropClass(knomsg,"running");})),
                 // Process locally stored (offline data) glosses
-                function(){
+                function syncGlosses(){
                     if (metaBook.sync) {
                         if (metaBook.cacheglosses) 
                             return metaBook.initGlossesOffline();}
@@ -516,7 +505,7 @@ metaBook.Startup=
                         window._sbook_loadinfo=false;}},
                 // Process anything we got via JSONP ahead of processing
                 //  _sbook_loadinfo
-                ((window._sbook_newinfo)&&(function(){
+                ((window._sbook_newinfo)&&(function loadPendingInfo(){
                     metaBook.loadInfo(window._sbook_newinfo);
                     window._sbook_newinfo=false;})),
                 function(){metaBook.setupIndex(metadata);},
@@ -1049,7 +1038,7 @@ metaBook.Startup=
                 metaBook.nofocus=new fdjtDOM.Selector(nofocus);}
 
         function setupBookInfo(){
-            var info=fdjt.DOM.$(".metabookrefinfo"), elt;
+            var info=fdjt.DOM.$(".metabookrefinfo"), elt, started=fdjtTime();
             var i=0, lim=info.length; while (i<lim) {
                 elt=info[i++];
                 elt.innerHTML="<strong>Ref:</strong> ";
@@ -1087,7 +1076,9 @@ metaBook.Startup=
                 info[i++].innerHTML=
                     "Program and Interface "+
                     "<span class='inlinesymbol'>©"+"</span>"+
-                    " beingmeta, inc 2008-2015";}}
+                    " beingmeta, inc 2008-2015";}
+            if (Trace.startup>1)
+                fdjtLog("Book info setup done in %dms",fdjtTime()-started);}
 
         function timeDOM(x){
             var elt;
@@ -1103,6 +1094,7 @@ metaBook.Startup=
                 return document.createTextNode("??time??");}}
 
         function setupZoom(){
+            var started=fdjtTime();
             var zoom=metaBook.Zoom=fdjtDOM(
                 "div#METABOOKZOOM.metabookzoom.metabookcontent",
                 fdjtDOM("div#METABOOKZOOMBOX",
@@ -1116,16 +1108,21 @@ metaBook.Startup=
                         fdjtDOM("div#METABOOKZOOMHELPTEXT",
                                 "Drag to pan, use two fingers to zoom")));
             zoom.metabookui=true;
-            document.body.appendChild(zoom);}
+            document.body.appendChild(zoom);
+            if (Trace.startup>1)
+                fdjtLog("Zoom setup done in %dms",fdjtTime()-started);}
         metaBook.setupZoom=setupZoom;
         
         function setupMedia(){
+            var started=fdjtTime();
             var media=metaBook.Media=fdjtDOM(
                 "div#METABOOKMEDIA.metabookmedia.metabookcontent",
                 fdjtDOM("div#METABOOKMEDIATARGET"),
                 fdjtDOM("div#METABOOKCLOSEMEDIA"));
             media.metabookui=true;
-            document.body.appendChild(media);}
+            document.body.appendChild(media);
+            if (Trace.startup>1)
+                fdjtLog("Zoom setup done in %dms",fdjtTime()-started);}
         metaBook.setupMedia=setupMedia;
 
         metaBook.addConfig("uisound",function(name,value){
