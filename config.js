@@ -304,9 +304,12 @@
     metaBook.updateSettings=updateSettings;
 
     function initSettings(){
+        var started=fdjtTime();
         for (var setting in current_config) {
             if (current_config.hasOwnProperty(setting))
-                updateSettings(setting,current_config[setting]);}}
+                updateSettings(setting,current_config[setting]);}
+        if (Trace.startup>1)
+            fdjtLog("Finished initSettings in %dms",fdjtTime()-started);}
     metaBook.initSettings=initSettings;
 
 })();

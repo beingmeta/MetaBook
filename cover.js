@@ -242,7 +242,6 @@
         return cover;}
     metaBook.setupCover=setupCover;
 
-
     var toArray=fdjtDOM.toArray;
     function addToCover(cover,item){
         var children=toArray(cover.childNodes);
