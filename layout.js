@@ -341,7 +341,7 @@ metaBook.Paginate=
                 
                 // Now reset the width
                 metaBook.content.style.width=saved_width;
-                
+
                 var root_i=0; var n_roots=roots.length;
                 function rootloop(){
                     if (root_i>=n_roots) {
@@ -355,7 +355,7 @@ metaBook.Paginate=
                             var elapsed=layout.done-layout.started;
                             if ((typeof cachethresh === "number")?
                                 (elapsed>cachethresh):(elapsed>5000)) {
-                                layout.saveLayout(function(l){
+                                layout.saveLayout(function layoutSaved(l){
                                     recordLayout(l.layout_id,metaBook.sourceid);});}}
                         $ID("CODEXPAGE").style.visibility='';
                         $ID("CODEXCONTENT").style.visibility='';
@@ -398,7 +398,7 @@ metaBook.Paginate=
                 if (Trace.layout)
                     fdjtLog("Fetching layout %s",layout_id);
                 CodexLayout.fetchLayout(layout_id).
-                    then(function(content){
+                    then(function layoutFetched(content){
                         if (!(content)) return new_layout();
                         if (Trace.layout) fdjtLog("Got layout %s",layout_id);
                         recordLayout(layout_id,metaBook.sourceid);
@@ -407,13 +407,14 @@ metaBook.Paginate=
                         catch (ex) {
                             fdjtLog("Layout restore error: %o",ex);
                             return new_layout();}})
-                    .catch(function(){return new_layout();});}
+                    .catch(function layoutNotFetched(){
+                        return new_layout();});}
             else if (async) {
                 setTimeout(new_layout,10);}
             else return new_layout();}
         metaBook.Paginate=Paginate;
 
-        CodexLayout.prototype.onresize=function(){
+        CodexLayout.prototype.onresize=function layoutOnResize(){
             if (metaBook.bypage) metaBook.Paginate("resize");
             else fdjt.DOM.adjustFonts(metaBook.content);};
         
@@ -474,11 +475,12 @@ metaBook.Paginate=
                 // If you're already paginated, repaginate.  Either
                 // when done with the config or immediately.
                 if (metaBook.postconfig) {
-                    metaBook.postconfig.push(function(){
+                    metaBook.postconfig.push(function layoutOnProperty(){
                         metaBook.Paginate(name);});}
                 else {
                     metaBook.Paginate(name);}}
-            fdjt.Async(function(){metaBook.updateSettings(name,val);});}
+            fdjt.Async(function layoutUpdateSettings(){
+                metaBook.updateSettings(name,val);});}
         metaBook.addConfig("bodysize",updateLayoutProperty);
         metaBook.addConfig("bodyfamily",updateLayoutProperty);
         metaBook.addConfig("bodyspacing",updateLayoutProperty);

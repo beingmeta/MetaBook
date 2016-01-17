@@ -436,11 +436,11 @@ metaBook.Startup=
             ([  // Scan the DOM for metadata.  This is surprisingly
                 //  fast, so we don't currently try to timeslice it or
                 //  cache it, though we could.
-                function(){
+                function scanStructure(){
                     applyTOCRules();
                     metadata=scanDOM();
                     metaBook.setupTOC(metadata[metaBook.content.id]);},
-                function(){
+                function buildTextIndex(){
                     var hasText=fdjtDOM.hasText;
                     var rules=fdjtDOM.getMeta("METABOOK.index",true)
                         .concat(fdjtDOM.getMeta("PUBTOOL.index",true))
@@ -455,7 +455,7 @@ metaBook.Startup=
                         var node=nodes[i++];
                         if (hasText(node)) index.indexText(node);}
                     index.finishIndex();},
-                function(){
+                function buildTagIndex(){
                     var toSet=RefDB.toSet;
                     var docdb=metaBook.docdb;
                     var index=metaBook.textindex;
@@ -485,11 +485,11 @@ metaBook.Startup=
                 //  this until we've scanned the DOM because we may
                 //  use results of DOM scanning in layout (for example,
                 //  heading information).
-                function(){
+                function doLayout(){
                     if (metaBook.bypage) metaBook.Paginate("initial");
                     else addClass(document.body,"_SCROLL");},
                 // Load all source (user,layer,etc) information
-                function(){
+                function loadSourceDB(){
                     if (Trace.startup>1) fdjtLog("Loading sourcedb");
                     metaBook.sourcedb.load(true);},
                 // Read knowledge bases (knodules) used by the book
