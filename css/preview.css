@@ -18,7 +18,14 @@ body.mbPREVIEW #METABOOKHUD.searchresults #METABOOKSKIMMER {
 /* HUD Preview rules */
 
 body.mbPREVIEW #METABOOKHUD {
-    opacity: 0.8;}
+    opacity: 0.8; visibility: hidden;}
+body.mbPREVIEW #METABOOKHEAD,
+body.mbPREVIEW.hudup #METABOOKHEAD,
+body._FULLHEIGHT.mbPREVIEW.hudup #METABOOKHEAD {
+    display: none;}
+body.mbPREVIEW #METABOOKFOOT,
+body.mbPREVIEW #METABOOKSKIMMER {
+    visibility: visible;}
 body.hudup.mbPREVIEW #METABOOKHEART {
     background-color: transparent; border-color: transparent; opacity: 0.0;}
 body.hudup.mbPREVIEW #METABOOKHUD.openheart #METABOOKHEART {

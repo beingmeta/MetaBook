@@ -465,15 +465,15 @@ html._MOUSE a[href]:hover {text-decoration: underline;}
 
 /* Block elements */
 
-#METABOOKBODY #SBOOKDETAILS,
-#METABOOKBODY #SBOOKASIDES,
-#METABOOKBODY #SBOOKNOTES {
+#METABOOKBODY #METABOOKDETAILS,
+#METABOOKBODY #METABOOKASIDES,
+#METABOOKBODY #METABOOKNOTES {
     page-break-before: always;}
 
-#METABOOKBODY #SBOOKDETAILS detail,
-#METABOOKBODY #SBOOKDETAILS .sbookdetail,
-#METABOOKBODY #SBOOKDETAILS aside,
-#METABOOKBODY #SBOOKDETAILS .sbookaside {
+#METABOOKBODY #METABOOKDETAILS detail,
+#METABOOKBODY #METABOOKDETAILS .sbookdetail,
+#METABOOKBODY #METABOOKDETAILS aside,
+#METABOOKBODY #METABOOKDETAILS .sbookaside {
     page-break-before: always;}
 
 div.metabookglossform form table {
@@ -526,19 +526,18 @@ div.codexpage.newpage.curpage, div.codexpage.oldpage.curpage {
 /* Sliding page turns */
 
 body._ANIMATE div.codexpage { 
-    transform: translate(0px,0px) translateZ(0); }
+    transform: translate3d(0px,0px,0); }
 body._ANIMATE div.codexpage.previewpage {
-    transform: translate(0px,0px) translateZ(0); }
+    transform: translate3d(0px,0px,0); }
 
 div.codexpage.newpage { z-index: 100; }
 
 body._ANIMATE div.codexpage.newpage.onright {
-    transform: translate(100%,0%);
-    -webkit-transform: translate(100%,0%);}
+    transform: translate3d(100%,0%,0);}
 body._ANIMATE div.codexpage.newpage.onleft {
-    transform: translate(-100%,0%);}
+    transform: translate3d(-100%,0%,0);}
 body._ANIMATE div.codexpage.newpage.onright.curpage, div.codexpage.newpage.onleft.curpage {
-    transform: translate(0%,0%);}
+    transform: translate3d(0%,0%,0);}
 
 /* Special rules for overriding properties on split (dup) passages */
 

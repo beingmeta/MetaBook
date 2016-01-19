@@ -51,7 +51,7 @@ div.metabookslice .mbtoc.mblivetoc.mbcurtoc {
     z-index: 50;
     white-space: normal;}
 .mbtoc div.elements {
-    transform: translate(0,0); overflow: visible;
+    transform: translate3d(0,0,0); overflow: visible;
     margin: 0px; padding: 0px; border: 0px; height: 1.3em;
     z-index: -50; margin-left: 2em;}
 .mbtoc a.brick {
