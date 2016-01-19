@@ -102,10 +102,10 @@ body.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR
 .hudup #METABOOKSKIMMER { 
     border: solid steelblue 4px;  border-top: 0px;
     padding: 0px;}
-#METABOOKSKIMMER .tochead {
+#METABOOKSKIMMER mbcard_tochead {
     background-color: steelblue; color: white;}
-#METABOOKSKIMMER .tochead a { color: white;}
-#METABOOKSKIMMER .tochead hr {
+#METABOOKSKIMMER mbcard_tochead a { color: white;}
+#METABOOKSKIMMER mbcard_tochead hr {
     color: rgb(33, 106, 129); 
     background-color: rgba(141,168,191, 0.9);}
 
@@ -184,18 +184,18 @@ div.fdjtdialog.savegloss.closing button[value="DISCARD"] {
 
 /* card.css */
 
-div.metabookcard > hr {
+div.mbcard > hr {
     color: gold; background-color: gold;}
-.metabookcard .private {
+.mbcard .private {
     background-color: red; color: white;}
-.metabookcard .links a {color: blue;}
-.metabookcard .links span.mbmedia { background-color: lightgray; }
-.metabookcard span.audience .outlet { color: #127112; }
-.metabookcardbody {
+.mbcard_links a {color: blue;}
+.mbcard_links span.mbmedia { background-color: lightgray; }
+span.mbcard_audience .outlet { color: #127112; }
+.mbcard_body {
     color: rgba(0,0,0,0.9); }
-.metabookcard span.glossbody {
+.mbcard span.glossbody {
     background-color: lightblue; color: black;}
-.metabookcard .age {color: #0A558F;}
+.mbcard .age {color: #0A558F;}
 
 /* clouds.css */
 
@@ -271,23 +271,18 @@ form.metabooksettings .button.exit {
 
 /* slices.css */
 
-body.hudup #METABOOKSKIMMER div.metabookcard,
+body.hudup #METABOOKSKIMMER div.mbcard,
 div.metabookslice div.skimpoint {
     background-color: hsla(0, 44%, 90%, 0.7);}
 div.metabookslice.mbtocslice div.skimpoint {
     background-color: hsla(207,44%,90%,0.2);
-    border-bottom-color: red;}
+    border-bottom-color: blue;}
 div.metabooksources img.button.everyone.selected { background-color: silver; }
 div.metabooksources img.button.source.selected,
 div.metabooksources div.button.source.selected {
     border-color: blue;}
-div.tochead { background-color: whitesmoke; color: blue; }
-div.tochead hr { background-color: rgba(141,168,191, 0.5); color: lightblue; }
-div.idhead {
-    background-color: silver; color: black;}
-div.idhead hr {
-    border-right: solid gold 1px; border-left: solid gold 1px; 
-    color: lightblue; background-color: lightblue;}
+div.mbcard_tochead { background-color: whitesmoke; color: blue; }
+div.mbcard_tochead hr { background-color: rgba(141,168,191, 0.5); color: lightblue; }
 
 /* addlgloss.css */
 
@@ -314,10 +309,10 @@ div.metabookglossform div.messageoverlay {
 
 /* tocslice.css */
 
-.mbtoc a.brick {
+.mbtoc a.mbtoc_sectbrick {
     border-right: solid gray 1px;
     background-color: lightblue;}
-.mbtoc a.showsize {
+.mbtoc a.mbtoc_showsize {
     background-color: rgba(211, 211, 211, 0.7);}
 body.hudup #METABOOKHUD.statictoc #METABOOKSKIMMER {
     background-color: rgba(70, 130, 180, 0.5);}
@@ -327,10 +322,10 @@ div.metabookslice .mbtoc.mblivetoc {
     border-bottom-color: red;
     border-bottom-style: dotted;}
 .mbtoc .context {color: black;}
-.mbtoc a.sectname,
-.mbtoc.cohi a.sectname, .mbtoc.cohi a.sectname:visited,
-#METABOOKHEARTBODY .mbtoc.cohi a.sectname:visited,
-#METABOOKHEARTBODY .mbtoc.cohi a.sectname {
+.mbtoc a.mbtoc_sectname,
+.mbtoc.cohi a.mbtoc_sectname, .mbtoc.cohi a.mbtoc_sectname:visited,
+#METABOOKHEARTBODY .mbtoc.cohi a.mbtoc_sectname:visited,
+#METABOOKHEARTBODY .mbtoc.cohi a.mbtoc_sectname {
     color: black;}
 
 html._MOUSE .mbtocslice .mbtoc:hover {

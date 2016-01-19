@@ -7,7 +7,7 @@
 #METABOOKHUD a img { border: transparent;}
 html._MOUSE #METABOOKHUD a:hover img { border: inherit;}
 html._MOUSE #METABOOKHUD a:hover { text-decoration: underline;}
-html._MOUSE #METABOOKHUD a.brick:hover { text-decoration: none;}
+html._MOUSE #METABOOKHUD a.mbtoc_sectbrick:hover { text-decoration: none;}
 
 /* Size rules */
 
@@ -73,7 +73,7 @@ html._TOUCH body.hudup #METABOOKFRAME > #METABOOKHUD > div.hudtip {
     border-bottom-right-radius: 0px;}
 
 #METABOOKFRAME._ANIMATE #METABOOKHEAD {
-    transition-property: opacity; transition-duration: 2s;}
+    transition-property: opacity; transition-duration: 0.5s;}
 #METABOOKHEAD {
     opacity: 0.0; max-height: 0px;
     display: block;}
@@ -424,7 +424,7 @@ body.hudup #CODEXPAGE p, body.hudup #CODEXPAGE div { cursor: pointer;}
 
 /* METABOOKPOINTGLOSSES rules */
 
-#METABOOKPOINTGLOSSES div.metabookcard { margin-left: 0px;}
+#METABOOKPOINTGLOSSES div.mbcard { margin-left: 0px;}
 #METABOOKPOINTGLOSSES.hudpanel {
     top: 100px; left: auto; right: 50px;
     max-width: 80vw; min-width: 15em; min-height: 20px; 
@@ -495,8 +495,7 @@ body.hudup #METABOOKHUD.addgloss .hudbutton {
     border-color: darkblue !important;
     background-color: rgba(141,168,191, 0.8) !important;}
 
-#METABOOKPOINTGLOSSES div.idhead,
-#METABOOKPOINTGLOSSES div.tochead {
+#METABOOKPOINTGLOSSES div.mbcard_tochead {
     display: none;}
 
 /* Skimmer buttons */

@@ -45,7 +45,7 @@ body.mbLAYOUT #CODEXCONTENT { display: none;}
 
 /* The page content gets a little transparent when the HUD comes up*/
 body._ANIMATE.hudup #CODEXPAGE {
-    transition-property: opacity; transition-duration: 0.25s;}
+    transition-property: opacity; transition-duration: 0.2s;}
 body.hudup #CODEXPAGE {opacity: 0.8;}
 body.hudup.mbPREVIEW #CODEXPAGE {opacity: 1;}
 
@@ -56,8 +56,8 @@ body.mbPREVIEW #CODEXPAGE, body.mbSHRINK #CODEXPAGE  {
 /* This is for page shrinking when appropriate */
 body._ANIMATE #CODEXPAGE {
     transition-property: opacity,transform;
-    transition-duration: 0.25s;}
-body #CODEXPAGE {transform: scale(1,1);}
+    transition-duration: 0.2s;}
+body #CODEXPAGE {transform: scale(1,1) translateZ(0);}
 
 body.mbSHRINK #CODEXPAGE, body.mbPREVIEW #CODEXPAGE,
 body.mbSKIMMING #CODEXPAGE {transform-origin: center center;}
@@ -110,7 +110,7 @@ body._BYPAGE #CODEXPAGE #CODEXCONTENT .metabookpagebreak {
     display: none;}
 
 body._ANIMATE body.metabookfixed div.codexpage {
-    transition-property: opacity; transition-duration: 0.5s;}
+    transition-property: opacity; transition-duration: 0.1s;}
 
 /* The content */
 
@@ -271,11 +271,11 @@ html._MOUSE .glossmark#METABOOKOPENGLOSSMARK.hover > img {
 .mbSKIMMING .glossmark, .mbPREVIEW .glossmark {
     opacity: 0.5;}
 
-/* Displaying the sbook target */
+/* Displaying the passage target */
 
 body._ANIMATE .mbtarget, body.mbSHRINK .mbtarget {
     transition-property: color,background-color;
-    transition-duration: 6s;}
+    transition-duration: 4s;}
 body.hudup .mbtarget, body.mbSHRINK .mbtarget {
     cursor: pointer;}
 body.hudup .mbtarget, body.mbSHRINK .mbtarget,
@@ -296,11 +296,6 @@ div.sbooksection.mbnewtarget > *:first-child {
    (actually, the body should probably never be a target, but when it is...)
 */
 body.mbtarget { color: inherit;}
-
-/*
-body._ANIMATE .glossmark > img {
-    transition-property: opacity; transition-duration: 0.5s;}
-*/
 
 .mbtarget > .glossmark {
     border-right-color: blue;} /* double */
@@ -510,7 +505,7 @@ body._ANIMATE.mbPREVIEW div.codexpage {
     transition-property: none !important;}
 
 body._ANIMATE #CODEXPAGE div.codexpage {
-    transition-duration: 0.15s;}
+    transition-duration: 0.2s;}
 
 body._ANIMATE div.codexpage {
     transition-property: opacity,transform;}

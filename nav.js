@@ -102,7 +102,7 @@
             var bar=false, appbar=false;
             if (tocelt) {
                 // tocelt.title=Math.round(progress)+"%";
-                bar=fdjtDOM.getFirstChild(tocelt,".posbar");}
+                bar=fdjtDOM.getFirstChild(tocelt,".mbtoc_posbar");}
             if (Trace.toc)
                 fdjtLog("For tocbar %o/%o loc=%o start=%o end=%o progress=%o",
                         bar,appbar,location,start,end,progress);

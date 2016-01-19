@@ -17,24 +17,24 @@ div.metabookslice textarea,
 div.metabookslice input[TYPE="TEXT"] {
     cursor: text; }
 
-div.metabookslice div.metabookcard {
+div.metabookslice div.mbcard {
     margin-left: 20px;}
-div.metabookslice div.metabookcard.skimpoint {
+div.metabookslice div.mbcard.skimpoint {
     margin-left: 10px; padding-left: 10px; padding-bottom: 1ex;
     border-left-color: darkblue;
     font-size: 110%;}
-div.metabookslice.sourced div.metabookcard { display: none;}
-div.metabookslice.sourced div.metabookcard.sourced { display: block;}
+div.metabookslice.sourced div.mbcard { display: none;}
+div.metabookslice.sourced div.mbcard.sourced { display: block;}
 
-div.metabookslice.onepassage .tocblock .tochead {display:none;}
+div.metabookslice.onepassage .tocblock mbcard_tochead {display:none;}
 
 div.metabookslice div.xrefs { display: none;}
 div.metabookslice .showxrefs div.xrefs { display: block;}
 div.metabookslice div.xrefs a { display: block;}
-div.metabookslice div.metabookcard span.tags span.other { display: none;}
+div.metabookslice divspan.mbcard_tags span.other { display: none;}
 
-div.metabookslice div.skimpoint.metabookcard {}
-div.metabookslice div.skimpoint.metabookcard .tool {
+div.metabookslice div.skimpoint.mbcard {}
+div.metabookslice div.skimpoint.mbcard .tool {
     font-size: 47%; font-weight: bold;}
 div.metabookslice .excerpt .elision,
 div.metabookslice .excerpt .delision {
@@ -42,12 +42,12 @@ div.metabookslice .excerpt .delision {
 div.metabookslice .excerpt .elided {
     display: inline;}
 
-div.skimpoint .metabookcard .metabookcardbody { padding-top: 0px;}
+div.skimpoint .mbcard .mbcard_body { padding-top: 0px;}
 
-div.metabookslice div.metabookcard.skimpoint + div.metabookcard > div.metabookcardbody,
-div.metabookslice div.metabookcard.skimpoint .metabookcardbody {
+div.metabookslice div.mbcard.skimpoint + div.mbcard > div.mbcard_body,
+div.metabookslice div.mbcard.skimpoint .mbcard_body {
     border-top-width: 0px;}
-div.metabookslice div.metabookcard.skimpoint .fdjtclearfloats {
+div.metabookslice div.mbcard.skimpoint .fdjtclearfloats {
     margin-bottom: 0px;}
 
 /* METABOOKSOURCES */
@@ -68,57 +68,40 @@ div.metabooksources div.button.source {
 
 /* Heads of various sorts */
 
-div.tochead { 
+div.mbcard_tochead { 
     position: relative; /* width: 100%; */
     border-top: solid black 2px; border-bottom: solid black 4px;
     text-align: left; vertical-align: middle;}
-div.tochead { background-color: whitesmoke; color: darkblue; }
-div.tochead span.spacer, div.idhead span.spacer {
+div.mbcard_tochead { background-color: whitesmoke; color: darkblue; }
+div.mbcard_tochead span.spacer {
     font-size: 125%; font-weight: bold; font-style: italic;}
-div.tochead .paratext {
+div.mbcard_tochead .paratext {
     color: darkblue; font-style: italic; padding-left: 5px;}
-div.tochead span.head {
+div.mbcard_tochead span.head {
     font-size: 90%; padding-left: 5px;}
-div.tochead span.headtext {
+div.mbcard_tochead span.headtext {
     white-space: nowrap; vertical-align: top;}
-div.tochead hr {
+div.mbcard_tochead hr {
     min-width: 3px;
     border: none; border-right: solid gold 1px; border-left: solid gold 1px;
     position: absolute; left: 0px; top: 0px; height: 100%; z-index: 1;
     padding: 0px; margin: 0px;}
-div.tochead span { z-index: 10; position: relative;}
-div.tochead a { z-index: 10; color: blue;} 
-html._MOUSE div.tochead a:hover { z-index: 10; color: darkblue;} 
-div.tochead hr[about] { cursor: crosshair;}
+div.mbcard_tochead span { z-index: 10; position: relative;}
+div.mbcard_tochead a { z-index: 10; color: blue;} 
+html._MOUSE div.mbcard_tochead a:hover { z-index: 10; color: darkblue;} 
+div.mbcard_tochead hr[about] { cursor: crosshair;}
 
-div.idhead { 
-    position: relative; white-space: nowrap; /* width: 100%; */
-    text-align: left; vertical-align: middle;
-    border-bottom: solid purple 2px;
-    overflow: hidden;}
-div.idhead hr {
-    border: 0px; padding: 0px; margin: 0px; min-width: 3px;
-    border-right: solid gold 1px; border-left: solid gold 1px; 
-    position: absolute; left: 0px; top: 0px; height: 100%;}
-div.idhead span {
-    z-index: 10; opacity: 0.75;}
-div.idhead div {
-    z-index: 10; opacity: 0.75;}
+div.metabookslice div.mbcard_tochead { display: none; }
 
-div.metabookslice div.metabookcard div.tochead { display: none; }
-div.metabookslice div.metabookcard div.idhead { display: none; }
-
-div.metabookslice div.metabookcard.slicenewhead div.tochead,
-div.metabookslice div.metabookcard.fdjtstartofpage div.tochead {
+div.metabookslice div.mbcard.slicenewhead div.mbcard_tochead,
+div.metabookslice div.mbcard.fdjtstartofpage div.mbcard_tochead {
     display: block; }
 
-div.metabookslice div.metabookcard.fdjtstartofpage div.tochead {
+div.metabookslice div.mbcard.fdjtstartofpage div.mbcard_tochead {
     border-top: 0px;}
 
-#METABOOKSKIMMER div.metabookcard div.metabookcardbody {
+#METABOOKSKIMMER div.mbcard div.mbcard_body {
     border-top: 0px; padding-left: 1em; padding-top: 0.25ex;}
-#METABOOKSKIMMER div.metabookcard div.idhead {
-    border-bottom: 0px;}
 
 /* Emacs local variables
 ;;;  Local variables: ***

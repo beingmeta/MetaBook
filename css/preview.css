@@ -18,7 +18,7 @@ body.mbPREVIEW #METABOOKHUD.searchresults #METABOOKSKIMMER {
 /* HUD Preview rules */
 
 body.mbPREVIEW #METABOOKHUD {
-    opacity: 0.8; visibility: hidden;}
+    opacity: 0.8;}
 body.mbPREVIEW #METABOOKHEAD,
 body.mbPREVIEW.hudup #METABOOKHEAD,
 body._FULLHEIGHT.mbPREVIEW.hudup #METABOOKHEAD {

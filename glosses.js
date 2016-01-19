@@ -1060,7 +1060,7 @@
         var i=0, lim=reps.length;
         while (i<lim) {
             var rep=reps[i++];
-            if (hasClass(rep,"metabookcard")) {
+            if (hasClass(rep,"mbcard")) {
                 var new_card=metaBook.renderCard(ref);
                 if (new_card) fdjtDOM.replace(rep,new_card);}}
         ref.save();
@@ -1748,7 +1748,7 @@
                     var rendering=renderings[i++];
                     if (rendering.id==='METABOOKSKIM')
                         fdjtDOM.replace(
-                            rendering,fdjtDOM("div.metabookcard.deletedgloss"));
+                            rendering,fdjtDOM("div.mbcard.deletedgloss"));
                     else fdjtDOM.remove(rendering);}}
             var glossmarks=
                 document.getElementsByName("METABOOK_GLOSSMARK_"+frag);

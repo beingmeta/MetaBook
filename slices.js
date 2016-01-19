@@ -111,7 +111,7 @@ metaBook.Slice=(function () {
         if (typeof shared === 'string') shared=[shared];
         if (overlay) shared=RefDB.remove(shared,(overlay._qid||overlay._id));
         var body=
-            fdjtDOM("div.metabookcardbody",
+            fdjtDOM("div.mbcard_body",
                     ((score)&&(showscore(info,score,query))),
                     (((info.maker)||(info.tstamp))?(showglossinfo(info)):
                      (showdocinfo(info))),
@@ -127,8 +127,8 @@ metaBook.Slice=(function () {
                     ((excerpt_len>0)&&(showexcerpts(info.excerpt)))," ");
         var card=
             fdjtDOM(((info.maker) ?
-                     "div.metabookcard.gloss" :
-                     "div.metabookcard.passage"),
+                     "div.mbcard.gloss" :
+                     "div.mbcard.passage"),
                     ((head)&&(makeTOCHead(head,((info.level)&&(info))))),
                     ((standalone)&&(makelocbar(target_info))),
                     body,
@@ -223,7 +223,7 @@ metaBook.Slice=(function () {
                 else if (count<4) fdjtDOM(toptags," ",elt);
                 else fdjtDOM(othertags," ",elt);}}
         if (ntags)
-            return fdjtDOM("span.tags",tagicon,
+            return fdjtDOM("span.mbcard_tags.tags",tagicon,
                            matches,toptags,othertags,sectags);
         else return false;}
 
@@ -249,7 +249,8 @@ metaBook.Slice=(function () {
         if (!(outlets instanceof Array)) outlets=[outlets];
         if (outlets.length===0) return false;
         var span=fdjtDOM(
-            spec||((outlets.length>1)?("div.audience"):("span.audience")),
+            spec||((outlets.length>1)?("div.mbcard_audience"):
+                   ("span.mbcard_audience")),
             ((outlets.length>1)&&
              (fdjtDOM("span.count",outlets.length, " outlets"))),
             " ");
@@ -283,7 +284,8 @@ metaBook.Slice=(function () {
         var count=0;
         for (var url in refs) if (url[0]==='_') continue; else count++;
         if (count===0) return false;
-        var span=fdjtDOM(spec||((count>4)?("div.links"):("span.links")),
+        var span=fdjtDOM(spec||((count>4)?("div.mbcard_links"):
+                                ("span.mbcard_links")),
                          ((count>1)&&(fdjtDOM("span.count",count, " links"))),
                          " ");
         for (url in refs) {
@@ -563,7 +565,7 @@ metaBook.Slice=(function () {
                     if (target===head) fdjtDOM(curspan,newspan);
                     else fdjtDOM(curspan," \u22ef ",newspan);
                     curspan=newspan;}}}
-        var tochead=fdjtDOM("div.tochead",
+        var tochead=fdjtDOM("div.mbcard_tochead",
                             makelocrule(info,false),
                             basespan);
         tochead.title=makelocstring(info,false);
@@ -675,7 +677,7 @@ metaBook.Slice=(function () {
 
     MetaBookSlice.prototype.getCard=function getCard(ref){
         if ((ref.nodeType===1)&&
-            ((hasClass(ref,"metabookcard"))||
+            ((hasClass(ref,"mbcard"))||
              (hasClass(ref,"mbtoc")))) {
             var id=ref.getAttribute("data-gloss")||
                 ref.getAttribute("data-passage");
@@ -774,7 +776,7 @@ metaBook.Slice=(function () {
             if ((add.about)&&(add.dom)) {
                 info=add; card=add.dom;}
             if ((add.nodeType)&&(add.nodeType===1)&&
-                (hasClass(add,"metabookcard"))) {
+                (hasClass(add,"mbcard"))) {
                 card=add; id=add.name||add.getAttribute("name");
                 if (!(id)) continue;
                 if ((info=byid[id])) {
@@ -880,10 +882,10 @@ metaBook.Slice=(function () {
             else {last_card=card; i++; continue;}}};
 
     function getCard(target){
-        if ((hasClass(target,"metabookcard"))||(hasClass(target,"mbtoc")))
+        if ((hasClass(target,"mbcard"))||(hasClass(target,"mbtoc")))
             return target;
-        else return getParent(target,".metabookcard,.mbtoc")||
-            getChild(target,".metabookcard,.mbtoc");}
+        else return getParent(target,".mbcard,.mbtoc")||
+            getChild(target,".mbcard,.mbtoc");}
 
     function slice_tapped(evt){
         var target=fdjtUI.T(evt);

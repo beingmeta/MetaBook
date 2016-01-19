@@ -4,208 +4,199 @@
 
 @charset "UTF-8";
 
-.metabookcard { 
+.mbcard { 
     white-space: normal; clear: both;
     text-align: left; text-decoration: none;
     text-align: left;}
-
-div.metabookcard {
+div.mbcard {
     margin-left: 20px; margin-right: 0px;
     border-left: transparent solid 1px;
     box-sizing: border-box;}
-div.metabookcard > div.idhead, div.metabookcard div.tochead {
+div.mbcard_tochead {
     max-height: 3ex; white-space: nowrap;
     text-overflow: ellipsis; overflow: hidden;
     line-height: 100%;}
 
-div.metabookcard div.idhead { margin-left: -10px;}
-div.metabookcard div.tochead { margin-left: -20px; }
+div.mbcard_tochead { margin-left: -20px; }
 
-#METABOOKHUD.openglossmark div.metabookcard div.idhead { display: none;}
-#METABOOKHUD.openglossmark div.metabookcard div.tochead { display: none;}
+#METABOOKHUD.openglossmark div.mbcard_tochead { display: none;}
 
 /* Sbook notes */
 
-div.metabookcard > div { text-align: left;}
-div.metabookcard > div span.count { float: right;}
+div.mbcard span.count { float: right;}
 
-div.metabookcard div.audience, div.metabookcard div.links {
+div.mbcard_audience, div.mbcard_links {
     text-align: right;}
-div.metabookcard > div .audience span.count,
-div.metabookcard > div .links span.count {
-    float: right; padding-left: 1ex;
+div.mbcard_audience span.count,
+div.mbcard_links span.count {
+    float: right; padding-left: 1ex; padding-right: 1ex;
     font-style: italic;
     opacity: 0.70;}
 
-div.metabookcard > hr {
+div.mbcard > hr {
     min-width: 3px; height: 100%;
     border-right: solid gold 1px; border-left: solid gold 1px;
     position: absolute; left: 0px; 
     border: 0px; padding: 0px; margin: 0px;}
 
-.metabookcard a.ref {
-    display: block; font-weight: normal;}
-.metabookcard a.ref span.title {}
-.metabookcard a.ref span.uri {
-    font-family: courier,fixed;}
-.metabookcard span.user { 
+.mbcard span.user { 
     color: green; font-size: 125%; font-style: italic;}
-.metabookcard span.mbmedia {
+.mbcard span.mbmedia {
     cursor: pointer;}
-.metabookcard span.outlet { color: green;}
-.metabookcard span.overlay { 
+.mbcard span.outlet { color: green;}
+.mbcard span.overlay { 
     color: green; font-size: 125%; font-style: normal;
     font-variant: small-caps;}
-.metabookcard span.links:before { content: " //"; }
-.metabookcard span.audience:before { content: " //"; }
-.metabookcard .private {
+span.mbcard_links:before { content: " //"; }
+span.mbcard_audience:before { content: " //"; }
+.mbcard .private {
     vertical-align: top;
     padding-right: 3px; padding-left: 3px;
     font-weight: bold; font-variant: small-caps;}
-.metabookcard .links a {
+.mbcard_links a {
     color: blue; text-decoration: underline;
     white-space: nowrap;}
-.metabookcard .links img { height: 2ex; width: auto; vertical-align: baseline;}
-.metabookcard .links span.mbmedia { 
+.mbcard_links img { height: 2ex; width: auto; vertical-align: baseline;}
+.mbcard_links span.mbmedia { 
     display: inline-block; padding: 2px; border-radius: 0.5ex;}
-.metabookcard .links span.mbmedia { background-color: lightgray; }
-.metabookcard span.audience { font-weight: normal; }
-.metabookcard span.audience .outlet {
+.mbcard_links span.mbmedia { background-color: lightgray; }
+span.mbcard_audience { font-weight: normal; }
+span.mbcard_audience .outlet {
     font-size: 90%; font-style: italic; padding-right: 1ex;}
-.metabookcard span.audience .outlet { color: forestgreen; }
-.metabookcard .audience .outlet:before {
+span.mbcard_audience .outlet { color: forestgreen; }
+.mbcard_audience .outlet:before {
     content: "→ "; font-weight: bold;}
 
-.metabookcardbody {
+.mbcard_body {
     color: rgba(0,0,0,0.9); line-height: 100%;
     padding-top: 2px;}
-.metabookcardbody:before, .metabookcard .metabookcardbody:after {
+.mbcard_body:before, .mbcard .mbcard_body:after {
     content: " "; display: table;}
-.metabookcardbody:after { clear: both; }
+.mbcard_body:after { clear: both; }
 
-.metabookcard .fdjtclearfloats { margin-bottom: 3px;}
-.metabookcardbody {
+.mbcard .fdjtclearfloats { margin-bottom: 3px;}
+.mbcard_body {
     border-top: solid purple 2px;}
-.metabookcard.slicenewhead .metabookcardbody,
-.metabookcard:first-child .metabookcardbody {
+.mbcard.slicenewhead .mbcard_body,
+.mbcard:first-child .mbcard_body {
     border-top: 0px;}
 
-.metabookcard span.sample {
+.mbcard span.sample {
     display: inline-block; white-space: nowrap;
     font-size: 80%; max-width: 50%;
     overflow: hidden; text-overflow: ellipsis;}
-.metabookcard span.sample:before {
+.mbcard span.sample:before {
     content: '¶'; font-weight: bold; color: steelblue;
     font-size: 120%;}
 
-.metabookcard span.controller { cursor: pointer;}
-.metabookcard .info { 
+.mbcard span.controller { cursor: pointer;}
+.mbcard .info { 
     float: right;}
-.metabookcard div.info { 
+.mbcard div.info { 
     float: right; width: 40px;}
-.metabookcard .info span.score {
+.mbcard .info span.score {
     color: gold; display: none;}
-.metabookcard span.tags { 
+span.mbcard_tags { 
     font-size: 80%; padding-left: 1ex;}
-.metabookcard span.tags img.tagicon { 
+span.mbcard_tags img.tagicon { 
     height: 3ex; width: auto;
     display: none;}
-.metabookcard span.tags span.sectname {
+span.mbcard_tags span.sectname {
     font-style: italic; color: purple;}
-.metabookcard span.tags span.sectname.longterm {
+span.mbcard_tags span.sectname.longterm {
     font-size: 80%; letter-spacing: -0.5px;}
-.metabookcard.gloss span.tags.fdjtexpanded { display: block;}
-.metabookcard span.tags.fdjtexpanded span.controller {
+.mbcard.gloss span.mbcard_tags.fdjtexpanded { display: block;}
+span.mbcard_tags.fdjtexpanded span.controller {
     color: black; float: right;}
-.metabookcard span.head {
+.mbcard span.head {
     font-size: 75%;}
-.metabookcard span.headhead {
+.mbcard span.headhead {
     color: blue; font-weight: bold;}
-.metabookcard span.controller {
+.mbcard span.controller {
     font-weight: bold; color: silver;
     white-space: nowrap;}
-.metabookcard span.note {font-style: italic;}
-.metabookcard span.excerpt { vertical-align: baseline; }
-.metabookcardbody img.glosspic,
-.metabookcardbody img.userpic,
-.metabookcardbody img.sourcepic  {
+.mbcard span.note {font-style: italic;}
+.mbcard span.excerpt { vertical-align: baseline; }
+.mbcard_body img.glosspic,
+.mbcard_body img.userpic,
+.mbcard_body img.sourcepic  {
     float: left; clear: left; margin-right: 3px;
     width: 50px; overflow: hidden; height: auto;
-    /* This lines up with the padding on metabookcardbody */
+    /* This lines up with the padding on.mbcard_body */
     margin-top: -2px;}
-.metabookcardbody div.glosspic,
-.metabookcardbody div.userpic,
-.metabookcardbody div.sourcepic  {
+.mbcard div.glosspic,
+.mbcard div.userpic,
+mbcard div.sourcepic  {
     float: left; clear: left; margin-right: 3px;
     width: 50px; height: 50px; font-size: 40px;
     text-align: center; vertical-align: top;
     font-weight: bold; overflow: hidden;
     color: rgba(245, 245, 245, 0.56);
     text-stroke: 2px black; -webkit-text-stroke: 2px black;
-    /* This lines up with the padding on metabookcardbody */
+    /* This lines up with the padding on.mbcard_body */
     margin-top: -2px;}
-.metabookcardbody div.userpic.sbooknopic,
-.metabookcardbody div.sourcepic.sbooknopic {
+.mbcard div.userpic.sbooknopic,
+.mbcard div.sourcepic.sbooknopic {
     background-image:
     url(https://s3.amazonaws.com/beingmeta/static/g/metabook/someone50x50.png);}
-.metabookcard img.detailsbutton { border: none; }
-.metabookcard img.xrefsbutton { border: none;}
-.metabookcard .score {
+.mbcard img.detailsbutton { border: none; }
+.mbcard img.xrefsbutton { border: none;}
+.mbcard .score {
     float: right; color: darkblue;
     font-size: 80%; vertical-align: top; margin-top: -0.5ex;}
-.metabookcard .score img.inline {
+.mbcard .score img.inline {
     padding-left: 0px; padding-right: 0px;}
-.metabookcard .score .note { color: red; padding-right: 1ex;}
-.metabookcard .glossinfo {
+.mbcard .score .note { color: red; padding-right: 1ex;}
+.mbcard_glossinfo {
     float: right; clear: right; display: block;
     padding: 0px; margin: 0px;
     margin-left: 3px; padding-top: 2px;
     text-align: right;}
-.metabookcard .glossinfo img { padding-left: 4px; cursor: pointer; }
-.metabookcard .tool {
+.mbcard_glossinfo img { padding-left: 4px; cursor: pointer; }
+.mbcard .tool {
     font-weight: normal; cursor: pointer;
     font-size: 70%; text-decoration: none;}
-.metabookcard .tool > span, .metabookcard .tool > a, .metabookcard .tool > img {
+.mbcard .tool > span, .mbcard .tool > a, .mbcard .tool > img {
     float: right; }
-.metabookcard .tool span.label {
+.mbcard .tool span.label {
     font-weight: bold; color: blue;
     padding-right: 1ex; padding-left: 1ex; padding-bottom: 1ex; 
     display: none;}
-.metabookcard .tool img {
+.mbcard .tool img {
     height: 40px; width: 40px; z-index: 40; opacity: 0.5; clear: right;
     /* This makes it overlap the date, tightening things up generally */
     margin-right: 6px; margin-top: -1em;}
-html._MOUSE .metabookcard .tool img:hover {opacity: 0.8;}
-.metabookcard span.glossbody {
+html._MOUSE .mbcard .tool img:hover {opacity: 0.8;}
+.mbcard span.glossbody {
     background-color: lightblue; color: black;
     padding: 2px; margin-top: 2px;
     border: solid darkblue 2px; border-radius: 1ex;
     display: inline-block;}
-.metabookcard .age {
+.mbcard .age {
     padding-right: 0.5em; padding-left: 0.4ex; margin-top: -3px;
     vertical-align: top; 
     clear: none;}
-.metabookcard.timeless .age { display: none;}
-.metabookcard.timeless .tool img { margin-top: -3px;}
-.metabookcard a.deletebutton { 
+.mbcard.timeless .age { display: none;}
+.mbcard.timeless .tool img { margin-top: -3px;}
+.mbcard a.deletebutton { 
     color: orange; text-decoration: none;
     padding-right: 3px;}
-.metabookcard .glossinfo img.delete { 
+.mbcard_glossinfo img.delete { 
     padding-right: 3px;
     cursor: pointer;}
-.metabookcard a.headref {
+.mbcard a.headref {
     float: right; clear: right; 
     font-family: times,serif;
     font-style: italic; font-size: 80%;
     white-space: nowrap; padding: 2px; padding-top: 0px;
     color: lightblue;}
 
-.metabookcardbody span.maker {
+.mbcard span.maker {
     color: black; font-weight: bold; padding-right: 1ex;}
-.metabookcardbody span.maker:after { content: ':'; }
+.mbcard span.maker:after { content: ':'; }
 
-.metabookcardbody span.maker { display: none;}
-.metabookcard.personal span.maker { display: inline;}
+.mbcard span.maker { display: none;}
+.mbcard.personal span.maker { display: inline;}
 
 /* Emacs local variables
 ;;;  Local variables: ***

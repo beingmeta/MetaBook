@@ -1514,7 +1514,7 @@
             if (cancelling) {
                 cancel(evt);
                 return;}}
-        if (getParent(target,".tochead")) {
+        if (getParent(target,"mbcard_tochead")) {
             var anchor=getParent(target,".tocref");
             var href=(anchor)&&(anchor.getAttribute("data-tocref"));
             if (href) metaBook.GoTOC(href);

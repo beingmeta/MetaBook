@@ -21,12 +21,12 @@ div.metabookslice .mbtoc.mblivetoc {
 div.metabookslice .mbtoc.mblivetoc.mbcurtoc {
     border-bottom-style: solid;}
 
-.mbtoc div.posbar {
+div.mbtoc_posbar {
     position: absolute; left: 0px; top: 0px;
     box-sizing: content-box; height: 100%; z-index: 50;
     border: 0px; border-right: solid red 2px;
     display: none;}
-.mbtoc.mblivetoc div.posbar {
+.mblivetoc div.mbtoc_posbar {
     display: block;}
 
 .mbtoc .context .tocpath { padding-left: 1ex; }
@@ -44,27 +44,27 @@ div.metabookslice .mbtoc.mblivetoc.mbcurtoc {
 #METABOOKSKIMMER .mbtoc1 .context,
 .mbtocslice .mbtoc.mbtoc1.fdjtstartofpage .context {
     display: none;}
-.mbtoc a.sectname {
+a.mbtoc_sectname {
     color: black; z-index: 50;
     display: block;}
-.mbtoc.fdjtoversize a.sectname {
+.fdjtoversize a.mbtoc_sectname {
     z-index: 50;
     white-space: normal;}
-.mbtoc div.elements {
+div.mbtoc_elements {
     transform: translate3d(0,0,0); overflow: visible;
     margin: 0px; padding: 0px; border: 0px; height: 1.3em;
     z-index: -50; margin-left: 2em;}
-.mbtoc a.brick {
+a.mbtoc_sectbrick {
     position: absolute; display: inline-block;
     box-sizing: border-box;
     border: 0px;
     opacity: 0.8;
     height: 1.25em;}
-.mbtoc .toctext {
+.mbtoc_text {
     position: relative; height: 0px; overflow: visible;
     pointer-events: none;
     z-index: 100; }
-.mbtoc a.showsize {
+a.mbtoc_showsize {
     position: absolute; display: inline-block;
     box-sizing: border-box;
     height: 1.2em; }
@@ -77,18 +77,18 @@ div.metabookslice .mbtoc.mblivetoc.mbcurtoc {
 .mbtoc.mbtoc4 { margin-left: 6em; font-size: 80%;}
 .mbtoc.mbtoc4.fdjtoversize { font-size: 70%;}
 
-.mbtoc a.brick { display: none; }
+.mbtoc a.mbtoc_sectbrick { display: none; }
 
 #METABOOKSKIMMER .mbtoc {
     font-weight: bold; padding-top: 2px; height: fit-content;
     border-bottom: 0px;}
 
-#METABOOKSKIMMER .mbtoc .elements .brick,
-#METABOOKSKIMMER .mbtoc .elements .showsize {
+#METABOOKSKIMMER .mbtoc_sectbrick,
+#METABOOKSKIMMER .mbtoc_showsize {
     display: none;}
-#METABOOKSKIMMER .mbtoc .toctext {
+#METABOOKSKIMMER .mbtoc_text {
     top: 2px;}
-#METABOOKSKIMMER .sectname:before {
+#METABOOKSKIMMER .mbtoc_sectname:before {
     content: "§"; font-style: italic;
     vertical-align: bottom;
     font-size: 120%;}

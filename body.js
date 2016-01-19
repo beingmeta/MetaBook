@@ -236,7 +236,7 @@
         var sh=view_height-150;
         var vs=(sh/geom.height);
         if (vs>1) vs=1;
-        shrinkrule.style[fdjtDOM.transform]="scale("+vs+","+vs+")";
+        shrinkrule.style[fdjtDOM.transform]="scale("+vs+","+vs+") translateZ(0)";
 
         document.body.style.overflow='';
         if (Trace.startup>1)

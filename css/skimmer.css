@@ -14,10 +14,10 @@
     display: none;}
 html._TOUCH #METABOOKSKIMMER,
 html._TOUCH #METABOOKSKIMMER div.mbtoc,
-html._TOUCH #METABOOKSKIMMER div.metabookcard {
+html._TOUCH #METABOOKSKIMMER div.mbcard {
     min-height: 30px;}
 body._ANIMATE #METABOOKSKIMMER {
-    transition-property: height; transition-duration: 0.3s;}
+    transition-property: height; transition-duration: 0.2s;}
 
 #METABOOKSKIMMER.flash { background-color: silver;}
 .hudup #METABOOKSKIMMER { 
@@ -25,26 +25,26 @@ body._ANIMATE #METABOOKSKIMMER {
     padding: 0px;}
 .hudup #METABOOKSKIMMER {
     max-height: inherit; }
-#METABOOKSKIMMER .tochead {
+#METABOOKSKIMMER mbcard_tochead {
     background-color: steelblue; color: white;}
-#METABOOKSKIMMER .tochead {
+#METABOOKSKIMMER mbcard_tochead {
     max-height: 4ex;}
-.hudup #METABOOKSKIMMER .tochead {
+.hudup #METABOOKSKIMMER mbcard_tochead {
     max-height: inherit;
     font-weight: bold;}
 
 #METABOOKSKIMMER,
-#METABOOKSKIMMER .metabookcard,
-#METABOOKSKIMMER .metabookcardbody {
+#METABOOKSKIMMER .mbcard,
+#METABOOKSKIMMER .mbcard_body {
     border-bottom-left-radius: 1ex;
     border-bottom-right-radius: 1ex;}
-#METABOOKSKIMMER .metabookcard,
-#METABOOKSKIMMER .tochead {
+#METABOOKSKIMMER .mbcard,
+#METABOOKSKIMMER mbcard_tochead {
     border-left: 0px;}
 
 body._ANIMATE #METABOOKSKIMMER.transanimate {
     transition-property: transform; 
-    transition-duration: 0.3s;
+    transition-duration: 0.2s;
     transition-timing-function: ease-out;}
 
 #METABOOKHUD.openglossmark #METABOOKSKIMMER,
@@ -96,26 +96,26 @@ body.hudup #METABOOKSKIMMER #METABOOKSKIMCONTROLS .expanded {
 body.hudup #METABOOKSKIMMER #METABOOKSKIMCONTROLS .collapsed {
     display: none;}
 
-#METABOOKSKIMMER div.tochead, #METABOOKPOINTGLOSSES div.tochead {
+#METABOOKSKIMMER div.mbcard_tochead, #METABOOKPOINTGLOSSES div.mbcard_tochead {
     border-top-width: 0px; border-bottom-width: 0px;}
-#METABOOKPOINTGLOSSES div.tochead { display: none; }
+#METABOOKPOINTGLOSSES div.mbcard_tochead { display: none; }
 
-#METABOOKSKIMMER div.metabookcardbody {font-size: 75%;}
-body.hudup.mbPREVIEW #METABOOKSKIMMER div.metabookcardbody {
+#METABOOKSKIMMER div.mbcard_body {font-size: 75%;}
+body.hudup.mbPREVIEW #METABOOKSKIMMER div.mbcard_body {
     font-size: 75%;}
-body.hudup #METABOOKSKIMMER div.metabookcardbody {font-size: 100%;}
-body.hudup #METABOOKSKIMMER div.metabookcardbody img.button {
+body.hudup #METABOOKSKIMMER div.mbcard_body {font-size: 100%;}
+body.hudup #METABOOKSKIMMER div.mbcard_body img.button {
     display: inline-block;}
 
-#METABOOKSKIMMER div.metabookcard.gloss div.tochead,
-#METABOOKSKIMMER div.metabookcard.gloss div.metabookcardbody {
+#METABOOKSKIMMER div.mbcard.gloss div.mbcard_tochead,
+#METABOOKSKIMMER div.mbcard.gloss div.mbcard_body {
     margin-left: 50px;}
-#METABOOKSKIMMER div.metabookcard.gloss div.metabookcardbody {
+#METABOOKSKIMMER div.mbcard.gloss div.mbcard_body {
     padding-left: 4px;}
-#METABOOKSKIMMER div.metabookcard.gloss div.tochead {
+#METABOOKSKIMMER div.mbcard.gloss div.mbcard_tochead {
     padding-left: 0px;}
-#METABOOKSKIMMER div.metabookcard.gloss div.metabookcardbody img.glosspic,
-#METABOOKSKIMMER div.metabookcard.gloss div.metabookcardbody .sourcepic {
+#METABOOKSKIMMER div.mbcard.gloss div.mbcard_body img.glosspic,
+#METABOOKSKIMMER div.mbcard.gloss div.mbcard_body .sourcepic {
     position: absolute; top: 0px; left: 0px; margin-top: 0px;}
 
 /* Skimmer rules */
@@ -144,33 +144,26 @@ body.hudup #METABOOKHUD #METABOOKSKIMMER .controller,
 body.hudup #METABOOKHUD #METABOOKSKIMMER span.whencollapsed {
     display: none;}
 
-#METABOOKSKIMMER div.tochead, #METABOOKSKIMMER div.idhead {
-    border-bottom: solid black 1px;}
-
-#METABOOKSKIMMER div.metabookcard,
-#METABOOKSKIMMER div.metabookcard div.tochead,
-#METABOOKSKIMMER div.metabookcard div.idhead {
+#METABOOKSKIMMER div.mbcard,
+#METABOOKSKIMMER div.mbcard_tochead {
     margin-left: 0px;}
-#METABOOKSKIMMER div.metabookcard {
+#METABOOKSKIMMER div.mbcard {
     min-height: 50px;}
 
-#METABOOKHUD #METABOOKSKIMMER div.idhead,
-#METABOOKPOINTGLOSSES div.idhead {
+#METABOOKHUD #METABOOKSKIMMER div.gloss div.mbcard_tochead,
+#METABOOKPOINTGLOSSES div.mbcard_tochead {
     display: none;}
-#METABOOKHUD #METABOOKSKIMMER div.gloss div.tochead,
-#METABOOKPOINTGLOSSES div.tochead {
-    display: none;}
-body.hudup #METABOOKHUD #METABOOKSKIMMER div.gloss div.tochead {
+body.hudup #METABOOKHUD #METABOOKSKIMMER div.gloss div.mbcard_tochead {
     display: block;}
 
-/* #METABOOKSKIMMER.mbfoundhighlights .metabookcard .excerpt { display: none; } */
+/* #METABOOKSKIMMER.mbfoundhighlights .mbcard .excerpt { display: none; } */
 
 body.hudup #METABOOKHUD div.hudpanel#METABOOKSKIMMER { max-height: inherit; }
 body.hudup #METABOOKHUD #METABOOKSKIMMER img.glosspic {  height: inherit; }
 
 #METABOOKFRAME._ANIMATE #METABOOKHUD #METABOOKSKIMMER {
     transition-property: background-color; transition-duration: 0.2s; }
-#METABOOKHUD #METABOOKSKIMMER div.metabookcard span.glossinfo span.isclickable {
+#METABOOKHUD #METABOOKSKIMMER div.mbcard span.glossinfo span.isclickable {
     display: none;}
 
 /* Media rules */
