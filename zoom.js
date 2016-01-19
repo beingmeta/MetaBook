@@ -183,7 +183,7 @@
             if ((Trace.zoom)||(Trace.gestures>1))
                 fdjtLog("zoom_touchmove(2) %o: d=%o->%o@[%o,%o] [%o,%o] [%o,%o]",
                         evt,d_last,d,ncg_x,ncg_y,x1,y1,x2,y2);
-            zbs[transform]="translate("+off_x+"px,"+off_y+"px) "+"scale("+scale+")";
+            zbs[transform]="translate3d("+off_x+"px,"+off_y+"px) "+"scale("+scale+",0)";
             if (Trace.zoom) fdjtLog("%s %o: %s",transform,zb,zbs[transform]);
             cg_x=ncg_x; cg_y=ncg_y; d_last=d;
             cancel(evt);}
@@ -195,7 +195,7 @@
                         evt,off_x,off_y,mB.zoomX,mB.zoomY,pan_dx,pan_dy,
                         x1,y1,panstart_x,panstart_y);
             zbs[transform]=
-                "translate("+off_x+"px,"+off_y+"px) "+"scale("+zoomscale+")";
+                "translate3d("+off_x+"px,"+off_y+"px) "+"scale("+zoomscale+",0)";
             if (Trace.zoom) fdjtLog("%s %o: %s",transform,zb,zbs[transform]);
             cancel(evt);}
         else {}}
