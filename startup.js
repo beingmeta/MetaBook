@@ -174,7 +174,7 @@ metaBook.Startup=
             // Execute any FDJT initializations
             fdjt.Init();
 
-            metaBook.updateSizeClasses();
+            // metaBook.updateSizeClasses();
 
             setupBook();
             setupDevice();
@@ -182,7 +182,9 @@ metaBook.Startup=
             metaBook._ui_setup=fdjtTime();
             showMessage();
             if (metaBook._user_setup) metaBook.setupUI4User();
-            setupContent();
+            // Modifies the DOM in various ways
+            metaBook.initBody();
+            // Sets up event handlers
             metaBook.setupGestures();
 
             // Reapply config settings to update the HUD UI
@@ -334,10 +336,9 @@ metaBook.Startup=
                  (getQuery("crosshair")))) {
                 fdjtUI.Reticle.setup();}
 
-            if (Trace.startup)
+            if (Trace.startup) {
                 fdjtLog("App setup took %dms",fdjtTime()-started);
-
-            fdjtLog("Body: %s",document.body.className);}
+                fdjtLog("Body: %s",document.body.className);}}
         
         function imageSetup(){
             var i, lim, started=fdjtTime();
@@ -375,15 +376,6 @@ metaBook.Startup=
             if (Trace.startup>1)
                 fdjtLog("Image setup took %dms",fdjtTime()-started);}
         
-        function setupContent(){
-            var started=fdjtTime();
-            // Modifies the DOM in various ways
-            metaBook.initBody();
-            // Size the content
-            metaBook.sizeContent();
-            if (Trace.gestures)
-                fdjtLog("Content setup in %dms",fdjtTime()-started);}
-
         metaBook.setSync=function setSync(val){
             if (!(val)) return false;
             var cur=metaBook.sync;
@@ -440,6 +432,13 @@ metaBook.Startup=
                     applyTOCRules();
                     metadata=scanDOM();
                     metaBook.setupTOC(metadata[metaBook.content.id]);},
+                // Now you're ready to lay out the book, which is
+                //  timesliced and runs on its own.  We wait to do
+                //  this until we've scanned the DOM because we may
+                //  use results of DOM scanning in layout (for example,
+                //  heading information).
+                function beginLayout(){
+                    fdjtAsync(startLayout);},
                 function buildTextIndex(){
                     var hasText=fdjtDOM.hasText;
                     var rules=fdjtDOM.getMeta("METABOOK.index",true)
@@ -455,14 +454,6 @@ metaBook.Startup=
                         var node=nodes[i++];
                         if (hasText(node)) index.indexText(node);}
                     index.finishIndex();},
-                // Now you're ready to lay out the book, which is
-                //  timesliced and runs on its own.  We wait to do
-                //  this until we've scanned the DOM because we may
-                //  use results of DOM scanning in layout (for example,
-                //  heading information).
-                function doLayout(){
-                    if (metaBook.bypage) metaBook.Paginate("initial");
-                    else addClass(document.body,"_SCROLL");},
                 function buildTagIndex(){
                     var toSet=RefDB.toSet;
                     var docdb=metaBook.docdb;
@@ -513,6 +504,11 @@ metaBook.Startup=
              {slice: 100, space: 25});}
         metaBook.Startup=metaBookStartup;
         
+        function startLayout(){
+            metaBook.sizeContent();
+            if (metaBook.bypage) metaBook.Paginate("initial");
+            else addClass(document.body,"_SCROLL");}
+
         function addTOCLevel(specs,level){
             var j=0, nspecs=specs.length; while (j<nspecs) {
                 var nodes=fdjtDOM.$(specs[j++]);

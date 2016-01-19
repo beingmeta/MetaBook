@@ -50,13 +50,6 @@
     
     var fixStaticRefs=metaBook.fixStaticRefs;
     
-    function getBGColor(arg){
-        var color=fdjtDOM.getStyle(arg).backgroundColor;
-        if (!(color)) return false;
-        else if (color==="transparent") return false;
-        else if (color.search(/rgba/)>=0) return false;
-        else return color;}
-
     function initBody(){
         var body=document.body, started=fdjtTime();
         var init_content=$ID("CODEXCONTENT");
@@ -75,8 +68,8 @@
         metaBook.content=content;
 
         // Move all the notes together
-        var notesblock=$ID("SBOOKNOTES")||
-            fdjtDOM("div.sbookbackmatter#SBOOKNOTES");
+        var notesblock=$ID("METABOOKNOTES")||
+            fdjtDOM("div.metabookbackmatter#METABOOKNOTES");
         applyMetaClass("htmlbooknote");
         applyMetaClass("htmlbooknote","METABOOK.booknotes");
         addClass(fdjtDOM.$("span[data-type='footnote']"),
@@ -238,7 +231,7 @@
         var shrinkrule=metaBook.CSS.shrinkrule;
         if (!(shrinkrule)) {
             shrinkrule=fdjtDOM.addCSSRule(
-                "body.mbSHRINK #CODEXPAGE,body.mbPREVIEW #CODEXPAGE, body.mbSKIMMING #CODEXPAGE", "");
+                "body.mbSHRINK #CODEXPAGE,body.mbPREVIEW #CODEXPAGE,body.mbSKIMMING #CODEXPAGE", "");
             metaBook.CSS.shrinkrule=shrinkrule;}
         var sh=view_height-150;
         var vs=(sh/geom.height);
@@ -257,24 +250,13 @@
         var page_left=fdjtDOM("div.mbpagecontrol#MBPAGELEFT");
         var controls=fdjtDOM("div#METABOOKPAGECONTROLS",page_left,page_right);
 
+        page_left.setAttribute("data-tapsound","METABOOKPAGEBACKWARDAUDIO");        
+        page_right.setAttribute("data-tapsound","METABOOKPAGEFORWARDAUDIO");
+
         fdjtDOM.prepend(document.body,controls);
 
         window.scrollTo(0,0);
-        
-        // The better way to do this might be to change the stylesheet,
-        //  but fdjtDOM doesn't currently handle that 
-        var bgcolor=getBGColor(document.body)||"white";
-        metaBook.backgroundColor=bgcolor;
-        if (bgcolor==='transparent')
-            bgcolor=fdjtDOM.getStyle(document.body).backgroundColor;
-        if ((bgcolor)&&(bgcolor.search("rgba")>=0)) {
-            if (bgcolor.search(/,\s*0\s*\)/)>0) bgcolor='white';
-            else {
-                bgcolor=bgcolor.replace("rgba","rgb");
-                bgcolor=bgcolor.replace(
-                        /,\s*((\d+)|(\d+.\d+))\s*\)/,")");}}
-        else if (bgcolor==="transparent") bgcolor="white";
-        else {}}
+    }
 })();
 
 /* Emacs local variables
