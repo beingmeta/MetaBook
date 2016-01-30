@@ -431,7 +431,7 @@
                     gesture_start=false;
                     clicked=fdjtTime();
                     return true;}
-                else if ((fn=metaBook.xtargets[idref])) {
+                else if ((metaBook.xtargets[idref])) {
                     var fn=metaBook.xtargets[idref];
                     gesture_start=false;
                     clicked=fdjtTime();

@@ -341,8 +341,8 @@ metaBook.DOMScan=(function(){
                     newid=xid;}
                 fdjtLog.warn("Duplicate ID=%o newid=%o",id,newid);
                 id=child.id=newid;
-                headinfo=docinfo[newid]||
-                    (docinfo[newid]=new ScanInfo(newid,scanstate));
+                if (!(docinfo[newid])) {
+                    docinfo[newid]=new ScanInfo(newid,scanstate);}
                 idmap[newid]=child;}
             else idmap[id]=child;
 

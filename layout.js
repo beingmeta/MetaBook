@@ -98,8 +98,7 @@ metaBook.Paginate=
             var howlong=secs2short((now-started)/1000);
             var indicator=$ID("METABOOKLAYOUTINDICATOR");
             if (info.done) {
-                if (indicator)
-                    indicator.style.width=Math.floor(pct)+"%";
+                if (indicator) indicator.style.width="100%";
                 fdjtDOM.replace(
                     "METABOOKPAGENOTEXT",
                     fdjtDOM("div.metabookpageno#METABOOKPAGENOTEXT",
