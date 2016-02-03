@@ -347,7 +347,7 @@ metaBook.DOMScan=(function(){
             else idmap[id]=child;
 
             var i=0, lim;
-            // Get the location in the TOC for this out of context node
+            // Get the position in the TOC for this out of context node
             //  These get generated, for example, when the content of an
             //  authorial footnote is moved elsewhere in the document.
             var tocloc=(child.metabooktocloc)||
