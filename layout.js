@@ -1012,12 +1012,16 @@ metaBook.Paginate=
                     if (curpages.length)
                         dropClass(toArray(curpages),"curpage");
                     addClass(page,"curpage");}
+                else if ((mB.dontanimate)||
+                         (!(hasClass(document.body,"_ANIMATE")))) {
+                    dropClass(curpage,"curpage");
+                    addClass(page,"curpage");}
                 else {
                     var curpagestring=curpage.getAttribute("data-pagenum");
                     var curnum=parseInt(curpagestring,10);
                     // This does the page flip animation;
-                    dropClass(curpage,/(oldpage|newpage|onleft|onright)/g);
-                    dropClass(page,/(oldpage|newpage|onleft|onright)/g);
+                    dropClass(curpage,/\b(oldpage|newpage|onleft|onright)\b/g);
+                    dropClass(page,/\b(oldpage|newpage|onleft|onright)\b/g);
                     if (pagenum<curnum) dirclass="onleft";
                     else dirclass="onright";
                     if (dirclass) addClass(page,dirclass);
@@ -1033,7 +1037,7 @@ metaBook.Paginate=
                         dropClass(lastpage,"curpage");
                         addClass(page,"curpage");
                         dropClass(page,"newpage");
-                        dropClass(page,"onright");},
+                        dropClass(page,/\bon(right|left)\b/);},
                                50);
                     setTimeout(function(){
                         dropClass(lastpage,"oldpage");},

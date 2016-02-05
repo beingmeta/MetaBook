@@ -97,6 +97,8 @@ metaBook.setMode=
             if ($ID("METABOOKFRAME")) frame=$ID("METABOOKFRAME");
             else {
                 frame=fdjtDOM("div#METABOOKFRAME");
+                if ((!(mB.dontanimate))&&(mB.getConfig("animatehud")))
+                    addClass(frame,"_ANIMATE");
                 fdjtDOM.prepend(document.body,frame);}
             addClass(frame,"metabookframe");
             addClass(frame,"tapholdcontext");
@@ -858,7 +860,7 @@ metaBook.setMode=
         metaBook.addConfig("animatecontent",function(name,value){
             if (mB.dontanimate) {}
             else if (value) addClass(document.body,"_ANIMATE");
-            else dropClass(mB.page,"_ANIMATE");
+            else dropClass(document.body,"_ANIMATE");
             fdjt.Async(function(){
                 mB.updateSettings(name,value);});});
         metaBook.addConfig("animatehud",function(name,value){
