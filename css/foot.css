@@ -76,8 +76,7 @@ body.mbLAYOUT hr#METABOOKLAYOUTINDICATOR {
 body.mbPREVIEW #METABOOKFOOT #METABOOKPAGEBAR .metabookpagespan {
     height: 100%;}
 #METABOOKFOOT #METABOOKPAGEBAR #METABOOKCURPAGESPAN.metabookpagespan {
-    visibility: visible; opacity: 1.0; z-index: 100;
-    overflow: visible; z-index: 50;}
+    visibility: visible; opacity: 1.0; overflow: visible;}
 #METABOOKFOOT #METABOOKPAGEBAR #METABOOKCURPAGESPAN.metabookpagespan {
     background-color: lightblue; color: transparent; }
 body #METABOOKFOOT #METABOOKPAGEBAR #METABOOKCURPAGESPAN.metabookpagespan {
@@ -85,11 +84,11 @@ body #METABOOKFOOT #METABOOKPAGEBAR #METABOOKCURPAGESPAN.metabookpagespan {
 body.mbPREVIEW #METABOOKFOOT #METABOOKPAGEBAR #METABOOKCURPAGESPAN.metabookpagespan {
     height: 100%;}
 body.mbPREVIEW #METABOOKFOOT #METABOOKPAGEBAR #METABOOKCURPAGESPAN.metabookpagespan {
-    overflow: visible; visibility: visible; z-index: 60; color: black;
+    overflow: visible; visibility: visible; color: black;
     opacity: 1.0;}
 body.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR #METABOOKPRVPAGESPAN.metabookpagespan {
     overflow: visible;
-    visibility: visible; opacity: 1.0; z-index: 100;
+    visibility: visible; opacity: 1.0;
     font-size: 200%; height: 150%; width: 1.5em;
     pointer-events: none;}
 body.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR #METABOOKPRVPAGESPAN.metabookpagespan {
@@ -100,10 +99,10 @@ body.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR #METABOOKCURPAGESPAN.metabookp
 #METABOOKFOOT #METABOOKPAGEBAR #METABOOKPAGEPROGRESS {
     box-sizing: content-box;
     position: absolute; bottom: 0px; left: 0px;
-    width: 33%; height: 100%; z-index: 15;
+    width: 33%; height: 100%; z-index: 50;
     pointer-events: none;
     transition-property: width; 
-    transition-duration: 1s;}
+    transition-duration: 0.5s;}
 #METABOOKFOOT #METABOOKPAGEBAR #METABOOKPAGEPROGRESS {
     border-right: solid darkblue 2px;
     background-color: transparent;}
@@ -117,9 +116,9 @@ body.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR #METABOOKCURPAGESPAN.metabookp
 #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER1.metabooksectmarker {
     height: 85%;}
 #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER2.metabooksectmarker {
-    height: 70%; }
+    height: 60%; }
 #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER3.metabooksectmarker {
-    height: 55%; }
+    height: 50%; }
 
 html._TOUCH #METABOOKFOOT.tapholding #METABOOKPAGEBAR {
     height: 100px;}

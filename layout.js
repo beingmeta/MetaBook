@@ -835,8 +835,9 @@ metaBook.Paginate=
                      (fdjtString.precString(pct,prec)))+"%");
                 locoff.title=location+"/"+max_loc;}
             else locoff=fdjtDOM("span.metabookloc#METABOOKLOCPCT");
-            showpage_elt.innerHTML=pagenum;
-            showpage_elt.style.left=((100*pagenum)/npages)+"%";
+            if (showpage_elt) {
+                showpage_elt.innerHTML=pagenum;
+                showpage_elt.style.left=((100*(pagenum-1))/npages)+"%";}
             var pageno_text=fdjtDOM(
                 "span#METABOOKPAGENOTEXT.metabookpageno",pagenum,"/",npages);
             pageno_text.title="select to change page number";
@@ -1112,10 +1113,10 @@ metaBook.Paginate=
                 var newloc=metaBook.getLocInfo(target);
                 updatePageDisplay(
                     newnum,newpage.getAttribute("data-staticpageref"),
-                    ((newloc)&&(newloc.starts_at)),"current");}
+                    ((newloc)&&(newloc.starts_at)));}
             else updatePageDisplay(
                 pagenum,curpage.getAttribute("data-staticpageref"),
-                metaBook.location,"current");
+                metaBook.location);
             if (typeof newpage === "number") metaBook.GoToPage(newpage);}
         metaBook.stopPagePreview=stopPagePreview;
         
