@@ -210,6 +210,14 @@
     // returned
     function syncState(force){
         var elapsed=(last_sync)?(fdjtTime.tick()-last_sync):(3600*24*365*10);
+        var timeout_id=false;
+        function gotState(req){
+            if (timeout_id) {
+                clearTimeout(timeout_id);
+                timeout_id=false;}
+            // Don't handle state if you timed out
+            else return;
+            if (req.text) freshState(JSON.parse(req.text));}
         if ((syncing)||((!(force))&&(!(metaBook.locsync)))) return;
         if (!(metaBook.user)) return;
         if (sync_req) {
@@ -234,7 +242,6 @@
             return;}
         else if (sync_wait) {clearTimeout(sync_wait); sync_wait=false;} 
         if (((force)||(metaBook.locsync))&&(navigator.onLine)) {
-            var uri=metaBook.docuri;
             var traced=(Trace.state)||(Trace.network);
             var state=metaBook.state;
             var refuri=
@@ -262,31 +269,18 @@
                 if (state.changed) sync_uri=sync_uri+
                     "&CHANGED="+encodeURIComponent(state.changed);
                 if (state.reset) sync_uri=sync_uri+"&RESET=true";}
-            var req=new XMLHttpRequest();
             syncing=state;
-            req.onreadystatechange=freshState;
-            req.ontimeout=syncTimeout;
-            req.withCredentials=true;
-            req.timeout=metaBook.sync_timeout;
+            var headers={}, options=
+                {headers: headers,mode: 'cors',
+                 timeout: metaBook.sync_timeout};
+            if (mB.mycopyid) headers.Authorization="Bearer "+mB.mycopyid;
+            else options.credentials='same-origin';
+            setTimeout(syncTimeout,metaBook.sync_timeout);
             if (traced) fdjtLog("syncState(call) %s",sync_uri);
-            try {
-                req.open("GET",sync_uri,true);
-                req.send();
-                sync_req=req;}
-            catch (ex) {
-                try {
-                    fdjtLog.warn(
-                        "Sync request %s returned status %d %j, pausing for %ds",
-                        uri,req.status,JSON.parse(req.responseText),
-                        metaBook.sync_pause);}
-                catch (err) {
-                    fdjtLog.warn(
-                        "Sync request %s returned status %d, pausing for %ds",
-                        uri,req.status,metaBook.sync_pause/1000);}
-                metaBook.locsync=false;
-                setTimeout(function(){metaBook.locsync=true;},
-                           metaBook.sync_pause);}}
-    } metaBook.syncState=syncState;
+            fetch(sync_uri,options)
+                .then(gotState)
+                .catch(syncFailed);}}
+    metaBook.syncState=syncState;
 
     function syncTimeout(evt){
         evt=evt||window.event;
@@ -299,47 +293,51 @@
 
     var prompted=false;
 
-    function freshState(evt){
-        var req=fdjtUI.T(evt); sync_req=false;
+    function freshState(xstate){
         var traced=(Trace.state)||(Trace.network)||
             ((Trace.startup)&&(sync_count<1));
-        if (req.readyState===4) {
-            if ((req.status>=200)&&(req.status<300)) {
-                var rtext=req.responseText;
-                if (!(rtext)) return;
-                var xstate=JSON.parse(rtext);
-                var tick=fdjtTime.tick();
-                if (xstate.changed) {
-                    if (traced)
-                        fdjtLog("freshState %o %j\n\t%j",
-                                evt,xstate,metaBook.state);
-                    if (xstate.changed>(tick+300))
-                        fdjtLog.warn(
-                            "Beware of oracles (future state date): %j %s",
-                            xstate,new Date(xstate.changed*1000));
-                    else if (!(metaBook.state)) {
-                        metaBook.xstate=xstate;
-                        restoreState(xstate);}
-                    else if (metaBook.state.changed>xstate.changed)
-                        // Our state is later, so we make it the xstate
-                        metaBook.xstate=xstate;
-                    else if ((prompted)&&(prompted>xstate.changed)) {
-                        // We've already bothered the user since this
-                        //  change was recorded, so we don't bother them
-                        // again
-                    }
-                    else if (document[fdjtDOM.isHidden])
-                        metaBook.freshstate=xstate;
-                    else {
-                        metaBook.xstate=xstate;
-                        prompted=fdjtTime.tick();
-                        metaBook.resolveXState(xstate);}}
-                sync_count++;}
-            else if (traced)
-                fdjtLog("syncState(callback/error) %o %d %s",
-                        evt,req.status,req.responseText);
-            if (navigator.onLine) setConnected(true);
-            syncing=false;}}
+        var tick=fdjtTime.tick();
+        if (xstate.changed) {
+            if (traced)
+                fdjtLog("freshState %j\n\t%j",xstate,metaBook.state);
+            if (xstate.changed>(tick+300))
+                fdjtLog.warn(
+                    "Beware of oracles (future state date): %j %s",
+                    xstate,new Date(xstate.changed*1000));
+            else if (!(metaBook.state)) {
+                metaBook.xstate=xstate;
+                restoreState(xstate);}
+            else if (metaBook.state.changed>xstate.changed)
+                // Our state is later, so we make it the xstate
+                metaBook.xstate=xstate;
+            else if ((prompted)&&(prompted>xstate.changed)) {
+                // We've already bothered the user since this
+                //  change was recorded, so we don't bother them
+                // again
+            }
+            else if (document[fdjtDOM.isHidden])
+                metaBook.freshstate=xstate;
+            else {
+                metaBook.xstate=xstate;
+                prompted=fdjtTime.tick();
+                metaBook.resolveXState(xstate);}}
+        if (navigator.onLine) setConnected(true);
+        syncing=false;
+        sync_count++;}
+
+    function syncFailed(req) {
+        try {
+            fdjtLog.warn(
+                "Sync request %s returned status %d %j, pausing for %ds",
+                req.uri,req.status,JSON.parse(req.responseText),
+                metaBook.sync_pause);}
+        catch (err) {
+            fdjtLog.warn(
+                "Sync request %s returned status %d, pausing for %ds",
+                req.uri,req.status,metaBook.sync_pause/1000);}
+        metaBook.locsync=false;
+        setTimeout(function(){metaBook.locsync=true;},
+                   metaBook.sync_pause);}
 
     var last_hidden=false;
     metaBook.visibilityChange=function visibilityChange(){

@@ -53,7 +53,6 @@ metaBook.Startup=
         var fdjtDevice=fdjt.device;
         var fdjtState=fdjt.State;
         var fdjtAsync=fdjt.Async;
-        var fdjtAjax=fdjt.Ajax;
         var fdjtTime=fdjt.Time;
         var fdjtLog=fdjt.Log;
         var fdjtDOM=fdjt.DOM;
@@ -961,7 +960,7 @@ metaBook.Startup=
         function fetchServerInfo(){
             var servername=metaBook.server;
             fdjtDOM.removeListener(window,"online",fetchServerInfo);
-            fdjtAjax.jsonCall(gotServerInfo,"https://"+servername+"/_info");}
+            fetch("https://"+servername+"/_info").then(gotServerInfo);}
         function updateServerInfo(){
             if (navigator.onLine) fetchServerInfo();
             else fdjtDOM.addListener(window,"online",fetchServerInfo);}

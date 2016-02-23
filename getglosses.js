@@ -151,7 +151,6 @@
                 metaBook.glosshash=false;}}
 
     var updating=false;
-    var noajax=false;
     function updatedInfo(data,source,start){
         var user=metaBook.user;
         if ((Trace.network)||
@@ -169,14 +168,8 @@
         if ((!(user))&&(metaBook.user)) metaBook.userSetup();
         else if (metaBook._ui_setup) metaBook.setupUI4User();}
     metaBook.updatedInfo=updatedInfo;
-    function updateInfo(callback,jsonp){
+    function updateInfo(callback){
         var user=metaBook.user; var start=fdjtTime();
-        var uri="https://"+metaBook.server+"/v1/loadinfo.js?REFURI="+
-            encodeURIComponent(metaBook.refuri);
-        var ajax_headers=((metaBook.sync)?({}):(false));
-        if (metaBook.sync)
-            ajax_headers["If-Modified-Since"]=
-            ((new Date(metaBook.sync*1000)).toString());
         function gotInfo(req){
             updating=false;
             var response=JSON.parse(req.responseText);
@@ -201,15 +194,10 @@
                 setTimeout(updateInfo,50);
             else {
                 // The response back didn't give us any user information
-                fdjtLog.warn("Couldn't determine user!");}}
+                fdjtLog.warn("Couldn't determine user!");}
+            if (callback) callback(response);}
         function ajaxFailed(req){
-            if ((req.readyState===4)&&(req.status<500)) {
-                fdjtLog.warn(
-                    "Ajax to %s callback failed, falling back to JSONP",
-                    uri);
-                updateInfoJSONP(uri+((user)?(""):("&JUSTUSER=yes")),jsonp);
-                noajax=true;}
-            else if (req.readyState===4) {
+            if (req.readyState===4) {
                 try {
                     fdjtLog.warn(
                         "Ajax to %s returned %d %j, taking a break",
@@ -222,8 +210,13 @@
                     clearInterval(metaBook.ticktock);
                     metaBook.ticktock=false;}
                 setTimeout(updateInfo,metaBook.update_pause);}}
-        if ((updating)||(!(navigator.onLine))) return; 
-        else updating=true;
+        if ((updating)||(!(navigator.onLine))) return; else updating=true;
+        var ajax_headers={};
+        var uri="https://"+metaBook.server+((user)?("/v1/loadinfo.js"):("/v1/userinfo.js"))+"?";
+        if (mB.sync) ajax_headers["If-Modified-Since"]=((new Date(metaBook.sync*1000)).toString());
+        if (mB.mycopyid) ajax_headers.Authorization="Bearer "+mB.mycopyid;
+        if (mB.docref) uri=uri+"DOC="+encodeURIComponent(mB.docref);
+        else uri=uri+"REFURI="+encodeURIComponent(mB.refuri);
         // Get any requested glosses and add them to the call
         var i=0, lim, glosses=getQuery("GLOSS",true); {
             i=0; lim=glosses.length; while (i<lim)
@@ -231,49 +224,11 @@
         glosses=getHash("GLOSS"); {
             i=0; lim=glosses.length; while (i<lim) 
                 uri=uri+"&GLOSS="+glosses[i++];}
-        if (metaBook.mycopyid)
-            uri=uri+"&MCOPYID="+encodeURIComponent(metaBook.mycopyid);
-        if (metaBook.sync) uri=uri+"&SYNC="+(metaBook.sync+1);
         if (user) uri=uri+"&SYNCUSER="+user._id;
         if ((!(user))&&(Trace.startup))
-            fdjtLog("Requesting initial user info with %s using %s",
-                    ((noajax)?("JSONP"):("Ajax")),uri);
-        if (noajax) {
-            updateInfoJSONP(uri+((user)?(""):("&JUSTUSER=yes")),jsonp);
-            return;}
-        try { fdjtAjax(gotInfo,
-                       uri+"&CALLBACK=return"+((user)?(""):("&JUSTUSER=yes")),[],
-                       ajaxFailed,
-                       ajax_headers,
-                       {timeout: metaBook.update_timeout});}
-        catch (ex) {
-            fdjtLog.warn(
-                "Ajax call to %s failed, falling back to JSONP",uri);
-            updateInfoJSONP(uri);}}
+            fdjtLog("Requesting initial user info using %s",uri);
+        fetch(uri,{headers: ajax_headers}).then(gotInfo).catch(ajaxFailed);}
     metaBook.updateInfo=updateInfo;
-    function updatedInfoJSONP(data){
-        var elt=$ID("METABOOKUPDATEINFO");
-        metaBook.updatedInfo(data,(((elt)&&(elt.src))||"JSON"));}
-    metaBook.updatedInfoJSONP=updatedInfoJSONP;
-    function updateInfoJSONP(uri,callback){
-        if (!(navigator.onLine)) return;
-        if (!(callback)) callback="metaBook.updatedInfoJSONP";
-        var elt=$ID("METABOOKUPDATEINFO");
-        if (uri.indexOf('?')>0) {
-            if (uri[uri.length-1]!=='&') uri=uri+"&";}
-        else uri=uri+"?";
-        uri=uri+"CALLBACK="+callback;
-        var update_script=fdjtDOM("script#METABOOKUPDATEINFO");
-        update_script.language="javascript";
-        update_script.type="text/javascript";
-        update_script.setAttribute("charset","utf-8");
-        update_script.setAttribute("async","async");
-        if (metaBook.mycopyid)
-            update_script.setAttribute("crossorigin","anonymous");
-        else update_script.setAttribute("crossorigin","use-credentials");
-        update_script.src=uri;
-        if (elt) fdjtDOM.replace(elt,update_script);
-        else document.body.appendChild(update_script);}
 
     function gotItem(item,qids){
         if (typeof item === 'string') {
@@ -432,9 +387,9 @@
     function getFreshMyCopyId(){
         if (getting_mycopyid) return;
         getting_mycopyid=fdjtTime();
-        fdjtAjax.fetchText("https://auth.bookhub.io/getmycopyid?DOC="+mB.docref).
-            then(function(mycopyid){
-                gotMyCopyId(mycopyid).then(function(){getting_mycopyid=false;});});}
+        fetch("https://auth.bookhub.io/getmycopyid?DOC="+mB.docref).
+            then(function(response){
+                gotMyCopyId(response.text()).then(function(){getting_mycopyid=false;});});}
 
 })();
 

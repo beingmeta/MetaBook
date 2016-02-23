@@ -1022,10 +1022,6 @@
                 return std;}}}
     metaBook.handleTagInput=handleTagInput;
 
-    function get_addgloss_callback(form,keep,uri){
-        return function(req){
-            return addgloss_callback(req,form,keep,uri);};}
-
     function addgloss_callback(req,form,keep){
         if ((Trace.network)||(Trace.glossing))
             fdjtLog("Got AJAX gloss response %o from %o",
@@ -1047,6 +1043,53 @@
             metaBook.setTarget(false);
             metaBook.setMode(false);
             return;}
+        if (keep)
+            addClass(form.parentNode,"submitdone");
+        else {
+            addClass(form.parentNode,"submitclose");
+            metaBook.setHUD(false,false);}
+        var json=JSON.parse(req.responseText);
+        var ref=metaBook.glossdb.Import(
+            // item,rules,flags
+            json,false,((RefDB.REFINDEX)|(RefDB.REFSTRINGS)|(RefDB.REFLOAD)));
+        var reps=document.getElementsByName(ref._id);
+        var i=0, lim=reps.length;
+        while (i<lim) {
+            var rep=reps[i++];
+            if (hasClass(rep,"mbcard")) {
+                var new_card=metaBook.renderCard(ref);
+                if (new_card) fdjtDOM.replace(rep,new_card);}}
+        ref.save();
+        if (metaBook.selecting) {
+            if (metaBook.selecting.onclear)
+                metaBook.selecting.onclear.push(function(){
+                    metaBook.addGloss2UI(ref);});
+            else metaBook.selecting.onclear=[function(){
+                metaBook.addGloss2UI(ref);}];}
+        /* Turn off the target lock */
+        if ((form)&&(!(keep))) {
+            setTimeout(function(){
+                if (hasClass(form.parentNode,"submitclose")) {
+                    if ((form.parentNode)&&(form.parentNode))
+                        fdjtDOM.remove(form.parentNode);
+                    setGlossTarget(false);
+                    metaBook.setTarget(false);
+                    metaBook.setMode(false);}},
+                       1500);}
+        else if (form)
+            setTimeout(function(){
+                dropClass(form.parentNode,"submitdone");},
+                       1500);
+        else {}}
+    function addgloss_success(req,form,keep){
+        if ((Trace.network)||(Trace.glossing))
+            fdjtLog("Got AJAX gloss response %o from %o",
+                    req,req.responseURL);
+        if (Trace.savegloss)
+            fdjtLog("Gloss %o successfully added (status %d) to %o",
+                    getInput(form,"UUID").value,req.status,
+                    getInput(form,"FRAG").value);
+        dropClass(form.parentNode,"submitting");
         if (keep)
             addClass(form.parentNode,"submitdone");
         else {
@@ -1255,10 +1298,31 @@
                                      "lose your changes when this page closes,",
                                      "or cancel the change you were about to make.")])));
             return;}
-        var sent=((navigator.onLine)&&(metaBook.connected)&&(metaBook.user)&&
-                  (fdjt.Ajax.onsubmit(form,get_addgloss_callback(form,keep))));
-        if (!(sent)) queueGloss(form,((arg)&&(arg.type)&&(arg)),keep);
-        else dropClass(div,"modified");}
+        var send=((navigator.onLine)&&(metaBook.connected)&&(metaBook.user));
+        if (send) {
+            fetch(form.action,{}).
+                then(function(response){
+                    if (typeof response === 'undefined') {
+                        addClass(form.parentNode,"submitfailed");
+                        if (response.status===403)
+                            fdjt.Dialog.alert(
+                                "Sorry, you're not allowed to save this gloss");
+                        else fdjt.Dialog.alert("There was a problem saving your gloss");
+                        if ((form.parentNode)&&(form.parentNode))
+                            fdjtDOM.remove(form.parentNode);
+                        queueGloss(form,((arg)&&(arg.type)&&(arg)),keep);
+                        setGlossTarget(false);
+                        metaBook.setTarget(false);
+                        metaBook.setMode(false);}
+                    else {
+                        dropClass(div,"modified");
+                        addgloss_success(response,form,keep);}});}
+        else {
+            queueGloss(form,((arg)&&(arg.type)&&(arg)),keep);
+            dropClass(div,"modified");
+            setGlossTarget(false);
+            metaBook.setTarget(false);
+            metaBook.setMode(false);}}
     metaBook.submitGloss=submitGloss;
 
     function cancelGloss_handler(evt){
@@ -1396,12 +1460,13 @@
             var post_data=((metaBook.nocache)?((queued_data[glossid])):
                            (fdjtState.getLocal("mB("+glossid+").params")));
             if (post_data) {
-                var req=new XMLHttpRequest();
-                req.open('POST',ajax_uri);
-                req.withCredentials='yes';
-                req.onreadystatechange=function () {
-                    if ((req.readyState === 4) &&
-                        (req.status>=200) && (req.status<300)) {
+                fetch(ajax_uri,{credentials: 'same-origin',
+                                headers: {
+                                    "Content-type": "application/x-www-form-urlencoded"}})
+                    .then(function(req){
+                        if (typeof req === 'undefined') {
+                            metaBook.setConnected(false);
+                            return;}
                         fdjtState.dropLocal("mB("+glossid+").params");
                         var pending=metaBook.queued;
                         if ((pending)&&(pending.length)) {
@@ -1412,16 +1477,9 @@
                                     fdjtState.setLocal(
                                         "mB("+mB.docid+").queued",pending,true);
                                 metaBook.queued=pending;}}
-                        addgloss_callback(req,false,false);
+                        addgloss_success(req,false,false);
                         if (pending.length) setTimeout(writeQueuedGlosses,200);
-                        fdjtState.dropLocal("mB("+mB.docid+").queued");}
-                    else if (req.readyState===4) {
-                        metaBook.setConnected(false);}
-                    else {}};
-                try {
-                    req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                    req.send(post_data);}
-                catch (ex) {metaBook.setConnected(false);}}}}
+                        fdjtState.dropLocal("mB("+mB.docid+").queued");});}}}
     metaBook.writeQueuedGlosses=writeQueuedGlosses;
     
     /* Glossform interaction */
@@ -2049,26 +2107,13 @@
         var itemid=fdjtState.getUUID();
         var filename=file.name, filetype=file.type;
         // var reader=new FileReader();
-        var savereq=new XMLHttpRequest();
         var endpoint="https://glossdata.bookhub.io/"+
             glossid+"/"+itemid+"/"+filename;
-        var aborted=false, done=false;
-        function attaching_file(resolve,reject){        
-            savereq.onreadystatechange=function(){
-                if (aborted) {}
-                else if (done) {}
-                else if (savereq.readyState===4) {
-                    if (savereq.status===200) {
-                        metaBook.glossattach=false;
-                        done=true; resolve(savereq);}
-                    else {done=aborted=true; reject(savereq);}}
-                else {}};
-            savereq.ontimeout=function(evt){reject(evt);};
-            savereq.open("POST",endpoint);
-            savereq.setRequestHeader("content-type",filetype);
-            savereq.withCredentials=true; // savereq.timeout=10000;
-            savereq.send(file);}
-        return new Promise(attaching_file);}
+        return fetch(endpoint,{method: 'POST',
+                               'content-type': filetype,
+                               credentials: 'same-origin',
+                               mode: 'CORS',
+                               body: file});}
 
     function glossetc_click(evt){
         var target=fdjtUI.T(evt);
