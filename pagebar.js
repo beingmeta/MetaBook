@@ -45,11 +45,14 @@
     function getGoPage(target,evt){
         var pagebar=$ID("METABOOKPAGEBAR");
         var w=pagebar.offsetWidth, npages=mB.pagecount;
-        var off=pagebar.offsetLeft, relx=(evt.clientX)-off; 
+        var evt_x=evt.clientX||
+            ((evt.touches)&&(evt.touches.length)&&
+             (evt.touches[0].clientX));
+        var off=pagebar.offsetLeft, relx=evt_x-off; 
         var gopage=npages*(relx/w);
         if ((Trace.gestures>1)||(hasClass(pagebar,"metabooktrace")))
             fdjtLog("pagebar_GoPage %o: %o-%o=%o/%o=%o => %o/%o",
-                    evt,evt.clientX,off,relx,w,relx/w,gopage,npages);
+                    evt,evt_x,off,relx,w,relx/w,gopage,npages);
         return Math.round(gopage+1);}
 
     var previewing_page=false, preview_start_page=false;
