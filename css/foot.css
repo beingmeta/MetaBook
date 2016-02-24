@@ -116,9 +116,9 @@ body.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR #METABOOKCURPAGESPAN.metabookp
 #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER1.metabooksectmarker {
     height: 85%;}
 #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER2.metabooksectmarker {
-    height: 60%; }
+    height: 55%; }
 #METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER3.metabooksectmarker {
-    height: 50%; }
+    height: 35%; }
 
 html._TOUCH #METABOOKFOOT.tapholding #METABOOKPAGEBAR {
     height: 100px;}
