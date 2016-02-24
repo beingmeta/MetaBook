@@ -815,19 +815,12 @@ metaBook.Paginate=
         
         /* Updating the page display */
 
-        function updatePageDisplay(pagenum,staticref,location,classname) {
-            var update_progress=(!(classname));
-            if (!(classname)) classname="current";
+        function updatePageDisplay(pagenum,staticref,location,eltid) {
+            var update_progress=(!(eltid));
+            if (!(eltid)) eltid="METABOOKCURPAGESPAN";
             var npages=metaBook.pagecount;
             var staticmax=metaBook.layout.laststaticref;
-            var page_elt=$ID("METABOOKPAGESPAN"+pagenum);
-            var cur=getChildren("METABOOKPAGEBAR","."+classname);
-            if (Trace.flips)
-                fdjtLog("updatePageDisplay/%s %d %d/%d",
-                        classname,location,pagenum,npages);
-            if (cur[0]!==page_elt) {
-                dropClass(cur,classname);
-                addClass(page_elt,classname);}
+            var showpage_elt=$ID(eltid);
             var locoff;
             if (typeof location==='number') {
                 var max_loc=metaBook.ends_at;
@@ -842,6 +835,9 @@ metaBook.Paginate=
                      (fdjtString.precString(pct,prec)))+"%");
                 locoff.title=location+"/"+max_loc;}
             else locoff=fdjtDOM("span.metabookloc#METABOOKLOCPCT");
+            if (showpage_elt) {
+                showpage_elt.innerHTML=pagenum;
+                showpage_elt.style.left=((100*(pagenum-1))/npages)+"%";}
             var pageno_text=fdjtDOM(
                 "span#METABOOKPAGENOTEXT.metabookpageno",pagenum,"/",npages);
             pageno_text.title="select to change page number";
@@ -872,30 +868,30 @@ metaBook.Paginate=
                     var head1=((info.level)?(info):(info.head));
                     var head2=((head1)&&(head1.head));
                     var head3=((head2)&&(head2.head));
-                    var span1=(head1)&&getPageSpan(head1);
-                    var span2=(head2)&&getPageSpan(head2);
-                    var span3=(head3)&&getPageSpan(head3);
-                    while ((span3)&&(span2)&&(span1.width<=1)) {
-                        var nextspan=(head3.head)&&(getPageSpan(head3.head));
+                    var range1=getpagerange(head1);
+                    var range2=getpagerange(head2);
+                    var range3=getpagerange(head3);
+                    while ((range3)&&(range2)&&(range1.width<=1)) {
+                        var nextspan=(head3.head)&&(getpagerange(head3.head));
                         if (!(nextspan)) break;
                         head1=head2; head2=head3; head3=head3.head;
-                        span1=span2; span2=span3; span3=nextspan;}
+                        range1=range2; range2=range3; range3=nextspan;}
                     var marker1=$ID("METABOOKSECTMARKER1");
                     var marker2=$ID("METABOOKSECTMARKER2");
                     var marker3=$ID("METABOOKSECTMARKER3");
-                    if ((span1)&&(span1.width)) {
-                        marker1.style.left=(100*((span1.start-1)/npages))+"%";
-                        marker1.style.width=(100*(span1.width/npages))+"%";
+                    if ((range1)&&(range1.width)) {
+                        marker1.style.left=(100*((range1.start-1)/npages))+"%";
+                        marker1.style.width=(100*(range1.width/npages))+"%";
                         marker1.style.display='block';                    }
                     else marker1.style.display='none';
-                    if ((span2)&&(span2.width)) {
-                        marker2.style.left=(100*((span2.start-1)/npages))+"%";
-                        marker2.style.width=(100*(span2.width/npages))+"%";
-                        marker2.style.display='block';                    }
+                    if ((range2)&&(range2.width)) {
+                        marker2.style.left=(100*((range2.start-1)/npages))+"%";
+                        marker2.style.width=(100*(range2.width/npages))+"%";
+                        marker2.style.display='block';}
                     else marker2.style.display='none';
-                    if ((span3)&&(span3.width)) {
-                        marker3.style.left=(100*((span3.start-1)/npages))+"%";
-                        marker3.style.width=(100*(span3.width/npages))+"%";
+                    if ((range3)&&(range3.width)) {
+                        marker3.style.left=(100*((range3.start-1)/npages))+"%";
+                        marker3.style.width=(100*(range3.width/npages))+"%";
                         marker3.style.display='block';                    }
                     else marker3.style.display='none';}}
             var handlers=metaBook.UI.handlers[metaBook.ui];
@@ -906,7 +902,7 @@ metaBook.Paginate=
                 pageref_text,handlers["#METABOOKPAGEREFTEXT"]);}
         metaBook.updatePageDisplay=updatePageDisplay;
         
-        function getPageSpan(headinfo) {
+        function getpagerange(headinfo) {
             var scan=headinfo, nextinfo, result={};
             while (scan) {
                 if (scan.next) {nextinfo=scan.next; break;}
@@ -928,7 +924,7 @@ metaBook.Paginate=
         
         function setupPagebar(){
             var layout=metaBook.layout, pages=layout.pages;
-            var i=0, n=pages.length; var html=[];
+            var i=0, n=pages.length;
             var pagemax=$ID("METABOOKGOTOPAGEMAX");
             if (pagemax) pagemax.innerHTML=""+n;
             var spanwidth=
@@ -937,18 +933,9 @@ metaBook.Paginate=
             if (metaBook.CSS.pagespanrule)
                 metaBook.CSS.pagespanrule.style.width=spanwidth+"px";
             else metaBook.CSS.pagespanrule=fdjtDOM.addCSSRule(
-                "div.metabookpagespans > span","width: "+spanwidth+"px;");
+                "div.metabookpagespan","width: "+spanwidth+"px;");
             while (i<n) {
                 var page=pages[i];
-                var topid=(page)&&(page.getAttribute("data-topid"));
-                var topinfo=(topid)&&(metaBook.docinfo[topid]);
-                var zstyle=(((topinfo)&&(topinfo.level))?
-                            ("; z-index: 50;"):(""));
-                html.push("<span id='METABOOKPAGESPAN"+(i+1)+"' "+
-                          "class='metabookpagespan' "+
-                          "title='p"+(i+1)+". Hold to glimpse, tap to jump' "+
-                          "style='left: "+(100*(i/n))+"%"+zstyle+"'"+
-                          ">"+(i+1)+"</span>");
                 var pageref=page.getAttribute("data-staticpageref");
                 if (pageref) {
                     var pagemap=layout.pagemap;
@@ -960,13 +947,7 @@ metaBook.Paginate=
                 i++;}
             if (layout.laststaticref)
                 addClass(document.body,"mbPAGEREFS");
-            else dropClass(document.body,"mbPAGEREFS");
-            var spans=$ID("METABOOKPAGESPANS");
-            spans.innerHTML=html.join("");
-            var outer_width=getGeometry(spans);
-            var inner_width=fdjt.DOM.getInsideBounds(spans);
-            var tweak=outer_width/inner_width;
-            spans.style[fdjt.DOM.transform]="scale("+tweak+",1)";}
+            else dropClass(document.body,"mbPAGEREFS");}
         metaBook.setupPagebar=setupPagebar;
 
 
@@ -1098,7 +1079,7 @@ metaBook.Paginate=
             metaBook.previewing=previewing=page;
             addClass(document.body,"mbPREVIEW");
             var staticref=page.getAttribute("data-staticpageref");
-            updatePageDisplay(pagenum,staticref,pageloc,"preview");}
+            updatePageDisplay(pagenum,staticref,pageloc,"METABOOKPRVPAGESPAN");}
         metaBook.startPagePreview=startPagePreview;
         function stopPagePreview(caller,target){
             var pagenum=parseInt(curpage.getAttribute("data-pagenum"),10);
@@ -1132,10 +1113,10 @@ metaBook.Paginate=
                 var newloc=metaBook.getLocInfo(target);
                 updatePageDisplay(
                     newnum,newpage.getAttribute("data-staticpageref"),
-                    ((newloc)&&(newloc.starts_at)),"current");}
+                    ((newloc)&&(newloc.starts_at)));}
             else updatePageDisplay(
                 pagenum,curpage.getAttribute("data-staticpageref"),
-                metaBook.location,"current");
+                metaBook.location);
             if (typeof newpage === "number") metaBook.GoToPage(newpage);}
         metaBook.stopPagePreview=stopPagePreview;
         

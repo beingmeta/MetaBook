@@ -42,12 +42,23 @@
     var cancel=fdjtUI.cancel;
     var Trace=metaBook.Trace;
 
-    function getGoPage(target){
-        return parseInt(target.innerHTML,10);}
+    function getGoPage(target,evt){
+        var pagebar=$ID("METABOOKPAGEBAR");
+        var w=pagebar.offsetWidth, npages=mB.pagecount;
+        var evt_x=evt.clientX||
+            ((evt.touches)&&(evt.touches.length)&&
+             (evt.touches[0].clientX));
+        var off=pagebar.offsetLeft, relx=evt_x-off; 
+        var gopage=npages*(relx/w);
+        if ((Trace.gestures>1)||(hasClass(pagebar,"metabooktrace")))
+            fdjtLog("pagebar_GoPage %o: %o-%o=%o/%o=%o => %o/%o",
+                    evt,evt_x,off,relx,w,relx/w,gopage,npages);
+        return Math.round(gopage+1);}
 
     var previewing_page=false, preview_start_page=false;
     function pagebar_hold(evt,target){
         evt=evt||window.event; if (!(target)) target=fdjtUI.T(evt);
+        if ((evt.type==="mousemove")&&(!(evt.buttons))) return;
         var pagebar=$ID("METABOOKPAGEBAR");
         previewTimeout(false);
         if (((mB.hudup)||(mB.mode))&&
@@ -56,11 +67,9 @@
             metaBook.setMode(false);
             return;}
         if (target.nodeType===3) target=target.parentNode;
-        if (((hasParent(target,pagebar))&&(target.tagName!=="SPAN")))
-            return;
         var gopage=getGoPage(target,evt);
         if ((Trace.gestures)||(hasClass(pagebar,"metabooktrace")))
-            fdjtLog("pagebar_span_hold %o t=%o gopage: %o=>%o/%o, start=%o",
+            fdjtLog("pagebar_hold %o t=%o gopage: %o=>%o/%o, start=%o",
                     evt,target,previewing_page,gopage,mB.pagecount,
                     preview_start_page);
         if (!(preview_start_page)) preview_start_page=gopage;
@@ -79,7 +88,7 @@
             metaBook.curpage,gopage);
         previewing_page=gopage;
         metaBook.startPreview(
-            "CODEXPAGE"+previewing_page,"pagebar_span_hold/timeout");}
+            "CODEXPAGE"+previewing_page,"pagebar_hold/timeout");}
     function pagebar_tap(evt,target){
         evt=evt||window.event; if (!(target)) target=fdjtUI.T(evt);
         var pagebar=$ID("METABOOKPAGEBAR");
@@ -98,8 +107,6 @@
             metaBook.setMode(false);
             return;}
         if (target.nodeType===3) target=target.parentNode;
-        if (((hasParent(target,pagebar))&&(target.tagName!=="SPAN")))
-            return;
         var gopage=getGoPage(target,evt);
         if (previewing_page===gopage) return;
         metaBook.GoToPage(gopage,"pagebar_tap",true);
@@ -155,6 +162,7 @@
         {"#METABOOKPAGEBAR": {
             tap: pagebar_tap,
             hold: pagebar_hold,
+            mousemove: pagebar_hold,
             release: pagebar_release,
             slip: pagebar_slip,
             click: cancel}});
@@ -163,6 +171,7 @@
         metaBook.UI.handlers.touch,
         {"#METABOOKPAGEBAR": {tap: pagebar_tap,
                               hold: pagebar_hold,
+                              touchmove: pagebar_hold,
                               release: pagebar_release,
                               slip: pagebar_slip,
                               touchtoo: pagebar_touchtoo,
