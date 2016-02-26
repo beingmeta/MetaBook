@@ -232,7 +232,7 @@
             i=0; lim=glosses.length; while (i<lim) 
                 uri=uri+"&GLOSS="+glosses[i++];}
         if (metaBook.mycopyid)
-            uri=uri+"&MCOPYID="+encodeURIComponent(metaBook.mycopyid);
+            uri=uri+"&MYCOPYID="+encodeURIComponent(metaBook.mycopyid);
         if (metaBook.sync) uri=uri+"&SYNC="+(metaBook.sync+1);
         if (user) uri=uri+"&SYNCUSER="+user._id;
         if ((!(user))&&(Trace.startup))
