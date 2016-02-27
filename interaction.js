@@ -1751,6 +1751,26 @@
             else {}}
         else {}}
 
+    function dombody_touched(evt){
+        if ((mB.hudup)||(mB.closed)) return;
+        else {
+            var touches=((evt.touches)&&(evt.touches.length)&&(evt.touches))||
+                ((evt.changedTouches)&&(evt.changedTouches.length)&&(evt.changedTouches));
+            var x=evt.clientX||((touches)&&(touches[0].clientX));
+            var y=evt.clientY||((touches)&&(touches[0].clientY));
+            var elt=((x)||(y))&&(document.elementFromPoint(x,y));
+            if (mB.Trace.gestures>1)
+                fdjtLog("dombody_touched %o: %o @ <%o,%o>",evt,elt,x,y);
+            if (elt!==document.body) return;
+            if ((y<50)||((elt.offsetHeight-y)<50)) return;
+            if (mB.Trace.gestures)
+                fdjtLog("dombody_touched(atedge) %o: %o @ <%o,%o>",evt,elt,x,y);
+            if (x<10) return mB.pageBackward();
+            else if ((elt.offsetWidth-x)<10)
+                return mB.pageBackward();
+            else return;}}
+    metaBook.dombody_touched=dombody_touched;
+
     function showcover_tapped(evt){
         evt=evt||window.event;
         if ((mB.touch)&&(!(mB.hudup))) return;
@@ -2005,6 +2025,7 @@
                slip: toc_slipped, release: toc_released,
                touchtoo: toc_touchtoo,
                touchmove: preview_touchmove_nodefault},
+         body: {touchstart : dombody_touched},
          glossmark: {touchstart: glossmark_tapped,touchend: cancel},
          "#METABOOKSTARTPAGE": {touchend: metaBook.UI.dropHUD},
          "#METABOOKMENU": {tap: raiseHUD},
