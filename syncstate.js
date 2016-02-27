@@ -240,10 +240,13 @@
             var refuri=
                 ((metaBook.target)&&(metaBook.getRefURI(metaBook.target)))||
                 (metaBook.refuri);
-            var sync_uri="https://sync.bookhub.io/v1/sync"+
-                "?REFURI="+encodeURIComponent(refuri)+
-                "&DOCURI="+encodeURIComponent(metaBook.docuri)+
-                "&NOW="+fdjtTime.tick();
+            var sync_uri="https://sync.bookhub.io/v1/sync?";
+            if (mB.docref)
+                sync_uri=sync_uri+"DOC="+encodeURIComponent(mB.docref);
+            else sync_uri=sync_uri+"REFURI="+encodeURIComponent(refuri);
+            if (mB.docuri!==refuri)
+                sync_uri=sync_uri+"&DOCURI="+encodeURIComponent(metaBook.docuri);
+            sync_uri=sync_uri+"&NOW="+fdjtTime.tick();
             metaBook.last_sync=last_sync=fdjtTime.tick(); syncing=state;
             if (metaBook.user) sync_uri=sync_uri+
                 "&SYNCUSER="+encodeURIComponent(metaBook.user._id);

@@ -171,12 +171,14 @@
     metaBook.updatedInfo=updatedInfo;
     function updateInfo(callback,jsonp){
         var user=metaBook.user; var start=fdjtTime();
-        var uri="https://"+metaBook.server+"/v1/loadinfo.js?REFURI="+
-            encodeURIComponent(metaBook.refuri);
+        var uri="https://"+metaBook.server+"/v1/loadinfo.js?";
         var ajax_headers=((metaBook.sync)?({}):(false));
-        if (metaBook.sync)
+        if (mB.docref)
+            uri=uri+"DOC="+encodeURIComponent(mB.docref);
+        else uri=uri+"REFURI="+encodeURIComponent(mB.refuri);
+        if (mB.sync) {
             ajax_headers["If-Modified-Since"]=
-            ((new Date(metaBook.sync*1000)).toString());
+                ((new Date(metaBook.sync*1000)).toString());}
         function gotInfo(req){
             updating=false;
             var response=JSON.parse(req.responseText);
