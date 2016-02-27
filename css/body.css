@@ -112,7 +112,6 @@ p { line-height: 1.2;}
 
 .sbooktitlepage {
   padding: 1em; margin: 0px;
-  font-family: helvetica,sans,sans-serif;
   text-align: center;
   page-break-inside: avoid;
   page-break-before: always;

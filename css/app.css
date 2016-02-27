@@ -114,8 +114,7 @@ body._ANIMATE body.metabookfixed div.codexpage {
 
 /* The content */
 
-span.excerpt {
-    font-family: times,serif; line-height: 1.0;}
+span.excerpt {line-height: 1.0;}
 span.excerpt span.content { font-size: 80%; display: none;}
 .showexcerpt span.excerpt span.content { display: inline;}
 .showexcerpt span.excerpt span.ellipsis { display: none;}
