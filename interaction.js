@@ -1767,7 +1767,7 @@
                 fdjtLog("dombody_touched(atedge) %o: %o @ <%o,%o>",evt,elt,x,y);
             if (x<10) return mB.pageBackward();
             else if ((elt.offsetWidth-x)<10)
-                return mB.pageBackward();
+                return mB.pageForward();
             else return;}}
     metaBook.dombody_touched=dombody_touched;
 
