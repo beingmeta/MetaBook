@@ -51,6 +51,7 @@ metaBook.DOMScan=(function(){
     var mB=metaBook;
     var Trace=mB.Trace;
     var fdjtString=fdjt.String;
+    var fdjtAsync=fdjt.Async;
     var fdjtTime=fdjt.Time;
     var fdjtLog=fdjt.Log;
     var fdjtDOM=fdjt.DOM;
@@ -67,6 +68,7 @@ metaBook.DOMScan=(function(){
         var baseid=mB.baseid;
         
         var idmap={};
+        var need_ids=[];
         
         if (typeof root === 'undefined') return this;
         if (!(docinfo)) {
@@ -336,7 +338,7 @@ metaBook.DOMScan=(function(){
             if ((!(id))&&(!(baseid))) {
                 // If there isn't a known BASEID, we generate
                 //  ids for block level elements using WSN.
-                id=assignWSN(child);}
+                need_ids.push(child);}
             // else if ((id)&&(baseid)&&(id.search(baseid)!==0)) id=false;
             else if (!(id)) {}
             else if (!(idmap[id])) idmap[id]=child;
@@ -382,11 +384,7 @@ metaBook.DOMScan=(function(){
                 return;}
             var toclevel=getLevel(child,curlevel), info=false;
             if ((toclevel)&&(!(id))) {
-                id=assignWSN(child);
-                allids.push(id); info=new ScanInfo(id,scanstate);
-                if (docinfo[id]!==info) window.alert("Wrong");
-                docinfo[id]=info;
-                info.elt=child;}
+                need_ids.push(child);}
             if (!(id)) {}
             else if ((info=docinfo[id])) {}
             else {
@@ -508,6 +506,8 @@ metaBook.DOMScan=(function(){
                 scaninfo.ends_at=scanstate.location;
                 scaninfo=scaninfo.head;}};
         
+        if (need_ids.length) {
+            fdjtAsync.slowmap(assignWSN,need_ids);}
         docinfo._rootinfo=docinfo[root.id];
 
         return docinfo;}
