@@ -143,9 +143,8 @@
         var notelinks=getChildren(
             content,"a[rel='sbooknote'],a[rel='footnote'],a[rel='endnote']");
         i=0; lim=notelinks.length; while (i<lim) {
-            var ref=notelinks[i++];
-            var nref=ref.href;
-            if (!(fdjtDOM.hasText(nref))) nref.innerHTML="Note";
+            var ref=notelinks[i++], nref=ref.href;
+            if (!(fdjtDOM.hasText(ref))) ref.innerHTML="Note";
             if ((nref)&&(nref[0]==="#")) {
                 addClass($ID(nref.slice(1)),"sbooknote");}}
         
