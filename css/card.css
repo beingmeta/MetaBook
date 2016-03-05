@@ -15,7 +15,8 @@ div.mbcard {
 div.mbcard_tochead {
     max-height: 3ex; white-space: nowrap;
     text-overflow: ellipsis; overflow: hidden;
-    line-height: 100%;}
+    padding-top: 2px; padding-bottom: 1px;
+    line-height: 120%;}
 
 div.mbcard_tochead { margin-left: -20px; }
 
