@@ -36,8 +36,6 @@ body.hudup #METABOOKBODY, body.mbCOVER #METABOOKBODY,
 body.mbMEDIA #METABOOKBODY, body.mbZOOM #METABOOKBODY {
     z-index: 0;}
 
-#METABOOKBODY {text-align: left;}
-
 #METABOOKBODY {pointer-events: none;}
 #METABOOKBODY #CODEXPAGE {pointer-events: all;}
 #METABOOKBODY #METABOOKPOINTGLOSSES {pointer-events: all;}

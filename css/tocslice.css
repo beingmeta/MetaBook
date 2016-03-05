@@ -94,9 +94,9 @@ a.mbtoc_showsize {
     font-size: 120%;}
 
 #METABOOKSKIMMER .mbtoc {
-    margin-left: 1ex; font-size: 80%;}
+    margin-left: 1ex; font-size: 80%; line-height: 100%;}
 body.hudup #METABOOKSKIMMER .mbtoc {
-    font-size: 100%;}
+    font-size: 90%;}
 
 #METABOOKSTATICTOC {
     box-sizing: border-box;
