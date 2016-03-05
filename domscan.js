@@ -111,6 +111,13 @@ metaBook.DOMScan=(function(){
             scanstate.locinfo.push(scanstate.location);
             return this;}
         ScanInfo.prototype=new Ref();
+        ScanInfo.prototype._id=ScanInfo.prototype._domain=
+            ScanInfo.prototype._db=ScanInfo.prototype.frag=
+            ScanInfo.prototype._live=ScanInfo.prototype._changed=
+            ScanInfo.prototype.starts_at=ScanInfo.prototype.ends_at=
+            ScanInfo.prototype.head=ScanInfo.prototype.headstart=
+            ScanInfo.prototype.elt=ScanInfo.prototype.title=
+            ScanInfo.prototype.bookhead=false;
         
         docdb.refclass=ScanInfo;
         docinfo._docdb=docdb;
