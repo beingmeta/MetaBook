@@ -688,7 +688,7 @@ metaBook.setMode=
         
         var rAF=fdjtDOM.requestAnimationFrame;
 
-        function metaBookSkimTo(card,dir){
+        function metaBookSkimTo(card,dir,hudup){
             var skimmer=$ID("METABOOKSKIMMER");
             var skimpoint=mB.skimpoint;
             var slice=getSlice(card);
@@ -759,6 +759,8 @@ metaBook.setMode=
                 metaBook.skimpoint=card;}
             else {}
             skimMode(slice);
+            if (typeof hudup !== 'undefined')
+                setHUD(hudup,false);
             mB.GoTo(passage,"Skim");
             setSkimTarget(passage);
             highlightSkimTarget(passage,card);}

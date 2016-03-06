@@ -908,7 +908,7 @@ metaBook.Slice=(function () {
         if (getParent(target,".tochead")) {
             var anchor=getParent(target,".tocref");
             var href=(anchor)&&(anchor.getAttribute("data-tocref"));
-            metaBook.SkimTo(href);
+            metaBook.SkimTo(href,0,false);
             fdjtUI.cancel(evt);
             return;}
 
@@ -938,7 +938,7 @@ metaBook.Slice=(function () {
         var gloss=((glossid)&&(metaBook.glossdb.ref(glossid)));
         if (!(passage)) return;
         else if ((!(gloss))&&(passage)) {
-            metaBook.SkimTo(card,0);
+            metaBook.SkimTo(card,0,false);
             return fdjtUI.cancel(evt);}
         else if (getParent(target,".tool")) {
             var form=metaBook.setGlossTarget(gloss);           
@@ -963,7 +963,7 @@ metaBook.Slice=(function () {
             metaBook.setMode("glossdetail");
             return fdjtUI.cancel(evt);}
         else {
-            metaBook.SkimTo(card,0);
+            metaBook.SkimTo(card,0,false);
             return fdjtUI.cancel(evt);}}
     function slice_held(evt){
         evt=evt||window.event;
