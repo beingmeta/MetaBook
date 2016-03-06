@@ -98,7 +98,7 @@ span.mbcard_audience .outlet { color: forestgreen; }
 .mbcard .info span.score {
     color: gold; display: none;}
 span.mbcard_tags { 
-    font-size: 80%; padding-left: 1ex;}
+    font-size: 70%; padding-left: 0.5ex;}
 span.mbcard_tags img.tagicon { 
     height: 3ex; width: auto;
     display: none;}
