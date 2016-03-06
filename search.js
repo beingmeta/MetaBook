@@ -102,7 +102,7 @@
             metaBook.query=query;
             metaBook.qstring=qstring;}
         if (search_modes.exec(metaBook.mode)) {
-            if (query.results.length===0) {}
+            if ((!(query.results))||(query.results.length===0)) {}
             else if (query.results.length<7)
                 showSearchResults();
             else if (!(metaBook.touch)) {
