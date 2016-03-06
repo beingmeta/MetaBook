@@ -768,7 +768,7 @@
                     if (evt.touches===2)
                         showPage.fastBckward(pagers[metaBook.mode]);
                     else showPage.backward(pagers[metaBook.mode]);}
-                else metaBook.pageBackward(evt,true);}}
+                else pageBackward(evt,true);}}
         else if (ady>(adx*2)) {
             // Vertical swipe
             if (!(mB.hudup)) {
@@ -1043,7 +1043,7 @@
             pageForward(evt);}
         else if (kc===38) {  /* arrow up */
             setHUD(false);
-            metaBook.pageBackward(evt);}
+            pageBackward(evt);}
         else if (kc===37) {  /* arrow left */
             if ((mB.mode)&&(!(mB.skimming))&&
                 (pagers[metaBook.mode]))
@@ -1765,9 +1765,9 @@
             if ((y<50)||((elt.offsetHeight-y)<50)) return;
             if (mB.Trace.gestures)
                 fdjtLog("dombody_touched(atedge) %o: %o @ <%o,%o>",evt,elt,x,y);
-            if (x<10) return mB.pageBackward();
+            if (x<10) return backward(evt);
             else if ((elt.offsetWidth-x)<10)
-                return mB.pageForward();
+                return forward(evt);
             else return;}}
     metaBook.dombody_touched=dombody_touched;
 
