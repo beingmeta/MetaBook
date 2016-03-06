@@ -55,7 +55,6 @@
     var ObjectMap=fdjt.Map||RefDB.Map;
 
     var hasClass=fdjtDOM.hasClass;
-    var addClass=fdjtDOM.addClass;
     var hasParent=fdjtDOM.hasParent;
 
     var getLocal=fdjtState.getLocal;
@@ -260,7 +259,7 @@
                     metaBook.addTag2Cloud(maker,metaBook.empty_cloud);
                     metaBook.UI.addGlossSource(maker,true);}
                 var maker_knodule=metaBook.getMakerKnodule(item.maker);
-                var make_cue=(maker===metaBook.user);
+                // var make_cue=(maker===metaBook.user);
                 var i, lim, sources=item.sources;
                 if (sources) {
                     if (typeof sources === 'string') sources=[sources];
@@ -274,9 +273,9 @@
                     i=0; lim=alltags.length; while (i<lim) {
                         var each_tag=alltags[i++], entry;
                         entry=addTag2Cloud(each_tag,empty_cloud);
-                        if ((make_cue)&&(entry)) addClass(entry,"cue");
+                        // if ((make_cue)&&(entry)) addClass(entry,"cue");
                         entry=addTag2Cloud(each_tag,metaBook.gloss_cloud);
-                        if ((make_cue)&&(entry)) addClass(entry,"cue");
+                        // if ((make_cue)&&(entry)) addClass(entry,"cue");
                         taglist.appendChild(knodeToOption(each_tag));}
                     var tag_slots=["tags","*tags","**tags"];
                     var s=0, n_slots=tag_slots.length; while (s<n_slots) {
