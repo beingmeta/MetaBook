@@ -1765,8 +1765,8 @@
             if ((y<50)||((elt.offsetHeight-y)<50)) return;
             if (mB.Trace.gestures)
                 fdjtLog("dombody_touched(atedge) %o: %o @ <%o,%o>",evt,elt,x,y);
-            if (x<10) return backward(evt);
-            else if ((elt.offsetWidth-x)<10)
+            if (x<25) return backward(evt);
+            else if ((elt.offsetWidth-x)<25)
                 return forward(evt);
             else return;}}
     metaBook.dombody_touched=dombody_touched;
