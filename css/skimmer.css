@@ -6,9 +6,9 @@
 
 #METABOOKSKIMMER {
     position: absolute;
-    top: 0px; left: 60px; right: 60px; z-index: 100;
-    border: solid steelblue 2px;  border-top: 0px;
-    padding: 2px; padding-top: 0px;
+    top: 0; left: 60px; right: 60px; z-index: 100;
+    border: solid steelblue 2px;  border-top: 0;
+    padding: 2px; padding-top: 0;
     font-size: 70%;
     max-height: 75px;
     display: none;}
@@ -21,8 +21,8 @@ body._ANIMATE #METABOOKSKIMMER {
 
 #METABOOKSKIMMER.flash { background-color: silver;}
 .hudup #METABOOKSKIMMER { 
-    border: solid steelblue 4px;  border-top: 0px; 
-    padding: 0px;}
+    border: solid steelblue 4px;  border-top: 0; 
+    padding: 0;}
 .hudup #METABOOKSKIMMER {
     max-height: inherit; }
 #METABOOKSKIMMER mbcard_tochead {
@@ -40,7 +40,7 @@ body._ANIMATE #METABOOKSKIMMER {
     border-bottom-right-radius: 1ex;}
 #METABOOKSKIMMER .mbcard,
 #METABOOKSKIMMER mbcard_tochead {
-    border-left: 0px;}
+    border-left: 0;}
 
 body._ANIMATE #METABOOKSKIMMER.transanimate {
     transition-property: transform; 
@@ -82,7 +82,7 @@ body.hudup #METABOOKSKIMMER .ellipsis .delision {
 
 /* This is the twisty control */
 #METABOOKSKIMMER span.expander {
-    position: absolute; left: 0px; top: 1.5em;}
+    position: absolute; left: 0; top: 1.5em;}
 #METABOOKSKIMMER span.expander img { width: 40px; height: 40px;}
 #METABOOKSKIMMER span.expander img[alt='-'] { display: none;}
 body.hudup #METABOOKSKIMMER span.expander img[alt='-'] { display: inline;}
@@ -97,7 +97,7 @@ body.hudup #METABOOKSKIMMER #METABOOKSKIMCONTROLS .collapsed {
     display: none;}
 
 #METABOOKSKIMMER div.mbcard_tochead, #METABOOKPOINTGLOSSES div.mbcard_tochead {
-    border-top-width: 0px; border-bottom-width: 0px;}
+    border-top-width: 0; border-bottom-width: 0;}
 #METABOOKPOINTGLOSSES div.mbcard_tochead { display: none; }
 
 #METABOOKSKIMMER div.mbcard_body {font-size: 75%;}
@@ -113,19 +113,19 @@ body.hudup #METABOOKSKIMMER div.mbcard_body img.button {
 #METABOOKSKIMMER div.mbcard.gloss div.mbcard_body {
     padding-left: 4px;}
 #METABOOKSKIMMER div.mbcard.gloss div.mbcard_tochead {
-    padding-left: 0px;}
+    padding-left: 0;}
 #METABOOKSKIMMER div.mbcard.gloss div.mbcard_body img.glosspic,
 #METABOOKSKIMMER div.mbcard.gloss div.mbcard_body .sourcepic {
-    position: absolute; top: 0px; left: 0px; margin-top: 0px;}
+    position: absolute; top: 0; left: 0; margin-top: 0;}
 
 /* Skimmer rules */
 
 body.hudup #METABOOKHUD #METABOOKSKIMMER img[alt="beginning"],
 body.hudup #METABOOKHUD #METABOOKSKIMMER img[alt="prev"] {
-    position: absolute; left: 0px; top: 8px;}
+    position: absolute; left: 0; top: 8px;}
 body.hudup #METABOOKHUD #METABOOKSKIMMER img[alt="end"], 
 body.hudup #METABOOKHUD #METABOOKSKIMMER img[alt="next"] {
-    position: absolute; right: 0px; top: 8px;}
+    position: absolute; right: 0; top: 8px;}
 body.hudup #METABOOKHUD #METABOOKSKIMMER img[alt="beginning"],
 body.hudup #METABOOKHUD #METABOOKSKIMMER img[alt="end"] {
     display: none;}
@@ -146,7 +146,7 @@ body.hudup #METABOOKHUD #METABOOKSKIMMER span.whencollapsed {
 
 #METABOOKSKIMMER div.mbcard,
 #METABOOKSKIMMER div.mbcard_tochead {
-    margin-left: 0px;}
+    margin-left: 0;}
 #METABOOKSKIMMER div.mbcard {
     min-height: 50px;}
 
@@ -173,7 +173,7 @@ body.hudup #METABOOKHUD #METABOOKSKIMMER img.glosspic {  height: inherit; }
         border-width: 2px;
         border-bottom-left-radius: 0.5ex;
         border-bottom-right-radius: 0.5ex;
-        padding-bottom: 0px;
+        padding-bottom: 0;
         left: 10px; right: 10px; }
 }
 

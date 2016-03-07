@@ -62,7 +62,7 @@ body {
 /* We reduce the number of fixed position containers because that puts
    an extra load on some devices (such as iOS). */
 #METABOOKFRAME {
-    position: fixed; top: 0px; bottom: 0px; left: 0px; right: 0px;
+    position: fixed; top: 0; bottom: 0; left: 0; right: 0;
     width: 100%; height: 100%; line-height: normal;
     box-sizing: border-box;
     pointer-events: none;
@@ -78,7 +78,7 @@ body.hudup #METABOOKFRAME, body.mbCOVER #METABOOKFRAME,
 body.mbSKIMMING #METABOOKFRAME, body.openhud #METABOOKFRAME,
 body.hudup #METABOOKHUD, body.mbSKIMMING #METABOOKHUD,
 body.openhud #METABOOKHUD, body.mbCOVER #METABOOKCOVER {
-    top: 0px; bottom: 0px; left: 0px; right: 0px;
+    top: 0; bottom: 0; left: 0; right: 0;
     height: 100%; width: 100%;
     display: block;}
 body.mbZOOM #METABOOKFRAME, body.mbZOOM #METABOOKBODY,
@@ -110,7 +110,7 @@ body._FULLHEIGHT #METABOOKFRAME {
 /* The HUD is where all of the active interface elements for reading
    appear.  */
 #METABOOKHUD {
-    position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px;
+    position: absolute; top: 0; bottom: 0; left: 0; right: 0;
     width: 100%; height: 100%;
     transform: translateZ(0);
     pointer-events: none;}
@@ -149,11 +149,11 @@ body.mbSKIMMING div.mbpagecontrol > span {
 div#MBPAGERIGHT.mbpagecontrol {
     background-image: url(/static/g/metabook/page_right.svgz);
     background-position: center right; padding-right: 3px;
-    text-align: right; right: 0px;}
+    text-align: right; right: 0;}
 div#MBPAGELEFT.mbpagecontrol {
     background-image: url(/static/g/metabook/page_left.svgz);
     background-position: center left; padding-left: 3px;
-    text-align: left; left: 0px;}
+    text-align: left; left: 0;}
 
 body.mbSKIMMING div#MBPAGERIGHT.mbpagecontrol {
     background-image: url(/static/g/metabook/skim_right.svgz);}
@@ -170,8 +170,8 @@ body.mbSKIMMING.mbSKIMSTART div#MBPAGELEFT.mbpagecontrol {
    a small metaBook tutorial. */
 #METABOOKCOVER {
     position: absolute; width: 100%; height: 100%;
-    top: 0px; bottom: 0px; left: 0px; right: 0px;
-    margin: 0px; border: 0px; padding: 0px;
+    top: 0; bottom: 0; left: 0; right: 0;
+    margin: 0; border: 0; padding: 0;
     background-color: black; opacity: 1.0;
     text-align: center;
     z-index: 100;}
@@ -193,7 +193,7 @@ body.mbCOVER #METABOOKHUD, body.hudup.mbCOVER #METABOOKHUD {
 
 #METABOOKZOOM, #METABOOKZOOMBOX { 
     position: absolute;
-    top: 0px; left: 0px; bottom: 0px; right: 0px;
+    top: 0; left: 0; bottom: 0; right: 0;
     text-align: center; vertical-align: middle;}
 
 #METABOOKZOOM {
@@ -217,7 +217,7 @@ body.mbZOOM #METABOOKZOOM {
     display: block;}
 #METABOOKZOOMCONTROLS { 
     position: fixed;
-    top: 0px; left: 0px; height: 100%; width: 100%;
+    top: 0; left: 0; height: 100%; width: 100%;
     text-align: center; vertical-align: middle;
     z-index: 100; opacity: 0.7;
     transform: translateZ(0);
@@ -285,14 +285,14 @@ body.mbSHOWHELP.mbZOOM #METABOOKZOOMHELPTEXT { display: block; }
 
 #METABOOKMEDIA, #METABOOKMEDIABOX { 
     position: absolute;
-    top: 0px; left: 0px; bottom: 0px; right: 0px;
+    top: 0; left: 0; bottom: 0; right: 0;
     text-align: center; vertical-align: middle;}
 
 #METABOOKMEDIA {
     overflow-x: scroll; overflow-y: scroll;
     display: none; }
 #METABOOKMEDIATARGET {
-    transform-origin: 0px 0px;}
+    transform-origin: 0 0;}
 img#METABOOKMEDIATARGET {
     max-height: 90%; max-width: 90%;}
 
@@ -348,7 +348,7 @@ body.mbMEDIA #METABOOKMEDIA iframe {
    pages or not. */
 #METABOOKBODY {
     position: fixed; overflow: visible;
-    left: 0px; right: 0px; top: 0px; bottom: 0px;} /* z-index: -50; */
+    left: 0; right: 0; top: 0; bottom: 0;} /* z-index: -50; */
 #METABOOKBODY { background-color: transparent; color: black; }
 
 .metabookcontent { background-color: white; color: #444; }
@@ -363,7 +363,7 @@ body.mbMEDIA #METABOOKMEDIA iframe {
    It's left and right styles are set based on the content width. */
 #CODEXPAGE {
     position: absolute; overflow: visible;
-    padding: 0px; margin: 0px;
+    padding: 0; margin: 0;
     left: 50px; right: 50px;
     top: 50px; bottom: 50px;
     border: solid transparent 3px;

@@ -96,7 +96,7 @@ p { line-height: 1.2;}
 .codexpage .sbookcover, .codexpage .sbookcoverpage,
 .codexpage .sbooktitlepage, .codexpage .sbookfullpage {
    page-break-before: always; page-break-after: always;
-   page-break-inside: never;
+   page-break-inside: avoid;
    box-sizing: border-box;
    height: 100%; width: 100%;
    text-align: center;}
@@ -109,7 +109,7 @@ p { line-height: 1.2;}
 /* Titlepage rules */
 
 .sbooktitlepage {
-  padding: 1em; margin: 0px;
+  padding: 1em; margin: 0;
   text-align: center;
   page-break-inside: avoid;
   page-break-before: always;
@@ -127,7 +127,7 @@ p { line-height: 1.2;}
 .sbooktitlepage .title h1, .sbooktitlepage .credits h1,
 .sbooktitlepage .title h2, .sbooktitlepage .credits h2,
 .sbooktitlepage .title h3, .sbooktitlepage .credits h3 {
-    margin-top: 0px; margin-bottom: 0.5ex;}
+    margin-top: 0; margin-bottom: 0.5ex;}
 .sbooktitlepage .credits .lifespan {
     white-space: nowrap; font-size: 0.9em;}
 
@@ -143,7 +143,7 @@ p { line-height: 1.2;}
 .sbooktitlepage .title, .sbooktitlepage .credits,
 .sbooktitlepage .author, .sbooktitlepage .byline,
 .sbooktitlepage .editor {
-    margin-top: 0px; margin-bottom: 1em;
+    margin-top: 0; margin-bottom: 1em;
     display: block; clear: both;}
 .sbooktitlepage .credits .author, .sbooktitlepage .credits .byline,
 .sbooktitlepage .credits .editor, .sbooktitlepage .credits .contributor {
@@ -161,7 +161,7 @@ p { line-height: 1.2;}
 .sbooktitlepage .title .translation,
 .sbooktitlepage .title .originaltitle {
     font-size: 50%; font-weight: normal;
-    margin-top: 1ex; margin-bottom: 0px;}
+    margin-top: 1ex; margin-bottom: 0;}
 
 .sbooktitlepage .credits, .sbooktitlepage .author, .sbooktitlepage .byline {
     font-size: 1.5em; font-style: italic;
@@ -171,19 +171,19 @@ p { line-height: 1.2;}
 .sbooktitlepage .pubinfo { 
     text-align: left; display: inline-block; font-size: 0.8em;
     min-width: 70%; max-width: 60em;
-    padding: 1ex; padding-bottom: 0px; margin-bottom: 0px;
+    padding: 1ex; padding-bottom: 0; margin-bottom: 0;
     margin-left: auto; margin-right: auto;
     page-break-inside: avoid;
     clear: both;}
 
 .sbooktitlepage .publisher { 
     font-size: 1em; text-align: center;
-    margin-top: 0.5em; margin-bottom: 0px; }
+    margin-top: 0.5em; margin-bottom: 0; }
 
 .sbooktitlepage .sbookbibinfo p, .sbooktitlepage .bibinfo p,
 .sbooktitlepage .pubinfo p {
     margin-right: 2em; margin-left: 3em; text-indent: -2em;
-    text-align: left; margin-bottom: 0px; margin-top: 0px;}
+    text-align: left; margin-bottom: 0; margin-top: 0;}
 
 .sbooktitlepage .sbookbibinfo span.bibdate,
 .sbooktitlepage .pubinfo span.bibdate,
@@ -200,7 +200,7 @@ p { line-height: 1.2;}
     margin-left: auto; margin-right: auto;
     max-width: 70%;}
 .sbooktitlepage .dedication p, .sbooktitlepage .epigraph p {
-    margin: 0px; padding: 0px;}
+    margin: 0; padding: 0;}
 .sbooktitlepage .dedication.leftalign p,
 .sbooktitlepage .epigraph.leftalign p {
     margin-left: 5em; text-indent: -5em;}
@@ -241,22 +241,22 @@ div.codexpage img {
 /* Add some layout override rules */
 body #METABOOKBODY #CODEXPAGE .codexpage p.codexdupend,
 body #METABOOKBODY #CODEXPAGE .codexpage p.codexdup {
-    text-indent: 0px;}
+    text-indent: 0;}
 body #METABOOKBODY #CODEXPAGE .codexpage .codexdupstart {
-    padding-bottom: 0px;
-    border-bottom-width: 0px;
-    margin-bottom: 0px;}
+    padding-bottom: 0;
+    border-bottom-width: 0;
+    margin-bottom: 0;}
 body #METABOOKBODY #CODEXPAGE .codexpage .codexdupend {
-    padding-top: 0px;
-    border-top-width: 0px;
-    margin-top: 0px;}
+    padding-top: 0;
+    border-top-width: 0;
+    margin-top: 0;}
 body #METABOOKBODY #CODEXPAGE .codexpage .codexdup {
-    padding-bottom: 0px;
-    border-bottom-width: 0px;
-    margin-bottom: 0px;
-    padding-top: 0px;
-    border-top-width: 0px;
-    margin-top: 0px;}
+    padding-bottom: 0;
+    border-bottom-width: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    border-top-width: 0;
+    margin-top: 0;}
 
 /* Anchor display */
 
@@ -330,7 +330,7 @@ div.metabooknotebody a.mbackref { float: left; margin-left: -3em;}
 
 @media handheld and (orientation: landscape) {
     #METABOOKFOOT #METABOOKPAGEBAR {
-        margin-left: 0px; margin-right: 0px;}}
+        margin-left: 0; margin-right: 0;}}
 
 @media (lightlevel: dim OR lightlevel: washed) {
     #METABOOKBODY .metabookcontent {

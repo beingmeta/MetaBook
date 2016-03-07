@@ -14,7 +14,7 @@ div.metabookglossformbody {
 
 #METABOOKADDGLOSS div.metabookglossform {
     box-sizing: border-box;
-    border-top: 0px;}
+    border-top: 0;}
 /*
 #METABOOKADDGLOSS div.metabookglossform.private {
     border-color: red;}
@@ -63,9 +63,9 @@ body.hudup div.metabookglossform.focused form div.glossetc{
 
 #METABOOKADDGLOSS div.metabookglossform {
     border-radius: 1ex;
-    border-top-width: 0px;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;}
+    border-top-width: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;}
 
 div.metabookglossform { display: none;}
 div.metabookglossform#METABOOKADDGLOSSPROTOTYPE { display: none;}
@@ -87,7 +87,7 @@ div.metabookglossform div .respdate {
     font-weight: bold; font-variant: small-caps;}
 
 div.metabookglossform form {
-    padding: 0px; margin: 0px;}
+    padding: 0; margin: 0;}
 div.metabookglossform form .excerpt { }
 div.metabookglossform form .excerpt.empty { display: none;}
 div.metabookglossform form .checkspan.excerpt {
@@ -105,7 +105,7 @@ div.metabookglossform form div.inputhelp {
     padding-bottom: 4px; text-align: left;}
 div.metabookglossform form .bracketbutton {
     font-weight: bold; font-size: 110%;
-    padding: 0px; cursor: pointer;}
+    padding: 0; cursor: pointer;}
 div.metabookglossform form .bracketbutton strong {
     font-size: 110%; color: red;}
 div.metabookglossform.focused form div.inputhelp { display: block;}
@@ -115,7 +115,7 @@ div.metabookglossform form div.textbox textarea,
 div.metabookglossform form div.textbox input[TYPE='TEXT'] {
     overflow: hidden; font-size: 16px; font-size: 1rem;
     border: solid darkblue 1px;
-    margin: 0px; padding-left: 3px;
+    margin: 0; padding-left: 3px;
     width: 99%; max-width: 99%; 
     background-position: right top;
     background-position-x: right; background-position-y: top;
@@ -172,7 +172,7 @@ html._NOSVG div.metabookglossform div.textbox input[name='OUTLET'] {
     background-image: url(g/metabook/sbookspeople24x24.png);}
 
 div.metabookglossform .glossetc .glossdate {
-    font-size: 0.8em; font-variant: small-caps; color: purple; padding: 0px;
+    font-size: 0.8em; font-variant: small-caps; color: purple; padding: 0;
     display: none;}
 div.metabookglossform.focused form .glossetc .glossdate {
     padding-bottom: 1ex;}
@@ -191,7 +191,7 @@ div.metabookglossform .checkspan.postgloss {}
 div.metabookglossform .checkspan.postgloss input[type='checkbox'] {
     vertical-align: bottom; height: 1em; width: 1em;}
 div.metabookglossform .checkspan.postgloss img {
-    height: 2ex; width: auto; padding: 0px; margin: 0px; border: 0px;
+    height: 2ex; width: auto; padding: 0; margin: 0; border: 0;
     vertical-align: top;}
 
 /* div.metabookglossform.glossedit form .glossetc .glossdate {
@@ -225,7 +225,7 @@ div.metabookglossform form div.glossetc .tags span.checkspan .term {
     color: black;}
 
 div.metabookglossform form div.glossetc .tags span.checkspan {
-    padding: 2px; padding-top: 0px;}
+    padding: 2px; padding-top: 0;}
 div.metabookglossform form div.glossetc .checkspan.waschecked {
     text-decoration: line-through; color: red;}
 div.metabookglossform form div.glossetc .glosslink.checkspan.waschecked
@@ -244,7 +244,7 @@ div.metabookglossform form div.glossetc .checkspan img {
     height: 1.7ex; width: auto; vertical-align: baseline;
     padding-left: 0.8ex; padding-top: 2px;}
 div.metabookglossform form div.glossetc .checkspan input {
-    margin-left: 0px;}
+    margin-left: 0;}
 div.metabookglossform form div.glossetc .checkspan.anchor input,
 div.metabookglossform form div.glossetc .checkspan.outlet input,
 div.metabookglossform form div.glossetc .checkspan.glosstag input,
@@ -305,7 +305,7 @@ div.metabookglossform form div.glossetc .links span.checkspan a {
 div.metabookglossform form div.glossetc span.checkspan input {}
 
 div.metabookglossform form .button {
-    font-weight: bold; font-size: 24px; padding: 0px;
+    font-weight: bold; font-size: 24px; padding: 0;
     border: solid black 2px; border-radius: 4px;
     text-align: center; vertical-align: top;
     cursor: pointer;}
@@ -339,9 +339,9 @@ div.metabookglossform form .submitbutton {
     padding-top: 3px; padding-right: 3px;
     height: 50px;}
 div.metabookglossform form .submitbutton .button {
-    margin: 0px; padding: 0px; border: none;
+    margin: 0; padding: 0; border: none;
     background-color: transparent;
-    border-radius: 0px;
+    border-radius: 0;
     height: 100%; width: auto;}
 div.metabookglossform form .submitbutton .edit,
 div.metabookglossform form .submitbutton .reply {
@@ -396,7 +396,7 @@ html._NOSVG div.metabookglossform div.textbox input[type="TEXT"][name='LINK'] {
     background-image: url(g/metabook/diaglink16x16.png);}
 
 div.glossetc, div.glossetc img, div.glossetc span, div.glossetc input {
-    margin-top: 0px;}
+    margin-top: 0;}
 
 /* The add gloss panel */
 
@@ -572,7 +572,7 @@ div.metabookglossform form div.textbox {
     box-sizing: border-box; padding-top: 3px;}
 
 div.metabookglossform form div.addglossmenu {
-    position: absolute; top: 0px; right: 0px;
+    position: absolute; top: 0; right: 0;
     width: 50px;
     z-index: 800;}
 
@@ -588,7 +588,7 @@ html._TOUCH div.metabookglossform
     width: 80px; height: 80px; margin-left: -20px;}
 html._TOUCH div.metabookglossform 
   form div.addglossmenu > img.held.menutop {
-    width: 40px; height: 40px; margin-left: 0px;}
+    width: 40px; height: 40px; margin-left: 0;}
 div.metabookglossform
   form div.addglossmenu > img.menutop[alt="downmenu"],
 div.metabookglossform
@@ -641,7 +641,7 @@ div.metabookglossform form div.glossetc .glossexposure .checkspan input {
     vertical-align: top;}
 
 div.metabookglossform form .glossexposure .checkspan {
-    float: right; margin-top: 2px; margin-right: 0px;
+    float: right; margin-top: 2px; margin-right: 0;
     font-variant: smallcaps; vertical-align: top;}
 div.metabookglossform form .glossexposure .checkspan span {
     vertical-align: middle;}
@@ -655,7 +655,7 @@ div.metabookglossform form .glossexposure .checkspan span {
 /* Saving/saved overlays */
 
 div.metabookglossform div.messageoverlay {
-    position: absolute; top: 0px; width: 100%; text-align: center;
+    position: absolute; top: 0; width: 100%; text-align: center;
     opacity: 0.9; z-index: 45; pointer-events: none;
     font-size: 1.5em; font-weight: bold;
     display: none;}
@@ -689,7 +689,7 @@ div.metabookglossform.submitclose form > div.messageoverlay {
     div.metabookglossform form div.addglossmenu > img.held {
         width: 80px; height: 80px; margin-left: -20px;}
     div.metabookglossform form div.addglossmenu > img.held.menutop {
-        width: 40px; height: 40px; margin-left: 0px;}}
+        width: 40px; height: 40px; margin-left: 0;}}
 
 @media screen and (max-width: 500px) {
     #METABOOKHEAD, #METABOOKHUD.openhead #METABOOKHEAD {

@@ -8,8 +8,8 @@
 
 #METABOOKFOOT #METABOOKPAGEBAR {
     vertical-align: bottom; text-align: center; height: 40px; font-size: 16px;
-    position: absolute; left: 50px; right: 50px; bottom: 0px; z-index: 100;
-    margin-left: 20px; margin-right: 20px; border: 0px;
+    position: absolute; left: 50px; right: 50px; bottom: 0; z-index: 100;
+    margin-left: 20px; margin-right: 20px; border: 0;
     cursor: crosshair;
     display: none;}
 body._BYPAGE #METABOOKFOOT #METABOOKPAGEBAR { display: block; }
@@ -34,7 +34,7 @@ body.mbPAGEREFS #METABOOKFOOT #METABOOKPAGEREFTEXT {display: inline-block;}
     content: '》'; font-style: normal; font-weight: bold;}
 */
 #METABOOKFOOT #METABOOKPAGEBAR div.progressbar {
-    background-color: gray; border: solid black 1px; border-top-width: 0px;
+    background-color: gray; border: solid black 1px; border-top-width: 0;
     z-index: 50; height: 100%; position: absolute; opacity: 0.5;}
 #METABOOKFOOT #METABOOKPAGELEAP {opacity: 0.001;}
 html._MOUSE #METABOOKFOOT #METABOOKPAGELEAP:hover {opacity: 0.4;}
@@ -43,7 +43,7 @@ body.hudup #METABOOKFOOT #METABOOKPAGELEAP {opacity: 0.7;}
 /* Page spans */
 
 #METABOOKFOOT #METABOOKPAGEBAR div.textfoot {
-    position: absolute; bottom: 0px;
+    position: absolute; bottom: 0;
     font-size: 28px; line-height: 100%;
     width: 100%; height: 28px; 
     box-sizing: border-box;
@@ -52,15 +52,15 @@ body.hudup #METABOOKFOOT #METABOOKPAGELEAP {opacity: 0.7;}
 #METABOOKFOOT #METABOOKPAGEBAR div.textfoot > div {}
 #METABOOKFOOT #METABOOKPAGEBAR div.textfoot > span {}
 #METABOOKFOOT #METABOOKPAGEBAR div.textfoot > span {
-    z-index: 50; pointer-events: all; bottom: 0px;}
+    z-index: 50; pointer-events: all; bottom: 0;}
 hr#METABOOKLAYOUTINDICATOR {
-    position: absolute; bottom: 0px; left: 0px; height: 70%; width: 0%;
-    opacity: 0.0; margin: 0px;
+    position: absolute; bottom: 0; left: 0; height: 70%; width: 0%;
+    opacity: 0.0; margin: 0;
     box-sizing: border-box;
     display: none;}
 #METABOOKLAYOUTADJUST {
     position: absolute;
-    top: 0px; left: 0px; height: 100%; width: auto; margin: 0px;
+    top: 0; left: 0; height: 100%; width: auto; margin: 0;
     font-weight: bold;
     z-index: 200;
     display: none;}
@@ -71,7 +71,7 @@ body.mbLAYOUT hr#METABOOKLAYOUTINDICATOR {
 
 #METABOOKFOOT #METABOOKPAGEBAR .metabookpagespan {
     opacity: 0.0; overflow: hidden; z-index: 20; height: 100%;
-    position: absolute; bottom: 0px; /* display: inline-block; */
+    position: absolute; bottom: 0; /* display: inline-block; */
     box-sizing: border-box; vertical-align: top;}
 body.mbPREVIEW #METABOOKFOOT #METABOOKPAGEBAR .metabookpagespan {
     height: 100%;}
@@ -98,7 +98,7 @@ body.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR #METABOOKCURPAGESPAN.metabookp
 
 #METABOOKFOOT #METABOOKPAGEBAR #METABOOKPAGEPROGRESS {
     box-sizing: content-box;
-    position: absolute; bottom: 0px; left: 0px;
+    position: absolute; bottom: 0; left: 0;
     width: 33%; height: 100%; z-index: 50;
     pointer-events: none;
     transition-property: width; 
@@ -108,7 +108,7 @@ body.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR #METABOOKCURPAGESPAN.metabookp
     background-color: transparent;}
 #METABOOKFOOT #METABOOKPAGEBAR .metabooksectmarker {
     box-sizing: content-box;
-    position: absolute; bottom: 0px; left: 10%; width: 0%;
+    position: absolute; bottom: 0; left: 10%; width: 0%;
     height: 60%;
     border-top-left-radius: 4px; border-top-right-radius: 4px;
     pointer-events: none;
@@ -124,7 +124,7 @@ html._TOUCH #METABOOKFOOT.tapholding #METABOOKPAGEBAR {
     height: 100px;}
 
 #METABOOKHUD .metabookgoto {
-    position: absolute; bottom: 0px; padding-bottom: 0px;
+    position: absolute; bottom: 0; padding-bottom: 0;
     display: none; opacity: 0.0;
     background-color: transparent;
     white-space: nowrap;
@@ -133,7 +133,7 @@ html._TOUCH #METABOOKFOOT.tapholding #METABOOKPAGEBAR {
 #METABOOKHUD .metabookgoto .gototext { background-color: white; } 
 #METABOOKHUD .metabookgoto .gototext {
     display: inline-block; 
-    padding: 2px; padding-bottom: 0px;}
+    padding: 2px; padding-bottom: 0;}
 #METABOOKHUD .metabookgoto input {
     width: 4em; text-align: right; padding-right: 2px;}
 #METABOOKHUD.gotoloc  .metabookgoto#METABOOKGOTOLOC,
@@ -141,21 +141,21 @@ html._TOUCH #METABOOKFOOT.tapholding #METABOOKPAGEBAR {
 #METABOOKHUD.gotoref .metabookgoto#METABOOKGOTOREF {
     display: inline; opacity: 1.0;}
 #METABOOKHUD  .metabookgoto#METABOOKGOTOLOC {
-    right: 0px; left: auto;
-    padding-left: 1ex; padding-right: 0px;}
+    right: 0; left: auto;
+    padding-left: 1ex; padding-right: 0;}
 #METABOOKHUD  .metabookgoto#METABOOKGOTOPAGE {
     right: 40%; left: 40%;}
 #METABOOKHUD  .metabookgoto#METABOOKGOTOREF {
-    left: 0px;}
+    left: 0;}
 
 /* SHOWTEXT rules */
 
 #METABOOKFOOT #METABOOKSHOWTEXT {
     position: absolute; z-index: 500; opacity: 1.0;
-    bottom: 0px; left: 100px; right: 100px;
+    bottom: 0; left: 100px; right: 100px;
     text-align: center;
     font-size: 32px; font-weight: bold;
-    padding: 0px; white-space: nowrap;
+    padding: 0; white-space: nowrap;
     cursor: pointer;
     display: none;}
 #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT.tapholdtarget {
@@ -164,7 +164,7 @@ html._TOUCH #METABOOKFOOT.tapholding #METABOOKPAGEBAR {
 #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT > span > span {
     border: solid black 1px; 
     padding-left: 1em; padding-right: 1em;
-    padding-top: 0.2ex; padding-bottom: 0px;
+    padding-top: 0.2ex; padding-bottom: 0;
     border-radius: 1ex;
     opacity: 0.70;}
 #METABOOKHUD #METABOOKSHOWTEXT span.stopskimming,
@@ -223,18 +223,18 @@ body._FULLHEIGHT #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT > span > span {
 @media screen and (max-width: 500px) {
     #METABOOKFOOT #METABOOKPAGEBAR {
         margin-left: 2px; margin-right: 2px;
-        left: 0px; right: 0px;}
+        left: 0; right: 0;}
     #METABOOKFOOT #METABOOKPAGEBAR .metabooksectmarker { 
-        border: solid blue 1px; border-bottom: 0px; opacity: 0.7; }
+        border: solid blue 1px; border-bottom: 0; opacity: 0.7; }
 
     #METABOOKFOOT .hudbutton { bottom: 30px;}
-    body.hudup #METABOOKFOOT .hudbutton { bottom: 0px;}
+    body.hudup #METABOOKFOOT .hudbutton { bottom: 0;}
     body.hudup #METABOOKFOOT #METABOOKSHOWTEXT { bottom: 3px;}
     body.hudup #METABOOKFOOT #METABOOKPAGEBAR { display: none;}
 
     body.mbSHOWHELP #METABOOKFOOT .hudbutton,
     #METABOOKHUD.openheart #METABOOKFOOT .hudbutton {
-        bottom: 0px;}
+        bottom: 0;}
     body.mbSHOWHELP #METABOOKFOOT #METABOOKSHOWTEXT,
     #METABOOKHUD.openheart #METABOOKFOOT #METABOOKSHOWTEXT {
         bottom: 5px;}

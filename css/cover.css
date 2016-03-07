@@ -42,7 +42,7 @@
 
 #METABOOKSPLASHPAGE {
     postion: fixed; width: 100%; height: 100%;
-    top: 0px; bottom: 0px; left: 0px; right: 0px;
+    top: 0; bottom: 0; left: 0; right: 0;
     background-color: black; color: ivory;
     text-align: center;
     opacity: 1.0;}
@@ -71,7 +71,7 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
     z-index: -50; opacity: 0.0;
     border-radius: 1em; border: solid black 3px; 
     display: none;}
-#METABOOKCOVER div.controls { border-radius: 0px; }
+#METABOOKCOVER div.controls { border-radius: 0; }
 #METABOOKCOVER div.flap.scrolling {
     overflow-y: auto;}
 #METABOOKFRAME._ANIMATE #METABOOKCOVER div.flap {
@@ -83,14 +83,14 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
 #METABOOKCOVERMESSAGE {
     position: absolute; white-space: nowrap;
     font-style: italic; font-size: 24px; font-size: 2rem;
-    width: 80%; left: 10%; right: 10%; border: 0px; 
-    top: 0px; bottom: auto;
+    width: 80%; left: 10%; right: 10%; border: 0; 
+    top: 0; bottom: auto;
     text-align: center; overflow: visible; 
     background-color: black; color: silver;
     cursor: pointer; display: block; opacity: 1.0;
     z-index: 50;}
 #METABOOKCOVER.coverpage #METABOOKCOVERMESSAGE {
-    width: 100%; left: 0px; right: 0px; z-index: 500;
+    width: 100%; left: 0; right: 0; z-index: 500;
     bottom: 40px; height: 60px; top: auto;}
 body.mbREADY #METABOOKCOVERMESSAGE { display: none;}
 body.mbREADY.mbLAYOUT #METABOOKCOVERMESSAGE { display: block;}
@@ -102,7 +102,7 @@ body.mbREADY.mbLAYOUT #METABOOKCOVERMESSAGE { display: block;}
 #METABOOKCOVERCONTROLS {
     box-sizing: border-box;
     position: absolute; height: 60px; bottom: 40px; top: auto;
-    width: 100%; left: 0px; right: 0px; border-width: 0px;
+    width: 100%; left: 0; right: 0; border-width: 0;
     padding-left: 1em; padding-right: 1em;
     margin-top: 0.25ex; margin-bottom: 0.25ex;
     line-height: 1.25;
@@ -114,7 +114,7 @@ body.mbREADY.mbLAYOUT #METABOOKCOVERMESSAGE { display: block;}
 #METABOOKCOVERCONTROLS span.control {
     color: silver; white-space: nowrap;
     padding-left: 0.5ex; padding-right: 0.5ex; padding-bottom: 0.5ex;
-    outline-width: 0px;
+    outline-width: 0;
     cursor: pointer;}
 html._MOUSE #METABOOKCOVERCONTROLS span.control:hover,
 #METABOOKCOVERCONTROLS span.control:focus {
@@ -123,7 +123,7 @@ html._MOUSE #METABOOKCOVERCONTROLS span.control:hover,
 #METABOOKCOVER div.loginbox, #METABOOKCOVER div.userbox {
     position: absolute; vertical-align: top;
     box-sizing: border-box;
-    bottom: 0px !important; top: auto !important; left: 0px; right: 0px; 
+    bottom: 0 !important; top: auto !important; left: 0; right: 0; 
     z-index: 50; color: gold; overflow: hidden;
     border-top: solid gold 1px; 
     opacity: 1.0;}
@@ -131,7 +131,7 @@ html._MOUSE #METABOOKCOVERCONTROLS span.control:hover,
     border-top: solid black 1px;
     padding-bottom: 2px;}
 #METABOOKCOVER div.userbox {
-    padding-top: 0px;}
+    padding-top: 0;}
 html._NOUSER #METABOOKCOVER div.userbox {display: none;}
 
 #METABOOKCOVER div.controls > div.fdjtfontwrapper {
@@ -163,7 +163,7 @@ html._USER #METABOOKCOVER div.loginbox {
 #METABOOKCOVER div.loginbox form input,
 #METABOOKCOVER div.loginbox form button,
 #METABOOKCOVER div.loginbox form select {
-    vertical-align: top; margin-top: 0px;}
+    vertical-align: top; margin-top: 0;}
 
 #METABOOKCOVER div.loginbox form input[NAME="LOGIN"] {
     max-width: 50%; float: left;} 
@@ -174,8 +174,8 @@ html._NOUSER #METABOOKCOVER > #METABOOKCOVERCONTROLS {
 
 #METABOOKCOVER div.loginbox {
     white-space: nowrap;
-    margin: 0px; padding: 0px;
-    height: 0px;}
+    margin: 0; padding: 0;
+    height: 0;}
 #METABOOKCOVER div.loginbox button { padding: 1px;}
 #METABOOKCOVER div.loginbox button > img { height: 100%; width: auto;}
 div.loginbox form > button, div.loginbox form > input[TYPE="TEXT"],
@@ -223,7 +223,7 @@ body.mbREADY #METABOOKCOVER.coverpage #METABOOKOPENTAB {
   display: none;}
 #METABOOKCOVER.coverpage div.flap#METABOOKCOVERPAGE,
 #METABOOKCOVER.bookcover div.flap#METABOOKCOVERPAGE {
-   top: 0px; bottom: 100px;}
+   top: 0; bottom: 100px;}
 
 
 #METABOOKCOVER.bookcover .control[data-mode='coverpage'],
@@ -235,7 +235,7 @@ body.mbREADY #METABOOKCOVER.coverpage #METABOOKOPENTAB {
 #METABOOKCOVER.help .control[data-mode='help'],
 #METABOOKCOVER.console .control[data-mode='console'],
 #METABOOKCOVER.login .control[data-mode='login'] {
-    outline-color: transparent; outline-width: 0px;
+    outline-color: transparent; outline-width: 0;
     display: inline;
     color: gold;}
 
@@ -272,16 +272,16 @@ html._USER._CONN .control[data-mode='login'] { display: none;}
 /* The sBooks app for managing layers */
 
 #METABOOKCOVER div.flap#METABOOKLAYERS {
-    border-top-left-radius: 0px; border-top-right-radius: 0px;
+    border-top-left-radius: 0; border-top-right-radius: 0;
     border-bottom-left-radius: 1.5em; border-bottom-right-radius: 1.5em;}
 
 #METABOOKCOVER div.flap#METABOOKLAYERS iframe#BOOKHUBAPP {
-    height: 100%; width: 100%; margin: 0px; padding: 0px;
+    height: 100%; width: 100%; margin: 0; padding: 0;
     background-color: ivory;}
 
 /* The book cover */
 
-div.flap#METABOOKCOVERPAGE { padding: 0px; }
+div.flap#METABOOKCOVERPAGE { padding: 0; }
 #METABOOKCOVERPAGE img {
     max-width: 95%; height: 95%; width: auto;}
 
@@ -342,15 +342,15 @@ html._SHOWCONSOLE .control[alt='Console'] {display: none;}
     margin-left: 4em; padding-top: 1em;}
 #METABOOKCONSOLE #METABOOKCONSOLEINPUT span.button {
     font-weight: bold; font-size: 200%;
-    padding: 0.5ex; border-radius: 0.5ex; padding-top: 0px;
-    margin: 0px; margin-top: 0.25ex; margin-right: 0.25ex;
+    padding: 0.5ex; border-radius: 0.5ex; padding-top: 0;
+    margin: 0; margin-top: 0.25ex; margin-right: 0.25ex;
     background-color: silver;
     float: right;}
 #METABOOKCONSOLE #METABOOKCONSOLEINPUT textarea { width: 80%;}
 html._TOUCH #METABOOKCONSOLE #METABOOKCONSOLEINPUT.uptop {
     position: absolute;
     top: 5px; left: 10%; right: 10%; width: 90%;
-    margin-left: 0px; padding-top: 0px;}
+    margin-left: 0; padding-top: 0;}
 html._TOUCH #METABOOKCONSOLELOG {
     /* This make it always scrollable on touch devices,
        in case interesting content is underneath the
@@ -363,11 +363,11 @@ html._TOUCH #METABOOKCONSOLELOG {
     text-align: center;}
 #METABOOKCOVERMESSAGE div.metabookstatus { display: none;}
 #METABOOKCOVER > .sbookslogo, #METABOOKCOVER > .publisherlogo {
-    position: absolute; top: 0px; z-index: 200;
+    position: absolute; top: 0; z-index: 200;
     color: silver; font-size: 2em;
     display: none; }
-#METABOOKCOVER > .sbookslogo {left: 0px;}
-#METABOOKCOVER > .publisherlogo {right: 0px;}
+#METABOOKCOVER > .sbookslogo {left: 0;}
+#METABOOKCOVER > .publisherlogo {right: 0;}
 
 #METABOOKCOVER > .sbookslogo em {color: steelblue;}
 
@@ -375,9 +375,9 @@ div#METABOOKOPENTAB {
     height: 40px; width: 7em; font-size: 38px; line-height: 1.0; white-space: nowrap;
     box-sizing: border-box;
     font-style: normal;
-    margin: 0px; margin-left: auto; margin-right: auto;
-    padding:  0px 1em 0px 1em; 
-    border: solid transparent 2px; border-top: 0px;
+    margin: 0; margin-left: auto; margin-right: auto;
+    padding:  0 1em 0 1em; 
+    border: solid transparent 2px; border-top: 0;
     background-color: gray; color: white;
     font-variant: small-caps; font-weight: bold;
     border-bottom-left-radius: 1ex; border-bottom-right-radius: 1ex;
@@ -399,8 +399,8 @@ body.mbBUSY #METABOOKCOVERMESSAGE #METABOOKOPENTAB {
 
 #METABOOKCOVERMESSAGE div.message {
     color: silver; font-size: 24px; font-size: 2rem;
-    padding-left: 0px; padding-right: 0px;
-    padding-top: 0px;
+    padding-left: 0; padding-right: 0;
+    padding-top: 0;
     box-sizing: border-box;
     width: 100%;}
 #METABOOKCOVERMESSAGE div.message {display: none;}
@@ -408,7 +408,7 @@ body.mbBUSY #METABOOKCOVERMESSAGE #METABOOKOPENTAB {
     box-sizing: border-box;
     margin-top: 0.2ex; width: 7em;
     margin-left: auto; margin-right: auto;
-    padding:  0px 1em 0px 1em; border: solid transparent 4px;
+    padding:  0 1em 0 1em; border: solid transparent 4px;
     background-color: gray; color: white;
     font-variant: small-caps; font-weight: bold;
     border-radius: 1ex; }
@@ -424,7 +424,7 @@ body.mbBUSY #METABOOKCOVERMESSAGE div.message#METABOOKREADYMESSAGE {
 #METABOOKREADYMESSAGE { padding-bottom: 1ex; }
 
 #METABOOKCOVERMESSAGE div.message > div.metabookprogressbox {
-    width: 100%; border: solid silver 2px; border-top: 0px;}
+    width: 100%; border: solid silver 2px; border-top: 0;}
 #METABOOKCOVERMESSAGE div.indicator {
     height: 1ex; background-color: gold;}
 
@@ -453,7 +453,7 @@ body.mbBUSY #METABOOKCOVERMESSAGE div.message#METABOOKREADYMESSAGE {
 
     #METABOOKCOVER #METABOOKCOVERMESSAGE,
     #METABOOKCOVER.coverpage #METABOOKCOVERMESSAGE {
-        bottom: 0px; top: auto; z-index: 200;}
+        bottom: 0; top: auto; z-index: 200;}
 
     #METABOOKCOVER div.flap { left: 10px; right: 10px;}
 
@@ -492,11 +492,11 @@ body.mbBUSY #METABOOKCOVERMESSAGE div.message#METABOOKREADYMESSAGE {
     #METABOOKCOVER div.loginbox form button { display: none;}
     #METABOOKCOVER div.loginbox form > span { display: none;}
     #METABOOKCOVER div.loginbox form select {
-        position: absolute; right: 0px;
+        position: absolute; right: 0;
         width: 48%; font-size: 16px; font-size: 1rem;
         display: inline-block;}
     #METABOOKCOVER div.loginbox form input[TYPE="TEXT"] {
-        position: absolute; left: 0px;
+        position: absolute; left: 0;
         width: 48%; font-size: 16px; font-size: 1rem;
         display: inline-block;}
     #METABOOKCOVER div.loginbox form input[TYPE="TEXT"]:focus {

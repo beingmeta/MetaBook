@@ -9,7 +9,7 @@
     text-align: left; text-decoration: none;
     text-align: left;}
 div.mbcard {
-    margin-left: 20px; margin-right: 0px;
+    margin-left: 20px; margin-right: 0;
     border-left: transparent solid 1px;
     box-sizing: border-box;}
 div.mbcard_tochead {
@@ -37,8 +37,8 @@ div.mbcard_links span.count {
 div.mbcard > hr {
     min-width: 3px; height: 100%;
     border-right: solid gold 1px; border-left: solid gold 1px;
-    position: absolute; left: 0px; 
-    border: 0px; padding: 0px; margin: 0px;}
+    position: absolute; left: 0; 
+    border: 0; padding: 0; margin: 0;}
 
 .mbcard span.user { 
     color: green; font-size: 125%; font-style: italic;}
@@ -80,7 +80,7 @@ span.mbcard_audience .outlet { color: forestgreen; }
     border-top: solid purple 2px;}
 .mbcard.slicenewhead .mbcard_body,
 .mbcard:first-child .mbcard_body {
-    border-top: 0px;}
+    border-top: 0;}
 
 .mbcard span.sample {
     display: inline-block; white-space: nowrap;
@@ -146,11 +146,11 @@ mbcard div.sourcepic  {
     float: right; color: darkblue;
     font-size: 80%; vertical-align: top; margin-top: -0.5ex;}
 .mbcard .score img.inline {
-    padding-left: 0px; padding-right: 0px;}
+    padding-left: 0; padding-right: 0;}
 .mbcard .score .note { color: red; padding-right: 1ex;}
 .mbcard_glossinfo {
     float: right; clear: right; display: block;
-    padding: 0px; margin: 0px;
+    padding: 0; margin: 0;
     margin-left: 3px; padding-top: 2px;
     text-align: right;}
 .mbcard_glossinfo img { padding-left: 4px; cursor: pointer; }
@@ -189,7 +189,7 @@ html._MOUSE .mbcard .tool img:hover {opacity: 0.8;}
     float: right; clear: right; 
     font-family: times,serif;
     font-style: italic; font-size: 80%;
-    white-space: nowrap; padding: 2px; padding-top: 0px;
+    white-space: nowrap; padding: 2px; padding-top: 0;
     color: lightblue;}
 
 .mbcard span.maker {

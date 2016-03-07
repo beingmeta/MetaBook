@@ -69,13 +69,13 @@ body.mbSHRINK._NOSHRINK #CODEXPAGE .codexpage {
 
 #CODEXPAGE #METABOOKPAGES {
     position: absolute;
-    top: 0px; bottom:0px; left: 0px; right: 0px;
-    padding: 0px; margin: 0px; border: 0px;
+    top: 0; bottom:0px; left: 0; right: 0;
+    padding: 0; margin: 0; border: 0;
     overflow: visible;}
 
 body._BYPAGE {
-    margin-top: 0px; margin-bottom: 0px;
-    margin-left: 0px; margin-right: 0px;}
+    margin-top: 0; margin-bottom: 0;
+    margin-left: 0; margin-right: 0;}
 
 body._SCROLL #CODEXCONTENT {
     padding-left: 3em; padding-right: 3em;}
@@ -91,10 +91,10 @@ body.mbSTARTUP #CODEXCONTENT {
 
 #CODEXPAGE #METABOOKPAGES #CODEXCONTENT {
     text-align: left;
-    padding: 0px; margin: 0px; border: 0px;
+    padding: 0; margin: 0; border: 0;
     /* This should make space for glossmarks and buttons */
     padding-left: 32px; padding-right: 32px;
-    margin-right: 0px;}
+    margin-right: 0;}
 
 body._BYPAGE #CODEXPAGE #CODEXCONTENT .metabookpagebreak {
     column-break-before: always;
@@ -128,7 +128,7 @@ span.note.ellipsis span.elision, span.note.ellipsis span.delision {
 #METABOOKFRAME table tr {
     /* Some documents may define style rules for TR which we want to override */
     background-color: transparent;
-    border: 0px transparent;}
+    border: 0 transparent;}
 #METABOOKFRAME input[TYPE="TEXT"] {
     box-sizing: border-box;
     padding-left: 0.3ex;}
@@ -138,9 +138,9 @@ span.note.ellipsis span.elision, span.note.ellipsis span.delision {
 /* html._TOUCH .fdjtselecting .fdjtselectloupe { display: inline-block; } */
 
 .fdjtselected {
-    box-shadow: 0px 0px 0.5ex 0.5ex rgba(255, 255, 0, 0.33);}
+    box-shadow: 0 0 0.5ex 0.5ex rgba(255, 255, 0, 0.33);}
 .fdjtselectstart, .fdjtselectend {
-    box-shadow: 0px 0px 0.5ex 0.5ex rgba(255, 215, 0, 0.33);}
+    box-shadow: 0 0 0.5ex 0.5ex rgba(255, 215, 0, 0.33);}
 
 #METABOOKBODY .fdjtselectwrap {
     background-color: transparent; }
@@ -219,23 +219,23 @@ html._TOUCH img.mouseicon { display: none;}
 div.locbar {
     width: 100%; clear: both;
     min-height: 6px; height: 6px;
-    border: 0px; margin: 0px; padding: 0px;
+    border: 0; margin: 0; padding: 0;
     margin-bottom: 2px;}
 div.locbar hr {
     min-width: 3px;
     border-right: solid gold 1px; border-left: solid gold 1px;
-    position: relative; left: 0px; width: 100%; height: 100%;
-    border: 0px; padding: 0px; margin: 0px;}
+    position: relative; left: 0; width: 100%; height: 100%;
+    border: 0; padding: 0; margin: 0;}
 
 /* Glossmarks */
 
 .glossmark {
-    position: absolute; right: 0px;
+    position: absolute; right: 0;
     /* float: right; text-align: right; */
-    margin: 0px; padding: 0px; text-indent: 0px; 
-    border: 0px;
+    margin: 0; padding: 0; text-indent: 0; 
+    border: 0;
     border-right: solid rgba(70,130,180,0.70) 6px;
-    width: 0px; overflow: visible;
+    width: 0; overflow: visible;
     width: 56px; height: 50px;
     box-sizing: border-box; 
     z-index: 50;}
@@ -265,7 +265,7 @@ html._MOUSE .glossmark#METABOOKOPENGLOSSMARK.hover > img {
     float: right;}
 .glossmark img { width: 100%; height: auto;}
 .glossmark img.wedge {
-    position: absolute; right: 0px; top: 0px;}
+    position: absolute; right: 0; top: 0;}
 
 .mbSKIMMING .glossmark, .mbPREVIEW .glossmark {
     opacity: 0.5;}
@@ -389,7 +389,7 @@ h1[toclevel='1'],h2[toclevel='1'] { page-break-before: always;}
 div.codexpage img.sbookpage {
     position: static; margin: auto;}
 div.codexpage .sbookpage .sbookinfo {
-    position: absolute; bottom: 0px; width: 100%;
+    position: absolute; bottom: 0; width: 100%;
     text-align: center;}
 
 .backmatter {page-break-before: always;}
@@ -488,7 +488,7 @@ div.codexpage {
 div.codexpage {
     padding: 2px;
     border: solid transparent 4px;
-    margin: 0px;}
+    margin: 0;}
 
 div.codexpage img.nomax { max-width: inherit; max-height: inherit;}
 
@@ -537,16 +537,16 @@ body._ANIMATE div.codexpage.newpage.onleft.curpage {
 /* Special rules for overriding properties on split (dup) passages */
 
 body #METABOOKBODY #CODEXPAGE .codexpage .metabookdupstart {
-    padding-bottom: 0px;
-    border-bottom-width: 0px;
-    margin-bottom: 0px;}
+    padding-bottom: 0;
+    border-bottom-width: 0;
+    margin-bottom: 0;}
 body #METABOOKBODY #CODEXPAGE .codexpage .metabookdup {
-    padding-top: 0px;
-    border-top-width: 0px;
-    margin-top: 0px;
-    padding-bottom: 0px;
-    border-bottom-width: 0px;
-    margin-bottom: 0px;}
+    padding-top: 0;
+    border-top-width: 0;
+    margin-top: 0;
+    padding-bottom: 0;
+    border-bottom-width: 0;
+    margin-bottom: 0;}
 body #METABOOKBODY #CODEXPAGE .codexpage p.metabookdup,
 
 img.metabookcoverpage {
@@ -559,7 +559,7 @@ img.metabookcoverpage {
 
 #METABOOKSTARTUPMESSAGES {
     position: absolute; z-index: -50;
-    top: 0px; left: 100px; right: 100px; height: 50px;
+    top: 0; left: 100px; right: 100px; height: 50px;
     opacity: 0.0;
     display: none;}
 body._ANIMATE #METABOOKSTARTUPMESSAGES {
@@ -612,7 +612,7 @@ div.fdjtdialog.metabooktaptap .choices button.cancel {
     color: red; font-weight: bold;
     padding-top: 3px; padding-bottom: 3px;}
 div.fdjtdialog.metabooktaptap .choices button.anchor {
-    overflow: hidden; text-overflow: ellipsis; padding: 0px;
+    overflow: hidden; text-overflow: ellipsis; padding: 0;
     line-height: 1; color: blue;}
 div.metabooktaptap .choices button.anchor .anchortext {
     font-size: 80%;}
@@ -622,7 +622,7 @@ div.fdjtdialog.fdjtconfirm.metabooktaptap div.choices {
 /* Rules for page references */
 
 .staticpageref {
-    position: absolute; right: 0px; 
+    position: absolute; right: 0; 
     font-size: 8px; font-size: 0.8rem;
     font-weight: normal; font-style: normal;
     display: none;}
@@ -630,17 +630,17 @@ div.fdjtdialog.fdjtconfirm.metabooktaptap div.choices {
 /* Custom dialog rules */
 
 div.fdjtdialog.savegloss {
-    top: 0px; left: 50px; right: 50px; height: 3.5em;
-    border-top: 0px; border-radius: 1ex;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
+    top: 0; left: 50px; right: 50px; height: 3.5em;
+    border-top: 0; border-radius: 1ex;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
     width: inherit; max-width: inherit;
-    padding: 0px 1em 1ex 1ex;
+    padding: 0 1em 1ex 1ex;
     font-size: 1.5rem;
     text-align: left;}
 div.fdjtdialog.savegloss div.choices {
-    position: absolute; right: 1ex; top: 0px;
-    margin-top: 0px; padding-top: 3px;
+    position: absolute; right: 1ex; top: 0;
+    margin-top: 0; padding-top: 3px;
     text-align: right;}
 div.fdjtdialog.savegloss div.choices button {
     font-weight: bold; margin-top: 0.5ex;}
@@ -650,7 +650,7 @@ div.fdjtdialog.savegloss .message {
     display: inline-block;}
 div.fdjtdialog.savegloss .countdown {
     position: static; background-color: ivory;
-    padding: 0px 1ex; border-radius: 0.5ex;
+    padding: 0 1ex; border-radius: 0.5ex;
     margin-top: 3px; margin-right: 1ex;}
 div.fdjtdialog.savegloss.closing button[value="SAVE"] {
     display: none; }

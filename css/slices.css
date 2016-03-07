@@ -31,7 +31,7 @@ div.metabookslice.onepassage .tocblock mbcard_tochead {display:none;}
 div.metabookslice div.xrefs { display: none;}
 div.metabookslice .showxrefs div.xrefs { display: block;}
 div.metabookslice div.xrefs a { display: block;}
-div.metabookslice divspan.mbcard_tags span.other { display: none;}
+div.metabookslice span.mbcard_tags span.other { display: none;}
 
 div.metabookslice div.skimpoint.mbcard {}
 div.metabookslice div.skimpoint.mbcard .tool {
@@ -42,13 +42,13 @@ div.metabookslice .excerpt .delision {
 div.metabookslice .excerpt .elided {
     display: inline;}
 
-div.skimpoint .mbcard .mbcard_body { padding-top: 0px;}
+div.skimpoint .mbcard .mbcard_body { padding-top: 0;}
 
 div.metabookslice div.mbcard.skimpoint + div.mbcard > div.mbcard_body,
 div.metabookslice div.mbcard.skimpoint .mbcard_body {
-    border-top-width: 0px;}
+    border-top-width: 0;}
 div.metabookslice div.mbcard.skimpoint .fdjtclearfloats {
-    margin-bottom: 0px;}
+    margin-bottom: 0;}
 
 /* METABOOKSOURCES */
 
@@ -59,7 +59,7 @@ div.metabooksources img.button {
 div.metabooksources img.button.everyone {}
 div.metabooksources .button {
     border: solid transparent 2px;
-    margin: 0px; margin-left: 2px; margin-right: 2px;}
+    margin: 0; margin-left: 2px; margin-right: 2px;}
 div.metabooksources div.button.source {
     min-height: 50px; min-width: 50px; display: inline;
     height: 50px; width: 50px; font-size: 32px;
@@ -85,8 +85,8 @@ div.mbcard_tochead span.headtext {
 div.mbcard_tochead hr {
     min-width: 3px;
     border: none; border-right: solid gold 1px; border-left: solid gold 1px;
-    position: absolute; left: 0px; top: 0px; height: 100%; z-index: 1;
-    padding: 0px; margin: 0px;}
+    position: absolute; left: 0; top: 0; height: 100%; z-index: 1;
+    padding: 0; margin: 0;}
 div.mbcard_tochead span { z-index: 10; position: relative;}
 div.mbcard_tochead a { z-index: 10; color: blue;} 
 html._MOUSE div.mbcard_tochead a:hover { z-index: 10; color: darkblue;} 
@@ -99,10 +99,10 @@ div.metabookslice div.mbcard.fdjtstartofpage div.mbcard_tochead {
     display: block; }
 
 div.metabookslice div.mbcard.fdjtstartofpage div.mbcard_tochead {
-    border-top: 0px;}
+    border-top: 0;}
 
 #METABOOKSKIMMER div.mbcard div.mbcard_body {
-    border-top: 0px; padding-left: 1em; padding-top: 0.25ex;}
+    border-top: 0; padding-left: 1em; padding-top: 0.25ex;}
 
 /* Emacs local variables
 ;;;  Local variables: ***

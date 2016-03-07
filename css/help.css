@@ -93,25 +93,25 @@ div.helpbox img.closebutton, div.metabookhelp img.closebutton {
     color: red;}
 
 div.helpbox th.helptext, div.metabookhelp th.helptext {
-    text-indent: 0px;}
+    text-indent: 0;}
 
 div#METABOOKHUDHELP {
     position: absolute;
-    bottom: 0px; 
+    bottom: 0; 
     left: 75px; 
     right: 75px;
     width: auto; 
     height: auto;
     z-index: 500;
-    border-bottom: 0px;
-    border-bottom-left-radius: 0px; 
-    border-bottom-right-radius: 0px;
+    border-bottom: 0;
+    border-bottom-left-radius: 0; 
+    border-bottom-right-radius: 0;
     display: none;}
 
 #METABOOKHUDHELP div.helpbox {
     position: static; overflow: auto; font-size: 1rem;
-    border: 0px; border-radius: 0px;
-    padding: 0px; padding-bottom: 1em;}
+    border: 0; border-radius: 0;
+    padding: 0; padding-bottom: 1em;}
 
 body.mbSHOWHELP #METABOOKHUDHELP,
 body.mbSHOWHELP #METABOOKHUD.addgloss #METABOOKHUDHELP { 
@@ -185,7 +185,7 @@ body.mbSHOWHELP.openglossmark #METABOOKPOINTGLOSSES {
 
 div.helpbox p {}
 
-div.helpbox h3, div.helpbox h2 { margin-top: 0px;}
+div.helpbox h3, div.helpbox h2 { margin-top: 0;}
 div.helpbox img.screenshot {
     width: 80%; margin-left: 10%; margin-right: 10%;}
 div.helpbox img.screenshot.right {
@@ -201,9 +201,9 @@ div.helpbox blockquote p {
 
 #BOTTOMHUDHELP {
     position: absolute;
-    bottom: 0px; left: 20px; right: 20px;}
+    bottom: 0; left: 20px; right: 20px;}
 #BOTTOMHUDHELP p {
-    text-indent: 0px; margin-bottom: 1px; margin-top: 1px;
+    text-indent: 0; margin-bottom: 1px; margin-top: 1px;
     max-width: 40em; margin-left: auto; margin-right: auto;
     text-align: center;
     color: red;}
@@ -223,11 +223,11 @@ div.helpbox blockquote p {
 #METABOOKHUD .hudtip.botleft {bottom: 25px; left: 60px; text-align: right;}
 #METABOOKHUD .hudtip.botright {bottom: 25px; right: 60px; text-align: left;}
 #METABOOKHUD .hudtip.topcenter {
-    top: 0px; width: 50%; left: 25%; right: 25%; text-align: center;
-    border-top-left-radius: 0px; border-top-right-radius: 0px;
-    -o-border-top-left-radius: 0px; -o-border-top-right-radius: 0px; 
-    -webkit-border-top-left-radius: 0px; -webkit-border-top-right-radius: 0px; 
-    -o-border-radius-topleft: 0px; -oborder-radius-topright: 0px;}
+    top: 0; width: 50%; left: 25%; right: 25%; text-align: center;
+    border-top-left-radius: 0; border-top-right-radius: 0;
+    -o-border-top-left-radius: 0; -o-border-top-right-radius: 0; 
+    -webkit-border-top-left-radius: 0; -webkit-border-top-right-radius: 0; 
+    -o-border-radius-topleft: 0; -oborder-radius-topright: 0;}
 
 #METABOOKHUD .hudtip.botcenter {
     bottom: 40px;
@@ -236,13 +236,13 @@ div.helpbox blockquote p {
 
 #METABOOKHUD div.hudtip.leftmiddle {
     position: absolute; max-width: 50px; padding-left: 3px;
-    top: 40%; left: 0px; text-align: left; padding-right: 2px;
-    border-top-left-radius: 0px; border-bottom-left-radius: 0px;}
+    top: 40%; left: 0; text-align: left; padding-right: 2px;
+    border-top-left-radius: 0; border-bottom-left-radius: 0;}
 
 #METABOOKHUD div.hudtip.rightmiddle {
     position: absolute; max-width: 50px; padding-right: 3px;
-    top: 40%; right: 0px; text-align: right; padding-left: 2px;
-    border-top-right-radius: 0px; border-bottom-right-radius: 0px;}
+    top: 40%; right: 0; text-align: right; padding-left: 2px;
+    border-top-right-radius: 0; border-bottom-right-radius: 0;}
 
 .hudtip span.arrow { font-weight: bold; vertical-align: top;}
 .hudtip.topleft span.arrow { float: left;}
@@ -257,7 +257,7 @@ div.metabookhelp div.hudtip#HIDETHISHELP {
 body div.metabookhelp h1, body div.metabookhelp h2,
 body div.metabookhelp h3, body div.helpbox h1,
 body div.helpbox h2, body div.helpbox h3 {
-    text-align: left; margin-left: 0px; margin-right: 2px;}
+    text-align: left; margin-left: 0; margin-right: 2px;}
 div.metabookhelp h1 span.metabooktogglehelp,
 div.metabookhelp h2 span.metabooktogglehelp,
 div.metabookhelp h3 span.metabooktogglehelp,
@@ -269,7 +269,7 @@ div.helpbox h3 span.metabooktogglehelp {
     cursor: pointer;
     font-weight: bold; font-style: italic; overflow: hidden;
     background-color: transparent; color: transparent;
-    height: 1.5em; width: 1.5em; border: 0px; border-radius: 0px;
+    height: 1.5em; width: 1.5em; border: 0; border-radius: 0;
     margin-left: 1ex;}
 #METABOOKCOVER span.metabooktogglehelp { display: none; }
 div.metabookhelp h1 span.metabooktogglehelp,
@@ -289,7 +289,7 @@ body.NOSVG span.metabooktogglehelp {
 div.metabookhelp h1 {
     margin-top: 3px !important;
     margin-bottom: 1.5ex !important;
-    padding-top: 0px !important;}
+    padding-top: 0 !important;}
 
 div.metabookhelp .result {
     font-style: italic;}
@@ -323,14 +323,14 @@ div.metabookhelp .glossbarbox {
     padding-right: 2px; border-right: solid blue 3px; margin-right: 4px;
     max-width: 3px; width: 3px; height: 2em;}
 div.metabookhelp p.glossexample {
-    text-indent: 0px; text-align: right;
+    text-indent: 0; text-align: right;
     padding-right: 6px; border-right: solid blue 4px;}
 
 div#METABOOKHELP {
     position: absolute; text-align: left;
     top: 75px; bottom: 125px; left: 80px; right: 80px; 
     height: auto; width: auto;
-    padding: 0px;
+    padding: 0;
     padding-right: 1ex; padding-right: 2vw;
     padding-left: 1ex; padding-left: 2vw;
     border-radius: 1ex;
@@ -368,13 +368,13 @@ div#METABOOKHELP {
 .metabookhelp p dfn:after { content: "”"; }
 .metabookhelp p.subpara {
     color: rgb(0,0,0); font-size: 85%;
-    margin: 0px; margin-left: 2em;}
+    margin: 0; margin-left: 2em;}
 .metabookhelp p.tightbottom {
-    margin-bottom: 0px;}
+    margin-bottom: 0;}
 .metabookhelp span.subpara {
     display: block; color: rgb(0,0,0);
     font-size: 85%; line-height: 120%;
-    margin: 0px; margin-left: 5%;}
+    margin: 0; margin-left: 5%;}
 
 #METABOOKHUD #METABOOKKEYBOARDHELPBOX.hudpanel {
     position: absolute; text-align: center;
@@ -421,7 +421,7 @@ div#METABOOKHELP {
     div.helpbox blockquote {
         margin-left: 2px; margin-right: 2px;}
     div.helpbox blockquote p {
-        margin-right: 0px; margin-left: 1ex; text-indent: -1ex;}
+        margin-right: 0; margin-left: 1ex; text-indent: -1ex;}
     div.helpbox.atfoot { left: 55px; right: 55px;}
 
     html._TOUCH #METABOOKHUD .metabookhelp,
@@ -437,7 +437,7 @@ div#METABOOKHELP {
         bottom: 100px; width: auto; left: 60px; right: 60px;}
     body.mbPREVIEW.mbPAGEPREVIEW #METABOOKPAGEBARHELP,
     body.mbPREVIEW #METABOOKSEETHRUHELP {
-        left: 0px; right: 0px; width: 100%;
+        left: 0; right: 0; width: 100%;
         padding: 3px; font-size: 14px;}
     div.helpbox h1 { font-size: 12px; }
     div.helpbox blockquote p {

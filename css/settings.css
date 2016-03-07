@@ -32,10 +32,10 @@
 @charset "UTF-8";
 
 body form.metabooksettings h1 { 
-    margin-top: 0px; margin-bottom: 0.25ex;
+    margin-top: 0; margin-bottom: 0.25ex;
     text-align: left;}
 form.metabooksettings > h1 + div.fontsizes {
-    margin-top: 0px;}
+    margin-top: 0;}
 
 form.metabooksettings {font-size: 1rem;}
 
@@ -86,7 +86,7 @@ form.metabooksettings > div.justify {
 
 form.metabooksettings > div p {
     display: inline-block; 
-    margin-top: 0px; 
+    margin-top: 0; 
     margin-bottom: 1px;}
 form.metabooksettings > div p.body {
     font-size: 150%;}

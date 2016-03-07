@@ -27,7 +27,7 @@ div.completions.noinput .cloudtoggle {
     display: none;}
 .cloud .showall {
     font-size: 24px; line-height: 100%; width: 60px; padding: 8px;
-    margin-left: 6px; margin-right: 8px; margin-bottom: 6px; margin-top: 0px;
+    margin-left: 6px; margin-right: 8px; margin-bottom: 6px; margin-top: 0;
     border: solid black 2px; border-radius: 12px;
     cursor: pointer;
     float: right;}
@@ -57,8 +57,8 @@ html._MOUSE .cloud .showall:hover,
 #METABOOKHUD .cloud .sectname, #METABOOKHUD .qtags .sectname {
     white-space: nowrap;
     font-weight: normal; font-style: italic;
-    padding: 0px; padding-left: 3px; padding-right: 3px; 
-    margin: 0px; margin-left: 3px; margin-right: 3px;
+    padding: 0; padding-left: 3px; padding-right: 3px; 
+    margin: 0; margin-left: 3px; margin-right: 3px;
     border-radius: 6px;}
 .cloud .sectname .name,
 #METABOOKHUD .qtags span.sectname .name {

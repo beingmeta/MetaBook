@@ -22,9 +22,9 @@ div.metabookslice .mbtoc.mblivetoc.mbcurtoc {
     border-bottom-style: solid;}
 
 div.mbtoc_posbar {
-    position: absolute; left: 0px; top: 0px;
+    position: absolute; left: 0; top: 0;
     box-sizing: content-box; height: 100%; z-index: 50;
-    border: 0px; border-right: solid red 2px;
+    border: 0; border-right: solid red 2px;
     display: none;}
 .mblivetoc div.mbtoc_posbar {
     display: block;}
@@ -52,16 +52,16 @@ a.mbtoc_sectname {
     white-space: normal;}
 div.mbtoc_elements {
     transform: translate3d(0,0,0); overflow: visible;
-    margin: 0px; padding: 0px; border: 0px; height: 1.3em;
+    margin: 0; padding: 0; border: 0; height: 1.3em;
     z-index: -50; margin-left: 2em;}
 a.mbtoc_sectbrick {
     position: absolute; display: inline-block;
     box-sizing: border-box;
-    border: 0px;
+    border: 0;
     opacity: 0.8;
     height: 1.25em;}
 .mbtoc_text {
-    position: relative; height: 0px; overflow: visible;
+    position: relative; height: 0; overflow: visible;
     pointer-events: none;
     z-index: 100; }
 a.mbtoc_showsize {
@@ -81,7 +81,7 @@ a.mbtoc_showsize {
 
 #METABOOKSKIMMER .mbtoc {
     font-weight: bold; padding-top: 2px; height: fit-content;
-    border-bottom: 0px;}
+    border-bottom: 0;}
 
 #METABOOKSKIMMER .mbtoc_sectbrick,
 #METABOOKSKIMMER .mbtoc_showsize {

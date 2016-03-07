@@ -35,7 +35,7 @@ div.searchbox .metabookclearsearch.tapholdtarget {
 div.searchbox input[type='TEXT'] {
     flex-grow: 1; max-height: 2em; margin-left: 1ex;}
 div.searchbox input[type='TEXT'] {
-    border-radius: 0px;}
+    border-radius: 0;}
 
 div.searchbox input[type='TEXT'][name='QTEXT'] {
     background-position: right top;
@@ -58,14 +58,14 @@ div.searchbox div.input input[type='TEXT'] {
     box-sizing: border-box;}
 
 div.resultinfo .noresults, div.resultinfo .noquery, div.resultinfo .stats {
-    float: right; padding-right: 0px;}
+    float: right; padding-right: 0;}
 div.resultinfo .stats > span {
     display: inline-block; text-align: center;
     cursor: pointer; background-color: white;
     padding-left: 1ex; padding-right: 1ex;
     border-bottom-left-radius: 0.5ex;
     border-bottom-right-radius: 0.5ex;
-    border: outset black 2px; border-top: 0px;
+    border: outset black 2px; border-top: 0;
     padding-top: 2px; padding-bottom: 4px;
     line-height: 0.9;}
 
@@ -130,7 +130,7 @@ html._NOSVG div.resultinfo .qtags .qelt span.redx {
 #METABOOKSEARCHINFO .qtags {
     box-sizing: border-box; display: inline-block;
     padding-top: 0.5ex; padding-right: 1ex;
-    margin-left: 3px; margin-bottom: 0px;
+    margin-left: 3px; margin-bottom: 0;
     height: 100%; vertical-align: top;
     white-space: normal;
     clear: left;}
