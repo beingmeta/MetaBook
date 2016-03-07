@@ -118,8 +118,8 @@ span.excerpt {
 .dterm {color: darkblue; background-color: gold; }
 .dterm sup {color: black;}
 .dterm.weak {
-    background-color: rbga(0,0,0,0.8);}
-.rootform {color: rbga(0,0,0,0.8);}
+    background-color: rgba(0,0,0,0.8);}
+.rootform {color: rgba(0,0,0,0.8);}
 .rawterm, .rootform {color: black;}
 .glosslink {
     background-color: lightblue;
