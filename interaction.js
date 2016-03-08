@@ -743,7 +743,7 @@
         if (Trace.gestures)
             fdjtLog("swiped d=%o,%o, ad=%o,%o, s=%o,%o vw=%o, n=%o",
                     dx,dy,adx,ady,evt.startX,evt.startY,vw,evt.ntouches);
-        if (adx>(ady*2)) {
+        if (adx>(ady*1.25)) {
             // Horizontal swipe
             if (dx<-(mB.minswipe||10)) {
                 if (evt.ntouches>2) window.history.forward();
@@ -1233,7 +1233,8 @@
                 setMode(mode);}}
         else if (evt.type==="hold") 
             addClass(document.body,"_HOLDING");
-        else dropClass(document.body,"_HOLDING");}
+        else dropClass(document.body,"_HOLDING");
+    }
     metaBook.UI.hudmodebutton=hudmodebutton;
 
     metaBook.UI.dropHUD=function(evt){
