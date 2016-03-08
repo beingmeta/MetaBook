@@ -80,7 +80,10 @@ body._BYPAGE {
 body._SCROLL #CODEXCONTENT {
     padding-left: 3em; padding-right: 3em;}
 
-#CODEXCONTENT > * {
+#CODEXCONTENT > div, #CODEXCONTENT > p,
+#CODEXCONTENT > h1, #CODEXCONTENT > h2,
+#CODEXCONTENT > h3, #CODEXCONTENT > h4,
+#CODEXCONTENT > h5, #CODEXCONTENT > h6 {
     max-width: inherit;}
 
 #CODEXCONTENT, #CODEXCONTENT p, #CODEXCONTENT div {
@@ -285,10 +288,17 @@ body.hudup .mbtarget.mbnewtarget {
     background-color: inherit; }
 .mbnewtarget {color: blue; }
 div.sbooksection.mbnewtarget, section.mbnewtarget,
-div.sbooksection.mbnewtarget > *, section.mbnewtarget > * {
+div.sbooksection.mbnewtarget > div, section.mbnewtarget > div,
+div.sbooksection.mbnewtarget > table, section.mbnewtarget > table,
+div.sbooksection.mbnewtarget > ul, section.mbnewtarget > ul,
+div.sbooksection.mbnewtarget > p, section.mbnewtarget > p {
     color: inherit;}
-section.mbnewtarget > *:first-child,
-div.sbooksection.mbnewtarget > *:first-child {
+section.mbnewtarget > div:first-child,
+section.mbnewtarget > p:first-child,
+section.mbnewtarget > ul:first-child, 
+div.sbooksection.mbnewtarget > div:first-child,
+div.sbooksection.mbnewtarget > p:first-child,
+div.sbooksection.mbnewtarget > ul:first-child  {
     color: blue;}
 
 /* Don't color the body
@@ -418,15 +428,29 @@ details > summary , .html5details > summary {
     display: block;}
 #METABOOKBODY details, #METABOOKBODY .html5details {
     display: inline;}
-#METABOOKBODY details > *, #METABOOKBODY .html5details > * {
+#METABOOKBODY details > div, #METABOOKBODY .html5details > div,
+#METABOOKBODY details > ul, #METABOOKBODY .html5details > ul,
+#METABOOKBODY details > table, #METABOOKBODY .html5details > table,
+#METABOOKBODY details > img, #METABOOKBODY .html5details > img,
+#METABOOKBODY details > p, #METABOOKBODY .html5details > p, {
     display: none;}
 #METABOOKBODY details > summary, #METABOOKBODY details > .html5summary,
 #METABOOKBODY .html5details > summary, #METABOOKBODY .html5details > .html5summary {
     color: blue; text-decoration: underline;
     display: inline; font-size: 80%;}
 
-#METABOOKBODY aside > *,
-#METABOOKBODY .html5aside > * { display: none;}
+#METABOOKBODY aside > div, #METABOOKBODY .html5aside > div,
+#METABOOKBODY aside > p, #METABOOKBODY .html5aside > p,
+#METABOOKBODY aside > hgroup, #METABOOKBODY .html5aside > hgroup,
+#METABOOKBODY aside > img, #METABOOKBODY .html5aside > img,
+#METABOOKBODY aside > h1, #METABOOKBODY .html5aside > h1,
+#METABOOKBODY aside > h2, #METABOOKBODY .html5aside > h2,
+#METABOOKBODY aside > h3, #METABOOKBODY .html5aside > h3,
+#METABOOKBODY aside > h4, #METABOOKBODY .html5aside > h4,
+#METABOOKBODY aside > h5, #METABOOKBODY .html5aside > h5,
+#METABOOKBODY aside > table, #METABOOKBODY .html5aside > table,
+#METABOOKBODY aside > ul, #METABOOKBODY .html5aside > ul, { 
+    display: none;}
 #METABOOKBODY aside > hgroup:first-child,
 #METABOOKBODY aside > h1:first-child,
 #METABOOKBODY aside > h2:first-child,

@@ -6,7 +6,7 @@
 
 /* framing.css */
 
-#METABOOKZOOMCONTROLS > * {
+#METABOOKZOOMCONTROLS > div {
     background-color: ivory;}
 body.mbSHOWHELP #METABOOKZOOMHELP {
     opacity: 1.0; background-color: gray;}

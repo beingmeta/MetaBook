@@ -50,7 +50,9 @@ body._SELECTING div.metabookglossform form div.addglossmenu {
     display: none;}
 body._SELECTING div.metabookglossform form div.glossetc {
     display: block;}
-body._SELECTING div.metabookglossform form div.glossetc > * {
+body._SELECTING div.metabookglossform form div.glossetc > span,
+body._SELECTING div.metabookglossform form div.glossetc > div,
+body._SELECTING div.metabookglossform form div.glossetc > p {
     visibility: hidden;}
 body._SELECTING div.metabookglossform form div.glossetc > *.excerpt {
     visibility: visible;}

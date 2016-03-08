@@ -115,7 +115,7 @@ p { line-height: 1.2;}
   page-break-before: always;
   page-break-after: always;
   overflow: hidden;}
-.sbooktitlepage > * {
+.sbooktitlepage > div, .sbooktitlepage > p {
   page-break-inside: avoid;}
 .sbooktitlepage > div { line-height: 1.0;}
 

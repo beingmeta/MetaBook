@@ -222,9 +222,9 @@ body.mbZOOM #METABOOKZOOM {
     z-index: 100; opacity: 0.7;
     transform: translateZ(0);
     pointer-events: none;}
-#METABOOKZOOMCONTROLS > * {
+#METABOOKZOOMCONTROLS > div {
     pointer-events: all;}
-#METABOOKZOOMCONTROLS > * {
+#METABOOKZOOMCONTROLS > div {
     background-color: ivory;}
 
 #METABOOKZOOMCLOSE {
