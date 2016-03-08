@@ -63,9 +63,10 @@ body {
    an extra load on some devices (such as iOS). */
 #METABOOKFRAME {
     position: fixed; top: 0; bottom: 0; left: 0; right: 0;
-    width: 100%; height: 100%; line-height: normal;
+    width: 100%; height: 100%;
     box-sizing: border-box;
     pointer-events: none;
+    line-height: normal;
     z-index: 1;}
 #METABOOKFRAME > div, #METABOOKFRAME > div > div, #METABOOKFRAME > div > a {
     box-sizing: border-box;}
@@ -78,8 +79,6 @@ body.hudup #METABOOKFRAME, body.mbCOVER #METABOOKFRAME,
 body.mbSKIMMING #METABOOKFRAME, body.openhud #METABOOKFRAME,
 body.hudup #METABOOKHUD, body.mbSKIMMING #METABOOKHUD,
 body.openhud #METABOOKHUD, body.mbCOVER #METABOOKCOVER {
-    top: 0; bottom: 0; left: 0; right: 0;
-    height: 100%; width: 100%;
     display: block;}
 body.mbZOOM #METABOOKFRAME, body.mbZOOM #METABOOKBODY,
 body.mbMEDIA #METABOOKFRAME, body.hudup.mbMEDIA #METABOOKFRAME { 
