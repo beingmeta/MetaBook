@@ -11,22 +11,22 @@
 
 #METABOOKMENU { opacity: 0.1;}
 
-.hudup #METABOOKMENU, 
+body.hudup #METABOOKMENU, 
 #METABOOKMENU.tapholding,
 html._MOUSE #METABOOKMENU:hover { 
     z-index: 200;}
 
 html._MOUSE #METABOOKMENU:hover {opacity: 0.5;}
 
-.hudup #METABOOKMENU, 
+body.hudup #METABOOKMENU, 
 #METABOOKMENU.tapholding,
-html._MOUSE .hudup #METABOOKMENU:hover,
+html._MOUSE body.hudup #METABOOKMENU:hover,
 html._MOUSE #METABOOKMENU.tapholding:hover {
     opacity: 1;}
 
 #METABOOKMENU .hudbutton {
     border-top: 0; opacity: 0.5;}
-.hudup #METABOOKMENU .hudbutton,
+body.hudup #METABOOKMENU .hudbutton,
 #METABOOKMENU.tapholding .hudbutton {
     opacity: 1;}
 
@@ -60,11 +60,11 @@ html._MOUSE not(body.mbSKIMMING) #METABOOKMENU:hover .hudbutton:hover {
     text-align: center; max-height: 100%;
     display: none;}
 
-.hudup.mbNOMODE #METABOOKCOVERTAB,
+body.hudup.mbNOMODE #METABOOKCOVERTAB,
 #METABOOKMENU.tapholding #METABOOKCOVERTAB { 
     display: inline-block;}
 
-.hudup #METABOOKBREVET,
+body.hudup #METABOOKBREVET,
 #METABOOKMENU.tapholding #METABOOKBREVET { 
     display: none;}
 
@@ -92,7 +92,7 @@ body._ANIMATE #METABOOKBREVET {
     background-image: url(g/metabook/downbar.svgz);}
 html._NOSVG #METABOOKBREVET {
     background-image: url(g/metabook/downbar128w.png);}
-.hudup #METABOOKBREVET, .mbcover #METABOOKBREVET { display: none;}
+body.hudup #METABOOKBREVET, .mbcover #METABOOKBREVET { display: none;}
 
 #METABOOKSHOWCOVER {
     display: inline-block;
@@ -110,7 +110,7 @@ html._NOSVG #METABOOKBREVET {
     float: left;}
 
 @media screen and (max-width: 640px) {
-    .hudup #METABOOKSHOWCOVER img {
+    body.hudup #METABOOKSHOWCOVER img {
         width: 50px; height: 50px;}
 
     #METABOOKMENU.tapholding img.hudbutton,

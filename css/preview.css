@@ -26,12 +26,12 @@ body._FULLHEIGHT.mbPREVIEW.hudup #METABOOKHEAD {
 body.mbPREVIEW #METABOOKFOOT,
 body.mbPREVIEW #METABOOKSKIMMER {
     visibility: visible;}
-body.hudup.mbPREVIEW #METABOOKHEART {
+body.mbPREVIEW.hudup #METABOOKHEART {
     background-color: transparent; border-color: transparent; opacity: 0.0;}
-body.hudup.mbPREVIEW #METABOOKHUD.openheart #METABOOKHEART {
+body.mbPREVIEW.hudup #METABOOKHUD.openheart #METABOOKHEART {
     background-color: transparent; border-color: transparent; opacity: 0.0;}
 
-body.hudup.mbPREVIEW #METABOOKHUD.allglosses #METABOOKSOURCES {
+body.mbPREVIEW.hudup #METABOOKHUD.allglosses #METABOOKSOURCES {
     opacity: 0.01;}
 
 body.mbPREVIEW #METABOOKHUD.searchresults #METABOOKSEARCH.hudpanel {
@@ -44,7 +44,7 @@ body.mbPREVIEW #METABOOKHUD.openfoot #METABOOKFOOT,
 body.mbPREVIEW #METABOOKHUD.openhead.openheart #METABOOKHEAD {
     background-color: transparent;}
 
-body.hudup.mbPREVIEW #METABOOKHUD.openhead #METABOOKHEAD,
+body.mbPREVIEW.hudup #METABOOKHUD.openhead #METABOOKHEAD,
 body.mbPREVIEW #METABOOKHUD.addgloss #METABOOKHEAD,
 body.mbPREVIEW #METABOOKHUD.openglossmark #METABOOKSKIMMER,
 body.mbPREVIEW.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER {

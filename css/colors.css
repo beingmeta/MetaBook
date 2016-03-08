@@ -42,7 +42,7 @@ body.hudup #METABOOKHUD.openhead #METABOOKHEAD {
 
 .hudbutton {
     background-color: rgba(255, 255, 255, 0.1);}
-.hudup .hudbutton {
+body.hudup .hudbutton {
     background-color: rgba(255, 255, 255, 0.9);}
 html._MOUSE .hudbutton:hover, .hudbutton.tapholdtarget {
     border-style: dotted; border-color: blue;}
@@ -99,7 +99,7 @@ body.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR
 #METABOOKSKIMMER {
     border: solid steelblue 2px;  border-top: 0;}
 #METABOOKSKIMMER.flash { background-color: silver;}
-.hudup #METABOOKSKIMMER { 
+body.hudup #METABOOKSKIMMER { 
     border: solid steelblue 4px;  border-top: 0;
     padding: 0;}
 #METABOOKSKIMMER mbcard_tochead {
@@ -216,7 +216,7 @@ div.helpbox img.inline { background-color: white; }
 body.mbSHOWHELP #METABOOKHUD img.hudbutton#METABOOKHELPBUTTON {
     background-color: silver; border-color: black;
     opacity: 0.9;}
-body.hudup.mbSHOWHELP #METABOOKHUD img.hudbutton#METABOOKHELPBUTTON {
+body.mbSHOWHELP.hudup #METABOOKHUD img.hudbutton#METABOOKHELPBUTTON {
     background-color: silver; border-color: black;}
 div.helpbox {
     background-color: silver; color: black;}
@@ -229,7 +229,7 @@ div#METABOOKHELP {
 body.mbSHOWHELP #METABOOKHUD img.hudbutton#METABOOKHELPBUTTON {
     background-color: silver; border-color: black;
     opacity: 0.9;}
-body.hudup.mbSHOWHELP #METABOOKHUD img.hudbutton#METABOOKHELPBUTTON {
+body.mbSHOWHELP.hudup #METABOOKHUD img.hudbutton#METABOOKHELPBUTTON {
     background-color: silver; border-color: black;}
 
 div.helpbox {

@@ -280,9 +280,6 @@ body._ANIMATE .mbtarget, body.mbSHRINK .mbtarget {
     transition-duration: 4s;}
 body.hudup .mbtarget, body.mbSHRINK .mbtarget {
     cursor: pointer;}
-body.hudup .mbtarget, body.mbSHRINK .mbtarget,
-body.mbSKIMMING .mbtarget {
-    /* outline: dotted silver 2px; */}
 
 body.hudup .mbtarget.mbnewtarget {
     background-color: inherit; }

@@ -420,7 +420,7 @@ html._NOUSER a.logout {
 /* HUDUP rules */
 
 body.hudup #METABOOKHUD { }
-body.hudup #CODEXPAGE p, body.hudup #CODEXPAGE div { cursor: pointer;}
+/* body.hudup #CODEXPAGE p, body.hudup #CODEXPAGE div { cursor: pointer;} */
 
 /* METABOOKPOINTGLOSSES rules */
 
@@ -717,9 +717,9 @@ body.hudup img.metabookpagebutton {
 /* Media rules */
 
 @media screen and (max-width: 640px) {
-    .hudup img.hudbutton {
+    body.hudup img.hudbutton {
         width: 50px; height: 50px;}
-    .hudup #METABOOKSHOWCOVER img {
+    body.hudup #METABOOKSHOWCOVER img {
         width: 50px; height: 50px;}
 
     ._TOUCH #METABOOKFOOT.tapholding

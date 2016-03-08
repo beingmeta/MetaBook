@@ -138,8 +138,8 @@ body._ANIMATE div.mbpagecontrol {
 body.mbSKIMMING div.mbpagecontrol,
 body.mbSKIMMING #METABOOKMENU {
     opacity: 0.6;}
-body.mbSKIMMING.hudup div.mbpagecontrol,
-html._MOUSE body.hudup div.mbpagecontrol:hover {
+body.mbSKIMMING.hudup #METABOOKPAGECONTROLS div.mbpagecontrol,
+html._MOUSE body.hudup #METABOOKPAGECONTROLS div.mbpagecontrol:hover {
     opacity: 0.8; }
 
 body.mbSKIMMING div.mbpagecontrol > span {

@@ -307,7 +307,6 @@ body.mbSHOWHELP.mbNOMODE div#METABOOKHELP {
     pointer-events: all;
     display: block;
     opacity: 1.0;}
-body.mbSHOWHELP.mbNOMODE.hudup { display: none; }
 body.mbSHOWHELP.mbNOMODE div#METABOOKBODY { opacity: 0.5;}
 body.mbSHOWHELP.mbNOMODE #METABOOKBREVET { display: none; }
 body.mbSHOWHELP.mbNOMODE #METABOOKHUD .hudtip {

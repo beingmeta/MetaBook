@@ -20,16 +20,16 @@ body._ANIMATE #METABOOKSKIMMER {
     transition-property: height; transition-duration: 0.2s;}
 
 #METABOOKSKIMMER.flash { background-color: silver;}
-.hudup #METABOOKSKIMMER { 
+body.hudup #METABOOKSKIMMER { 
     border: solid steelblue 4px;  border-top: 0; 
     padding: 0;}
-.hudup #METABOOKSKIMMER {
+body.hudup #METABOOKSKIMMER {
     max-height: inherit; }
 #METABOOKSKIMMER mbcard_tochead {
     background-color: steelblue; color: white; font-size: 80%;}
 #METABOOKSKIMMER mbcard_tochead {
     max-height: 4ex;}
-.hudup #METABOOKSKIMMER mbcard_tochead {
+body.hudup #METABOOKSKIMMER mbcard_tochead {
     max-height: inherit;
     font-weight: bold;}
 
@@ -52,9 +52,9 @@ body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER,
 #METABOOKHUD.allglosses #METABOOKSKIMMER {
     overflow: hidden;}
 
-.hudup #METABOOKHUD.openglossmark #METABOOKSKIMMER,
+body.hudup #METABOOKHUD.openglossmark #METABOOKSKIMMER,
 body.hudup.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER,
-body.hudup .mbSKIMMING #METABOOKHUD #METABOOKSKIMMER {
+body.hudup.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER {
     height: auto; max-height: 50%; overflow: visible;}
 
 body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER {display: block;}
@@ -71,8 +71,8 @@ body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER {
 body.mbSKIMMING #METABOOKHUD #METABOOKSKIMMER {
     border-color: steelblue;}
 
-.hudup #METABOOKHUD #METABOOKSKIMMER,
-.hudup #METABOOKHEAD #METABOOKSKIMMER {
+body.hudup #METABOOKHUD #METABOOKSKIMMER,
+body.hudup #METABOOKHEAD #METABOOKSKIMMER {
     max-height: inherit; overflow: auto;}
 
 body.hudup #METABOOKSKIMMER .ellipsis .elided { display: inline; }
