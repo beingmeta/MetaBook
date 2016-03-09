@@ -56,7 +56,7 @@
         if (metaBook.nouser) {
             metaBook.setConnected(false);
             return;}
-        if (window._sbook_loadinfo!==info)
+        if (window._metabook_loadinfo!==info)
             metaBook.setConnected(true);
         if (info.sticky) metaBook.setPersist(true);
         if (info.mycopyid) gotMyCopyId(info.mycopyid);
@@ -94,13 +94,13 @@
             metaBook.scandone=function(){loadInfo(info);};
             return;}
         else if (info.loaded) return;
-        if ((window._sbook_loadinfo)&&
-            (window._sbook_loadinfo!==info)) {
+        if ((window._metabook_loadinfo)&&
+            (window._metabook_loadinfo!==info)) {
             // This means that we have more information from the gloss
             // server before the local app has gotten around to
             // processing  the app-cached loadinfo.js
             // In this case, we put it in _sbook_new_loadinfo
-            window._sbook_newinfo=info;
+            window._metabook_newinfo=info;
             return;}
         if ((metaBook.persist)&&(metaBook.cacheglosses)&&
             (info)&&(info.userinfo)&&(metaBook.user)&&

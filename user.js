@@ -222,20 +222,20 @@
             // Clear any loadinfo read on startup from the
             // application cache but already stored locally.
             if ((metaBook.user)&&(metaBook.sync)&&(metaBook.cacheglosses)&&
-                (window._sbook_loadinfo))
+                (window._metabook_loadinfo))
                 // Clear the loadinfo "left over" from startup,
                 //  which should now be in the database
-                window._sbook_loadinfo=false;}
+                window._metabook_loadinfo=false;}
         
         if (metaBook.nologin) {}
-        else if ((window._sbook_loadinfo)&&
-                 (window._sbook_loadinfo.userinfo)) {
+        else if ((window._metabook_loadinfo)&&
+                 (window._metabook_loadinfo.userinfo)) {
             // Get the userinfo from the loadinfo that might have already been loaded
-            loadinfo=window._sbook_loadinfo;
+            loadinfo=window._metabook_loadinfo;
             userinfo=loadinfo.userinfo;
-            window._sbook_loadinfo=false;
+            window._metabook_loadinfo=false;
             if (Trace.storage) 
-                fdjtLog("Have window._sbook_loadinfo for %o (%s) dated %o: %j",
+                fdjtLog("Have window._metabook_loadinfo for %o (%s) dated %o: %j",
                         userinfo._id,userinfo.name||userinfo.email,
                         loadinfo.sync,userinfo);
             setUser(userinfo,

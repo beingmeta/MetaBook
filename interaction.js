@@ -180,17 +180,6 @@
             addHandlers(false,'window');
             addHandlers(document,'document');
             addHandlers(document.body,'body');
-            addHandlers($ID("METABOOKBODY"),'content');
-            metaBook.TapHold.body=fdjtUI.TapHold(
-                $ID("METABOOKBODY"),
-                {override: true,noslip: true,id: "METABOOKBODY",
-                 maxtouches: 3,taptapmsecs: true,
-                 movethresh: 10,untouchable: false});
-            metaBook.TapHold.menu=fdjtUI.TapHold(
-                $ID("METABOOKMENU"),
-                {override: true,noslip: false,id: "METABOOKMENU",
-                 maxtouches: 3,taptapmsecs: false,
-                 movethresh: 10,untouchable: false});
             addHandlers(metaBook.HUD,'hud');}
         if (mode) {
             var handlers=metaBook.UI.handlers[mode];

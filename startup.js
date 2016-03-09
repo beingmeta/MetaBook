@@ -83,6 +83,10 @@ metaBook.Startup=
         var readLocal=metaBook.readLocal;
         var saveLocal=metaBook.saveLocal;
 
+        function addHandlers(node,type){
+            var mode=metaBook.ui;
+            fdjtDOM.addListeners(node,mB.UI.handlers[mode][type]);}
+        
         /* Initialization */
         
         function startupMessage(){
@@ -102,8 +106,6 @@ metaBook.Startup=
             var inits=metaBook.inits;
             var i=0, lim=inits.length;
             while (i<lim) {inits[i++]();}}
-
-        /* Save local */
 
         function syncStartup(){
             // This is the startup code which is run
@@ -161,7 +163,7 @@ metaBook.Startup=
             mB.gotMyCopyId(mycopyid);
 
             // If we have no clue who the user is, ask right away (updateInfo())
-            if (!((metaBook.user)||(window._sbook_loadinfo)||
+            if (!((metaBook.user)||(window._metabook_loadinfo)||
                   (metaBook.userinfo)||(window._userinfo)||
                   (getLocal("mB.user")))) {
                 if (Trace.startup)
@@ -182,8 +184,6 @@ metaBook.Startup=
             metaBook._ui_setup=fdjtTime();
             showMessage();
             if (metaBook._user_setup) metaBook.setupUI4User();
-            // Modifies the DOM in various ways
-            metaBook.initBody();
             // Sets up event handlers
             metaBook.setupGestures();
 
@@ -403,10 +403,21 @@ metaBook.Startup=
 
         var glosshash_pat=/G[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i;
         
-        function metaBookStartup(force){
-            var metadata=false;
+        function metaBookStartup(){
             if (metaBook._started) return;
-            if ((!force)&&(getQuery("nometabook"))) return;
+            _head_loaded=mB._head_loaded=fdjtTime();
+            _body_loaded=mB._body_loaded=fdjtTime();
+            processHead();}
+        metaBook.Startup=metaBookStartup;
+        
+        var _head_loaded=false, _head_processed=false;
+        var _body_loaded=false, _body_processed=false;
+        var _dom_loaded=false, _dom_processed=false;
+
+        function processHead(){
+            var metadata=false;
+            if (_head_processed) return;
+            if (!(_head_loaded)) return;
             /* Cleanup, save initial hash location */
             if ((location.hash==="null")||(location.hash==="#null"))
                 location.hash="";
@@ -420,9 +431,74 @@ metaBook.Startup=
             addClass(document.body,"mbSTARTUP");
             // This is all of the startup that we need to do synchronously
             syncStartup();
-
             metaBook.resizeUI().then(function(){dropSplashPage();});
-            
+            // The rest of the stuff we timeslice
+            fdjtAsync.timeslice
+            ([  // Load all source (user,layer,etc) information
+                function loadSourceDB(){
+                    if (Trace.startup>1) fdjtLog("Loading sourcedb");
+                    metaBook.sourcedb.load(true);},
+                // Read knowledge bases (knodules) used by the book
+                ((Knodule)&&(Knodule.HTML)&&
+                 (Knodule.HTML.Setup)&&(metaBook.knodule)&&
+                 (function setupKnodule(){
+                     var knomsg=$ID("METABOOKSTARTUPKNO");
+                     var knodetails=$ID("METABOOKSTARTUPKNODETAILS");
+                     if (knodetails) {
+                         knodetails.innerHTML=fdjtString(
+                             "Processing knodule %s",metaBook.knodule.name);}
+                     addClass(knomsg,"running");
+                     if ((Trace.startup>1)||(Trace.indexing))
+                         fdjtLog("Processing knodule %s",metaBook.knodule.name);
+                     Knodule.HTML.Setup(metaBook.knodule);
+                     dropClass(knomsg,"running");})),
+                // Process locally stored (offline data) glosses
+                function syncGlosses(){
+                    if (metaBook.sync) {
+                        if (metaBook.cacheglosses) 
+                            return metaBook.initGlossesOffline();}
+                    else if (window._metabook_loadinfo) {
+                        metaBook.loadInfo(window._metabook_loadinfo);
+                        window._metabook_loadinfo=false;}},
+                // Process anything we got via JSONP ahead of processing
+                //  _metabook_loadinfo
+                ((window._metabook_newinfo)&&(function loadPendingInfo(){
+                    metaBook.loadInfo(window._metabook_newinfo);
+                    window._metabook_newinfo=false;})),
+                function(){metaBook.setupIndex(metadata);},
+                headProcessed],
+             {slice: 100, space: 25});}
+        metaBook.processHead=processHead;
+        
+        function headLoaded(){
+            if (_head_processed) return;
+            mB._head_loaded=_head_loaded=fdjtTime();
+            return processHead();}
+        metaBook.headLoaded=headLoaded;
+
+        function headProcessed(){
+            if (_head_processed) return;
+            mB._head_processed=_head_processed=fdjtTime();
+            if ((_body_loaded)&&(!(_body_processed)))
+                return processBody();}
+        
+        function processBody(){
+            var metadata=false;
+            if (_body_processed) return;
+            if (!(_body_loaded)) return;
+            // Modifies the DOM in various ways
+            metaBook.initBody();
+            addHandlers($ID("METABOOKBODY"),'content');
+            metaBook.TapHold.body=fdjtUI.TapHold(
+                $ID("METABOOKBODY"),
+                {override: true,noslip: true,id: "METABOOKBODY",
+                 maxtouches: 3,taptapmsecs: true,
+                 movethresh: 10,untouchable: false});
+            metaBook.TapHold.menu=fdjtUI.TapHold(
+                $ID("METABOOKMENU"),
+                {override: true,noslip: false,id: "METABOOKMENU",
+                 maxtouches: 3,taptapmsecs: false,
+                 movethresh: 10,untouchable: false});
             // The rest of the stuff we timeslice
             fdjtAsync.timeslice
             ([  // Scan the DOM for metadata.  This is surprisingly
@@ -438,7 +514,7 @@ metaBook.Startup=
                 //  use results of DOM scanning in layout (for example,
                 //  heading information).
                 function beginLayout(){
-                    fdjtAsync(startLayout);},
+                    if (_dom_loaded) fdjtAsync(startLayout);},
                 function buildTextIndex(){
                     var hasText=fdjtDOM.hasText;
                     var rules=fdjtDOM.getMeta("METABOOK.index",true)
@@ -468,41 +544,27 @@ metaBook.Startup=
                     var n=0, nids=allids.length; while (n<nids) {
                         var id=allids[n++], doc=docinfo[id];
                         if (doc) doc.strings=toSet(idterms[id]);}},
-                // Load all source (user,layer,etc) information
-                function loadSourceDB(){
-                    if (Trace.startup>1) fdjtLog("Loading sourcedb");
-                    metaBook.sourcedb.load(true);},
-                // Read knowledge bases (knodules) used by the book
-                ((Knodule)&&(Knodule.HTML)&&
-                 (Knodule.HTML.Setup)&&(metaBook.knodule)&&
-                 (function setupKnodule(){
-                     var knomsg=$ID("METABOOKSTARTUPKNO");
-                     var knodetails=$ID("METABOOKSTARTUPKNODETAILS");
-                     if (knodetails) {
-                         knodetails.innerHTML=fdjtString(
-                             "Processing knodule %s",metaBook.knodule.name);}
-                     addClass(knomsg,"running");
-                     if ((Trace.startup>1)||(Trace.indexing))
-                         fdjtLog("Processing knodule %s",metaBook.knodule.name);
-                     Knodule.HTML.Setup(metaBook.knodule);
-                     dropClass(knomsg,"running");})),
-                // Process locally stored (offline data) glosses
-                function syncGlosses(){
-                    if (metaBook.sync) {
-                        if (metaBook.cacheglosses) 
-                            return metaBook.initGlossesOffline();}
-                    else if (window._sbook_loadinfo) {
-                        metaBook.loadInfo(window._sbook_loadinfo);
-                        window._sbook_loadinfo=false;}},
-                // Process anything we got via JSONP ahead of processing
-                //  _sbook_loadinfo
-                ((window._sbook_newinfo)&&(function loadPendingInfo(){
-                    metaBook.loadInfo(window._sbook_newinfo);
-                    window._sbook_newinfo=false;})),
-                function(){metaBook.setupIndex(metadata);},
-                startupDone],
+                bodyProcessed],
              {slice: 100, space: 25});}
-        metaBook.Startup=metaBookStartup;
+
+        function bodyLoaded(){
+            if (_body_processed) return;
+            mB._body_loaded=_body_loaded=fdjtTime();
+            if (!(_head_loaded)) return headLoaded();
+            else return processBody();}
+        metaBook.bodyLoaded=bodyLoaded;
+
+        function bodyProcessed(){
+            if (_body_processed) return;
+            mB._body_processed=_body_processed=fdjtTime();
+            if ((_dom_loaded)&&(!(_dom_processed))) {
+                startLayout();
+                startupDone();}}
+
+        function domLoaded(){
+            if (_dom_processed) return;
+            mB._dom_loaded=_dom_loaded=fdjtTime();}
+        metaBook.domLoaded=domLoaded;
         
         function startLayout(){
             metaBook.sizeContent();
@@ -694,7 +756,7 @@ metaBook.Startup=
             var noterefspecs=getMeta("booknoteref",true).concat(
                 getMeta("METABOOK.booknoteref",true));
             metaBook.booknotes=(((notespecs)&&(notespecs.length))?
-                                 (fdjtDOM.sel(notespecs)):(false));
+                                (fdjtDOM.sel(notespecs)):(false));
             metaBook.booknoterefs=(((noterefspecs)&&(noterefspecs.length))?
                                    (fdjtDOM.sel(noterefspecs)):(false));
             

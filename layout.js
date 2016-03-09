@@ -307,7 +307,7 @@ metaBook.Paginate=
                 return id;}
 
             function new_layout(){
-
+                fdjtLog("new_layout");
                 // Prepare to do the layout
                 dropClass(document.body,"_SCROLL");
                 addClass(document.body,"_BYPAGE");
@@ -380,15 +380,25 @@ metaBook.Paginate=
                                               layout.tracelevel,
                                               layout_progress,
                                               ((async)&&(rootloop)));
-                            if (async) return rootloop;
+                            if (async) return rootloop();
                             else return true;}
                         else if (async) return rootloop();
                         else return true;}}
-
+                
                 if (async) rootloop();
                 else {
                     var running=true;
                     while (running) running=rootloop();}}
+            var layout_wait=false;
+            function start_new_layout(){
+                if (!(layout_wait)) new_layout();
+                else if (mB._dom_loaded) {
+                    clearInterval(layout_wait);
+                    layout_wait=false;
+                    new_layout();}}
+            function request_layout(){
+                if (!(layout_wait)) 
+                    layout_wait=setInterval(start_new_layout,50);}
             
             if ((metaBook.cache_layout_thresh)&&
                 (!((metaBook.forcelayout)))&&
@@ -397,19 +407,17 @@ metaBook.Paginate=
                     fdjtLog("Fetching layout %s",layout_id);
                 CodexLayout.fetchLayout(layout_id).
                     then(function layoutFetched(content){
-                        if (!(content)) return new_layout();
+                        if (!(content)) return request_layout();
                         if (Trace.layout) fdjtLog("Got layout %s",layout_id);
                         recordLayout(layout_id,metaBook.sourceid);
                         try {
                             return restore_layout(content,layout_id);}
                         catch (ex) {
                             fdjtLog("Layout restore error: %o",ex);
-                            return new_layout();}})
+                            request_layout();}})
                     .catch(function layoutNotFetched(){
-                        return new_layout();});}
-            else if (async) {
-                setTimeout(new_layout,10);}
-            else return new_layout();}
+                        request_layout();});}
+            else request_layout();}
         metaBook.Paginate=Paginate;
 
         CodexLayout.prototype.onresize=function layoutOnResize(){
