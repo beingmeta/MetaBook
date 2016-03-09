@@ -115,6 +115,10 @@ body._BYPAGE #CODEXPAGE #CODEXCONTENT .metabookpagebreak {
 body._ANIMATE body.metabookfixed div.codexpage {
     transition-property: opacity; transition-duration: 0.1s;}
 
+/* Hide the datalist object */
+
+datalist { display: none; }
+
 /* The content */
 
 span.excerpt {line-height: 1.0;}
