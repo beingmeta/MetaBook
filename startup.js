@@ -58,6 +58,7 @@ metaBook.Startup=
         var fdjtLog=fdjt.Log;
         var fdjtDOM=fdjt.DOM;
         var fdjtUI=fdjt.UI;
+        var fdjtET=fdjtTime.ET;
         var $ID=fdjt.ID;
         var RefDB=fdjt.RefDB;
         var mbID=metaBook.ID;
@@ -83,10 +84,6 @@ metaBook.Startup=
         var readLocal=metaBook.readLocal;
         var saveLocal=metaBook.saveLocal;
 
-        function addHandlers(node,type){
-            var mode=metaBook.ui;
-            fdjtDOM.addListeners(node,mB.UI.handlers[mode][type]);}
-        
         /* Initialization */
         
         function startupMessage(){
@@ -184,8 +181,6 @@ metaBook.Startup=
             metaBook._ui_setup=fdjtTime();
             showMessage();
             if (metaBook._user_setup) metaBook.setupUI4User();
-            // Sets up event handlers
-            metaBook.setupGestures();
 
             // Reapply config settings to update the HUD UI
             metaBook.setConfig(metaBook.getConfig());
@@ -405,19 +400,19 @@ metaBook.Startup=
         
         function metaBookStartup(){
             if (metaBook._started) return;
-            _head_loaded=mB._head_loaded=fdjtTime();
-            _body_loaded=mB._body_loaded=fdjtTime();
+            _head_ready=mB._head_ready=fdjtET();
+            _body_ready=mB._body_ready=fdjtET();
             processHead();}
         metaBook.Startup=metaBookStartup;
         
-        var _head_loaded=false, _head_processed=false;
-        var _body_loaded=false, _body_processed=false;
-        var _dom_loaded=false, _dom_processed=false;
+        var _head_ready=false, _head_processing=false, _head_processed=false;
+        var _body_ready=false, _body_processing=false, _body_processed=false;
+        var _dom_ready=false, _dom_processed=false;
 
         function processHead(){
-            var metadata=false;
-            if (_head_processed) return;
-            if (!(_head_loaded)) return;
+            if ((_head_processed)||(_head_processing)) return;
+            if (!(_head_ready)) return;
+            metaBook._starting=_head_processing=fdjtET();
             /* Cleanup, save initial hash location */
             if ((location.hash==="null")||(location.hash==="#null"))
                 location.hash="";
@@ -427,12 +422,92 @@ metaBook.Startup=
                 if (glosshash_pat.exec(location.hash))
                     metaBook.glosshash=hash;
                 else metaBook.inithash=location.hash;}
-            metaBook._starting=fdjtTime();
             addClass(document.body,"mbSTARTUP");
             // This is all of the startup that we need to do synchronously
             syncStartup();
             metaBook.resizeUI().then(function(){dropSplashPage();});
+            headProcessed();}
+        metaBook.processHead=processHead;
+        
+        function headReady(){
+            if ((_head_processed)||(_head_processing)) return;
+            mB._head_ready=_head_ready=fdjtET();
+            if (mB.Trace.startup) fdjtLog("Head ready");
+            return processHead();}
+        metaBook.headReady=headReady;
+
+        function headProcessed(){
+            if (_head_processed) return;
+            mB._head_processed=_head_processed=fdjtET();
+            if (mB.Trace.startup) 
+                fdjtLog("Head processed in %s",_head_processed-_head_processing);
+            _head_processing=false;
+            if ((_body_ready)&&(!(_body_processed))&&(!(_body_processing)))
+                return processBody();}
+        
+        function processBody(){
+            var metadata=false;
+            if ((_body_processed)||(_body_processing)) return;
+            if (!(_body_ready)) return;
+            if (!(_head_processed)) {
+                if (_head_ready) return processHead();
+                else return;}
+            _body_processing=fdjtET();
+            // Modifies the DOM in various ways
+            metaBook.initBody();
+            // Sets up event handlers
+            metaBook.setupGestures();
             // The rest of the stuff we timeslice
+            fdjtAsync.timeslice
+            ([  // Scan the DOM for metadata.  This is surprisingly
+                //  fast, so we don't currently try to timeslice it or
+                //  cache it, though we could.
+                function scanStructure(){
+                    applyTOCRules();
+                    metadata=scanDOM();
+                    metaBook.setupTOC(metadata[metaBook.content.id]);
+                    fdjt.Async(processMetadata,metadata);},
+                // Now you're ready to lay out the book, which is
+                //  timesliced and runs on its own.  We wait to do
+                //  this until we've scanned the DOM because we may
+                //  use results of DOM scanning in layout (for example,
+                //  heading information).
+                function beginLayout(){
+                    fdjtAsync(startLayout);},
+                function buildTextIndex(){
+                    var hasText=fdjtDOM.hasText;
+                    var rules=fdjtDOM.getMeta("METABOOK.index",true)
+                        .concat(fdjtDOM.getMeta("PUBTOOL.index",true))
+                        .concat(fdjtDOM.getMeta("INDEX.include",true))
+                        .concat(fdjtDOM.getMeta("textindex",true));
+                    var content=$ID("CODEXCONTENT");
+                    rules.push("p,li,ul,blockquote,div");
+                    rules.push("h1,h2,h3,h4,h5,h6,h7,hgroup,.sbookindex");
+                    var nodes=fdjtDOM.getChildren(content,rules.join(","));
+                    var index=metaBook.textindex=new fdjt.TextIndex();
+                    var i=0, lim=nodes.length; while (i<lim) {
+                        var node=nodes[i++];
+                        if (hasText(node)) index.indexText(node);}
+                    index.finishIndex();},
+                function buildTagIndex(){
+                    var toSet=RefDB.toSet;
+                    var docdb=metaBook.docdb;
+                    var index=metaBook.textindex;
+                    var docinfo=metaBook.docinfo;
+                    var allids=index.allids, idterms=index.idterms;
+                    var allterms=index.allterms, termindex=index.termindex;
+                    var wix=docdb.addIndex('strings',RefDB.StringMap);
+                    var t=0, nterms=allterms.length; while (t<nterms) {
+                        var term=allterms[t++];
+                        wix[term]=toSet(termindex[term]);}
+                    var n=0, nids=allids.length; while (n<nids) {
+                        var id=allids[n++], doc=docinfo[id];
+                        if (doc) doc.strings=toSet(idterms[id]);}},
+                bodyProcessed],
+             {slice: 100, space: 25});}
+
+        function processMetadata(metadata){
+            if (Trace.startup) fdjtLog("Processing metadata");
             fdjtAsync.timeslice
             ([  // Load all source (user,layer,etc) information
                 function loadSourceDB(){
@@ -466,105 +541,33 @@ metaBook.Startup=
                     metaBook.loadInfo(window._metabook_newinfo);
                     window._metabook_newinfo=false;})),
                 function(){metaBook.setupIndex(metadata);},
-                headProcessed],
-             {slice: 100, space: 25});}
-        metaBook.processHead=processHead;
-        
-        function headLoaded(){
-            if (_head_processed) return;
-            mB._head_loaded=_head_loaded=fdjtTime();
-            return processHead();}
-        metaBook.headLoaded=headLoaded;
-
-        function headProcessed(){
-            if (_head_processed) return;
-            mB._head_processed=_head_processed=fdjtTime();
-            if ((_body_loaded)&&(!(_body_processed)))
-                return processBody();}
-        
-        function processBody(){
-            var metadata=false;
-            if (_body_processed) return;
-            if (!(_body_loaded)) return;
-            // Modifies the DOM in various ways
-            metaBook.initBody();
-            addHandlers($ID("METABOOKBODY"),'content');
-            metaBook.TapHold.body=fdjtUI.TapHold(
-                $ID("METABOOKBODY"),
-                {override: true,noslip: true,id: "METABOOKBODY",
-                 maxtouches: 3,taptapmsecs: true,
-                 movethresh: 10,untouchable: false});
-            metaBook.TapHold.menu=fdjtUI.TapHold(
-                $ID("METABOOKMENU"),
-                {override: true,noslip: false,id: "METABOOKMENU",
-                 maxtouches: 3,taptapmsecs: false,
-                 movethresh: 10,untouchable: false});
-            // The rest of the stuff we timeslice
-            fdjtAsync.timeslice
-            ([  // Scan the DOM for metadata.  This is surprisingly
-                //  fast, so we don't currently try to timeslice it or
-                //  cache it, though we could.
-                function scanStructure(){
-                    applyTOCRules();
-                    metadata=scanDOM();
-                    metaBook.setupTOC(metadata[metaBook.content.id]);},
-                // Now you're ready to lay out the book, which is
-                //  timesliced and runs on its own.  We wait to do
-                //  this until we've scanned the DOM because we may
-                //  use results of DOM scanning in layout (for example,
-                //  heading information).
-                function beginLayout(){
-                    if (_dom_loaded) fdjtAsync(startLayout);},
-                function buildTextIndex(){
-                    var hasText=fdjtDOM.hasText;
-                    var rules=fdjtDOM.getMeta("METABOOK.index",true)
-                        .concat(fdjtDOM.getMeta("PUBTOOL.index",true))
-                        .concat(fdjtDOM.getMeta("INDEX.include",true))
-                        .concat(fdjtDOM.getMeta("textindex",true));
-                    var content=$ID("CODEXCONTENT");
-                    rules.push("p,li,ul,blockquote,div");
-                    rules.push("h1,h2,h3,h4,h5,h6,h7,hgroup,.sbookindex");
-                    var nodes=fdjtDOM.getChildren(content,rules.join(","));
-                    var index=metaBook.textindex=new fdjt.TextIndex();
-                    var i=0, lim=nodes.length; while (i<lim) {
-                        var node=nodes[i++];
-                        if (hasText(node)) index.indexText(node);}
-                    index.finishIndex();},
-                function buildTagIndex(){
-                    var toSet=RefDB.toSet;
-                    var docdb=metaBook.docdb;
-                    var index=metaBook.textindex;
-                    var docinfo=metaBook.docinfo;
-                    var allids=index.allids, idterms=index.idterms;
-                    var allterms=index.allterms, termindex=index.termindex;
-                    var wix=docdb.addIndex('strings',RefDB.StringMap);
-                    var t=0, nterms=allterms.length; while (t<nterms) {
-                        var term=allterms[t++];
-                        wix[term]=toSet(termindex[term]);}
-                    var n=0, nids=allids.length; while (n<nids) {
-                        var id=allids[n++], doc=docinfo[id];
-                        if (doc) doc.strings=toSet(idterms[id]);}},
-                bodyProcessed],
+                function(){if (Trace.startup) fdjtLog("Metadata processed");}],
              {slice: 100, space: 25});}
 
-        function bodyLoaded(){
-            if (_body_processed) return;
-            mB._body_loaded=_body_loaded=fdjtTime();
-            if (!(_head_loaded)) return headLoaded();
-            else return processBody();}
-        metaBook.bodyLoaded=bodyLoaded;
+        function bodyReady(){
+            if ((_body_processed)||(_body_processing)) return;
+            mB._body_ready=_body_ready=fdjtET();
+            if (!(_head_ready)) return headReady();
+            if (Trace.startup) fdjtLog("Body ready");
+            return processBody();}
+        metaBook.bodyReady=bodyReady;
 
         function bodyProcessed(){
             if (_body_processed) return;
-            mB._body_processed=_body_processed=fdjtTime();
-            if ((_dom_loaded)&&(!(_dom_processed))) {
-                startLayout();
-                startupDone();}}
+            mB._body_processed=_body_processed=fdjtET();
+            if (mB.Trace.startup)
+                fdjtLog("Body processed in ",_body_processed-_body_processing);
+            _body_processing=false;
+            startLayout();
+            startupDone();}
 
-        function domLoaded(){
+        function domReady(){
             if (_dom_processed) return;
-            mB._dom_loaded=_dom_loaded=fdjtTime();}
-        metaBook.domLoaded=domLoaded;
+            mB._dom_ready=_dom_ready=fdjtET();
+            headReady(); 
+            bodyReady();
+            if (mB.Trace.startup) fdjtLog("DOM ready");}
+        metaBook.domReady=domReady;
         
         function startLayout(){
             metaBook.sizeContent();
@@ -884,8 +887,8 @@ metaBook.Startup=
 
         function setupBook(){
             if (metaBook.bookinfo) return;
-            if (Trace.startup>2) fdjtLog("Book setup");
             var bookinfo=metaBook.bookinfo={}; var started=fdjtTime();
+            if (Trace.startup>2) fdjtLog("Book setup at %o",started/1000);
             bookinfo.title=
                 getMeta("METABOOK.title")||
                 getMeta("PUBTOOL.title")||

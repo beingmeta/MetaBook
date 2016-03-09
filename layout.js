@@ -379,9 +379,7 @@ metaBook.Paginate=
                             layout.addContent(root,timeslice,timeskip,
                                               layout.tracelevel,
                                               layout_progress,
-                                              ((async)&&(rootloop)));
-                            if (async) return rootloop();
-                            else return true;}
+                                              ((async)&&(rootloop)));}
                         else if (async) return rootloop();
                         else return true;}}
                 
@@ -392,7 +390,7 @@ metaBook.Paginate=
             var layout_wait=false;
             function start_new_layout(){
                 if (!(layout_wait)) new_layout();
-                else if (mB._dom_loaded) {
+                else if (mB._dom_ready) {
                     clearInterval(layout_wait);
                     layout_wait=false;
                     new_layout();}}

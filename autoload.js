@@ -1,8 +1,8 @@
 if ((typeof _metabook_suppressed === "undefined")||(!(_metabook_suppressed))) {
     if (document.addEventListener) {
-	document.addEventListener("load",metaBook.headLoaded);
-	document.addEventListener("DOMContentLoaded",metaBook.bodyLoaded);
-        window.onload=metaBook.domLoaded();}
+	document.addEventListener("load",metaBook.headReady);
+	document.addEventListener("DOMContentLoaded",metaBook.bodyReady);
+        window.onload=metaBook.domReady;}
     else window.onload=function(evt){metaBook.Setup();};}
 
 /* Emacs local variables

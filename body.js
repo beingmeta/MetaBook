@@ -36,7 +36,7 @@
 (function(){
     "use strict";
     var fdjtDOM=fdjt.DOM, fdjtLog=fdjt.Log, $ID=fdjt.ID;
-    var fdjtTime=fdjt.Time, fdjtString=fdjt.String;
+    var fdjtTime=fdjt.Time, fdjtString=fdjt.String, fdjtUI=fdjt.UI;
     var dropClass=fdjtDOM.dropClass, addClass=fdjtDOM.addClass;
     var getGeometry=fdjtDOM.getGeometry;
     var getChildren=fdjtDOM.getChildren, getChild=fdjtDOM.getChild;
@@ -49,6 +49,10 @@
     var note_counter=1;
     
     var fixStaticRefs=metaBook.fixStaticRefs;
+    
+    function addHandlers(node,type){
+        var mode=metaBook.ui;
+        fdjtDOM.addListeners(node,mB.UI.handlers[mode][type]);}
     
     function initBody(){
         var body=document.body, started=fdjtTime();
@@ -182,6 +186,19 @@
 
         // Initialize the margins
         initMargins();
+
+        addHandlers($ID("METABOOKBODY"),'content');
+        metaBook.TapHold.body=fdjtUI.TapHold(
+            $ID("METABOOKBODY"),
+            {override: true,noslip: true,id: "METABOOKBODY",
+             maxtouches: 3,taptapmsecs: true,
+             movethresh: 10,untouchable: false});
+        metaBook.TapHold.menu=fdjtUI.TapHold(
+            $ID("METABOOKMENU"),
+            {override: true,noslip: false,id: "METABOOKMENU",
+             maxtouches: 3,taptapmsecs: false,
+             movethresh: 10,untouchable: false});
+
         if (Trace.startup>1)
             fdjtLog("initBody took %dms",fdjtTime()-started);
         metaBook.Timeline.initBody=fdjtTime();}

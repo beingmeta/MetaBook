@@ -181,6 +181,7 @@
             addHandlers(document,'document');
             addHandlers(document.body,'body');
             addHandlers(metaBook.HUD,'hud');}
+
         if (mode) {
             var handlers=metaBook.UI.handlers[mode];
             var keys=[], seen=[];
