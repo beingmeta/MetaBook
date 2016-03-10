@@ -155,7 +155,7 @@ var metaBook={
     srcloading: {}, glossdata: {},
     // These are functions to be called when everythings has been loaded
     //  to initialize local references to common metaBook functions
-    inits: [],
+    inits: {local: [], app: [], head: [], body: [], dom: []},
     default_config: {
         layout: 'bypage',
         bodysize: 'normal',bodyfamily: 'serif',

@@ -49,7 +49,7 @@
         setTarget=metaBook.setTarget;
         setConnected=metaBook.setConnected;
         setConfig=metaBook.setConfig;}
-    metaBook.inits.push(init_local);
+    metaBook.inits.local.push(init_local);
 
     /* Managing the reader state */
 

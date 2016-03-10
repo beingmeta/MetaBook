@@ -46,7 +46,7 @@
         getDups=metaBook.getDups;
         saveState=metaBook.saveState;
         setHistory=metaBook.setHistory;}
-    metaBook.inits.push(init_local);
+    metaBook.inits.local.push(init_local);
 
     /* Navigation functions */
 
@@ -160,7 +160,8 @@
             dropClass(targets,"mbnewtarget");},
                    3000);
         fdjtState.setCookie(
-            "mbtarget",targetid||target.getAttribute('data-bookid'));
+            "MB:TARGET",targetid||target.getAttribute('data-bookid'),
+            false,false,(location.href.search('https:')==0));
         metaBook.target=primary;
         if (metaBook.UI.setTarget) metaBook.UI.setTarget(primary);
         if (metaBook.empty_cloud)

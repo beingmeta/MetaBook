@@ -156,7 +156,19 @@
                     metaBook.updateSettings(setting,value);}}}
         else config={};
         if (Trace.config) fdjtLog("initConfig default=%j",default_config);
-        for (setting in default_config) {
+
+        var devicename=current_config.devicename;
+        if ((devicename)&&(!(isEmpty(devicename))))
+            metaBook.deviceName=devicename;
+        if (Trace.startup>1)
+            fdjtLog("initConfig took %dms",fdjtTime()-started);}
+    metaBook.initConfig=initConfig;
+    
+    function bookConfig(){
+        var started=fdjtTime();
+        var config=current_config;
+        for (var setting in default_config) {
+            var value, source;
             if ((default_config.hasOwnProperty(setting))&&
                 (!((config.hasOwnProperty(setting))||(getQuery(setting))))) {
                 if (getMeta("METABOOK."+setting)) {
@@ -172,14 +184,9 @@
         metaBook.postconfig=false;
         var i=0; var lim=dopost.length;
         while (i<lim) dopost[i++]();
-        
-        var devicename=current_config.devicename;
-        if ((devicename)&&(!(isEmpty(devicename))))
-            metaBook.deviceName=devicename;
-        if (Trace.startup>1)
-            fdjtLog("initConfig took %dms",fdjtTime()-started);}
-    metaBook.initConfig=initConfig;
-    
+        if (Trace.config) fdjtLog("bookConfig took %dms",fdjtTime()-started);}
+    metaBook.bookConfig=bookConfig;
+
     var getParent=fdjtDOM.getParent;
     var getChild=fdjtDOM.getChild;
 

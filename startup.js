@@ -80,6 +80,7 @@ metaBook.Startup=
 
         var mB=metaBook;
         var Trace=metaBook.Trace;
+        var Timeline=metaBook.Timeline;
 
         var readLocal=metaBook.readLocal;
         var saveLocal=metaBook.saveLocal;
@@ -99,30 +100,78 @@ metaBook.Startup=
                 splash.parentNode.removeChild(splash);}
         metaBook.dropSplashPage=dropSplashPage;
 
-        function run_inits(){
-            var inits=metaBook.inits;
+        function setupWait(tprop,fcn){
+            var waiting=false;
+            function waitingForSetup(){
+                if (Timeline[tprop]) {
+                    clearInterval(waiting);
+                    waiting=false;
+                    fcn();}}
+            if (Timeline[tprop]) fcn();
+            else waiting=setInterval(waitingForSetup,50);}
+        metaBook.setupWait=setupWait;
+
+        function run_inits(phase){
+            var inits=metaBook.inits[phase];
             var i=0, lim=inits.length;
             while (i<lim) {inits[i++]();}}
 
-        function syncStartup(){
-            // This is the startup code which is run
-            //  synchronously, before the time-sliced processing
-            fdjtLog.console="METABOOKCONSOLELOG";
-            fdjtLog.consoletoo=true;
-            run_inits();
-            if (!(metaBook._setup_started)) metaBook._setup_started=new Date();
+        var app_init_done=false;
+        function appInit(){
+            var now=new Date(), started=fdjtTime();
+            // This is done when the script is finished loading, but
+            // nothing else may be ready.  More functionality may be
+            // moved here to improve startup performance
+            run_inits("local");
+
+            // Application hearald
             metaBook.appsource=getSourceRef();
             fdjtLog("This is metaBook %s, built %s on %s, launched %s, from %s",
-                    mB.version,mB.buildtime,mB.buildhost,
-                    mB._setup_started.toString(),
+                    mB.version,mB.buildtime,mB.buildhost,now.toString(),
                     mB.root||metaBook.appsource||"somewhere");
-            if ($ID("METABOOKBODY")) metaBook.body=$ID("METABOOKBODY");
+            fdjtLog("Copyright © 2010-2016 beingmeta, inc");
 
             // Check for any trace settings
             if (getQuery("mbtrace")) useTraceSettings(getQuery("mbtrace",true));
             if (getSession("mbtrace")) useTraceSettings([getSession("mbtrace")]);
             if (getLocal("mbtrace")) useTraceSettings([getLocal("mbtrace")]);
+
+            // Whether to suppress login, etc
+            if ((getLocal("mB.nologin"))||(getQuery("nologin")))
+                metaBook.nologin=true;
+
+            // Whether devmode is enabled
+            if (fdjtState.getLocal("mB.devmode")) {
+                addClass(document.documentElement,"_DEVMODE");
+                metaBook.devmode=true;}
+
+            // Initialize domain and origin for browsers which care
+            try {document.domain="bookhub.io";}
+            catch (ex) {fdjtLog.warn("Error setting document.domain");}
+
+            // Get device info
+            metaBook.devinfo=fdjtState.versionInfo();
             
+            var docid=fdjtState.getCookie("MB:DOCID",false);
+            if (docid) {
+                // We could do a lot more here
+                metaBook.docid=docid;}
+
+            var done=Timeline.app_init_done=app_init_done=fdjtTime();
+
+            if (Trace.startup) fdjtLog("appInit done in %dms",done-started);}
+        metaBook.appInit=appInit;
+
+        function syncStartup(){
+            // This is the startup code which is run
+            //  synchronously, before the time-sliced processing
+            if (!(app_init_done)) appInit();
+            fdjtLog.console="METABOOKCONSOLELOG";
+            fdjtLog.consoletoo=true;
+            run_inits("app");
+            if (!(metaBook._setup_started)) metaBook._setup_started=new Date();
+            if ($ID("METABOOKBODY")) metaBook.body=$ID("METABOOKBODY");
+
             // Get various settings for the sBook from the HTML
             // (META tags, etc), including settings or guidance for
             // skimming, graphics, layout, glosses, etc.
@@ -135,16 +184,17 @@ metaBook.Startup=
                      ("")));
             
             // Initialize the databases
-            metaBook.initDB();
+            mB.initDB();
 
             // Get config information
-            metaBook.initConfig();
-
+            mB.initConfig();
+            mB.bookConfig();
+            
             // This sets various aspects of the environment
             readEnvSettings();
 
             // Use the cached mycopyid if available
-            readMycopyid();
+            readMyCopyId();
 
             // Figure out if we have a user and whether we can keep
             // user information
@@ -154,10 +204,6 @@ metaBook.Startup=
 
             // Initialize the book state (location, targets, etc)
             metaBook.initState(); metaBook.syncState();
-
-            var mycopyid=mB.readLocal("mB("+mB.docid+").mycopyid")||
-                fdjtState.getQuery("MYCOPYID");
-            mB.gotMyCopyId(mycopyid);
 
             // If we have no clue who the user is, ask right away (updateInfo())
             if (!((metaBook.user)||(window._metabook_loadinfo)||
@@ -187,6 +233,19 @@ metaBook.Startup=
 
             if (Trace.startup>1)
                 fdjtLog("Initializing markup converter");
+
+            Timeline.sync_startup=new Date();
+            if (metaBook.onsyncstartup) {
+                var delayed=metaBook.onsyncstartup;
+                delete metaBook.onsyncstartup;
+                if (Array.isArray(delayed)) {
+                    var i=0, lim=delayed.length;
+                    while (i<lim) {delayed[i](); i++;}}
+                else delayed();}
+            if (Trace.startup)
+                fdjtLog("Done with sync startup");}
+
+        function initMarkdown(){
             var markdown_converter=new Markdown.Converter();
             metaBook.markdown_converter=markdown_converter;
             metaBook.md2HTML=function(mdstring){
@@ -204,18 +263,8 @@ metaBook.Startup=
                     nodes.push(children[i++]);}
                 i=0; while (i<lim) frag.appendChild(nodes[i++]);
                 return frag;}
-            metaBook.md2DOM=md2DOM;
-
-            metaBook.Timeline.sync_startup=new Date();
-            if (metaBook.onsyncstartup) {
-                var delayed=metaBook.onsyncstartup;
-                delete metaBook.onsyncstartup;
-                if (Array.isArray(delayed)) {
-                    var i=0, lim=delayed.length;
-                    while (i<lim) {delayed[i](); i++;}}
-                else delayed();}
-            if (Trace.startup)
-                fdjtLog("Done with sync startup");}
+            metaBook.md2DOM=md2DOM;}
+        mB.inits.local.push(initMarkdown);
 
         function getSourceRef(){
             var scripts=fdjtDOM.$("SCRIPT");
@@ -234,10 +283,6 @@ metaBook.Startup=
 
         function readEnvSettings() {
 
-            // Initialize domain and origin for browsers which care
-            try {document.domain="bookhub.io";}
-            catch (ex) {fdjtLog.warn("Error setting document.domain");}
-
             // First, define common schemas
             fdjtDOM.addAppSchema("METABOOK","http://metabook.bookhub.io/");
             fdjtDOM.addAppSchema("BOOKHUB","http://bookhub.io/");
@@ -249,16 +294,11 @@ metaBook.Startup=
             fdjtDOM.addAppSchema("INDEX","http://beingmeta.com/INDEX/");
             fdjtDOM.addAppSchema("BM","http://beingmeta.com/");
 
-            metaBook.devinfo=fdjtState.versionInfo();
-            
             /* Where to get your images from, especially to keep
                references inside https */
             if ((metaBook.root==="http://static.beingmeta.com/")&&
                 (window.location.protocol==='https:'))
                 metaBook.root=https_root;
-            // Whether to suppress login, etc
-            if ((getLocal("mB.nologin"))||(getQuery("nologin")))
-                metaBook.nologin=true;
             var glosshost=getMeta("BOOKHUB.server")||getMeta("GLOSSDB");
             if (glosshost) metaBook.server=glosshost;
             else if (fdjtState.getCookie("METABOOKSERVER"))
@@ -269,20 +309,15 @@ metaBook.Startup=
             if (!(metaBook.server)) metaBook.server=metaBook.default_server;
             updateServerInfo(metaBook.server);
 
-            if (fdjtState.getLocal("mB.devmode")) {
-                addClass(document.documentElement,"_DEVMODE");
-                metaBook.devmode=true;}
-
             // Get the settings for scanning the document structure
             getScanSettings();}
 
-        function readMycopyid(){
-            var string=readLocal("mB("+mB.docid+").mycopyid");
-            if (!(string)) return;
-            var tickmatch=/:x(\d+)/.exec(string);
-            var tick=(tickmatch)&&(tickmatch.length>1)&&(parseInt(tickmatch[1]));
-            var expires=(tick)&&(new Date(tick*1000));
-            if (expires>(new Date())) mB.gotMyCopyId(string);}
+        function readMyCopyId(){
+            var mycopyid=(fdjtState.getQuery("MYCOPYID"))||
+                (fdjtState.getCookie("MYCOPYID"))||
+                ((mB.docid)&&(mB.readLocal("mB("+mB.docid+").mycopyid")));
+            // Should check signature and expiration
+            mB.gotMyCopyId(mycopyid);}
 
         function setupApp(){
 
@@ -433,6 +468,7 @@ metaBook.Startup=
             if ((_head_processed)||(_head_processing)) return;
             mB._head_ready=_head_ready=fdjtET();
             if (mB.Trace.startup) fdjtLog("Head ready");
+            run_inits("head");
             return processHead();}
         metaBook.headReady=headReady;
 
@@ -549,6 +585,7 @@ metaBook.Startup=
             mB._body_ready=_body_ready=fdjtET();
             if (!(_head_ready)) return headReady();
             if (Trace.startup) fdjtLog("Body ready");
+            run_inits("body");
             return processBody();}
         metaBook.bodyReady=bodyReady;
 
@@ -566,6 +603,7 @@ metaBook.Startup=
             mB._dom_ready=_dom_ready=fdjtET();
             headReady(); 
             bodyReady();
+            run_inits("dom");
             if (mB.Trace.startup) fdjtLog("DOM ready");}
         metaBook.domReady=domReady;
         
@@ -640,7 +678,7 @@ metaBook.Startup=
             if ((metaBook.glosshash)&&(metaBook.glossdb.ref(metaBook.glosshash))) {
                 if (metaBook.showGloss(metaBook.glosshash)) {
                     metaBook.glosshash=false;
-                    metaBook.Timeline.initLocation=fdjtTime();}
+                    Timeline.initLocation=fdjtTime();}
                 else metaBook.initLocation();}
             else metaBook.initLocation();
             window.onpopstate=function onpopstate(evt){
@@ -773,6 +811,7 @@ metaBook.Startup=
             var docref=getMeta("BOOKHUB.docref"), docid;
             if (docref) metaBook.docid=metaBook.docref=docid=docref;
             else metaBook.docid=docid=docuri;
+            fdjtState.setCookie("MB:DOCID",docid,3600*24*42,false,false,true);
             saveLocal("mB("+docid+")",docuri);
 
             if (docids.indexOf(docid)<0) {

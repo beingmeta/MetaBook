@@ -276,6 +276,7 @@
     function initUserOffline(){
         var user=getLocal("mB.user");
         var sync=metaBook.sync;
+        if (!(user)) return;
         var nodeid=getLocal("mB("+mB.docid+").nodeid",true);
         // We store the information for the current user
         //  in both localStorage and in the "real" sourcedb.
@@ -285,8 +286,6 @@
         if (Trace.storage)
             fdjtLog("initOffline user=%s sync=%s nodeid=%s info=%j",
                     user,sync,nodeid,userinfo);
-        if (!(sync)) return;
-        if (!(user)) return;
         if (Trace.startup>1)
             fdjtLog("initOffline userinfo=%j",userinfo);
         // Should these really be refs in sourcedb?
