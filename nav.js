@@ -161,7 +161,7 @@
                    3000);
         fdjtState.setCookie(
             "MB:TARGET",targetid||target.getAttribute('data-bookid'),
-            false,false,(location.href.search('https:')==0));
+            false,false,(location.href.search('https:')===0));
         metaBook.target=primary;
         if (metaBook.UI.setTarget) metaBook.UI.setTarget(primary);
         if (metaBook.empty_cloud)
