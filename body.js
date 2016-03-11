@@ -42,6 +42,7 @@
     var getChildren=fdjtDOM.getChildren, getChild=fdjtDOM.getChild;
     var toArray=fdjtDOM.toArray;
     var isEmpty=fdjtString.isEmpty;
+    var hasText=fdjtDOM.hasText;
 
     var mB=metaBook, Trace=metaBook.Trace;
     var applyMetaClass=mB.applyMetaClass;
@@ -143,12 +144,12 @@
                 else a.className=extclass;
                 a.target="_blank";}}
         
-        // Interpet links
+        // Interpret links
         var notelinks=getChildren(
             content,"a[rel='sbooknote'],a[rel='footnote'],a[rel='endnote']");
         i=0; lim=notelinks.length; while (i<lim) {
             var ref=notelinks[i++], nref=ref.href;
-            if (!(fdjtDOM.hasText(ref))) ref.innerHTML="Note";
+            if (!(hasText(ref))) ref.innerHTML="Note";
             if ((nref)&&(nref[0]==="#")) {
                 addClass($ID(nref.slice(1)),"sbooknote");}}
         
