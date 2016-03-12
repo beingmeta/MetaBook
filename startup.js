@@ -934,7 +934,7 @@ metaBook.Startup=
         function setupBook(){
             if (metaBook.bookinfo) return;
             var bookinfo=metaBook.bookinfo={}; var started=fdjtTime();
-            if (Trace.startup>2) fdjtLog("setupBook started");
+            if (Trace.startup>2) fdjtLog("Book setup started");
             bookinfo.title=
                 getMeta("METABOOK.title")||
                 getMeta("PUBTOOL.title")||
