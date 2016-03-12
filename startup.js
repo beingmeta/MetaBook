@@ -58,7 +58,6 @@ metaBook.Startup=
         var fdjtLog=fdjt.Log;
         var fdjtDOM=fdjt.DOM;
         var fdjtUI=fdjt.UI;
-        var fdjtET=fdjtTime.ET;
         var $ID=fdjt.ID;
         var RefDB=fdjt.RefDB;
         var mbID=metaBook.ID;
@@ -435,8 +434,8 @@ metaBook.Startup=
         
         function metaBookStartup(){
             if (metaBook._started) return;
-            _head_ready=mB._head_ready=fdjtET();
-            _body_ready=mB._body_ready=fdjtET();
+            _head_ready=mB._head_ready=fdjtTime();
+            _body_ready=mB._body_ready=fdjtTime();
             processHead();}
         metaBook.Startup=metaBookStartup;
         
@@ -447,7 +446,7 @@ metaBook.Startup=
         function processHead(){
             if ((_head_processed)||(_head_processing)) return;
             if (!(_head_ready)) return;
-            metaBook._starting=_head_processing=fdjtET();
+            metaBook._starting=_head_processing=fdjtTime();
             /* Cleanup, save initial hash location */
             if ((location.hash==="null")||(location.hash==="#null"))
                 location.hash="";
@@ -466,7 +465,7 @@ metaBook.Startup=
         
         function headReady(){
             if ((_head_processed)||(_head_processing)) return;
-            mB._head_ready=_head_ready=fdjtET();
+            mB._head_ready=_head_ready=fdjtTime();
             if (mB.Trace.startup) fdjtLog("Head ready");
             run_inits("head");
             return processHead();}
@@ -474,9 +473,9 @@ metaBook.Startup=
 
         function headProcessed(){
             if (_head_processed) return;
-            mB._head_processed=_head_processed=fdjtET();
+            mB._head_processed=_head_processed=fdjtTime();
             if (mB.Trace.startup) 
-                fdjtLog("Head processed in %s",_head_processed-_head_processing);
+                fdjtLog("Head processed in %dms",(_head_processed-_head_processing));
             _head_processing=false;
             if ((_body_ready)&&(!(_body_processed))&&(!(_body_processing)))
                 return processBody();}
@@ -488,7 +487,7 @@ metaBook.Startup=
             if (!(_head_processed)) {
                 if (_head_ready) return processHead();
                 else return;}
-            _body_processing=fdjtET();
+            _body_processing=fdjtTime();
             // Modifies the DOM in various ways
             metaBook.initBody();
             // Sets up event handlers
@@ -582,7 +581,7 @@ metaBook.Startup=
 
         function bodyReady(){
             if ((_body_processed)||(_body_processing)) return;
-            mB._body_ready=_body_ready=fdjtET();
+            mB._body_ready=_body_ready=fdjtTime();
             if (!(_head_ready)) return headReady();
             if (Trace.startup) fdjtLog("Body ready");
             run_inits("body");
@@ -591,16 +590,16 @@ metaBook.Startup=
 
         function bodyProcessed(){
             if (_body_processed) return;
-            mB._body_processed=_body_processed=fdjtET();
+            mB._body_processed=_body_processed=fdjtTime();
             if (mB.Trace.startup)
-                fdjtLog("Body processed in ",_body_processed-_body_processing);
+                fdjtLog("Body processed in %dms",(_body_processed-_body_processing));
             _body_processing=false;
             startLayout();
             startupDone();}
 
         function domReady(){
             if (_dom_processed) return;
-            mB._dom_ready=_dom_ready=fdjtET();
+            mB._dom_ready=_dom_ready=fdjtTime();
             headReady(); 
             bodyReady();
             run_inits("dom");
@@ -927,7 +926,7 @@ metaBook.Startup=
         function setupBook(){
             if (metaBook.bookinfo) return;
             var bookinfo=metaBook.bookinfo={}; var started=fdjtTime();
-            if (Trace.startup>2) fdjtLog("Book setup at %o",started/1000);
+            if (Trace.startup>2) fdjtLog("setupBook started");
             bookinfo.title=
                 getMeta("METABOOK.title")||
                 getMeta("PUBTOOL.title")||
