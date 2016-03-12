@@ -53,6 +53,7 @@ metaBook.Paginate=
 
         var mB=metaBook;
         var Trace=mB.Trace;
+        var Timeline=mB.Timeline;
         var fdjtString=fdjt.String;
         var fdjtState=fdjt.State;
         var fdjtHash=fdjt.Hash;
@@ -146,6 +147,7 @@ metaBook.Paginate=
         function Paginate(why,init){
             if (((metaBook.layout)&&(!(metaBook.layout.done)))) return;
             if (!(why)) why="because";
+            Timeline.page_layout_started=fdjtTime();
             if (Trace.layout)
                 fdjtLog("Starting pagination (%s) with %j",why,init);
             layoutMessage("Preparing your book",0);
@@ -215,7 +217,9 @@ metaBook.Paginate=
                 dropClass(document.body,"_SCROLL");
                 addClass(document.body,"_BYPAGE");
                 layout.started=fdjtTime();
-                layout.restoreLayout(content).then(finish_layout);}
+                layout.restoreLayout(content).then(function(){
+                    Timeline.layout_restored=fdjtTime();
+                    finish_layout();});}
             function finish_layout(layout) {
                 var started=layout.started;
                 $ID("CODEXPAGE").style.visibility='';
@@ -247,6 +251,7 @@ metaBook.Paginate=
                     var fn=metaBook.layoutdone;
                     metaBook.layoutdone=false;
                     fn();}
+                Timeline.layout_complete=fdjtTime();
                 if (metaBook.state)
                     metaBook.restoreState(metaBook.state,"layoutRestored");
                 metaBook.layout.running=false;
@@ -348,6 +353,7 @@ metaBook.Paginate=
                         var pages=layout.pages;
                         var i=0, n=pages.length; while (i<n)
                             finishPageInfo(pages[i++],layout);
+                        Timeline.layout_done=fdjtTime();
                         var cachethresh=metaBook.cache_layout_thresh;
                         if (cachethresh) {
                             var elapsed=layout.done-layout.started;
@@ -389,14 +395,18 @@ metaBook.Paginate=
                     while (running) running=rootloop();}}
             var layout_wait=false;
             function start_new_layout(){
-                if (!(layout_wait)) new_layout();
+                if (!(layout_wait)) {
+                    Timeline.layout_started=fdjtTime();
+                    new_layout();}
                 else if (mB._dom_ready) {
                     clearInterval(layout_wait);
                     layout_wait=false;
+                    Timeline.layout_started=fdjtTime();
                     new_layout();}}
             function request_layout(){
-                if (!(layout_wait)) 
-                    layout_wait=setInterval(start_new_layout,50);}
+                if (!(layout_wait)) {
+                    Timeline.layout_requested=fdjtTime();
+                    layout_wait=setInterval(start_new_layout,50);}}
             
             if ((metaBook.cache_layout_thresh)&&
                 (!((metaBook.forcelayout)))&&
@@ -409,6 +419,7 @@ metaBook.Paginate=
                         if (Trace.layout) fdjtLog("Got layout %s",layout_id);
                         recordLayout(layout_id,metaBook.sourceid);
                         try {
+                            Timeline.layout_fetched=fdjtTime();
                             return restore_layout(content,layout_id);}
                         catch (ex) {
                             fdjtLog("Layout restore error: %o",ex);
