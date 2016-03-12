@@ -68,7 +68,9 @@ body.hudup #METABOOKBREVET,
 #METABOOKMENU.tapholding #METABOOKBREVET { 
     display: none;}
 
-body.mbSKIMMING #METABOOKCOVERTAB { display: none; }
+body.mbSKIMMING #METABOOKCOVERTAB,
+body.mbSKIMMING #METABOOKMENU { 
+    display: none; }
 #METABOOKCOVERTAB .hudbutton {
     position: static;}
 #METABOOKCOVERTAB .hudbutton.left {
