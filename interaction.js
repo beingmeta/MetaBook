@@ -1752,8 +1752,8 @@
             var elt=((x)||(y))&&(document.elementFromPoint(x,y));
             if (mB.Trace.gestures>1)
                 fdjtLog("dombody_touched %o: %o @ <%o,%o>",evt,elt,x,y);
-            if (elt!==document.body) return;
-            if ((y<50)||((elt.offsetHeight-y)<50)) return;
+            if ((elt!==document.body)&&(hasParent(elt,document.body))) return;
+            if ((elt.offsetHeight)&&((y<50)||((elt.offsetHeight-y)<50))) return;
             if (mB.Trace.gestures)
                 fdjtLog("dombody_touched(atedge) %o: %o @ <%o,%o>",evt,elt,x,y);
             if (x<25) return backward(evt);
@@ -2001,6 +2001,7 @@
             keypress: mb_onkeypress,
             touchmove: preview_touchmove_nodefault,
             focus: mb_onfocus,
+            touchstart : dombody_touched,
             blur: mb_onblur},
          content: {tap: body_tapped,
                    hold: body_held,
@@ -2016,7 +2017,6 @@
                slip: toc_slipped, release: toc_released,
                touchtoo: toc_touchtoo,
                touchmove: preview_touchmove_nodefault},
-         body: {touchstart : dombody_touched},
          glossmark: {touchstart: glossmark_tapped,touchend: cancel},
          "#METABOOKSTARTPAGE": {touchend: metaBook.UI.dropHUD},
          "#METABOOKMENU": {tap: raiseHUD},
