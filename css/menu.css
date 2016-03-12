@@ -136,7 +136,7 @@ body.hudup #METABOOKBREVET, .mbcover #METABOOKBREVET { display: none;}
         display: none;}
 }
 
-media only screen and /* (min-width: 320px) and */
+@media only screen and /* (min-width: 320px) and */
             (max-width: 480px) {
     #METABOOKMENU .hudbutton[hudmode="allglosses"] {right: 70px;}
     #METABOOKMENU .hudbutton[hudmode="help"] {left: 70px;}
