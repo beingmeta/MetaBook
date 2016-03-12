@@ -398,7 +398,7 @@ metaBook.Paginate=
                 if (!(layout_wait)) {
                     Timeline.layout_started=fdjtTime();
                     new_layout();}
-                else if (mB._dom_ready) {
+                else if (Timeline.dom_ready) {
                     clearInterval(layout_wait);
                     layout_wait=false;
                     Timeline.layout_started=fdjtTime();
