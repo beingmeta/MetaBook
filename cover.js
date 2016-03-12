@@ -234,9 +234,6 @@
         
         metaBook.showCover();
         
-        // Make the cover hidden by default
-        metaBook.CSS.hidecover=fdjtDOM.addCSSRule(
-            "#METABOOKCOVER","opacity: 0.0; z-index: -10; pointer-events: none; height: 0px; width: 0px;");
         if (Trace.startup>1)
             fdjtLog("Cover setup done in %dms",fdjtTime()-started);
         return cover;}

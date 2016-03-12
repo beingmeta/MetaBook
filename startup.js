@@ -84,6 +84,8 @@ metaBook.Startup=
         var readLocal=metaBook.readLocal;
         var saveLocal=metaBook.saveLocal;
 
+        var keep_open_msecs=((3600+1800)*1000);
+
         /* Initialization */
         
         function startupMessage(){
@@ -434,8 +436,8 @@ metaBook.Startup=
         
         function metaBookStartup(){
             if (metaBook._started) return;
-            _head_ready=mB._head_ready=fdjtTime();
-            _body_ready=mB._body_ready=fdjtTime();
+            _head_ready=Timeline.head_ready=fdjtTime();
+            _body_ready=Timeline.body_ready=fdjtTime();
             processHead();}
         metaBook.Startup=metaBookStartup;
         
@@ -459,13 +461,13 @@ metaBook.Startup=
             addClass(document.body,"mbSTARTUP");
             // This is all of the startup that we need to do synchronously
             syncStartup();
-            metaBook.resizeUI().then(function(){dropSplashPage();});
+            metaBook.resizeUI();
             headProcessed();}
         metaBook.processHead=processHead;
         
         function headReady(){
             if ((_head_processed)||(_head_processing)) return;
-            mB._head_ready=_head_ready=fdjtTime();
+            Timeline.head_ready=_head_ready=fdjtTime();
             if (mB.Trace.startup) fdjtLog("Head ready");
             run_inits("head");
             return processHead();}
@@ -473,10 +475,16 @@ metaBook.Startup=
 
         function headProcessed(){
             if (_head_processed) return;
-            mB._head_processed=_head_processed=fdjtTime();
+            Timeline.head_processed=_head_processed=fdjtTime();
             if (mB.Trace.startup) 
                 fdjtLog("Head processed in %dms",(_head_processed-_head_processing));
             _head_processing=false;
+            if (mB.docid) {
+                var opened=readLocal(
+                    "mB("+mB.docid+").opened",true);
+                if ((!(opened))||((opened+keep_open_msecs)>fdjtTime())) {
+                    mB.showCover();
+                    dropSplashPage();}}
             if ((_body_ready)&&(!(_body_processed))&&(!(_body_processing)))
                 return processBody();}
         
@@ -581,7 +589,7 @@ metaBook.Startup=
 
         function bodyReady(){
             if ((_body_processed)||(_body_processing)) return;
-            mB._body_ready=_body_ready=fdjtTime();
+            Timeline.body_ready=_body_ready=fdjtTime();
             if (!(_head_ready)) return headReady();
             if (Trace.startup) fdjtLog("Body ready");
             run_inits("body");
@@ -590,7 +598,7 @@ metaBook.Startup=
 
         function bodyProcessed(){
             if (_body_processed) return;
-            mB._body_processed=_body_processed=fdjtTime();
+            Timeline.body_processed=_body_processed=fdjtTime();
             if (mB.Trace.startup)
                 fdjtLog("Body processed in %dms",(_body_processed-_body_processing));
             _body_processing=false;
@@ -599,7 +607,7 @@ metaBook.Startup=
 
         function domReady(){
             if (_dom_processed) return;
-            mB._dom_ready=_dom_ready=fdjtTime();
+            Timeline.dom_ready=_dom_ready=fdjtTime();
             headReady(); 
             bodyReady();
             run_inits("dom");
@@ -727,7 +735,7 @@ metaBook.Startup=
             else if ((!(mode))&&(metaBook.user)) {
                 var opened=readLocal(
                     "mB("+mB.docid+").opened",true);
-                if ((opened)&&((opened+((3600+1800)*1000))>fdjtTime()))
+                if ((opened)&&((opened+keep_open_msecs)<fdjtTime()))
                     metaBook.hideCover();}
             if (fdjtDOM.vischange)
                 fdjtDOM.addListener(document,fdjtDOM.vischange,
