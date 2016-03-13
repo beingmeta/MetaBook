@@ -425,10 +425,10 @@
                     state,xstate);
         var msg1="Start at";
         var choices=[];
-        var latest=xstate.location, farthest=xstate.maxloc;
+        var latest=xstate.location, farthest=xstate.maxloc, loclen=xstate.loclen;
         if (farthest>state.location)
             choices.push(
-                {label: "farthest @"+loc2pct(farthest),
+                {label: "farthest @"+loc2pct(farthest,loclen),
                  title: "your farthest location on any device/app",
                  isdefault: false,
                  handler: function(){
@@ -438,7 +438,7 @@
                      metaBook.hideCover();}});
         if ((latest!==state.location)&&(latest!==farthest))
             choices.push(
-                {label: ("latest @"+loc2pct(latest)),
+                {label: ("latest @"+loc2pct(latest,loclen)),
                  title: "the most recent location on any device/app",
                  isdefault: false,
                  handler: function(){
@@ -449,7 +449,7 @@
         if ((choices.length)&&(state.location>17))
             choices.push(
                 {label: ("current @"+((state.location<42)?("start"):
-                                      (loc2pct(state.location)))),
+                                      (loc2pct(state.location,loclen)))),
                  title: "the most recent location on this device",
                  isdefault: true,
                  handler: function(){
