@@ -219,8 +219,8 @@ metaBook.Paginate=
                 layout.started=fdjtTime();
                 layout.restoreLayout(content).then(function(){
                     Timeline.layout_restored=fdjtTime();
-                    finish_layout();});}
-            function finish_layout(layout) {
+                    finish_restore(layout);});}
+            function finish_restore(layout) {
                 var started=layout.started;
                 $ID("CODEXPAGE").style.visibility='';
                 $ID("CODEXCONTENT").style.visibility='';
