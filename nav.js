@@ -113,13 +113,13 @@
         metaBook.location=location;}
     metaBook.setLocation=setLocation;
 
-    function location2pct(location) {
-        var max_loc=metaBook.ends_at;
-        var pct=(100*location)/max_loc;
+    function location2pct(location,loclen) {
+        if (!(loclen)) loclen=metaBook.ends_at;
+        var pct=(100*location)/loclen;
         if (pct>100) pct=100;
         // This is (very roughly) intended to be the precision needed
         //  for line level (40 character) accuracy.
-        var prec=Math.round(Math.log(max_loc/40)/Math.log(10))-2;
+        var prec=Math.round(Math.log(loclen/40)/Math.log(10))-2;
         if (prec<0) prec=0;
         if (Math.floor(pct)===pct)
             return Math.floor(pct)+"%";
