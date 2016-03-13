@@ -416,8 +416,8 @@
             //  separately)
             return;}
         var now=fdjtTime.tick();
-        if ((now-state.changed)<(30)) {
-            // If our state changed in the past 30 seconds, don't
+        if ((now-state.changed)<(3000)) {
+            // If our state changed in the past 5 minutes, don't
             // bother changing the current state.
             return;}
         if (Trace.state) 
@@ -426,11 +426,13 @@
         var msg1="Start at";
         var choices=[];
         var latest=xstate.location, farthest=xstate.maxloc, loclen=xstate.loclen;
+        var prefer_current=((state.location>17)&&((now-state.changed)<(3600*24)));
+        var prefer_latest=((farthest-loclen)<80);
         if (farthest>state.location)
             choices.push(
                 {label: "farthest @"+loc2pct(farthest,loclen),
                  title: "your farthest location on any device/app",
-                 isdefault: false,
+                 isdefault: ((!(prefer_latest))&&(!(prefer_current))),
                  handler: function(){
                      metaBook.GoTo(xstate.maxloc,"sync");
                      state=metaBook.state; state.changed=fdjtTime.tick();
@@ -440,7 +442,7 @@
             choices.push(
                 {label: ("latest @"+loc2pct(latest,loclen)),
                  title: "the most recent location on any device/app",
-                 isdefault: false,
+                 isdefault: ((prefer_latest)&&(!(prefer_current))),
                  handler: function(){
                      metaBook.restoreState(xstate); state=metaBook.state;
                      state.changed=fdjtTime.tick();
@@ -451,7 +453,7 @@
                 {label: ("current @"+((state.location<42)?("start"):
                                       (loc2pct(state.location,loclen)))),
                  title: "the most recent location on this device",
-                 isdefault: true,
+                 isdefault: prefer_current,
                  handler: function(){
                      state.changed=fdjtTime.tick();
                      metaBook.saveState(state,true,true);
@@ -467,7 +469,8 @@
         if (choices.length)
             metaBook.statedialog=fdjtUI.choose(
                 {choices: choices,cancel: true,timeout: 7,
-                 nodefault: true,noauto: true,
+                 // nodefault: true,
+                 // noauto: true,
                  onclose: function(){metaBook.statedialog=false;},
                  spec: "div.fdjtdialog.resolvestate#METABOOKRESOLVESTATE"},
                 fdjtDOM("div",msg1));}
