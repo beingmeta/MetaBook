@@ -215,7 +215,7 @@
         if (sync_req) {
             fdjtLog("Skipping state sync because one is already in process");
             if (sync_wait) clearTimeout(sync_wait);
-            setTimeout(function(){syncState(force);},15000);
+            setTimeout(((force)?(forceSyncState):(syncState)),15000);
             return;}
         if ((!(force))&&(elapsed<metaBook.sync_interval)) {
             if (Trace.state)
@@ -228,9 +228,8 @@
                 fdjtLog("Skipping state sync because page is hidden");
             return;}
         if ((!(force))&&(elapsed<(metaBook.sync_min))) {
-            sync_wait=setTimeout(
-                function(){syncState(force);},
-                metaBook.sync_min);
+            sync_wait=setTimeout(((force)?(forceSyncState):(syncState)),
+                                 metaBook.sync_min);
             return;}
         else if (sync_wait) {clearTimeout(sync_wait); sync_wait=false;} 
         if (((force)||(metaBook.locsync))&&(navigator.onLine)) {
@@ -287,18 +286,17 @@
                         "Sync request %s returned status %d, pausing for %ds",
                         uri,req.status,metaBook.sync_pause/1000);}
                 metaBook.locsync=false;
-                setTimeout(function(){metaBook.locsync=true;},
-                           metaBook.sync_pause);}}
+                setTimeout(startLocSync,metaBook.sync_pause);}}
     } metaBook.syncState=syncState;
+    function forceSyncState(){syncState(true);}
+    function startLocSync(){metaBook.locsync=true;}
 
     function syncTimeout(evt){
         evt=evt||window.event;
         fdjtLog.warn("Sync request timed out, pausing for %ds",
                      metaBook.sync_pause/1000);
         metaBook.locsync=false;
-        setTimeout(function(){
-            metaBook.locsync=true;},
-                   metaBook.sync_pause);}
+        setTimeout(startLocSync,metaBook.sync_pause);}
 
     var prompted=false;
 
@@ -365,11 +363,12 @@
     function forceSync(){
         if (metaBook.connected) metaBook.update();
         else if (metaBook._onconnect)
-            metaBook._onconnect.push(function(){metaBook.update();});
-        else metaBook._onconnect=[function(){metaBook.update();}];
+            metaBook._onconnect.push(mBUpdate);
+        else metaBook._onconnect=[mBUpdate];
         if (!(metaBook.syncstart)) metaBook.syncLocation();
         else syncState();
     } metaBook.forceSync=forceSync;
+    function mBUpdate(){metaBook.update();}
 
     function getLoc(x){
         var info=metaBook.getLocInfo(x);
