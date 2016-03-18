@@ -674,6 +674,9 @@ metaBook.setMode=
         function stopSkimming(){
             // Tapping the tochead returns to results/glosses/etc
             var skimming=mB.skimpoint;
+            if (!(skimming)) return;
+            if ((Trace.skimming)||(Trace.flips))
+                fdjtLog("stopSkimming() %o",skimming);
             if (!(mB.skimming)) return;
             dropClass(document.body,"mbSKIMMING");
             mB.skimming=false;
@@ -711,7 +714,7 @@ metaBook.setMode=
             else if (hasParent(card,$ID("METABOOKSTATICTOC")))
                 metaBook.skimming=mB.slices.statictoc;
             else mB.skimming=true;
-            if (Trace.mode)
+            if ((Trace.mode)||(Trace.skimming))
                 fdjtLog("metaBookSkim() %o (card=%o) mode=%o scn=%o/%o dir=%o",
                         passage,card,
                         mB.mode,mB.skimpoint,

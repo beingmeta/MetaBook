@@ -194,6 +194,7 @@ var metaBook={
         knodules: 0,      // How much to trace knodule processing
         preview: false,   // Whether to trace preview activity
         flips: false,     // Whether to trace page flips (movement by pages)
+        skimming: false,  // Whether to trace skimming
         resize: false,    // Whether to trace resizing events/activity
         messages: false,  // Whether to trace inter-window messages
         glossing: false,  // Whether to trace gloss adding or edition

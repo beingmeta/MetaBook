@@ -548,6 +548,9 @@
             return;}
         if (mB.skimming) {
             cancel(evt);
+            if (Trace.gestures) 
+                fdjtLog("stop_skimming/body_held %o %o %o",
+                        evt,anchor,href);
             mB.stopSkimming();
             setHUD(false);
             mB.TapHold.body.abort();
