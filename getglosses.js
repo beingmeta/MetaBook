@@ -88,7 +88,7 @@
                 (info.mycopyid!==metaBook.mycopyid))
                 fdjtLog.warn("Mismatched mycopyids");
             if (info.mycopyid!==metaBook.mycopyid) {
-                metaBook.mycopyid=info.mycopyid;
+                gotMyCopyId(info.mycopyid);
                 if (mB.iosAuthKludge) mB.iosAuthKludge();}}
         if (!(metaBook.docinfo)) { /* Scan not done */
             metaBook.scandone=function(){loadInfo(info);};
