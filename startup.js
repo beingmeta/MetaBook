@@ -551,41 +551,41 @@ metaBook.Startup=
 
         function processMetadata(metadata){
             if (Trace.startup) fdjtLog("Processing metadata");
-            fdjtAsync.timeslice
-            ([  // Load all source (user,layer,etc) information
-                function loadSourceDB(){
-                    if (Trace.startup>1) fdjtLog("Loading sourcedb");
-                    metaBook.sourcedb.load(true);},
-                // Read knowledge bases (knodules) used by the book
-                ((Knodule)&&(Knodule.HTML)&&
-                 (Knodule.HTML.Setup)&&(metaBook.knodule)&&
-                 (function setupKnodule(){
-                     var knomsg=$ID("METABOOKSTARTUPKNO");
-                     var knodetails=$ID("METABOOKSTARTUPKNODETAILS");
-                     if (knodetails) {
-                         knodetails.innerHTML=fdjtString(
-                             "Processing knodule %s",metaBook.knodule.name);}
-                     addClass(knomsg,"running");
-                     if ((Trace.startup>1)||(Trace.indexing))
-                         fdjtLog("Processing knodule %s",metaBook.knodule.name);
-                     Knodule.HTML.Setup(metaBook.knodule);
-                     dropClass(knomsg,"running");})),
-                // Process locally stored (offline data) glosses
-                function syncGlosses(){
-                    if (metaBook.sync) {
-                        if (metaBook.cacheglosses) 
-                            return metaBook.initGlossesOffline();}
-                    else if (window._metabook_loadinfo) {
-                        metaBook.loadInfo(window._metabook_loadinfo);
-                        window._metabook_loadinfo=false;}},
-                // Process anything we got via JSONP ahead of processing
-                //  _metabook_loadinfo
-                ((window._metabook_newinfo)&&(function loadPendingInfo(){
-                    metaBook.loadInfo(window._metabook_newinfo);
-                    window._metabook_newinfo=false;})),
-                function(){metaBook.setupIndex(metadata);},
-                function(){if (Trace.startup) fdjtLog("Metadata processed");}],
-             {slice: 100, space: 25});}
+            // Read knowledge bases (knodules) used by the book
+            if ((Knodule)&&(Knodule.HTML)&&
+                (Knodule.HTML.Setup)&&(metaBook.knodule)) {
+                var knomsg=$ID("METABOOKSTARTUPKNO");
+                var knodetails=$ID("METABOOKSTARTUPKNODETAILS");
+                if (knodetails) {
+                    knodetails.innerHTML=fdjtString(
+                        "Processing knodule %s",metaBook.knodule.name);}
+                addClass(knomsg,"running");
+                if ((Trace.startup>1)||(Trace.indexing))
+                    fdjtLog("Processing knodule %s",metaBook.knodule.name);
+                Knodule.HTML.Setup(metaBook.knodule);
+                dropClass(knomsg,"running");}
+            fdjtAsync(function(){metaBook.setupIndex(metadata);});
+
+            fdjtAsync.timeslice(
+                [  // Load all source (user,layer,etc) information
+                    function loadSourceDB(){
+                        if (Trace.startup>1) fdjtLog("Loading sourcedb");
+                        metaBook.sourcedb.load(true);},
+                    // Process locally stored (offline data) glosses
+                    function syncGlosses(){
+                        if (metaBook.sync) {
+                            if (metaBook.cacheglosses) 
+                                return metaBook.initGlossesOffline();}
+                        else if (window._metabook_loadinfo) {
+                            metaBook.loadInfo(window._metabook_loadinfo);
+                            window._metabook_loadinfo=false;}},
+                    // Process anything we got via JSONP ahead of processing
+                    //  _metabook_loadinfo
+                    ((window._metabook_newinfo)&&(function loadPendingInfo(){
+                        metaBook.loadInfo(window._metabook_newinfo);
+                        window._metabook_newinfo=false;})),
+                    function(){if (Trace.startup) fdjtLog("Metadata processed");}],
+                {slice: 100, space: 25});}
 
         function bodyReady(){
             if ((_body_processed)||(_body_processing)) return;
