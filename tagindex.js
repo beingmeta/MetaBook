@@ -386,6 +386,7 @@
         applyMultiTagSpans();
         applyTagAttributes(metadata);
         var pubindex=metaBook._publisher_index||
+            window._publisher_autoindex||
             window._pubtool_autoindex;
         if (pubindex) {
             handlePublisherIndex(pubindex,indexingDone);
