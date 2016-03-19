@@ -509,7 +509,7 @@ metaBook.Startup=
                     applyTOCRules();
                     metadata=scanDOM();
                     metaBook.setupTOC(metadata[metaBook.content.id]);
-                    fdjt.Async(processMetadata,metadata);},
+                    fdjt.Async(metadataDone,metadata);},
                 // Now you're ready to lay out the book, which is
                 //  timesliced and runs on its own.  We wait to do
                 //  this until we've scanned the DOM because we may
@@ -549,7 +549,7 @@ metaBook.Startup=
                 bodyProcessed],
              {slice: 100, space: 25});}
 
-        function processMetadata(metadata){
+        function metadataDone(metadata){
             if (Trace.startup) fdjtLog("Processing metadata");
             // Read knowledge bases (knodules) used by the book
             if ((Knodule)&&(Knodule.HTML)&&
@@ -566,7 +566,7 @@ metaBook.Startup=
                 dropClass(knomsg,"running");}
             fdjtAsync(function(){metaBook.setupIndex(metadata);});
 
-            fdjtAsync.timeslice(
+            return fdjtAsync.timeslice(
                 [  // Load all source (user,layer,etc) information
                     function loadSourceDB(){
                         if (Trace.startup>1) fdjtLog("Loading sourcedb");
