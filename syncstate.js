@@ -118,7 +118,8 @@
         if (!(state.refuri)) state.refuri=metaBook.refuri;
         if (!(state.docuri)) state.docuri=metaBook.docuri;
         var title=state.title, frag=state.target;
-        if ((!(title))&&(frag)&&(metaBook.docinfo[frag])) {
+        if ((!(title))&&(frag)&&(metaBook.docinfo)&&
+            (metaBook.docinfo[frag])) {
             state.title=title=metaBook.docinfo[frag].title||
                 metaBook.docinfo[frag].head.title;}
         if (Trace.state) fdjtLog("Setting state to %j",state);
@@ -153,7 +154,8 @@
         if (!(hash)) hash=state.target;
         if (!(title)) title=state.title;
         var href=fdjtState.getURL();
-        if ((!(title))&&(hash)&&(metaBook.docinfo[hash])) {
+        if ((!(title))&&(hash)&&(metaBook.docinfo)&&
+            (metaBook.docinfo[hash])) {
             state.title=title=metaBook.docinfo[hash].title||
                 metaBook.docinfo[hash].head.title;}
         if ((!(hash))&&(state.location)&&

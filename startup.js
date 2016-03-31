@@ -509,6 +509,7 @@ metaBook.Startup=
                     applyTOCRules();
                     metadata=scanDOM();
                     metaBook.setupTOC(metadata[metaBook.content.id]);
+                    if (mB.target) mB.setTarget(mB.target);
                     fdjt.Async(metadataDone,metadata);},
                 // Now you're ready to lay out the book, which is
                 //  timesliced and runs on its own.  We wait to do

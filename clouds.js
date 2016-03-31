@@ -644,21 +644,24 @@
                 addClass(completion,"softcue");}}}
     function setCloudCuesFromTarget(cloud,target){
         var tags=[];
+        if (!(mB.docinfo)) return;
         var targetid=((target.codexbaseid)||(target.id)||(target.frag));
-        var info=metaBook.docinfo[targetid];
-        var glosses=metaBook.glossdb.find('frag',targetid);
+        var info=mB.docinfo[targetid];
         var knodule=metaBook.knodule;
         if ((info)&&(info.tags)) tags=tags.concat(info.tags);
-        if ((info)&&(info.autotags)&&(info.autotags.length)) {
+        if ((info)&&(info.autotags)&&(info.autotags.length)&&(knodule)) {
             var autotags=info.autotags; var j=0; var jlim=autotags.length;
             while (j<jlim) {
                 var kn=knodule.probe(autotags[j]);
                 if (kn) tags.push(kn.tagString());
                 j++;}}
-        var i=0; var lim=glosses.length;
-        while (i<lim) {
-            var g=glosses[i++]; var gtags=g.tags;
-            if (gtags) tags=tags.concat(gtags);}
+        var glosses=mB.glossdb&&
+            mB.glossdb.find('frag',targetid);
+        if (glosses) {
+            var i=0; var lim=glosses.length;
+            while (i<lim) {
+                var g=glosses[i++]; var gtags=g.tags;
+                if (gtags) tags=tags.concat(gtags);}}
         setCloudCues(cloud,tags);}
     metaBook.setCloudCues=setCloudCues;
     metaBook.setCloudCuesFromTarget=setCloudCuesFromTarget;

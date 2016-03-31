@@ -57,7 +57,7 @@
             head=getHead(mbID(head))||metaBook.content;
         else head=arg;
         var headid=head.codexbaseid||head.id;
-        var headinfo=metaBook.docinfo[headid];
+        var headinfo=(mB.docinfo)&&(mB.docinfo[headid]);
         while ((headinfo)&&(!(headinfo.level))) {
             headinfo=headinfo.head;
             headid=headinfo.frag;
@@ -164,7 +164,7 @@
             false,false,(location.href.search('https:')===0));
         metaBook.target=primary;
         if (metaBook.UI.setTarget) metaBook.UI.setTarget(primary);
-        if (metaBook.empty_cloud)
+        if ((mB.docinfo)&&(metaBook.empty_cloud))
             metaBook.setCloudCuesFromTarget(metaBook.empty_cloud,primary);}
     metaBook.setTarget=setTarget;
 
@@ -301,8 +301,8 @@
         else if ((typeof istarget === "string")&&(mbID(istarget)))
             target=mbID(istarget);
         else {}
-        var info=(target)&&
-            metaBook.docinfo[target.getAttribute("data-baseid")||target.id];
+        var info=(target)&&(mB.docinfo)&&
+            mB.docinfo[target.getAttribute("data-baseid")||target.id];
         if ((location)&&(info)&&(info.ends_at)&&(info.starts_at)&&
             ((location>(info.ends_at))||(location<(info.starts_at))))
             // Why does this happen???
@@ -340,7 +340,7 @@
         if (info) {
             metaBook.point=target;
             if (!((metaBook.hudup)||(metaBook.mode))) metaBook.skimpoint=false;}
-        setHead(target);
+        if (mB.docinfo) setHead(target);
         setLocation(location);
         if ((istarget)&&(targetid)&&(!(inUI(target)))) setTarget(target);
         if ((savestate)&&(istarget))
