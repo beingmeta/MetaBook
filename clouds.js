@@ -199,7 +199,7 @@
             var noun=((dterm.search(/\.\.\.$/)>0)?("root form"):("concept"));
             var title=
                 ((knode.prime)?("key "):
-                 (knode.weak)?("weak "):(""))+
+                 (knode.weak)?("rough "):(""))+
                 ((origin==="index")?("index "+noun+" "):
                  (noun+" (from "+origin+") "));
             if (knode.about)
