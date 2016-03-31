@@ -88,11 +88,16 @@
             metaBook.search_cloud=metaBook.empty_cloud;
             fdjtDOM.replace(
                 "METABOOKSEARCHCLOUD",fdjtDOM("div#METABOOKSEARCHCLOUD"));
+            fdjtDOM.replace(
+                "METABOOKSEARCHRESULTS",
+                fdjtDOM("div.metabookslice.mbsyncslice.searchslice.hudpanel"));
             displayQuery(query,$ID("METABOOKSEARCH"));
             metaBook.empty_cloud.complete("");
             addClass(metaBook.HUD,"emptysearch");
             metaBook.query=mB.empty_query;
             metaBook.qstring="";
+            if (mB.mode==='searchresults')
+                mB.setMode('refinesearch');
             return;}
         else dropClass(metaBook.HUD,"emptysearch");
         mB.empty_cloud.complete("");
