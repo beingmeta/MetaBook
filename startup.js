@@ -863,7 +863,9 @@ metaBook.Startup=
             if (autofonts.length)
                 fdjt.DOM.autofont=fdjt.DOM.autofont+","+autofonts.join(",");
 
-            if (getMeta("METABOOK.forcelayout")) mB.forcelayout=true;
+            if ((getMeta("METABOOK.forcelayout"))||
+                (getQuery("mbFORCELAYOUT")))
+                mB.forcelayout=true;
 
             var autotoc=getMeta("METABOOK.autotoc");
             if (autotoc) {
