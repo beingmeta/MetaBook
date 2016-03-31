@@ -78,7 +78,7 @@ div.resultinfo.noresults .stats { display: none;}
 div.resultinfo .noquery { display: none;}
 #METABOOKHUD.emptysearch div.resultinfo .noquery { display: block;}
 
-#METABOOKHUD.emptysearch div.resultinfo span { display: none;}
+#METABOOKHUD.emptysearch div.resultinfo span.stats { display: none;}
 
 #METABOOKHUD div.resultinfo {
     text-align: left; min-height: 1ex; max-height: 100%;
