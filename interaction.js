@@ -549,8 +549,8 @@
         if (mB.skimming) {
             cancel(evt);
             if (Trace.gestures) 
-                fdjtLog("stop_skimming/body_held %o %o %o",
-                        evt,anchor,href);
+                fdjtLog("stop_skimming/body_held %o skimming=%o",
+                        evt,mB.skimming);
             mB.stopSkimming();
             setHUD(false);
             mB.TapHold.body.abort();
@@ -1210,6 +1210,7 @@
             (evt.type==='release')) {
             dropClass(document.body,"_HOLDING");
             if ((mB.skimpoint)&&(!(mB.hudup))) {
+                if (mB.skimming) mB.stopSkimming();
                 if ((mode==="refinesearch")||(mode==="searchresults")) {
                     setMode("searchresults"); return;}
                 else if (mode==="allglosses") {
