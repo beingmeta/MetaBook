@@ -36,19 +36,12 @@
 // mycopyid.js
 (function(){
     "use strict";
-    var fdjtDOM=fdjt.DOM, fdjtLog=fdjt.Log, fdjtString=fdjt.String;
-    var fdjtTime=fdjt.Time, $ID=fdjt.ID, fdjtAsync=fdjt.Async;
-    var RefDB=fdjt.RefDB, fdjtState=fdjt.State, fdjtAjax=fdjt.Ajax;
+    var fdjtDOM=fdjt.DOM, fdjtLog=fdjt.Log;
+    var fdjtTime=fdjt.Time, fdjtAsync=fdjt.Async;
+    var fdjtState=fdjt.State, fdjtAjax=fdjt.Ajax;
 
-    var dropClass=fdjtDOM.dropClass, addClass=fdjtDOM.addClass;
-    
     var mB=metaBook, Trace=mB.Trace;
 
-    var getQuery=fdjtState.getQuery;
-    var getHash=fdjtState.getHash;
-
-    var getLocal=fdjtState.getLocal;
-    var saveLocal=metaBook.saveLocal;
     var need_mycopyid=[];
 
     function gotMyCopyId(string){
