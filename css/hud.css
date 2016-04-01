@@ -357,12 +357,11 @@ html._MOUSE img.hudbutton:hover, img.hudbutton.tapholdtarget {
 #METABOOKFOOT img.hudbutton[hudmode="statictoc"],
 #METABOOKFOOT img.hudbutton[alt="save gloss"] {
     display: none; }
-#METABOOKHUD.addgloss #METABOOKFOOT img.hudbutton {
-    opacity: 0.8;}
 #METABOOKHUD.addgloss #METABOOKFOOT img.hudbutton[alt="save gloss"],
-body.mbSKIMMING #METABOOKHUD.searchresults
-   img.hudbutton[hudmode="searchresults"],
-body.mbSKIMMING #METABOOKHUD.statictoc img.hudbutton[hudmode="statictoc"] {
+.mbSKIMMING #METABOOKHUD.searchresults img.hudbutton[hudmode="searchresults"],
+.mbSKIMMING #METABOOKHUD.allglosses img.hudbutton[hudmode="allglosses"],
+.mbSKIMMING #METABOOKHUD.statictoc img.hudbutton[hudmode="statictoc"] {
+    opacity: 0.8; z-index: 50;
     display: inline-block; }
 #METABOOKHUD.addgloss img.hudbutton[hudmode="allglosses"],
 body.mbSKIMMING #METABOOKHUD.searchresults img.hudbutton[hudmode="allglosses"],
