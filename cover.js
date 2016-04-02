@@ -228,10 +228,15 @@
         if ((existing_cover)&&(existing_cover.parentNode===frame))
             frame.replaceChild(cover,existing_cover);
         else {
-            frame.appendChild(cover); 
+            frame.appendChild(cover);
             if (existing_cover)
                 existing_cover.parentNode.removeChild(existing_cover);}
         
+        var hidden_refuri=fdjt.ID("BHLOGINREFURI");
+        var hidden_docid=fdjt.ID("BHLOGINDOCID");
+        if ((hidden_refuri)&&(mB.refuri)) hidden_refuri.value=mB.refuri;
+        if ((hidden_docid)&&(mB.docid)) hidden_docid.value=mB.docid;
+
         metaBook.showCover();
         
         if (Trace.startup>1)

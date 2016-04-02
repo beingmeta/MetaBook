@@ -465,6 +465,8 @@ metaBook.setMode=
                 else if (typeof mode !== 'string') 
                     throw new Error('mode arg not a string');
                 else if (mode.search(metaBookCoverModes)>=0) {
+                    if (mode==='login')
+                        addClass(document.documentElement,'_SHOWLOGIN');
                     if (mode!==mB.mode) {
                         $ID("METABOOKCOVER").className=mode;
                         metaBook.mode=mode;

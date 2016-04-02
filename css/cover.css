@@ -174,8 +174,7 @@ html._NOUSER #METABOOKCOVER > #METABOOKCOVERCONTROLS {
 
 #METABOOKCOVER div.loginbox {
     white-space: nowrap;
-    margin: 0; padding: 0;
-    height: 0;}
+    margin: 0; padding: 0;}
 #METABOOKCOVER div.loginbox button { padding: 1px;}
 #METABOOKCOVER div.loginbox button > img { height: 100%; width: auto;}
 div.loginbox form > button, div.loginbox form > input[TYPE="TEXT"],
@@ -212,6 +211,7 @@ html._USER #METABOOKCOVER div.userbox {
 #METABOOKCOVER.console div.flap#METABOOKCONSOLE,
 #METABOOKCOVER.settings div.flap#METABOOKSETTINGS, 
 #METABOOKCOVER.layers div.flap#METABOOKLAYERS,
+#METABOOKCOVER.login div.flap#METABOOKLOGIN,
 #METABOOKCOVER.bookcover div.flap#METABOOKCOVERPAGE, /* Legacy */
 #METABOOKCOVER.bookcover div.flap#METABOOKBOOKCOVER,
 #METABOOKCOVER.aboutbook div.flap#METABOOKBLURB,
@@ -245,7 +245,11 @@ html._USER span.control[data-mode='layers'] .whenloggedin {
     display: inline;}
 html._USER span.control[data-mode='layers'] .notloggedin {
     display: none;}
-html._USER._CONN .control[data-mode='login'] { display: none;}
+#METABOOKCOVER .control[data-mode='login'] { display: none;}
+html._SHOWLOGIN #METABOOKCOVER .control[data-mode='login'] { 
+    display: inline;}
+html._SHOWLOGIN._USER #METABOOKCOVER .control[data-mode='login'] { 
+    display: none;}
 
 #METABOOKCOVERCONTROLS.nobookcover .control[data-mode='bookcover'],
 #METABOOKCOVERCONTROLS.nocoverpage .control[data-mode='coverpage'],
@@ -271,7 +275,7 @@ html._USER._CONN .control[data-mode='login'] { display: none;}
     border-top-left-radius: 0; border-top-right-radius: 0;
     border-bottom-left-radius: 1.5em; border-bottom-right-radius: 1.5em;}
 
-#METABOOKCOVER div.flap#METABOOKLAYERS iframe#BOOKHUBAPP {
+#METABOOKCOVER div.flap iframe {
     height: 100%; width: 100%; margin: 0; padding: 0;
     background-color: ivory;}
 
