@@ -154,9 +154,13 @@ metaBook.Startup=
             metaBook.devinfo=fdjtState.versionInfo();
             
             var docid=fdjtState.getCookie("MB:DOCID",false);
+            var refuri=fdjtState.getCookie("MB:REFURI",false);
             if (docid) {
                 // We could do a lot more here
                 metaBook.docid=docid;}
+            if (refuri) {
+                metaBook.refuri=refuri;
+                mB.createDatabases(refuri);}
 
             var done=Timeline.app_init_done=app_init_done=fdjtTime();
 
@@ -821,6 +825,7 @@ metaBook.Startup=
             if (docref) metaBook.docid=metaBook.docref=docid=docref;
             else metaBook.docid=docid=docuri;
             fdjtState.setCookie("MB:DOCID",docid,3600*24*42,false,false,true);
+            fdjtState.setCookie("MB:REFURI",refuri,3600*24*42,false,false,true);
             saveLocal("mB("+docid+")",docuri);
 
             if (docids.indexOf(docid)<0) {

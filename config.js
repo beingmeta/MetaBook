@@ -135,7 +135,9 @@
         saved_config=saved;}
     metaBook.saveConfig=saveConfig;
 
+    var config_initialized=false;
     function initConfig(){
+        if (config_initialized) return; else config_initialized=true;
         var setting, value, source, started=fdjtTime(); // changed=false;
         var config=getLocal("mB("+mB.docid+").config",true)||
             fdjtState.getSession("mB("+mB.docid+").config",

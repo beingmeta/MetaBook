@@ -144,7 +144,6 @@
         var i=0, len=waiting.length; while (i<len)
             waiting[i++](ex);}
 
-    
     if ((indexedDB)&&(!(mB.noidb))) {
         var req=indexedDB.open("metaBook",1);
         req.onerror=function(event){
@@ -171,18 +170,9 @@
 
     /* Initialize the runtime for the core databases */
 
-    function initDB() {
-        if (Trace.start>1) fdjtLog("Initializing DB");
-        var refuri=(metaBook.refuri||document.location.href);
-        if (refuri.indexOf('#')>0) refuri=refuri.slice(0,refuri.indexOf('#'));
-
-        metaBook.setupGlossData();
-
-        var taglist=metaBook.taglist||$ID("METABOOKTAGLIST");
-        if (!(taglist)) {
-            taglist=metaBook.taglist=fdjt.DOM("datalist#METABOOKTAGLIST");
-            document.body.appendChild(taglist);}
-        
+    var databases_created=false;
+    function createDatabases(refuri) {
+        if (databases_created) return; else databases_created=true;
         metaBook.docdb=new RefDB(
             refuri+"#",{indices: ["frag","head","heads",
                                   "tags","tags*",
@@ -193,8 +183,88 @@
                                   "^tags*","~^tags*","*^tags*","**^tags*"]});
         metaBook.docdb.slots=["head","heads"];
         
-        var knodeToOption=Knodule.knodeToOption;
+        metaBook.BRICO=new Knodule("BRICO");
+        metaBook.BRICO.addAlias(":@1/");
+        metaBook.BRICO.addAlias("@1/");
+        
+        var glosses_init={
+            indices: ["frag","maker","outlets",
+                      "tags","*tags","**tags",
+                      "tags*","*tags*","**tags*"]};
+        var glossdbname="glosses@"+refuri;
+        var glossdb=metaBook.glossdb=new RefDB(glossdbname,glosses_init); {
+            glossdb.absrefs=true;
+            glossdb.dbname="glosses";
+            glossdb.addAlias("glossdb");
+            glossdb.addAlias("-UUIDTYPE=61");
+            glossdb.addAlias(":@31055/");
+            glossdb.addAlias("@31055/");}
 
+        function Gloss(){return Ref.apply(this,arguments);}
+        Gloss.prototype=new Ref();
+        
+        var exportTagSlot=Knodule.exportTagSlot;
+        var tag_export_rules={
+            "*tags": exportTagSlot, "**tags": exportTagSlot,
+            "~tags": exportTagSlot, "~~tags": exportTagSlot,
+            "tags": exportTagSlot,
+            "*tags*": exportTagSlot, "**tags*": exportTagSlot,
+            "~tags*": exportTagSlot, "~~tags*": exportTagSlot,
+            "tags*": exportTagSlot,
+            "*tags**": exportTagSlot, "**tags**": exportTagSlot,
+            "~tags**": exportTagSlot, "~~tags**": exportTagSlot,
+            "tags**": exportTagSlot};
+        metaBook.tag_export_rules=tag_export_rules;
+        metaBook.tag_import_rules=tag_export_rules;
+
+        // Use this when generating external summaries.  In particular,
+        //  this recovers all of the separate weighted tag slots into
+        //  one tags slot which uses prefixed strings to indicate weights.
+        Gloss.prototype.ExportExternal=function exportGloss(){
+            return Ref.Export.call(this,tag_export_rules);};
+
+        metaBook.glossdb.refclass=Gloss;
+
+        var sourcedbname="sources@"+refuri;
+        var sourcedb=metaBook.sourcedb=new RefDB(sourcedbname);{
+            sourcedb.absrefs=true;
+            sourcedb.dbname="sources";
+            sourcedb.oidrefs=true;
+            sourcedb.addAlias("@1961/");
+            sourcedb.addAlias(":@1961/");            
+            sourcedb.addAlias("@acc/");
+            sourcedb.addAlias(":@acc/");            
+            sourcedb.onLoad(function initSource(item) {
+                if ((item.pic)&&(typeof item.pic === "string")&&
+                    (item.pic.search("data:")===0)) {
+                    item._pic=fdjtDOM.data2URL(item.pic);}});
+            sourcedb.forDOM=function(source){
+                var spec="span.source"+((source.kind)?".":"")+
+                    ((source.kind)?(source.kind.slice(1).toLowerCase()):"");
+                var name=source.name||source.oid||source.uuid||source.uuid;
+                var span=fdjtDOM(spec,name);
+                if (source.about) span.title=source.about;
+                return span;};}
+    }
+    mB.createDatabases=createDatabases;
+        
+    var db_initialized=false;
+    function initDB() {
+        if (db_initialized) return; else db_initialized=true;
+        if (Trace.start>1) fdjtLog("Initializing DB");
+        var refuri=(metaBook.refuri||document.location.href);
+        if (refuri.indexOf('#')>0) refuri=refuri.slice(0,refuri.indexOf('#'));
+
+        createDatabases(refuri);
+
+        metaBook.setupGlossData();
+
+        var taglist=metaBook.taglist||$ID("METABOOKTAGLIST");
+        if (!(taglist)) {
+            taglist=metaBook.taglist=fdjt.DOM("datalist#METABOOKTAGLIST");
+            document.body.appendChild(taglist);}
+        
+        var knodeToOption=Knodule.knodeToOption;
 
         var cachelink=/^https:\/\/glossdata.(sbooks\.net|metabooks\.net|beingmeta\.com|bookhub\.io)\//;
         mB.cachelink=cachelink;
@@ -206,22 +276,9 @@
             refuri;
         metaBook.knodule=new Knodule(knodule_name);
         Knodule.current=metaBook.knodule;
-        metaBook.BRICO=new Knodule("BRICO");
-        metaBook.BRICO.addAlias(":@1/");
-        metaBook.BRICO.addAlias("@1/");
-        var glosses_init={
-            indices: ["frag","maker","outlets",
-                      "tags","*tags","**tags",
-                      "tags*","*tags*","**tags*"]};
+
         var stdspace=fdjtString.stdspace;
-        var glossdbname="glosses@"+metaBook.refuri;
-        var glossdb=metaBook.glossdb=new RefDB(glossdbname,glosses_init); {
-            glossdb.absrefs=true;
-            glossdb.dbname="glosses";
-            glossdb.addAlias("glossdb");
-            glossdb.addAlias("-UUIDTYPE=61");
-            glossdb.addAlias(":@31055/");
-            glossdb.addAlias("@31055/");
+        var glossdb=metaBook.glossdb; {
             glossdb.onLoad(function initGloss(item) {
                 var info=metaBook.docinfo[item.frag];
                 if (!(info)) {
@@ -294,52 +351,6 @@
                     getDB().then(function(db){glossdb.storage=db;});
                 else glossdb.storage=localStorage;}}
         
-        function Gloss(){return Ref.apply(this,arguments);}
-        Gloss.prototype=new Ref();
-        
-        var exportTagSlot=Knodule.exportTagSlot;
-        var tag_export_rules={
-            "*tags": exportTagSlot, "**tags": exportTagSlot,
-            "~tags": exportTagSlot, "~~tags": exportTagSlot,
-            "tags": exportTagSlot,
-            "*tags*": exportTagSlot, "**tags*": exportTagSlot,
-            "~tags*": exportTagSlot, "~~tags*": exportTagSlot,
-            "tags*": exportTagSlot,
-            "*tags**": exportTagSlot, "**tags**": exportTagSlot,
-            "~tags**": exportTagSlot, "~~tags**": exportTagSlot,
-            "tags**": exportTagSlot};
-        metaBook.tag_export_rules=tag_export_rules;
-        metaBook.tag_import_rules=tag_export_rules;
-
-        // Use this when generating external summaries.  In particular,
-        //  this recovers all of the separate weighted tag slots into
-        //  one tags slot which uses prefixed strings to indicate weights.
-        Gloss.prototype.ExportExternal=function exportGloss(){
-            return Ref.Export.call(this,tag_export_rules);};
-
-        metaBook.glossdb.refclass=Gloss;
-        
-        var sourcedbname="sources@"+metaBook.refuri;
-        var sourcedb=metaBook.sourcedb=new RefDB(sourcedbname);{
-            sourcedb.absrefs=true;
-            sourcedb.dbname="sources";
-            sourcedb.oidrefs=true;
-            sourcedb.addAlias("@1961/");
-            sourcedb.addAlias(":@1961/");            
-            sourcedb.addAlias("@acc/");
-            sourcedb.addAlias(":@acc/");            
-            sourcedb.onLoad(function initSource(item) {
-                if ((item.pic)&&(typeof item.pic === "string")&&
-                    (item.pic.search("data:")===0)) {
-                    item._pic=fdjtDOM.data2URL(item.pic);}});
-            sourcedb.forDOM=function(source){
-                var spec="span.source"+((source.kind)?".":"")+
-                    ((source.kind)?(source.kind.slice(1).toLowerCase()):"");
-                var name=source.name||source.oid||source.uuid||source.uuid;
-                var span=fdjtDOM(spec,name);
-                if (source.about) span.title=source.about;
-                return span;};}
-
         metaBook.queued=
             ((metaBook.cacheglosses)&&
              (getLocal("mB("+metaBook.docid+").queued",true)))||[];
