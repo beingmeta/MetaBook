@@ -65,7 +65,7 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
 
 #METABOOKCOVER div.flap {
     position: absolute;
-    top: 60px; bottom: 120px; left: 10%; right: 10%;
+    top: 3vw; top: 36px; bottom: 120px; left: 10%; right: 10%;
     box-sizing: border-box; padding: 1em; padding-top: 2px;
     height: auto; width: auto; overflow: hidden;
     z-index: -50; opacity: 0.0;
@@ -81,19 +81,19 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
     height: 100%; width: 100%;}
 
 #METABOOKCOVERMESSAGE {
-    position: absolute; white-space: nowrap;
-    font-style: italic; font-size: 24px; font-size: 2rem;
-    width: 80%; left: 10%; right: 10%; border: 0; 
-    top: 0; bottom: auto;
+    position: absolute; 
+    width: 100%; left: 0; right: 0; border: 0; 
+    top: 0; height: 36px; height: 3vw; bottom: auto;
+    font-size: 36px; font-size: 3vw;
+    font-variant: small-caps; white-space: nowrap;
     text-align: center; overflow: visible; 
-    background-color: black; color: silver;
+    background-color: black; 
     cursor: pointer; display: block; opacity: 1.0;
     z-index: 50;}
-#METABOOKCOVER.coverpage #METABOOKCOVERMESSAGE {
-    width: 100%; left: 0; right: 0; z-index: 500;
-    bottom: 40px; height: 60px; top: auto;}
-body.mbREADY #METABOOKCOVERMESSAGE { display: none;}
-body.mbREADY.mbLAYOUT #METABOOKCOVERMESSAGE { display: block;}
+#METABOOKCOVERMESSAGE > div {
+    font-weight: bold; line-height: 1.2ex;
+    margin-left: 10%; margin-right: 10%; width: 80%;
+    color: silver;}
 
 #METABOOKCOVERCONTROLS {
     white-space: nowrap;
@@ -138,7 +138,7 @@ html._NOUSER #METABOOKCOVER div.userbox {display: none;}
     width: 100%;}
 
 html._NOUSER #METABOOKCOVER div.flap {
-    top: 65px; bottom: 150px; }
+    bottom: 150px; }
 #METABOOKCOVER div.userbox { 
     height: 40px; padding-top: 1px; 
     display: none;}
@@ -221,10 +221,6 @@ html._USER #METABOOKCOVER div.userbox {
 body.mbREADY #METABOOKCOVER.bookcover #METABOOKOPENTAB,
 body.mbREADY #METABOOKCOVER.coverpage #METABOOKOPENTAB {
   display: none;}
-#METABOOKCOVER.coverpage div.flap#METABOOKCOVERPAGE,
-#METABOOKCOVER.bookcover div.flap#METABOOKCOVERPAGE {
-   top: 0; bottom: 100px;}
-
 
 #METABOOKCOVER.bookcover .control[data-mode='coverpage'],
 #METABOOKCOVER.coverpage .control[data-mode='coverpage'],
@@ -283,7 +279,7 @@ html._USER._CONN .control[data-mode='login'] { display: none;}
 
 div.flap#METABOOKCOVERPAGE { padding: 0; }
 #METABOOKCOVERPAGE img {
-    max-width: 95%; height: 95%; width: auto;}
+    max-width: 95%; height: 100%; width: auto;}
 
 /* Help */
 
@@ -480,8 +476,7 @@ body.mbBUSY #METABOOKCOVERMESSAGE div.message#METABOOKREADYMESSAGE {
         margin-left: 1ex;}
 
     #METABOOKCOVER div.flap {
-        left: 5%; right: 5%;
-        top: 40px; bottom: 100px;
+        left: 5%; right: 5%; bottom: 100px;
         padding: 2px 1ex 1ex 2px;}
 
 }

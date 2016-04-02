@@ -85,9 +85,10 @@ metaBook.Paginate=
 
         function layoutMessage(string,pct){
             var pb=$ID("METABOOKLAYOUTMESSAGE");
-            fdjt.UI.ProgressBar.setMessage(pb,string);
-            if (typeof pct==="number")
-                fdjt.UI.ProgressBar.setProgress(pb,pct);}
+            if (pb) {
+                fdjt.UI.ProgressBar.setMessage(pb,string);
+                if (typeof pct==="number")
+                    fdjt.UI.ProgressBar.setProgress(pb,pct);}}
 
         /* Reporting progress, debugging */
         function layout_progress(info){

@@ -701,10 +701,11 @@ metaBook.Startup=
                     addClass("METABOOKSPLASHPAGE","startupdone");},
                            3000);
             var rmsg=$ID("METABOOKREADYMESSAGE");
-            if (!($ID("METABOOKOPENTAB"))) {
-                rmsg.innerHTML="Open";
-                rmsg.id="METABOOKOPENTAB";}
-            else rmsg.style.display='none';
+            if (rmsg) {
+                if (!($ID("METABOOKOPENTAB"))) {
+                    rmsg.innerHTML="Open";
+                    rmsg.id="METABOOKOPENTAB";}
+                else rmsg.style.display='none';}
             if (mode) {}
             else if (getQuery("startmode"))
                 mode=getQuery("startmode");
