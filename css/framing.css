@@ -349,7 +349,7 @@ body.mbMEDIA #METABOOKMEDIA iframe {
    pages or not. */
 #METABOOKBODY {
     position: fixed; overflow: visible;
-    left: 0; right: 0; top: 0; bottom: 0;} /* z-index: -50; */
+    left: 0; right: 0; top: 0px; bottom: 50px;} /* z-index: -50; */
 #METABOOKBODY { background-color: transparent; color: black; }
 
 .metabookcontent { background-color: white; color: #444; }
@@ -366,7 +366,7 @@ body.mbMEDIA #METABOOKMEDIA iframe {
     position: absolute; overflow: visible;
     padding: 0; margin: 0;
     left: 50px; right: 50px;
-    top: 50px; bottom: 50px;
+    top: 50px; bottom: 0px;
     border: solid transparent 3px;
     border-radius: 18px;
     z-index: 50;}
