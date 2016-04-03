@@ -322,7 +322,7 @@ metaBook.Startup=
                 (fdjtState.getCookie("MYCOPYID"))||
                 ((mB.docid)&&(mB.readLocal("mB("+mB.docid+").mycopyid")));
             // Should check signature and expiration
-            mB.gotMyCopyId(mycopyid);}
+            mB.setMyCopyId(mycopyid);}
 
         function setupApp(){
 
@@ -735,7 +735,7 @@ metaBook.Startup=
             if ((msg=getCookie("APPMESSAGE"))) {
                 fdjtUI.alertFor(10,msg);
                 fdjtState.clearCookie("APPMESSAGE","bookhub.io","/");}
-            if ((!(mode))&&(location.hash)&&(metaBook.state)&&
+            if ((!(mode))&&(mB.user)&&(location.hash)&&(metaBook.state)&&
                 (location.hash.slice(1)!==metaBook.state.target))
                 metaBook.hideCover();
             else if ((!(mode))&&(metaBook.user)) {

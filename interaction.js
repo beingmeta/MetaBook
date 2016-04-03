@@ -1849,7 +1849,11 @@
     function clearOffline(evt){
         evt=evt||window.event; cancel(evt);
         if (Trace.gestures) fdjtLog("clearOffline %o",evt);
-        metaBook.clearOffline();}
+        metaBook.clearOffline();
+        fdjt.ID("METABOOKSETTINGSMESSAGE").innerHTML=
+            "<strong>Poof!</strong> Local copies of your "+
+            "personalizations (glosses, settings, etc) for this "+
+            "book have been erased.";}
     function consolefn(evt){
         evt=evt||window.event; metaBook.consolefn(evt);}
 

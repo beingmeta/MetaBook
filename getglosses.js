@@ -49,7 +49,7 @@
     var getLocal=fdjtState.getLocal;
     var saveLocal=metaBook.saveLocal;
 
-    var gotMyCopyId=mB.gotMyCopyId;
+    var setMyCopyId=mB.setMyCopyId;
 
     /* Loading meta info (user, glosses, etc) */
 
@@ -60,8 +60,8 @@
         if (window._metabook_loadinfo!==info)
             metaBook.setConnected(true);
         if (info.sticky) metaBook.setPersist(true);
-        if (info.mycopyid) gotMyCopyId(info.mycopyid);
-        else if (info.mycopy) gotMyCopyId(info.mycopy);
+        if (info.mycopyid) setMyCopyId(info.mycopyid);
+        else if (info.mycopy) setMyCopyId(info.mycopy);
         else {}
         if (!(metaBook.user)) {
             if (info.userinfo)
@@ -89,7 +89,7 @@
                 (info.mycopyid!==metaBook.mycopyid))
                 fdjtLog.warn("Mismatched mycopyids");
             if (info.mycopyid!==metaBook.mycopyid) {
-                gotMyCopyId(info.mycopyid);
+                setMyCopyId(info.mycopyid);
                 if (mB.iosAuthKludge) mB.iosAuthKludge();}}
         if (!(metaBook.docinfo)) { /* Scan not done */
             metaBook.scandone=function(){loadInfo(info);};
@@ -133,7 +133,7 @@
         if (info.sources) gotInfo("sources",info.sources,keepdata);
         if (info.outlets) gotInfo("outlets",info.outlets,keepdata);
         if (info.layers) gotInfo("layers",info.layers,keepdata);
-        if (info.mycopyid) gotMyCopyId(info.mycopyid);
+        if (info.mycopyid) setMyCopyId(info.mycopyid);
         metaBook.addOutlets2UI(info.outlets);
         if ((info.sync)&&((!(metaBook.sync))||(info.sync>=metaBook.sync))) {
             metaBook.setSync(info.sync);}

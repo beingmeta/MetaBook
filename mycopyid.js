@@ -37,42 +37,39 @@
 (function(){
     "use strict";
     var fdjtDOM=fdjt.DOM, fdjtLog=fdjt.Log;
-    var fdjtTime=fdjt.Time, fdjtAsync=fdjt.Async;
-    var fdjtState=fdjt.State, fdjtAjax=fdjt.Ajax;
+    var fdjtTime=fdjt.Time, fdjtAjax=fdjt.Ajax;
 
     var mB=metaBook, Trace=mB.Trace;
 
     var need_mycopyid=[];
 
-    function gotMyCopyId(string){
-        function mycopyidupdate(resolve){
-            if (!(string)) return resolve(string);
-            if (string===mB.mycopyid) return resolve(string);
-            var tickmatch=/:x(\d+)/.exec(string);
-            var tick=(tickmatch)&&(tickmatch.length>1)&&(parseInt(tickmatch[1]));
-            var expires=(tick)&&(new Date(tick*1000));
-            if ((Trace.glosses>1)||(Trace.glossdata))
-                fdjtLog("gotMyCopyId: %s/%s, cur=%s/%s",
-                        string,expires,metaBook.mycopyid,metaBook.mycopyid_expires);
-            if (!(expires)) {
-                metaBook.umycopyid=string;
-                metaBook.saveLocal("umycopyid("+mB.docuri+")",string);}
-            if ((!(metaBook.mycopyid))||
-                ((!(metaBook.mycopyid_expires))&&(expires))||
-                ((metaBook.mycopyid_expires)&&(expires)&&
-                 (expires>metaBook.mycopyid_expires))) {
-                metaBook.mycopyid=string; metaBook.mycopyid_expires=expires;
-                metaBook.saveLocal("mycopyid("+mB.docuri+")",string);
-                if (mB.iosAuthKludge) mB.iosAuthKludge();}
-            else {}
-            if ((need_mycopyid)&&(need_mycopyid.length)) {
-                var needs=need_mycopyid; need_mycopyid=[];
-                return fdjtAsync.slowmap(function(fn){fn(string);},needs).
-                    then(function(){resolve(string);});}
-            else return resolve(string);}
-        return new Promise(mycopyidupdate);}
-    metaBook.gotMyCopyId=gotMyCopyId;
-
+    function setMyCopyId(string){
+        if (!(string)) return;
+        if (mB.mycopyid===string) return;
+        var parts=string.split('.'), payload=false, doc;
+        try {
+            payload=JSON.parse(atob(parts[1]));}
+        catch (ex) {payload=false;}
+        if (!(payload)) {
+            fdjtLog.warn("Bad mycopyid JWT %s",string);
+            return;}
+        else if ((doc=payload.doc)) {
+            doc=(doc.replace(/^:/,"")).toLowerCase();
+            if (doc!==mB.docid) {
+                fdjtLog.warn("mycopyid for wrong title %s; doc=%s, payload=%j",
+                             doc,mB.docid,payload);
+                return;}}
+        else {}
+        var expstring=payload.exp;
+        var expires=(expstring)&&(new Date(expstring));
+        mB.mycopyid=string;
+        mB.mycopyid_payload=payload;
+        mB.mycopyid_expires=expires;
+        var waiting=need_mycopyid; need_mycopyid=[];
+        var i=0, lim=waiting.length; while (i<lim) {
+            waiting[i++](string);}}
+    metaBook.setMyCopyId=setMyCopyId;
+            
     var good_origin=/https:\/\/[^\/]+.(bookhub\.io|metabooks\.net)/;
     function myCopyMessage(evt){
         var origin=evt.origin, data=evt.data;
@@ -85,7 +82,7 @@
             return;}
         if (data.search(/^mycopyid=/)===0) {
             var mycopyid=data.slice(9);
-            gotMyCopyId(mycopyid);
+            setMyCopyId(mycopyid);
             return;}
         else return;}
     fdjtDOM.addListener(window,"message",myCopyMessage);
@@ -93,23 +90,26 @@
     var getting_mycopyid=false;
 
     function getMyCopyId(){
-        function updatemycopyid(resolved){
-            var now=new Date();
-            if ((mB.mycopyid)&&(mB.mycopyid_expires>now))
-                return resolved(mB.mycopyid);
-            else if (!(getting_mycopyid)) getFreshMyCopyId();
-            need_mycopyid.push(resolved);}
-        return new Promise(updatemycopyid);}
+        var now=new Date();
+        if ((mB.mycopyid)&&
+            ((!(mB.mycopyid_expires))||(now>mB.mycopyid_expires)))
+            return Promise.resolve(mB.mycopyid);
+        else return fetchMyCopyId();}
     metaBook.getMyCopyId=getMyCopyId;
 
-    function getFreshMyCopyId(){
-        if (getting_mycopyid) return;
-        getting_mycopyid=fdjtTime();
-        fdjtAjax.fetchText(
-            "https://auth.bookhub.io/getmycopyid?DOC="+mB.docref).
-            then(function(mycopyid){
-                gotMyCopyId(mycopyid).then(
-                    function(){getting_mycopyid=false;});});}
+    function fetchMyCopyId(){
+        function fetching_mycopyid(resolve,reject){
+            need_mycopyid.push(resolve);
+            if (getting_mycopyid) return;
+            getting_mycopyid=fdjtTime();
+            fdjtAjax.fetchText(
+                "https://auth.bookhub.io/getmycopyid?DOC="+mB.docref).
+                then(function(mycopyid,alt){
+                    if (typeof mycopyid === 'undefined') 
+                        return reject(alt);
+                    getting_mycopyid=fdjtTime();
+                    setMyCopyId(mycopyid);});}
+        return new Promise(fetching_mycopyid);}
 
 })();
 

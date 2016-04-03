@@ -183,7 +183,7 @@ metaBook.setMode=
                 var origin=evt.origin;
                 if (Trace.messages)
                     fdjtLog("Got a message from %s with payload %j",origin,evt.data);
-                if (origin.search(/https?:\/\/[^\/]+.(bookhub\.io|metabooks\.net|sbooks\.net)/)!==0) {
+                if (origin.search(/https:\/\/[^\/]+.(bookhub\.io|metabooks\.net)/)!==0) {
                     fdjtLog.warn("Rejecting insecure message from %s: %s",
                                  origin,evt.data);
                     return;}
@@ -199,7 +199,7 @@ metaBook.setMode=
                     if (!(mB.user)) {
                         metaBook.userinfo=JSON.parse(evt.data.slice(8));
                         mB.loginUser(mB.userinfo);
-                        setMode("welcome");
+                        if (mB.mode==='login') setMode("cover");
                         mB.userSetup();}}
                 else if (evt.data.updateglosses) {
                     mB.updateInfo();}
@@ -212,7 +212,7 @@ metaBook.setMode=
                     if (!(mB.user)) {
                         metaBook.userinfo=evt.data.userinfo;
                         mB.loginUser(mB.userinfo);
-                        setMode("welcome");
+                        if (mB.mode==='login') setMode("cover");
                         mB.userSetup();}}
                 else if (evt.data)
                     fdjtDOM("METABOOKINTRO",evt.data);
@@ -367,7 +367,8 @@ metaBook.setMode=
                     dropClass(document.body,"mbSKIMEND");
                     addClass(document.body,"mbNOMODE");
                     metaBook.skimming=false;
-                    metaBook.mode=false;}
+                    if ((mB.mode)&&(mB.mode.search(metaBookCoverModes)<0))
+                        mB.mode=false;}
                 dropClass(document.body,"hudup");
                 dropClass(document.body,"openhud");
                 mB.focusBody();}}
@@ -407,7 +408,7 @@ metaBook.setMode=
         var metabookHeartModes=/\b((statictoc)|(search)|(refinesearch)|(expandsearch)|(searchresults)|(allglosses)|(showaside)|(glossaddtag)|(glossaddtag)|(glossaddoutlet)|(glossdetail))\b/g;
         var metabookHeadModes=/\b((search)|(refinesearch)|(expandsearch)|(searchresults)|(allglosses)|(addgloss)|(shownote))\b/g;
         var metaBookPopModes=/\b((glossdetail))\b/g;
-        var metaBookCoverModes=/\b((welcome)|(help)|(layers)|(login)|(settings)|(cover)|(aboutsbooks)|(aboutmetabooks)|(console)|(aboutbook)|(titlepage))\b/g;
+        var metaBookCoverModes=/\b((cover)|(help)|(layers)|(login)|(settings)|(cover)|(aboutsbooks)|(aboutmetabooks)|(console)|(aboutbook)|(titlepage))\b/g;
         var metaBookSearchModes=/((refinesearch)|(searchresults)|(expandsearch))/;
         metaBook.searchModes=metaBookSearchModes;
         var metabook_mode_foci=
@@ -465,10 +466,13 @@ metaBook.setMode=
                 else if (typeof mode !== 'string') 
                     throw new Error('mode arg not a string');
                 else if (mode.search(metaBookCoverModes)>=0) {
+                    var cover=fdjt.ID("METABOOKCOVER");
                     if (mode==='login')
                         addClass(document.documentElement,'_SHOWLOGIN');
+                    if (mode==="cover")
+                        mode=cover.getAttribute("data-defaultclass")||"help";
                     if (mode!==mB.mode) {
-                        $ID("METABOOKCOVER").className=mode;
+                        cover.className=mode;
                         metaBook.mode=mode;
                         metaBook.modechange=fdjtTime();}
                     if (mode==="console") fdjtLog.update();

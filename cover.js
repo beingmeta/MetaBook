@@ -232,10 +232,12 @@
             if (existing_cover)
                 existing_cover.parentNode.removeChild(existing_cover);}
         
-        var hidden_refuri=fdjt.ID("BHLOGINREFURI");
-        var hidden_docid=fdjt.ID("BHLOGINDOCID");
+        var hidden_refuri=fdjt.ID("BHLOGIN_REFURI");
+        var hidden_docid=fdjt.ID("BHLOGIN_DOCID");
+        var hidden_origin=fdjt.ID("BHLOGIN_ORIGIN");
         if ((hidden_refuri)&&(mB.refuri)) hidden_refuri.value=mB.refuri;
         if ((hidden_docid)&&(mB.docid)) hidden_docid.value=mB.docid;
+        if (hidden_origin) hidden_origin.value=location.origin;
 
         metaBook.showCover();
         

@@ -37,12 +37,17 @@ body form.metabooksettings h1 {
 form.metabooksettings > h1 + div.fontsizes {
     margin-top: 0;}
 
+#METABOOKSETTINGSMESSAGE, h1 #METABOOKSETTINGSMESSAGE {
+    font-weight: normal; }
+#METABOOKSETTINGSMESSAGE strong {
+    font-size: 150%; color: purple; padding-right: 1ex;}
+
 form.metabooksettings {font-size: 1rem;}
 
 form.metabooksettings button, form.metabooksettings .button {
     font-size: 1.2rem; cursor: pointer;}
 form.metabooksettings > div button {
-    white-space: nowrap; width: 6em;
+    white-space: nowrap; width: 6em; margin-top: 0.25ex;
     text-align: left;}
 form.metabooksettings button img {
     height: 1.5ex; width: auto;
