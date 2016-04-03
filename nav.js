@@ -305,7 +305,7 @@
             mB.docinfo[target.getAttribute("data-baseid")||target.id];
         if ((location)&&(info)&&(info.ends_at)&&(info.starts_at)&&
             ((location>(info.ends_at))||(location<(info.starts_at))))
-            // Why does this happen???
+            // Don't use the location if it's not in the node
             location=false;
         var page=((metaBook.bypage)&&(metaBook.layout)&&
                   (metaBook.getPage(target,location)));
