@@ -424,7 +424,7 @@ metaBook.Startup=
             var i=0; var lim=tracing.length;
             while (i<lim) {
                 var trace_spec=tracing[i++];
-                var colon=trace_spec.indexOf(":");
+                var colon=trace_spec.indexOf(";");
                 if (colon<0) {
                     if (typeof Trace[trace_spec] === 'number')
                         Trace[trace_spec]=1;
