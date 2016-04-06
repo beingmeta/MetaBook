@@ -317,7 +317,7 @@
                     target,((location)?(location):("none")),page,pageno,arg);
         if (!(target)) {
             if (metaBook.layout instanceof fdjt.CodexLayout)
-                metaBook.GoToPage(arg,caller,savestate);
+                metaBook.GoToPage(page||arg,caller,savestate);
             else if (arg.nodeType) {
                 var scan=arg;
                 while (scan) {
@@ -362,6 +362,9 @@
             location: location,page: pageno,npages: metaBook.pagecount});
         if (page)
             metaBook.GoToPage(page,caller||"metabookGoTo",false,true);
+        else if ((mB.layout)&&(mB.layout instanceof CodexLayout)) {
+            if (!(mB.layout.done)) {
+                mB.layout.target={target: targetid||target,location: location};}}
         else {
             if (metaBook.previewing)
                 metaBook.stopPreview(((caller)?("goto/"+caller):("goto")),target);

@@ -285,17 +285,17 @@ metaBook.Paginate=
                 var prevpage=
                     (((pagenum)&&(pagenum>1))&&(pages[pagenum-2]));
                 if (lastid) page.setAttribute("data-lastid",lastid);
-                if ((!(page.getAttribute("data-sbookloc")))&&(prevpage)) {
+                if ((!(page.getAttribute("data-mbloc")))&&(prevpage)) {
                     var prevlast=prevpage.getAttribute("data-lastid");
                     var lastinfo=((prevlast)&&(docinfo[prevlast]));
                     if (lastinfo) {
                         curloc=lastinfo.starts_at;
-                        page.setAttribute("data-sbookloc",lastinfo.ends_at);}
+                        page.setAttribute("data-mbloc",lastinfo.ends_at);}
                     else {
-                        var prevoff=prevpage.getAttribute("data-sbookloc");
+                        var prevoff=prevpage.getAttribute("data-mbloc");
                         if (prevoff)
-                            page.setAttribute("data-sbookloc",prevoff);
-                        else page.setAttribute("data-sbookloc","0");}}}
+                            page.setAttribute("data-mbloc",prevoff);
+                        else page.setAttribute("data-mbloc","0");}}}
 
             function getPageLastID(node,id) {
                 if (hasClass(node,"codexpage")) {}
@@ -612,7 +612,7 @@ metaBook.Paginate=
                     var info=docinfo[topid];
                     curloc=info.starts_at+locoff;
                     if (topid) page.setAttribute("data-topid",topid);
-                    page.setAttribute("data-sbookloc",curloc);}
+                    page.setAttribute("data-mbloc",curloc);}
                 if ((typeof curloc === "number")&&(pagenum)&&
                     (!(metaBook.curpage))&&(metaBook.state)&&
                     (goneto!==metaBook.state)&&
@@ -1042,7 +1042,7 @@ metaBook.Paginate=
                         dropClass(lastpage,"oldpage");},
                                500);}
                 if (typeof spec === 'number') {
-                    var locval=page.getAttribute("data-sbookloc");
+                    var locval=page.getAttribute("data-mbloc");
                     var location=((locval)&&(parseInt(locval,10)));
                     if (location) metaBook.setLocation(location);}
                 var staticref=page.getAttribute("data-staticpageref");
@@ -1056,7 +1056,7 @@ metaBook.Paginate=
                     if (!((metaBook.hudup)||(metaBook.mode)))
                         metaBook.skimpoint=false;}
                 if ((savestate)&&(page)) {
-                    var loc=page.getAttribute("data-sbookloc");
+                    var loc=page.getAttribute("data-mbloc");
                     var pageno=page.getAttribute("data-pagenum");
                     metaBook.saveState(
                         {location: atoi(loc,10),
@@ -1084,7 +1084,7 @@ metaBook.Paginate=
                 fdjtLog("startPagePreview for %o from %s",page,spec);}
             if (!(page)) return;
             var pagenum=parseInt(page.getAttribute("data-pagenum"),10);
-            var pageloc=parseInt(page.getAttribute("data-sbookloc"),10);
+            var pageloc=parseInt(page.getAttribute("data-mbloc"),10);
             if (previewing===page) return;
             if (previewing) dropClass(previewing,"previewpage");
             dropClass(getChildren(metaBook.pages,".previewpage"),
@@ -1138,20 +1138,22 @@ metaBook.Paginate=
             if (typeof newpage === "number") metaBook.GoToPage(newpage);}
         metaBook.stopPagePreview=stopPagePreview;
         
-        function getPage(arg,location){
+        function getPage(arg,location,layout){
+            if (!(layout)) layout=mB.layout;
             var node=((arg)&&
                       ((arg.nodeType)?(arg):
                        (typeof arg === "string")?(mbID(arg)):
                        (false)));
             var page=((node)&&(getParent(node,".codexpage")));
+            if ((page)&&(layout.pages.indexOf(page)<0)) page=false;
             if ((!(location))||(!(page))) return page;
-            var loc=parseInt(page.getAttribute("data-sbookloc"),10);
+            var loc=parseInt(page.getAttribute("data-mbloc"),10);
             if (loc===location) return page;
-            var layout=metaBook.layout, pages=layout.pages, npages=pages.length;
+            var pages=layout.pages, npages=pages.length;
             var i=((page)?(parseInt(page.getAttribute("data-pagenum"),10)):(1)); i--;
             var prev=page; while (i<npages) {
                 var next=pages[i++];
-                loc=parseInt(next.getAttribute("data-sbookloc"),10);
+                loc=parseInt(next.getAttribute("data-mbloc"),10);
                 if (typeof loc !== "number") return prev;
                 else if (loc===location) return next;
                 else if (loc>location) return prev;
