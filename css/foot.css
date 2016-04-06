@@ -59,8 +59,8 @@ hr#METABOOKLAYOUTINDICATOR {
     box-sizing: border-box;
     display: none;}
 #METABOOKLAYOUTADJUST {
-    position: absolute;
-    top: 0; left: 0; height: 100%; width: auto; margin: 0;
+    position: absolute; text-align: center;
+    top: 0; left: 0; height: 100%; width: 100%; margin: 0;
     font-weight: bold;
     z-index: 200;
     display: none;}

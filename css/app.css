@@ -518,6 +518,8 @@ div.codexpage {
 div.codexpage img.nomax { max-width: inherit; max-height: inherit;}
 
 div.codexpage.curpage {display: block;}
+div.codexpage.curpage.previewcurpage {
+    opacity: 0.8; color: gray;}
 
 div.codexpage.oldpage, div.codexpage.newpage { display: block; }
 

@@ -181,9 +181,13 @@
             body.appendChild(cxbody);}
         else metaBook.body.appendChild(page);
 
-        var menu=metaBook.menu=fdjtDOM("div#METABOOKMENU");
+        var menu=metaBook.menu=fdjtDOM("div.metabookui#METABOOKMENU");
         menu.innerHTML=fixStaticRefs(metaBook.HTML.menu);
         fdjtDOM.prepend($ID("METABOOKBODY"),menu);
+
+        var layout_wait=metaBook.menu=fdjtDOM("div.metabookui#MBLAYOUTWAIT");
+        layout_wait.innerHTML=fixStaticRefs(metaBook.HTML.layoutwait);
+        fdjtDOM.prepend($ID("METABOOKBODY"),layout_wait);
 
         // Initialize the margins
         initMargins();

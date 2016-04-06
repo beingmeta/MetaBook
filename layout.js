@@ -60,6 +60,7 @@ metaBook.Paginate=
         var fdjtTime=fdjt.Time;
         var fdjtLog=fdjt.Log;
         var fdjtDOM=fdjt.DOM;
+        var fdjtAsync=fdjt.Async;
         var $ID=fdjt.ID;
         var mbID=metaBook.ID;
         var CodexLayout=fdjt.CodexLayout;
@@ -83,24 +84,66 @@ metaBook.Paginate=
 
         var atoi=parseInt;
 
+        var layout_preview_interval=2000;
+        var layout_previewing=false;
+        var layout_preview_next=false;
+        var layout_waiting=false;
+
+        function layoutWait(){
+            layout_waiting=true;
+            layout_preview_next=fdjtTime();
+            addClass("MBLAYOUTWAIT","live");}
+        function stopLayoutWait(){
+            if (layout_previewing) {
+                dropClass(layout_previewing,"previewcurpage");
+                dropClass(layout_previewing,"curpage");
+                layout_previewing=false;}
+            layout_waiting=false;
+            layout_preview_next=false;
+            dropClass("MBLAYOUTWAIT","live");}
+
         function layoutMessage(string,pct){
             var pb=$ID("METABOOKLAYOUTMESSAGE");
             if (pb) {
                 fdjt.UI.ProgressBar.setMessage(pb,string);
                 if (typeof pct==="number")
-                    fdjt.UI.ProgressBar.setProgress(pb,pct);}}
+                    fdjt.UI.ProgressBar.setProgress(pb,pct);}
+            var fpb=$ID("METABOOKLAYOUTADJUST");
+            if (layout_waiting) {
+                var layout=mB.layout, now=fdjtTime();
+                if (fpb) fpb.innerHTML="Updating layout ("+Math.round(pct)+"%)";
+                if (now>layout_preview_next) {
+                    var pages=layout.pages, latest=pages[pages.length-2];
+                    dropClass(layout_previewing,"curpage");
+                    dropClass(layout_previewing,"previewcurpage");
+                    if (latest) {
+                        addClass(latest,"curpage");
+                        addClass(latest,"previewcurpage");}
+                    layout_previewing=latest;
+                    layout_preview_next=now+layout_preview_interval;}}
+            else if (fpb) fpb.innerHTML="Finishing layout @"+Math.round(pct)+"%";
+            else {}}
 
+        var layout_next_report=false;
+        var layout_report_interval=500;
+        
         /* Reporting progress, debugging */
         function layout_progress(info){
             var tracelevel=info.tracelevel;
             var started=info.started;
+
             var pagenum=info.pagenum;
             if (!(pagenum)) return;
+
             var now=fdjtTime();
             var howlong=secs2short((now-started)/1000);
             var indicator=$ID("METABOOKLAYOUTINDICATOR");
             if (info.done) {
                 if (indicator) indicator.style.width="100%";
+                layout_next_report=false;
+                dropClass(layout_previewing,"curpage");
+                dropClass(layout_previewing,"previewcurpage");
+                layout_previewing=false;
                 fdjtDOM.replace(
                     "METABOOKPAGENOTEXT",
                     fdjtDOM("div.metabookpageno#METABOOKPAGENOTEXT",
@@ -113,7 +156,9 @@ metaBook.Paginate=
                 fdjtLog("Finished laying out %d %dx%d pages in %s",
                         pagenum,info.width,info.height,
                         secs2short((info.done-info.started)/1000));}
+            else if ((layout_next_report)&&(now<layout_next_report)) return;
             else {
+                layout_next_report=now+layout_report_interval;
                 if ((info.lastid)&&(metaBook.docinfo)&&
                     ((metaBook.docinfo[info.lastid]))) {
                     var docinfo=metaBook.docinfo;
@@ -154,6 +199,7 @@ metaBook.Paginate=
             layoutMessage("Preparing your book",0);
             dropClass(document.body,"_SCROLL");
             addClass(document.body,"mbLAYOUT");
+            layoutWait(true);
             scaleLayout(false);
             if (Trace.layout) fdjtLog("Unscaled layout");
             var forced=((init)&&(init.forced));
@@ -178,6 +224,7 @@ metaBook.Paginate=
                     (((justify)&&(current.justify))||
                      ((!justify)&&(!current.justify)))) {
                     dropClass(document.body,"mbLAYOUT");
+                    stopLayoutWait();
                     fdjtLog("Skipping redundant pagination for %s",
                             current.layout_id);
                     return;}
@@ -226,6 +273,7 @@ metaBook.Paginate=
                 $ID("CODEXPAGE").style.visibility='';
                 $ID("CODEXCONTENT").style.visibility='';
                 dropClass(document.body,"mbLAYOUT");
+                stopLayoutWait();
                 metaBook.layout=layout;
                 metaBook.pagecount=layout.pages.length;
                 fdjtLog("Restored %d-page layout %s in %ds, adding glosses",
@@ -372,8 +420,11 @@ metaBook.Paginate=
                             var fn=metaBook.layoutdone;
                             metaBook.layoutdone=false;
                             fn();}
-                        if (metaBook.state)
-                            metaBook.restoreState(metaBook.state,"layoutDone");
+                        if ((mB.state)&&(layout_waiting)) 
+                            mB.GoTo(mB.state.location,"layoutDone",
+                                    mbID(mB.target),
+                                    false,true);
+                        stopLayoutWait();
                         metaBook.layout.running=false;
                         if (async) setTimeout(checkLayout,100);
                         return false;}
@@ -581,7 +632,6 @@ metaBook.Paginate=
                 ((sourcehash)?("/"+sourcehash):("")));
 
             var docinfo=metaBook.docinfo;
-            var goneto=false;
             var getChild=fdjtDOM.getChild;
             var stripMarkup=fdjtString.stripMarkup;
 
@@ -613,15 +663,15 @@ metaBook.Paginate=
                     curloc=info.starts_at+locoff;
                     if (topid) page.setAttribute("data-topid",topid);
                     page.setAttribute("data-mbloc",curloc);}
-                if ((typeof curloc === "number")&&(pagenum)&&
-                    (!(metaBook.curpage))&&(metaBook.state)&&
-                    (goneto!==metaBook.state)&&
-                    (metaBook.state.hasOwnProperty('location'))&&
-                    (curloc>=metaBook.state.location)) {
-                    goneto=metaBook.state;
-                    setTimeout(function(){
-                        metaBook.GoToPage(pagenum,"layout",false);},
-                               10);}}
+                if (mB.state) {
+                    var state=mB.state, target=state.target, loc=state.location;
+                    var resolved=(target)?(getPage(target,loc)):
+                        ((curloc)&&(loc<curloc)&&(loc2page(loc,layout)));
+                    fdjtLog("Checking state %j, resolved=%o",state,resolved);
+                    if (resolved) {
+                        stopLayoutWait();
+                        fdjtAsync(function(){
+                            GoToPage(resolved,"partial_layout",false);});}}}
             
             function getPageTop(node) {
                 var last=false;
@@ -1161,6 +1211,17 @@ metaBook.Paginate=
             return page;}
         metaBook.getPage=getPage;
         
+        function loc2page(loc,layout){
+            var pages=layout.pages, n=pages.length-1, i=n;
+            while (i>=0) {
+                var page=pages[i], mbloc=page.getAttribute("data-mbloc");
+                if (mbloc) mbloc=parseInt(mbloc);
+                if (loc===mbloc) return page;
+                else if (loc<mbloc) i--;
+                else if (i===n) return false;
+                else return page[n+1];}
+            return false;}
+
         function refreshLayout(why,slice,skip){
             var opts={forced: true};
             if (slice) opts.timeslice=slice;

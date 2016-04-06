@@ -741,12 +741,13 @@ metaBook.Startup=
             else if ((!(mode))&&(metaBook.user)) {
                 var opened=readLocal(
                     "mB("+mB.docid+").opened",true);
-                if ((opened)&&((opened+keep_open_msecs)<fdjtTime()))
+                if ((opened)&&((opened+keep_open_msecs)>fdjtTime()))
                     metaBook.hideCover();}
             if (fdjtDOM.vischange)
                 fdjtDOM.addListener(document,fdjtDOM.vischange,
                                     metaBook.visibilityChange);
-            fdjtDOM.addListener(window,"resize",metaBook.resizeHandler);}
+            fdjtDOM.addListener(window,"resize",metaBook.resizeHandler);
+            if (metaBook.state) mB.restoreState(metaBook.state);}
         
         /* Application settings */
         
@@ -871,7 +872,9 @@ metaBook.Startup=
                 fdjt.DOM.autofont=fdjt.DOM.autofont+","+autofonts.join(",");
 
             if ((getMeta("METABOOK.forcelayout"))||
-                (getQuery("mbFORCELAYOUT")))
+                (getQuery("mbFORCELAYOUT"))||
+                (getLocal("mbFORCELAYOUT"))||
+                (getSession("mbFORCELAYOUT")))
                 mB.forcelayout=true;
 
             var autotoc=getMeta("METABOOK.autotoc");

@@ -310,6 +310,7 @@
         var page=((metaBook.bypage)&&(metaBook.layout)&&
                   (metaBook.getPage(target,location)));
         var pageno=(page)&&(parseInt(page.getAttribute("data-pagenum"),10));
+        var targetid=(target)&&(target.codexbaseid||target.id);
         if (mB.Trace.nav)
             fdjtLog("mB.GoTo(%s%s%s%s%s) %o location=%o page=%o pageno=%d arg=%o",
                     caller||"",((caller)?(":"):("")),((istarget)?("t"):("")),
@@ -332,7 +333,6 @@
                           true);
             else saveState({location: metaBook.location},true);
             return;}
-        var targetid=target.codexbaseid||target.id;
         if (Trace.nav)
             fdjtLog("metaBook.GoTo%s() #%o@P%o/L%o %o",
                     ((caller)?("/"+caller):""),targetid,pageno,
@@ -362,9 +362,6 @@
             location: location,page: pageno,npages: metaBook.pagecount});
         if (page)
             metaBook.GoToPage(page,caller||"metabookGoTo",false,true);
-        else if ((mB.layout)&&(mB.layout instanceof CodexLayout)) {
-            if (!(mB.layout.done)) {
-                mB.layout.target={target: targetid||target,location: location};}}
         else {
             if (metaBook.previewing)
                 metaBook.stopPreview(((caller)?("goto/"+caller):("goto")),target);
