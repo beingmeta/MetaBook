@@ -133,9 +133,9 @@ metaBook.Startup=
             fdjtLog("Copyright © 2010-2016 beingmeta, inc");
 
             // Check for any trace settings
-            if (getQuery("mbtrace")) useTraceSettings(getQuery("mbtrace",true));
-            if (getSession("mbtrace")) useTraceSettings([getSession("mbtrace")]);
             if (getLocal("mbtrace")) useTraceSettings([getLocal("mbtrace")]);
+            if (getSession("mbtrace")) useTraceSettings([getSession("mbtrace")]);
+            if (getQuery("mbtrace")) useTraceSettings(getQuery("mbtrace",true));
 
             // Whether to suppress login, etc
             if ((getLocal("mB.nologin"))||(getQuery("nologin")))
