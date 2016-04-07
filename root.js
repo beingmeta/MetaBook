@@ -176,6 +176,7 @@ var metaBook={
         config: 0,        // Whether to trace config setup/modification/etc
         mode: false,      // Whether to trace mode changes
         nav: false,       // Whether to trace book navigation
+        creds: false,     // Whether to trace credentialing events
         domscan: 0,       // How much to trace initial DOM scanning
         search: 0,        // How much to trace searches
         clouds: 0,        // How much to trace cloud generation
