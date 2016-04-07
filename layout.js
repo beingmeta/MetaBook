@@ -417,6 +417,7 @@ metaBook.Paginate=
                         mB.layout=layout;
                         mB.pagecount=layout.pages.length;
                         setupPagebar();
+                        stopLayoutWait();
                         if (mB.layoutdone) {
                             var fn=mB.layoutdone;
                             mB.layoutdone=false;
@@ -427,7 +428,6 @@ metaBook.Paginate=
                             mB.GoTo(state.location||state.target||state.hash,
                                     "layoutDone",targetid&&mbID(targetid),
                                     false,true);}
-                        stopLayoutWait();
                         mB.layout.running=false;
                         if (async) setTimeout(checkLayout,100);
                         return false;}
