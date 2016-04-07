@@ -164,7 +164,7 @@ metaBook.Startup=
 
             var done=Timeline.app_init_done=app_init_done=fdjtTime();
 
-            if (Trace.startup) fdjtLog("appInit done in %dms",done-started);}
+            if (Trace.startup>1) fdjtLog("appInit done in %dms",done-started);}
         metaBook.appInit=appInit;
 
         function syncStartup(){
@@ -199,7 +199,7 @@ metaBook.Startup=
             readEnvSettings();
 
             // Use the cached mycopyid if available
-            readMyCopyId();
+            mB.readMyCopyId();
 
             // Figure out if we have a user and whether we can keep
             // user information
@@ -317,13 +317,6 @@ metaBook.Startup=
             // Get the settings for scanning the document structure
             getScanSettings();}
 
-        function readMyCopyId(){
-            var mycopyid=(fdjtState.getQuery("MYCOPYID"))||
-                (fdjtState.getCookie("MYCOPYID"))||
-                ((mB.docid)&&(mB.readLocal("mB("+mB.docid+").mycopyid")));
-            // Should check signature and expiration
-            mB.setMyCopyId(mycopyid);}
-
         function setupApp(){
 
             var body=document.body;
@@ -371,7 +364,7 @@ metaBook.Startup=
                  (getQuery("crosshair")))) {
                 fdjtUI.Reticle.setup();}
 
-            if (Trace.startup) {
+            if (Trace.startup>1) {
                 fdjtLog("App setup took %dms",fdjtTime()-started);
                 fdjtLog("Body: %s",document.body.className);}}
         
@@ -472,7 +465,7 @@ metaBook.Startup=
         function headReady(){
             if ((_head_processed)||(_head_processing)) return;
             Timeline.head_ready=_head_ready=fdjtTime();
-            if (mB.Trace.startup) fdjtLog("Head ready");
+            if (Trace.startup>1) fdjtLog("Head ready");
             run_inits("head");
             return processHead();}
         metaBook.headReady=headReady;
@@ -480,7 +473,7 @@ metaBook.Startup=
         function headProcessed(){
             if (_head_processed) return;
             Timeline.head_processed=_head_processed=fdjtTime();
-            if (mB.Trace.startup) 
+            if (Trace.startup>1) 
                 fdjtLog("Head processed in %dms",(_head_processed-_head_processing));
             _head_processing=false;
             if (mB.docid) {
@@ -555,7 +548,7 @@ metaBook.Startup=
              {slice: 100, space: 25});}
 
         function metadataDone(metadata){
-            if (Trace.startup) fdjtLog("Processing metadata");
+            if (Trace.startup>1) fdjtLog("Processing metadata");
             // Read knowledge bases (knodules) used by the book
             if ((Knodule)&&(Knodule.HTML)&&
                 (Knodule.HTML.Setup)&&(metaBook.knodule)) {
@@ -589,14 +582,14 @@ metaBook.Startup=
                     ((window._metabook_newinfo)&&(function loadPendingInfo(){
                         metaBook.loadInfo(window._metabook_newinfo);
                         window._metabook_newinfo=false;})),
-                    function(){if (Trace.startup) fdjtLog("Metadata processed");}],
+                    function(){if (Trace.startup>1) fdjtLog("Metadata processed");}],
                 {slice: 100, space: 25});}
 
         function bodyReady(){
             if ((_body_processed)||(_body_processing)) return;
             Timeline.body_ready=_body_ready=fdjtTime();
             if (!(_head_ready)) return headReady();
-            if (Trace.startup) fdjtLog("Body ready");
+            if (Trace.startup>1) fdjtLog("Body ready");
             run_inits("body");
             return processBody();}
         metaBook.bodyReady=bodyReady;
@@ -604,7 +597,7 @@ metaBook.Startup=
         function bodyProcessed(){
             if (_body_processed) return;
             Timeline.body_processed=_body_processed=fdjtTime();
-            if (mB.Trace.startup)
+            if (Trace.startup>1)
                 fdjtLog("Body processed in %dms",(_body_processed-_body_processing));
             _body_processing=false;
             startLayout();
@@ -616,7 +609,7 @@ metaBook.Startup=
             headReady(); 
             bodyReady();
             run_inits("dom");
-            if (mB.Trace.startup) fdjtLog("DOM ready");}
+            if (Trace.startup>1) fdjtLog("DOM ready");}
         metaBook.domReady=domReady;
         
         function startLayout(){
@@ -660,7 +653,7 @@ metaBook.Startup=
             if (h7.length) addTOCLevel(h7,"7");}
 
         function scanDOM(){
-            if ((Trace.startup)||(Trace.domscan))
+            if ((Trace.startup>1)||(Trace.domscan))
                 fdjtLog("Starting DOM scan with %o",metaBook.content);
             var scanmsg=$ID("METABOOKSTARTUPSCAN");
             addClass(scanmsg,"running");
@@ -668,7 +661,7 @@ metaBook.Startup=
                 metaBook.content,metaBook.refuri+"#");
             metaBook.docinfo=metadata;
             metaBook.ends_at=metaBook.docinfo._maxloc;
-            if ((Trace.startup)||(Trace.domscan))
+            if ((Trace.startup>1)||(Trace.domscan))
                 fdjtLog("Done with DOM scan yielding %o",
                         metadata);
             dropClass(scanmsg,"running");
@@ -886,9 +879,7 @@ metaBook.Startup=
                 else metaBook.autotoc=false;}
 
             if (!(metaBook.nologin)) {
-                var mycopyid=getMeta("BOOKHUB.mycopyid")||
-                    (getLocal("mycopyid("+refuri+")"))||
-                    false;
+                var mycopyid=mB.readMyCopyId();
                 if ((mycopyid)&&(mycopyid!==mB.mycopid)) 
                     if (mB.iosAuthKludge) mB.iosAuthKludge();
                 mB.mycopyid=mycopyid;}}
