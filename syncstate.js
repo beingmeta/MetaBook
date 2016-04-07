@@ -211,6 +211,7 @@
     // Post the current state and update synced state from what's
     // returned
     function syncState(force){
+        var mycopyid=mB.mycopyid||mB.readMyCopyId();
         var elapsed=(last_sync)?(fdjtTime.tick()-last_sync):(3600*24*365*10);
         if ((syncing)||((!(force))&&(!(metaBook.locsync)))) return;
         if (!(metaBook.user)) return;
@@ -251,8 +252,8 @@
             metaBook.last_sync=last_sync=fdjtTime.tick(); syncing=state;
             if (metaBook.user) sync_uri=sync_uri+
                 "&SYNCUSER="+encodeURIComponent(metaBook.user._id);
-            if (metaBook.mycopyid) sync_uri=sync_uri+
-                "&MYCOPYID="+encodeURIComponent(metaBook.mycopyid);
+            if (mycopyid) sync_uri=sync_uri+
+                "&MYCOPYID="+encodeURIComponent(mycopyid);
             if (metaBook.deviceName) sync_uri=sync_uri+
                 "&DEVICE="+encodeURIComponent(metaBook.deviceName);
             if (metaBook.ends_at) sync_uri=sync_uri+
