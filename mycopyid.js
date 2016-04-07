@@ -38,42 +38,55 @@
     "use strict";
     var fdjtDOM=fdjt.DOM, fdjtLog=fdjt.Log;
     var fdjtTime=fdjt.Time, fdjtAjax=fdjt.Ajax;
+    var fdjtState=fdjt.State;
 
     var mB=metaBook, Trace=mB.Trace;
+
+    var getSession=fdjtState.getSession, getLocal=fdjtState.getLocal;
 
     var need_mycopyid=[];
 
     function setMyCopyId(string){
         if (!(string)) return;
-        if (mB.mycopyid===string) return;
+        if (mB.mycopyid===string) return string;
         var parts=string.split('.'), payload=false, doc;
         try {
             payload=JSON.parse(atob(parts[1]));}
         catch (ex) {payload=false;}
         if (!(payload)) {
             fdjtLog.warn("Bad mycopyid JWT %s",string);
-            return;}
+            return false;}
         else if ((doc=payload.doc)) {
             doc=(doc.replace(/^:/,"")).toLowerCase();
             if (doc!==mB.docid) {
                 fdjtLog.warn("mycopyid for wrong title %s; doc=%s, payload=%j",
                              doc,mB.docid,payload);
-                return;}}
+                return false;}}
         else {}
+        var now=new Date();
         var expstring=payload.exp;
         var expires=(expstring)&&(new Date(expstring));
+        if (now>expires) {
+            fdjtLog.warn("Expired (%s) mycopyid %j",expires,payload);
+            return false;}
+        if ((Trace.startup)||(Trace.creds)) {
+            fdjtLog("Setting myCopyID to %s",string);
+            fdjtLog("myCopyID payload is %j",payload);}
         mB.mycopyid=string;
         mB.mycopyid_payload=payload;
         mB.mycopyid_expires=expires;
+        mB.saveLocal("mb("+mB.refuri+").mycopyid",string);
+        mB.saveLocal("mb("+mB.docid+").mycopyid",string);
         var waiting=need_mycopyid; need_mycopyid=[];
         var i=0, lim=waiting.length; while (i<lim) {
-            waiting[i++](string);}}
+            waiting[i++](string);}
+        return string;}
     metaBook.setMyCopyId=setMyCopyId;
             
     var good_origin=/https:\/\/[^\/]+.(bookhub\.io|metabooks\.net)/;
     function myCopyMessage(evt){
         var origin=evt.origin, data=evt.data;
-        if (Trace.messages)
+        if ((Trace.messages)||(Trace.creds))
             fdjtLog("Got a message from %s with payload %s",
                     origin,data);
         if (origin.search(good_origin)!==0) {
@@ -97,6 +110,24 @@
         else return fetchMyCopyId();}
     metaBook.getMyCopyId=getMyCopyId;
 
+    function readMyCopyId(){
+        var mycopyid=(fdjtState.getQuery("MYCOPYID"))||
+            (fdjtState.getCookie("MYCOPYID"))||
+            ((mB.docid)&&(getSession("mycopyid("+mB.docid+")")))||
+            ((mB.refuri)&&(getSession("mycopyid("+mB.refuri+")")))||
+            ((mB.docid)&&(getSession("mB("+mB.docid+").mycopyid")))||
+            ((mB.refuri)&&(getSession("mB("+mB.refuri+").mycopyid")))||
+            ((mB.docid)&&(getLocal("mycopyid("+mB.docid+")")))||
+            ((mB.refuri)&&(getLocal("mycopyid("+mB.refuri+")")))||
+            ((mB.docid)&&(getLocal("mB("+mB.docid+").mycopyid")))||
+            ((mB.refuri)&&(getLocal("mB("+mB.refuri+").mycopyid")));
+        if ((mycopyid)&&((Trace.startup)||(Trace.creds)))
+            fdjtLog("Read local myCopyID %s",mycopyid);
+        if (mycopyid)
+            return mB.setMyCopyId(mycopyid);
+        else return false;}
+    metaBook.readMyCopyId=readMyCopyId;
+
     function fetchMyCopyId(){
         function fetching_mycopyid(resolve,reject){
             need_mycopyid.push(resolve);
@@ -105,9 +136,13 @@
             fdjtAjax.fetchText(
                 "https://auth.bookhub.io/getmycopyid?DOC="+mB.docref).
                 then(function(mycopyid,alt){
-                    if (typeof mycopyid === 'undefined') 
-                        return reject(alt);
-                    getting_mycopyid=fdjtTime();
+                    if (typeof mycopyid === 'undefined') {
+                        if (Trace.creds)
+                            fdjtLog("Failed call to fetch remote creds");
+                        return reject(alt);}
+                    getting_mycopyid=false;
+                    if (Trace.creds)
+                        fdjtLog("Fetched myCopyId from network");
                     setMyCopyId(mycopyid);});}
         return new Promise(fetching_mycopyid);}
 
