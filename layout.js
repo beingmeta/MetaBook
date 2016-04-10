@@ -93,7 +93,7 @@ metaBook.Paginate=
             layout_waiting=true;
             layout_preview_next=fdjtTime();
             setTimeout(function(){addClass("MBLAYOUTWAIT","live");},
-                       1500);}
+                       500);}
         function stopLayoutWait(){
             if (layout_previewing) {
                 dropClass(layout_previewing,"previewcurpage");
@@ -101,7 +101,8 @@ metaBook.Paginate=
                 layout_previewing=false;}
             layout_waiting=false;
             layout_preview_next=false;
-            dropClass("MBLAYOUTWAIT","live");}
+            setTimeout(function(){dropClass("MBLAYOUTWAIT","live");},
+                       500);}
 
         function layoutMessage(string,pct){
             var pb=$ID("METABOOKLAYOUTMESSAGE");
@@ -666,7 +667,7 @@ metaBook.Paginate=
                     curloc=info.starts_at+locoff;
                     if (topid) page.setAttribute("data-topid",topid);
                     page.setAttribute("data-mbloc",curloc);}
-                if (mB.state) {
+                if ((mB.state)&&(layout_waiting)) {
                     var state=mB.state, target=state.target, loc=state.location;
                     var resolved=(target)?(getPage(target,loc)):
                         ((curloc)&&(loc<curloc)&&(loc2page(loc,layout)));
