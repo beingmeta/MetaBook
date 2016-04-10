@@ -461,6 +461,7 @@
                 clearLocal("mB("+docid+").etc");
                 clearLocal("mB("+docid+").sync");
                 clearLocal("mB("+docid+").sourceid");
+                clearLocal("mB("+docid+").state");
                 clearLocal("mB("+docid+").opened");
                 // We don't currently clear sources when doing book
                 // specific clearing because they might be shared
