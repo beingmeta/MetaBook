@@ -65,7 +65,7 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
 
 #METABOOKCOVER div.flap {
     position: absolute;
-    top: 3vw; top: 36px; bottom: 120px; left: 10%; right: 10%;
+    top: 40px; top: 5vh; bottom: 120px; left: 10%; right: 10%;
     box-sizing: border-box; padding: 1em; padding-top: 2px;
     height: auto; width: auto; overflow: hidden;
     z-index: -50; opacity: 0.0;
@@ -83,8 +83,8 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
 #METABOOKCOVERMESSAGE {
     position: absolute; 
     width: 100%; left: 0; right: 0; border: 0; 
-    top: 0; height: 36px; height: 3vw; bottom: auto;
-    font-size: 36px; font-size: 3vw;
+    top: 0; height: 40px; height: 5vh; bottom: auto;
+    font-size: 36px; font-size: 4vh;
     font-variant: small-caps; white-space: nowrap;
     text-align: center; overflow: visible; 
     background-color: black; 
@@ -447,10 +447,6 @@ body.mbBUSY #METABOOKCOVERMESSAGE div.message#METABOOKREADYMESSAGE {
     #METABOOKCOVERMESSAGE div#METABOOKOPENTAB {
         font-size: 30px; height: 40px;}
     #METABOOKCOVERMESSAGE div.message#METABOOKREADYMESSAGE { font-size: 30px;}
-
-    #METABOOKCOVER #METABOOKCOVERMESSAGE,
-    #METABOOKCOVER.coverpage #METABOOKCOVERMESSAGE {
-        bottom: 0; top: auto; z-index: 200;}
 
     #METABOOKCOVER div.flap { left: 10px; right: 10px;}
 
