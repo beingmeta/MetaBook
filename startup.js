@@ -733,12 +733,12 @@ metaBook.Startup=
                 fdjtState.clearCookie("APPMESSAGE","bookhub.io","/");}
             if ((!(mode))&&(mB.user)&&(location.hash)&&(metaBook.state)&&
                 (location.hash.slice(1)!==metaBook.state.target))
-                metaBook.hideCover();
+                mB.layoutReady(metaBook.hideCover);
             else if ((!(mode))&&(metaBook.user)) {
                 var opened=readLocal(
                     "mB("+mB.docid+").opened",true);
                 if ((opened)&&((opened+keep_open_msecs)>fdjtTime()))
-                    metaBook.hideCover();}
+                    mB.layoutReady(metaBook.hideCover);}
             if (fdjtDOM.vischange)
                 fdjtDOM.addListener(document,fdjtDOM.vischange,
                                     metaBook.visibilityChange);

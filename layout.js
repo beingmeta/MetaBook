@@ -88,21 +88,34 @@ metaBook.Paginate=
         var layout_previewing=false;
         var layout_preview_next=false;
         var layout_waiting=false;
-
+        
         function layoutWait(){
-            layout_waiting=true;
+            if (!(layout_waiting)) layout_waiting=[];
             layout_preview_next=fdjtTime();
+            fdjtLog("Waiting for layout to finish");
             setTimeout(function(){addClass("MBLAYOUTWAIT","live");},
-                       500);}
+                       100);}
         function stopLayoutWait(){
             if (layout_previewing) {
                 dropClass(layout_previewing,"previewcurpage");
                 dropClass(layout_previewing,"curpage");
                 layout_previewing=false;}
+            if (!(layout_waiting)) return;
+            fdjtLog("Done with layout wait");
+            var readyfns=layout_waiting;
             layout_waiting=false;
             layout_preview_next=false;
             setTimeout(function(){dropClass("MBLAYOUTWAIT","live");},
-                       500);}
+                       200);
+            var i=0, lim=readyfns.length; while (i<lim) {
+                readyfns[i++]();}}
+        function layoutReady(whenready){
+            if ((mB.layout)&&(mB.layout.done))
+                return whenready();
+            else if (layout_waiting)
+                layout_waiting.push(whenready);
+            else layout_waiting=[whenready];}
+        metaBook.layoutReady=layoutReady;
 
         function layoutMessage(string,pct){
             var pb=$ID("METABOOKLAYOUTMESSAGE");
