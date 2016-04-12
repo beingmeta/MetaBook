@@ -201,7 +201,6 @@ metaBook.Paginate=
             layoutMessage("Preparing your book",0);
             dropClass(document.body,"_SCROLL");
             addClass(document.body,"mbLAYOUT");
-            layoutWait(true);
             scaleLayout(false);
             if (Trace.layout) fdjtLog("Unscaled layout");
             var forced=((init)&&(init.forced));
@@ -226,7 +225,6 @@ metaBook.Paginate=
                     (((justify)&&(current.justify))||
                      ((!justify)&&(!current.justify)))) {
                     dropClass(document.body,"mbLAYOUT");
-                    stopLayoutWait();
                     fdjtLog("Skipping redundant pagination for %s",
                             current.layout_id);
                     return;}
@@ -275,7 +273,6 @@ metaBook.Paginate=
                 $ID("CODEXPAGE").style.visibility='';
                 $ID("CODEXCONTENT").style.visibility='';
                 dropClass(document.body,"mbLAYOUT");
-                stopLayoutWait();
                 mB.layout=layout;
                 mB.pagecount=layout.pages.length;
                 fdjtLog("Restored %d-page layout %s in %ds, adding glosses",
@@ -362,10 +359,53 @@ metaBook.Paginate=
                             id=getPageLastID(child,id);}}}
                 return id;}
 
+            var images_count=0, images_loaded=0, images_failed=0;
+            function get_image_donefn(whenready){
+                function image_loaded(evt){
+                    var target=fdjt.UI.T(evt);
+                    target.onload=false; target.onerror=false;
+                    if (evt.type==="load")
+                        images_loaded++;
+                    else images_failed++;
+                    if (target.parentElement)
+                        target.parentElement.removeChild(target);
+                    if ((images_loaded+images_failed)>=images_count) {
+                        Timeline.images_loaded=fdjtTime();
+                        whenready();}}
+                return image_loaded;}
+
+            function body_wait(content,whenready){
+                if (!(content))
+                    content=mB.content||document.body;
+                if (Timeline.dom_ready)
+                    return whenready();
+                else {
+                    var images=fdjtDOM.getChildren(content,"IMG");
+                    var donefn=get_image_donefn(whenready);
+                    if ((images)&&(images.length)) {
+                        var dups=[];
+                        var i=0, n_imgs=images.length;
+                        while (i<n_imgs) {
+                            var img=images[i++];
+                            if (img.src) {
+                                var dup=fdjtDOM("IMG");
+                                dup.src=img.src;
+                                dup.onload=dup.onerror=donefn;
+                                dup.style.display='none';
+                                dups.push(dup);}}
+                        if (dups.length===0)
+                            return whenready();
+                        images_count=dups.length;
+                        var body=document.body;
+                        var j=0, n_dups=dups.length;
+                        while (j<n_dups) 
+                            body.appendChild(dups[j++]);}}}
+
             function new_layout(){
                 // Prepare to do the layout
                 dropClass(document.body,"_SCROLL");
                 addClass(document.body,"_BYPAGE");
+                layoutWait();
                 // This keeps the page content hidden during layout
                 // $ID("CODEXPAGE").style.visibility='hidden';
                 // This shouldn't be neccessary because CODEXCONTENT 
@@ -448,20 +488,14 @@ metaBook.Paginate=
                 else {
                     var running=true;
                     while (running) running=rootloop();}}
-            var layout_wait=false;
+
             function start_new_layout(){
-                if (!(layout_wait)) {
-                    Timeline.layout_started=fdjtTime();
-                    new_layout();}
-                else if (Timeline.dom_ready) {
-                    clearInterval(layout_wait);
-                    layout_wait=false;
-                    Timeline.layout_started=fdjtTime();
-                    new_layout();}}
+                Timeline.layout_started=fdjtTime();
+                new_layout();}
             function request_layout(){
-                if (!(layout_wait)) {
+                if (!(Timeline.layout_requested))
                     Timeline.layout_requested=fdjtTime();
-                    layout_wait=setInterval(start_new_layout,50);}}
+                body_wait(mB.content,start_new_layout);}
             
             if ((mB.cache_layout_thresh)&&
                 (!((mB.forcelayout)))&&
