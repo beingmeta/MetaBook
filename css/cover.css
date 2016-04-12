@@ -84,7 +84,7 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
     position: absolute; 
     width: 100%; left: 0; right: 0; border: 0; 
     top: 0; height: 40px; height: 5vh; bottom: auto;
-    font-size: 36px; font-size: 4vh;
+    font-size: 36px; font-size: 5vh;
     font-variant: small-caps; white-space: nowrap;
     text-align: center; overflow: visible; 
     background-color: black; 
