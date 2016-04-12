@@ -40,26 +40,33 @@
     var fdjtAsync=fdjt.Async;
     var dropClass=fdjtDOM.dropClass, addClass=fdjtDOM.addClass;
     var getLink=fdjtDOM.getLink, isEmpty=fdjtString.isEmpty;
+    var addListener=fdjtDOM.addListener;
 
-    var mB=metaBook, Trace=mB.Trace;
+    var mB=metaBook, Trace=mB.Trace, Timeline=mB.Timeline;
 
     /* Indexing tags */
     
-    function handlePublisherIndex(pubindex,whendone){
-        if (!(pubindex))
-            pubindex=metaBook._publisher_index||window._pubtool_autoindex;
-        if (!(pubindex)) {
-            if (whendone) whendone();
-            return;}
-        if ((Trace.startup>1)||(Trace.indexing)) {
+    function publisherIndex(pubindex){
+        mB._publisher_index=pubindex;
+        indexReady();}
+    metaBook.publisherIndex=publisherIndex;
+
+    function indexReady(){
+        var pubindex=metaBook._publisher_index||window._pubtool_autoindex;
+        if (metaBook._publisher_index) metaBook._publisher_index=false;
+        if (window._pubtool_autoindex) window._pubtool_autoindex=false;
+        if (Timeline.index_done) return;
+        Timeline.index_done=fdjtTime();
+        if (((Trace.startup>1)||(Trace.indexing))&&(pubindex)) {
             if (pubindex._nkeys)
                 fdjtLog("Processing provided index of %d keys and %d refs",
                         pubindex._nkeys,pubindex._nrefs);
             else fdjtLog("Processing provided index");}
-        mB.useIndexData(pubindex,metaBook.knodule,false,whendone);}
-
+        return mB.useIndexData(pubindex,metaBook.knodule,false,indexingDone);}
+    metaBook.indexReady=indexReady;
+        
     function indexingDone(){
-        if ((Trace.indexing)||(Trace.startup))
+        if ((Trace.indexing)||(Trace.startup>1))
             fdjtLog("Content indexing is completed");
         if (metaBook._started) setupClouds();
         else metaBook.onsetup=setupClouds;}
@@ -386,19 +393,11 @@
         applyMultiTagSpans();
         applyTagAttributes(metadata);
         var pubindex=metaBook._publisher_index||
-            window._publisher_autoindex||
             window._pubtool_autoindex;
-        if (pubindex) {
-            handlePublisherIndex(pubindex,indexingDone);
-            metaBook._publisher_index=false;
-            window._pubtool_autoindex=false;}
+        if (pubindex) indexReady();
         else if ($ID("PUTBOOLAUTOINDEX")) {
             var elt=$ID("PUBTOOLAUTOINDEX");
-            fdjtDOM.addListener(elt,"load",function(evt){
-                evt=evt||window.event;
-                handlePublisherIndex(false,indexingDone);
-                metaBook._publisher_index=false;
-                window._pubtool_autoindex=false;});}
+            fdjtDOM.addListener(elt,"load",indexReady);}
         else {
             var indexref=getLink("PUBTOOL.bookindex");
             if (indexref) {
@@ -406,12 +405,12 @@
                 script_elt.setAttribute("src",indexref);
                 script_elt.setAttribute("language","javascript");
                 script_elt.setAttribute("async","async");
-                fdjtDOM.addListener(script_elt,"load",function(){
-                    handlePublisherIndex(false,indexingDone);
-                    metaBook._publisher_index=false;
-                    window._pubtool_autoindex=false;});
+                fdjtDOM.addListener(script_elt,"load",indexReady);
+                fdjtDOM.addListener(script_elt,"error",indexReady);
                 document.body.appendChild(script_elt);}
-            else indexingDone();}}
+            else if (document.readyState==="complete")
+                indexReady();
+            else addListener(window,"load",indexReady);}}
     metaBook.setupIndex=setupIndex;
 
 })();
