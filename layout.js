@@ -212,7 +212,7 @@ metaBook.Paginate=
             var size=mB.bodysize||"normal";
             var family=(mB.dyslexical)?("opendyslexic"):
                 (mB.bodyfamily||"default");
-            if ((!(mB.layout))&&(Trace.startup))
+            if ((!(mB.layout))&&(Trace.startup>1))
                 fdjtLog("Page layout requires %dx%d %s pages",
                         width,height,size);
             if (mB.layout) {
@@ -363,7 +363,6 @@ metaBook.Paginate=
                 return id;}
 
             function new_layout(){
-                fdjtLog("new_layout");
                 // Prepare to do the layout
                 dropClass(document.body,"_SCROLL");
                 addClass(document.body,"_BYPAGE");

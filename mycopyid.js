@@ -69,9 +69,8 @@
         if (now>expires) {
             fdjtLog.warn("Expired (%s) mycopyid %j",expires,payload);
             return false;}
-        if ((Trace.startup)||(Trace.creds)) {
-            fdjtLog("Setting myCopyID to %s",string);
-            fdjtLog("myCopyID payload is %j",payload);}
+        if ((Trace.startup>1)||(Trace.creds)) {
+            fdjtLog("Setting myCopyID to %s payload=%j",string,payload);}
         mB.mycopyid=string;
         mB.mycopyid_payload=payload;
         mB.mycopyid_expires=expires;

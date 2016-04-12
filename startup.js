@@ -247,7 +247,7 @@ metaBook.Startup=
                     var i=0, lim=delayed.length;
                     while (i<lim) {delayed[i](); i++;}}
                 else delayed();}
-            if (Trace.startup)
+            if (Trace.startup>1)
                 fdjtLog("Done with sync startup");}
 
         function initMarkdown(){

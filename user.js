@@ -54,8 +54,9 @@
     function setUser(userinfo,outlets,layers,sync){
         var started=fdjtTime();
         var root=document.documentElement||document.body;
-        fdjtLog("Setting up user %s (%s)",userinfo._id,
-                userinfo.name||userinfo.email);
+        if (Trace.setup>1)
+            fdjtLog("Setting up user %s (%s)",userinfo._id,
+                    userinfo.name||userinfo.email);
         if (userinfo) {
             fdjtDOM.dropClass(root,"_NOUSER");
             fdjtDOM.addClass(root,"_USER");}
