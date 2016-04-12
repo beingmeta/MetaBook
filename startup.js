@@ -366,7 +366,7 @@ metaBook.Startup=
 
             if (Trace.startup>1) {
                 fdjtLog("App setup took %dms",fdjtTime()-started);
-                fdjtLog("Body: %s",document.body.className);}}
+                fdjtLog("Body: class='%s'",document.body.className);}}
         
         function imageSetup(){
             var i, lim, started=fdjtTime();
@@ -414,10 +414,12 @@ metaBook.Startup=
             return val;};
 
         function useTraceSettings(tracing){
+            if (typeof tracing === 'string')
+                tracing=tracing.split(';');
             var i=0; var lim=tracing.length;
             while (i<lim) {
                 var trace_spec=tracing[i++];
-                var colon=trace_spec.indexOf(";");
+                var colon=trace_spec.indexOf(":");
                 if (colon<0) {
                     if (typeof Trace[trace_spec] === 'number')
                         Trace[trace_spec]=1;
@@ -428,6 +430,7 @@ metaBook.Startup=
                     if (typeof Trace[trace_name] === 'number')
                         Trace[trace_name]=parseInt(trace_val,10);
                     else Trace[trace_name]=trace_val;}}}
+        metaBook.useTraceSettings=useTraceSettings;
 
         var glosshash_pat=/G[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i;
         
