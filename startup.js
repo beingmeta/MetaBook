@@ -691,7 +691,7 @@ metaBook.Startup=
             else metaBook.initLocation();
             window.onpopstate=function onpopstate(evt){
                 if (evt.state) metaBook.restoreState(evt.state,"popstate");};
-            fdjtLog("metaBook startup done");
+            if (Trace.startup>1) fdjtLog("metaBook startup done");
             metaBook.resizeUI(); // Just in case
             metaBook.displaySync();
             fdjtDOM.dropClass(document.body,"mbSTARTUP");
