@@ -471,7 +471,8 @@ metaBook.Startup=
             if (Trace.startup>1) fdjtLog("Head ready");
             run_inits("head");
             return processHead();}
-        metaBook.headReady=headReady;
+        metaBook.headReady=function declareHeadReady(){
+            setTimeout(headReady,5);};
 
         function headProcessed(){
             if (_head_processed) return;
@@ -565,6 +566,7 @@ metaBook.Startup=
                     fdjtLog("Processing knodule %s",metaBook.knodule.name);
                 Knodule.HTML.Setup(metaBook.knodule);
                 dropClass(knomsg,"running");}
+            Timeline.metadata_done=fdjtTime();
             fdjtAsync(function(){metaBook.setupIndex(metadata);});
 
             return fdjtAsync.timeslice(
@@ -595,7 +597,8 @@ metaBook.Startup=
             if (Trace.startup>1) fdjtLog("Body ready");
             run_inits("body");
             return processBody();}
-        metaBook.bodyReady=bodyReady;
+        metaBook.bodyReady=function declareBodyReady(){
+            setTimeout(bodyReady,5);};
 
         function bodyProcessed(){
             if (_body_processed) return;
@@ -613,7 +616,8 @@ metaBook.Startup=
             bodyReady();
             run_inits("dom");
             if (Trace.startup>1) fdjtLog("DOM ready");}
-        metaBook.domReady=domReady;
+        metaBook.domReady=function declareDOMReady(){
+            setTimeout(domReady,5);};
         
         function startLayout(){
             metaBook.sizeContent();
