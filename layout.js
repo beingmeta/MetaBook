@@ -291,6 +291,7 @@ metaBook.Paginate=
                 fdjtLog("Restored %d-page layout %s in %ds, adding glosses",
                         layout.pages.length,layout_id,
                         (fdjtTime()-started)/1000);
+                stopLayoutWait();
                 var lostids=layout.lostids, moved_ids=lostids._all_ids;
                 var i=0, lim=moved_ids.length;
                 while (i<lim) {
