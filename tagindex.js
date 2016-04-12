@@ -48,7 +48,7 @@
     
     function publisherIndex(pubindex){
         mB._publisher_index=pubindex;
-        indexReady();}
+        if (Timeline.metadata_done) indexReady();}
     metaBook.publisherIndex=publisherIndex;
 
     function indexReady(){
