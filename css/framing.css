@@ -396,8 +396,8 @@ div#MBLAYOUTWAIT div.fdjtprogress {
     border: solid black 3px;}
 
 @media screen and (max-width: 640px) {
-div#MBLAYOUTWAIT {
-    width: 60%; left: 20%; right: 20%;
+    div#MBLAYOUTWAIT {
+        width: 80%; left: 10%; right: 10%;
 }
 }
 
