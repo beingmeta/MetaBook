@@ -368,17 +368,19 @@ metaBook.Startup=
                 fdjtLog("App setup took %dms",fdjtTime()-started);
                 fdjtLog("Body: class='%s'",document.body.className);}}
         
+        var isEmpty=fdjtString.isEmpty;
+        function goodString(s){
+            if ((typeof s === "string")&&(!(isEmpty(s))))
+                return s;
+            else return false;}
+
         function imageSetup(){
             var i, lim, started=fdjtTime();
             var uri=
-                ((typeof metaBook.coverimage === "string")&&
-                 (metaBook.coverimage))||
-                ((typeof metaBook.bookimage === "string")&&
-                 (metaBook.bookimage))||
-                ((typeof metaBook.bookcover === "string")&&
-                 (metaBook.bookcover))||
-                ((typeof metaBook.coverpage === "string")&&
-                 (metaBook.coverpage));
+                goodString(metaBook.coverimage)||
+                goodString(metaBook.bookimage)||
+                goodString(metaBook.bookcover)||
+                goodString(metaBook.coverpage);
             if (uri) {
                 var bookimages=fdjtDOM.$("img.metabookbookimage");
                 i=0; lim=bookimages.length;
@@ -478,7 +480,8 @@ metaBook.Startup=
             if (_head_processed) return;
             Timeline.head_processed=_head_processed=fdjtTime();
             if (Trace.startup>1) 
-                fdjtLog("Head processed in %dms",(_head_processed-_head_processing));
+                fdjtLog("Head processed in %dms",
+                        (_head_processed-_head_processing));
             _head_processing=false;
             if (mB.docid) {
                 var opened=readLocal(
@@ -587,7 +590,8 @@ metaBook.Startup=
                     ((window._metabook_newinfo)&&(function loadPendingInfo(){
                         metaBook.loadInfo(window._metabook_newinfo);
                         window._metabook_newinfo=false;})),
-                    function(){if (Trace.startup>1) fdjtLog("Metadata processed");}],
+                    function(){if (Trace.startup>1)
+                        fdjtLog("Metadata processed");}],
                 {slice: 100, space: 25});}
 
         function bodyReady(){
@@ -604,7 +608,8 @@ metaBook.Startup=
             if (_body_processed) return;
             Timeline.body_processed=_body_processed=fdjtTime();
             if (Trace.startup>1)
-                fdjtLog("Body processed in %dms",(_body_processed-_body_processing));
+                fdjtLog("Body processed in %dms",
+                        (_body_processed-_body_processing));
             _body_processing=false;
             startLayout();
             startupDone();}
@@ -687,7 +692,8 @@ metaBook.Startup=
             return metadata;}
         
         function startupDone(mode){
-            if ((metaBook.glosshash)&&(metaBook.glossdb.ref(metaBook.glosshash))) {
+            if ((metaBook.glosshash)&&
+                (metaBook.glossdb.ref(metaBook.glosshash))) {
                 if (metaBook.showGloss(metaBook.glosshash)) {
                     metaBook.glosshash=false;
                     Timeline.initLocation=fdjtTime();}

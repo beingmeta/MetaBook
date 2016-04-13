@@ -88,8 +88,8 @@
                 ((!(state.hash))&&(state.target)&&(state.target!==hash))) {
                 if (!(state)) state={};
                 // Hash changed
-                state.refuri=metaBook.refuri;
-                state.docuri=metaBook.docuri;
+                state.refuri=mB.refuri;
+                state.docuri=mB.docuri;
                 state.target=hash;
                 state.location=false;
                 state.changed=fdjtTime.tick();
@@ -391,7 +391,9 @@
                        // This is the beginning of the 21st century
                        changed: 978307200};
             else state={location: 1,changed: 978307200};}
-        metaBook.saveState(state,true,true);}
+        mB.GoTo(state.location||state.target,"initLocation",
+                false,false,false);
+        mB.saveState(state,true,true);}
     metaBook.initLocation=initLocation;
 
     function resolveXState(xstate) {
@@ -428,7 +430,8 @@
         var msg1="Start at";
         var choices=[];
         var latest=xstate.location, farthest=xstate.maxloc, loclen=xstate.loclen;
-        var prefer_current=((state.location>17)&&((now-state.changed)<(3600*24)));
+        var prefer_current=
+            ((state.location>17)&&((now-state.changed)<(3600*24)));
         var prefer_latest=((farthest-loclen)<80);
         if (farthest>state.location)
             choices.push(
