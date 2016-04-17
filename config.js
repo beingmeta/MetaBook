@@ -229,6 +229,9 @@
         metaBook.taptapmsecs=value;
         fdjtUI.TapHold.default_opts.taptapmsecs=value;});
 
+    metaBook.addConfig("dont_rAF",function(name,value){
+        fdjt.CodexLayout.dont_rAF=value;});
+
     metaBook.addConfig("checksync",function(name,value){
         metaBook.sync_interval=value;
         if (metaBook.synctock) {
