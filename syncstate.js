@@ -381,7 +381,7 @@
        document, using the hash value if there is one. */ 
     function initLocation() {
         var state=metaBook.state;
-        if (state) {}
+        if ((state)&&((state.location)||(state.target))) {}
         else {
             var target=$ID("METABOOKSTART")||fdjt.$1(".metabookstart")||
                 $ID("SBOOKSTART")||fdjt.$1(".sbookstart")||
@@ -391,8 +391,9 @@
                        // This is the beginning of the 21st century
                        changed: 978307200};
             else state={location: 1,changed: 978307200};}
-        mB.GoTo(state.location||state.target,"initLocation",
-                false,false,false);
+        var goto_arg=((typeof state.location === "undefined")?(state.target):
+                      (state.location));
+        mB.GoTo(goto_arg,"initLocation",false,false,false);
         mB.saveState(state,true,true);}
     metaBook.initLocation=initLocation;
 
