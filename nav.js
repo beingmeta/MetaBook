@@ -271,7 +271,7 @@
         if (typeof savestate === 'undefined') savestate=true;
         var target, location, locinfo;
         if (savestate) metaBook.clearStateDialog();
-        if (!(arg)) {
+        if ((!(arg))&&(arg!==0)) {
             fdjtLog.warn("falsy arg (%s) to metabookGoTo from %s",arg,caller);
             return;}
         if (typeof arg === 'string') {
