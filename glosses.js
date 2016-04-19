@@ -2029,6 +2029,7 @@
         $ID("METABOOKATTACHFILE").className="nofile";
         $ID("METABOOKATTACHFILENAME").innerHTML="";
         fdjt.UI.CheckSpan.set(rightsok,false);        
+        dropClass($ID("METABOOKATTACHFORM"),"editlink");
         metaBook.glossattach=false;
         metaBook.editlink=false;
         fileinput.value="";}
