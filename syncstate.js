@@ -175,7 +175,7 @@
         if (Trace.state) fdjtLog("Restoring (%s) state %j",reason,state);
         if (state.location)
             metaBook.GoTo(state.location,reason||"restoreState",
-                          ((state.target)&&(mbID(state.target))),
+                          ((state.target)?(mbID(state.target)):(false)),
                           false,(!(savehist)));
         else if ((state.page)&&(metaBook.layout)) {
             metaBook.GoToPage(state.page,reason||"restoreState",

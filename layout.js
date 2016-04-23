@@ -476,7 +476,7 @@ metaBook.Paginate=
                             var fn=mB.layoutdone;
                             mB.layoutdone=false;
                             fn();}
-                        if ((mB.state)&&(layout_waiting)) {
+                        if ((mB.state)&&((layout_waiting)||(!(mB.curpage)))) {
                             var state=mB.state;
                             var targetid=state.target||state.hash;
                             mB.GoTo(state.location||state.target||state.hash,

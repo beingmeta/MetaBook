@@ -317,8 +317,9 @@
                     ((savestate)?("s"):("")),((!(skiphist))?("h"):("")),
                     target,((location)?(location):("none")),page,pageno,arg);
         if (!(target)) {
-            if (metaBook.layout instanceof fdjt.CodexLayout)
-                metaBook.GoToPage(page||arg,caller,savestate);
+            if (mB.bypage) {
+                if ((page)&&(metaBook.layout instanceof fdjt.CodexLayout)) 
+                    metaBook.GoToPage(page||arg,caller,savestate);}
             else if (arg.nodeType) {
                 var scan=arg;
                 while (scan) {
@@ -340,10 +341,10 @@
         if (info) {
             metaBook.point=target;
             if (!((metaBook.hudup)||(metaBook.mode))) metaBook.skimpoint=false;}
-        if (mB.docinfo) setHead(target);
-        setLocation(location);
+        if ((target)&&(mB.docinfo)) setHead(target);
+        if (location) setLocation(location);
         if ((istarget)&&(targetid)&&(!(inUI(target)))) setTarget(target);
-        if ((savestate)&&(istarget))
+        if ((savestate)&&(istarget)&&(target))
             metaBook.saveState({
                 target: (target.getAttribute("data-baseid")||target.id),
                 location: location,page: pageno,npages: metaBook.pagecount},
@@ -352,14 +353,17 @@
             metaBook.saveState({location: location,page: pageno,
                                 npages: metaBook.pagecount},
                                skiphist);
-        else if (skiphist) {}
+        else {}
+        if (skiphist) {}
         else if (istarget)
             setHistory({
                 target: (target.getAttribute("data-baseid")||target.id),
                 location: location,page: pageno,npages: metaBook.pagecount});
-        else setHistory({
-            target: (target.getAttribute("data-baseid")||target.id),
-            location: location,page: pageno,npages: metaBook.pagecount});
+        else if (target) 
+            setHistory({
+                target: (target.getAttribute("data-baseid")||target.id),
+                location: location,page: pageno,npages: metaBook.pagecount});
+        else {}
         if (page)
             metaBook.GoToPage(page,caller||"metabookGoTo",false,true);
         else {

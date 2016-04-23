@@ -74,8 +74,8 @@
         mB.mycopyid=string;
         mB.mycopyid_payload=payload;
         mB.mycopyid_expires=expires;
-        mB.saveLocal("mb("+mB.refuri+").mycopyid",string);
-        mB.saveLocal("mb("+mB.docid+").mycopyid",string);
+        mB.saveLocal("mB("+mB.refuri+").mycopyid",string);
+        mB.saveLocal("mB("+mB.docid+").mycopyid",string);
         var waiting=need_mycopyid; need_mycopyid=[];
         var i=0, lim=waiting.length; while (i<lim) {
             waiting[i++](string);}

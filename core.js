@@ -112,6 +112,24 @@
         fdjtState.dropSession(key);}
     metaBook.clearLocal=clearLocal;
 
+    function dropVal(key,val){
+        var local=fdjtState.getLocal(key,true);
+        var session=fdjtState.getSession(key,true);
+        if (local) {
+            if (!(val)) fdjtState.dropLocal(key);
+            else if (local.indexOf(val)>=0) {
+                local=RefDB.remove(local,val);
+                if (local.length)
+                    fdjtState.setLocal(key,local);
+                else fdjtState.dropLocal(key,local);}}
+        if (session) {
+            if (!(val)) fdjtState.dropSession(key);
+            else if (session.indexOf(val)>=0) {
+                session=RefDB.remove(session,val);
+                if (session.length) 
+                    fdjtState.setSession(key,session);
+                else fdjtState.dropSession(key);}}}
+
     metaBook.focusBody=function(){
         // document.body.focus();
     };
@@ -449,26 +467,33 @@
                 //  contain personalized information
                 fdjt.CodexLayout.clearLayouts();
                 fdjtState.clearLocal();
-                fdjtState.clearSession();}
+                fdjtState.clearSession();
+                window.location.hash="";}
             else {
                 if (typeof docid !== "string") docid=metaBook.docid;
+                if (docid===mB.docid) location.hash="";
                 var sourceid=getLocal("mB("+docid+").sourceid");
                 if (sourceid) metaBook.clearLayouts(sourceid);
+                var refuri=getLocal("mB("+docid+").refuri")||
+                    ((docid===mB.docid)&&(mB.refuri));
+                var docuri=getLocal("mB("+docid+").docuri")||
+                    ((docid===mB.docid)&&(mB.docuri));
+                var refuris=mB.refuris; var r=0, n_refs=refuris.length;
+                while (r<n_refs) {
+                    clearLocal("allids(sources@"+refuris[r]+")");
+                    clearLocal("allids(glosses@"+refuris[r]+")");
+                    r++;}
+                dropVal("mB.docids",docid);
+                dropVal("mB.refuris",refuri);
+                dropVal("mB.docuris",docuri);
                 metaBook.sync=false;
-                clearLocal("mB("+docid+").sources");
-                clearLocal("mB("+docid+").outlets");
-                clearLocal("mB("+docid+").layers");
-                clearLocal("mB("+docid+").etc");
-                clearLocal("mB("+docid+").sync");
-                clearLocal("mB("+docid+").sourceid");
-                clearLocal("mB("+docid+").state");
-                clearLocal("mB("+docid+").opened");
                 // We don't currently clear sources when doing book
                 // specific clearing because they might be shared
                 // between books.  This is a bug.
                 metaBook.glossdb.clearOffline(function(){
                     clearLocal("mB("+docid+").sync");});
-                metaBook.clearGlossData(docid);}}
+                metaBook.clearGlossData(docid);
+                dropVal(new RegExp("mB\\("+docid+"\\).*"));}}
         metaBook.clearOffline=clearOffline;
         
         function refreshOffline(){
