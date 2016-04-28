@@ -85,9 +85,6 @@
     metaBook.setMyCopyId=setMyCopyId;
             
     function addMyCopyToURI(){
-        if ((!(metaBook.user))||(fdjt.device.standalone)||
-            (!(fdjt.device.mobilesafari)))
-            return;
         var auth=mB.mycopyid;
         if (!(auth)) return;
         var v=fdjtState.getQuery("MYCOPYID");
