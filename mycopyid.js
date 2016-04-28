@@ -76,12 +76,25 @@
         mB.mycopyid_expires=expires;
         mB.saveLocal("mB("+mB.refuri+").mycopyid",string);
         mB.saveLocal("mB("+mB.docid+").mycopyid",string);
+        if ((fdjt.device.mobilesafari)&&(!(fdjt.device.standalone))) {
+            addMyCopyToURI();}
         var waiting=need_mycopyid; need_mycopyid=[];
         var i=0, lim=waiting.length; while (i<lim) {
             waiting[i++](string);}
         return string;}
     metaBook.setMyCopyId=setMyCopyId;
             
+    function addMyCopyToURI(){
+        if ((!(metaBook.user))||(fdjt.device.standalone)||
+            (!(fdjt.device.mobilesafari)))
+            return;
+        var auth=mB.mycopyid;
+        if (!(auth)) return;
+        var v=fdjtState.getQuery("MYCOPYID");
+        if (v===auth) return;
+        fdjtState.setQuery("MYCOPYID",auth);}
+    fdjtState.addMyCopyToUri=addMyCopyToURI;
+
     var good_origin=/https:\/\/[^\/]+.(bookhub\.io|metabooks\.net)/;
     function myCopyMessage(evt){
         var origin=evt.origin, data=evt.data;
