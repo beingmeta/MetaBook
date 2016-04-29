@@ -243,7 +243,7 @@
                 ((metaBook.target)&&(metaBook.getRefURI(metaBook.target)))||
                 (metaBook.refuri);
             var sync_uri="https://sync.bookhub.io/v1/sync?";
-            if (typeof state.location !== "number") return;
+            if ((!(state))||(typeof state.location !== "number")) return;
             if (mB.docref)
                 sync_uri=sync_uri+"DOC="+encodeURIComponent(mB.docref);
             else sync_uri=sync_uri+"REFURI="+encodeURIComponent(refuri);
