@@ -92,7 +92,8 @@ metaBook.Paginate=
         function layoutWait(){
             if (!(layout_waiting)) layout_waiting=[];
             layout_preview_next=fdjtTime();
-            fdjtLog("Waiting for layout to finish");
+            if ((Trace.layout)||(Trace.startup)||(Trace.nav)||(Trace.flips)||(Trace.resize))
+                fdjtLog("Waiting for layout to finish");
             setTimeout(function(){addClass("MBLAYOUTWAIT","live");},
                        100);}
         function stopLayoutWait(){
@@ -101,7 +102,8 @@ metaBook.Paginate=
                 dropClass(layout_previewing,"curpage");
                 layout_previewing=false;}
             if (!(layout_waiting)) return;
-            fdjtLog("Done with layout wait");
+            if ((Trace.layout)||(Trace.startup)||(Trace.nav)||(Trace.flips)||(Trace.resize))
+                fdjtLog("Done with layout wait");
             var readyfns=layout_waiting;
             layout_waiting=false;
             layout_preview_next=false;
@@ -1247,11 +1249,15 @@ metaBook.Paginate=
                        (false)));
             var page=((node)&&(getParent(node,".codexpage")));
             if ((page)&&(layout.pages.indexOf(page)<0)) page=false;
-            if ((!(location))||(!(page))) return page;
-            var loc=parseInt(page.getAttribute("data-mbloc"),10);
+            if (!(location)) return page;
+            else if (page) {}
+            else page=layout.pages[0];
+            var loc=(page)?(parseInt(page.getAttribute("data-mbloc"),10)):-1;
             if (loc===location) return page;
             var pages=layout.pages, npages=pages.length;
-            var i=((page)?(parseInt(page.getAttribute("data-pagenum"),10)):(1)); i--;
+            var i=((page)?
+                   (parseInt(page.getAttribute("data-pagenum"),10)):
+                   (1)); i--;
             var prev=page; while (i<npages) {
                 var next=pages[i++];
                 loc=parseInt(next.getAttribute("data-mbloc"),10);
