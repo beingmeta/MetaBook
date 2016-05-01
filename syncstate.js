@@ -433,8 +433,8 @@
         var latest=xstate.location, farthest=xstate.maxloc, loclen=xstate.loclen;
         var prefer_current=
             ((state.location>17)&&((now-state.changed)<(3600*24)));
-        var prefer_latest=((farthest-loclen)<80);
-        if (farthest>state.location)
+        var prefer_latest=((loclen-farthest)>100);
+        if ((farthest)&&(farthest>state.location)&&((loclen-farthest)>20))
             choices.push(
                 {label: "farthest @"+loc2pct(farthest,loclen),
                  title: "your farthest location on any device/app",
@@ -444,7 +444,7 @@
                      state=metaBook.state; state.changed=fdjtTime.tick();
                      metaBook.saveState(state,true,true);
                      metaBook.hideCover();}});
-        if ((latest!==state.location)&&(latest!==farthest))
+        if ((latest)&&(latest!==state.location)&&(latest!==farthest))
             choices.push(
                 {label: ("latest @"+loc2pct(latest,loclen)),
                  title: "the most recent location on any device/app",
