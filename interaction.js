@@ -592,7 +592,7 @@
             choices.push({label: "Copy content",
                           handler: function(){copyContent(passage);}});}
         */
-        if (true) choices.push(
+        choices.push(
             {label: "Zoom content",
              classname: "zoomcontent",
              handler: function(){
