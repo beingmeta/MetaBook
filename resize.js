@@ -37,6 +37,7 @@
 (function (){
     "use strict";
     var fdjtDOM=fdjt.DOM, fdjtLog=fdjt.Log, $ID=fdjt.ID;
+    var hasClass=fdjtDOM.hasClass;
     var addClass=fdjtDOM.addClass;
     var showPage=fdjt.showPage;
     var fdjtUI=fdjt.UI;
@@ -84,13 +85,10 @@
 
     function metabookResize(){
         var layout=mB.layout;
-        if (Trace.resize)
-            fdjtLog("Real resize w/layout=%o",layout);
         if (resizing) {
             clearTimeout(resizing); resizing=false;}
         updateSizeClasses();
         mB.resizeUI();
-        mB.sizeContent();
         // Unscale the layout
         if (layout) mB.scaleLayout(false);
         if ((mB.touch)&&
@@ -109,6 +107,13 @@
             if (layout) metaBook.scaleLayout(true);
             if (Trace.resize) fdjtLog("Resize to norm, ignoring");
             return;}
+        if ((hasClass(document.body,"mbZOOM"))||
+            (hasClass(document.body,"mbMEDIA"))) {
+            resizing=setTimeout(metabookResize,1000);
+            return;}
+        if (Trace.resize)
+            fdjtLog("Real resize w/layout=%o",layout);
+        mB.sizeContent();
         resizePagers();
         // Set these values to the new one
         outer_width=window.outerWidth;
