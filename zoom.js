@@ -175,17 +175,15 @@
         if ((evt.touches.length===2)&&(typeof d_last === 'number')) {
             var touch2=touches[1];
             var x2=touch2.clientX, y2=touch2.clientY;
-            var ncg_x=((x1+x2)/2), ncg_y=((y1+y2)/2);
+            var ncg_x=(x1+x2)/2, ncg_y=(y1+y2)/2;
             var dx=x2-x1, dy=y2-y1, d=Math.sqrt((dx*dx)+(dy*dy));
             var scale=((d/d_start)*(zoomscale));
-            off_x=off_x+((ncg_x*scale)-(ncg_x*zoomscale));
+            off_x=off_x+((ncg_x*zoomscale)-(ncg_x*scale));
             off_y=off_y+((ncg_y*zoomscale)-(ncg_y*scale));
             if ((Trace.zoom)||(Trace.gestures>1))
                 fdjtLog("zoom_touchmove(2) %o: d=%o->%o@[%o,%o] [%o,%o] [%o,%o]",
                         evt,d_last,d,ncg_x,ncg_y,x1,y1,x2,y2);
-            zbs[transform]=
-                "translate3d("+off_x+"px,"+off_y+"px,0px) "+
-                "scale("+scale+") ";
+            zbs[transform]="translate3d("+off_x+"px,"+off_y+"px) "+"scale("+scale+",0)";
             if (Trace.zoom) fdjtLog("%s %o: %s",transform,zb,zbs[transform]);
             cg_x=ncg_x; cg_y=ncg_y; d_last=d;
             cancel(evt);}
@@ -197,7 +195,7 @@
                         evt,off_x,off_y,mB.zoomX,mB.zoomY,pan_dx,pan_dy,
                         x1,y1,panstart_x,panstart_y);
             zbs[transform]=
-                "translate3d("+off_x+"px,"+off_y+"px,0px) "+"scale("+zoomscale+")";
+                "translate3d("+off_x+"px,"+off_y+"px) "+"scale("+zoomscale+",0)";
             if (Trace.zoom) fdjtLog("%s %o: %s",transform,zb,zbs[transform]);
             cancel(evt);}
         else {}}
