@@ -201,7 +201,7 @@ body.mbCOVER #METABOOKHUD, body.hudup.mbCOVER #METABOOKHUD {
     overflow-x: scroll; overflow-y: scroll;
     display: none; }
 #METABOOKZOOMBOX {
-    transform-origin: top center;
+    transform-origin: top left;
     z-index: 50;}
 #METABOOKZOOMTARGET {
     display: inline-block; 
