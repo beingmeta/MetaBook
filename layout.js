@@ -221,7 +221,7 @@ metaBook.Paginate=
             var forced=((init)&&(init.forced));
             var geom=getGeometry($ID("CODEXPAGE"),false,true);
             var height=geom.inner_height, width=geom.width;
-            var justify=mB.textjustify;
+            var justify=mB.justify;
             var spacing=mB.bodyspacing;
             var size=mB.bodysize||"normal";
             var family=(mB.dyslexical)?("opendyslexic"):
@@ -575,6 +575,7 @@ metaBook.Paginate=
                     addClass(document.body,"_SCROLL");
                     fdjt.DOM.adjustFonts(mB.content);}});
 
+        var layout_flags=/justify/;
         function updateLayoutProperty(name,val){
             // This updates layout properties
             if (val===true) 
@@ -582,6 +583,10 @@ metaBook.Paginate=
             else if (!(val))
                 fdjtDOM.dropClass(
                     mB.body,new RegExp("metabook"+name+"\\w*"));
+            else if (name.search(layout_flags)>=0) {
+                fdjtDOM.swapClass(
+                    mB.body,new RegExp("metabook"+name+"\\w*"),
+                    "metabook"+name);}
             else fdjtDOM.swapClass(
                 mB.body,new RegExp("metabook"+name+"\\w*"),
                 "metabook"+name+val);
@@ -604,7 +609,7 @@ metaBook.Paginate=
         mB.addConfig("bodysize",updateLayoutProperty);
         mB.addConfig("bodyfamily",updateLayoutProperty);
         mB.addConfig("bodyspacing",updateLayoutProperty);
-        mB.addConfig("textjustify",updateLayoutProperty);
+        mB.addConfig("justify",updateLayoutProperty);
         
         function getLayoutID(width,height,family,size,spacing,
                              justify,source_id){
@@ -620,7 +625,7 @@ metaBook.Paginate=
             if (!(size)) size=mB.bodysize||"normal";
             if (!(source_id))
                 source_id=mB.sourceid||fdjtHash.hex_md5(mB.docuri);
-            if (!(justify)) justify=mB.textjustify;
+            if (!(justify)) justify=mB.justify;
             if (!(spacing)) spacing=mB.linespacing;
             page.style.left=left; page.style.right=right;
             return fdjtString(
@@ -670,7 +675,7 @@ metaBook.Paginate=
             var bodysize=mB.bodysize||"normal";
             var docref=mB.docref;
             var sourceid=mB.sourceid;
-            var justify=mB.textjustify;
+            var justify=mB.justify;
             var spacing=mB.linespacing;
             var sourcehash=fdjt.CodexLayout.sourcehash;
             var layout_id=fdjtString(

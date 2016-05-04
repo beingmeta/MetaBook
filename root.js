@@ -159,7 +159,7 @@ var metaBook={
     default_config: {
         layout: 'bypage',
         bodysize: 'normal',bodyfamily: 'serif',
-        bodycontrast: 'high', textjustify: false,
+        bodycontrast: 'high', justify: true,
         linespacing: 'normal',
         uisize: 'normal',dyslexical: false,
         animatecontent: true,animatehud: true,
