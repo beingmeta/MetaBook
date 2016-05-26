@@ -266,7 +266,7 @@
     } metaBook.resolveLocation=resolveLocation;
 
     // This moves within the document in a persistent way
-    function metabookGoTo(arg,caller,istarget,savestate,skiphist){
+    function metabookGoTo(arg,caller,istarget,savestate,skiphist,forgetcur){
         if (typeof istarget === 'undefined') istarget=true;
         if (typeof savestate === 'undefined') savestate=true;
         var target, location, locinfo;
@@ -297,6 +297,8 @@
         else {
             fdjtLog.warn("Bad metabookGoTo %o",arg);
             return;}
+        // Save the current state
+        if ((mB.state)&&(!(forgetcur))) setHistory(mB.state);
         if ((istarget)&&(istarget.nodeType)) target=istarget;
         else if ((typeof istarget === "string")&&(mbID(istarget)))
             target=mbID(istarget);
@@ -383,7 +385,9 @@
             if (target.href) break; else target=target.parentNode;
         if ((target)&&(target.href)&&(target.href[0]==='#')) {
             var elt=mbID(target.href.slice(1));
-            if (elt) {metaBook.GoTo(elt,"anchorFn"); fdjtUI.cancel(evt);}}}
+            if (elt) {
+                metaBook.GoTo(elt,"anchorFn"); 
+                fdjtUI.cancel(evt);}}}
     metaBook.anchorFn=anchorFn;
 
     // This jumps and disables the HUD at the same time

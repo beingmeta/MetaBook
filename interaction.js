@@ -295,9 +295,9 @@
             if (mB.hudup)
                 setHUD(false,false);
             else if ((touch)&&(cX<vw/4)) 
-                pageBackward(evt,true);
+                pageBackward(evt,"body_tapped/skimming",true);
             else  if ((touch)&&(cX<vw/4)) 
-                pageForward(evt,true);
+                pageForward(evt,"body_tapped/skimming",true);
             else setHUD(false);
             cancel(evt);
             return;}
@@ -341,8 +341,8 @@
             ((cY<50)||(cY>(fdjtDOM.viewHeight()-50)))) 
             setHUD(true);
         else if (cX<(fdjtDOM.viewWidth()*0.4)) 
-            pageBackward(evt,true);
-        else pageForward(evt,true);
+            pageBackward(evt,"body_tapped",true);
+        else pageForward(evt,"body_tapped",true);
         cancel(evt); gesture_start=false;
         return;}
 
@@ -696,8 +696,8 @@
                  (evt.changedTouches.length)&&
                  (evt.changedTouches[0].clientX));
             var w=fdjtDOM.viewWidth();
-            if (x>(w/2)) pageForward(evt);
-            else pageBackward(evt);}}
+            if (x>(w/2)) pageForward(evt,"body_touchend");
+            else pageBackward(evt,"body_touchend");}}
     
     function body_released(evt){
         evt=evt||window.event;
@@ -750,7 +750,7 @@
                     if (evt.touches===2)
                         showPage.fastForward(pagers[metaBook.mode]);
                     else showPage.forward(pagers[metaBook.mode]);}
-                else pageForward(evt,true);}
+                else pageForward(evt,"body_swiped",true);}
             else if (dx>(mB.minswipe||10)) {
                 if (evt.ntouches>2) window.history.back();
                 else if (evt.ntouches>1) {
@@ -762,7 +762,7 @@
                     if (evt.touches===2)
                         showPage.fastBckward(pagers[metaBook.mode]);
                     else showPage.backward(pagers[metaBook.mode]);}
-                else pageBackward(evt,true);}}
+                else pageBackward(evt,"body_swiped",true);}}
         else if (ady>(adx*2)) {
             // Vertical swipe
             if (!(mB.hudup)) {
@@ -1030,14 +1030,14 @@
             input.dispatchEvent(new_evt);
             cancel(evt);
             return;}
-        else if (kc===34) pageForward(evt);   /* page down */
-        else if (kc===33) pageBackward(evt);  /* page up */
+        else if (kc===34) pageForward(evt,"mb_onkeydown/pgdn");   /* page down */
+        else if (kc===33) pageBackward(evt,"mb_onkeydown/pgup");  /* page up */
         else if (kc===40) { /* arrow down */
             setHUD(false);
-            pageForward(evt);}
+            pageForward(evt,"mb_onkeydown/arrowdn");}
         else if (kc===38) {  /* arrow up */
             setHUD(false);
-            pageBackward(evt);}
+            pageBackward(evt,"mb_onkeydown/arrowup");}
         else if (kc===37) {  /* arrow left */
             if ((mB.mode)&&(!(mB.skimming))&&
                 (pagers[metaBook.mode]))
@@ -1056,13 +1056,13 @@
                 if (evt.shiftKey)
                     showPage.fastForward(pagers[metaBook.mode]);
                 else showPage.forward(pagers[metaBook.mode]);}
-            else pageForward(evt,true);}
+            else pageForward(evt,"mb_onkeydown/space");}
         else if ((kc===8)||(kc===45)) { // backspace or delete
             if ((mB.mode)&&(!(mB.skimming))&& (pagers[metaBook.mode])) {
                 if (evt.shiftKey)
                     showPage.fastBackward(pagers[metaBook.mode]);
                 else showPage.backward(pagers[metaBook.mode]);}
-            else pageBackward(evt,true);}
+            else pageBackward(evt,"mb_onkeydown/space",true);}
         // Home goes to the current head.
         else if (kc===36) metaBook.JumpTo(mB.head);
         else if (mB.mode==="addgloss") {
@@ -1342,7 +1342,7 @@
 
     var last_motion=false;
 
-    function forward(evt){
+    function forward(evt,caller){
         if (!(evt)) evt=window.event||false;
         if (evt) cancel(evt);
         if (Trace.nav)
@@ -1354,9 +1354,9 @@
             showPage.forward(pagers[metaBook.mode]);
         else if ((evt)&&(evt.shiftKey))
             skimForward(evt);
-        else pageForward(evt);}
+        else pageForward(evt,caller||"mB.forward");}
     metaBook.Forward=forward;
-    function backward(evt){
+    function backward(evt,caller){
         if (!(evt)) evt=window.event||false;
         if (evt) cancel(evt);
         if (Trace.nav)
@@ -1368,13 +1368,13 @@
             showPage.backward(pagers[metaBook.mode]);
         else if ((evt)&&(evt.shiftKey))
             skimBackward();
-        else pageBackward();}
+        else pageBackward(evt,caller||"mB.backward");}
     metaBook.Backward=backward;
 
     function preview_touchmove_nodefault(evt){
         if (mB.previewing) fdjtUI.noDefault(evt);}
 
-    function pageForward(evt,clearmodes){
+    function pageForward(evt,caller,clearmodes){
         evt=evt||window.event;
         dropClass(document.body,/\bmb(PAGE)?PREVIEW/g);
         var now=fdjtTime();
@@ -1386,8 +1386,9 @@
         else {}
         if (mB.readsound)
             fdjtDOM.playAudio("METABOOKPAGEORWARDAUDIO");
-        if ((Trace.gestures)||(Trace.flips))
-            fdjtLog("pageForward (on %o) c=%o n=%o",
+        if ((Trace.gestures)||(Trace.nav)||(Trace.flips))
+            fdjtLog("pageForward%s (on %o) c=%o n=%o",
+                    ((caller)?"":("/"+caller)),
                     evt,mB.curpage,mB.pagecount);
         if ((mB.bypage)&&(typeof metaBook.curpage === "number")) {
             var pagemax=((mB.bypage)&&
@@ -1403,7 +1404,7 @@
             window.scrollTo(fdjtDOM.viewLeft(),newy);}}
     metaBook.pageForward=pageForward;
 
-    function pageBackward(evt,clearmodes){
+    function pageBackward(evt,caller,clearmodes){
         var now=fdjtTime();
         dropClass(document.body,/\bmb(PAGE)?PREVIEW/g);
         if ((last_motion)&&((now-last_motion)<100)) return;
@@ -1413,8 +1414,9 @@
         else {}
         if (mB.readsound)
             fdjtDOM.playAudio("METABOOKPAGEBACKWARDAUDIO");
-        if ((Trace.gestures)||(Trace.flips))
-            fdjtLog("pageBackward (on %o) c=%o n=%o",
+        if ((Trace.gestures)||(Trace.nav)||(Trace.flips))
+            fdjtLog("pageBackward/%s (on %o) c=%o n=%o",
+                    ((caller)?"":("/"+caller)),
                     evt,mB.curpage,mB.pagecount);
         if ((mB.bypage)&&(typeof metaBook.curpage === "number")) {
             var newpage=false;
@@ -1880,7 +1882,10 @@
 
     function cancelNotAnchor(evt){
         var target=fdjt.UI.T(evt);
-        if (hasParent(target,"A[href]")) {
+        if ((hasParent(target,mB.HUD))||(hasParent(target,mB.body))) {
+            // Handled by tap
+            cancel(evt);}
+        else if (hasParent(target,"A[href]")) {
             if ((clicked)&&((fdjtTime()-clicked)<2000)) 
                 cancel(evt);
             return;}
@@ -1950,12 +1955,12 @@
          "#MBPAGERIGHT": {click: function(evt){
              if (hasClass(document.body,"mbSKIMMING"))
                  skimForward(evt);
-             else pageForward(evt); 
+             else pageForward(evt,"#MBPAGERIGHT"); 
              cancel(evt);}},
          "#MBPAGELEFT": {click: function(evt){
              if (hasClass(document.body,"mbSKIMMING"))
                  skimBackward(evt);
-             else pageBackward(evt); 
+             else pageBackward(evt,"#MBPAGELEFT"); 
              cancel(evt);}},
          "#METABOOKSHOWTEXT": {click: back_to_reading},
          "#METABOOKGLOSSDETAIL": {click: metaBook.UI.dropHUD},
@@ -2055,12 +2060,12 @@
          "#MBPAGERIGHT": {touchstart: function(evt){
              if (hasClass(document.body,"mbSKIMMING"))
                  skimForward(evt);
-             else pageForward(evt); 
+             else pageForward(evt,"#MBPAGERIGHT"); 
              cancel(evt);}},
          "#MBPAGELEFT": {touchstart: function(evt){
              if (hasClass(document.body,"mbSKIMMING"))
                  skimBackward(evt);
-             else pageBackward(evt); 
+             else pageBackward(evt,"#MBPAGELEFT"); 
              cancel(evt);}},
          "#METABOOKHELP": {tap: toggleHelp, swipe: cancel},
          "#METABOOKHELPBUTTON": {

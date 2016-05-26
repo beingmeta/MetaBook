@@ -149,7 +149,7 @@
         fdjtAsync.slowmap(function(string){
             searchlist.appendChild(knodeToOption(string));},
                          metaBook.textindex.allterms,
-                         {slice: 100,space: 20});
+                         {slice: 50,space: 20});
         metaBook.sortCloud(empty_cloud);
         metaBook.sortCloud(gloss_cloud);
         metaBook.sizeCloud(empty_cloud,metaBook.tagfreqs,[]);
@@ -256,7 +256,7 @@
         fdjtAsync.slowmap(
             handleIndexEntry,alltags,
             {watchfn: ((alltags.length>100)&&(tracelevel>1)&&(indexProgress)),
-             slice: 200,space: 10})
+             slice: 50,space: 5})
             .then(function(state){
                 fdjtLog("Book index links %d keys to %d refs",ntags,nitems);
                 dropClass(document.body,"mbINDEXING");
@@ -372,7 +372,7 @@
             handle_inline_tags,
             tohandle,
             {watchfn: ((tohandle.length>100)&&(index_progress)),
-             done: index_done,slice: 200, space: 5});}
+             done: index_done,slice: 50, space: 5});}
     metaBook.applyTagAttributes=applyTagAttributes;
     
     function handle_inline_tags(info){
