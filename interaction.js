@@ -736,6 +736,7 @@
         if (Trace.gestures)
             fdjtLog("swiped d=%o,%o, ad=%o,%o, s=%o,%o vw=%o, n=%o",
                     dx,dy,adx,ady,evt.startX,evt.startY,vw,evt.ntouches);
+        body_tapstart=false;
         if (adx>(ady*1.25)) {
             // Horizontal swipe
             if (dx<-(mB.minswipe||10)) {
