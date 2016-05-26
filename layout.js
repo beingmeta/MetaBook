@@ -128,7 +128,7 @@ metaBook.Paginate=
             var fpb=$ID("METABOOKLAYOUTADJUST");
             if (layout_waiting) {
                 var layout=mB.layout, now=fdjtTime();
-                if (fpb) fpb.innerHTML="Updating layout ("+Math.round(pct)+"%)";
+                if (fpb) fpb.innerHTML="Layout ("+Math.round(pct)+"%)";
                 if (now>layout_preview_next) {
                     var pages=layout.pages, latest=pages[pages.length-2];
                     dropClass(layout_previewing,"curpage");
@@ -138,7 +138,7 @@ metaBook.Paginate=
                         addClass(latest,"previewcurpage");}
                     layout_previewing=latest;
                     layout_preview_next=now+layout_preview_interval;}}
-            else if (fpb) fpb.innerHTML="Finishing layout @"+Math.round(pct)+"%";
+            else if (fpb) fpb.innerHTML="Finishing @"+Math.round(pct)+"%";
             else {}}
 
         var layout_next_report=false;
