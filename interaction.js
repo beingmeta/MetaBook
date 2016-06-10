@@ -607,9 +607,7 @@
         cancel(evt);
         choices.push(
             {label: "Cancel",
-             classname: "cancel",
-             handler: function(){
-                 metaBook.cancelGloss();}});
+             classname: "cancel"});
         var spec={choices: choices,
                   spec: "div.fdjtdialog.metabooktaptap"};
         metaBook.passage_menu=fdjtUI.choose(spec);}
