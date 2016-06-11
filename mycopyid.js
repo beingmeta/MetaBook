@@ -102,11 +102,16 @@
             fdjtLog.warn("Rejecting insecure message from %s: %s",
                          origin,evt.data);
             return;}
-        if (data.search(/^mycopyid=/)===0) {
+        if (!(data)) {
+            fdjtLog.warn("No data provided for message from %s",origin);
+            return;}
+        else if ((data.search)&&(data.search(/^mycopyid=/)===0)) {
             var mycopyid=data.slice(9);
             setMyCopyId(mycopyid);
             return;}
-        else return;}
+        else {
+            fdjtLog.warn("Not a mycopy message from %s: %s",origin,data);
+            return;}}
     fdjtDOM.addListener(window,"message",myCopyMessage);
 
     var getting_mycopyid=false;
