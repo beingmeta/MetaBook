@@ -49,17 +49,17 @@ body.mbMEDIA #METABOOKBODY, body.mbZOOM #METABOOKBODY {
     box-sizing: border-box;}
 
 #METABOOKBODY {
-    font-size: 2em;}
+    font-size: 2vw;}
 #METABOOKBODY.metabookbodysizexlarge {
-    font-size: 4em;}
+    font-size: 4vw;}
 #METABOOKBODY.metabookbodysizelarge {
-    font-size: 3em;}
+    font-size: 3vw;}
 #METABOOKBODY.metabookbodysizenormal {
-    font-size: 2em;}
+    font-size: 2vw;}
 #METABOOKBODY.metabookbodysizesmall {
-    font-size: 1.25em;}
+    font-size: 1.25vw;}
 #METABOOKBODY.metabookbodysizetiny {
-    font-size: 0.8em;}
+    font-size: 0.8vw;}
 .metabookbody.metabooklinespacingsingle {
     line-height: 100%;}
 .metabookbody.metabooklinespacingdouble {

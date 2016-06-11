@@ -154,11 +154,11 @@ form.metabooksettings div.fontsizes
   span.checkspan input[TYPE="RADIO"] { display: none; }
 form.metabooksettings div.fontsizes span.checkspan.ischecked {
     border-color: blue; }
-form.metabooksettings div.fontsizes span.sample.xlarge { font-size: 225%; }
-form.metabooksettings div.fontsizes span.sample.large { font-size: 180%; }
-form.metabooksettings div.fontsizes span.sample.normal { font-size: 150%; }
-form.metabooksettings div.fontsizes span.sample.small { font-size: 100%; }
-form.metabooksettings div.fontsizes span.sample.tiny { font-size: 75%; }
+form.metabooksettings div.fontsizes span.sample.xlarge { font-size: 4vw; }
+form.metabooksettings div.fontsizes span.sample.large { font-size: 3vw; }
+form.metabooksettings div.fontsizes span.sample.normal { font-size: 2vw; }
+form.metabooksettings div.fontsizes span.sample.small { font-size: 1.25vw; }
+form.metabooksettings div.fontsizes span.sample.tiny { font-size: 0.8vw; }
 
 form.metabooksettings > div.checkspan {
     white-space: normal; margin-top: 0.5ex;}
