@@ -128,12 +128,15 @@
         var cotags=query.getCoTags();
         var showtags=query.getRefiners();
         var input=getChild(box,".searchinput");
-        var cloudid=input.getAttribute("completions");
-        var infoid=input.getAttribute("info");
+        var cloudid=input.getAttribute("data-completions")||
+            input.getAttribute("completions");
+        var infoid=input.getAttribute("data-searchinfo")||
+            input.getAttribute("info");
         var qtags=getChild(box,".qtags")||$ID("METABOOKSEARCHTAGS");
         /* These should possibly be used in initializing the .listing
          * field of the query */
-        //var resultsid=input.getAttribute("results");
+        //var resultsid=input.getAttribute("data-results")
+        //    ||input.getAttribute("results");
         //var results=((resultsid)&&($ID(resultsid)));
         var info=((infoid)&&($ID(infoid)));
         var resultcount=getChild(info,".resultcount");

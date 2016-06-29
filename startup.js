@@ -1098,8 +1098,8 @@ metaBook.Startup=
             if ((elt.toclevel)||
                 ((elt.getAttributeNS)&&
                  (elt.getAttributeNS('toclevel','http://beingmeta.com/TOC/')))||
-                (elt.getAttribute('toclevel'))||
                 (elt.getAttribute('data-toclevel'))||
+                (elt.getAttribute('toclevel'))||
                 ((elt.className)&&(elt.className.search)&&
                  ((elt.className.search(/\b(sbook|pubtool)\dhead\b/)>=0)||
                   (elt.className.search(/\b(sbook|pubtool)notoc\b/)>=0)||

@@ -1120,7 +1120,8 @@ metaBook.Slice=(function () {
                     return;}}
             else skimpoint=mB.skimming.skimpoint;
             if (!(skimpoint)) mB.setMode(false);
-            var curname=skim.getAttribute("name"), newname=skimpoint.getAttribute("name");
+            var curname=skim.getAttribute("name");
+            var newname=skimpoint.getAttribute("name");
             if (curname===newname) return;
             var clone=skimpoint.cloneNode(true);
             if (clone.id) clone.id="METABOOKSKIM";
