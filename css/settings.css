@@ -123,6 +123,9 @@ form.metabooksettings > div.info {
     margin-top: 1.5ex;
     border-top: solid gray 4px;}
 
+form.metabooksettings > div.info {
+    padding-top: 0.4ex;}
+
 form.metabooksettings > div.fontsizes span.samples {
     font-size: 150%;}
 
@@ -154,11 +157,16 @@ form.metabooksettings div.fontsizes
   span.checkspan input[TYPE="RADIO"] { display: none; }
 form.metabooksettings div.fontsizes span.checkspan.ischecked {
     border-color: blue; }
-form.metabooksettings div.fontsizes span.sample.xlarge { font-size: 7vw; }
-form.metabooksettings div.fontsizes span.sample.large { font-size: 5vw; }
-form.metabooksettings div.fontsizes span.sample.normal { font-size: 3vw; }
-form.metabooksettings div.fontsizes span.sample.small { font-size: 2vw; }
-form.metabooksettings div.fontsizes span.sample.tiny { font-size: 1vw; }
+form.metabooksettings div.fontsizes span.sample.xlarge { 
+    font-size: calc( 1em + 6vmin );}
+form.metabooksettings div.fontsizes span.sample.large { 
+    font-size: calc( 1em + 4vmin );}
+form.metabooksettings div.fontsizes span.sample.normal { 
+    font-size: calc( 1em + 2vmin );}
+form.metabooksettings div.fontsizes span.sample.small { 
+    font-size: calc( 1ex + 2vmin );}
+form.metabooksettings div.fontsizes span.sample.tiny { 
+    font-size: calc( 1ex + 1vmin ); }
 
 form.metabooksettings > div.checkspan {
     white-space: normal; margin-top: 0.5ex;}
