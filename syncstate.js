@@ -133,9 +133,6 @@
         if (Trace.state)
             fdjtLog("saveState skiphist=%o force=%o state=%j",
                     skiphist,force,state);
-        metaBook.state=state;
-        var statestring=JSON.stringify(state);
-        saveLocal("mB("+mB.docid+").state",statestring);
         if ((!(syncing))&&(metaBook.locsync)&&(metaBook.user)&&
             ((!(metaBook.xstate))||(state.changed>metaBook.xstate.changed)))
             syncState(true);
@@ -143,6 +140,13 @@
             (window.history)&&(window.history.pushState))
             setHistory(state,frag,title);
     } metaBook.saveState=saveState;
+
+    function saveStateLocal(state){
+        metaBook.state=state;
+        var statestring=JSON.stringify(state);
+        saveLocal("mB("+mB.docid+").state",statestring);
+    } metaBook.saveStateLocal=saveStateLocal;
+
 
     // This sets the browser history from a particular state
     function setHistory(state,hash,title){
@@ -189,7 +193,7 @@
                 setTarget(mbID(state.target));}
         if (!(state.refuri)) state.refuri=metaBook.refuri;
         if (!(state.docuri)) state.docuri=metaBook.docuri;
-        saveState(state);
+        saveStateLocal(state);
     } metaBook.restoreState=restoreState;
 
     function clearState(){
@@ -450,7 +454,7 @@
                  title: "the most recent location on any device/app",
                  isdefault: ((prefer_latest)&&(!(prefer_current))),
                  handler: function(){
-                     metaBook.restoreState(xstate); state=metaBook.state;
+                     metaBook.restoreState(xstate);
                      state.changed=fdjtTime.tick();
                      metaBook.saveState(state,true,true);
                      metaBook.hideCover();}});
@@ -462,6 +466,7 @@
                  isdefault: prefer_current,
                  handler: function(){
                      state.changed=fdjtTime.tick();
+                     metaBook.restoreState(state);
                      metaBook.saveState(state,true,true);
                      metaBook.hideCover();}});
         if (choices.length)
