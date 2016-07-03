@@ -645,6 +645,10 @@ metaBook.setMode=
         function initIFrameApp(){
             if (iframe_app_init) return;
             if (mB.appinit) return;
+            var server=fdjtState.getLocal('BOOKHUB.flyleaf')||
+                fdjtState.getCookie('BOOKHUB.flyleaf')||
+                mB.server;
+            if (server==="sourcedomain") server=location.hostname;
             var query="";
             if (document.location.search) {
                 if (document.location.search[0]==="?")
@@ -653,7 +657,7 @@ metaBook.setMode=
             if ((query.length)&&(query[query.length-1]!=="&"))
                 query=query+"&";
             var refuri=mB.refuri;
-            var appuri="https://"+mB.server+"/flyleaf?"+query;
+            var appuri="https://"+server+"/flyleaf?"+query;
             if (query.search("REFURI=")<0)
                 appuri=appuri+"REFURI="+encodeURIComponent(refuri);
             if (mB.mycopyid)
