@@ -656,16 +656,8 @@ metaBook.setMode=
             var appuri="https://"+mB.server+"/flyleaf?"+query;
             if (query.search("REFURI=")<0)
                 appuri=appuri+"REFURI="+encodeURIComponent(refuri);
-            if (query.search("TOPURI=")<0)
-                appuri=appuri+"&TOPURI="+
-                encodeURIComponent(document.location.href);
-            if (document.title) {
-                appuri=appuri+"&DOCTITLE="+encodeURIComponent(document.title);}
-            if (mB.user) {
-                appuri=appuri+"&BOOKUSER="+encodeURIComponent(mB.user._id);}
-            if (document.location.hash) {
-                appuri=appuri+"&HASH="+document.location.hash.slice(1);}
-
+            if (mB.mycopyid)
+                appuri=appuri+"&MYCOPYID="+encodeURIComponent(mB.mycopyid);
             var app=$ID("BOOKHUBAPP");
             app.src=appuri;
             iframe_app_init=true;}
