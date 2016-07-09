@@ -452,12 +452,14 @@ metaBook.Startup=
             if (!(_head_ready)) return;
             metaBook._starting=_head_processing=fdjtTime();
             /* Cleanup, save initial hash location */
-            if ((location.hash==="null")||(location.hash==="#null"))
+            if ((location.hash==="null")||
+                (location.hash==="#null")||
+                (location.hash==="#undefined"))
                 location.hash="";
             if ((location.hash)&&(location.hash!=="#")) {
                 var hash=location.hash;
                 if (hash[0]==='#') hash=hash.slice(1);
-                if (glosshash_pat.exec(location.hash))
+                if (glosshash_pat.exec(hash))
                     metaBook.glosshash=hash;
                 else metaBook.inithash=location.hash;}
             addClass(document.body,"mbSTARTUP");

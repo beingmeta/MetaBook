@@ -94,6 +94,12 @@
                 state.location=false;
                 state.changed=fdjtTime.tick();
                 saveLocal("mB("+mB.docid+").state",state,true);}}
+        else if ((hash)&&(hash.search("MBLOC")===0)) {
+            var loc=parseInt(hash.slice(5));
+            if ((!(state))||(state.location!==loc)) {
+                state={refuri: mB.refuri, docuri: mB.docuri,
+                       location: loc, change: fdjtTime.tick()};
+                saveLocal("mB("+mB.docid+").state",state,true);}}
         if (state) metaBook.state=state;};
     
     // This records the current state of the app, bundled into an
@@ -139,6 +145,7 @@
         if ((!(skiphist))&&(frag)&&
             (window.history)&&(window.history.pushState))
             setHistory(state,frag,title);
+        saveStateLocal(state);
     } metaBook.saveState=saveState;
 
     function saveStateLocal(state){
@@ -164,14 +171,16 @@
                 metaBook.docinfo[hash].head.title;}
         if ((!(hash))&&(state.location)&&
             (typeof state.location === "number"))
-            hash="SBOOKLOC"+state.location;
+            hash="MBLOC"+state.location;
         if (Trace.state)
             fdjtLog("Pushing history %j %s (%s) '%s'",
                     state,href,title);
         if ((!(window.history.state))||
             (window.history.state.target!==state.target)||
             (window.history.state.location!==state.location)) {
-            window.history.pushState(state,title,href+"#"+hash);}
+            if (hash)
+                window.history.pushState(state,title,href+"#"+hash);
+            else window.history.pushState(state,title,href);}
     }
     metaBook.setHistory=setHistory;
 
