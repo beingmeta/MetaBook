@@ -1283,15 +1283,17 @@ metaBook.Paginate=
         metaBook.getPage=getPage;
         
         function loc2page(loc,layout){
-            var pages=layout.pages, n=pages.length-1, i=n;
+            var pages=layout.pages, n=pages.length-1, i=n, mbloc;
             while (i>=0) {
-                var page=pages[i], mbloc=page.getAttribute("data-mbloc");
+                var page=pages[i];
+                mbloc=page.getAttribute("data-mbloc");
                 if (mbloc) mbloc=parseInt(mbloc);
                 if (loc===mbloc) return page;
                 else if (loc<mbloc) i--;
-                else if (i===n) return false;
                 else return page[n+1];}
-            return false;}
+            if (loc<mbloc)
+                return pages[0];
+            else return false;}
 
         function refreshLayout(why,slice,skip){
             var opts={forced: true};
