@@ -59,6 +59,9 @@
 
     var getLocal=fdjtState.getLocal;
     var setLocal=fdjtState.setLocal;
+    var dropLocal=fdjtState.dropLocal;
+    var setSession=fdjtState.setSession;
+    var dropSession=fdjtState.dropSession;
     var existsLocal=fdjtState.existsLocal;
     
     var mB=metaBook;
@@ -93,7 +96,7 @@
     function saveLocal(key,value,unparse){
         if (unparse) value=unparser(value);
         if (mB.persist) setLocal(key,value,false);
-        else fdjtState.setSession(key,value,false);}
+        else setSession(key,value,false);}
     metaBook.saveLocal=saveLocal;
 
     function readLocal(key,parse){
@@ -108,27 +111,27 @@
     metaBook.readLocal=readLocal;
 
     function clearLocal(key){
-        fdjtState.dropLocal(key);
-        fdjtState.dropSession(key);}
+        dropLocal(key);
+        dropSession(key);}
     metaBook.clearLocal=clearLocal;
 
     function dropVal(key,val){
-        var local=fdjtState.getLocal(key,true);
-        var session=fdjtState.getSession(key,true);
+        var local=fdjtState.getLocal(key,(!(!(val))));
+        var session=fdjtState.getSession(key,(!(!(val))));
         if (local) {
-            if (!(val)) fdjtState.dropLocal(key);
+            if (!(val)) dropLocal(key);
             else if (local.indexOf(val)>=0) {
                 local=RefDB.remove(local,val);
                 if (local.length)
-                    fdjtState.setLocal(key,local);
-                else fdjtState.dropLocal(key,local);}}
+                    setLocal(key,local,true);
+                else dropLocal(key,local);}}
         if (session) {
-            if (!(val)) fdjtState.dropSession(key);
+            if (!(val)) dropSession(key);
             else if (session.indexOf(val)>=0) {
                 session=RefDB.remove(session,val);
                 if (session.length) 
-                    fdjtState.setSession(key,session);
-                else fdjtState.dropSession(key);}}}
+                    setSession(key,session,true);
+                else dropSession(key);}}}
 
     metaBook.focusBody=function(){
         // document.body.focus();
@@ -403,7 +406,7 @@
                 metaBook.cacheglosses=true;}
             else {
                 clearOffline(metaBook.docuri);
-                if (docid) fdjtState.dropLocal("mB("+docid+").queued");
+                if (docid) dropLocal("mB("+docid+").queued");
                 metaBook.queued=[];
                 metaBook.cacheglosses=false;}}
         metaBook.setCacheGlosses=setCacheGlosses;
@@ -454,7 +457,6 @@
         /* Clearing offline data */
 
         function clearOffline(docid){
-            var dropLocal=fdjtState.dropLocal;
             if (!(docid)) {
                 var books=readLocal("mB.docids",true);
                 if (books) {
