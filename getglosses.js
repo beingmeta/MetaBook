@@ -133,7 +133,7 @@
         if (info.sources) gotInfo("sources",info.sources,keepdata);
         if (info.outlets) gotInfo("outlets",info.outlets,keepdata);
         if (info.layers) gotInfo("layers",info.layers,keepdata);
-        if (info.mycopyid) setMyCopyId(info.mycopyid);
+        if (info.mycopyid) setMyCopyId(info.mycopyid,"loadinfo");
         metaBook.addOutlets2UI(info.outlets);
         if ((info.sync)&&((!(metaBook.sync))||(info.sync>=metaBook.sync))) {
             metaBook.setSync(info.sync);}
