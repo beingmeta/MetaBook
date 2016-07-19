@@ -226,6 +226,7 @@ metaBook.Paginate=
             var forced=((init)&&(init.forced));
             var geom=getGeometry($ID("CODEXPAGE"),false,true);
             var height=geom.inner_height, width=geom.width;
+            var orientation=window.orientation;
             var justify=mB.justify;
             var spacing=mB.bodyspacing;
             var size=mB.bodysize||"normal";
@@ -266,6 +267,7 @@ metaBook.Paginate=
             if (Trace.layout) fdjtLog("Starting content layout");
             var layout=new CodexLayout(layout_args);
             layout.bodysize=size; layout.bodyfamily=family;
+            layout.orientation=orientation;
             mB.layout=layout;
 
             var timeslice=

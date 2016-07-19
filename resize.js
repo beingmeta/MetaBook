@@ -47,8 +47,8 @@
 
     // This is the window outer dimensions, which is stable across
     // most chrome changes, especially on-screen keyboards.  We
-    // track so that we can avoid resizes which shouldn't force
-    // layout updates.
+    // track so that we can avoid layout updates for resizes which
+    // don't really require them.
     var outer_height=window.outerHeight, outer_width=window.outerWidth;
 
     /* Whether to resize by default */
@@ -85,21 +85,31 @@
 
     function metabookResize(){
         var layout=mB.layout;
+        if ((hasClass(document.body,"mbZOOM"))||
+            (hasClass(document.body,"mbMEDIA"))) {
+            resizing=setTimeout(metabookResize,1000);
+            return;}
         if (resizing) {
             clearTimeout(resizing); resizing=false;}
         updateSizeClasses();
         mB.resizeUI();
+        resizePagers();
+        if ((mB.layout)&&(fdjt.device.fixedframe)) {
+            // On fixed frame devices (phones, tablets, etc), only
+            // resize the layout if there's been an orientation
+            // change.
+            var orientation=Math.abs(window.orientation)%180;
+            var layout_orientation=
+                ((mB.layout.orientation)&&
+                 (Math.abs(mB.layout.orientation)%180));
+            if (orientation !== layout_orientation)
+                resizeLayout();}
+        else resizeLayout();}
+    metaBook.resize=metabookResize;
+
+    function resizeLayout() {
         // Unscale the layout
         if (layout) mB.scaleLayout(false);
-        if ((mB.touch)&&
-            ((mB.textinput)||
-             ((document.activeElement)&&
-              ((document.activeElement.tagName==="INPUT")||
-               (document.activeElement.tagName==="TEXTAREA")||
-               (document.activeElement.isContentEditable))))) {
-            if (Trace.resize)
-                fdjtLog("Resize for soft keyboard, mostly ignoring");
-            return;}
         if ((window.outerWidth===outer_width)&&
             (window.outerHeight===outer_height)) {
             // Not a real change (we think), so just scale the
@@ -107,14 +117,8 @@
             if (layout) metaBook.scaleLayout(true);
             if (Trace.resize) fdjtLog("Resize to norm, ignoring");
             return;}
-        if ((hasClass(document.body,"mbZOOM"))||
-            (hasClass(document.body,"mbMEDIA"))) {
-            resizing=setTimeout(metabookResize,1000);
-            return;}
         if (Trace.resize)
             fdjtLog("Real resize w/layout=%o",layout);
-        mB.sizeContent();
-        resizePagers();
         // Set these values to the new one
         outer_width=window.outerWidth;
         outer_height=window.outerHeight;
@@ -131,10 +135,10 @@
             // cached (metaBook.layoutCached()).
             if ((metaBook.long_layout_thresh)&&(layout.started)&&
                 ((layout.done-layout.started)<=metaBook.long_layout_thresh))
-                resizing=setTimeout(resizeNow,50);
+                resizing=setTimeout(resizeLayoutNow,50);
             else if (choosing_resize) {}
             else if (metaBook.layoutCached())
-                resizing=setTimeout(resizeNow,50);
+                resizing=setTimeout(resizeLayoutNow,50);
             else {
                 // This prompts for updating the layout
                 var msg=fdjtDOM("div.title","Update layout?");
@@ -150,7 +154,7 @@
                          choosing_resize=false;
                          resize_default=true;
                          metaBook.layout_choice_timeout=10;
-                         resizing=setTimeout(resizeNow,50);},
+                         resizing=setTimeout(resizeLayoutNow,50);},
                      isdefault: resize_default},
                     {label: "No",
                      handler: function(){
@@ -163,9 +167,8 @@
                                     metaBook.choice_timeout||20),
                           spec: "div.fdjtdialog.fdjtconfirm.updatelayout"};
                 choosing_resize=fdjtUI.choose(spec,msg);}}}
-    metaBook.resize=metabookResize;
 
-    function resizeNow(evt){
+    function resizeLayoutNow(evt){
         if (resizing) clearTimeout(resizing);
         resizing=false;
         metaBook.layout.onresize(evt);}
