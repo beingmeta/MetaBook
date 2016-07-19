@@ -169,6 +169,26 @@
                     setMyCopyId(mycopyid,"ajax");});}
         return new Promise(fetching_mycopyid);}
 
+    function checkMyCopyId(){
+        return (fdjtState.getQuery("MYCOPYID"))||
+            (fdjtState.getCookie("MYCOPYID"))||
+            ((mB.docid)&&(getSession("mB("+mB.docid+").mycopyid")))||
+            ((mB.refuri)&&(getSession("mB("+mB.refuri+").mycopyid")))||
+            ((mB.docid)&&(getLocal("mB("+mB.docid+").mycopyid")))||
+            ((mB.refuri)&&(getLocal("mB("+mB.refuri+").mycopyid")))||
+            false;}
+    metaBook.checkMyCopyId=checkMyCopyId;
+
+    var body=document.body;
+    var hasClass=fdjtDOM.hasClass;
+    var addClass=fdjtDOM.addClass;
+    var dropClass=fdjtDOM.dropClass;
+
+    if ((body)&&(checkMyCopyId())&&
+        (!(hasClass(body,"_USER")))) {
+        dropClass(body,"_NOUSER");
+        addClass(body,"_USER");}
+
 })();
 
 /* Emacs local variables
