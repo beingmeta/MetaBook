@@ -981,6 +981,18 @@
         else return false;}
     metaBook.mediaTypeClass=mediaTypeClass;
 
+    /* Debugging support */
+
+    function reload(root){
+        if (!(root))
+            window.location.reload();
+        else if (root.search(/https?:/)===0) 
+            location.href=root+location.pathname+location.search+location.hash;
+        else if (root.search(".html")>=0)
+            location.href=location.href.replace(/[A-Za-z0-9]+\.html/,root);
+        else fdjtLog.warn("Couldn't understand reload argument '%s'",root);}
+    metaBook.reload=reload;
+
 })();
 
 fdjt.DOM.noautofontadjust=true;
