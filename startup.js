@@ -160,6 +160,7 @@ metaBook.Startup=
                 metaBook.docid=docid;}
             if (refuri) {
                 metaBook.refuri=refuri;
+                metaBook.refuris.push(refuri);
                 mB.createDatabases(refuri);}
 
             var done=Timeline.app_init_done=app_init_done=fdjtTime();
@@ -776,6 +777,8 @@ metaBook.Startup=
             metaBook.topuri=document.location.href;
             metaBook.docuri=docuri;
             
+            // These are all the refuris and docuris and docids on the "device"
+            //  (which means available to getLocal() )
             var refuris=getLocal("mB.refuris",true)||[];
             var docuris=getLocal("mB.docuris",true)||[];
             var docids=getLocal("mB.docids",true)||[];
@@ -856,6 +859,18 @@ metaBook.Startup=
             var icon=getRelLink("PUBTOOL.icon")||getRelLink("icon")||
                 getRelLink("*.icon");
             if (icon) metaBook.icon=icon;
+            
+            // Getting alternate refuris
+            var alturis=metaBook.refuris;
+            var alturi_types=["METABOOK.refuri","BOOKHUB.refuri","PUBTOOL.refuri",
+                              "METABOOK.alturi","BOOKHUB.alturi","PUBTOOL.alturi",
+                              "MYCOPYID.refuri","MYCOPYID.alturi","MYCOPYID.uri",
+                              "canonical"];
+            var type_i=0, n_types=alturi_types.length; while (type_i<n_types) {
+                var alturi_type=alturi_types[type_i++];
+                var uris=getLink(alturi_type,true,true,false);
+                var link_j=0, n_links=uris.length; while (link_j<n_links) {
+                    alturis.push(uris[link_j++]);}}
             
             var baseid=getMeta("BOOKHUB.id")||
                 getMeta("*.prefix")||getMeta("*.baseid");
