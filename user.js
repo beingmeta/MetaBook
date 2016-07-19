@@ -109,9 +109,10 @@
         if (Trace.startup>1) fdjtLog("Starting UI setup for user");
         var startui=fdjtTime();
         if (!(metaBook.user)) {
+            fdjtDOM.dropClass(root,"_USER");
             fdjtDOM.addClass(root,"_NOUSER");
             return;}
-        fdjtDOM.addClass(root,"_NOUSER");
+        fdjtDOM.addClass(root,"_USER");
         fdjtDOM.dropClass(root,"_NOUSER");
         var username=metaBook.user.name||metaBook.user.handle||metaBook.user.email;
         if (username) {
