@@ -830,7 +830,7 @@ metaBook.Startup=
                 docuris.push(docuri);
                 saveLocal("mB.docuris",docuris,true);}
 
-            var docref=getMeta("BOOKHUB.docref"), docid;
+            var docref=getMeta("BOOKHUB.docref")||getMeta("METABOOK.docref"), docid;
             if (docref) metaBook.docid=metaBook.docref=docid=docref;
             else metaBook.docid=docid=docuri;
             fdjtState.setCookie("MB:DOCID",docid,3600*24*42,false,false,true);
