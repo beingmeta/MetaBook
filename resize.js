@@ -84,7 +84,6 @@
     metaBook.resizeUI=resizeUI;
 
     function metabookResize(){
-        var layout=mB.layout;
         if ((hasClass(document.body,"mbZOOM"))||
             (hasClass(document.body,"mbMEDIA"))) {
             resizing=setTimeout(metabookResize,1000);
@@ -108,6 +107,7 @@
     metaBook.resize=metabookResize;
 
     function resizeLayout() {
+        var layout=mB.layout;
         // Unscale the layout
         if (layout) mB.scaleLayout(false);
         if ((window.outerWidth===outer_width)&&
