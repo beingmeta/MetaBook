@@ -232,6 +232,15 @@
             if (existing_cover)
                 existing_cover.parentNode.removeChild(existing_cover);}
         
+        if (mB.docid) {
+            var docid=mB.docid;
+            var catlink=$ID("METABOOKCATALOGLINK");
+            if (catlink) {
+                var slash=docid.indexOf('/');
+                if (slash>0)
+                    catlink.href="https://catalog.bookhub.io/T"+
+                    docid.slice(slash+1)+"/";}}
+
         var hidden_refuri=fdjt.ID("BHLOGIN_REFURI");
         var hidden_docid=fdjt.ID("BHLOGIN_DOCID");
         var hidden_origin=fdjt.ID("BHLOGIN_ORIGIN");

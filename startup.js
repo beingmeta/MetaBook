@@ -707,8 +707,8 @@ metaBook.Startup=
             if (Trace.startup>1) fdjtLog("metaBook startup done");
             metaBook.resizeUI(); // Just in case
             metaBook.displaySync();
-            fdjtDOM.dropClass(document.body,"mbSTARTUP");
-            fdjtDOM.addClass(document.body,"mbREADY");
+            dropClass(document.body,"mbSTARTUP");
+            addClass(document.body,"mbREADY");
             if ($ID("METABOOKSPLASHPAGE"))
                 setTimeout(function(){
                     addClass("METABOOKSPLASHPAGE","startupdone");},
@@ -930,7 +930,7 @@ metaBook.Startup=
             fdjt.TapHold.default_opts.bubble=false;
             
             if (device.touch) {
-                fdjtDOM.addClass(root,"_TOUCH");
+                addClass(root,"_TOUCH");
                 fdjt.TapHold.default_opts.fortouch=true;
                 metaBook.ui="touch";
                 metaBook.touch=true;
@@ -950,14 +950,16 @@ metaBook.Startup=
                 // Have fdjtLog do it's own format conversion for the log
                 fdjtLog.doformat=true;}
             else if (device.touch) {
-                fdjtDOM.addClass(root,"_TOUCH");
+                addClass(root,"_TOUCH");
                 metaBook.ui="touch";}
             else if (!(metaBook.ui)) {
                 // Assume desktop or laptop
-                fdjtDOM.addClass(root,"_MOUSE");
+                addClass(root,"_MOUSE");
                 metaBook.ui="mouse";}
             else {}
             
+            if (device.fixedframe) addClass(root,"_FIXEDFRAME");
+
             if (Trace.startup>1) {
                 fdjtLog("setupDevice done in %dms: %s/%dx%d %s",
                         fdjtTime()-started,

@@ -137,6 +137,11 @@ html._TOUCH #METABOOKFOOT.tapholding #METABOOKPAGEBAR {
     padding: 2px; padding-bottom: 0;}
 #METABOOKHUD .metabookgoto input {
     width: 4em; text-align: right; padding-right: 2px;}
+body.mbPAGEPREVIEW #METABOOKPAGEBAR,
+#METABOOKHUD.gotoloc #METABOOKPAGEBAR,
+#METABOOKHUD.gotopage #METABOOKPAGEBAR,
+#METABOOKHUD.gotoref #METABOOKPAGEBAR {
+    opacity: 1.0;}
 #METABOOKHUD.gotoloc  .metabookgoto#METABOOKGOTOLOC,
 #METABOOKHUD.gotopage .metabookgoto#METABOOKGOTOPAGE,
 #METABOOKHUD.gotoref .metabookgoto#METABOOKGOTOREF {
@@ -220,9 +225,13 @@ body._FULLHEIGHT #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT > span > span {
 @media screen and (max-width: 500px) {
     #METABOOKFOOT #METABOOKPAGEBAR {
         margin-left: 2px; margin-right: 2px;
-        left: 0; right: 0;}
+        left: 0; right: 0;
+        opacity: 0.4;}
     #METABOOKFOOT #METABOOKPAGEBAR .metabooksectmarker { 
         border: solid blue 1px; border-bottom: 0; opacity: 0.7; }
+
+    html._MOUSE #METABOOKFOOT #METABOOKPAGEBAR:hover {
+        opacity: 0.8;}
 
     #METABOOKFOOT .hudbutton { bottom: 30px;}
     body.hudup #METABOOKFOOT .hudbutton { bottom: 0;}

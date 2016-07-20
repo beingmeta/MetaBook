@@ -241,7 +241,7 @@ div.locbar hr {
     /* float: right; text-align: right; */
     margin: 0; padding: 0; text-indent: 0; 
     border: 0;
-    border-right: solid rgba(70,130,180,0.70) 6px;
+    border-right: solid rgba(70,130,180,0.20) 6px;
     width: 0; overflow: visible;
     width: 56px; height: 50px;
     box-sizing: border-box; 

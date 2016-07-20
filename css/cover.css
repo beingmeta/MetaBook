@@ -414,22 +414,17 @@ body.mbBUSY #METABOOKCOVERMESSAGE div.message#METABOOKREADYMESSAGE {
 }
 
 /* Phone */
-@media only screen and /* (min-width: 320px) and */
-            (max-width: 480px) {
+@media only screen and (max-width: 480px) {
     html._NOUSER #METABOOKCOVER div.flap { bottom: 150px; }
     #METABOOKCOVERMESSAGE div.message { font-size: 0.7em;}
     #METABOOKCOVERMESSAGE div.message#METABOOKREADYMESSAGE { font-size: 30px;}
 
-    #METABOOKCOVER div.flap { left: 10px; right: 10px;}
+    #METABOOKUSERBOX span.text { display: none; }
+    #METABOOKUSERBOX a.booklink { float: left; }
+    #METABOOKUSERBOX a.userlink { float: right; }
 
     html._TOUCH #METABOOKSETTINGS {  font-size: 0.9em; }
     html._TOUCH #METABOOKSETTINGS table.settings {  font-size: 1em; }
-    
-/*
-    #METABOOKCOVER div.userbox .booklink { float: left;}
-    #METABOOKCOVER div.userbox .bookplate__username { float: right;}
-    #METABOOKCOVER div.userbox .bookplate__text { display: none;}
-*/
 
     #METABOOKCOVER > #METABOOKCOVERCONTROLS {
         height: 60px; white-space: normal; }

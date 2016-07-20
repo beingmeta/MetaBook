@@ -9,7 +9,7 @@
     top: 0; left: 0; right: 0; height: 60px; z-index: 20;
     text-align: center; padding: 0; max-height: 60px;}
 
-#METABOOKMENU { opacity: 0.1;}
+#METABOOKMENU { opacity: 0.05;}
 
 body.hudup #METABOOKMENU, 
 #METABOOKMENU.tapholding,
