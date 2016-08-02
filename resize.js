@@ -49,7 +49,7 @@
     // most chrome changes, especially on-screen keyboards.  We
     // track so that we can avoid layout updates for resizes which
     // don't really require them.
-    var outer_height=window.outerHeight, outer_width=window.outerWidth;
+    var inner_height=window.innerHeight, inner_width=window.innerWidth;
 
     /* Whether to resize by default */
     var resize_default=false;
@@ -110,8 +110,8 @@
         var layout=mB.layout;
         // Unscale the layout
         if (layout) mB.scaleLayout(false);
-        if ((window.outerWidth===outer_width)&&
-            (window.outerHeight===outer_height)) {
+        if ((window.innerWidth===inner_width)&&
+            (window.innerHeight===inner_height)) {
             // Not a real change (we think), so just scale the
             // layout, don't make a new one.
             if (layout) metaBook.scaleLayout(true);
@@ -120,8 +120,8 @@
         if (Trace.resize)
             fdjtLog("Real resize w/layout=%o",layout);
         // Set these values to the new one
-        outer_width=window.outerWidth;
-        outer_height=window.outerHeight;
+        inner_width=window.innerWidth;
+        inner_height=window.innerHeight;
         // Possibly a new layout
         var width=getGeometry($ID("CODEXPAGE"),false,true).width;
         var height=getGeometry($ID("CODEXPAGE"),false,true).inner_height;
