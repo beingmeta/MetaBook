@@ -607,9 +607,7 @@ metaBook.setMode=
                 if ((mode_input)&&
                     ((!(mB.touch))||
                      (hasParent(mode_input,mB.DOM.foot)))) {
-                    setTimeout(function(){
-                        mB.setFocus(mode_input);},
-                               50);}}
+                    mB.setFocus(mode_input);}}
             else if ((mode==="addgloss")&&(mB.glossform)) {
                 var glossform=mB.glossform;
                 var curglossmode=mB.getGlossMode(glossform);
