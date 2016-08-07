@@ -93,17 +93,7 @@
         updateSizeClasses();
         mB.resizeUI();
         resizePagers();
-        if ((mB.layout)&&(fdjt.device.fixedframe)) {
-            // On fixed frame devices (phones, tablets, etc), only
-            // resize the layout if there's been an orientation
-            // change.
-            var orientation=Math.abs(window.orientation)%180;
-            var layout_orientation=
-                ((mB.layout.orientation)&&
-                 (Math.abs(mB.layout.orientation)%180));
-            if (orientation !== layout_orientation)
-                resizeLayout();}
-        else resizeLayout();}
+        resizeLayout();}
     metaBook.resize=metabookResize;
 
     function resizeLayout() {
@@ -128,6 +118,17 @@
         if ((layout)&&(layout.width===width)&&(layout.height===height)) {
             if (Trace.resize) fdjtLog("Layout size unchanged, ignoring");
             return;}
+        if ((mB.layout)&&(fdjt.device.fixedframe)) {
+            // On fixed frame devices (phones, tablets, etc), only
+            // resize the layout if there's been an orientation
+            // change.
+            var orientation=Math.abs(window.orientation)%180;
+            var layout_orientation=
+                ((mB.layout.orientation)&&
+                 (Math.abs(mB.layout.orientation)%180));
+            if (orientation === layout_orientation) {
+                mB.scaleLayout(true);
+                return;}}
         if ((layout)&&(layout.onresize)&&(!(metaBook.freezelayout))) {
             // This handles prompting for whether or not to update
             // the layout.  We don't prompt if the layout didn't
@@ -143,7 +144,7 @@
                 // This prompts for updating the layout
                 var msg=fdjtDOM("div.title","Update layout?");
                 // This should be fast, so we do it right away.
-                metaBook.scaleLayout(true);
+                mB.scaleLayout(true);
                 choosing_resize=true;
                 // When a choice is made, it becomes the default
                 // When a choice is made to not resize, the
