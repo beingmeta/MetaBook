@@ -274,14 +274,14 @@ metaBook.Paginate=
             
             var layout_id=layout.layout_id;
 
-            function restore_layout(content,layout_id){
+            function restore_layout(saved_layout,layout_id){
                 fdjtLog("Using saved layout %s",layout_id);
                 $ID("CODEXCONTENT").style.display='none';
                 layoutMessage("Using cached layout",0);
                 dropClass(document.body,"_SCROLL");
                 addClass(document.body,"_BYPAGE");
                 layout.started=fdjtTime();
-                layout.restoreLayout(content).then(function(){
+                layout.restoreLayout(saved_layout).then(function(){
                     Timeline.layout_restored=fdjtTime();
                     finish_restore(layout);});}
             function finish_restore(layout) {
@@ -425,16 +425,16 @@ metaBook.Paginate=
                     else return whenready();}}
 
             function getContent(){
-                if (layout.content) return layout.content;
+                if (layout.content) 
+                    return layout.content;
                 else {
                     var cur_content=$ID("CODEXCONTENT");
                     var copy=fdjtDOM.clone(mB.originalContent);
                     if (cur_content)
                         fdjtDOM.replace(cur_content,copy);
                     else document.body.appendChild(copy);
-                    layout.content=copy;
                     copy.id="CODEXCONTENT";
-                    mB.content=copy;
+                    mB.content=layout.content=copy;
                     return copy;}}
             
             function new_layout(content){
@@ -526,19 +526,21 @@ metaBook.Paginate=
                     Timeline.layout_requested=fdjtTime();
                 body_wait(mB.content,start_new_layout);}
             
+            var content=getContent();
+
             if ((mB.cache_layout_thresh)&&
                 (!((mB.forcelayout)))&&
                 (!(forced))) {
                 if (Trace.layout)
                     fdjtLog("Fetching layout %s",layout_id);
                 Codex.fetchLayout(layout_id).
-                    then(function layoutFetched(content){
-                        if (!(content)) return request_layout();
+                    then(function layoutFetched(saved_layout){
+                        if (!(saved_layout)) return request_layout();
                         if (Trace.layout) fdjtLog("Got layout %s",layout_id);
                         recordLayout(layout_id,mB.sourceid);
                         try {
                             Timeline.layout_fetched=fdjtTime();
-                            return restore_layout(content,layout_id);}
+                            return restore_layout(saved_layout,layout_id);}
                         catch (ex) {
                             fdjtLog("Layout restore error: %o",ex);
                             request_layout();}})
