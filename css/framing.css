@@ -74,6 +74,7 @@ body {
     background-color: transparent; 
     text-decoration: none;}
 #METABOOKCOVER a { color: lightblue; }
+#METABOOKCOVER #METABOOKTITLE a { color: blue; }
 
 body.hudup #METABOOKFRAME, body.mbCOVER #METABOOKFRAME,
 body.mbSKIMMING #METABOOKFRAME, body.openhud #METABOOKFRAME,
