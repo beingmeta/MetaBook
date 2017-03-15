@@ -4,9 +4,9 @@
 
 /* Copyright (C) 2009-2015 beingmeta, inc.
    This file implements a Javascript/DHTML web application for reading
-   large structured documents (sBooks).
+   large structured documents (metaBooks).
 
-   For more information on sbooks, visit www.sbooks.net
+   For more information on metabooks, visit www.bookhub.io
    For more information on knodules, visit www.knodules.net
    For more information about beingmeta, visit www.beingmeta.com
 
@@ -121,16 +121,23 @@
             titlepage.removeAttribute("style");
             titlepage.id="METABOOKTITLE";}
         else {
-            titlepage=$ID("METABOOKTITLEPAGE")||
-                $ID("PUBTOOLTITLEPAGE")||
+            var mb_titlepage=$ID("METABOOKTITLEPAGE");
+            var other_titlepage= $ID("PUBTOOLTITLEPAGE") ||
                 $ID("TITLEPAGE");
+            if ( (mb_titlepage) && (other_titlepage) )
+                titlepage=mb_titlepage;
+            else if (mb_titlepage)
+                titlepage=mb_titlepage.cloneNode(true);
+            else if (other_titlepage)
+                titlepage=other_titlepage.cloneNode(true);
+            else titlepage=false;
             if (titlepage) {
-                titlepage=titlepage.cloneNode(true);
                 fdjtDOM.dropClass(
-                    titlepage,/\b(codex|metabook)[A-Za-z0-9]+\b/);
-                fdjtDOM.addClass(titlepage,"sbooktitlepage");
+                    titlepage,/\b(codex|pubtool)[A-Za-z0-9]+\b/);
+                fdjtDOM.addClass(titlepage,"metabooktitlepage");
                 fdjtDOM.stripIDs(titlepage);
                 titlepage.setAttribute("style","");
+                fdjtDOM.addClass(titlepage,"flap");
                 titlepage.id="METABOOKTITLE";}
             else {
                 var info=metaBook.getBookInfo();
@@ -151,7 +158,7 @@
         if (creditspage)
             creditspage=creditspage.cloneNode(true);
         else {
-            creditspage=$ID("METABOOKCREDITS")||$ID("SBOOKSCREDITSPAGE")||$ID("CREDITSPAGE");
+            creditspage=$ID("METABOOKCREDITS")||$ID("PUBTOOLCREDITSPAGE")||$ID("CREDITSPAGE");
             if (creditspage) {
                 creditspage=creditspage.cloneNode(true);
                 fdjtDOM.stripIDs(creditspage);
@@ -206,11 +213,11 @@
         if (console) addToCover(cover,console);
         
         var layers=fdjtDOM("div#METABOOKLAYERS.flap");
-        var sbooksapp=fdjtDOM("iframe#BOOKHUBAPP");
-        sbooksapp.setAttribute("frameborder",0);
-        sbooksapp.setAttribute("scrolling","auto");
-        layers.appendChild(sbooksapp);
-        metaBook.DOM.sbooksapp=sbooksapp;
+        var bkhapp=fdjtDOM("iframe#BOOKHUBAPP");
+        bkhapp.setAttribute("frameborder",0);
+        bkhapp.setAttribute("scrolling","auto");
+        layers.appendChild(bkhapp);
+        metaBook.DOM.bkhapp=bkhapp;
         if (layers) addToCover(cover,layers);
         
         var cc=getChildren(cover,"#METABOOKCOVERCONTROLS");
