@@ -70,14 +70,14 @@ var metaBook={
     missing_nodes: [],
     // Whether to cache layouts locally; the value is a threshold
     // (in milliseconds) for when to cache
-    cache_layout_thresh: 2500,
+    cache_layout_thresh: 2000,
     // Ask about updating layouts which took longer than this
     //  many milliseconds to generate
-    long_layout_thresh: 5000,
+    long_layout_thresh: 3000,
     // How long (msecs) to wait for a resize to be 'real'
     resize_wait: 500,
     // Whether to force new layouts 
-    forcelayout: true,
+    forcelayout: false,
     // Whether layout is temporarily frozen, for example during text
     // input (on tablets, there may be extraneous resizes when the
     // on-screen keyboard appears)
