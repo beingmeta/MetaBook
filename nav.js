@@ -320,7 +320,7 @@
                     target,((location)?(location):("none")),page,pageno,arg);
         if (!(target)) {
             if (mB.bypage) {
-                if ((page)&&(metaBook.layout instanceof fdjt.CodexLayout)) 
+                if ((page)&&(metaBook.layout instanceof fdjt.Codex)) 
                     metaBook.GoToPage(page||arg,caller,savestate);}
             else if (arg.nodeType) {
                 var scan=arg;

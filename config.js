@@ -48,7 +48,6 @@
     var getQuery=fdjtState.getQuery;
     
     var mB=metaBook, Trace=metaBook.Trace;
-    var saveLocal=mB.saveLocal;
     
     /* Configuration information */
 
@@ -131,7 +130,7 @@
                 (!(getQuery(setting)))) {
                 saved[setting]=config[setting];}}
         if (Trace.config) fdjtLog("Saving config %o",saved);
-        saveLocal("mB("+mB.docid+").config",JSON.stringify(saved));
+        mB.saveLocal("mB("+mB.docid+").config",JSON.stringify(saved));
         saved_config=saved;}
     metaBook.saveConfig=saveConfig;
 
@@ -230,7 +229,7 @@
         fdjtUI.TapHold.default_opts.taptapmsecs=value;});
 
     metaBook.addConfig("dont_rAF",function(name,value){
-        fdjt.CodexLayout.dont_rAF=value;});
+        fdjt.Codex.dont_rAF=value;});
 
     metaBook.addConfig("checksync",function(name,value){
         metaBook.sync_interval=value;

@@ -62,7 +62,7 @@ metaBook.Startup=
         var RefDB=fdjt.RefDB;
         var mbID=metaBook.ID;
         
-        var CodexLayout=fdjt.CodexLayout;
+        var Codex=fdjt.Codex;
 
         var https_root="https://s3.amazonaws.com/beingmeta/static/";
 
@@ -798,7 +798,7 @@ metaBook.Startup=
                 var layouts=getLocal("mB("+oldid+").layouts");
                 if ((layouts)&&(layouts.length)) {
                     var i=0, lim=layouts.length; while (i<lim) 
-                        CodexLayout.dropLayout(layouts[i++]);}}
+                        Codex.dropLayout(layouts[i++]);}}
             else saveLocal("mB("+mB.docid+").sourceid",
                            metaBook.sourceid);
 

@@ -155,7 +155,7 @@
     function gotDB(db){
         metaBook.metaBookDB=metaBookDB=db;
         fdjtAsync(function(){
-            fdjt.CodexLayout.useIndexedDB(db.name);});
+            fdjt.Codex.useIndexedDB(db.name);});
         var waiting=dbwait; dbwait=[]; dbfail=[];
         var i=0, len=waiting.length; while (i<len)
             waiting[i++](db);}
@@ -187,7 +187,7 @@
             db.createObjectStore("sources",{keyPath: "_id"});
             db.createObjectStore("docs",{keyPath: "_id"});
             db.createObjectStore("glosses",{keyPath: "glossid"});};}
-    else fdjt.CodexLayout.useIndexedDB(false);
+    else fdjt.Codex.useIndexedDB(false);
 
     /* Initialize the runtime for the core databases */
 
@@ -467,7 +467,7 @@
                 dropLocal("mB.docids");
                 // We clear layouts, because they might
                 //  contain personalized information
-                fdjt.CodexLayout.clearLayouts();
+                fdjt.Codex.clearLayouts();
                 fdjtState.clearLocal();
                 fdjtState.clearSession();
                 window.location.hash="";}
@@ -766,7 +766,8 @@
             id=id.slice(1);
         if (!(metabook_docinfo)) metabook_docinfo=metaBook.docinfo;
         var elt=((metabook_docinfo)&&(info=metabook_docinfo[id])&&(info.elt));
-        if ((elt)&&(elt.id)) return elt;
+        if ((elt)&&(hasParent(elt,document.body))&&(elt.id)) 
+            return elt;
         else if ((elt=document.getElementById(id))) return elt;
         else {
             elts=document.getElementsByName(id);
@@ -996,7 +997,7 @@
 })();
 
 fdjt.DOM.noautofontadjust=true;
-fdjt.CodexLayout.dbname="metaBook";
+fdjt.Codex.dbname="metaBook";
 
 
 /* Emacs local variables

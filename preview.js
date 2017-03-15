@@ -87,7 +87,7 @@
             fdjtLog("startPreview %o (%s)",target,caller);
         if (target===mB.previewing) {}
         if (mB.skimming) mB.stopSkimming();
-        if (mB.layout instanceof fdjt.CodexLayout) {
+        if (mB.layout instanceof fdjt.Codex) {
             var dups=((getTarget(target))&&(mB.getDups(target)));
             mB.startPagePreview(target,caller);
             addClass(target,"mbpreviewing");
@@ -109,7 +109,7 @@
             fdjtLog("stopPreview/%s jump to %o, pt=%o, p=%o",
                     caller||"nocaller",jumpto,
                     mB.previewTarget,mB.previewing);
-        if (mB.layout instanceof fdjt.CodexLayout) {
+        if (mB.layout instanceof fdjt.Codex) {
             mB.stopPagePreview(caller,jumpto);}
         else if (!(jumpto)) scrollPreview(false,caller);
         else if (jumpto===mB.previewing) {

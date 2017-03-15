@@ -76,8 +76,8 @@ var metaBook={
     long_layout_thresh: 5000,
     // How long (msecs) to wait for a resize to be 'real'
     resize_wait: 500,
-    // Whether to force new layouts
-    forcelayout: false,
+    // Whether to force new layouts 
+    forcelayout: true,
     // Whether layout is temporarily frozen, for example during text
     // input (on tablets, there may be extraneous resizes when the
     // on-screen keyboard appears)

@@ -157,9 +157,11 @@
         if (notesblock.childNodes.length)
             fdjtDOM.append(content,"\n",notesblock,"\n");
         
+        mB.originalContent=fdjtDOM.clone(content);
+
         // Initialize cover and titlepage (if specified)
         metaBook.coverpage=metaBook.getCoverPage();
-        metaBook.titlepage=$ID("SBOOKTITLEPAGE");
+        metaBook.titlepage=$ID("METABOOKTITLEPAGE");
 
         var pages=metaBook.pages=$ID("METABOOKPAGES")||
             fdjtDOM("div#METABOOKPAGES");
