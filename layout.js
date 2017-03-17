@@ -122,11 +122,13 @@ metaBook.Paginate=
         metaBook.layoutReady=layoutReady;
 
         function layoutMessage(string,pct){
-            var pb=$ID("METABOOKLAYOUTMESSAGE");
-            if (pb) {
-                fdjt.UI.ProgressBar.setMessage(pb,string);
-                if (typeof pct==="number")
-                    fdjt.UI.ProgressBar.setProgress(pb,pct);}
+            var indicators=document.body.getElementsByClassName("metabooklayoutprogress");
+            if ((indicators)&&(indicators.length)) {
+                var i=0, len=indicators.length; while (i<len) {
+                    var indicator=indicators[i++];
+                    fdjt.UI.ProgressBar.setMessage(indicator,string);
+                    if (typeof pct==="number")
+                        fdjt.UI.ProgressBar.setProgress(indicator,pct);}}
             var fpb=$ID("METABOOKLAYOUTADJUST");
             var rpct=((typeof pct === 'number')&&
                       (!(Number.isNaN(pct)))&&
@@ -526,7 +528,7 @@ metaBook.Paginate=
                     Timeline.layout_requested=fdjtTime();
                 body_wait(mB.content,start_new_layout);}
             
-            var content=getContent();
+            getContent();
 
             if ((mB.cache_layout_thresh)&&
                 (!((mB.forcelayout)))&&

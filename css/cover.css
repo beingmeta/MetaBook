@@ -64,10 +64,9 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
 #METABOOKCOVER .fdjtfontwrapper {}
 
 #METABOOKCOVER div.flap {
-    position: absolute;
-    top: 40px; top: 6vh; bottom: 120px; left: 10%; right: 10%;
     box-sizing: border-box; padding: 1em; padding-top: 2px;
-    height: auto; width: auto; overflow: hidden;
+    height: 80%; width: auto; max-width: 50rem; overflow: hidden;
+    margin-left: auto; margin-right: auto;
     z-index: -50; opacity: 0.0;
     border-radius: 1em; border: solid black 3px; 
     display: none;}
@@ -81,7 +80,6 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
     height: 100%; width: 100%;}
 
 #METABOOKCOVERMESSAGE {
-    position: absolute; 
     width: 100%; left: 0; right: 0; border: 0; 
     top: 0; height: 40px; height: 6vh; bottom: auto;
     font-size: 36px; font-size: 5vh;
@@ -371,14 +369,14 @@ html._TOUCH #METABOOKCONSOLELOG {
 
 #METABOOKCOVER > .sbookslogo em {color: steelblue;}
 
-#METABOOKCOVERMESSAGE div.message {
+#METABOOKCOVERMESSAGE > div.message {
     color: silver; font-size: 24px; font-size: 2rem;
     padding-left: 0; padding-right: 0;
     padding-top: 0;
     box-sizing: border-box;
     width: 100%;}
-#METABOOKCOVERMESSAGE div.message {display: none;}
-#METABOOKCOVERMESSAGE div.message#METABOOKREADYMESSAGE {
+#METABOOKCOVERMESSAGE > div {display: none;}
+#METABOOKCOVERMESSAGE > div.message#METABOOKREADYMESSAGE {
     box-sizing: border-box;
     margin-top: 0.2ex; width: 7em;
     margin-left: auto; margin-right: auto;
@@ -386,13 +384,11 @@ html._TOUCH #METABOOKCONSOLELOG {
     background-color: gray; color: white;
     font-variant: small-caps; font-weight: bold;
     border-radius: 1ex; }
-body.mbLAYOUT #METABOOKCOVERMESSAGE div.metabookstatus#METABOOKLAYOUTMESSAGE,
-body.mbLAYOUT #METABOOKCOVERMESSAGE div#METABOOKLAYOUTMESSAGE div.message,
-body #METABOOKCOVERMESSAGE div.message#METABOOKREADYMESSAGE,
+body.mbLAYOUT #METABOOKCOVERMESSAGE div.metabooklayoutprogress,
 body.mbBUSY #METABOOKCOVERMESSAGE div.message#METABOOKBUSYMESSAGE {
     display: block;}
-body.mbLAYOUT #METABOOKCOVERMESSAGE div.message#METABOOKREADYMESSAGE,
-body.mbBUSY #METABOOKCOVERMESSAGE div.message#METABOOKREADYMESSAGE {
+body.mbLAYOUT #METABOOKCOVERMESSAGE div.message#METABOOKOPENCOVER,
+body.mbBUSY #METABOOKCOVERMESSAGE div.message#METABOOKOPENCOVER {
     display: none;}
 
 #METABOOKREADYMESSAGE { padding-bottom: 1ex; }
