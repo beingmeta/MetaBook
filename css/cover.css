@@ -31,6 +31,22 @@
 
 @charset "UTF-8";
 
+/* General cover layout is: 
+    [Flap          ]
+    [Message Box   ]
+    [Tab Controls  ]
+    [User/Login bar]
+
+  The user bar is shorter and tighter (at the top and bottom).
+  The tab controls are bigger with more space at the top and bottom.
+  The message box is also a little bigger and has more space around it
+  The flap takes up the rest of the space.
+
+  In the default configuration:
+   The flap is 80%, the user bar is 4%, and the tab controls and message box are 8% each.
+*/
+
+
 #METABOOKCOVER {font-size: 2em;}
 
 #METABOOKCOVER div, #METABOOKCOVER form, #METABOOKCOVER img {
@@ -67,6 +83,7 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
     box-sizing: border-box; padding: 1em; padding-top: 2px;
     height: 80%; width: auto; max-width: 50rem; overflow: hidden;
     margin-left: auto; margin-right: auto;
+    overflow: hidden;
     z-index: -50; opacity: 0.0;
     border-radius: 1em; border: solid black 3px; 
     display: none;}
@@ -80,10 +97,10 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
     height: 100%; width: 100%;}
 
 #METABOOKCOVERMESSAGE {
-    width: 100%; left: 0; right: 0; border: 0; 
-    top: 0; height: 40px; height: 6vh; bottom: auto;
+    margin-left: 0; margin-right: 0;
+    width: auto; height: 1.2em; 
     font-size: 36px; font-size: 5vh;
-    font-variant: small-caps; white-space: nowrap;
+    white-space: nowrap;
     text-align: center; overflow: visible; 
     background-color: black; 
     cursor: pointer; display: block; opacity: 1.0;
@@ -101,10 +118,10 @@ html._NOUSER #METABOOKCOVERCONTROLS {
 
 #METABOOKCOVERCONTROLS {
     box-sizing: border-box;
-    position: absolute; height: 60px; bottom: 40px; top: auto;
-    width: 100%; left: 0; right: 0; border-width: 0;
+    margin-left: 0; margin-right: 0; border-width: 0;
     padding-left: 1em; padding-right: 1em;
     margin-top: 0.25ex; margin-bottom: 0.25ex;
+    width: 100%; height: 1.2em; font-size: 36px; font-size: 6vh;
     line-height: 1.25;
     opacity: 1; overflow: hidden; z-index: 50; 
     display: block;}
