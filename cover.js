@@ -300,6 +300,7 @@
             framestyle.display='';}}
     metaBook.resizeCover=resizeCover;
 
+    /*
     var coverids={"coverpage": "METABOOKCOVERPAGE",
                   "titlepage": "METABOOKTITLE",
                   "creditspage": "METABOOKCREDITS",
@@ -307,6 +308,7 @@
                   "help": "METABOOKAPPHELP",
                   "settings": "METABOOKSETTINGS",
                   "layers": "METABOOKLAYERS"};
+    */
 
     function cover_clicked(evt){
         var target=fdjtUI.T(evt);
@@ -335,26 +337,15 @@
             (!($ID("BOOKHUBAPP").src))&&
             (!(metaBook.appinit)))
             metaBook.initIFrameApp();
-
+        /*
         var curclass=cover.className;
         var cur=((curclass)&&(coverids[curclass])&&
                  ($ID(coverids[curclass])));
         var nxt=((mode)&&(coverids[mode])&&($ID(coverids[mode])));
-        if ((cur)&&(nxt)) {
-            cur.style.display='block';
-            nxt.style.display='block';
-            setTimeout(function(){
-                cur.style.display="";
-                nxt.style.display="";},
-                       3000);}
-        setTimeout(function(){
-            if (Trace.mode)
-                fdjtLog("On %o, switching cover mode to %s from %s",
-                        evt,mode,curclass);
-            if (mode==="console") fdjtLog.update();
-            cover.className=mode;
-            metaBook.mode=mode;},
-                   20);
+        */
+        if (mode==="console") fdjtLog.update();
+        cover.className=mode;
+        metaBook.mode=mode;
         fdjt.UI.cancel(evt);
         return false;}
 
