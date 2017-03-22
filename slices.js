@@ -2,20 +2,18 @@
 
 /* ###################### metabook/slices.js ###################### */
 
-/* Copyright (C) 2009-2015 beingmeta, inc.
+/* Copyright (C) 2009-2017 beingmeta, inc.
 
    This file implements the display of lists of glosses or summaries
    referring to book passages.
 
    This file is part of metaBook, a Javascript/DHTML web application for reading
-   large structured documents (sBooks).
+   large structured documents.
 
-   For more information on sbooks, visit www.sbooks.net
    For more information on knodules, visit www.knodules.net
    For more information about beingmeta, visit www.beingmeta.com
 
    This library uses the FDJT (www.fdjt.org) toolkit.
-   This file assumes that the sbooks.js file has already been loaded.
 
    This program comes with absolutely NO WARRANTY, including implied
    warranties of merchantability or fitness for any particular
@@ -292,7 +290,6 @@ metaBook.Slice=(function () {
             if (url[0]==='_') continue;
             var urlinfo=refs[url], elt=false;
             var openinbook=(url.search("https://glossdata.bookhub.io/")===0)||
-                (url.search("https://glossdata.sbooks.net/")===0)||
                 (url.search("resources/")===0);
             var title; var icon=false, type=false, useclass=false;
             if (!(openinbook)) {

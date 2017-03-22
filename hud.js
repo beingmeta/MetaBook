@@ -2,16 +2,15 @@
 
 /* ###################### metabook/hud.js ###################### */
 
-/* Copyright (C) 2009-2015 beingmeta, inc.
+/* Copyright (C) 2009-2017 beingmeta, inc.
 
    This file provides initialization and some interaction for the
    metaBook HUD (Heads Up Display), an layer on the book content
    provided by the metaBook e-reader web application.
 
    This file is part of metaBook, a Javascript/DHTML web application for reading
-   large structured documents (sBooks).
+   large structured documents.
 
-   For more information on sbooks, visit www.sbooks.net
    For more information on knodules, visit www.knodules.net
    For more information about beingmeta, visit www.beingmeta.com
 
@@ -187,10 +186,8 @@ metaBook.setMode=
                     fdjtLog.warn("Rejecting insecure message from %s: %s",
                                  origin,evt.data);
                     return;}
-                if (evt.data==="sbooksapp") {
-                    setMode("sbooksapp");}
-                else if (evt.data==="metabooksapp") {
-                    setMode("sbooksapp");}
+                if (evt.data==="metabooksapp") {
+                    setMode("bookhubapp");}
                 else if (evt.data==="loggedin") {
                     if (!(mB.user)) {
                         mB.userSetup();}}
@@ -408,7 +405,7 @@ metaBook.setMode=
         var metabookHeartModes=/\b((statictoc)|(search)|(refinesearch)|(expandsearch)|(searchresults)|(allglosses)|(showaside)|(glossaddtag)|(glossaddtag)|(glossaddoutlet)|(glossdetail))\b/g;
         var metabookHeadModes=/\b((search)|(refinesearch)|(expandsearch)|(searchresults)|(allglosses)|(addgloss)|(shownote))\b/g;
         var metaBookPopModes=/\b((glossdetail))\b/g;
-        var metaBookCoverModes=/\b((cover)|(help)|(layers)|(login)|(settings)|(cover)|(aboutsbooks)|(aboutmetabooks)|(console)|(aboutbook)|(titlepage))\b/g;
+        var metaBookCoverModes=/\b((cover)|(help)|(layers)|(login)|(settings)|(cover)|(aboutmetabooks)|(console)|(aboutbook)|(titlepage))\b/g;
         var metaBookSearchModes=/((refinesearch)|(searchresults)|(expandsearch))/;
         metaBook.searchModes=metaBookSearchModes;
         var metabook_mode_foci=
@@ -492,7 +489,7 @@ metaBook.setMode=
                     metaBook.mode=mode;}
                 // If we're switching to the inner app but the iframe
                 //  hasn't been initialized, we do it now.
-                if ((mode==="sbooksapp")&&
+                if ((mode==="bookhubapp")&&
                     (!($ID("BOOKHUBAPP").src))&&
                     (!(mB.appinit)))
                     initIFrameApp();
@@ -666,8 +663,8 @@ metaBook.setMode=
         metaBook.initIFrameApp=initIFrameApp;
 
         metaBook.selectApp=function(){
-            if (mB.mode==='sbooksapp') setMode(false);
-            else setMode('sbooksapp');};
+            if (mB.mode==='bookhubapp') setMode(false);
+            else setMode('bookhubapp');};
 
         /* Skimming */
 

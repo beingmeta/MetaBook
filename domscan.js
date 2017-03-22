@@ -2,15 +2,14 @@
 
 /* ###################### metabook/domscan.js ###################### */
 
-/* Copyright (C) 2009-2015 beingmeta, inc.
+/* Copyright (C) 2009-2017 beingmeta, inc.
 
    This file implements extraction of map and metadata from the loaded
    DOM.
 
    This file is part of metaBook, a Javascript/DHTML web application for reading
-   large structured documents (sBooks).
+   large structured documents.
 
-   For more information on sbooks, visit www.sbooks.net
    For more information on knodules, visit www.knodules.net
    For more information about beingmeta, visit www.beingmeta.com
 
@@ -474,8 +473,7 @@ metaBook.DOMScan=(function(){
         /* Build the metadata */
         var i=0; while (i<children.length) {
             var child=children[i++];
-            if (!((child.sbookskip)||(child.metabookui)))
-                scanner(child,scanstate,docinfo);} 
+            if (!(child.metabookui)) scanner(child,scanstate,docinfo);} 
         docinfo._nodecount=scanstate.nodecount;
         docinfo._headcount=scanstate.headcount;
         docinfo._eltcount=scanstate.eltcount;

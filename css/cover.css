@@ -1,10 +1,9 @@
 /* -*- Mode: CSS; character-encoding: utf-8; -*- */
 
-/* Copyright (C) 2009-2015 beingmeta, inc.
+/* Copyright (C) 2009-2017 beingmeta, inc.
    This file implements a Javascript/DHTML web application for reading
-    large structured documents (sBooks).
+    large structured documents.
 
-   For more information on sbooks, visit www.sbooks.net
    For more information on knodules, visit www.knodules.net
    For more information about beingmeta, visit www.beingmeta.com
 
@@ -170,7 +169,6 @@ html._USER #METABOOKCOVER div.loginbox {
     height: 30px; text-align: center;
     background: gray;
     background: linear-gradient(to top,gray,black);}
-#METABOOKCOVER div.loginmessage span.sbooks em { color: cornflowerblue; }
 
 #METABOOKCOVER div.loginbox form {
     height: 40px; text-align: right; vertical-align: top;
@@ -207,13 +205,8 @@ div.loginbox form > span, div.loginbox form > select {
 #METABOOKCOVER div.userbox a:visited,
 #METABOOKCOVER div.userbox a {
     color: silver; background-color: transparent;}
-#METABOOKCOVER div.userbox a.sbookslogo em { color: cornflowerblue; }
-#METABOOKCOVER div.userbox span.sbooks em { color: silver;}
-#METABOOKCOVER div.userbox a.sbooks em { color: steelblue;}
 html._USER #METABOOKCOVER div.userbox {
     height: 40px;}
-
-#METABOOKCOVER div.userbox a.sbookslogo { display: none;}
 
 #METABOOKCOVER.coverpage div.flap#METABOOKCOVERPAGE,
 #METABOOKCOVER.bookcover div.flap#METABOOKCOVERPAGE,
@@ -224,7 +217,7 @@ html._USER #METABOOKCOVER div.userbox {
 #METABOOKCOVER.blurb div.flap#METABOOKBLURB,
 #METABOOKCOVER.aboutbook div.flap#METABOOKABOUTBOOKHOLDER,
 #METABOOKCOVER.help div.flap#METABOOKAPPHELP,
-#METABOOKCOVER.aboutsbooks div.flap#METABOOKABOUTSBOOKS,
+#METABOOKCOVER.aboutbookhub div.flap#METABOOKABOUTBOOKHUB,
 #METABOOKCOVER.console div.flap#METABOOKCONSOLE,
 #METABOOKCOVER.settings div.flap#METABOOKSETTINGS, 
 #METABOOKCOVER.layers div.flap#METABOOKLAYERS,
@@ -248,7 +241,7 @@ html._USER #METABOOKCOVER div.userbox {
     display: inline;
     color: gold;}
 
-.control[data-mode='console'], .control[data-mode='aboutsbooks'],
+.control[data-mode='console'], .control[data-mode='aboutbookhub'],
 .control[data-mode='aboutbook'] {
     display: none;}
 html._SHOWCONSOLE span.control[data-mode='console'] { display: inline;}
@@ -282,7 +275,7 @@ html._SHOWLOGIN._USER #METABOOKCOVER .control[data-mode='login'] {
 #METABOOKAPPHELP h1, #METABOOKCREDITS h1, #METABOOKBLURB h1 {
     font-size: 160%;} 
 
-/* The sBooks app for managing layers */
+/* The bookhub app for managing layers */
 
 #METABOOKCOVER div.flap#METABOOKLAYERS,
 #METABOOKCOVER div.flap#METABOOKLOGIN {
@@ -307,21 +300,21 @@ div.flap#METABOOKCOVERPAGE { padding: 0; }
     padding-left: 1.5em; padding-left: 3vw;
     padding-right: 1.5em; padding-right: 3vw;}
 
-#METABOOKBLURB, #ABOUTSBOOKS {
+#METABOOKBLURB, #ABOUTBOOKHUB {
     background-color: ivory;
     font-size: 80%;}
 #METABOOKCONSOLE, #METABOOKSETTINGS {
     background-color: ivory;
     -webkit-overflow-scrolling: touch;
     overflow: auto;}
-#METABOOKBLURB h1, #ABOUTSBOOKS h1, #METABOOKBLURB h2, #ABOUTSBOOKS h2 {
+#METABOOKBLURB h1, #ABOUTBOOKHUB h1, #METABOOKBLURB h2, #ABOUTBOOKHUB h2 {
     text-align: left;
     font-size: 120%;}
 #METABOOKBLURB > div {
     max-width: 40em; margin-left: auto; margin-right: auto;}
-#METABOOKBLURB p .floatright, #ABOUTSBOOKS p .floatright {
+#METABOOKBLURB p .floatright, #ABOUTBOOKHUB p .floatright {
     max-width: 30%; float: right;}
-#METABOOKBLURB p .floatright img, #ABOUTSBOOKS p .floatright img {
+#METABOOKBLURB p .floatright img, #ABOUTBOOKHUB p .floatright img {
     max-width: 100%; height: auto; }
 html._SHOWCONSOLE .control[alt='Console'] {display: none;}
 
@@ -333,6 +326,13 @@ html._SHOWCONSOLE .control[alt='Console'] {display: none;}
     overflow: hidden;}
 
 .metabooktitlepage { text-align: center;}
+.metabooktitlepage .title { font-weight: 500;}
+.metabooktitlepage .title .subtitle { font-weight: normal;}
+.metabooktitlepage .title, .metabooktitlepage .credits { 
+    margin-bottom: 1em;}
+.metabooktitlepage .title .subtitle, 
+.metabooktitlepage .credits .subcredits { 
+    font-size: 75%;}
 .metabookbibpage { text-align: left;}
 
 #METABOOKSETTINGS {
@@ -377,14 +377,12 @@ html._TOUCH #METABOOKCONSOLELOG {
 #METABOOKCOVERMESSAGE {
     text-align: center;}
 #METABOOKCOVERMESSAGE div.metabookstatus { display: none;}
-#METABOOKCOVER > .sbookslogo, #METABOOKCOVER > .publisherlogo {
+#METABOOKCOVER > .publisherlogo {
     position: absolute; top: 0; z-index: 200;
     color: silver; font-size: 2em;
     display: none; }
-#METABOOKCOVER > .sbookslogo {left: 0;}
 #METABOOKCOVER > .publisherlogo {right: 0;}
 
-#METABOOKCOVER > .sbookslogo em {color: steelblue;}
 
 #METABOOKCOVERMESSAGE > div.message {
     color: silver; font-size: 24px; font-size: 2rem;

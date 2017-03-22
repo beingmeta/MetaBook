@@ -2,15 +2,14 @@
 
 /* ###################### metabook/startup.js ###################### */
 
-/* Copyright (C) 2009-2015 beingmeta, inc.
+/* Copyright (C) 2009-2017 beingmeta, inc.
 
    This file specifies the startup of the metaBook web application,
    initializing both internal data structures and the DOM.
 
    This file is part of metaBook, a Javascript/DHTML web application for reading
-   large structured documents (sBooks).
+   large structured documents.
 
-   For more information on sbooks, visit www.sbooks.net
    For more information on knodules, visit www.knodules.net
    For more information about beingmeta, visit www.beingmeta.com
 
@@ -130,7 +129,7 @@ metaBook.Startup=
             fdjtLog("This is metaBook %s, built %s on %s, launched %s, from %s",
                     mB.version,mB.buildtime,mB.buildhost,now.toString(),
                     mB.root||metaBook.appsource||"somewhere");
-            fdjtLog("Copyright © 2010-2016 beingmeta, inc");
+            fdjtLog("Copyright © 2010-2017 beingmeta, inc");
 
             // Check for any trace settings
             if (getLocal("mbtrace")) useTraceSettings([getLocal("mbtrace")]);
@@ -1218,7 +1217,7 @@ metaBook.Startup=
                 info[i++].innerHTML=
                     "Program and Interface "+
                     "<span class='inlinesymbol'>©"+"</span>"+
-                    " beingmeta, inc 2008-2015";}
+                    " beingmeta, inc 2008-2017";}
             if (Trace.startup>1)
                 fdjtLog("Book info setup done in %dms",fdjtTime()-started);}
 
@@ -1307,8 +1306,6 @@ metaBook.Startup=
 
 //fdjt.DOM.noautotweakfonts="Handled by metaBook";
 /*
-  sbookStartup=metaBook.StartupHandler;
-  sbook={Start: metaBook.Startup,
   setUser: metaBook.setUser,
   Startup: metaBook.Startup};
 */

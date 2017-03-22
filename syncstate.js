@@ -2,11 +2,10 @@
 
 /* ###################### metabook/syncstate.js ###################### */
 
-/* Copyright (C) 2009-2015 beingmeta, inc.
+/* Copyright (C) 2009-2017 beingmeta, inc.
    This file implements a Javascript/DHTML web application for reading
-   large structured documents (sBooks).
+   large structured documents.
 
-   For more information on sbooks, visit www.sbooks.net
    For more information on knodules, visit www.knodules.net
    For more information about beingmeta, visit www.beingmeta.com
 
@@ -397,8 +396,8 @@
         if ((state)&&((state.location)||(state.target))) {}
         else {
             var target=$ID("METABOOKSTART")||fdjt.$1(".metabookstart")||
-                $ID("SBOOKSTART")||fdjt.$1(".sbookstart")||
-                $ID("SBOOKTITLEPAGE");
+                $ID("METABOOKTITLEPAGE")||$ID("PUBTOOLTITLEPAGE")||
+                $ID("TITLEPAGE");
             if (target)
                 state={location: getLoc(target),
                        // This is the beginning of the 21st century

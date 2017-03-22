@@ -2,11 +2,10 @@
 
 /* ###################### metabook/core.js ###################### */
 
-/* Copyright (C) 2009-2015 beingmeta, inc.
+/* Copyright (C) 2009-2017 beingmeta, inc.
    This file implements a Javascript/DHTML web application for reading
-   large structured documents (sBooks).
+   large structured documents.
 
-   For more information on sbooks, visit www.sbooks.net
    For more information on knodules, visit www.knodules.net
    For more information about beingmeta, visit www.beingmeta.com
 
@@ -287,7 +286,7 @@
         
         var knodeToOption=Knodule.knodeToOption;
 
-        var cachelink=/^https:\/\/glossdata.(sbooks\.net|metabooks\.net|beingmeta\.com|bookhub\.io)\//;
+        var cachelink=/^https:\/\/glossdata.bookhub.io\//;
         mB.cachelink=cachelink;
         
         var knodule_name=
@@ -323,13 +322,6 @@
                     var links=item.links; for (var link in links) {
                         if (!(links.hasOwnProperty(link))) continue;
                         if (!(links[link])) continue;
-                        if (cachelink.exec(link)) {
-                            var newlink=link.replace(
-                                "//glossdata.sbooks.net/","//glossdata.bookhub.io/");
-                            if (link!==newlink) {
-                                links[newlink]=links[link];
-                                delete links[link];
-                                link=newlink;}}
                         if ((links.hasOwnProperty(link))&&
                             (cachelink.exec(link)))
                             metaBook.needGlossData(link);}}
@@ -943,8 +935,6 @@
     
     fdjtString.entities.beingmeta=
         "<span class='beingmeta'>being<span class='bmm'>m<span class='bme'>e<span class='bmt'>t<span class='bma'>a</span></span></span></span></span>";
-    fdjtString.entities.sBooks="<span class='sbooks'><em>s</em>Books</span>";
-    fdjtString.entities.sBook="<span class='sbooks'><em>s</em>Book</span>";
     fdjtString.entities.metaBooks=
         "<span class='metabook'><span class='bmm'>m<span class='bme'>e<span class='bmt'>t<span class='bma'>a</span></span></span></span>Books</span>";
     fdjtString.entities.metaBook=

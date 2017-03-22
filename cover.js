@@ -2,7 +2,7 @@
 
 /* ###################### metabook/cover.js ###################### */
 
-/* Copyright (C) 2009-2015 beingmeta, inc.
+/* Copyright (C) 2009-2017 beingmeta, inc.
    This file implements a Javascript/DHTML web application for reading
    large structured documents (metaBooks).
 
@@ -346,6 +346,7 @@
         if (mode==="console") fdjtLog.update();
         cover.className=mode;
         metaBook.mode=mode;
+        metaBook.covermode=mode;
         fdjt.UI.cancel(evt);
         return false;}
 

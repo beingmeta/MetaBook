@@ -2,15 +2,14 @@
 
 /* ###################### metabook/interaction.js ###################### */
 
-/* Copyright (C) 2009-2015 beingmeta, inc.
+/* Copyright (C) 2009-2017 beingmeta, inc.
 
    This file implements most of the interaction handling for the
    e-reader web application.
 
    This file is part of metaBook, a Javascript/DHTML web application
-   for reading large structured documents (sBooks).
+   for reading large structured documents.
 
-   For more information on sbooks, visit www.sbooks.net
    For more information on knodules, visit www.knodules.net
    For more information about beingmeta, visit www.beingmeta.com
 
@@ -1330,7 +1329,7 @@
                 15,"You're currently offline; information will be synchronized when you're back online");
         else if (!(mB.connected))
             fdjtUI.alertFor(
-                15,"You're not currently logged into sBooks.  Information will be synchronized when you've logged in.");
+                15,"You're not currently logged into bookhub.  Information will be synchronized when you've logged in.");
         else fdjtUI.alertFor(7,"Sychronizing glosses, etc with the remote server");
         return false;}
     metaBook.UI.forceSyncAction=forceSyncAction;

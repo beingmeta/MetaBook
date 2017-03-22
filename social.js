@@ -2,16 +2,15 @@
 
 /* ###################### metabook/social.js ###################### */
 
-/* Copyright (C) 2009-2015 beingmeta, inc.
+/* Copyright (C) 2009-2017 beingmeta, inc.
 
    This file implements basic features for browsing glosses based on
    their "sources" --- the reasons they're overlaid on the reader's
    book in the first place.
 
    This file is part of metaBook, a Javascript/DHTML web application for reading
-   large structured documents (sBooks).
+   large structured documents.
 
-   For more information on sbooks, visit www.sbooks.net
    For more information on knodules, visit www.knodules.net
    For more information about beingmeta, visit www.beingmeta.com
 
@@ -67,7 +66,7 @@
         var humid=info.humid;
         if (!(info.name)) return;
         if (withgloss) {
-            var icon=$ID("SBOOKSOURCEICON"+humid);
+            var icon=$ID("SOURCEICON"+humid);
             if (!(icon)) { // Add icon to the sources bar
                 var pic=(info._pic)||(info.pic)||
                     ((info.fbid)&&
@@ -93,7 +92,7 @@
                     ((info.about)?(info.about):"");
                 icon.title=title; icon.oid=info._id;
                 if (info.name) icon.alt=getInitials(info.name);
-                icon.id="SBOOKSOURCEICON"+humid;
+                icon.id="SOURCEICON"+humid;
                 fdjtDOM($ID("METABOOKSOURCES")," ",icon);}}
         return info;}
     metaBook.UI.addSource=addSource;

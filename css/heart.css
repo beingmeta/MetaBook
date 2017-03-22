@@ -1,6 +1,6 @@
 /* -*- Mode: CSS; character-encoding: utf-8; -*- */
 
-/* Copyright (C) 2009-2015 beingmeta, inc. */
+/* Copyright (C) 2009-2017 beingmeta, inc. */
 
 @charset "UTF-8";
 
@@ -13,10 +13,10 @@
 
 #METABOOKHUD #METABOOKHEARTBODY .tabcontent {
     overflow-y: hidden; overflow-x: hidden;}
-#METABOOKHUD.sbooksapp #METABOOKHEARTBODY .tabcontent#BOOKHUBAPP,
+#METABOOKHUD.bookhubapp #METABOOKHEARTBODY .tabcontent#BOOKHUBAPP,
 #METABOOKHUD.login #METABOOKHEARTBODY .tabcontent#METABOOKLOGIN {
     overflow: visible;}
-#METABOOKHUD.sbooksapp #METABOOKHEARTBODY .tabcontent#BOOKHUBAPP {
+#METABOOKHUD.bookhubapp #METABOOKHEARTBODY .tabcontent#BOOKHUBAPP {
     width: 100%; height: 100%; border: 0; margin: 0; padding: 0;}
 #METABOOKHUD.login #METABOOKHEARTBODY .tabcontent#METABOOKLOGIN {
     width: 100%; border: 0; margin: 0; padding: 0;}

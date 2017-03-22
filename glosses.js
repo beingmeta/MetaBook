@@ -2,20 +2,18 @@
 
 /* ###################### metabook/glosses.js ###################### */
 
-/* Copyright (C) 2009-2015 beingmeta, inc.
+/* Copyright (C) 2009-2017 beingmeta, inc.
 
    This file implements the interface for adding and editing **glosses**,
    which are annotations associated with text passages in a document.
 
    This file is part of metaBook, a Javascript/DHTML web application for reading
-   large structured documents (sBooks).
+   large structured documents.
 
-   For more information on sbooks, visit www.sbooks.net
    For more information on knodules, visit www.knodules.net
    For more information about beingmeta, visit www.beingmeta.com
 
    This library uses the FDJT (www.fdjt.org) toolkit.
-   This file assumes that the sbooks.js file has already been loaded.
 
    This program comes with absolutely NO WARRANTY, including implied
    warranties of merchantability or fitness for any particular
@@ -214,7 +212,7 @@
     function setupGlossForm(form,passage,gloss,response){
         var passageid=((passage.codexbaseid)||(passage.id));
         var info=metaBook.docinfo[passageid];
-        if (form.getAttribute("sbooksetup")) return false;
+        if (form.getAttribute("glossformsetup")) return false;
         if (!(info)) return false;
         form.onsubmit=submitGloss;
         getInput(form,"REFURI").value=metaBook.refuri;
@@ -328,7 +326,7 @@
         if (cancel_button) {
             fdjtDOM.addListener(
                 cancel_button,"click",cancelGloss_handler);}
-        form.setAttribute("sbooksetup","yes");
+        form.setAttribute("glossformsetup","yes");
         updateForm(form);
         var container=getParent(form,".metabookglossform");
         if (container) {dropClass(container,"modified");}
@@ -509,7 +507,6 @@
         var attrib=
             target.getAttributeNS("tagline","https://beingmeta.com/METABOOK/")||
             target.getAttributeNS("tagline","https://metabooks.net/")||
-            target.getAttributeNS("tagline","https://sbooks.net/")||
             target.getAttribute("data-tagline")||
             target.getAttribute("tagline");
         if (attrib) return attrib;
@@ -1228,7 +1225,7 @@
             fdjtUI.choose(choices,
                           ((navigator.onLine)&&(!(metaBook.user))&&
                            ([fdjtDOM("p.smaller",
-                                     "This book isn't currently associated with an sBooks account, ",
+                                     "This book isn't currently associated with a bookhub account, ",
                                      "so any highlights or glosses you add will not be permanently saved ",
                                      "until you login."),
                              fdjtDOM("p.smaller",
@@ -1238,7 +1235,7 @@
                                      "or cancel the change you're about to make.")])),
                           (((navigator.onLine)&&(metaBook.user)&&
                             ([fdjtDOM("p.smaller",
-                                      "You aren't currently logged into your sBooks account from ",
+                                      "You aren't currently logged into your bookhub account from ",
                                       "this machine, so any highlights or glosses you add won't ",
                                       "be saved until you do."),
                               fdjtDOM("p.smaller","In addition, you won't get updated glosses from ",
@@ -1928,7 +1925,7 @@
                                 {label: "Cancel"}],
                                fdjtDOM("P","By choosing 'Yes,' I affirm that ",
                                        "I have the right to use and share this ",
-                                       "file according to the sBooks ",
+                                       "file according to the bookhub ",
                                        fdjtDOM.Anchor(
                                            "https://www.bookhub.io/legalia/TOS/",
                                            "A[target='_blank']",

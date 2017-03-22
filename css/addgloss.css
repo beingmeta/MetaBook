@@ -1,6 +1,6 @@
 /* -*- Mode: CSS; character-encoding: utf-8; -*- */
 
-/* Copyright (C) 2009-2015 beingmeta, inc. */
+/* Copyright (C) 2009-2017 beingmeta, inc. */
 
 @charset "UTF-8";
 
@@ -522,8 +522,6 @@ html._TOUCH .haveupload #METABOOKATTACHFILE span.mbmessage {
 
 #METABOOKGLOSSATTACH tr.fileokay {
     color: black; font-size: 0.9em; font-style: italic; color: red;}
-#METABOOKGLOSSATTACH tr.fileokay span.sbooksname { color: black; }
-#METABOOKGLOSSATTACH tr.fileokay span.sbooksname em { color: blue; }
 #METABOOKGLOSSATTACH tr.fileokay a { color: blue; text-decoration: underline;}
 #METABOOKGLOSSATTACH tr.fileokay.ischecked {
     color: green; font-weight: normal;}

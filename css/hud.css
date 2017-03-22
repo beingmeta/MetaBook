@@ -1,6 +1,6 @@
 /* -*- Mode: CSS; character-encoding: utf-8; -*- */
 
-/* Copyright (C) 2009-2015 beingmeta, inc. */
+/* Copyright (C) 2009-2017 beingmeta, inc. */
 
 @charset "UTF-8";
 
@@ -606,31 +606,31 @@ body.mbINDEXING #METABOOKHUD.searchresults #METABOOKINDEXMESSAGE {
 #METABOOKHUD div.tabcontent img.closebutton {
     float: right; max-width: 12%; padding-right: 1ex;}
 
-form.sbooksapp {
+form.bookhubapp {
     margin-top: 1em; max-width: 40em;
     margin-left: 10%; margin-right: 5%;}
-form.sbooksapp button {}
-form.sbooksapp table th {
+form.bookhubapp button {}
+form.bookhubapp table th {
     white-space: nowrap;}
-form.sbooksapp table td.text:first-line {
+form.bookhubapp table td.text:first-line {
     font-weight: bold;}
-form.sbooksapp button[NAME="AUTHORITY"] {
+form.bookhubapp button[NAME="AUTHORITY"] {
     padding: 3px; border-radius: 2px;
     min-height: 50px; max-width: 50px;}
-form.sbooksapp button[NAME="AUTHORITY"] img {
+form.bookhubapp button[NAME="AUTHORITY"] img {
     height: 40px; width: 40px;}
 
-form.sbooksapp { clear: both; padding-top: 1ex;}
-form.sbooksapp table th { padding-right: 1ex;}
-form.sbooksapp table td.text { padding-bottom: 1ex;}
-form.sbooksapp table td.text { padding-bottom: 1ex;}
+form.bookhubapp { clear: both; padding-top: 1ex;}
+form.bookhubapp table th { padding-right: 1ex;}
+form.bookhubapp table td.text { padding-bottom: 1ex;}
+form.bookhubapp table td.text { padding-bottom: 1ex;}
 
 /* User, no user rules */
 
 html._NOUSER ._USER { display: none;}
 html._USER ._NOUSER { display: none;}
 
-html._NOUSER form.sbooksapp { padding-top: 0;}
+html._NOUSER form.bookhubapp { padding-top: 0;}
 
 .mbwithuser, .mbnouser, .mbdisconn, .mbwithconn { display: none; }
 
