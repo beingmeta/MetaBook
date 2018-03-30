@@ -76,7 +76,8 @@ body.hudup #METABOOKHUD, #METABOOKHUD.openhead, #METABOOKHUD.openheart,
 #METABOOKHUD.openglossmark, body.mbSHOWHELP #METABOOKHUD {
     z-index: 100; }
 
-#METABOOKCOVER .fdjtfontwrapper {}
+#METABOOKCOVER .fdjtfontwrapper {
+    vertical-align: top;}
 
 #METABOOKCOVER div.flap {
     box-sizing: border-box; padding: 1em; padding-top: 2px;
