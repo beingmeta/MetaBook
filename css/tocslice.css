@@ -17,10 +17,10 @@
 .mbtoc { height: 1.3em; }
 .mbtoc.fdjtstartofpage { 
     overflow: hidden;}
-div.metabookslice .mbtoc.mblivetoc {
+div.metareaderslice .mbtoc.mblivetoc {
     border-bottom-color: red;
     border-bottom-style: dotted;}
-div.metabookslice .mbtoc.mblivetoc.mbcurtoc {
+div.metareaderslice .mbtoc.mblivetoc.mbcurtoc {
     border-bottom-style: solid;}
 
 div.mbtoc_posbar {

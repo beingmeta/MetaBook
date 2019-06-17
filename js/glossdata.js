@@ -1,6 +1,6 @@
 /* -*- Mode: Javascript; Character-encoding: utf-8; -*- */
 
-/* ###################### metabook/glossdata.js ###################### */
+/* ###################### metareader/glossdata.js ###################### */
 
 /* Copyright (C) 2009-2017 beingmeta, inc.
    This file implements a Javascript/DHTML web application for reading
@@ -40,11 +40,11 @@
     var dropLocal=fdjtState.dropLocal;
     var pushLocal=fdjtState.pushLocal, removeLocal=fdjtState.removeLocal;
 
-    var mB=metaBook, Trace=metaBook.Trace;
+    var mR=metaReader, Trace=metaReader.Trace;
     
     /* Noting (and caching) glossdata */
 
-    var glossdata=metaBook.glossdata, glossdata_state={};
+    var glossdata=metaReader.glossdata, glossdata_state={};
     var glossdata_waiting={};
     var createObjectURL=
         ((window.URL)&&(window.URL.createObjectURL))||
@@ -52,14 +52,14 @@
     var Blob=window.Blob;
 
     function setupGlossData(){
-        var cached=getLocal("mB("+mB.docid+").glossdata",true);
+        var cached=getLocal("mR("+mR.docid+").glossdata",true);
         var i=0, len=cached.length; while (i<len) 
             glossdata_state[cached[i++]]="cached";}
-    metaBook.setupGlossData=setupGlossData;
+    metaReader.setupGlossData=setupGlossData;
 
     function cacheGlossData(uri){
         function caching(resolved,rejected){
-            if (uri.search(mB.cachelink)!==0) return;
+            if (uri.search(mR.cachelink)!==0) return;
             if (glossdata[uri]) return resolved(glossdata[uri]);
             if (glossdata_state[uri]==="cached") return;
             else if (glossdata_state[uri]) {
@@ -78,10 +78,10 @@
             // We provide credentials in the query string because we
             //  need to have .withCredentials be false to avoid some
             //  CORS-related errors on redirects to sites like S3.
-            var mycopyid=mB.mycopyid;
+            var mycopyid=mR.mycopyid;
             if (mycopyid) {
                 endpoint=endpoint+"?MYCOPYID="+encodeURIComponent(mycopyid)+
-                    "&DOC="+encodeURIComponent(mB.docref);}
+                    "&DOC="+encodeURIComponent(mR.docref);}
             if (Trace.glossdata) {
                 fdjtLog("Fetching glossdata %s (%s) to cache locally",uri,rtype);}
             req.onreadystatechange=function () {
@@ -141,10 +141,10 @@
                 fdjt.DOM.addListener(window,"online",load_glossdata);
             if (need_glossdata.indexOf(uri)<0) need_glossdata.push(uri);
             return;}
-        if ((mB.mycopyid)&&(mB.mycopyid_expires<(new Date())))
+        if ((mR.mycopyid)&&(mR.mycopyid_expires<(new Date())))
             return cacheGlossData(uri).catch(function(){delay_glossdata(uri);});
         else {
-            var req=mB.getMyCopyId();
+            var req=mR.getMyCopyId();
             return req.then(function(mycopyid){
                 if (mycopyid)
                     return cacheGlossData(uri).catch(function(trouble){
@@ -152,7 +152,7 @@
                         delay_glossdata(uri);});
                 else delay_glossdata(uri);})
                 .catch(function(){delay_glossdata(uri);});}}
-    metaBook.needGlossData=needGlossData;
+    metaReader.needGlossData=needGlossData;
     
     function delay_glossdata(uri){
         need_glossdata.push(uri);
@@ -171,7 +171,7 @@
         function getting(resolved,failed){
             if (glossdata[uri]) resolved(glossdata[uri]);
             else if (glossdata_state[uri]==="cached")  {
-                return metaBook.getDB().then(function(db){
+                return metaReader.getDB().then(function(db){
                     var txn=db.transaction(["glossdata"],"readwrite");
                     var storage=txn.objectStore("glossdata");
                     var req=storage.get(uri);
@@ -191,11 +191,11 @@
                     .catch(failed);}
             else return fillCache(resolved,failed);}
         function fillCache(resolved,failed){
-            if ((mB.mycopyid)&&(mB.mycopyid_expires<(new Date())))
+            if ((mR.mycopyid)&&(mR.mycopyid_expires<(new Date())))
                 setTimeout(function(){
                     cacheGlossData(uri).then(resolved).catch(failed);},
                            2000);
-            else mB.getMyCopyId().then(function(mycopyid){
+            else mR.getMyCopyId().then(function(mycopyid){
                 if (mycopyid)
                     setTimeout(function(){
                         cacheGlossData(uri).then(resolved).catch(failed);},
@@ -203,12 +203,12 @@
                 else failed(new Error("Couldn't get MYCOPYID"));})
                 .catch(failed);}
         return new Promise(getting);}
-    metaBook.getGlossData=getGlossData;
+    metaReader.getGlossData=getGlossData;
 
     function gotLocalURL(uri,local_url,resolved){
         var i, lim;
-        var waiting_elts=mB.srcloading[uri], waiting=glossdata_waiting[uri];
-        mB.srcloading[uri]=false; glossdata_waiting[uri]=false;
+        var waiting_elts=mR.srcloading[uri], waiting=glossdata_waiting[uri];
+        mR.srcloading[uri]=false; glossdata_waiting[uri]=false;
         glossdata[uri]=local_url;
         if (resolved) resolved(local_url);
         if (waiting_elts) {
@@ -219,11 +219,11 @@
         if (waiting) {
             i=0; lim=waiting.length;
             while (i<lim) waiting[i++](local_url);
-            mB.srcloading[uri]=false;}}
+            mR.srcloading[uri]=false;}}
 
     function cacheDataURI(url,datauri){
         var key="gD("+url+").glossdata";
-        metaBook.getDB().then(function(db){
+        metaReader.getDB().then(function(db){
             var txn=db.transaction(["glossdata"],"readwrite");
             var storage=txn.objectStore("glossdata");
             var req=storage.put({url: url,datauri: datauri});
@@ -242,18 +242,18 @@
 
     function glossDataSaved(url){
         if (Trace.glossdata) fdjtLog("GlossData cached for %s",url);
-        pushLocal("mB("+mB.docid+").glossdata",url);}
+        pushLocal("mR("+mR.docid+").glossdata",url);}
 
     function clearGlossData(docid){
-        var key="mB("+docid+").glossdata", urls=getLocal(key,true);
+        var key="mR("+docid+").glossdata", urls=getLocal(key,true);
         if ((urls)&&(urls.length)) {
             clearGlossDataCache(urls,key);}
         else dropLocal(key);}
-    metaBook.clearGlossData=clearGlossData;
+    metaReader.clearGlossData=clearGlossData;
 
     function clearGlossDataCache(urls,key){
         function clearing(resolve){
-            metaBook.getDB().then(function(db){
+            metaReader.getDB().then(function(db){
                 var txn=db.transaction(["glossdata"],"readwrite");
                 var storage=txn.objectStore("glossdata");
                 storage.openCursor().onsuccess=function(event){

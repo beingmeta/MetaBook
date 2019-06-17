@@ -82,7 +82,7 @@ body.mbPREVIEW #METABOOKLOCPCT,
 body.mbPREVIEW #METABOOKLOCOFF {
     pointer-events: none;}
 
-div.metabookhelp .result span { display: none; }
+div.metareaderhelp .result span { display: none; }
 
 @media screen and (max-width: 640px) {
     #METABOOKPAGEBARHELP.helpbox, #METABOOKSEETHRUHELP.helpbox {

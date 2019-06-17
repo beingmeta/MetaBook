@@ -1,6 +1,6 @@
 /* -*- Mode: Javascript; Character-encoding: utf-8; -*- */
 
-/* ###################### metabook/root.js ###################### */
+/* ###################### metareader/root.js ###################### */
 
 /* Copyright (C) 2009-2017 beingmeta, inc.
    This file implements a Javascript/DHTML web application for reading
@@ -39,7 +39,7 @@
 //var Knodule=((typeof Knodule !== "undefined")?(Knodule):({}));
 //var fdjtMap=fdjt.Map;
 
-var metaBook={
+var metaReader={
     mode: false,hudup: false,scrolling: false,query: false,
     head: false,target: false,glosstarget: false,location: false,
     root: false,start: false,HUD: false,locsync: false,
@@ -85,7 +85,7 @@ var metaBook={
     persist: false,
     // Whether to locally save glosses, etc for offline availability,
     cacheglosses: false,
-    // Which properties of the metaBook object to save
+    // Which properties of the metaReader object to save
     saveprops: ["sources","outlets","layers","sync","nodeid","state"],
     // Whether to store glosses, etc for offline access and improved
     // performance.  This is no longer used, replaced by the two values
@@ -129,7 +129,7 @@ var metaBook={
     sync_timeout: 15000,    // Timeout on sync requests
     sync_pause: 5*60*1000, // Interval to sleep on error or timeout
     // Various handlers, settings, and status information for the
-    // metaBook interface
+    // metaReader interface
     UI: {
         // This maps device types into sets of node->event handlers
         handlers: {mouse: {}, touch: {}, kbd: {}, ios: {}}},
@@ -153,7 +153,7 @@ var metaBook={
     // loaded to cache locally
     srcloading: {}, glossdata: {},
     // These are functions to be called when everythings has been loaded
-    //  to initialize local references to common metaBook functions
+    //  to initialize local references to common metaReader functions
     inits: {local: [], app: [], head: [], body: [], dom: []},
     default_config: {
         layout: 'bypage',
@@ -205,7 +205,7 @@ var metaBook={
         gestures: 0}      // How much to trace gestures
 };
 
-if (typeof mB === 'undefined') mB=metaBook;
+if (typeof mR === 'undefined') mR=metaReader;
 
 fdjt.DOM.noautofontadjust=true;
 

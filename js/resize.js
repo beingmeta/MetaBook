@@ -1,6 +1,6 @@
 /* -*- Mode: Javascript; Character-encoding: utf-8; -*- */
 
-/* ###################### metabook/nav.js ###################### */
+/* ###################### metareader/nav.js ###################### */
 
 /* Copyright (C) 2009-2017 beingmeta, inc.
    This file implements a Javascript/DHTML web application for reading
@@ -40,7 +40,7 @@
     var addClass=fdjtDOM.addClass;
     var showPage=fdjt.showPage;
     var fdjtUI=fdjt.UI;
-    var Trace=metaBook.Trace, mB=metaBook;
+    var Trace=metaReader.Trace, mR=metaReader;
 
     var getGeometry=fdjtDOM.getGeometry;
 
@@ -65,8 +65,8 @@
                     var hud=$ID("METABOOKHUD");
                     var cover=$ID("METABOOKCOVER");
                     ui_height=h; ui_width=w;
-                    if (cover) mB.resizeCover(cover);
-                    if (hud) mB.resizeHUD(hud);
+                    if (cover) mR.resizeCover(cover);
+                    if (hud) mR.resizeHUD(hud);
                     if ((hud)||(cover))
                         fdjtLog("Resized UI in %fsecs, running %d callbacks",
                                 ((fdjt.Time()-adjstart)/1000),
@@ -80,30 +80,30 @@
         if (typeof wait !== "number") wait=100;
         return new Promise(resizing);}
 
-    metaBook.resizeUI=resizeUI;
+    metaReader.resizeUI=resizeUI;
 
-    function metabookResize(){
+    function metareaderResize(){
         if ((hasClass(document.body,"mbZOOM"))||
             (hasClass(document.body,"mbMEDIA"))) {
-            resizing=setTimeout(metabookResize,1000);
+            resizing=setTimeout(metareaderResize,1000);
             return;}
         if (resizing) {
             clearTimeout(resizing); resizing=false;}
         updateSizeClasses();
-        mB.resizeUI();
+        mR.resizeUI();
         resizePagers();
         resizeLayout();}
-    metaBook.resize=metabookResize;
+    metaReader.resize=metareaderResize;
 
     function resizeLayout() {
-        var layout=mB.layout;
+        var layout=mR.layout;
         // Unscale the layout
-        if (layout) mB.scaleLayout(false);
+        if (layout) mR.scaleLayout(false);
         if ((window.innerWidth===inner_width)&&
             (window.innerHeight===inner_height)) {
             // Not a real change (we think), so just scale the
             // layout, don't make a new one.
-            if (layout) metaBook.scaleLayout(true);
+            if (layout) metaReader.scaleLayout(true);
             if (Trace.resize) fdjtLog("Resize to norm, ignoring");
             return;}
         if (Trace.resize)
@@ -117,33 +117,33 @@
         if ((layout)&&(layout.width===width)&&(layout.height===height)) {
             if (Trace.resize) fdjtLog("Layout size unchanged, ignoring");
             return;}
-        if ((mB.layout)&&(fdjt.device.fixedframe)) {
+        if ((mR.layout)&&(fdjt.device.fixedframe)) {
             // On fixed frame devices (phones, tablets, etc), only
             // resize the layout if there's been an orientation
             // change.
             var orientation=Math.abs(window.orientation)%180;
             var layout_orientation=
-                ((mB.layout.orientation)&&
-                 (Math.abs(mB.layout.orientation)%180));
+                ((mR.layout.orientation)&&
+                 (Math.abs(mR.layout.orientation)%180));
             if (orientation === layout_orientation) {
-                mB.scaleLayout(true);
+                mR.scaleLayout(true);
                 return;}}
-        if ((layout)&&(layout.onresize)&&(!(metaBook.freezelayout))) {
+        if ((layout)&&(layout.onresize)&&(!(metaReader.freezelayout))) {
             // This handles prompting for whether or not to update
             // the layout.  We don't prompt if the layout didn't
-            // take very long (metaBook.long_layout_thresh) or is already
-            // cached (metaBook.layoutCached()).
-            if ((metaBook.long_layout_thresh)&&(layout.started)&&
-                ((layout.done-layout.started)<=metaBook.long_layout_thresh))
+            // take very long (metaReader.long_layout_thresh) or is already
+            // cached (metaReader.layoutCached()).
+            if ((metaReader.long_layout_thresh)&&(layout.started)&&
+                ((layout.done-layout.started)<=metaReader.long_layout_thresh))
                 resizing=setTimeout(resizeLayoutNow,50);
             else if (choosing_resize) {}
-            else if (metaBook.layoutCached())
+            else if (metaReader.layoutCached())
                 resizing=setTimeout(resizeLayoutNow,50);
             else {
                 // This prompts for updating the layout
                 var msg=fdjtDOM("div.title","Update layout?");
                 // This should be fast, so we do it right away.
-                mB.scaleLayout(true);
+                mR.scaleLayout(true);
                 choosing_resize=true;
                 // When a choice is made, it becomes the default
                 // When a choice is made to not resize, the
@@ -153,25 +153,25 @@
                      handler: function(){
                          choosing_resize=false;
                          resize_default=true;
-                         metaBook.layout_choice_timeout=10;
+                         metaReader.layout_choice_timeout=10;
                          resizing=setTimeout(resizeLayoutNow,50);},
                      isdefault: resize_default},
                     {label: "No",
                      handler: function(){
                          choosing_resize=false;
                          resize_default=false;
-                         metaBook.layout_choice_timeout=10;},
+                         metaReader.layout_choice_timeout=10;},
                      isdefault: (!(resize_default))}];
                 var spec={choices: choices,
-                          timeout: (metaBook.layout_choice_timeout||
-                                    metaBook.choice_timeout||20),
+                          timeout: (metaReader.layout_choice_timeout||
+                                    metaReader.choice_timeout||20),
                           spec: "div.fdjtdialog.fdjtconfirm.updatelayout"};
                 choosing_resize=fdjtUI.choose(spec,msg);}}}
 
     function resizeLayoutNow(evt){
         if (resizing) clearTimeout(resizing);
         resizing=false;
-        metaBook.layout.onresize(evt);}
+        metaReader.layout.onresize(evt);}
 
     function resizePagers(){
         var pagers=fdjtDOM.$(".fdjtpage");
@@ -192,7 +192,7 @@
         else if (h<600) addClass(document.body,"_SHORT");
         else if (h>1200) addClass(document.body,"_TALL");
         else {}}
-    metaBook.updateSizeClasses=updateSizeClasses;
+    metaReader.updateSizeClasses=updateSizeClasses;
 
     var resizing=false;
     var resize_wait=false;
@@ -207,8 +207,8 @@
             if (Trace.resize) fdjtLog("Close resize dialog %o",evt);
             fdjt.Dialog.close(choosing_resize);
             choosing_resize=false;}
-        resize_wait=setTimeout(metabookResize,metaBook.resize_wait);}
-    metaBook.resizeHandler=resizeHandler;
+        resize_wait=setTimeout(metareaderResize,metaReader.resize_wait);}
+    metaReader.resizeHandler=resizeHandler;
 
 })();
 

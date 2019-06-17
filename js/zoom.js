@@ -1,13 +1,13 @@
 /* -*- Mode: Javascript; Character-encoding: utf-8; -*- */
 
-/* ###################### metabook/interaction.js ###################### */
+/* ###################### metareader/interaction.js ###################### */
 
 /* Copyright (C) 2009-2017 beingmeta, inc.
 
    This file implements most of the interaction handling for the
    e-reader web application.
 
-   This file is part of metaBook, a Javascript/DHTML web application for reading
+   This file is part of metaReader, a Javascript/DHTML web application for reading
    large structured documents.
 
    For more information on knodules, visit www.knodules.net
@@ -34,7 +34,7 @@
 
 */
 /* jshint browser: true */
-/* global metaBook: false */
+/* global metaReader: false */
 
 (function(){
     "use strict";
@@ -48,8 +48,8 @@
     var addClass=fdjtDOM.addClass;
     var dropClass=fdjtDOM.dropClass;
 
-    var mB=metaBook, $ID=fdjt.ID;
-    var Trace=mB.Trace;
+    var mR=metaReader, $ID=fdjt.ID;
+    var Trace=mR.Trace;
 
     /* Full page zoom mode */
     
@@ -57,15 +57,15 @@
         var zoom_target=$ID("METABOOKZOOMTARGET"), copy;
         if ((Trace.zoom)||(Trace.mode)) fdjtLog("startZoom %o",node);
         if (!(node)) return stopZoom();
-        if (metaBook.zoomtarget===node) {
-            metaBook.zoomed=node;
+        if (metaReader.zoomtarget===node) {
+            metaReader.zoomed=node;
             addClass(document.body,"mbZOOM");}
         else {
-            mB.zoomX=mB.zoomY=mB.zoomscale=false;}
-        metaBook.zoomtarget=node;
-        if (!(metaBook.layout)) {}
+            mR.zoomX=mR.zoomY=mR.zoomscale=false;}
+        metaReader.zoomtarget=node;
+        if (!(metaReader.layout)) {}
         else {
-            var layout=metaBook.layout;
+            var layout=metaReader.layout;
             var id=node.getAttribute("data-baseid")||node.id;
             if ((layout.lostids)&&(layout.lostids[id]))
                 copy=layout.lostids[id].cloneNode(true);
@@ -78,21 +78,21 @@
         copy.id="METABOOKZOOMTARGET";
         fdjt.DOM.replace(zoom_target,copy);
         addClass(document.body,"mbZOOM");
-        if (!(mB.zoomscale)) {
+        if (!(mR.zoomscale)) {
             var mz=$ID("METABOOKZOOM");
             var zb=$ID("METABOOKZOOM");
             var xscale=((0.9*mz.clientWidth)/mz.scrollWidth);
             var yscale=((0.9*mz.clientHeight)/mz.scrollHeight);
-            mB.zoomscale=1; zb.style[fdjt.DOM.transform]="";
+            mR.zoomscale=1; zb.style[fdjt.DOM.transform]="";
             if (xscale<yscale) setZoom(xscale);
             else setZoom(yscale);}}
-    metaBook.startZoom=startZoom;
+    metaReader.startZoom=startZoom;
 
     function stopZoom(evt){
         dropClass(document.body,"mbZOOM");
-        metaBook.zoomed=false;
+        metaReader.zoomed=false;
         if (evt) fdjt.UI.cancel(evt);}
-    metaBook.stopZoom=stopZoom;
+    metaReader.stopZoom=stopZoom;
 
     function setZoom(scale,zx,zy) {
         var mz=$ID("METABOOKZOOM");
@@ -100,23 +100,23 @@
         var rx=mz.scrollLeft/mz.scrollWidth;
         var ry=mz.scrollTop/mz.scrollHeight;
         if (typeof zx === 'number') {
-            mB.zoomX=zx||0; mB.zoomY=zy||0;}
-        else if (typeof mB.zoomX === 'number') {
-            zx=mB.zoomX; zy=mB.zoomY;}
+            mR.zoomX=zx||0; mR.zoomY=zy||0;}
+        else if (typeof mR.zoomX === 'number') {
+            zx=mR.zoomX; zy=mR.zoomY;}
         else {}
         if ((Trace.zoom)||(Trace.gestures)) {
             if (typeof zx=== 'number')
                 fdjtLog("setZoom(%o) @%o,%o %o",scale,zx,zy,zb);
             else fdjtLog("setZoom(%o) @%o,%o %o",scale,rx,ry,zb);}
         if (!(scale)) {
-            mB.zoomX=mB.zoomY=false;
-            mB.zoomscale=1; zb.style[fdjt.DOM.transform]="";
+            mR.zoomX=mR.zoomY=false;
+            mR.zoomscale=1; zb.style[fdjt.DOM.transform]="";
             var xscale=((0.9*mz.clientWidth)/mz.scrollWidth);
             var yscale=((0.9*mz.clientHeight)/mz.scrollHeight);
             if (xscale<yscale) setZoom(xscale);
             else setZoom(yscale);}
         else {
-            metaBook.zoomscale=scale;
+            metaReader.zoomscale=scale;
             if (typeof zx === 'number') {
                 zb.style[fdjt.DOM.transform]=
                     "translate3d("+zx+"px,"+zy+"px,0px) "+
@@ -126,13 +126,13 @@
                 fdjtLog("%s=%s %o",fdjt.DOM.transform,zb.style[fdjt.DOM.transform],
                         zb);}
         if (typeof zx !== 'number') {
-            mB.zoomX=mB.zoomY=false;
+            mR.zoomX=mR.zoomY=false;
             mz.scrollLeft=rx*mz.scrollWidth;
             mz.scrollTop=ry*mz.scrollHeight;}}
     function zoom(adjust){
         if (!(adjust)) setZoom(false);
-        else setZoom((metaBook.zoomscale||1)*adjust);}
-    metaBook.zoom=zoom;
+        else setZoom((metaReader.zoomscale||1)*adjust);}
+    metaReader.zoom=zoom;
 
     function zoomIn(evt){
         evt=evt||window.event; zoom(1.1); fdjt.UI.cancel(evt);}
@@ -148,13 +148,13 @@
         var zc=$ID("METABOOKZOOMCONTROLS"), target=getTarget(evt);
         if (hasParent(target,zc)) return;
         var touches=evt.touches, touch1=touches[0];
-        var zoomscale=mB.zoomscale||1;
-        var cx1=touch1.clientX, x1=(cx1-(mB.zoomX||0))/zoomscale;
-        var cy1=touch1.clientY, y1=(cy1-(mB.zoomY||0))/zoomscale;
+        var zoomscale=mR.zoomscale||1;
+        var cx1=touch1.clientX, x1=(cx1-(mR.zoomX||0))/zoomscale;
+        var cy1=touch1.clientY, y1=(cy1-(mR.zoomY||0))/zoomscale;
         if (evt.touches.length===2) {
             var touch2=touches[1];
-            var cx2=touch2.clientX, x2=(cx2-(mB.zoomX||0))/zoomscale;
-            var cy2=touch2.clientY, y2=(cy2-(mB.zoomY||0))/zoomscale;
+            var cx2=touch2.clientX, x2=(cx2-(mR.zoomX||0))/zoomscale;
+            var cy2=touch2.clientY, y2=(cy2-(mR.zoomY||0))/zoomscale;
             var dx=cx2-cx1, dy=cy2-cy1;
             var d=Math.sqrt((dx*dx)+(dy*dy));
             cg_x=(x1+x2)/2; cg_y=(y1+y2)/2;
@@ -175,8 +175,8 @@
     function zoom_touchmove(evt){
         if (!((evt)&&(evt.touches)&&(evt.touches.length>=1))) return;
         var zb=$ID("METABOOKZOOMBOX"); var zbs=zb.style;
-        var off_x=(mB.zoomX||0), off_y=(mB.zoomY||0);
-        var zoomscale=mB.zoomscale||1; 
+        var off_x=(mR.zoomX||0), off_y=(mR.zoomY||0);
+        var zoomscale=mR.zoomscale||1; 
         var transform=fdjtDOM.transform;
         var touches=evt.touches, touch1=touches[0];
         var cx1=touch1.clientX, x1=(cx1-off_x)/zoomscale;
@@ -202,7 +202,7 @@
             off_x=off_x+pan_dx; off_y=off_y+pan_dy; 
             if ((Trace.zoom)||(Trace.gestures>1))
                 fdjtLog("zoom_touchmove(1) %o: [%o,%o]=[%o,%o]+([%o,%o]=[%o,%o]-[%o,%o])",
-                        evt,off_x,off_y,mB.zoomX,mB.zoomY,pan_dx,pan_dy,
+                        evt,off_x,off_y,mR.zoomX,mR.zoomY,pan_dx,pan_dy,
                         x1,y1,panstart_x,panstart_y);
             zbs[transform]=
                 "translate3d("+off_x+"px,"+off_y+"px,0px) "+"scale("+zoomscale+")";
@@ -210,8 +210,8 @@
             cancel(evt);}
         else {}}
     function zoom_touchend(evt){
-        var zoomscale=mB.zoomscale||1;
-        var off_x=(mB.zoomX||0), off_y=(mB.zoomY||0);
+        var zoomscale=mR.zoomscale||1;
+        var off_x=(mR.zoomX||0), off_y=(mR.zoomY||0);
         if ((d_last)&&(d_start)) {
             var scale=(d_last/d_start);
             off_x=off_x+((cg_x*zoomscale)-(cg_x*scale*zoomscale));
@@ -222,7 +222,7 @@
             setZoom((scale)*(zoomscale),off_x,off_y);
             off_x=off_y=d_last=d_start=false;}
         else if (typeof panstart_x === 'number') {
-            var new_x=(mB.zoomX||0), new_y=(mB.zoomY||0), now=fdjtTime();
+            var new_x=(mR.zoomX||0), new_y=(mR.zoomY||0), now=fdjtTime();
             if ((Trace.zoom)||(Trace.gestures))
                 fdjtLog("zoom_touchend(2) %o: [%o,%o]=[%o,%o] start [%o,%o]",
                         evt,new_x+pan_dx,new_y+pan_dy,pan_dx,pan_dy,
@@ -232,29 +232,29 @@
                     fdjtLog("tapzoom_touchend(2) %o: [%o,%o]=[%o,%o] start [%o,%o]",
                             evt,new_x+pan_dx,new_y+pan_dy,pan_dx,pan_dy,
                             panstart_x,panstart_y);
-                mB.zoomX=panstart_x; mB.zoomY=panstart_y;
-                setZoom(1.1*zoomscale,mB.zoomX,mB.zoomY);}
+                mR.zoomX=panstart_x; mR.zoomY=panstart_y;
+                setZoom(1.1*zoomscale,mR.zoomX,mR.zoomY);}
             else {
-                mB.zoomX=new_x+pan_dx; mB.zoomY=new_y+pan_dy;}
+                mR.zoomX=new_x+pan_dx; mR.zoomY=new_y+pan_dy;}
             pan_dx=pan_dy=panstart_x=panstart_y=false;}
         else {}}
 
     fdjt.DOM.defListeners(
-        metaBook.UI.handlers.mouse,
+        metaReader.UI.handlers.mouse,
 	{"#METABOOKZOOMCLOSE": {click: stopZoom},
-         "#METABOOKZOOMHELP": {click: metaBook.toggleHelp},
+         "#METABOOKZOOMHELP": {click: metaReader.toggleHelp},
          "#METABOOKZOOMIN": {click: zoomIn},
          "#METABOOKZOOMOUT": {click: zoomOut},
          "#METABOOKUNZOOM": {click: unZoom}});
 
     fdjt.DOM.defListeners(
-        metaBook.UI.handlers.touch,
+        metaReader.UI.handlers.touch,
         {"#METABOOKZOOM": {
             touchstart: zoom_touchstart,
             touchmove: zoom_touchmove,
             touchend: zoom_touchend},
-         "#METABOOKZOOMCLOSE": {click: metaBook.stopZoom},
-         "#METABOOKZOOMHELP": {click: metaBook.toggleHelp},
+         "#METABOOKZOOMCLOSE": {click: metaReader.stopZoom},
+         "#METABOOKZOOMHELP": {click: metaReader.toggleHelp},
          "#METABOOKZOOMIN": {touchend: zoomIn},
          "#METABOOKZOOMOUT": {touchend: zoomOut},
          "#METABOOKUNZOOM": {touchend: unZoom}});
@@ -275,7 +275,7 @@
                     fdjt.DOM.replace(media_target,media_elt);}
             else $ID("METABOOKMEDIA").appendChild(media_target);
             addClass(document.body,"mbMEDIA");}
-        if (metaBook.showing===url) {
+        if (metaReader.showing===url) {
             addClass(document.body,"mbMEDIA");
             return;}
         else if (type.search("image")===0) {
@@ -301,28 +301,28 @@
         else {
             src_elt=media_elt=fdjtDOM("IFRAME");}
         media_elt.id="METABOOKMEDIATARGET";
-        metaBook.showing=url;
-        if ((src_elt)&&(mB.glossdata[url])) {
-            src_elt.src=mB.glossdata[url];
+        metaReader.showing=url;
+        if ((src_elt)&&(mR.glossdata[url])) {
+            src_elt.src=mR.glossdata[url];
             placeMedia();}
         else if (src_elt) {
             addClass($ID("METABOOKMEDIA"),"loadingcontent");
             addClass(src_elt,"loadingcontent");
-            metaBook.getGlossData(url).then(function(val){
+            metaReader.getGlossData(url).then(function(val){
                 dropClass($ID("METABOOKMEDIA"),"loadingcontent");
                 dropClass(src_elt,"loadingcontent");
                 src_elt.src=val;
                 placeMedia();})
             .catch(function(ex){
                 fdjt.Log("Couldn't fetch glossdata from %s: %o",url,ex);
-                metaBook.showing=url;
+                metaReader.showing=url;
                 dropClass($ID("METABOOKMEDIA"),"loadingcontent");
                 dropClass(src_elt,"loadingcontent");});}
         else placeMedia();}
-    metaBook.showMedia=showMedia;
+    metaReader.showMedia=showMedia;
     function hideMedia(){
         dropClass(document.body,"mbMEDIA");}
-    metaBook.hideMedia=hideMedia;
+    metaReader.hideMedia=hideMedia;
 
     var pause_media_timeout=false;
     function closeMedia_tapped(evt){
@@ -352,15 +352,15 @@
         var media_elt=$ID("METABOOKMEDIATARGET");
         if ((target===media_elt)&&(fdjtDOM.isImage(target))) {
             dropClass(document.body,"mbMEDIA");
-            mB.startZoom(media_elt);}}
+            mR.startZoom(media_elt);}}
 
     fdjt.DOM.defListeners(
-        metaBook.UI.handlers.mouse,
+        metaReader.UI.handlers.mouse,
         {"#METABOOKCLOSEMEDIA": {mousedown: closeMedia_tapped},
          "#METABOOKMEDIA": {click: zoomMedia}});
 
     fdjt.DOM.defListeners(
-        metaBook.UI.handlers.touch,
+        metaReader.UI.handlers.touch,
         {"#METABOOKCLOSEMEDIA": {touchend: closeMedia_tapped},
          "#METABOOKMEDIA": {touchend: zoomMedia}});
 

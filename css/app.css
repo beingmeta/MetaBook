@@ -33,7 +33,7 @@
 /* Major wrappers and rules */
 
 body._FULLWIDTH #CODEXPAGE { max-width: inherit;}
-body._SCROLL #CODEXPAGE, img.metabookpagebutton { display: none;}
+body._SCROLL #CODEXPAGE, img.metareaderpagebutton { display: none;}
 
 body._BYPAGE { overflow: hidden; }
 body._BYPAGE #CODEXCONTENT { display: none;}
@@ -98,7 +98,7 @@ body.mbSTARTUP #CODEXCONTENT {
     padding-left: 32px; padding-right: 32px;
     margin-right: 0;}
 
-body._BYPAGE #CODEXPAGE #CODEXCONTENT .metabookpagebreak {
+body._BYPAGE #CODEXPAGE #CODEXCONTENT .metareaderpagebreak {
     column-break-before: always;
     break-before: always;}
 
@@ -111,7 +111,7 @@ body._BYPAGE #CODEXPAGE #CODEXCONTENT .metabookpagebreak {
     top: 60px; left: 60px; right: 60px;
     display: none;}
 
-body._ANIMATE body.metabookfixed div.codexpage {
+body._ANIMATE body.metareaderfixed div.codexpage {
     transition-property: opacity; transition-duration: 0.1s;}
 
 /* Hide the datalist object */
@@ -384,7 +384,7 @@ h1[toclevel='1'],h2[toclevel='1'] { page-break-before: always;}
 .avoidbreakbefore { page-break-before: avoid;}
 
 .avoidbreakafter { page-break-after: avoid;}
-.avoidbreakafter.metabookdupstart, .avoidbreakafter.metabookdup {
+.avoidbreakafter.metareaderdupstart, .avoidbreakafter.metareaderdup {
     page-break-after: auto;}
 
 .forcebreakbefore { page-break-before: always;}
@@ -494,13 +494,13 @@ html._MOUSE a[href]:hover {text-decoration: underline;}
 #METABOOKBODY #METABOOKDETAILS .sbookaside {
     page-break-before: always;}
 
-div.metabookglossform form table {
+div.metareaderglossform form table {
     width: 100%;}
-div.metabookglossform form table td {
+div.metareaderglossform form table td {
     vertical-align: top; text-align: left;}
-div.metabookglossform form table td.button {
+div.metareaderglossform form table td.button {
     width: 50px; text-align: center;}
-div.metabookglossform form table td textarea { width: 100%;}
+div.metareaderglossform form table td textarea { width: 100%;}
 
 /* New pagination model */
 
@@ -562,20 +562,20 @@ body._ANIMATE div.codexpage.newpage.onleft.curpage {
 
 /* Special rules for overriding properties on split (dup) passages */
 
-body #METABOOKBODY #CODEXPAGE .codexpage .metabookdupstart {
+body #METABOOKBODY #CODEXPAGE .codexpage .metareaderdupstart {
     padding-bottom: 0;
     border-bottom-width: 0;
     margin-bottom: 0;}
-body #METABOOKBODY #CODEXPAGE .codexpage .metabookdup {
+body #METABOOKBODY #CODEXPAGE .codexpage .metareaderdup {
     padding-top: 0;
     border-top-width: 0;
     margin-top: 0;
     padding-bottom: 0;
     border-bottom-width: 0;
     margin-bottom: 0;}
-body #METABOOKBODY #CODEXPAGE .codexpage p.metabookdup,
+body #METABOOKBODY #CODEXPAGE .codexpage p.metareaderdup,
 
-img.metabookcoverpage {
+img.metareadercoverpage {
     display: block;
     max-width: 100%; max-height: 100%;
     width: auto; height: auto;
@@ -613,10 +613,10 @@ span.bmt {
 span.bma {
     color: rgb(0,0,255);}
 
-.metabook { }
-.metabook > span {
+.metareader { }
+.metareader > span {
     font-style: oblique; font-size: 100%; font-weight: bold;}
-.metabook > sub {font-style: italic; color: red; font-size: 60%;}
+.metareader > sub {font-style: italic; color: red; font-size: 60%;}
 
 .mupub { font-variant: small-caps;}
 .mupub em, .mupub i {
@@ -624,17 +624,17 @@ span.bma {
     font-variant: normal;
     color: blue; }
 
-div.fdjtdialog.metabooktaptap .choices button {
+div.fdjtdialog.metareadertaptap .choices button {
      width: 12em; max-height: 3em;}
-div.fdjtdialog.metabooktaptap .choices button.cancel {
+div.fdjtdialog.metareadertaptap .choices button.cancel {
     color: red; font-weight: bold;
     padding-top: 3px; padding-bottom: 3px;}
-div.fdjtdialog.metabooktaptap .choices button.anchor {
+div.fdjtdialog.metareadertaptap .choices button.anchor {
     overflow: hidden; text-overflow: ellipsis; padding: 0;
     line-height: 1; color: blue;}
-div.metabooktaptap .choices button.anchor .anchortext {
+div.metareadertaptap .choices button.anchor .anchortext {
     font-size: 80%;}
-div.fdjtdialog.fdjtconfirm.metabooktaptap div.choices {
+div.fdjtdialog.fdjtconfirm.metareadertaptap div.choices {
     padding-top: 2px; padding-bottom: 2px;}
 
 /* Rules for page references */

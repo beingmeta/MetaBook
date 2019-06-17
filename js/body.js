@@ -1,6 +1,6 @@
 /* -*- Mode: Javascript; Character-encoding: utf-8; -*- */
 
-/* ###################### metabook/nav.js ###################### */
+/* ###################### metareader/nav.js ###################### */
 
 /* Copyright (C) 2009-2017 beingmeta, inc.
    This file implements a Javascript/DHTML web application for reading
@@ -43,16 +43,16 @@
     var isEmpty=fdjtString.isEmpty;
     var hasText=fdjtDOM.hasText;
 
-    var mB=metaBook, Trace=metaBook.Trace;
-    var applyMetaClass=mB.applyMetaClass;
+    var mR=metaReader, Trace=metaReader.Trace;
+    var applyMetaClass=mR.applyMetaClass;
     /* Initializing the body and content */
     var note_counter=1;
     
-    var fixStaticRefs=metaBook.fixStaticRefs;
+    var fixStaticRefs=metaReader.fixStaticRefs;
     
     function addHandlers(node,type){
-        var mode=metaBook.ui;
-        fdjtDOM.addListeners(node,mB.UI.handlers[mode][type]);}
+        var mode=metaReader.ui;
+        fdjtDOM.addListeners(node,mR.UI.handlers[mode][type]);}
     
     function initBody(){
         var body=document.body, started=fdjtTime();
@@ -61,7 +61,7 @@
         var i, lim;
         if (Trace.startup>2) fdjtLog("Starting initBody");
 
-        addClass(content,"metabookcontent");
+        addClass(content,"metareadercontent");
         addClass(content,"codexroot");
 
         body.setAttribute("tabindex",1);
@@ -69,11 +69,11 @@
         body.style.fontSize=""; body.style.width="";
 
         // Save those DOM elements in a handy place
-        metaBook.content=content;
+        metaReader.content=content;
 
         // Move all the notes together
         var notesblock=$ID("METABOOKNOTES")||
-            fdjtDOM("div.metabookbackmatter#METABOOKNOTES");
+            fdjtDOM("div.metareaderbackmatter#METABOOKNOTES");
         applyMetaClass("htmlbooknote");
         applyMetaClass("htmlbooknote","METABOOK.booknotes");
         addClass(fdjtDOM.$("span[data-type='footnote']"),
@@ -156,50 +156,50 @@
         if (notesblock.childNodes.length)
             fdjtDOM.append(content,"\n",notesblock,"\n");
         
-        mB.originalContent=fdjtDOM.clone(content);
+        mR.originalContent=fdjtDOM.clone(content);
 
         // Initialize cover and titlepage (if specified)
-        metaBook.coverpage=metaBook.getCoverPage();
-        metaBook.titlepage=$ID("METABOOKTITLEPAGE");
+        metaReader.coverpage=metaReader.getCoverPage();
+        metaReader.titlepage=$ID("METABOOKTITLEPAGE");
 
-        var pages=metaBook.pages=$ID("METABOOKPAGES")||
+        var pages=metaReader.pages=$ID("METABOOKPAGES")||
             fdjtDOM("div#METABOOKPAGES");
-        var page=metaBook.page=fdjtDOM("div#CODEXPAGE.metabookcontent",pages);
+        var page=metaReader.page=fdjtDOM("div#CODEXPAGE.metareadercontent",pages);
         
-        metaBook.body=$ID("METABOOKBODY");
-        if (!(metaBook.body)) {
-            var cxbody=metaBook.body=
-                fdjtDOM("div#METABOOKBODY.metabookbody",content,page);
-            if (metaBook.justify) addClass(cxbody,"metabookjustify");
-            if (metaBook.bodycontrast)
-                addClass(cxbody,"metabookcontrast"+metaBook.bodycontrast);
-            if (metaBook.bodysize)
-                addClass(cxbody,"metabookbodysize"+metaBook.bodysize);
-            if (metaBook.bodyfamily)
-                addClass(cxbody,"metabookbodyfamily"+metaBook.bodyfamily);
-            if (metaBook.bodyspacing)
-                addClass(cxbody,"metabookbodyspacing"+metaBook.bodyspacing);
+        metaReader.body=$ID("METABOOKBODY");
+        if (!(metaReader.body)) {
+            var cxbody=metaReader.body=
+                fdjtDOM("div#METABOOKBODY.metareaderbody",content,page);
+            if (metaReader.justify) addClass(cxbody,"metareaderjustify");
+            if (metaReader.bodycontrast)
+                addClass(cxbody,"metareadercontrast"+metaReader.bodycontrast);
+            if (metaReader.bodysize)
+                addClass(cxbody,"metareaderbodysize"+metaReader.bodysize);
+            if (metaReader.bodyfamily)
+                addClass(cxbody,"metareaderbodyfamily"+metaReader.bodyfamily);
+            if (metaReader.bodyspacing)
+                addClass(cxbody,"metareaderbodyspacing"+metaReader.bodyspacing);
             body.appendChild(cxbody);}
-        else metaBook.body.appendChild(page);
+        else metaReader.body.appendChild(page);
 
-        var menu=metaBook.menu=fdjtDOM("div.metabookui#METABOOKMENU");
-        menu.innerHTML=fixStaticRefs(metaBook.HTML.menu);
+        var menu=metaReader.menu=fdjtDOM("div.metareaderui#METABOOKMENU");
+        menu.innerHTML=fixStaticRefs(metaReader.HTML.menu);
         fdjtDOM.prepend($ID("METABOOKBODY"),menu);
 
-        var layout_wait=metaBook.menu=fdjtDOM("div.metabookui#MBLAYOUTWAIT");
-        layout_wait.innerHTML=fixStaticRefs(metaBook.HTML.layoutwait);
+        var layout_wait=metaReader.menu=fdjtDOM("div.metareaderui#MBLAYOUTWAIT");
+        layout_wait.innerHTML=fixStaticRefs(metaReader.HTML.layoutwait);
         fdjtDOM.prepend($ID("METABOOKBODY"),layout_wait);
 
         // Initialize the margins
         initMargins();
 
         addHandlers($ID("METABOOKBODY"),'content');
-        metaBook.TapHold.body=fdjtUI.TapHold(
+        metaReader.TapHold.body=fdjtUI.TapHold(
             $ID("METABOOKBODY"),
             {override: true,noslip: true,id: "METABOOKBODY",
              maxtouches: 3,taptapmsecs: true,
              movethresh: 10,untouchable: false});
-        metaBook.TapHold.menu=fdjtUI.TapHold(
+        metaReader.TapHold.menu=fdjtUI.TapHold(
             $ID("METABOOKMENU"),
             {override: true,noslip: false,id: "METABOOKMENU",
              maxtouches: 3,taptapmsecs: false,
@@ -207,12 +207,12 @@
 
         if (Trace.startup>1)
             fdjtLog("initBody took %dms",fdjtTime()-started);
-        metaBook.Timeline.initBody=fdjtTime();}
-    metaBook.initBody=initBody;
+        metaReader.Timeline.initBody=fdjtTime();}
+    metaReader.initBody=initBody;
 
     function sizeContent(){
-        var started=metaBook.sized=fdjtTime();
-        var content=metaBook.content, page=metaBook.page, body=document.body;
+        var started=metaReader.sized=fdjtTime();
+        var content=metaReader.content, page=metaReader.page, body=document.body;
         var view_height=fdjtDOM.viewHeight();
         var view_width=fdjtDOM.viewWidth();
 
@@ -222,7 +222,7 @@
         content.style.right=page.style.right='';
         body.style.overflow='hidden';
         // Get geometry
-        metaBook.sizeCodexPage();
+        metaReader.sizeCodexPage();
         var geom=getGeometry(page,page.offsetParent,true);
         var fakepage=fdjtDOM("DIV.codexpage.curpage");
         page.appendChild(fakepage);
@@ -236,25 +236,25 @@
         var page_margin=view_width-inner_width;
         var glossmark_offset=Math.floor(page_margin/2)+fakepage_geom.right_border;
         fdjtDOM.remove(fakepage);
-        if (metaBook.CSS.pagerule) {
-            metaBook.CSS.pagerule.style.width=inner_width+"px";
-            metaBook.CSS.pagerule.style.height=inner_height+"px";}
-        else metaBook.CSS.pagerule=fdjtDOM.addCSSRule(
+        if (metaReader.CSS.pagerule) {
+            metaReader.CSS.pagerule.style.width=inner_width+"px";
+            metaReader.CSS.pagerule.style.height=inner_height+"px";}
+        else metaReader.CSS.pagerule=fdjtDOM.addCSSRule(
             "div.codexpage",
             "width: "+inner_width+"px; "+
                 "height: "+inner_height+"px;");
-        if (metaBook.CSS.glossmark_rule) {
-            metaBook.CSS.glossmark_rule.style.marginRight=
+        if (metaReader.CSS.glossmark_rule) {
+            metaReader.CSS.glossmark_rule.style.marginRight=
                 (-glossmark_offset)+"px";}
-        else metaBook.CSS.glossmark_rule=fdjtDOM.addCSSRule(
+        else metaReader.CSS.glossmark_rule=fdjtDOM.addCSSRule(
             "#CODEXPAGE .glossmark","margin-right: "+
                 (-glossmark_offset)+"px;");
         
-        var shrinkrule=metaBook.CSS.shrinkrule;
+        var shrinkrule=metaReader.CSS.shrinkrule;
         if (!(shrinkrule)) {
             shrinkrule=fdjtDOM.addCSSRule(
                 "body.mbSHRINK #CODEXPAGE,body.mbPREVIEW #CODEXPAGE,body.mbSKIMMING #CODEXPAGE", "");
-            metaBook.CSS.shrinkrule=shrinkrule;}
+            metaReader.CSS.shrinkrule=shrinkrule;}
         var sh=view_height-150;
         var vs=(sh/geom.height);
         if (vs>1) vs=1;
@@ -263,7 +263,7 @@
         document.body.style.overflow='';
         if (Trace.startup>1)
             fdjtLog("Content sizing took %dms",fdjtTime()-started);}
-    metaBook.sizeContent=sizeContent;
+    metaReader.sizeContent=sizeContent;
     
     /* Margin creation */
 

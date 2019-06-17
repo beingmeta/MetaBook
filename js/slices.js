@@ -1,13 +1,13 @@
 /* -*- Mode: Javascript; Character-encoding: utf-8; -*- */
 
-/* ###################### metabook/slices.js ###################### */
+/* ###################### metareader/slices.js ###################### */
 
 /* Copyright (C) 2009-2017 beingmeta, inc.
 
    This file implements the display of lists of glosses or summaries
    referring to book passages.
 
-   This file is part of metaBook, a Javascript/DHTML web application for reading
+   This file is part of metaReader, a Javascript/DHTML web application for reading
    large structured documents.
 
    For more information on knodules, visit www.knodules.net
@@ -34,17 +34,17 @@
 
 */
 /* jshint browser: true */
-/* global metaBook: false */
+/* global metaReader: false */
 
 /* Initialize these here, even though they should always be
    initialized before hand.  This will cause various code checkers to
    not generate unbound variable warnings when called on individual
    files. */
 // var fdjt=((typeof fdjt !== "undefined")?(fdjt):({}));
-// var metaBook=((typeof metaBook !== "undefined")?(metaBook):({}));
+// var metaReader=((typeof metaReader !== "undefined")?(metaReader):({}));
 // var Knodule=((typeof Knodule !== "undefined")?(Knodule):({}));
 
-metaBook.Slice=(function () {
+metaReader.Slice=(function () {
     "use strict";
     
     var fdjtString=fdjt.String;
@@ -56,12 +56,12 @@ metaBook.Slice=(function () {
     var RefDB=fdjt.RefDB, Ref=RefDB.Ref;
     var $=fdjtDOM.$, $ID=fdjt.ID;
 
-    var mB=metaBook, mbID=mB.ID, Trace=mB.Trace;
+    var mR=metaReader, mbID=mR.ID, Trace=mR.Trace;
 
     var addClass=fdjtDOM.addClass;
     var dropClass=fdjtDOM.dropClass;
 
-    var mbicon=metaBook.icon;
+    var mbicon=metaReader.icon;
     var addListener=fdjtDOM.addListener;
 
     var getParent=fdjtDOM.getParent;
@@ -94,7 +94,7 @@ metaBook.Slice=(function () {
     function renderCard(info,query,idprefix,standalone){
         var target_id=(info.frag)||(info.id);
         // var target=((target_id)&&(mbID(target_id)));
-        var target_info=metaBook.docinfo[target_id];
+        var target_info=metaReader.docinfo[target_id];
         if (!(target_info)) return false;
         var head_info=((target_info.level)?(target_info):(target_info.head));
         var head=((head_info)&&(mbID(head_info.frag)));
@@ -155,7 +155,7 @@ metaBook.Slice=(function () {
             card.name=card.qref=info._id;
             card.setAttribute("name",info._id);}
         return card;}
-    metaBook.renderCard=renderCard;
+    metaReader.renderCard=renderCard;
     
     function sampletext(para,len){
         if (!(len)) len=80;
@@ -170,7 +170,7 @@ metaBook.Slice=(function () {
     function convertNote(note){
         if (note.search(/^{(md|markdown)}/)===0) {
             var close=note.indexOf('}');
-            return metaBook.md2DOM(note.slice(close+1),true);}
+            return metaReader.md2DOM(note.slice(close+1),true);}
         else return note;}
     function shownote(gloss){
         return fdjtDOM("span.note",convertNote(gloss.note));}
@@ -214,7 +214,7 @@ metaBook.Slice=(function () {
                 else {count++; seen[tagstring]=tag;}
                 var sectag=((tag._qid)&&(tag._qid[0]==="\u00a7"));
                 var elt=((sectag)?(sectag2HTML(tag)):
-                         (Knodule.HTML(tag,metaBook.knodule)));
+                         (Knodule.HTML(tag,metaReader.knodule)));
                 if ((matches)&&(tag_matchp(tag,query)))
                     fdjtDOM(matches," ",elt);
                 else if (sectag) fdjtDOM(sectags," ",elt);
@@ -253,7 +253,7 @@ metaBook.Slice=(function () {
              (fdjtDOM("span.count",outlets.length, " outlets"))),
             " ");
         var i=0; var lim=outlets.length; while (i<lim) {
-            var outlet=outlets[i]; var info=metaBook.sourcedb.ref(outlet);
+            var outlet=outlets[i]; var info=metaReader.sourcedb.ref(outlet);
             var outlet_span=fdjtDOM("span.outlet");
             if (info._live) {
                 fdjtDOM(outlet_span,info.name);
@@ -293,7 +293,7 @@ metaBook.Slice=(function () {
                 (url.search("resources/")===0);
             var title; var icon=false, type=false, useclass=false;
             if (!(openinbook)) {
-                var inbookurls=metaBook.inbookurls;
+                var inbookurls=metaReader.inbookurls;
                 var i=0, lim=inbookurls; while (i<lim) {
                     var pat=inbookurls[i++];
                     if (typeof pat === 'string') {
@@ -306,9 +306,9 @@ metaBook.Slice=(function () {
                 title=urlinfo.title;
                 icon=urlinfo.icon;
                 type=urlinfo.type;}
-            if (!(type)) type=metaBook.urlType(url);
-            if (!(icon)) icon=metaBook.typeIcon(type);
-            if (!(useclass)) useclass=metaBook.mediaTypeClass(type);
+            if (!(type)) type=metaReader.urlType(url);
+            if (!(icon)) icon=metaReader.typeIcon(type);
+            if (!(useclass)) useclass=metaReader.mediaTypeClass(type);
             var image=fdjtDOM.Image(icon);
             if (openinbook) {
                 elt=fdjtDOM("span.mbmedia",image,title);
@@ -348,9 +348,9 @@ metaBook.Slice=(function () {
         else return fdjtDOM("span.score",partial,"(",score,staricon,")");}
     function showglossinfo(info) {
         var maker=info.maker, makerid=(info.maker._id)||(info.maker);
-        var can_edit=((maker===metaBook.user)||(maker===metaBook.user._id))||
-            ((mB.outlets)&&(mB.outlets.indexOf(maker)>=0))||
-            ((mB.outlets)&&(mB.outlets.indexOf(makerid)>=0));
+        var can_edit=((maker===metaReader.user)||(maker===metaReader.user._id))||
+            ((mR.outlets)&&(mR.outlets.indexOf(maker)>=0))||
+            ((mR.outlets)&&(mR.outlets.indexOf(makerid)>=0));
         var agestring=timestring(info.modified||info.created||info.tstamp);
         var age=fdjtDOM("span.age",agestring);
         age.title=fdjtTime.timeString(info.modified||info.created||info.tstamp);
@@ -379,7 +379,7 @@ metaBook.Slice=(function () {
             if (typeof sources === 'string') sources=[sources];
             var i=0; var lim=sources.length;
             while (i<lim) {
-                var source=metaBook.sourcedb.loadref(sources[i++]);
+                var source=metaReader.sourcedb.loadref(sources[i++]);
                 if ((source)&&(source.kind===':OVERLAY'))
                     return source;}
             return false;}
@@ -395,7 +395,7 @@ metaBook.Slice=(function () {
             return IMG(gloss.links.icon,"img.glosspic.glossicon");
         var maker=((gloss.maker)&&
                    ((typeof gloss.maker === "string")?
-                    (gloss.maker=mB.sourcedb.ref(gloss.maker)):
+                    (gloss.maker=mR.sourcedb.ref(gloss.maker)):
                     (gloss.maker)));
         if ((maker)&&(maker._live)&&((maker._pic)||maker.pic)) 
             return IMG(maker._pic||maker.pic,"img.glosspic.userpic",
@@ -458,7 +458,7 @@ metaBook.Slice=(function () {
         var target_start=target_info.starts_at;
         var target_end=target_info.ends_at;
         var target_len=target_end-target_start;
-        if (!(cxt_info)) cxt_info=metaBook.docinfo[document.body.id];
+        if (!(cxt_info)) cxt_info=metaReader.docinfo[document.body.id];
         var cxt_start=cxt_info.starts_at;
         var cxt_end=cxt_info.ends_at;
         var cxt_len=cxt_end-cxt_start;
@@ -472,7 +472,7 @@ metaBook.Slice=(function () {
 
     function makelocrule(target_info,cxtinfo,spec){
         var tocrule=(!(cxtinfo));
-        if (!(cxtinfo)) cxtinfo=metaBook.docinfo[metaBook.content.id];
+        if (!(cxtinfo)) cxtinfo=metaReader.docinfo[metaReader.content.id];
         var locrule=fdjtDOM(spec||"hr.locrule");
         var cxt_start=cxtinfo.starts_at;
         var cxt_end=cxtinfo.ends_at;
@@ -492,7 +492,7 @@ metaBook.Slice=(function () {
         return locrule;}
     function makelocstring(target_info,cxtinfo){
         var tocrule=(!(cxtinfo));
-        if (!(cxtinfo)) cxtinfo=metaBook.docinfo[metaBook.content.id];
+        if (!(cxtinfo)) cxtinfo=metaReader.docinfo[metaReader.content.id];
         var cxt_start=cxtinfo.starts_at;
         var cxt_end=cxtinfo.ends_at;
         var cxt_len=cxt_end-cxt_start;
@@ -514,24 +514,24 @@ metaBook.Slice=(function () {
             else scan=scan.parentNode;}
         if (!(scan)) return;
         var qref=scan.qref;
-        var gloss=metaBook.glossdb.ref(qref);
-        var form=metaBook.setGlossTarget(gloss,evt.type==="hold");
+        var gloss=metaReader.glossdb.ref(qref);
+        var form=metaReader.setGlossTarget(gloss,evt.type==="hold");
         if (!(form)) return;
-        metaBook.setMode("addgloss");}
+        metaReader.setMode("addgloss");}
 
     // Displayings sets of notes organized into threads
 
     function sumText(target){
-        var title=metaBook.getTitle(target,true);
+        var title=metaReader.getTitle(target,true);
         if (title.length<40) return title;
         /* title.slice(0,40)+"\u22ef "; */
         else return title;}
     
     function makeTOCHead(target,head){
-        if (!(head)) head=metaBook.getHead(target);
+        if (!(head)) head=metaReader.getHead(target);
         var basespan=fdjtDOM("span");
         basespan.title='this location in the structure of the book';
-        var info=metaBook.docinfo[target.id];
+        var info=metaReader.docinfo[target.id];
         if (head) {
             var text=sumText(head);
             var headtext=
@@ -542,12 +542,12 @@ metaBook.Slice=(function () {
             var curspan=fdjtDOM("span.head",headtext);
             headtext.title='jump to the section: '+text;
             fdjtDOM.append(basespan," ",curspan);
-            var heads=metaBook.Info(head).heads;
+            var heads=metaReader.Info(head).heads;
             if (heads) {
                 var j=heads.length-1; while (j>0) {
                     var hinfo=heads[j--]; var elt=mbID(hinfo.frag);
                     if ((!(elt))||(!(hinfo.title))||
-                        (elt===metaBook.docroot)||(elt===document.body))
+                        (elt===metaReader.docroot)||(elt===document.body))
                         continue;
                     var anchor=
                         fdjtDOM("span.tocref.headtext",
@@ -573,7 +573,7 @@ metaBook.Slice=(function () {
     var hasClass=fdjtDOM.hasClass;
 
     function selectSources(slice,sources){
-        var sourcerefs=[], sourcedb=metaBook.sourcedb;
+        var sourcerefs=[], sourcedb=metaReader.sourcedb;
         if ((!(sources))||(sources.length===0)) {
             slice.filter(false); return;}
         var i=0; var lim=sources.length; while (i<lim) {
@@ -585,7 +585,7 @@ metaBook.Slice=(function () {
                     ((RefDB.contains(sourcerefs,gloss.maker))||
                      (RefDB.overlaps(sourcerefs,gloss.sources))||
                      (RefDB.overlaps(sourcerefs,gloss.shared))));});}
-    metaBook.UI.selectSources=selectSources;
+    metaReader.UI.selectSources=selectSources;
 
     /* Results handlers */
 
@@ -597,7 +597,7 @@ metaBook.Slice=(function () {
         else if (!(this instanceof MetaBookSlice))
             return new MetaBookSlice(container,cards,sortfn,opts);
         else if (!(container)) 
-            container=fdjtDOM("div.metabookslice");
+            container=fdjtDOM("div.metareaderslice");
         else if (typeof container === "string") {
             if (named_slices.hasOwnProperty(container))
                 return named_slices[container];
@@ -625,21 +625,21 @@ metaBook.Slice=(function () {
         if (opts.hasOwnProperty('touchtoo'))
             opts.touchtoo=function(evt){
                 evt=evt||window.event;
-                if (metaBook.previewing)
-                    metaBook.stopPreview("touchtoo",true);
+                if (metaReader.previewing)
+                    metaReader.stopPreview("touchtoo",true);
                 this.abort(evt,"touchtoo");};
         if (container.id)
-            metaBook.TapHold[container.id]=new fdjtUI.TapHold(
+            metaReader.TapHold[container.id]=new fdjtUI.TapHold(
                 container,opts);
         else fdjtUI.TapHold(container,opts);
-        metaBook.UI.addHandlers(container,'summary');
+        metaReader.UI.addHandlers(container,'summary');
         this.container=container; this.cards=[];
         if (sortfn) this.sortfn=sortfn;
         this.byid=new fdjt.StringMap();
-        this.byfrag=new fdjt.RefMap(mB.docinfo);
+        this.byfrag=new fdjt.RefMap(mR.docinfo);
         this.live=false; this.needupdate=false;
         this.addCards(cards);
-        if (metaBook.touch) opts.packthresh=40;
+        if (metaReader.touch) opts.packthresh=40;
         if ((cards)&&(cards.length)&&(container.parentNode))
             this.update();
         return this;}
@@ -697,7 +697,7 @@ metaBook.Slice=(function () {
         return false;}
 
     MetaBookSlice.prototype.update=function updateSlice(){
-        if (metaBook.Trace.slices)
+        if (metaReader.Trace.slices)
             fdjtLog("Updating slice %o over %o",
                     this,this.container);
         var cards=this.cards, visible=[], shown=[];
@@ -745,7 +745,7 @@ metaBook.Slice=(function () {
 
     MetaBookSlice.prototype.filter=function filterSlice(fn){
         var cards=this.cards; var i=0, n=cards.length;
-        if (metaBook.Trace.slices) {
+        if (metaReader.Trace.slices) {
             if (fn) fdjtLog("Filtering slice %o by %o",this.container,fn);
             else fdjtLog("Restoring filtered slice %o",this.container);}
         if (!(fn)) while (i<n) delete cards[i++].hidden;
@@ -762,7 +762,7 @@ metaBook.Slice=(function () {
         if (!(adds instanceof Array)) adds=[adds];
         if (adds.length===0) return;
         if (!(scores)) scores=this.scores||false;
-        if (metaBook.Trace.slices) 
+        if (metaReader.Trace.slices) 
             fdjtLog("Adding %d cards to slice %o with scores %o",
                     adds.length,this.container,scores);
         var byid=this.byid, cards=this.cards;
@@ -798,7 +798,7 @@ metaBook.Slice=(function () {
             if (card.getAttribute("data-location"))
                 info.location=parseInt(card.getAttribute("data-location"),10);
             if (card.getAttribute("data-gloss"))
-                info.gloss=metaBook.glossdb.refs[card.getAttribute("data-gloss")];
+                info.gloss=metaReader.glossdb.refs[card.getAttribute("data-gloss")];
             if (card.getAttribute("data-searchscore"))
                 info.score=parseInt(card.getAttribute("data-searchscore"),10);
             if (card.getAttribute("data-timestamp"))
@@ -888,12 +888,12 @@ metaBook.Slice=(function () {
         var target=fdjtUI.T(evt);
         if (Trace.gestures)
             fdjtLog("slice_tapped %o: %o",evt,target);
-        if (metaBook.previewing) {
+        if (metaReader.previewing) {
             // Because we're previewing, this slice is invisible, so
             //  the user really meant to tap on the body underneath,
             //  so we stop previewing and jump there We might try to
             //  figure out exactly which element was tapped somehow
-            metaBook.stopPreview("slice_tapped",true);
+            metaReader.stopPreview("slice_tapped",true);
             fdjtUI.cancel(evt);
             return;}
         if ((getParent(target,".ellipsis"))&&
@@ -905,7 +905,7 @@ metaBook.Slice=(function () {
         if (getParent(target,".tochead")) {
             var anchor=getParent(target,".tocref");
             var href=(anchor)&&(anchor.getAttribute("data-tocref"));
-            metaBook.SkimTo(href,0,false);
+            metaReader.SkimTo(href,0,false);
             fdjtUI.cancel(evt);
             return;}
 
@@ -914,10 +914,10 @@ metaBook.Slice=(function () {
             var src=link.getAttribute("data-src"), cancel=false;
             var type=link.getAttribute("data-type");
             if (hasClass(link,"imagelink")) {
-                metaBook.showMedia(src,type); cancel=true;}
+                metaReader.showMedia(src,type); cancel=true;}
             else if ((hasClass(link,"audiolink"))||
                      (hasClass(link,"musiclink"))) {
-                metaBook.showMedia(src,type); cancel=true;}
+                metaReader.showMedia(src,type); cancel=true;}
             else {}
             if (cancel) {
                 fdjtUI.cancel(evt);
@@ -928,22 +928,22 @@ metaBook.Slice=(function () {
             (getCard(target));
         else card=getCard(target);
         if (!(card)) return;
-        var slice=getParent(card,".metabookslice");
+        var slice=getParent(card,".metareaderslice");
         addClass(slice,"mbsyncslice");
         var passage=mbID(card.getAttribute("data-passage"));
         var glossid=card.getAttribute("data-gloss");
-        var gloss=((glossid)&&(metaBook.glossdb.ref(glossid)));
+        var gloss=((glossid)&&(metaReader.glossdb.ref(glossid)));
         if (!(passage)) return;
         else if ((!(gloss))&&(passage)) {
-            metaBook.SkimTo(card,0,false);
+            metaReader.SkimTo(card,0,false);
             return fdjtUI.cancel(evt);}
         else if (getParent(target,".tool")) {
-            var form=metaBook.setGlossTarget(gloss);           
+            var form=metaReader.setGlossTarget(gloss);           
             if (!(form)) return;
-            metaBook.setMode("addgloss");
+            metaReader.setMode("addgloss");
             return fdjtUI.cancel(evt);}
-        else if (mB.mode==="openglossmark") {
-            mB.clearGlossmark();
+        else if (mR.mode==="openglossmark") {
+            mR.clearGlossmark();
             goToGloss(card); 
             return fdjtUI.cancel(evt);}
         else if (getParent(target,".showdetail"))  {
@@ -954,49 +954,49 @@ metaBook.Slice=(function () {
             else if (detail.search(/^{(md|markdown)}/)===0) {
                 var close=detail.indexOf('}');
                 $ID("METABOOKGLOSSDETAIL").innerHTML=
-                    metaBook.md2HTML(detail.slice(close+1));}
+                    metaReader.md2HTML(detail.slice(close+1));}
             else $ID("METABOOKGLOSSDETAIL").innerHTML=
-                metaBook.md2HTML(detail);
-            metaBook.setMode("glossdetail");
+                metaReader.md2HTML(detail);
+            metaReader.setMode("glossdetail");
             return fdjtUI.cancel(evt);}
         else {
-            metaBook.SkimTo(card,0,false);
+            metaReader.SkimTo(card,0,false);
             return fdjtUI.cancel(evt);}}
     function slice_held(evt){
         evt=evt||window.event;
-        mB.slipTimeout(false);
+        mR.slipTimeout(false);
         var slice_target=fdjtUI.T(evt), card=getCard(slice_target);
         if (Trace.gestures)
             fdjtLog("slice_held %o: %o, skimming=%o",
-                    evt,card,metaBook.skimpoint);
+                    evt,card,metaReader.skimpoint);
         if (!(card)) return;
         /* Handle openglossmarks */
         if ((card.getAttribute("data-gloss"))&&
-            (mB.mode==="openglossmark")) {
+            (mR.mode==="openglossmark")) {
             goToGloss(card); return fdjtUI.cancel(evt);}
-        var slice=mB.getSlice(card);
+        var slice=mR.getSlice(card);
         if (slice) slice.setSkim(card);
         // Put a clone of the card in the skimmer
         var clone=card.cloneNode(true);
         clone.id="METABOOKSKIM"; fdjtDOM.replace("METABOOKSKIM",clone);
         // If we're currently previewing something, clear it
-        if (metaBook.previewTarget) {
-            var drop=metaBook.getDups(metaBook.previewTarget);
+        if (metaReader.previewTarget) {
+            var drop=metaReader.getDups(metaReader.previewTarget);
             dropClass(drop,"mbpreviewing");
-            metaBook.clearHighlights(drop);
-            metaBook.previewTarget=false;}
+            metaReader.clearHighlights(drop);
+            metaReader.previewTarget=false;}
 
         // Get the attributes of this card
         var passageid=card.getAttribute("data-passage");
         var glossid=card.getAttribute("data-gloss");
-        var gloss=((glossid)&&metaBook.glossdb.ref(glossid));
+        var gloss=((glossid)&&metaReader.glossdb.ref(glossid));
         var passage=mbID(passageid), show_target=false;
-        var dups=metaBook.getDups(passageid);
+        var dups=metaReader.getDups(passageid);
         // Set up for preview
-        metaBook.previewTarget=passage; addClass(dups,"mbpreviewing");
+        metaReader.previewTarget=passage; addClass(dups,"mbpreviewing");
         if ((gloss)&&(gloss.excerpt)) {
             // Highlight the gloss excerpt
-            var range=metaBook.findExcerpt(dups,gloss.excerpt,gloss.exoff);
+            var range=metaReader.findExcerpt(dups,gloss.excerpt,gloss.exoff);
             if (range) {
                 var starts=range.startContainer;
                 if (!(getParent(starts,passage)))
@@ -1007,46 +1007,46 @@ metaBook.Slice=(function () {
 
         if (getParent(card,".searchslice")) {
             // It's a search result, so highlight any matching terms
-            var terms=metaBook.query.tags;
-            var info=metaBook.docinfo[passageid];
+            var terms=metaReader.query.tags;
+            var info=metaReader.docinfo[passageid];
             // knodeterms match tags to their originating strings
             var spellings=info.knodeterms;
             var i=0; var lim=terms.length; while (i<lim) {
                 var term=terms[i++];
-                var highlights=metaBook.highlightTerm(term,passage,info,spellings);
+                var highlights=metaReader.highlightTerm(term,passage,info,spellings);
                 if (!(show_target))
                     if ((highlights)&&(highlights.length)&&
                         (!(getParent(highlights[0],passage))))
                         show_target=getTargetDup(highlights[0],passage);}}
-        metaBook.startPreview(show_target||passage,"slice_held");
+        metaReader.startPreview(show_target||passage,"slice_held");
         return fdjtUI.cancel(evt);}
     function slice_released(evt){
         var card=getCard(fdjtUI.T(evt||window.event));
         var glossid=(card)&&(card.getAttribute("data-gloss"));
         if (Trace.gestures) {
             fdjtLog("slice_released %o: %o, skimming=%o",evt,card);}
-        if (metaBook.previewing)
-            metaBook.stopPreview("slice_released");
-        if ((glossid)&&(mB.mode==="openglossmark")) goToGloss(card);
+        if (metaReader.previewing)
+            metaReader.stopPreview("slice_released");
+        if ((glossid)&&(mR.mode==="openglossmark")) goToGloss(card);
         fdjtUI.cancel(evt);}
     function slice_slipped(evt){
         evt=evt||window.event;
         var rel=evt.relatedTarget;
         if (Trace.gestures)
             fdjtLog("slice_slipped %o to %o",evt,rel);
-        if (!((rel)&&(hasParent(rel,".metabookslice"))))
-            mB.slipTimeout(function(){
+        if (!((rel)&&(hasParent(rel,".metareaderslice"))))
+            mR.slipTimeout(function(){
                 if (Trace.gestures) fdjtLog("slice_slipped/timeout %o",evt);
-                metaBook.stopPreview("slice_slipped");});}
+                metaReader.stopPreview("slice_slipped");});}
     function slice_touchtoo(evt){
         evt=evt||window.event;
-        metaBook.previewTimeout(false);
-        if (!(metaBook.previewing)) return;
+        metaReader.previewTimeout(false);
+        if (!(metaReader.previewing)) return;
         else if (Trace.gestures) {
             fdjtLog("slice_touchtoo %o noabout",evt);
-            metaBook.stopPreview("toc_touchtoo",true);}
+            metaReader.stopPreview("toc_touchtoo",true);}
         else {
-            metaBook.stopPreview("toc_touchtoo",true);}
+            metaReader.stopPreview("toc_touchtoo",true);}
         fdjtUI.cancel(evt);}
 
     function slice_swiped(evt){
@@ -1054,69 +1054,69 @@ metaBook.Slice=(function () {
         var vw=fdjtDOM.viewWidth();
         var adx=((dx<0)?(-dx):(dx)), ady=((dy<0)?(-dy):(dy));
         var target=fdjtUI.T(evt);
-        var slice=getParent(target,".metabookslice");
+        var slice=getParent(target,".metareaderslice");
         if (Trace.gestures)
             fdjtLog("slice_swiped d=%o,%o, ad=%o,%o, s=%o,%o vw=%o, n=%o",
                     dx,dy,adx,ady,evt.startX,evt.startY,vw,evt.ntouches);
         if (adx>(ady*2)) {
             // Horizontal swipe
-            if (dx<(-(metaBook.minswipe||10))) {
-                if (metaBook.skimming)
-                    metaBook.skimForward();
+            if (dx<(-(metaReader.minswipe||10))) {
+                if (metaReader.skimming)
+                    metaReader.skimForward();
                 else {
                     dropClass(slice,"myslicesync");
                     showPage.forward(slice);}}
-            else if (dx>(metaBook.minswipe||10)) {
-                if (metaBook.skimming)
-                    metaBook.skimBackward();
+            else if (dx>(metaReader.minswipe||10)) {
+                if (metaReader.skimming)
+                    metaReader.skimBackward();
                 else {
                     dropClass(slice,"mbyslicesync");
                     showPage.backward(slice);}}}
         else if (ady>(adx*2)) {
             // Vertical swipe
-            if (!(metaBook.hudup)) {
+            if (!(metaReader.hudup)) {
                 // Ignore really short swipes 
-                if (ady<=(metaBook.minswipe||10)) return;
+                if (ady<=(metaReader.minswipe||10)) return;
                 else if ((evt.startX<(vw/5))&&(dy<0))
                     // On the left, up, show help
-                    metaBook.setMode("help");
+                    metaReader.setMode("help");
                 else if ((evt.startX<(vw/5))&&(dy>0))
                     // On the left, down, show TOC
-                    metaBook.setMode("statictoc");
+                    metaReader.setMode("statictoc");
                 else if ((evt.startX>(vw*0.8))&&(dy>0))
                     // On the right, down, show SEARCH
-                    metaBook.setMode("search");
+                    metaReader.setMode("search");
                 else if ((evt.startX>(vw*0.8))&&(dy<0))
                     // On the right, up, show GLOSSES
-                    metaBook.setMode("allglosses");
+                    metaReader.setMode("allglosses");
                 else if (dy>0) {
-                    metaBook.clearStateDialog();
-                    metaBook.showCover();}
-                else metaBook.setHUD(true);}
-            else if (dy<-(metaBook.minswipe||10)) metaBook.setMode("allglosses");
-            else if (dy>(metaBook.minswipe||10)) metaBook.setMode("search");}
+                    metaReader.clearStateDialog();
+                    metaReader.showCover();}
+                else metaReader.setHUD(true);}
+            else if (dy<-(metaReader.minswipe||10)) metaReader.setMode("allglosses");
+            else if (dy>(metaReader.minswipe||10)) metaReader.setMode("search");}
         else {}}
 
-    metaBook.UI.getCard=getCard;
+    metaReader.UI.getCard=getCard;
 
-    metaBook.updateSkimmer=function updateSkimmer(){
-        if (mB.skimming) {
+    metaReader.updateSkimmer=function updateSkimmer(){
+        if (mR.skimming) {
             var skim=$ID("METABOOKSKIM"), skimpoint;
-            mB.skimming.setLocation(mB.location);
-            if (mB.skimming!==mB.slices.statictoc) { 
-                skimpoint=mB.skimming.skimpoint;
+            mR.skimming.setLocation(mR.location);
+            if (mR.skimming!==mR.slices.statictoc) { 
+                skimpoint=mR.skimming.skimpoint;
                 var pid=(skimpoint)&&(skimpoint.getAttribute("data-passage"));
-                var dups=(pid)&&(mB.getDups(pid)), found=false;
+                var dups=(pid)&&(mR.getDups(pid)), found=false;
                 var i=0, lim=dups.length; while (i<lim) {
                     if (found) i++;
                     else if (hasParent(dups[i],".curpage")) 
                         found=dups[i++];
                     else i++;}
                 if (!(found)) {
-                    mB.setMode(false);
+                    mR.setMode(false);
                     return;}}
-            else skimpoint=mB.skimming.skimpoint;
-            if (!(skimpoint)) mB.setMode(false);
+            else skimpoint=mR.skimming.skimpoint;
+            if (!(skimpoint)) mR.setMode(false);
             var curname=skim.getAttribute("name");
             var newname=skimpoint.getAttribute("name");
             if (curname===newname) return;
@@ -1126,20 +1126,20 @@ metaBook.Slice=(function () {
 
     function goToGloss(card){
         var glossid=card.getAttribute("data-gloss");
-        var glosscard=(glossid)&&(mB.slices.allglosses.byid[glossid]);
+        var glosscard=(glossid)&&(mR.slices.allglosses.byid[glossid]);
         if (glosscard) {
-            metaBook.setMode("allglosses");
+            metaReader.setMode("allglosses");
             fdjt.Async(function(){
-                mB.slices.allglosses.setSkim(glosscard);});}}
+                mR.slices.allglosses.setSkim(glosscard);});}}
     
     fdjt.DOM.defListeners(
-        metaBook.UI.handlers.mouse,
+        metaReader.UI.handlers.mouse,
         {summary: {tap: slice_tapped, hold: slice_held,
                    release: slice_released, click: generic_cancel,
                    slip: slice_slipped}});
 
    fdjt.DOM.defListeners(
-        metaBook.UI.handlers.touch,
+        metaReader.UI.handlers.touch,
         {summary: {tap: slice_tapped,
                    hold: slice_held,
                    release: slice_released,

@@ -25,4 +25,4 @@
 
 */
 
-window._metabook_amalgam=(document)&&(document.currentScript)&&(document.currentScript.src);
+window._metareader_amalgam=(document)&&(document.currentScript)&&(document.currentScript.src);

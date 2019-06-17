@@ -1,13 +1,13 @@
 /* -*- Mode: Javascript; Character-encoding: utf-8; -*- */
 
-/* ###################### metabook/domscan.js ###################### */
+/* ###################### metareader/domscan.js ###################### */
 
 /* Copyright (C) 2009-2017 beingmeta, inc.
 
    This file implements extraction of map and metadata from the loaded
    DOM.
 
-   This file is part of metaBook, a Javascript/DHTML web application for reading
+   This file is part of metaReader, a Javascript/DHTML web application for reading
    large structured documents.
 
    For more information on knodules, visit www.knodules.net
@@ -34,21 +34,21 @@
 
 */
 /* jshint browser: true */
-/* global metaBook: false */
+/* global metaReader: false */
 
 /* Initialize these here, even though they should always be
    initialized before hand.  This will cause various code checkers to
    not generate unbound variable warnings when called on individual
    files. */
 //var fdjt=((typeof fdjt !== "undefined")?(fdjt):({}));
-//var metaBook=((typeof metaBook !== "undefined")?(metaBook):({}));
+//var metaReader=((typeof metaReader !== "undefined")?(metaReader):({}));
 //var Knodule=((typeof Knodule !== "undefined")?(Knodule):({}));
 
-metaBook.DOMScan=(function(){
+metaReader.DOMScan=(function(){
     "use strict";
 
-    var mB=metaBook;
-    var Trace=mB.Trace;
+    var mR=metaReader;
+    var Trace=mR.Trace;
     var fdjtString=fdjt.String;
     var fdjtAsync=fdjt.Async;
     var fdjtTime=fdjt.Time;
@@ -57,14 +57,14 @@ metaBook.DOMScan=(function(){
     var RefDB=fdjt.RefDB;
     var Ref=RefDB.Ref;
 
-    var getLevel=metaBook.getTOCLevel;
+    var getLevel=metaReader.getTOCLevel;
 
     function MetaBookDOMScan(root,dbid,docinfo){
         var md5ID=fdjt.WSN.md5ID;
         var stdspace=fdjtString.stdspace;
         var getStyle=fdjtDOM.getStyle;
         var rootns=root.namespaceURI;
-        var baseid=mB.baseid;
+        var baseid=mR.baseid;
         
         var idmap={};
         var need_ids=[];
@@ -73,7 +73,7 @@ metaBook.DOMScan=(function(){
         if (!(docinfo)) {
             if (this instanceof MetaBookDOMScan) docinfo=this;
             else docinfo=new MetaBookDOMScan();}
-        if (!(root)) root=metaBook.docroot||document.body;
+        if (!(root)) root=metaReader.docroot||document.body;
         var start=new Date();
         var allheads=[], allids=[];
 
@@ -95,7 +95,7 @@ metaBook.DOMScan=(function(){
              locinfo: [], idmap: idmap,
              idstate: {prefix: false,count: 0},
              idstack: [{prefix: false,count: 0}],
-             pool: metaBook.docdb};
+             pool: metaReader.docdb};
 
         var docdb=new RefDB(dbid);
         
@@ -300,7 +300,7 @@ metaBook.DOMScan=(function(){
             var curhead=scanstate.curhead;
             var curinfo=scanstate.curinfo;
             var curlevel=scanstate.curlevel;
-            if (!(baseid)) baseid=mB.baseid;
+            if (!(baseid)) baseid=mR.baseid;
             scanstate.nodecount++;
             // Location tracking and TOC building
             if (child.nodeType===3) {
@@ -316,17 +316,17 @@ metaBook.DOMScan=(function(){
             if (!((id)&&(id.search(baseid)===0)))
                 id=child.getAttribute('data-tocid')||child.id;
 
-            if ((metaBook.ignore)&&(metaBook.ignore.match(child)))
+            if ((metaReader.ignore)&&(metaReader.ignore.match(child)))
                 return;
             
             if ((rootns)&&(child.namespaceURI!==rootns)) return;
             
             if ((classname)&&
                 ((typeof classname !== "string")||
-                 (classname.search(/\b(metabookignore)\b/)>=0)))
+                 (classname.search(/\b(metareaderignore)\b/)>=0)))
                 return;
             
-            if ((child.metabookui)||
+            if ((child.metareaderui)||
                 ((id)&&(id.search("METABOOK")===0)))
                 return;
             
@@ -358,7 +358,7 @@ metaBook.DOMScan=(function(){
             // Get the position in the TOC for this out of context node
             //  These get generated, for example, when the content of an
             //  authorial footnote is moved elsewhere in the document.
-            var tocloc=(child.metabooktocloc)||
+            var tocloc=(child.metareadertocloc)||
                 (child.getAttribute("data-tocloc"));
             if ((tocloc)&&(docinfo[tocloc])) {
                 var tocinfo=docinfo[tocloc];
@@ -406,7 +406,7 @@ metaBook.DOMScan=(function(){
                     curhead.getAttribute('data-tocid')||curhead.id;
                 info.headstart=curinfo.starts_at;}
             // Set the first content node
-            if ((id)&&(info)&&(!start)) metaBook.start=start=child;
+            if ((id)&&(info)&&(!start)) metaReader.start=start=child;
             // And the initial content level
             if ((info)&&(toclevel)&&(!(info.toclevel)))
                 info.toclevel=toclevel;
@@ -416,7 +416,7 @@ metaBook.DOMScan=(function(){
                 if (tags) info.atags=tags.split(',');}
             if (((classname)&&(classname.search)&&
                  (classname.search(/\b(sbook|pubtool)ignore\b/)>=0))||
-                ((metaBook.ignore)&&(metaBook.ignore.match(child))))
+                ((metaReader.ignore)&&(metaReader.ignore.match(child))))
                 return;
             if ((id)&&(toclevel))
                 handleHead(child,id,docinfo,scanstate,toclevel,
@@ -439,8 +439,8 @@ metaBook.DOMScan=(function(){
 
             if (((classname)&&(classname.search)&&
                  (classname.search(/\b(sbook|pubtool)terminal\b/)>=0))||
-                ((classname)&&(metaBook.terminals)&&
-                 (metaBook.terminals.match(child)))) {
+                ((classname)&&(metaReader.terminals)&&
+                 (metaReader.terminals.match(child)))) {
                 scanstate.location=scanstate.location+textWidth(child);}
             else {
                 var grandchildren=child.childNodes;
@@ -473,7 +473,7 @@ metaBook.DOMScan=(function(){
         /* Build the metadata */
         var i=0; while (i<children.length) {
             var child=children[i++];
-            if (!(child.metabookui)) scanner(child,scanstate,docinfo);} 
+            if (!(child.metareaderui)) scanner(child,scanstate,docinfo);} 
         docinfo._nodecount=scanstate.nodecount;
         docinfo._headcount=scanstate.headcount;
         docinfo._eltcount=scanstate.eltcount;
@@ -511,7 +511,7 @@ metaBook.DOMScan=(function(){
         return docinfo;}
 
     MetaBookDOMScan.prototype.toJSON=function(){
-        var rep={constructor: "metaBook.DOMScan",
+        var rep={constructor: "metaReader.DOMScan",
                  frag: this.frag,
                  head: this.bookhead,
                  start: this.starts_at,

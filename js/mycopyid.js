@@ -1,6 +1,6 @@
 /* -*- Mode: Javascript; Character-encoding: utf-8; -*- */
 
-/* ###################### metabook/mycopyid.js ###################### */
+/* ###################### metareader/mycopyid.js ###################### */
 
 /* Copyright (C) 2009-2017 beingmeta, inc.
    This file implements a Javascript/DHTML web application for reading
@@ -39,7 +39,7 @@
     var fdjtTime=fdjt.Time, fdjtAjax=fdjt.Ajax;
     var fdjtState=fdjt.State;
 
-    var mB=metaBook, Trace=mB.Trace;
+    var mR=metaReader, Trace=mR.Trace;
 
     var getSession=fdjtState.getSession, getLocal=fdjtState.getLocal;
 
@@ -48,11 +48,11 @@
     function setMyCopyId(string,origin){
         var trace=(((Trace.startup)||(Trace.creds)||(Trace.mycopy)));
         var fmt="Got "+
-            ((mB.mycopyid===string)?("redundant "):(""))+
+            ((mR.mycopyid===string)?("redundant "):(""))+
             "myCopyID"+((origin)?("from "+origin):(""))+": %s";
         if (!(string)) return;
         if (trace) fdjtLog(fmt,string);
-        if (mB.mycopyid===string) 
+        if (mR.mycopyid===string) 
             return string;
         var parts=string.split('.'), payload=false, doc;
         try {
@@ -65,10 +65,10 @@
             return false;}
         else if ((doc=payload.doc)) {
             doc=(doc.replace(/^:/,"")).toLowerCase();
-            if (doc!==mB.docid) {
+            if (doc!==mR.docid) {
                 fdjtLog.warn(
                     "wrong mycopyid (%s) for %s; doc=%s, payload=%j",
-                    origin||"",doc,mB.docid,payload);
+                    origin||"",doc,mR.docid,payload);
                 return false;}}
         else {}
         var now=new Date();
@@ -79,28 +79,28 @@
             return false;}
         if ((Trace.startup>1)||(Trace.creds)) {
             fdjtLog("Setting myCopyID to %s payload=%j",string,payload);}
-        mB.mycopyid=string;
-        mB.mycopyid_payload=payload;
-        mB.mycopyid_expires=expires;
-        mB.saveLocal("mB("+mB.refuri+").mycopyid",string);
-        mB.saveLocal("mB("+mB.docid+").mycopyid",string);
+        mR.mycopyid=string;
+        mR.mycopyid_payload=payload;
+        mR.mycopyid_expires=expires;
+        mR.saveLocal("mR("+mR.refuri+").mycopyid",string);
+        mR.saveLocal("mR("+mR.docid+").mycopyid",string);
         if ((fdjt.device.mobilesafari)&&(!(fdjt.device.standalone))) {
             addMyCopyToURI();}
         var waiting=need_mycopyid; need_mycopyid=[];
         var i=0, lim=waiting.length; while (i<lim) {
             waiting[i++](string);}
         return string;}
-    metaBook.setMyCopyId=setMyCopyId;
+    metaReader.setMyCopyId=setMyCopyId;
             
     function addMyCopyToURI(){
-        var auth=mB.mycopyid;
+        var auth=mR.mycopyid;
         if (!(auth)) return;
         var v=fdjtState.getQuery("MYCOPYID");
         if (v===auth) return;
         fdjtState.setQuery("MYCOPYID",auth);}
     fdjtState.addMyCopyToUri=addMyCopyToURI;
 
-    var good_origin=/https:\/\/[^\/]+.(bookhub\.io|metabooks\.net)/;
+    var good_origin=/https:\/\/[^\/]+.(bookhub\.io|metareaders\.net)/;
     function myCopyMessage(evt){
         var origin=evt.origin, data=evt.data;
         if ((Trace.messages)||(Trace.creds))
@@ -126,29 +126,29 @@
 
     function getMyCopyId(){
         var now=new Date();
-        if ((mB.mycopyid)&&
-            ((!(mB.mycopyid_expires))||(now>mB.mycopyid_expires)))
-            return Promise.resolve(mB.mycopyid);
+        if ((mR.mycopyid)&&
+            ((!(mR.mycopyid_expires))||(now>mR.mycopyid_expires)))
+            return Promise.resolve(mR.mycopyid);
         else return fetchMyCopyId();}
-    metaBook.getMyCopyId=getMyCopyId;
+    metaReader.getMyCopyId=getMyCopyId;
 
     function readMyCopyId(){
         var mycopyid=(fdjtState.getQuery("MYCOPYID"));
         if (mycopyid) 
-            return mB.setMyCopyId(mycopyid,"getQuery");
+            return mR.setMyCopyId(mycopyid,"getQuery");
         else if ((mycopyid=fdjtState.getCookie("MYCOPYID")))
-            return mB.setMyCopyId(mycopyid,"getCookie");
-        else if ((mB.docid)&&(mycopyid=getSession("mB("+mB.docid+").mycopyid")))
-            return mB.setMyCopyId(mycopyid,"session(docid).mycopyid");
-        else if ((mB.refuri)&&
-                 (mycopyid=getSession("mB("+mB.refuri+").mycopyid")))
-            return mB.setMyCopyId(mycopyid,"session(refuri).mycopyid");
-        else if ((mB.docid)&&(mycopyid=getLocal("mB("+mB.docid+").mycopyid")))
-            return mB.setMyCopyId(mycopyid,"local(docid).mycopyid");
-        else if ((mB.refuri)&&(mycopyid=getLocal("mB("+mB.refuri+").mycopyid")))
-            return mB.setMyCopyId(mycopyid,"local(refuri).mycopyid");
+            return mR.setMyCopyId(mycopyid,"getCookie");
+        else if ((mR.docid)&&(mycopyid=getSession("mR("+mR.docid+").mycopyid")))
+            return mR.setMyCopyId(mycopyid,"session(docid).mycopyid");
+        else if ((mR.refuri)&&
+                 (mycopyid=getSession("mR("+mR.refuri+").mycopyid")))
+            return mR.setMyCopyId(mycopyid,"session(refuri).mycopyid");
+        else if ((mR.docid)&&(mycopyid=getLocal("mR("+mR.docid+").mycopyid")))
+            return mR.setMyCopyId(mycopyid,"local(docid).mycopyid");
+        else if ((mR.refuri)&&(mycopyid=getLocal("mR("+mR.refuri+").mycopyid")))
+            return mR.setMyCopyId(mycopyid,"local(refuri).mycopyid");
         else return false;}
-    metaBook.readMyCopyId=readMyCopyId;
+    metaReader.readMyCopyId=readMyCopyId;
 
     function fetchMyCopyId(){
         function fetching_mycopyid(resolve,reject){
@@ -156,7 +156,7 @@
             if (getting_mycopyid) return;
             getting_mycopyid=fdjtTime();
             fdjtAjax.fetchText(
-                "https://auth.bookhub.io/getmycopyid?DOC="+mB.docref).
+                "https://auth.bookhub.io/getmycopyid?DOC="+mR.docref).
                 then(function(mycopyid,alt){
                     if (typeof mycopyid === 'undefined') {
                         if (Trace.creds)
@@ -171,12 +171,12 @@
     function checkMyCopyId(){
         return (fdjtState.getQuery("MYCOPYID"))||
             (fdjtState.getCookie("MYCOPYID"))||
-            ((mB.docid)&&(getSession("mB("+mB.docid+").mycopyid")))||
-            ((mB.refuri)&&(getSession("mB("+mB.refuri+").mycopyid")))||
-            ((mB.docid)&&(getLocal("mB("+mB.docid+").mycopyid")))||
-            ((mB.refuri)&&(getLocal("mB("+mB.refuri+").mycopyid")))||
+            ((mR.docid)&&(getSession("mR("+mR.docid+").mycopyid")))||
+            ((mR.refuri)&&(getSession("mR("+mR.refuri+").mycopyid")))||
+            ((mR.docid)&&(getLocal("mR("+mR.docid+").mycopyid")))||
+            ((mR.refuri)&&(getLocal("mR("+mR.refuri+").mycopyid")))||
             false;}
-    metaBook.checkMyCopyId=checkMyCopyId;
+    metaReader.checkMyCopyId=checkMyCopyId;
 
     var body=document.body;
     var hasClass=fdjtDOM.hasClass;

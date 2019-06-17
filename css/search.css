@@ -24,12 +24,12 @@ div.searchbox div.query {
 #METABOOKHUD.emptysearch  #METABOOKSEARCHLABEL {
     display: none;}
 
-div.searchbox .metabookclearsearch {
+div.searchbox .metareaderclearsearch {
     box-sizing: border-box;
     border: solid transparent 2px;
     height: 2em; width: auto; padding-left: 1vw;
     flex-grow: 0;}
-div.searchbox .metabookclearsearch.tapholdtarget {
+div.searchbox .metareaderclearsearch.tapholdtarget {
     border-color: blue;}
 
 div.searchbox input[type='TEXT'] {
@@ -39,11 +39,11 @@ div.searchbox input[type='TEXT'] {
 
 div.searchbox input[type='TEXT'][name='QTEXT'] {
     background-position: right top;
-    background-image: url(g/metabook/tagicon.svgz);
+    background-image: url(g/metareader/tagicon.svgz);
     background-repeat: no-repeat;
     background-size: contain;}
 html._NOSVG div.searchbox input[type='TEXT'][name='QTEXT'] {
-    background-image: url(g/metabook/tagicon64x64.png);}
+    background-image: url(g/metareader/tagicon64x64.png);}
 
 div.searchbox div.toolbox div.tags {
     min-height: 1ex; clear: both; text-align: center;}
@@ -112,9 +112,9 @@ div.resultinfo .qtags .qelt span.redx {
     color: transparent; vertical-align: baseline;
     background-position: left center;
     background-repeat: no-repeat; background-size: contain;
-    background-image: url(g/metabook/redx.svgz);}
+    background-image: url(g/metareader/redx.svgz);}
 html._NOSVG div.resultinfo .qtags .qelt span.redx {
-    background-image: url(g/metabook/redx64x64.png);}
+    background-image: url(g/metareader/redx64x64.png);}
 
 #METABOOKHUD.refinesearch div.resultinfo span.refinecount, 
 #METABOOKHUD.expandsearch div.resultinfo span.showalltags,

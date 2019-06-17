@@ -1,6 +1,6 @@
 /* -*- Mode: Javascript; Character-encoding: utf-8; -*- */
 
-/* ###################### metabook/social.js ###################### */
+/* ###################### metareader/social.js ###################### */
 
 /* Copyright (C) 2009-2017 beingmeta, inc.
 
@@ -8,7 +8,7 @@
    their "sources" --- the reasons they're overlaid on the reader's
    book in the first place.
 
-   This file is part of metaBook, a Javascript/DHTML web application for reading
+   This file is part of metaReader, a Javascript/DHTML web application for reading
    large structured documents.
 
    For more information on knodules, visit www.knodules.net
@@ -35,14 +35,14 @@
 
 */
 /* jshint browser: true */
-/* global metaBook: false */
+/* global metaReader: false */
 
 /* Initialize these here, even though they should always be
    initialized before hand.  This will cause various code checkers to
    not generate unbound variable warnings when called on individual
    files. */
 // var fdjt=((typeof fdjt !== "undefined")?(fdjt):({}));
-// var metaBook=((typeof metaBook !== "undefined")?(metaBook):({}));
+// var metaReader=((typeof metaReader !== "undefined")?(metaReader):({}));
 // var Knodule=((typeof Knodule !== "undefined")?(Knodule):({}));
 
 (function(){
@@ -56,8 +56,8 @@
     var getInitials=fdjtString.getInitials;
     var addClass=fdjtDOM.addClass, dropClass=fdjtDOM.dropClass;
     var hasClass=fdjtDOM.hasClass, toggleClass=fdjtDOM.toggleClass;
-    var mbicon=metaBook.icon;
-    var mB=metaBook;
+    var mbicon=metaReader.icon;
+    var mR=metaReader;
 
     /* Social UI components */
 
@@ -95,34 +95,34 @@
                 icon.id="SOURCEICON"+humid;
                 fdjtDOM($ID("METABOOKSOURCES")," ",icon);}}
         return info;}
-    metaBook.UI.addSource=addSource;
-    metaBook.UI.addGlossSource=function(info){addSource(info,true);};
+    metaReader.UI.addSource=addSource;
+    metaReader.UI.addGlossSource=function(info){addSource(info,true);};
 
     function everyone_ontap(evt){
         evt=evt||window.event||null;
         var target=fdjtDOM.T(evt);
-        // var sources=fdjtDOM.getParent(target,".metabooksources");
+        // var sources=fdjtDOM.getParent(target,".metareadersources");
         // var glosses=fdjtDOM.getParent(target,".sbookglosses");
         var sources=$ID("METABOOKSOURCES");
         var glosses=$ID("METABOOKALLGLOSSES");
         if ((!(sources))||(!(glosses)))
             return; /* Warning? */
         if (fdjtDOM.hasClass(target,"selected")) {
-            metaBook.setMode(false);
+            metaReader.setMode(false);
             fdjtDOM.cancel(evt);
             return;}
         var selected=fdjtDOM.$(".selected",sources);
         toggleClass(selected,"selected");
         addClass(target,"selected");
-        metaBook.UI.selectSources(metaBook.slices.allglosses,false);
+        metaReader.UI.selectSources(metaReader.slices.allglosses,false);
         fdjtDOM.cancel(evt);}
-    metaBook.UI.handlers.everyone_ontap=everyone_ontap;
+    metaReader.UI.handlers.everyone_ontap=everyone_ontap;
 
     function sources_tapped(evt){
         evt=evt||window.event||null;
-        // if (!(metaBook.user)) return;
+        // if (!(metaReader.user)) return;
         var target=fdjtDOM.T(evt);
-        // var sources=fdjtDOM.getParent(target,".metabooksources");
+        // var sources=fdjtDOM.getParent(target,".metareadersources");
         // var glosses=fdjtDOM.getParent(target,".sbookglosses");
         var sources=$ID("METABOOKSOURCES");
         var glosses=$ID("METABOOKALLGLOSSES");
@@ -138,17 +138,17 @@
         var everyone=fdjtDOM.$(".everyone",sources)[0];
         if (new_sources.length) {
             if (everyone) dropClass(everyone,"selected");
-            metaBook.UI.selectSources(metaBook.slices.allglosses,new_sources);}
+            metaReader.UI.selectSources(metaReader.slices.allglosses,new_sources);}
         else {
             if (everyone) addClass(everyone,"selected");
-            metaBook.UI.selectSources(metaBook.slices.allglosses,false);}
+            metaReader.UI.selectSources(metaReader.slices.allglosses,false);}
         fdjtDOM.cancel(evt);}
 
     function sources_taptap(evt){
         evt=evt||window.event||null;
-        // if (!(metaBook.user)) return;
+        // if (!(metaReader.user)) return;
         var target=fdjtDOM.T(evt);
-        // var sources=fdjtDOM.getParent(target,".metabooksources");
+        // var sources=fdjtDOM.getParent(target,".metareadersources");
         // var glosses=fdjtDOM.getParent(target,".sbookglosses");
         var sources=$ID("METABOOKSOURCES");
         var glosses=$ID("METABOOKALLGLOSSES");
@@ -163,10 +163,10 @@
         var everyone=fdjtDOM.$(".everyone",sources)[0];
         if (new_sources.length) {
             if (everyone) dropClass(everyone,"selected");
-            metaBook.UI.selectSources(metaBook.slices.allglosses,new_sources);}
+            metaReader.UI.selectSources(metaReader.slices.allglosses,new_sources);}
         else {
             if (everyone) addClass(everyone,"selected");
-            metaBook.UI.selectSources(metaBook.slices.allglosses,false);}
+            metaReader.UI.selectSources(metaReader.slices.allglosses,false);}
         fdjtDOM.cancel(evt);}
 
     function geticon(source){
@@ -177,7 +177,7 @@
                   source.fbid+"/picture?type=square")));}
 
     function extendGlossmark(glossmark,glosses,image){
-        var sources=metaBook.sourcedb; var glossdb=metaBook.glossdb;
+        var sources=metaReader.sourcedb; var glossdb=metaReader.glossdb;
         if (!(image)) image=fdjtDOM.getChild(glossmark,".wedge");
         var images=image.getAttribute("data-images").split("|");
         if ((images.length===1)&&(images[0]==="")) images=[];
@@ -203,8 +203,8 @@
         image.setAttribute("data-images",images.join("|"));
         return glossmark;}
     
-    metaBook.UI.addGlossmark=function(passage,gloss){
-        var Glosses=metaBook.glossdb;
+    metaReader.UI.addGlossmark=function(passage,gloss){
+        var Glosses=metaReader.glossdb;
         var current_glossmark=fdjtDOM.getChild(passage,".glossmark");
         if ((current_glossmark)&&(current_glossmark.parentNode===passage)) {
             if (gloss) extendGlossmark(current_glossmark,[gloss]);
@@ -222,51 +222,51 @@
         wedge.defaultsrc=imgsrc;
         wedge.setAttribute("data-images","");
         extendGlossmark(glossmark,glosses,wedge);
-        metaBook.UI.addHandlers(glossmark,"glossmark");
+        metaReader.UI.addHandlers(glossmark,"glossmark");
         addClass(passage,"glossed");
         fdjtDOM.prepend(passage,glossmark);
         glossmark.name="METABOOK_GLOSSMARK_"+id;
         return glossmark;};
     
-    var MetaBookSlice=metaBook.Slice;
+    var MetaBookSlice=metaReader.Slice;
 
     function showGlossmark(target,point) {
         var id=target.codexbaseid||target.id;
         if (!(id)) return;
-        var dups=metaBook.getDups(id);
-        var glossids=metaBook.glossdb.find('frag',id), glosses=[];
-        var slicediv=fdjtDOM("div.metabookglosses.metabookslice");
+        var dups=metaReader.getDups(id);
+        var glossids=metaReader.glossdb.find('frag',id), glosses=[];
+        var slicediv=fdjtDOM("div.metareaderglosses.metareaderslice");
         if ((!(glossids))||(!(glossids.length)))
             addClass(slicediv,"noglosses");
-        if (metaBook.target) metaBook.clearHighlights(metaBook.target);
+        if (metaReader.target) metaReader.clearHighlights(metaReader.target);
         var i=0, lim=glossids.length; while (i<lim) {
-            var glossref=metaBook.glossdb.ref(glossids[i++]);
+            var glossref=metaReader.glossdb.ref(glossids[i++]);
             glosses.push(glossref);}
-        // metaBook.glossdb.load(glosses);
+        // metaReader.glossdb.load(glosses);
         i=0; while (i<lim) {
             var gloss=glosses[i++];
             if (gloss.excerpt) {
-                var range=metaBook.findExcerpt(dups,gloss.excerpt,gloss.exoff);
+                var range=metaReader.findExcerpt(dups,gloss.excerpt,gloss.exoff);
                 if (range) {
                     var starts=range.startContainer;
                     if (!(hasClass(starts,"mbhighlightexcerpt"))) {
                         fdjtUI.Highlight(range,"mbhighlightexcerpt");}}}}
         var slice=new MetaBookSlice(slicediv,glosses,sort_point_glosses);
         var hudwrapper=fdjtDOM("div.hudpanel#METABOOKPOINTGLOSSES",slicediv);
-        metaBook.openglossmark=slice;
+        metaReader.openglossmark=slice;
         if (point) {
-            mB.setMode(false);
+            mR.setMode(false);
             hudwrapper.style.display='block';
             hudwrapper.style.opacity=0.0;
             if ($ID("METABOOKPOINTGLOSSES"))
                 fdjtDOM.replace("METABOOKPOINTGLOSSES",hudwrapper);
-            else mB.body.appendChild(hudwrapper);
+            else mR.body.appendChild(hudwrapper);
             var geom=fdjtDOM.getGeometry(slicediv);
             var wgeom=fdjtDOM.getGeometry(hudwrapper);
             var pgeom=fdjtDOM.getGeometry(point);
             var tgeom=fdjtDOM.getGeometry(target);
             var w=fdjtDOM.viewWidth(), h=fdjtDOM.viewHeight();
-            if (metaBook.fullwidth) {
+            if (metaReader.fullwidth) {
                 var wspec=(w-30)+"px";
                 hudwrapper.style.left="10px";
                 hudwrapper.style.width=
@@ -285,12 +285,12 @@
                 else hudwrapper.style.maxWidth=(w-100)+"px";}
             geom=fdjtDOM.getGeometry(slicediv);
             wgeom=fdjtDOM.getGeometry(hudwrapper);
-            if ((!(metaBook.fullwidth))&&(geom.width>(w-50)))
+            if ((!(metaReader.fullwidth))&&(geom.width>(w-50)))
                 hudwrapper.style.left="10px";
             var wh=false;
             if ((geom.height+15)>h/2) wh=h/2;
             else wh=geom.height+10;
-            if ((!(metaBook.fullwidth))&&(wh>50))
+            if ((!(metaReader.fullwidth))&&(wh>50))
                 hudwrapper.style.minHeight=wh+'px';
             slicediv.style.overflowX='hidden';
             slicediv.style.overflowY='auto';
@@ -307,7 +307,7 @@
                 hudwrapper.style.top=(pgeom.bottom+15)+'px';
             else {
                 // Now, we're scrolling
-                if (!(metaBook.fullwidth)) {
+                if (!(metaReader.fullwidth)) {
                     hudwrapper.style.right=(w-pgeom.left+10)+'px';
                     hudwrapper.style.left='50px';}
                 if (pgeom.top-(h/4)<50) {
@@ -319,7 +319,7 @@
                     hudwrapper.style.bottom='auto';
                     hudwrapper.style.height=(h/2)+'px';}}
             // fdjtLog("geom=%j, pgeom=%j, wgeom=%j ph=%j",geom,pgeom,wgeom,fdjtDOM.viewHeight());
-            if (metaBook.fullwidth) {}
+            if (metaReader.fullwidth) {}
             else if (fdjtDOM.viewWidth()<300)
                 hudwrapper.style.minWidth=((fdjtDOM.viewWidth())-10)+"px";
             else {}
@@ -329,14 +329,14 @@
         if (point) {
             var cur=$ID("METABOOKOPENGLOSSMARK");
             if (cur) {
-                if (metaBook.target)
-                    metaBook.clearHighlights(metaBook.target);
+                if (metaReader.target)
+                    metaReader.clearHighlights(metaReader.target);
                 cur.id="";}
             point.id="METABOOKOPENGLOSSMARK";}
-        metaBook.setTarget(target);
+        metaReader.setTarget(target);
         slice.update();
-        metaBook.setMode("openglossmark");}
-    metaBook.showGlossmark=showGlossmark;
+        metaReader.setMode("openglossmark");}
+    metaReader.showGlossmark=showGlossmark;
 
     function sort_point_glosses(g1,g2){
         if ((g1.location)&&(g2.location)) {
@@ -352,33 +352,33 @@
         else return 0;}
 
     function clearGlossmark() {
-        if (metaBook.mode==="openglossmark") metaBook.setMode(false,true);
-        var slicediv=fdjtDOM("div.metabookglosses.metabookslice");
+        if (metaReader.mode==="openglossmark") metaReader.setMode(false,true);
+        var slicediv=fdjtDOM("div.metareaderglosses.metareaderslice");
         var hudwrapper=fdjtDOM("div.hudpanel#METABOOKPOINTGLOSSES",slicediv);
         fdjtDOM.replace("METABOOKPOINTGLOSSES",hudwrapper);}
-    metaBook.clearGlossmark=clearGlossmark;
+    metaReader.clearGlossmark=clearGlossmark;
 
     var cancel=fdjtUI.cancel;
 
     fdjt.DOM.defListeners(
-        metaBook.UI.handlers.mouse,
+        metaReader.UI.handlers.mouse,
         {"#METABOOKSOURCES": {
             tap: sources_tapped,taptap: sources_taptap},
          "#METABOOKSOURCES .button.everyone": {
              tap: function(evt){
                  evt=evt||window.event;
-                 metaBook.UI.handlers.everyone_ontap(evt);
+                 metaReader.UI.handlers.everyone_ontap(evt);
                  fdjt.UI.cancel(event);}}});
 
    fdjt.DOM.defListeners(
-        metaBook.UI.handlers.touch,
+        metaReader.UI.handlers.touch,
        {"#METABOOKSOURCES": {
             tap: sources_tapped,taptap: sources_taptap},
         "#METABOOKSOURCES .button.everyone": {
             touchstart: cancel,
             touchend: function(evt){
                 evt=evt||window.event;
-                metaBook.UI.handlers.everyone_ontap(evt);
+                metaReader.UI.handlers.everyone_ontap(evt);
                 fdjt.UI.cancel(event);}}});
 
 })();

@@ -97,14 +97,14 @@ body.mbPREVIEW #METABOOKFRAME, body.mbSHOWHELP #METABOOKFRAME,
 body._FULLHEIGHT #METABOOKFRAME {
     z-index: 50;}
 
-/* Override simple stylesheet definitions in the metaBook frame */
+/* Override simple stylesheet definitions in the metaReader frame */
 
-.metabookframe img, .metabookframe picture, .metabookframe figure,
-.metabookframe object, .metabookframe video, .metabookframe audio {
+.metareaderframe img, .metareaderframe picture, .metareaderframe figure,
+.metareaderframe object, .metareaderframe video, .metareaderframe audio {
     max-width: initial; max-height: initial;}
-.metabookframe h1 { font-size: 2em; margin: 0.67em 0; color: black; }
-.metabookframe h2 { font-size: 1.5em; margin: 0.5em 0; color: black; }
-.metabookframe h3 { font-size: 1.4em; margin: 0.4em 0; color: black; }
+.metareaderframe h1 { font-size: 2em; margin: 0.67em 0; color: black; }
+.metareaderframe h2 { font-size: 1.5em; margin: 0.5em 0; color: black; }
+.metareaderframe h3 { font-size: 1.4em; margin: 0.4em 0; color: black; }
 
 /* The HUD is where all of the active interface elements for reading
    appear.  */
@@ -152,27 +152,27 @@ body.mbSKIMMING div.mbpagecontrol > span {
     z-index: 500;}
 
 div#MBPAGERIGHT.mbpagecontrol {
-    background-image: url(/static/g/metabook/page_right.svgz);
+    background-image: url(/static/g/metareader/page_right.svgz);
     background-position: center right; padding-right: 3px;
     text-align: right; right: 0;}
 div#MBPAGELEFT.mbpagecontrol {
-    background-image: url(/static/g/metabook/page_left.svgz);
+    background-image: url(/static/g/metareader/page_left.svgz);
     background-position: center left; padding-left: 3px;
     text-align: left; left: 0;}
 
 body.mbSKIMMING div#MBPAGERIGHT.mbpagecontrol {
-    background-image: url(/static/g/metabook/skim_right.svgz);}
+    background-image: url(/static/g/metareader/skim_right.svgz);}
 body.mbSKIMMING.mbSKIMEND div#MBPAGERIGHT.mbpagecontrol {
-    background-image: url(/static/g/metabook/skim_right_stop.svgz);}
+    background-image: url(/static/g/metareader/skim_right_stop.svgz);}
 body.mbSKIMMING div#MBPAGELEFT.mbpagecontrol {
-    background-image: url(/static/g/metabook/skim_left.svgz);}
+    background-image: url(/static/g/metareader/skim_left.svgz);}
 body.mbSKIMMING.mbSKIMSTART div#MBPAGELEFT.mbpagecontrol {
-    background-image: url(/static/g/metabook/skim_left_stop.svgz);}
+    background-image: url(/static/g/metareader/skim_left_stop.svgz);}
 
 /* The COVER contains the usual wrapping elements for the book
    (coverpage, title, blurbs, etc) and also contains elements which
    aren't part of physical books: settings, layer management, and
-   a small metaBook tutorial. */
+   a small metaReader tutorial. */
 #METABOOKCOVER {
     position: absolute; width: 100%; height: 100%;
     top: 0; bottom: 0; left: 0; right: 0;
@@ -184,11 +184,11 @@ body.mbSKIMMING.mbSKIMSTART div#MBPAGELEFT.mbpagecontrol {
 body.mbCOVER #METABOOKFRAME > #METABOOKCOVER { pointer-events: all; }
 body.mbCOVER #METABOOKCOVER { display: block; }
 
-#METABOOKFRAME.metabookuifontlarge #METABOOKCOVER { font-size: 3em; }
-#METABOOKFRAME.metabookuifontnormal #METABOOKCOVER { font-size: 2em; }
-#METABOOKFRAME.metabookuifontsmall #METABOOKCOVER { font-size: 1em; }
+#METABOOKFRAME.metareaderuifontlarge #METABOOKCOVER { font-size: 3em; }
+#METABOOKFRAME.metareaderuifontnormal #METABOOKCOVER { font-size: 2em; }
+#METABOOKFRAME.metareaderuifontsmall #METABOOKCOVER { font-size: 1em; }
 
-#METABOOKFRAME.metabookuifontlarge #METABOOKCOVER > #METABOOKCOVERCONTROLS {
+#METABOOKFRAME.metareaderuifontlarge #METABOOKCOVER > #METABOOKCOVERCONTROLS {
     font-size: 0.8em; }
 
 body.mbCOVER #METABOOKCOVER {
@@ -241,44 +241,44 @@ body.mbZOOM #METABOOKZOOM {
     top: 4px; top: 1vmax; right: 1em; right: 1rem;
     width: 50px; width: 8vmin; height: 50px; height: 8vmin; 
     background-repeat: no-repeat; background-size: contain;
-    background-image: url(g/metabook/redx.svgz);}
+    background-image: url(g/metareader/redx.svgz);}
 html._NOSVG #METABOOKZOOMCLOSE {
-    background-image: url(g/metabook/redx100x100.png);}
+    background-image: url(g/metareader/redx100x100.png);}
 #METABOOKZOOMHELP {
     position: absolute;
     bottom: 4px; bottom: 1vmax; left: 4px; left: 1vmax;
     width: 50px; width: 8vmin; height: 50px; height: 8vmin; 
     background-repeat: no-repeat; background-size: contain;
-    background-image: url(g/metabook/help.svgz);}
+    background-image: url(g/metareader/help.svgz);}
 html._NOSVG #METABOOKZOOMHELP {
-    background-image: url(g/metabook/help100x100.png);}
+    background-image: url(g/metareader/help100x100.png);}
 
 #METABOOKZOOMOUT {
     position: absolute;
     bottom: 4px; bottom: 1vmax; right: 1em; right: 1rem;
     width: 50px; width: 8vmin; height: 50px; height: 8vmin; 
     background-repeat: no-repeat; background-size: contain;
-    background-image: url(g/metabook/zoomout.svgz);}
+    background-image: url(g/metareader/zoomout.svgz);}
 html._NOSVG #METABOOKZOOMOUT {
-    background-image: url(g/metabook/zoomout50x50.png);}
+    background-image: url(g/metareader/zoomout50x50.png);}
 
 #METABOOKZOOMIN {
     position: absolute;
     bottom: 120px; bottom: 20vmax; right: 1em; right: 1rem;
     width: 50px; width: 8vmin; height: 50px; height: 8vmin; 
     background-repeat: no-repeat; background-size: contain;
-    background-image: url(g/metabook/zoomin.svgz);}
+    background-image: url(g/metareader/zoomin.svgz);}
 html._NOSVG #METABOOKZOOMIN {
-    background-image: url(g/metabook/zoomin50x50.png);}
+    background-image: url(g/metareader/zoomin50x50.png);}
 
 #METABOOKUNZOOM {
     position: absolute;
     bottom: 60px; bottom: 10vmax; right: 1em; right: 1rem;
     width: 50px; width: 8vmin; height: 50px; height: 8vmin; 
     background-repeat: no-repeat; background-size: contain;
-    background-image: url(g/metabook/unzoom.svgz);}
+    background-image: url(g/metareader/unzoom.svgz);}
 html._NOSVG #METABOOKUNZOOM {
-    background-image: url(g/metabook/unzoom50x50.png);}
+    background-image: url(g/metareader/unzoom50x50.png);}
 
 body.mbSHOWHELP #METABOOKZOOMHELP {
     opacity: 1.0; background-color: gray;}
@@ -319,7 +319,7 @@ body.mbMEDIA #METABOOKMEDIA #METABOOKMEDIATARGET {
     top: 1em; top: 1rem; right: 1em; right: 1rem; 
     width: 5em; width: 5rem; height: 5em; height: 5rem;
     background-repeat: no-repeat; background-size: contain;
-    background-image: url(g/metabook/redx.svgz);}
+    background-image: url(g/metareader/redx.svgz);}
 
 body.mbMEDIA #METABOOKMEDIA img {}
 body.mbMEDIA #METABOOKMEDIA audio {
@@ -360,7 +360,7 @@ body.mbMEDIA #METABOOKMEDIA iframe {
     left: 0; right: 0; top: 0px; bottom: 50px;} /* z-index: -50; */
 #METABOOKBODY { background-color: transparent; color: black; }
 
-.metabookcontent { background-color: white; color: #444; }
+.metareadercontent { background-color: white; color: #444; }
 
 /* CODEXCONTENT is where linear content lives for scrolling layout.
    It is also used to determine the width of the content region

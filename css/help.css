@@ -59,12 +59,12 @@ div.helpbox kbd { font-weight: bold; }
 div.helpbox p img.screengrab {
     float: right; height: 2em;}
 
-#METABOOKHUD .metabookhelp {
+#METABOOKHUD .metareaderhelp {
     font-size: 3vh;}
 
 #METABOOKHUD .helpbox {
     font-size: 16px; font-size: 1rem;}
-html._TOUCH #METABOOKHUD .metabookhelp,
+html._TOUCH #METABOOKHUD .metareaderhelp,
 html._TOUCH #METABOOKHUD .helpbox {
     font-size: 24px; font-size: 1.5rem;}
 
@@ -84,14 +84,14 @@ div.helpbox {
     overflow: auto;
     display: none;}
 
-div.helpbox img.closebutton, div.metabookhelp img.closebutton {
+div.helpbox img.closebutton, div.metareaderhelp img.closebutton {
     position: absolute; width: 24px; height: 24px;
     top: 6px; right: 6px; padding: 2px;
     border: solid red 2px; 
     border-radius: 6px;
     color: red;}
 
-div.helpbox th.helptext, div.metabookhelp th.helptext {
+div.helpbox th.helptext, div.metareaderhelp th.helptext {
     text-indent: 0;}
 
 div#METABOOKHUDHELP {
@@ -126,20 +126,20 @@ body.mbSHOWHELP #METABOOKHUD .hudtip,
 body.mbSHOWHELP #METABOOKHUD .hudbutton {
     opacity: 0.5;}
 
-body.mbSHOWHELP #METABOOKHUD.addgloss div.metabookhelp, 
-body.mbSHOWHELP.hudup #METABOOKHUD div.metabookhelp, 
-body.mbSHOWHELP.mbSHRINK #METABOOKHUD div.metabookhelp,
-body.mbSHOWHELP.mbPREVIEW #METABOOKHUD div.metabookhelp,
+body.mbSHOWHELP #METABOOKHUD.addgloss div.metareaderhelp, 
+body.mbSHOWHELP.hudup #METABOOKHUD div.metareaderhelp, 
+body.mbSHOWHELP.mbSHRINK #METABOOKHUD div.metareaderhelp,
+body.mbSHOWHELP.mbPREVIEW #METABOOKHUD div.metareaderhelp,
 body.mbSHOWHELP.hudup #METABOOKHUD.openhud .hudtip,
 body.mbSHOWHELP.hudup #METABOOKHUD.openheart .hudtip,
-body.mbSHOWHELP.mbSKIMMING #METABOOKHUD div.metabookhelp,
+body.mbSHOWHELP.mbSKIMMING #METABOOKHUD div.metareaderhelp,
 body.mbSHOWHELP.mbSKIMMING #METABOOKHUD .hudtip,
 body.mbSHOWHELP #METABOOKHUD.addgloss .hudtip,
 body.mbSHOWHELP #METABOOKHUD.statictoc .hudtip,
 body.mbSHOWHELP.mbSHRINK #METABOOKHUD .hudtip,
 body.mbSHOWHELP.mbPREVIEW #METABOOKHUD .hudtip {
     display: none;}
-body.mbSHOWHELP.hudup #METABOOKHUD.splash div.metabookhelp {
+body.mbSHOWHELP.hudup #METABOOKHUD.splash div.metareaderhelp {
     display: block;}
 
 body.mbSHOWHELP #METABOOKHUD.addgloss #METABOOKADDGLOSSHELP.helpbox,
@@ -249,20 +249,20 @@ div.helpbox blockquote p {
 .hudtip.botleft span.arrow { float: left;}
 .hudtip.botright span.arrow { float: right;}
 
-div.metabookhelp div.hudtip#HIDETHISHELP {
+div.metareaderhelp div.hudtip#HIDETHISHELP {
     position: absolute;
     top: 40px; right: 4px; width: 70px;}
 
-body div.metabookhelp h1, body div.metabookhelp h2,
-body div.metabookhelp h3, body div.helpbox h1,
+body div.metareaderhelp h1, body div.metareaderhelp h2,
+body div.metareaderhelp h3, body div.helpbox h1,
 body div.helpbox h2, body div.helpbox h3 {
     text-align: left; margin-left: 0; margin-right: 2px;}
-div.metabookhelp h1 span.metabooktogglehelp,
-div.metabookhelp h2 span.metabooktogglehelp,
-div.metabookhelp h3 span.metabooktogglehelp,
-div.helpbox h1 span.metabooktogglehelp,
-div.helpbox h2 span.metabooktogglehelp,
-div.helpbox h3 span.metabooktogglehelp {
+div.metareaderhelp h1 span.metareadertogglehelp,
+div.metareaderhelp h2 span.metareadertogglehelp,
+div.metareaderhelp h3 span.metareadertogglehelp,
+div.helpbox h1 span.metareadertogglehelp,
+div.helpbox h2 span.metareadertogglehelp,
+div.helpbox h3 span.metareadertogglehelp {
     /* float: right; */
     position: absolute; right: 2px; top: 2px;
     cursor: pointer;
@@ -270,37 +270,37 @@ div.helpbox h3 span.metabooktogglehelp {
     background-color: transparent; color: transparent;
     height: 1.5em; width: 1.5em; border: 0; border-radius: 0;
     margin-left: 1ex;}
-#METABOOKCOVER span.metabooktogglehelp { display: none; }
-div.metabookhelp h1 span.metabooktogglehelp,
-div.metabookhelp h2 span.metabooktogglehelp,
-div.metabookhelp h3 span.metabooktogglehelp,
-div.helpbox h1 span.metabooktogglehelp,
-div.helpbox h2 span.metabooktogglehelp,
-div.helpbox h3 span.metabooktogglehelp {
+#METABOOKCOVER span.metareadertogglehelp { display: none; }
+div.metareaderhelp h1 span.metareadertogglehelp,
+div.metareaderhelp h2 span.metareadertogglehelp,
+div.metareaderhelp h3 span.metareadertogglehelp,
+div.helpbox h1 span.metareadertogglehelp,
+div.helpbox h2 span.metareadertogglehelp,
+div.helpbox h3 span.metareadertogglehelp {
     background-position: center center;
     background-size: contain; background-repeat: no-repeat;
-    background-image: url(g/metabook/hide_help.svgz);}
-span.metabooktogglehelp {
-    background-image: url(g/metabook/hide_help.svgz);}
-body.NOSVG span.metabooktogglehelp {
-    background-image: url(g/metabook/hide_help64x64.png);}
+    background-image: url(g/metareader/hide_help.svgz);}
+span.metareadertogglehelp {
+    background-image: url(g/metareader/hide_help.svgz);}
+body.NOSVG span.metareadertogglehelp {
+    background-image: url(g/metareader/hide_help64x64.png);}
 
-div.metabookhelp h1 {
+div.metareaderhelp h1 {
     margin-top: 3px !important;
     margin-bottom: 1.5ex !important;
     padding-top: 0 !important;}
 
-div.metabookhelp .result {
+div.metareaderhelp .result {
     font-style: italic;}
-div.metabookhelp td dfn {
+div.metareaderhelp td dfn {
     color: rgba(0,0,0,1);}
 
-div.metabookhelp .result span { display: none; }
+div.metareaderhelp .result span { display: none; }
 
-div.metabookhelp img.narrowimage, div.metabookhelp img.wideimage {
+div.metareaderhelp img.narrowimage, div.metareaderhelp img.wideimage {
     clear: both; max-width:90%; margin-left: 5%; height: auto;}
 
-div.metabookhelp img.narrowimage { display: none;}
+div.metareaderhelp img.narrowimage { display: none;}
 
 body.mbSHOWHELP.mbNOMODE div#METABOOKHELP {
     pointer-events: all;
@@ -315,12 +315,12 @@ body.mbSHOWHELP #METABOOKMENU {
     opacity: 1; height: 50px; z-index: 100;}
 
 div#METABOOKHELP table.textual { font-size: 120%;}
-div.metabookhelp table.textual td {padding-left: 3px;}
-div.metabookhelp .glossbarbox {
+div.metareaderhelp table.textual td {padding-left: 3px;}
+div.metareaderhelp .glossbarbox {
     display: inline-block; float: right; text-align: right;
     padding-right: 2px; border-right: solid blue 3px; margin-right: 4px;
     max-width: 3px; width: 3px; height: 2em;}
-div.metabookhelp p.glossexample {
+div.metareaderhelp p.glossexample {
     text-indent: 0; text-align: right;
     padding-right: 6px; border-right: solid blue 4px;}
 
@@ -336,40 +336,40 @@ div#METABOOKHELP {
     display: none;}
 #METABOOKHUD #METABOOKHELP.hudpanel { overflow: auto;}
 
-#METABOOKCOVER div.metabookhelp#METABOOKAPPHELP,
-#METABOOKHUD div.metabookhelp#METABOOKHELP {
+#METABOOKCOVER div.metareaderhelp#METABOOKAPPHELP,
+#METABOOKHUD div.metareaderhelp#METABOOKHELP {
     padding-bottom: 1.5em; }
-.metabookhelp h1 {
+.metareaderhelp h1 {
     text-align: center; margin-bottom: 1ex;}
-#METABOOKAPPHELP table, .metabookhelp p {
+#METABOOKAPPHELP table, .metareaderhelp p {
     margin-left: auto; margin-right: auto;
     margin-top: 1ex; margin-bottom: 1.5em;
     max-width: 40em; clear: both;}
-.metabookhelp p img.floatleft, .metabookhelp p img.floatright {
+.metareaderhelp p img.floatleft, .metareaderhelp p img.floatright {
   max-width: 20%; max-height: 3em; width: auto; height: auto;}
 
 #METABOOKCOVER p.helphelp { display: none; }
 
-.metabookhelp .fdjtselected,
+.metareaderhelp .fdjtselected,
 .helpbox .fdjtselected {
     background-color: rgba(255,255,0,0.7); }
 .helpbox .fdjtselectstart, .helpbox .fdjtselectend,
-.metabookhelp .fdjtselectstart, .metabookhelp .fdjtselectend {
+.metareaderhelp .fdjtselectstart, .metareaderhelp .fdjtselectend {
     background-color: rgba(255,215,0,0.7); }
 
-.metabookhelp p { color: rgb(60,60,60); }
-.metabookhelp p strong {
+.metareaderhelp p { color: rgb(60,60,60); }
+.metareaderhelp p strong {
     color: black; font-weight: normal; }
-.metabookhelp p strong em { font-weight: normal; }
-.metabookhelp p dfn { color: black; white-space: nowrap;}
-.metabookhelp p dfn:before { content: "“"; }
-.metabookhelp p dfn:after { content: "”"; }
-.metabookhelp p.subpara {
+.metareaderhelp p strong em { font-weight: normal; }
+.metareaderhelp p dfn { color: black; white-space: nowrap;}
+.metareaderhelp p dfn:before { content: "“"; }
+.metareaderhelp p dfn:after { content: "”"; }
+.metareaderhelp p.subpara {
     color: rgb(0,0,0); font-size: 85%;
     margin: 0; margin-left: 2em;}
-.metabookhelp p.tightbottom {
+.metareaderhelp p.tightbottom {
     margin-bottom: 0;}
-.metabookhelp span.subpara {
+.metareaderhelp span.subpara {
     display: block; color: rgb(0,0,0);
     font-size: 85%; line-height: 120%;
     margin: 0; margin-left: 5%;}
@@ -406,9 +406,9 @@ div#METABOOKHELP {
     font-size: 120%; font-weight: bold;}
 
 @media screen and (max-width: 640px) {
-    div.metabookhelp img.narrowimage { display: inline;}
-    div.metabookhelp img.wideimage { display: none;}
-        #METABOOKHUD div.metabookhelp.hudpanel {
+    div.metareaderhelp img.narrowimage { display: inline;}
+    div.metareaderhelp img.wideimage { display: none;}
+        #METABOOKHUD div.metareaderhelp.hudpanel {
         left: 5px; right: 5px; top: 60px; bottom: 60px;}
     #METABOOKHUD div.hudtip.rightmiddle,
     #METABOOKHUD div.hudtip.leftmiddle {
@@ -422,7 +422,7 @@ div#METABOOKHELP {
         margin-right: 0; margin-left: 1ex; text-indent: -1ex;}
     div.helpbox.atfoot { left: 55px; right: 55px;}
 
-    html._TOUCH #METABOOKHUD .metabookhelp,
+    html._TOUCH #METABOOKHUD .metareaderhelp,
     html._TOUCH #METABOOKHUD .helpbox {
         font-size: 18px; font-size: 1.25rem;}
 }

@@ -4,63 +4,63 @@
 
 @charset "UTF-8";
 
-/* metabook 'slices' of summaries or glosses */
+/* metareader 'slices' of summaries or glosses */
 
-div.metabookslice {
+div.metareaderslice {
     cursor: crosshair; }
-div#METABOOKHEART div.metabookslice.hudpanel {
+div#METABOOKHEART div.metareaderslice.hudpanel {
     min-height: 100%;}
-div.metabookslice button, div.metabookslice input[TYPE="SUBMIT"],
-div.metabookslice img.button, div.metabookslice .tool {
+div.metareaderslice button, div.metareaderslice input[TYPE="SUBMIT"],
+div.metareaderslice img.button, div.metareaderslice .tool {
     cursor: pointer; }
-div.metabookslice textarea,
-div.metabookslice input[TYPE="TEXT"] {
+div.metareaderslice textarea,
+div.metareaderslice input[TYPE="TEXT"] {
     cursor: text; }
 
-div.metabookslice div.mbcard {
+div.metareaderslice div.mbcard {
     margin-left: 20px;}
-div.metabookslice div.mbcard.skimpoint {
+div.metareaderslice div.mbcard.skimpoint {
     margin-left: 10px; padding-left: 10px; padding-bottom: 1ex;
     border-left-color: darkblue;
     font-size: 110%;}
-div.metabookslice.sourced div.mbcard { display: none;}
-div.metabookslice.sourced div.mbcard.sourced { display: block;}
+div.metareaderslice.sourced div.mbcard { display: none;}
+div.metareaderslice.sourced div.mbcard.sourced { display: block;}
 
-div.metabookslice.onepassage .tocblock mbcard_tochead {display:none;}
+div.metareaderslice.onepassage .tocblock mbcard_tochead {display:none;}
 
-div.metabookslice div.xrefs { display: none;}
-div.metabookslice .showxrefs div.xrefs { display: block;}
-div.metabookslice div.xrefs a { display: block;}
-div.metabookslice span.mbcard_tags span.other { display: none;}
+div.metareaderslice div.xrefs { display: none;}
+div.metareaderslice .showxrefs div.xrefs { display: block;}
+div.metareaderslice div.xrefs a { display: block;}
+div.metareaderslice span.mbcard_tags span.other { display: none;}
 
-div.metabookslice div.skimpoint.mbcard {}
-div.metabookslice div.skimpoint.mbcard .tool {
+div.metareaderslice div.skimpoint.mbcard {}
+div.metareaderslice div.skimpoint.mbcard .tool {
     font-size: 47%; font-weight: bold;}
-div.metabookslice .excerpt .elision,
-div.metabookslice .excerpt .delision {
+div.metareaderslice .excerpt .elision,
+div.metareaderslice .excerpt .delision {
     display: none; }
-div.metabookslice .excerpt .elided {
+div.metareaderslice .excerpt .elided {
     display: inline;}
 
 div.skimpoint .mbcard .mbcard_body { padding-top: 0;}
 
-div.metabookslice div.mbcard.skimpoint + div.mbcard > div.mbcard_body,
-div.metabookslice div.mbcard.skimpoint .mbcard_body {
+div.metareaderslice div.mbcard.skimpoint + div.mbcard > div.mbcard_body,
+div.metareaderslice div.mbcard.skimpoint .mbcard_body {
     border-top-width: 0;}
-div.metabookslice div.mbcard.skimpoint .fdjtclearfloats {
+div.metareaderslice div.mbcard.skimpoint .fdjtclearfloats {
     margin-bottom: 0;}
 
 /* METABOOKSOURCES */
 
-div.metabooksources {}
-div.metabooksources img.button {
+div.metareadersources {}
+div.metareadersources img.button {
     height: 50px; width: auto; max-width: 50px; border-radius: 10%;
     box-sizing: border-box;}
-div.metabooksources img.button.everyone {}
-div.metabooksources .button {
+div.metareadersources img.button.everyone {}
+div.metareadersources .button {
     border: solid transparent 2px;
     margin: 0; margin-left: 2px; margin-right: 2px;}
-div.metabooksources div.button.source {
+div.metareadersources div.button.source {
     min-height: 50px; min-width: 50px; display: inline;
     height: 50px; width: 50px; font-size: 32px;
     text-align: center; vertical-align: top;
@@ -92,13 +92,13 @@ div.mbcard_tochead a { z-index: 10; color: blue;}
 html._MOUSE div.mbcard_tochead a:hover { z-index: 10; color: darkblue;} 
 div.mbcard_tochead hr[about] { cursor: crosshair;}
 
-div.metabookslice div.mbcard_tochead { display: none; }
+div.metareaderslice div.mbcard_tochead { display: none; }
 
-div.metabookslice div.mbcard.slicenewhead div.mbcard_tochead,
-div.metabookslice div.mbcard.fdjtstartofpage div.mbcard_tochead {
+div.metareaderslice div.mbcard.slicenewhead div.mbcard_tochead,
+div.metareaderslice div.mbcard.fdjtstartofpage div.mbcard_tochead {
     display: block; }
 
-div.metabookslice div.mbcard.fdjtstartofpage div.mbcard_tochead {
+div.metareaderslice div.mbcard.fdjtstartofpage div.mbcard_tochead {
     border-top: 0;}
 
 #METABOOKSKIMMER div.mbcard div.mbcard_body {

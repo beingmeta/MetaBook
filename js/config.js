@@ -1,6 +1,6 @@
 /* -*- Mode: Javascript; Character-encoding: utf-8; -*- */
 
-/* ###################### metabook/config.js ###################### */
+/* ###################### metareader/config.js ###################### */
 
 /* Copyright (C) 2009-2017 beingmeta, inc.
    This file implements a Javascript/DHTML web application for reading
@@ -46,12 +46,12 @@
     var getLocal=fdjtState.getLocal;
     var getQuery=fdjtState.getQuery;
     
-    var mB=metaBook, Trace=metaBook.Trace;
+    var mR=metaReader, Trace=metaReader.Trace;
     
     /* Configuration information */
 
     var config_handlers={};
-    var default_config=metaBook.default_config;
+    var default_config=metaReader.default_config;
     var current_config={};
     var saved_config={};
 
@@ -64,26 +64,26 @@
                 fdjtLog("Applying config handler to current %s=%s",
                         name,current_config[name]);
             handler(name,current_config[name]);}}
-    metaBook.addConfig=addConfig;
+    metaReader.addConfig=addConfig;
 
     function getConfig(name){
         if (!(name)) return current_config;
         else return current_config[name];}
-    metaBook.getConfig=getConfig;
+    metaReader.getConfig=getConfig;
 
     function setConfig(name,value,save,cxt){
         if (cxt) cxt=" ("+cxt+")";
         else cxt="";
         if (arguments.length===1) {
             var config=name;
-            metaBook.postconfig=[];
+            metaReader.postconfig=[];
             if (Trace.config)
                 fdjtLog("batch setConfig %s: %s",cxt,config);
             for (var setting in config) {
                 if (config.hasOwnProperty(setting))
                     setConfig(setting,config[setting]);}
-            var dopost=metaBook.postconfig;
-            metaBook.postconfig=false;
+            var dopost=metaReader.postconfig;
+            metaReader.postconfig=false;
             if ((Trace.config>1)&&(!((dopost)||(dopost.length===0))))
                 fdjtLog("batch setConfig, no post processing %s",
                         config,cxt);
@@ -112,8 +112,8 @@
         if ((save)&&(saved_config[name]!==value)) {
             saved_config[name]=value;
             saveConfig(saved_config);}}
-    metaBook.setConfig=setConfig;
-    metaBook.resetConfig=function(){setConfig(saved_config);};
+    metaReader.setConfig=setConfig;
+    metaReader.resetConfig=function(){setConfig(saved_config);};
 
     function saveConfig(config){
         if (Trace.config) {
@@ -129,18 +129,18 @@
                 (!(getQuery(setting)))) {
                 saved[setting]=config[setting];}}
         if (Trace.config) fdjtLog("Saving config %o",saved);
-        mB.saveLocal("mB("+mB.docid+").config",JSON.stringify(saved));
+        mR.saveLocal("mR("+mR.docid+").config",JSON.stringify(saved));
         saved_config=saved;}
-    metaBook.saveConfig=saveConfig;
+    metaReader.saveConfig=saveConfig;
 
     var config_initialized=false;
     function initConfig(){
         if (config_initialized) return; else config_initialized=true;
         var setting, value, source, started=fdjtTime(); // changed=false;
-        var config=getLocal("mB("+mB.docid+").config",true)||
-            fdjtState.getSession("mB("+mB.docid+").config",
+        var config=getLocal("mR("+mR.docid+").config",true)||
+            fdjtState.getSession("mR("+mR.docid+").config",
                                  true);
-        metaBook.postconfig=[];
+        metaReader.postconfig=[];
         if (config) {
             if (Trace.config) fdjtLog("initConfig local=%j",config);
             for (setting in config) {
@@ -153,16 +153,16 @@
                     else {
                         value=config[setting]; source="initConfig/local";}
                     setConfig(setting,value,false,source);
-                    metaBook.updateSettings(setting,value);}}}
+                    metaReader.updateSettings(setting,value);}}}
         else config={};
         if (Trace.config) fdjtLog("initConfig default=%j",default_config);
 
         var devicename=current_config.devicename;
         if ((devicename)&&(!(isEmpty(devicename))))
-            metaBook.deviceName=devicename;
+            metaReader.deviceName=devicename;
         if (Trace.startup>1)
             fdjtLog("initConfig took %dms",fdjtTime()-started);}
-    metaBook.initConfig=initConfig;
+    metaReader.initConfig=initConfig;
     
     function bookConfig(){
         var started=fdjtTime();
@@ -179,13 +179,13 @@
                     source="initConfig/appdefaults";}
                 setConfig(setting,value,false,"initConfig/HTML");
                 setConfig(setting,value,false,source);
-                metaBook.updateSettings(setting,value);}}
-        var dopost=metaBook.postconfig;
-        metaBook.postconfig=false;
+                metaReader.updateSettings(setting,value);}}
+        var dopost=metaReader.postconfig;
+        metaReader.postconfig=false;
         var i=0; var lim=dopost.length;
         while (i<lim) dopost[i++]();
         if (Trace.config) fdjtLog("bookConfig took %dms",fdjtTime()-started);}
-    metaBook.bookConfig=bookConfig;
+    metaReader.bookConfig=bookConfig;
 
     var getParent=fdjtDOM.getParent;
     var getChild=fdjtDOM.getChild;
@@ -202,58 +202,58 @@
         if ((elt.type==='radio')||(elt.type==='checkbox'))
             setConfig(name,elt.checked||false,save,"updateConfig/checked");
         else setConfig(name,elt.value,save,"updateConfig/input");}
-    metaBook.updateConfig=updateConfig;
+    metaReader.updateConfig=updateConfig;
 
-    function metabookPropConfig(name,value){
-        metaBook[name]=value;}
-    metaBook.propConfig=metabookPropConfig;
+    function metareaderPropConfig(name,value){
+        metaReader[name]=value;}
+    metaReader.propConfig=metareaderPropConfig;
 
-    metaBook.addConfig("keyboardhelp",function(name,value){
-        metaBook.keyboardhelp=value;
+    metaReader.addConfig("keyboardhelp",function(name,value){
+        metaReader.keyboardhelp=value;
         fdjtUI.CheckSpan.set(
             document.getElementsByName("METABOOKKEYBOARDHELP"),
             value);});
-    metaBook.addConfig("devicename",function(name,value){
-        if (isEmpty(value)) metaBook.deviceName=false;
-        else metaBook.deviceName=value;});
+    metaReader.addConfig("devicename",function(name,value){
+        if (isEmpty(value)) metaReader.deviceName=false;
+        else metaReader.deviceName=value;});
 
-    metaBook.addConfig("holdmsecs",function(name,value){
-        metaBook.holdmsecs=value;
+    metaReader.addConfig("holdmsecs",function(name,value){
+        metaReader.holdmsecs=value;
         fdjtUI.TapHold.default_opts.holdmsecs=value;});
-    metaBook.addConfig("wandermsecs",function(name,value){
-        metaBook.wandermsecs=value;
+    metaReader.addConfig("wandermsecs",function(name,value){
+        metaReader.wandermsecs=value;
         fdjtUI.TapHold.default_opts.wanderthresh=value;});
-    metaBook.addConfig("taptapmsecs",function(name,value){
-        metaBook.taptapmsecs=value;
+    metaReader.addConfig("taptapmsecs",function(name,value){
+        metaReader.taptapmsecs=value;
         fdjtUI.TapHold.default_opts.taptapmsecs=value;});
 
-    metaBook.addConfig("dont_rAF",function(name,value){
+    metaReader.addConfig("dont_rAF",function(name,value){
         fdjt.Codex.dont_rAF=value;});
 
-    metaBook.addConfig("checksync",function(name,value){
-        metaBook.sync_interval=value;
-        if (metaBook.synctock) {
-            clearInterval(metaBook.synctock);
-            metaBook.synctock=false;}
-        if ((value)&&(metaBook.locsync))
-            metaBook.synctock=setInterval(metaBook.syncState,value*1000);});
-    metaBook.addConfig("synctimeout",function(name,value){
-        metaBook.sync_timeout=value;});
-    metaBook.addConfig("syncpause",function(name,value){
-        metaBook.sunc_pause=value;});
+    metaReader.addConfig("checksync",function(name,value){
+        metaReader.sync_interval=value;
+        if (metaReader.synctock) {
+            clearInterval(metaReader.synctock);
+            metaReader.synctock=false;}
+        if ((value)&&(metaReader.locsync))
+            metaReader.synctock=setInterval(metaReader.syncState,value*1000);});
+    metaReader.addConfig("synctimeout",function(name,value){
+        metaReader.sync_timeout=value;});
+    metaReader.addConfig("syncpause",function(name,value){
+        metaReader.sunc_pause=value;});
 
-    metaBook.addConfig("locsync",function(name,value){
+    metaReader.addConfig("locsync",function(name,value){
         // Start or clear the sync check interval timer
-        if ((!(value))&&(metaBook.synctock)) {
-            clearInterval(metaBook.synctock);
-            metaBook.synctock=false;}
-        else if ((value)&&(!(metaBook.synctock))&&
-                 (metaBook.sync_interval))
-            metaBook.synctock=setInterval(
-                metaBook.syncState,(metaBook.sync_interval)*1000);
+        if ((!(value))&&(metaReader.synctock)) {
+            clearInterval(metaReader.synctock);
+            metaReader.synctock=false;}
+        else if ((value)&&(!(metaReader.synctock))&&
+                 (metaReader.sync_interval))
+            metaReader.synctock=setInterval(
+                metaReader.syncState,(metaReader.sync_interval)*1000);
         else {}
-        metaBook.locsync=value;
-        fdjt.Async(function(){metaBook.updateSettings(name,value);});});
+        metaReader.locsync=value;
+        fdjt.Async(function(){metaReader.updateSettings(name,value);});});
     
     function configChange(evt){
         evt=evt||window.event;
@@ -266,17 +266,17 @@
         else if (target.type==="checkbox")
             setConfig(setting,"",true,"configChange");
         else {}}
-    metaBook.configChange=configChange;
+    metaReader.configChange=configChange;
 
     function applyMetaClass(name,metaname){
         if (!(metaname)) metaname=name;
         var meta=getMeta(metaname,true);
         var i=0; var lim=meta.length;
         while (i<lim) fdjtDOM.addClass(fdjtDOM.$(meta[i++]),name);}
-    metaBook.applyMetaClass=applyMetaClass;
+    metaReader.applyMetaClass=applyMetaClass;
 
     function updateSettings(setting,value){
-        var forms=fdjtDOM.$(".metabooksettings");
+        var forms=fdjtDOM.$(".metareadersettings");
         var i=0, n_forms=forms.length; while (i<n_forms) {
             var form=forms[i++];
             var inputs=getChildren(
@@ -311,7 +311,7 @@
                 if (getParent(input,".checkspan")) 
                     fdjt.UI.CheckSpan.set(input,true);
                 else input.checked=true;}}}
-    metaBook.updateSettings=updateSettings;
+    metaReader.updateSettings=updateSettings;
 
     function initSettings(){
         var started=fdjtTime();
@@ -320,7 +320,7 @@
                 updateSettings(setting,current_config[setting]);}
         if (Trace.startup>1)
             fdjtLog("Finished initSettings in %dms",fdjtTime()-started);}
-    metaBook.initSettings=initSettings;
+    metaReader.initSettings=initSettings;
 
 })();
 

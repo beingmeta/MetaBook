@@ -1,6 +1,6 @@
 /* -*- Mode: Javascript; Character-encoding: utf-8; -*- */
 
-/* ###################### metabook/preview.js ###################### */
+/* ###################### metareader/preview.js ###################### */
 
 /* Copyright (C) 2009-2017 beingmeta, inc.
    This file implements a Javascript/DHTML web application for reading
@@ -36,9 +36,9 @@
     var fdjtDOM=fdjt.DOM, fdjtLog=fdjt.Log;
     var dropClass=fdjtDOM.dropClass, addClass=fdjtDOM.addClass;
     var hasClass=fdjtDOM.hasClass;
-    var mB=metaBook, mbID=mB.ID, getTarget=mB.getTarget;
-    var Trace=mB.Trace;
-    var mbGoTo=mB.GoTo;
+    var mR=metaReader, mbID=mR.ID, getTarget=mR.getTarget;
+    var Trace=mR.Trace;
+    var mbGoTo=mR.GoTo;
 
     // Preview functions
     var oldscroll=false, preview_elt=false;
@@ -50,11 +50,11 @@
             if (!(elt)) return;
             else preview_elt=elt;
             if (!(oldscroll)) oldscroll={x: 0,y: yoff};
-            var offinfo=fdjtDOM.getGeometry(elt,mB.content);
+            var offinfo=fdjtDOM.getGeometry(elt,mR.content);
             if (Trace.flips)
                 fdjtLog("startScrollPreview/%s to %d for %o",
                         caller||"nocaller",offinfo.top-100,elt);
-            // metaBook.content.style.top=(-offinfo.top)+"px";
+            // metaReader.content.style.top=(-offinfo.top)+"px";
             var use_top=offinfo.top-((fdjtDOM.viewHeight()-50)/2);
             if (use_top<0) use_top=0;
             window.scrollTo(0,use_top);}
@@ -78,50 +78,50 @@
         var i=0, lim=current.length; while (i<lim) {
             var p=current[i++];
             dropClass(p,"mbpreviewing");
-            mB.clearHighlights(p);}}
+            mR.clearHighlights(p);}}
 
     function startPreview(spec,caller){
         var target=((spec.nodeType)?(spec):(mbID(spec)));
         if ((Trace.flips)||(Trace.preview))
             fdjtLog("startPreview %o (%s)",target,caller);
-        if (target===mB.previewing) {}
-        if (mB.skimming) mB.stopSkimming();
-        if (mB.layout instanceof fdjt.Codex) {
-            var dups=((getTarget(target))&&(mB.getDups(target)));
-            mB.startPagePreview(target,caller);
+        if (target===mR.previewing) {}
+        if (mR.skimming) mR.stopSkimming();
+        if (mR.layout instanceof fdjt.Codex) {
+            var dups=((getTarget(target))&&(mR.getDups(target)));
+            mR.startPagePreview(target,caller);
             addClass(target,"mbpreviewing");
             if (dups) addClass(dups,"mbpreviewing");}
         else {
             scrollPreview(target,caller);
             addClass(target,"mbpreviewing");}
-        metaBook.previewing=target;
+        metaReader.previewing=target;
         addClass(document.body,"mbPREVIEW");
         if (hasClass(target,"codexpage"))
             addClass(document.body,"mbPAGEPREVIEW");
         return target;}
-    metaBook.startPreview=startPreview;
+    metaReader.startPreview=startPreview;
     function stopPreview(caller,jumpto){
         clearPreview();
         if ((jumpto)&&(!(jumpto.nodeType)))
-            jumpto=mB.previewTarget||mB.previewing;
+            jumpto=mR.previewTarget||mR.previewing;
         if ((Trace.flips)||(Trace.preview))
             fdjtLog("stopPreview/%s jump to %o, pt=%o, p=%o",
                     caller||"nocaller",jumpto,
-                    mB.previewTarget,mB.previewing);
-        if (mB.layout instanceof fdjt.Codex) {
-            mB.stopPagePreview(caller,jumpto);}
+                    mR.previewTarget,mR.previewing);
+        if (mR.layout instanceof fdjt.Codex) {
+            mR.stopPagePreview(caller,jumpto);}
         else if (!(jumpto)) scrollPreview(false,caller);
-        else if (jumpto===mB.previewing) {
+        else if (jumpto===mR.previewing) {
             oldscroll=false; scrollPreview(false,caller);}
         else scrollPreview(false,caller);
-        mB.previewing=false; mB.previewTarget=false;
+        mR.previewing=false; mR.previewTarget=false;
         dropClass(document.body,"mbPREVIEW");
         dropClass(document.body,"mbPAGEPREVIEW");
         if (jumpto) {
-            if (mB.hudup) mB.setHUD(false);
+            if (mR.hudup) mR.setHUD(false);
             mbGoTo(jumpto);}
         return false;}
-    metaBook.stopPreview=stopPreview;})();
+    metaReader.stopPreview=stopPreview;})();
 
 /* Emacs local variables
    ;;;  Local variables: ***

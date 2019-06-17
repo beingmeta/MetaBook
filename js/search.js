@@ -1,13 +1,13 @@
 /* -*- Mode: Javascript; Character-encoding: utf-8; -*- */
 
-/* ###################### metabook/search.js ###################### */
+/* ###################### metareader/search.js ###################### */
 
 /* Copyright (C) 2009-2017 beingmeta, inc.
 
    This file implements the search component for the e-reader web
    application, and relies heavily on the Knodules module.
 
-   This file is part of metaBook, a Javascript/DHTML web application for reading
+   This file is part of metaReader, a Javascript/DHTML web application for reading
    large structured documents.
 
    For more information on knodules, visit www.knodules.net
@@ -34,20 +34,20 @@
 
 */
 /* jshint browser: true */
-/* global metaBook: false */
+/* global metaReader: false */
 
 /* Initialize these here, even though they should always be
    initialized before hand.  This will cause various code checkers to
    not generate unbound variable warnings when called on individual
    files. */
 // var fdjt=((typeof fdjt !== "undefined")?(fdjt):({}));
-// var metaBook=((typeof metaBook !== "undefined")?(metaBook):({}));
+// var metaReader=((typeof metaReader !== "undefined")?(metaReader):({}));
 // var Knodule=((typeof Knodule !== "undefined")?(Knodule):({}));
 
 (function(){
     "use strict";
-    var mB=metaBook;
-    var Trace=mB.Trace;
+    var mR=metaReader;
+    var Trace=mR.Trace;
     var fdjtString=fdjt.String;
     var fdjtLog=fdjt.Log;
     var fdjtDOM=fdjt.DOM;
@@ -55,10 +55,10 @@
     var $ID=fdjt.ID;
     var RefDB=fdjt.RefDB, Query=RefDB.Query; 
 
-    metaBook.search_cloud=false;
-    if (!(metaBook.empty_cloud)) metaBook.empty_cloud=false;
-    if (!(metaBook.show_refiners)) metaBook.show_refiners=25;
-    if (!(metaBook.search_gotlucky)) metaBook.search_gotlucky=7;
+    metaReader.search_cloud=false;
+    if (!(metaReader.empty_cloud)) metaReader.empty_cloud=false;
+    if (!(metaReader.show_refiners)) metaReader.show_refiners=25;
+    if (!(metaReader.search_gotlucky)) metaReader.search_gotlucky=7;
     
     var addClass=fdjtDOM.addClass;
     var dropClass=fdjtDOM.dropClass;
@@ -73,46 +73,46 @@
     // completions="METABOOKSEARCHCLOUD"
     var search_modes=/(search|refinesearch|searchresults|expandsearch)/;
 
-    metaBook.getQuery=function(){return metaBook.query;};
+    metaReader.getQuery=function(){return metaReader.query;};
     
     function setQuery(query){
         if (query instanceof Query) query=query;
-        else query=new metaBook.Query(query);
-        if (query===metaBook.query) return query;
+        else query=new metaReader.Query(query);
+        if (query===metaReader.query) return query;
         if (Trace.search) log("Setting working query to %o",query);
         if (query.tags.length===0) {
-            addClass(metaBook.HUD,"emptysearch");
-            metaBook.empty_cloud.dom.style.fontSize="";
-            metaBook.search_cloud=metaBook.empty_cloud;
+            addClass(metaReader.HUD,"emptysearch");
+            metaReader.empty_cloud.dom.style.fontSize="";
+            metaReader.search_cloud=metaReader.empty_cloud;
             fdjtDOM.replace(
                 "METABOOKSEARCHCLOUD",fdjtDOM("div#METABOOKSEARCHCLOUD"));
             fdjtDOM.replace(
                 "METABOOKSEARCHRESULTS",
-                fdjtDOM("div.metabookslice.mbsyncslice.searchslice.hudpanel"));
+                fdjtDOM("div.metareaderslice.mbsyncslice.searchslice.hudpanel"));
             displayQuery(query,$ID("METABOOKSEARCH"));
-            metaBook.empty_cloud.complete("");
-            addClass(metaBook.HUD,"emptysearch");
-            metaBook.query=mB.empty_query;
-            metaBook.qstring="";
-            if (mB.mode==='searchresults')
-                mB.setMode('refinesearch');
+            metaReader.empty_cloud.complete("");
+            addClass(metaReader.HUD,"emptysearch");
+            metaReader.query=mR.empty_query;
+            metaReader.qstring="";
+            if (mR.mode==='searchresults')
+                mR.setMode('refinesearch');
             return;}
-        else dropClass(metaBook.HUD,"emptysearch");
-        mB.empty_cloud.complete("");
+        else dropClass(metaReader.HUD,"emptysearch");
+        mR.empty_cloud.complete("");
         var qstring=query.getString();
-        if (qstring!==metaBook.qstring) {
+        if (qstring!==metaReader.qstring) {
             displayQuery(query,$ID("METABOOKSEARCH"));
-            metaBook.query=query;
-            metaBook.qstring=qstring;}
-        if (search_modes.exec(metaBook.mode)) {
+            metaReader.query=query;
+            metaReader.qstring=qstring;}
+        if (search_modes.exec(metaReader.mode)) {
             if ((!(query.results))||(query.results.length===0)) {}
             else if (query.results.length<7)
                 showSearchResults();
-            else if (!(metaBook.touch)) {
+            else if (!(metaReader.touch)) {
                 $ID("METABOOKSEARCHINPUT").focus();}
             else {}}
         return query;}
-    metaBook.setQuery=setQuery;
+    metaReader.setQuery=setQuery;
 
     function displayQuery(query,box_arg){
         if ((box_arg)&&(typeof box_arg === 'string'))
@@ -144,17 +144,17 @@
         var elts=query.tags; var i=0; var lim=elts.length;
         // Update 'notags' class
         if (elts.length) {
-            fdjtDOM.dropClass(metaBook.HUD,"emptysearch");
+            fdjtDOM.dropClass(metaReader.HUD,"emptysearch");
             fdjtDOM.dropClass("METABOOKSEARCHINFO","notags");}
         else {
-            addClass(metaBook.HUD,"emptysearch");
+            addClass(metaReader.HUD,"emptysearch");
             fdjtDOM.dropClass("METABOOKSEARCHINFO","notags");}
         // Update the query tags
         var newtags=fdjtDOM("div.qtags");
         while (i<lim) {
             var tag=elts[i];
             if (typeof tag === 'string') tag=kbref(tag)||tag;
-            var entry=metaBook.cloudEntry(tag,false,false,"span.qelt");
+            var entry=metaReader.cloudEntry(tag,false,false,"span.qelt");
             entry.appendChild(fdjtDOM("span.redx","x"));
             fdjtDOM(newtags,((i>0)&&("\u00a0\u00B7 ")),entry);
             //fdjtDOM(newtags,((i>0)&&(" ")),entry);
@@ -180,16 +180,16 @@
         // Update the search cloud
         var n_refiners=((showtags)?(showtags.length):
                         (cotags)?(cotags.length):(0));
-        var completions=metaBook.queryCloud(query);
+        var completions=metaReader.queryCloud(query);
         refinecount.innerHTML=n_refiners+" <br/>"+
             ((n_refiners===1)?("co-tag"):("co-tags"));
         fdjtDOM.dropClass(box,"norefiners");
-        if (completions!==mB.empty_cloud) {
+        if (completions!==mR.empty_cloud) {
             fdjtDOM.replace(cloudid,completions.dom);
             if (cloudid) completions.dom.id=cloudid;
             addClass(completions.dom,"hudpanel");}
         else cloudid="METABOOKALLTAGS";
-        metaBook.search_cloud=completions;
+        metaReader.search_cloud=completions;
         if (Trace.search>1)
             log("Setting search cloud for %o to %o",box,completions.dom);
         completions.complete("",function(){
@@ -199,7 +199,7 @@
             else fdjtDOM.append(
                 $ID("METABOOKHEARTBODY"),
                 completions.dom);
-            metaBook.adjustCloudFont(completions);});
+            metaReader.adjustCloudFont(completions);});
         if (n_refiners===0) {
             addClass(box,"norefiners");
             refinecount.innerHTML="no refiners";}
@@ -220,18 +220,18 @@
             fdjtLog("searchTags_ontap %o: %s%o",
                     evt,((onx)?("(onx) "):("")),
                     elt);
-        var cur=[].concat(metaBook.query.tags);
+        var cur=[].concat(metaReader.query.tags);
         var splicepos=((elt)?(cur.indexOf(elt)):
                        (cur.indexOf(eltval)));
         if (splicepos<0) splicepos=cur.indexOf(eltval);
         if (splicepos<0) return;
         else cur.splice(splicepos,1);
         if (cur.length===0) {
-            metaBook.empty_cloud.dom.style.fontSize="";
-            setQuery(metaBook.empty_query);}
-        else setQuery(new metaBook.Query(cur));
+            metaReader.empty_cloud.dom.style.fontSize="";
+            setQuery(metaReader.empty_query);}
+        else setQuery(new metaReader.Query(cur));
         fdjtUI.cancel(evt);}
-    metaBook.searchTags_onclick=searchTags_onclick;
+    metaReader.searchTags_onclick=searchTags_onclick;
 
     function extendQuery(query,elt){
         var elts=[].concat(query.tags);
@@ -240,33 +240,33 @@
                 elts.push(kbref(elt)||elt);
             else elts.push(elt);}
         else elts.push(elt);
-        return new metaBook.Query(elts);}
-    metaBook.extendQuery=extendQuery;
+        return new metaReader.Query(elts);}
+    metaReader.extendQuery=extendQuery;
 
-    metaBook.updateQuery=function(input_elt){
+    metaReader.updateQuery=function(input_elt){
         var q=Knodule.Query.string2query(input_elt.value);
-        if ((q)!==(metaBook.query.tags))
-            metaBook.setQuery(q,false);};
+        if ((q)!==(metaReader.query.tags))
+            metaReader.setQuery(q,false);};
 
     function showSearchResults(){
-        var results=metaBook.query.showResults();
+        var results=metaReader.query.showResults();
         var results_panel=results.container;
         addClass(results_panel,"hudpanel");
         results_panel.id="METABOOKSEARCHRESULTS";
         fdjtDOM.replace("METABOOKSEARCHRESULTS",results_panel);
-        mB.slices.searchresults=results;
-        metaBook.setMode("searchresults");
+        mR.slices.searchresults=results;
+        metaReader.setMode("searchresults");
         results.update();
         $ID("METABOOKSEARCHINPUT").blur();
         $ID("METABOOKSEARCHRESULTS").focus();}
-    metaBook.showSearchResults=showSearchResults;
+    metaReader.showSearchResults=showSearchResults;
 
     /* Call this to search */
 
     function startSearch(tag){
         setQuery([tag]);
-        metaBook.setMode("refinesearch");}
-    metaBook.startSearch=startSearch;
+        metaReader.setMode("refinesearch");}
+    metaReader.startSearch=startSearch;
 
     /* Text input handlers */
 
@@ -280,7 +280,7 @@
             var qstring=target.value; 
             if (fdjtString.isEmpty(qstring)) showSearchResults();
             else {
-                completeinfo=metaBook.queryCloud(metaBook.query);
+                completeinfo=metaReader.queryCloud(metaReader.query);
                 if (completeinfo.timer) {
                     clearTimeout(completeinfo.timer);
                     completeinfo.timer=false;}
@@ -290,25 +290,25 @@
                     completeinfo.select();
                 // Signal error?
                 if (!(completion)) {
-                    var found=metaBook.textindex.termindex[qstring];
+                    var found=metaReader.textindex.termindex[qstring];
                     if ((found)&&(found.length))
-                        setQuery(extendQuery(metaBook.query,qstring));
+                        setQuery(extendQuery(metaReader.query,qstring));
                     return;}
                 var value=completeinfo.getValue(completion);
-                setQuery(extendQuery(metaBook.query,value));}
+                setQuery(extendQuery(metaReader.query,value));}
             fdjtDOM.cancel(evt);
-            if ((metaBook.search_gotlucky) && 
-                (metaBook.query.results.length>0) &&
-                (metaBook.query.results.length<=metaBook.search_gotlucky))
+            if ((metaReader.search_gotlucky) && 
+                (metaReader.query.results.length>0) &&
+                (metaReader.query.results.length<=metaReader.search_gotlucky))
                 showSearchResults();
             else {
                 /* Handle new info */
-                completeinfo=metaBook.queryCloud(metaBook.query);
+                completeinfo=metaReader.queryCloud(metaReader.query);
                 completeinfo.complete("");}
             return false;}
         else if (ch===9) { /* tab */
             var partial_string=target.value;
-            completeinfo=metaBook.queryCloud(metaBook.query);
+            completeinfo=metaReader.queryCloud(metaReader.query);
             completions=completeinfo.complete(partial_string);
             fdjtUI.cancel(evt);
             if ((completions.prefix)&&
@@ -319,7 +319,7 @@
             else if (evt.shiftKey) completeinfo.selectPrevious();
             else completeinfo.selectNext();}
         else {}}
-    metaBook.UI.handlers.search_keydown=searchInput_keydown;
+    metaReader.UI.handlers.search_keydown=searchInput_keydown;
 
     function searchInput_keyup(evt){
         evt=evt||window.event||null;
@@ -329,7 +329,7 @@
         else if (ch===8) {
             setTimeout(function(){searchUpdate(target);},100);}
         else searchUpdate(target);}
-    metaBook.UI.handlers.search_keyup=searchInput_keyup;
+    metaReader.UI.handlers.search_keyup=searchInput_keyup;
     
     function searchInput_keypress(evt){
         evt=evt||window.event||null;
@@ -337,11 +337,11 @@
         var target=fdjtDOM.T(evt);
         if ((ch===13)||(ch===13)||(ch===59)||(ch===93)||(ch===9)||(ch===8)) {}
         else searchUpdate(target);}
-    metaBook.UI.handlers.search_keypress=searchInput_keypress;
+    metaReader.UI.handlers.search_keypress=searchInput_keypress;
 
     function searchUpdate(input,cloud){
         if (!(input)) input=$ID("METABOOKSEARCHINPUT");
-        if (!(cloud)) cloud=metaBook.queryCloud(metaBook.query);
+        if (!(cloud)) cloud=metaReader.queryCloud(metaReader.query);
         if (input.value.length===0) cloud.clearSelection();
         cloud.complete(input.value,function(results){
             if ((input.value.length>0)&&
@@ -351,68 +351,68 @@
                 addRawText(cloud,input.value);
                 setTimeout(function(){cloud.complete(input.value);},50);}
             else {}});}
-    metaBook.searchUpdate=searchUpdate;
+    metaReader.searchUpdate=searchUpdate;
 
     function addRawText(cloud,text,ptree,maxmatch){
-        if (!(ptree)) ptree=metaBook.textindex.prefixTree();
+        if (!(ptree)) ptree=metaReader.textindex.prefixTree();
         if (!(maxmatch)) maxmatch=42;
         var matches=fdjtString.prefixFind(ptree,text);
         if (matches.length===0) return;
         else if (matches.length>maxmatch) return;
         else {
             var i=0, lim=matches.length; while (i<lim) 
-                metaBook.cloudEntry(matches[i++],cloud);}}
+                metaReader.cloudEntry(matches[i++],cloud);}}
 
     function searchInput_focus(evt){
         evt=evt||window.event||null;
         var input=fdjtDOM.T(evt);
-        metaBook.setFocus(input);
-        if ((metaBook.mode)&&(metaBook.mode==='searchresults'))
-            metaBook.setMode("refinesearch");
+        metaReader.setFocus(input);
+        if ((metaReader.mode)&&(metaReader.mode==='searchresults'))
+            metaReader.setMode("refinesearch");
         searchUpdate(input);}
-    metaBook.UI.handlers.search_focus=searchInput_focus;
+    metaReader.UI.handlers.search_focus=searchInput_focus;
 
     function searchInput_blur(evt){
         evt=evt||window.event||null;
         var input=fdjtDOM.T(evt);
-        metaBook.clearFocus(input);}
-    metaBook.UI.handlers.search_blur=searchInput_blur;
+        metaReader.clearFocus(input);}
+    metaReader.UI.handlers.search_blur=searchInput_blur;
 
     function clearSearch(evt){
         var target=fdjtUI.T(evt||window.event);
         var box=fdjtDOM.getParent(target,".searchbox");
         var input=getChild(box,".searchinput");
         fdjtUI.cancel(evt);
-        if ((metaBook.query.tags.length===0)&&
+        if ((metaReader.query.tags.length===0)&&
             (input.value.length===0)) {
-            metaBook.setMode(false); return;}
+            metaReader.setMode(false); return;}
         else {
-            metaBook.empty_cloud.dom.style.fontSize="";
-            setQuery(metaBook.empty_query);
+            metaReader.empty_cloud.dom.style.fontSize="";
+            setQuery(metaReader.empty_query);
             input.value="";
-            metaBook.empty_cloud.clearSelection();
-            metaBook.empty_cloud.complete("");
-            metaBook.setMode("refinesearch");}
+            metaReader.empty_cloud.clearSelection();
+            metaReader.empty_cloud.complete("");
+            metaReader.setMode("refinesearch");}
         // input.focus();
     }
-    metaBook.UI.handlers.clearSearch=clearSearch;
+    metaReader.UI.handlers.clearSearch=clearSearch;
     
     /* Search result listings */
 
-    var MetaBookSlice=metaBook.Slice;
+    var MetaBookSlice=metaReader.Slice;
     function SearchResults(query){
         if (!(this instanceof SearchResults))
             return new SearchResults(query);
         this.query=query; this.results=query.results;
         this.scores=query.scores;
         return MetaBookSlice.call(
-            this,fdjtDOM("div.metabookslice.mbsyncslice.searchslice"),
+            this,fdjtDOM("div.metareaderslice.mbsyncslice.searchslice"),
             this.results);}
-    metaBook.SearchResults=SearchResults;
+    metaReader.SearchResults=SearchResults;
 
     SearchResults.prototype=new MetaBookSlice();
     SearchResults.prototype.renderCard=function renderSearchResult(result){
-        return metaBook.renderCard(result,this.query);};
+        return metaReader.renderCard(result,this.query);};
     SearchResults.prototype.sortfn=function searchResultsSortFn(x,y){
         if ((typeof x.score === "number")&&(typeof y.score === "number")) {
             if (x.score!==y.score) return y.score-x.score;}

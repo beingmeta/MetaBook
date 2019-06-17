@@ -1,6 +1,6 @@
 /* -*- Mode: Javascript; Character-encoding: utf-8; -*- */
 
-/* ###################### metabook/syncstate.js ###################### */
+/* ###################### metareader/syncstate.js ###################### */
 
 /* Copyright (C) 2009-2017 beingmeta, inc.
    This file implements a Javascript/DHTML web application for reading
@@ -36,19 +36,19 @@
     var fdjtDOM=fdjt.DOM, fdjtState=fdjt.State;
     var fdjtLog=fdjt.Log, fdjtUI=fdjt.UI, fdjtTime=fdjt.Time;
     var $ID=fdjt.ID;
-    var mB=metaBook, mbID=mB.ID;
-    var saveLocal=mB.saveLocal, readLocal=mB.readLocal;
-    var clearLocal=mB.clearLocal;
-    var Trace=metaBook.Trace;
-    var loc2pct=metaBook.location2pct;
+    var mR=metaReader, mbID=mR.ID;
+    var saveLocal=mR.saveLocal, readLocal=mR.readLocal;
+    var clearLocal=mR.clearLocal;
+    var Trace=metaReader.Trace;
+    var loc2pct=metaReader.location2pct;
     var sync_count=0;
 
     var setTarget, setConnected, setConfig;
     function init_local(){
-        setTarget=metaBook.setTarget;
-        setConnected=metaBook.setConnected;
-        setConfig=metaBook.setConfig;}
-    metaBook.inits.local.push(init_local);
+        setTarget=metaReader.setTarget;
+        setConnected=metaReader.setConnected;
+        setConfig=metaReader.setConfig;}
+    metaReader.inits.local.push(init_local);
 
     /* Managing the reader state */
 
@@ -69,10 +69,10 @@
     
     // This initializes the reading state, either from local storage
     //  or the initial hash id from the URL (which was saved in
-    //  metaBook.inithash).
-    metaBook.initState=function initState() {
-        var state=readLocal("mB("+mB.docid+").state",true);
-        var hash=metaBook.inithash;
+    //  metaReader.inithash).
+    metaReader.initState=function initState() {
+        var state=readLocal("mR("+mR.docid+").state",true);
+        var hash=metaReader.inithash;
         if (hash) {
             if (hash[0]==="#") hash=hash.slice(1);}
         else hash=false;
@@ -87,46 +87,46 @@
                 ((!(state.hash))&&(state.target)&&(state.target!==hash))) {
                 if (!(state)) state={};
                 // Hash changed
-                state.refuri=mB.refuri;
-                state.docuri=mB.docuri;
+                state.refuri=mR.refuri;
+                state.docuri=mR.docuri;
                 state.target=hash;
                 state.location=false;
                 state.changed=fdjtTime.tick();
-                saveLocal("mB("+mB.docid+").state",state,true);}}
+                saveLocal("mR("+mR.docid+").state",state,true);}}
         else if ((hash)&&(hash.search("MBLOC")===0)) {
             var loc=parseInt(hash.slice(5));
             if ((!(state))||(state.location!==loc)) {
-                state={refuri: mB.refuri, docuri: mB.docuri,
+                state={refuri: mR.refuri, docuri: mR.docuri,
                        location: loc, change: fdjtTime.tick()};
-                saveLocal("mB("+mB.docid+").state",state,true);}}
-        if (state) metaBook.state=state;};
+                saveLocal("mR("+mR.docid+").state",state,true);}}
+        if (state) metaReader.state=state;};
     
     // This records the current state of the app, bundled into an
     //  object. It primarily consists a location, a target, and
     //  the time it was last changed.
     // Mechanically, this procedure fills things out and stores the object
-    //  in both metaBook.state and local/session storage.  If the changed
-    //  date is later than the current metaBook.xstate, it also does
+    //  in both metaReader.state and local/session storage.  If the changed
+    //  date is later than the current metaReader.xstate, it also does
     //  an Ajax call to update the server.
     // Finally, unless skiphist is true, it updates the browser
     //  history to get the browser button to be useful.
     function saveState(state,skiphist,force){
         if ((!force)&&(state)&&
-            ((metaBook.state===state)||
-             ((metaBook.state)&&
-              (metaBook.state.target===state.target)&&
-              (metaBook.state.location===state.location)&&
-              (metaBook.state.page===state.page))))
+            ((metaReader.state===state)||
+             ((metaReader.state)&&
+              (metaReader.state.target===state.target)&&
+              (metaReader.state.location===state.location)&&
+              (metaReader.state.page===state.page))))
             return;
-        if (!(state)) state=metaBook.state;
+        if (!(state)) state=metaReader.state;
         if (!(state.changed)) state.changed=fdjtTime.tick();
-        if (!(state.refuri)) state.refuri=metaBook.refuri;
-        if (!(state.docuri)) state.docuri=metaBook.docuri;
+        if (!(state.refuri)) state.refuri=metaReader.refuri;
+        if (!(state.docuri)) state.docuri=metaReader.docuri;
         var title=state.title, frag=state.target;
-        if ((!(title))&&(frag)&&(metaBook.docinfo)&&
-            (metaBook.docinfo[frag])) {
-            state.title=title=metaBook.docinfo[frag].title||
-                metaBook.docinfo[frag].head.title;}
+        if ((!(title))&&(frag)&&(metaReader.docinfo)&&
+            (metaReader.docinfo[frag])) {
+            state.title=title=metaReader.docinfo[frag].title||
+                metaReader.docinfo[frag].head.title;}
         if (Trace.state) fdjtLog("Setting state to %j",state);
         if ((state.maxloc)&&(state.maxloc<state.location))
             state.maxloc=state.location;
@@ -138,20 +138,20 @@
         if (Trace.state)
             fdjtLog("saveState skiphist=%o force=%o state=%j",
                     skiphist,force,state);
-        if ((!(syncing))&&(metaBook.locsync)&&(metaBook.user)&&
-            ((!(metaBook.xstate))||(state.changed>metaBook.xstate.changed)))
+        if ((!(syncing))&&(metaReader.locsync)&&(metaReader.user)&&
+            ((!(metaReader.xstate))||(state.changed>metaReader.xstate.changed)))
             syncState(true);
         if ((!(skiphist))&&(frag)&&
             (window.history)&&(window.history.pushState))
             setHistory(state,frag,title);
         saveStateLocal(state);
-    } metaBook.saveState=saveState;
+    } metaReader.saveState=saveState;
 
     function saveStateLocal(state){
-        metaBook.state=state;
+        metaReader.state=state;
         var statestring=JSON.stringify(state);
-        saveLocal("mB("+mB.docid+").state",statestring);
-    } metaBook.saveStateLocal=saveStateLocal;
+        saveLocal("mR("+mR.docid+").state",statestring);
+    } metaReader.saveStateLocal=saveStateLocal;
 
 
     // This sets the browser history from a particular state
@@ -164,10 +164,10 @@
         if (!(hash)) hash=state.target;
         if (!(title)) title=state.title;
         var href=fdjtState.getURL();
-        if ((!(title))&&(hash)&&(metaBook.docinfo)&&
-            (metaBook.docinfo[hash])) {
-            state.title=title=metaBook.docinfo[hash].title||
-                metaBook.docinfo[hash].head.title;}
+        if ((!(title))&&(hash)&&(metaReader.docinfo)&&
+            (metaReader.docinfo[hash])) {
+            state.title=title=metaReader.docinfo[hash].title||
+                metaReader.docinfo[hash].head.title;}
         if ((!(hash))&&(state.location)&&
             (typeof state.location === "number"))
             hash="MBLOC"+state.location;
@@ -181,96 +181,96 @@
                 window.history.pushState(state,title,href+"#"+hash);
             else window.history.pushState(state,title,href);}
     }
-    metaBook.setHistory=setHistory;
+    metaReader.setHistory=setHistory;
 
     function restoreState(state,reason,savehist){
         if (Trace.state) fdjtLog("Restoring (%s) state %j",reason,state);
         if (state.location)
-            metaBook.GoTo(state.location,reason||"restoreState",
+            metaReader.GoTo(state.location,reason||"restoreState",
                           ((state.target)?(mbID(state.target)):(false)),
                           false,(!(savehist)));
-        else if ((state.page)&&(metaBook.layout)) {
-            metaBook.GoToPage(state.page,reason||"restoreState",
+        else if ((state.page)&&(metaReader.layout)) {
+            metaReader.GoToPage(state.page,reason||"restoreState",
                               false,(!(savehist)));
             if ((state.target)&&(mbID(state.target)))
                 setTarget(mbID(state.target));}
         else if (state.target) {
-            metaBook.GoTo(state.target,reason||"restoreState",
+            metaReader.GoTo(state.target,reason||"restoreState",
                           true,false,(!(savehist)));
             if ((state.target)&&(mbID(state.target)))
                 setTarget(mbID(state.target));}
-        if (!(state.refuri)) state.refuri=metaBook.refuri;
-        if (!(state.docuri)) state.docuri=metaBook.docuri;
+        if (!(state.refuri)) state.refuri=metaReader.refuri;
+        if (!(state.docuri)) state.docuri=metaReader.docuri;
         saveStateLocal(state);
-    } metaBook.restoreState=restoreState;
+    } metaReader.restoreState=restoreState;
 
     function clearState(){
-        metaBook.state=false;
-        clearLocal("mB("+mB.docid+").state");
-        metaBook.xstate=false;
-    } metaBook.clearState=clearState;
+        metaReader.state=false;
+        clearLocal("mR("+mR.docid+").state");
+        metaReader.xstate=false;
+    } metaReader.clearState=clearState;
 
     function resetState(){
-        var state=metaBook.state;
+        var state=metaReader.state;
         if (state.location) state.maxloc=location;
         state.reset=true;
         var statestring=JSON.stringify(state);
-        saveLocal("mB("+mB.docid+").state",statestring);
+        saveLocal("mR("+mR.docid+").state",statestring);
         syncState(true);}
-    metaBook.resetState=resetState;
+    metaReader.resetState=resetState;
 
     var sync_req=false, sync_wait=false, last_sync=false;
     // Post the current state and update synced state from what's
     // returned
     function syncState(force){
-        var mycopyid=mB.mycopyid||mB.readMyCopyId();
+        var mycopyid=mR.mycopyid||mR.readMyCopyId();
         var elapsed=(last_sync)?(fdjtTime.tick()-last_sync):(3600*24*365*10);
-        if ((syncing)||((!(force))&&(!(metaBook.locsync)))) return;
-        if (!(metaBook.user)) return;
+        if ((syncing)||((!(force))&&(!(metaReader.locsync)))) return;
+        if (!(metaReader.user)) return;
         if (sync_req) {
             fdjtLog("Skipping state sync because one is already in process");
             if (sync_wait) clearTimeout(sync_wait);
             setTimeout(((force)?(forceSyncState):(syncState)),15000);
             return;}
-        if ((!(force))&&(elapsed<metaBook.sync_interval)) {
+        if ((!(force))&&(elapsed<metaReader.sync_interval)) {
             if (Trace.state)
                 fdjtLog("Skipping state sync because it's too soon");
             return;}
-        if ((!(force))&&(metaBook.state)&&
+        if ((!(force))&&(metaReader.state)&&
             ((!(fdjtDOM.isHidden))||(document[fdjtDOM.isHidden]))&&
-            (elapsed<(5*metaBook.sync_interval))) {
+            (elapsed<(5*metaReader.sync_interval))) {
             if (Trace.state)
                 fdjtLog("Skipping state sync because page is hidden");
             return;}
-        if ((!(force))&&(elapsed<(metaBook.sync_min))) {
+        if ((!(force))&&(elapsed<(metaReader.sync_min))) {
             sync_wait=setTimeout(((force)?(forceSyncState):(syncState)),
-                                 metaBook.sync_min);
+                                 metaReader.sync_min);
             return;}
         else if (sync_wait) {clearTimeout(sync_wait); sync_wait=false;} 
-        if (((force)||(metaBook.locsync))&&(navigator.onLine)) {
-            var uri=metaBook.docuri;
+        if (((force)||(metaReader.locsync))&&(navigator.onLine)) {
+            var uri=metaReader.docuri;
             var traced=(Trace.state)||(Trace.network);
-            var state=metaBook.state;
+            var state=metaReader.state;
             var refuri=
-                ((metaBook.target)&&(metaBook.getRefURI(metaBook.target)))||
-                (metaBook.refuri);
+                ((metaReader.target)&&(metaReader.getRefURI(metaReader.target)))||
+                (metaReader.refuri);
             var sync_uri="https://sync.bookhub.io/v1/sync?";
-            if (mB.docref)
-                sync_uri=sync_uri+"DOC="+encodeURIComponent(mB.docref);
+            if (mR.docref)
+                sync_uri=sync_uri+"DOC="+encodeURIComponent(mR.docref);
             else sync_uri=sync_uri+"REFURI="+encodeURIComponent(refuri);
-            if (mB.docuri!==refuri)
-                sync_uri=sync_uri+"&DOCURI="+encodeURIComponent(metaBook.docuri);
+            if (mR.docuri!==refuri)
+                sync_uri=sync_uri+"&DOCURI="+encodeURIComponent(metaReader.docuri);
             sync_uri=sync_uri+"&NOW="+fdjtTime.tick();
-            metaBook.last_sync=last_sync=fdjtTime.tick(); 
+            metaReader.last_sync=last_sync=fdjtTime.tick(); 
             if (state) syncing=state; else syncing={};
-            if (metaBook.user) sync_uri=sync_uri+
-                "&SYNCUSER="+encodeURIComponent(metaBook.user._id);
+            if (metaReader.user) sync_uri=sync_uri+
+                "&SYNCUSER="+encodeURIComponent(metaReader.user._id);
             if (mycopyid) sync_uri=sync_uri+
                 "&MYCOPYID="+encodeURIComponent(mycopyid);
-            if (metaBook.deviceName) sync_uri=sync_uri+
-                "&DEVICE="+encodeURIComponent(metaBook.deviceName);
-            if (metaBook.ends_at) sync_uri=sync_uri+
-                "&LOCLEN="+encodeURIComponent(metaBook.ends_at);
+            if (metaReader.deviceName) sync_uri=sync_uri+
+                "&DEVICE="+encodeURIComponent(metaReader.deviceName);
+            if (metaReader.ends_at) sync_uri=sync_uri+
+                "&LOCLEN="+encodeURIComponent(metaReader.ends_at);
             if (state) {
                 if (state.target) sync_uri=sync_uri+
                     "&TARGET="+encodeURIComponent(state.target);
@@ -284,7 +284,7 @@
             req.onreadystatechange=freshState;
             req.ontimeout=syncTimeout;
             req.withCredentials=true;
-            req.timeout=metaBook.sync_timeout;
+            req.timeout=metaReader.sync_timeout;
             if (traced) fdjtLog("syncState(call) %s",sync_uri);
             try {
                 req.open("GET",sync_uri,true);
@@ -295,23 +295,23 @@
                     fdjtLog.warn(
                         "Sync request %s returned status %d %j, pausing for %ds",
                         uri,req.status,JSON.parse(req.responseText),
-                        metaBook.sync_pause);}
+                        metaReader.sync_pause);}
                 catch (err) {
                     fdjtLog.warn(
                         "Sync request %s returned status %d, pausing for %ds",
-                        uri,req.status,metaBook.sync_pause/1000);}
-                metaBook.locsync=false;
-                setTimeout(startLocSync,metaBook.sync_pause);}}
-    } metaBook.syncState=syncState;
+                        uri,req.status,metaReader.sync_pause/1000);}
+                metaReader.locsync=false;
+                setTimeout(startLocSync,metaReader.sync_pause);}}
+    } metaReader.syncState=syncState;
     function forceSyncState(){syncState(true);}
-    function startLocSync(){metaBook.locsync=true;}
+    function startLocSync(){metaReader.locsync=true;}
 
     function syncTimeout(evt){
         evt=evt||window.event;
         fdjtLog.warn("Sync request timed out, pausing for %ds",
-                     metaBook.sync_pause/1000);
-        metaBook.locsync=false;
-        setTimeout(startLocSync,metaBook.sync_pause);}
+                     metaReader.sync_pause/1000);
+        metaReader.locsync=false;
+        setTimeout(startLocSync,metaReader.sync_pause);}
 
     var prompted=false;
 
@@ -328,28 +328,28 @@
                 if (xstate.changed) {
                     if (traced)
                         fdjtLog("freshState %o %j\n\t%j",
-                                evt,xstate,metaBook.state);
+                                evt,xstate,metaReader.state);
                     if (xstate.changed>(tick+300))
                         fdjtLog.warn(
                             "Beware of oracles (future state date): %j %s",
                             xstate,new Date(xstate.changed*1000));
-                    else if (!(metaBook.state)) {
-                        metaBook.xstate=xstate;
+                    else if (!(metaReader.state)) {
+                        metaReader.xstate=xstate;
                         restoreState(xstate);}
-                    else if (metaBook.state.changed>xstate.changed)
+                    else if (metaReader.state.changed>xstate.changed)
                         // Our state is later, so we make it the xstate
-                        metaBook.xstate=xstate;
+                        metaReader.xstate=xstate;
                     else if ((prompted)&&(prompted>xstate.changed)) {
                         // We've already bothered the user since this
                         //  change was recorded, so we don't bother them
                         // again
                     }
                     else if (document[fdjtDOM.isHidden])
-                        metaBook.freshstate=xstate;
+                        metaReader.freshstate=xstate;
                     else {
-                        metaBook.xstate=xstate;
+                        metaReader.xstate=xstate;
                         prompted=fdjtTime.tick();
-                        metaBook.resolveXState(xstate);}}
+                        metaReader.resolveXState(xstate);}}
                 sync_count++;}
             else if (traced)
                 fdjtLog("syncState(callback/error) %o %d %s",
@@ -358,44 +358,44 @@
             syncing=false;}}
 
     var last_hidden=false;
-    metaBook.visibilityChange=function visibilityChange(){
+    metaReader.visibilityChange=function visibilityChange(){
         if (!(document[fdjtDOM.isHidden])) {
             if ((last_hidden)&&((fdjtTime.tick()-last_hidden)<300)) {}
             else if (navigator.onLine) {
                 last_hidden=false;
                 syncState(true);}
-            else if (metaBook.freshstate) {
+            else if (metaReader.freshstate) {
                 // Something changed while we were hidden
-                var freshstate=metaBook.freshstate;
+                var freshstate=metaReader.freshstate;
                 last_hidden=false;
-                metaBook.freshstate=false;
-                metaBook.xstate=freshstate;
+                metaReader.freshstate=false;
+                metaReader.xstate=freshstate;
                 prompted=fdjtTime.tick();
-                metaBook.resolveXState(freshstate);}
+                metaReader.resolveXState(freshstate);}
             else {}}
         else last_hidden=fdjtTime.tick();};
 
     function forceSync(){
-        if (metaBook.connected) metaBook.update();
-        else if (metaBook._onconnect)
-            metaBook._onconnect.push(mBUpdate);
-        else metaBook._onconnect=[mBUpdate];
-        if (!(metaBook.syncstart)) metaBook.syncLocation();
+        if (metaReader.connected) metaReader.update();
+        else if (metaReader._onconnect)
+            metaReader._onconnect.push(mRUpdate);
+        else metaReader._onconnect=[mRUpdate];
+        if (!(metaReader.syncstart)) metaReader.syncLocation();
         else syncState();
-    } metaBook.forceSync=forceSync;
-    function mBUpdate(){metaBook.update();}
+    } metaReader.forceSync=forceSync;
+    function mRUpdate(){metaReader.update();}
 
     function getLoc(x){
-        var info=metaBook.getLocInfo(x);
+        var info=metaReader.getLocInfo(x);
         return ((info)&&(info.start));}
 
     /* This initializes the sbook state to the initial location with the
        document, using the hash value if there is one. */ 
     function initLocation() {
-        var state=metaBook.state;
+        var state=metaReader.state;
         if ((state)&&((state.location)||(state.target))) {}
         else {
-            var target=$ID("METABOOKSTART")||fdjt.$1(".metabookstart")||
+            var target=$ID("METABOOKSTART")||fdjt.$1(".metareaderstart")||
                 $ID("METABOOKTITLEPAGE")||$ID("PUBTOOLTITLEPAGE")||
                 $ID("TITLEPAGE");
             if (target)
@@ -405,27 +405,27 @@
             else state={location: 1,changed: 978307200};}
         var goto_arg=((typeof state.location === "undefined")?(state.target):
                       (state.location));
-        mB.GoTo(goto_arg,"initLocation",false,false,false);
-        mB.saveState(state,true,true);}
-    metaBook.initLocation=initLocation;
+        mR.GoTo(goto_arg,"initLocation",false,false,false);
+        mR.saveState(state,true,true);}
+    metaReader.initLocation=initLocation;
 
     function resolveXState(xstate) {
-        var state=metaBook.state;
-        if (!(metaBook.sync_interval)) return;
-        if (metaBook.statedialog) {
+        var state=metaReader.state;
+        if (!(metaReader.sync_interval)) return;
+        if (metaReader.statedialog) {
             if (Trace.state)
                 fdjtLog("resolveXState dialog exists: %o",
-                        metaBook.statedialog);
+                        metaReader.statedialog);
             return;}
         if (Trace.state)
             fdjtLog("resolveXState state=%j, xstate=%j",state,xstate);
         if (!(state)) {
-            metaBook.restoreState(xstate);
+            metaReader.restoreState(xstate);
             return;}
         else if (xstate.maxloc>state.maxloc) {
             state.maxloc=xstate.maxloc;
             var statestring=JSON.stringify(state);
-            saveLocal("mB("+mB.docid+").state",statestring);}
+            saveLocal("mR("+mR.docid+").state",statestring);}
         else {}
         if (state.changed>=xstate.changed) {
             // The locally saved state is newer than the server,
@@ -452,20 +452,20 @@
                  title: "your farthest location on any device/app",
                  isdefault: ((!(prefer_latest))&&(!(prefer_current))),
                  handler: function(){
-                     metaBook.GoTo(xstate.maxloc,"sync");
-                     state=metaBook.state; state.changed=fdjtTime.tick();
-                     metaBook.saveState(state,true,true);
-                     metaBook.hideCover();}});
+                     metaReader.GoTo(xstate.maxloc,"sync");
+                     state=metaReader.state; state.changed=fdjtTime.tick();
+                     metaReader.saveState(state,true,true);
+                     metaReader.hideCover();}});
         if ((latest)&&(latest!==state.location)&&(latest!==farthest))
             choices.push(
                 {label: ("latest @"+loc2pct(latest,loclen)),
                  title: "the most recent location on any device/app",
                  isdefault: ((prefer_latest)&&(!(prefer_current))),
                  handler: function(){
-                     metaBook.restoreState(xstate);
+                     metaReader.restoreState(xstate);
                      state.changed=fdjtTime.tick();
-                     metaBook.saveState(state,true,true);
-                     metaBook.hideCover();}});
+                     metaReader.saveState(state,true,true);
+                     metaReader.hideCover();}});
         if ((choices.length)&&(state.location>17))
             choices.push(
                 {label: ("current @"+((state.location<42)?("start"):
@@ -474,9 +474,9 @@
                  isdefault: prefer_current,
                  handler: function(){
                      state.changed=fdjtTime.tick();
-                     metaBook.restoreState(state);
-                     metaBook.saveState(state,true,true);
-                     metaBook.hideCover();}});
+                     metaReader.restoreState(state);
+                     metaReader.saveState(state,true,true);
+                     metaReader.hideCover();}});
         if (choices.length)
             choices.push(
                 {label: "stop syncing",
@@ -486,20 +486,20 @@
         if (Trace.state)
             fdjtLog("resolveXState choices=%j",choices);
         if (choices.length)
-            metaBook.statedialog=fdjtUI.choose(
+            metaReader.statedialog=fdjtUI.choose(
                 {choices: choices,cancel: true,timeout: 7,
                  // nodefault: true,
                  // noauto: true,
-                 onclose: function(){metaBook.statedialog=false;},
+                 onclose: function(){metaReader.statedialog=false;},
                  spec: "div.fdjtdialog.resolvestate#METABOOKRESOLVESTATE"},
                 fdjtDOM("div",msg1));}
-    metaBook.resolveXState=resolveXState;
+    metaReader.resolveXState=resolveXState;
 
     function clearStateDialog(){
-        if (metaBook.statedialog) {
-            fdjt.Dialog.close(metaBook.statedialog);
-            metaBook.statedialog=false;}}
-    metaBook.clearStateDialog=clearStateDialog;
+        if (metaReader.statedialog) {
+            fdjt.Dialog.close(metaReader.statedialog);
+            metaReader.statedialog=false;}}
+    metaReader.clearStateDialog=clearStateDialog;
 })();
 
 /* Emacs local variables

@@ -1,4 +1,4 @@
-<form onsubmit="fdjt.UI.cancel(event); return false;" class="metabooksettings">
+<form onsubmit="fdjt.UI.cancel(event); return false;" class="metareadersettings">
   <h1 class="cf">
     Settings
     <span class="message" ID="METABOOKSETTINGSMESSAGE"></span></h1>
@@ -8,8 +8,8 @@
       Body text<br/>
       <button name="REFRESH" value="Layout"
               id="METABOOKREFRESHLAYOUT">
-        <img src="{{bmg}}metabook/refresh.svgz" 
-             onerror="this.src='{{bmg}}metabook/refresh50x50.png'"
+        <img src="{{bmg}}metareader/refresh.svgz" 
+             onerror="this.src='{{bmg}}metareader/refresh50x50.png'"
              alt="Update">
         Layout</button></span>
     <span class="samples">
@@ -88,7 +88,7 @@
   </div>
   <div class="clearfloats"></div>
   <div class="fontsizes device"
-       title="Set the font sizes used by the interface components of metaBook">
+       title="Set the font sizes used by the interface components of metaReader">
     <span class="label">Application</span>
     <span class="samples">
       <span class="checkspan">
@@ -121,8 +121,8 @@
     <button id="METABOOKRESETSYNC" name="SYNC" VALUE="RESET"
             class="reset floatright"
             title="Reset synchronized location information.">
-      <img src="{{bmg}}metabook/reset.svgz" 
-           onerror="this.src='{{bmg}}metabook/reset50x50.png" alt=""/>
+      <img src="{{bmg}}metareader/reset.svgz" 
+           onerror="this.src='{{bmg}}metareader/reset50x50.png" alt=""/>
       Reset</button>
     <input TYPE="CHECKBOX" NAME="locsync" VALUE="yes"/>
     <span class="checktext">
@@ -132,8 +132,8 @@
   <div class="checkspan saveglosses cf">
     <button id="METABOOKREFRESHOFFLINE" class="refresh floatright"
             title="Reload glosses and layers for this book from the cloud.">
-      <img src="{{bmg}}metabook/refresh.svgz" 
-           onerror="this.error='{{bmg}}metabook/refresh50x50.png" alt=""/>
+      <img src="{{bmg}}metareader/refresh.svgz" 
+           onerror="this.error='{{bmg}}metareader/refresh50x50.png" alt=""/>
       Reload</button>
     <input TYPE="CHECKBOX" NAME="cacheglosses" VALUE="yes" CHECKED/>
     <span class="checktext">
@@ -149,14 +149,14 @@
   <div class="clearfloats"></div>
   <div class="info" id="METABOOKINFOPANEL">
     <span class="label">Info</span>
-    <p class="metabookrefinfo"></p>
-    <p class="metabooksourceinfo"></p>
-    <p class="metabookbuildinfo"></p>
-    <p class="metabookappinfo"></p>
-    <p class="metabookserverinfo"></p>
+    <p class="metareaderrefinfo"></p>
+    <p class="metareadersourceinfo"></p>
+    <p class="metareaderbuildinfo"></p>
+    <p class="metareaderappinfo"></p>
+    <p class="metareaderserverinfo"></p>
   </div>
-  <div class="metabookcopyright">
-    <p class="metabookcopyrightinfo"></p>
+  <div class="metareadercopyright">
+    <p class="metareadercopyrightinfo"></p>
   </div>
 
 </form>

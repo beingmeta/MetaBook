@@ -1,6 +1,6 @@
 /* -*- Mode: Javascript; Character-encoding: utf-8; -*- */
 
-/* ###################### metabook/user.js ###################### */
+/* ###################### metareader/user.js ###################### */
 
 /* Copyright (C) 2009-2017 beingmeta, inc.
    This file implements a Javascript/DHTML web application for reading
@@ -38,16 +38,16 @@
     var fdjtTime=fdjt.Time, $ID=fdjt.ID;
     var RefDB=fdjt.RefDB, Ref=fdjt.Ref, fdjtState=fdjt.State;
     
-    var mB=metaBook, Trace=mB.Trace;
+    var mR=metaReader, Trace=mR.Trace;
 
     var getLocal=fdjtState.getLocal;
     var setLocal=fdjtState.setLocal;
-    var saveLocal=mB.saveLocal;
+    var saveLocal=mR.saveLocal;
 
     function sourceref(arg){
         if (arg instanceof Ref) return arg;
         else if (typeof arg === "string")
-            return mB.sourcedb.ref(arg);
+            return mR.sourcedb.ref(arg);
         else return false;}
 
     function setUser(userinfo,outlets,layers,sync){
@@ -59,61 +59,61 @@
         if (userinfo) {
             fdjtDOM.dropClass(root,"_NOUSER");
             fdjtDOM.addClass(root,"_USER");}
-        if (metaBook.user) {
-            if (userinfo._id===metaBook.user._id) {}
+        if (metaReader.user) {
+            if (userinfo._id===metaReader.user._id) {}
             else throw { error: "Can't change user"};}
-        var cursync=metaBook.sync;
+        var cursync=metaReader.sync;
         if ((cursync)&&(cursync>sync)) {
             fdjtLog.warn(
                 "Cached user information is newer (%o) than loaded (%o)",
                 cursync,sync);}
         if ((navigator.onLine)&&
-            (getLocal("mB("+mB.docid+").queued")))
-            metaBook.writeQueuedGlosses();
-        metaBook.user=metaBook.sourcedb.Import(
+            (getLocal("mR("+mR.docid+").queued")))
+            metaReader.writeQueuedGlosses();
+        metaReader.user=metaReader.sourcedb.Import(
             userinfo,false,RefDB.REFLOAD|RefDB.REFSTRINGS|RefDB.REFINDEX);
-        if (outlets) metaBook.outlets=outlets.map(sourceref);
-        if (layers) metaBook.layers=layers.map(sourceref);
+        if (outlets) metaReader.outlets=outlets.map(sourceref);
+        if (layers) metaReader.layers=layers.map(sourceref);
         // No callback needed
-        metaBook.user.save();
-        saveLocal("mB.user",metaBook.user._id);
+        metaReader.user.save();
+        saveLocal("mR.user",metaReader.user._id);
         // We also save it locally so we can get it synchronously
-        saveLocal(metaBook.user._id,metaBook.user.Export(),true);
-        if (metaBook.locsync) metaBook.setConfig("locsync",true);
-        metaBook.saveProps();
+        saveLocal(metaReader.user._id,metaReader.user.Export(),true);
+        if (metaReader.locsync) metaReader.setConfig("locsync",true);
+        metaReader.saveProps();
         
         if (Trace.startup) {
             var now=fdjtTime();
             fdjtLog("setUser %s (%s) done in %dms",
                     userinfo._id,userinfo.name||userinfo.email,
                     now-started);}
-        metaBook._user_setup=fdjtTime();
+        metaReader._user_setup=fdjtTime();
         // This sets up for local storage, now that we have a user 
-        if (metaBook.cacheglosses) metaBook.setCacheGlosses(true);
-        if (metaBook._ui_setup) setupUI4User();
-        return metaBook.user;}
-    metaBook.setUser=setUser;
+        if (metaReader.cacheglosses) metaReader.setCacheGlosses(true);
+        if (metaReader._ui_setup) setupUI4User();
+        return metaReader.user;}
+    metaReader.setUser=setUser;
     
     function setNodeID(nodeid){
-        if (!(metaBook.nodeid)) {
-            metaBook.nodeid=nodeid;
-            if ((nodeid)&&(metaBook.persist))
-                setLocal("mB("+mB.docid+").nodeid",nodeid,true);}}
-    metaBook.setNodeID=setNodeID;
+        if (!(metaReader.nodeid)) {
+            metaReader.nodeid=nodeid;
+            if ((nodeid)&&(metaReader.persist))
+                setLocal("mR("+mR.docid+").nodeid",nodeid,true);}}
+    metaReader.setNodeID=setNodeID;
 
     function setupUI4User(){
-        if (metaBook._user_ui_setup) return;
+        if (metaReader._user_ui_setup) return;
         var i=0, lim;
         var root=document.documentElement||document.body;
         if (Trace.startup>1) fdjtLog("Starting UI setup for user");
         var startui=fdjtTime();
-        if (!(metaBook.user)) {
+        if (!(metaReader.user)) {
             fdjtDOM.dropClass(root,"_USER");
             fdjtDOM.addClass(root,"_NOUSER");
             return;}
         fdjtDOM.addClass(root,"_USER");
         fdjtDOM.dropClass(root,"_NOUSER");
-        var username=metaBook.user.name||metaBook.user.handle||metaBook.user.email;
+        var username=metaReader.user.name||metaReader.user.handle||metaReader.user.email;
         if (username) {
             if ($ID("METABOOKUSERNAME"))
                 $ID("METABOOKUSERNAME").innerHTML=username;
@@ -127,7 +127,7 @@
             if ((names)&&(names.length)) {
                 i=0; lim=names.length; while (i<lim)
                     names[i++].innerHTML=username;}
-            names=fdjtDOM.$(".metabookusername");
+            names=fdjtDOM.$(".metareaderusername");
             if ((names)&&(names.length)) {
                 i=0; lim=names.length; while (i<lim)
                     names[i++].innerHTML=username;}
@@ -136,34 +136,34 @@
                 i=0; lim=names.length; while (i<lim)
                     names[i++].innerHTML=username;}}
         if ($ID("SBOOKMARKUSER"))
-            $ID("SBOOKMARKUSER").value=metaBook.user._id;
+            $ID("SBOOKMARKUSER").value=metaReader.user._id;
         
         /* Initialize add gloss prototype */
-        var ss=metaBook.stylesheet;
+        var ss=metaReader.stylesheet;
         var form=$ID("METABOOKADDGLOSSPROTOTYPE");
-        if (metaBook.user.fbid)  
+        if (metaReader.user.fbid)  
             ss.insertRule(
                 "#METABOOKHUD span.facebook_share { display: inline;}",
                 ss.cssRules.length);
-        if (metaBook.user.twitterid) 
+        if (metaReader.user.twitterid) 
             ss.insertRule(
                 "#METABOOKHUD span.twitter_share { display: inline;}",
                 ss.cssRules.length);
-        if (metaBook.user.linkedinid) 
+        if (metaReader.user.linkedinid) 
             ss.insertRule(
                 "#METABOOKHUD span.linkedin_share { display: inline;}",
                 ss.cssRules.length);
-        if (metaBook.user.googleid) 
+        if (metaReader.user.googleid) 
             ss.insertRule(
                 "#METABOOKHUD span.google_share { display: inline;}",
                 ss.cssRules.length);
         var maker=fdjtDOM.getInput(form,"MAKER");
-        if (maker) maker.value=metaBook.user._id;
+        if (maker) maker.value=metaReader.user._id;
         var pic=
-            (metaBook.user._pic)||
-            (metaBook.user.pic)||
-            ((metaBook.user.fbid)&&
-             ("https://graph.facebook.com/"+metaBook.user.fbid+
+            (metaReader.user._pic)||
+            (metaReader.user.pic)||
+            ((metaReader.user.fbid)&&
+             ("https://graph.facebook.com/"+metaReader.user.fbid+
               "/picture?type=square"));
         if (pic) {
             if ($ID("SBOOKMARKIMAGE")) $ID("SBOOKMARKIMAGE").src=pic;
@@ -179,75 +179,75 @@
                 idlink.target='_blank';
                 idlink.title='click to edit your personal information';
                 idlink.href='https://my.bookhub.io/profile';}}
-        if (metaBook.user.friends) {
-            var friends=metaBook.user.friends; var sourcedb=metaBook.sourcedb;
+        if (metaReader.user.friends) {
+            var friends=metaReader.user.friends; var sourcedb=metaReader.sourcedb;
             i=0; lim=friends.length; while (i<lim) {
                 var friend=RefDB.resolve(friends[i++],sourcedb);
-                metaBook.addTag2Cloud(friend,metaBook.gloss_cloud);
-                metaBook.addTag2Cloud(friend,metaBook.share_cloud);}}
-        if (metaBook.outlets)
-            metaBook.addOutlets2UI(metaBook.outlets);
+                metaReader.addTag2Cloud(friend,metaReader.gloss_cloud);
+                metaReader.addTag2Cloud(friend,metaReader.share_cloud);}}
+        if (metaReader.outlets)
+            metaReader.addOutlets2UI(metaReader.outlets);
         if (Trace.startup) {
             var now=fdjtTime();
             fdjtLog("Setup UI for %s (%s) in %dms",
-                    metaBook.user._id,metaBook.user.name||metaBook.user.email,
+                    metaReader.user._id,metaReader.user.name||metaReader.user.email,
                     now-startui);}
-        metaBook._user_ui_setup=true;}
-    metaBook.setupUI4User=setupUI4User;
+        metaReader._user_ui_setup=true;}
+    metaReader.setupUI4User=setupUI4User;
 
     function loginUser(info){
-        metaBook.user=metaBook.sourcedb.Import(
+        metaReader.user=metaReader.sourcedb.Import(
             info,false,RefDB.REFLOAD|RefDB.REFSTRINGS|RefDB.REFINDEX);
         setupUI4User();
-        metaBook._user_setup=false;}
-    metaBook.loginUser=loginUser;
+        metaReader._user_setup=false;}
+    metaReader.loginUser=loginUser;
     
     function userSetup(){
         // Get any local sync information
-        var sync=metaBook.sync=
-            getLocal("mB("+mB.docid+").sync",true)||0;
+        var sync=metaReader.sync=
+            getLocal("mR("+mR.docid+").sync",true)||0;
         var started=fdjtTime();
         var loadinfo=false, userinfo=false;
 
         // If the configuration is set to not persist, but there's
         //  a sync timestamp, we should erase what's there.
-        if ((metaBook.sync)&&(!(metaBook.persist)))
-            metaBook.clearOffline();
+        if ((metaReader.sync)&&(!(metaReader.persist)))
+            metaReader.clearOffline();
 
-        if (metaBook.nologin) {}
-        else if ((metaBook.persist)&&(getLocal("mB.user"))) {
+        if (metaReader.nologin) {}
+        else if ((metaReader.persist)&&(getLocal("mR.user"))) {
             initUserOffline();
             if (Trace.storage) 
                 fdjtLog("Local info for %o (%s) from %o",
-                        metaBook.user._id,metaBook.user.name,metaBook.sync);
+                        metaReader.user._id,metaReader.user.name,metaReader.sync);
             // Clear any loadinfo read on startup from the
             // application cache but already stored locally.
-            if ((metaBook.user)&&(metaBook.sync)&&(metaBook.cacheglosses)&&
-                (window._metabook_loadinfo))
+            if ((metaReader.user)&&(metaReader.sync)&&(metaReader.cacheglosses)&&
+                (window._metareader_loadinfo))
                 // Clear the loadinfo "left over" from startup,
                 //  which should now be in the database
-                window._metabook_loadinfo=false;}
+                window._metareader_loadinfo=false;}
         
-        if (metaBook.nologin) {}
-        else if ((window._metabook_loadinfo)&&
-                 (window._metabook_loadinfo.userinfo)) {
+        if (metaReader.nologin) {}
+        else if ((window._metareader_loadinfo)&&
+                 (window._metareader_loadinfo.userinfo)) {
             // Get the userinfo from the loadinfo that might have already been loaded
-            loadinfo=window._metabook_loadinfo;
+            loadinfo=window._metareader_loadinfo;
             userinfo=loadinfo.userinfo;
-            window._metabook_loadinfo=false;
+            window._metareader_loadinfo=false;
             if (Trace.storage) 
-                fdjtLog("Have window._metabook_loadinfo for %o (%s) dated %o: %j",
+                fdjtLog("Have window._metareader_loadinfo for %o (%s) dated %o: %j",
                         userinfo._id,userinfo.name||userinfo.email,
                         loadinfo.sync,userinfo);
             setUser(userinfo,
                     loadinfo.outlets,loadinfo.layers,
                     loadinfo.sync);
             if (loadinfo.nodeid) setNodeID(loadinfo.nodeid);}
-        else if ((metaBook.userinfo)||(window._userinfo)) {
-            userinfo=(metaBook.userinfo)||(window._userinfo);
+        else if ((metaReader.userinfo)||(window._userinfo)) {
+            userinfo=(metaReader.userinfo)||(window._userinfo);
             if ((Trace.storage)||(Trace.startup))
                 fdjtLog("Have %s for %o (%s) dated %o: %j",
-                        ((metaBook.userinfo)?("metaBook.userinfo"):("window._userinfo")),
+                        ((metaReader.userinfo)?("metaReader.userinfo"):("window._userinfo")),
                         userinfo._id,userinfo.name||userinfo.email,
                         userinfo.sync||userinfo.modified,userinfo);
             setUser(userinfo,userinfo.outlets,userinfo.layers,
@@ -255,30 +255,30 @@
         else {}
         if (Trace.startup>1)
             fdjtLog("userSetup done in %dms",fdjtTime()-started);
-        if (metaBook.nologin) return;
-        else if (!(metaBook.refuri)) return;
+        if (metaReader.nologin) return;
+        else if (!(metaReader.refuri)) return;
         else {}
         if (window.navigator.onLine) {
-            if ((metaBook.user)&&(sync))
+            if ((metaReader.user)&&(sync))
                 fdjtLog("Requesting additional glosses (> %s (%d)) on %s from %s for %s",
-                        fdjtTime.timeString(metaBook.sync),metaBook.sync,
-                        metaBook.refuri,metaBook.server,metaBook.user._id,metaBook.user.name);
-            else if (metaBook.user)
+                        fdjtTime.timeString(metaReader.sync),metaReader.sync,
+                        metaReader.refuri,metaReader.server,metaReader.user._id,metaReader.user.name);
+            else if (metaReader.user)
                 fdjtLog("Requesting all glosses on %s from %s for %s (%s)",
-                        metaBook.refuri,metaBook.server,metaBook.user._id,metaBook.user.name);
+                        metaReader.refuri,metaReader.server,metaReader.user._id,metaReader.user.name);
             else fdjtLog(
                 "No user, requesting user info and glosses from %s",
-                metaBook.server);
-            metaBook.updateInfo();
+                metaReader.server);
+            metaReader.updateInfo();
             return;}
         else return;}
-    metaBook.userSetup=userSetup;
+    metaReader.userSetup=userSetup;
 
     function initUserOffline(){
-        var user=getLocal("mB.user");
-        var sync=metaBook.sync;
+        var user=getLocal("mR.user");
+        var sync=metaReader.sync;
         if (!(user)) return;
-        var nodeid=getLocal("mB("+mB.docid+").nodeid",true);
+        var nodeid=getLocal("mR("+mR.docid+").nodeid",true);
         // We store the information for the current user
         //  in both localStorage and in the "real" sourcedb.
         // We fetch the user from local storage because we
@@ -290,19 +290,19 @@
         if (Trace.startup>1)
             fdjtLog("initOffline userinfo=%j",userinfo);
         // Should these really be refs in sourcedb?
-        var outlets=metaBook.outlets=
-            (getLocal("mB("+mB.docid+").outlets",true)||[]).map(sourceref);
-        var layers=metaBook.layers=
-            (getLocal("mB("+mB.docid+").layers",true)||[]).map(sourceref);
+        var outlets=metaReader.outlets=
+            (getLocal("mR("+mR.docid+").outlets",true)||[]).map(sourceref);
+        var layers=metaReader.layers=
+            (getLocal("mR("+mR.docid+").layers",true)||[]).map(sourceref);
         if (userinfo) setUser(userinfo,outlets,layers,sync);
         if (nodeid) setNodeID(nodeid);}
-    metaBook.initUserOffline=initUserOffline;
+    metaReader.initUserOffline=initUserOffline;
 
     /* Setting up the clouds */
     
     function addOutlets2UI(outlet){
         if (typeof outlet === 'string')
-            outlet=metaBook.sourcedb.ref(outlet);
+            outlet=metaReader.sourcedb.ref(outlet);
         if (!(outlet)) return;
         if (outlet instanceof Array) {
             var outlets=outlet;
@@ -324,9 +324,9 @@
                 completion.title=outlet.description;
             else if (outlet.nick) completion.title=outlet.name;
             fdjtDOM("#METABOOKSHARECLOUD",completion," ");
-            metaBook.share_cloud.addCompletion(completion);}
+            metaReader.share_cloud.addCompletion(completion);}
         outlet.onLoad(init,"addoutlet2cloud");}
-    metaBook.addOutlets2UI=addOutlets2UI;
+    metaReader.addOutlets2UI=addOutlets2UI;
 
 })();
 

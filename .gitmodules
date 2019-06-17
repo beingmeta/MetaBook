@@ -1,0 +1,6 @@
+[submodule "fdjt"]
+	path = fdjt
+	url = git@github.com:beingmeta/fdjt.git
+[submodule "knodules"]
+	path = knodules
+	url = git@github.com:beingmeta/knodules_js.git

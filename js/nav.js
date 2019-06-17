@@ -1,6 +1,6 @@
 /* -*- Mode: Javascript; Character-encoding: utf-8; -*- */
 
-/* ###################### metabook/nav.js ###################### */
+/* ###################### metareader/nav.js ###################### */
 
 /* Copyright (C) 2009-2017 beingmeta, inc.
    This file implements a Javascript/DHTML web application for reading
@@ -37,15 +37,15 @@
     var fdjtLog=fdjt.Log, fdjtUI=fdjt.UI;
     var dropClass=fdjtDOM.dropClass, addClass=fdjtDOM.addClass;
     var hasClass=fdjtDOM.hasClass, hasParent=fdjtDOM.hasParent;
-    var mB=metaBook, mbID=mB.ID, getHead=mB.getHead, getTarget=mB.getTarget;
-    var Trace=metaBook.Trace;
+    var mR=metaReader, mbID=mR.ID, getHead=mR.getHead, getTarget=mR.getTarget;
+    var Trace=metaReader.Trace;
     var getDups, saveState, setHistory;
 
     function init_local(){
-        getDups=metaBook.getDups;
-        saveState=metaBook.saveState;
-        setHistory=metaBook.setHistory;}
-    metaBook.inits.local.push(init_local);
+        getDups=metaReader.getDups;
+        saveState=metaReader.saveState;
+        setHistory=metaReader.setHistory;}
+    metaReader.inits.local.push(init_local);
 
     /* Navigation functions */
 
@@ -53,45 +53,45 @@
         var head;
         if (!(arg)) return;
         else if (typeof arg === "string") 
-            head=getHead(mbID(head))||metaBook.content;
+            head=getHead(mbID(head))||metaReader.content;
         else head=arg;
         var headid=head.codexbaseid||head.id;
-        var headinfo=(mB.docinfo)&&(mB.docinfo[headid]);
+        var headinfo=(mR.docinfo)&&(mR.docinfo[headid]);
         while ((headinfo)&&(!(headinfo.level))) {
             headinfo=headinfo.head;
             headid=headinfo.frag;
             head=mbID(headid);}
         if ((Trace.nav>1)&&(headinfo))
-            fdjtLog("metaBook.setHead #%s %o from %o info=%o:\n%j",
+            fdjtLog("metaReader.setHead #%s %o from %o info=%o:\n%j",
                     (headid||"none"),head,arg,headinfo,headinfo);
         else if (Trace.nav)
-            fdjtLog("metaBook.setHead #%s %o from %o",
+            fdjtLog("metaReader.setHead #%s %o from %o",
                     (headid||"none"),head,arg);
 
-        if (head===metaBook.head) {
+        if (head===metaReader.head) {
             if (Trace.target) fdjtLog("Redundant SetHead");
             return;}
         else if (headinfo) {
             if (Trace.target)
-                metaBook.trace("metaBook.setHead",head);
+                metaReader.trace("metaReader.setHead",head);
             window.title=headinfo.title+" ("+document.title+")";
-            if (metaBook.head) dropClass(metaBook.head,"bookhead");
+            if (metaReader.head) dropClass(metaReader.head,"bookhead");
             addClass(head,"bookhead");
-            metaBook.setLocation(metaBook.location);
-            metaBook.head=mbID(headid);
-            metaBook.TOC.setHead(headinfo);}
+            metaReader.setLocation(metaReader.location);
+            metaReader.head=mbID(headid);
+            metaReader.TOC.setHead(headinfo);}
         else {
             if (Trace.target)
-                metaBook.trace("metaBook.setFalseHead",head);
-            metaBook.TOC.setHead(false);
-            metaBook.head=false;}}
-    metaBook.setHead=setHead;
+                metaReader.trace("metaReader.setFalseHead",head);
+            metaReader.TOC.setHead(false);
+            metaReader.head=false;}}
+    metaReader.setHead=setHead;
 
     function setLocation(location,force){
-        if ((!(force)) && (metaBook.location===location)) return;
+        if ((!(force)) && (metaReader.location===location)) return;
         if (Trace.toc)
             fdjtLog("Setting location to %o",location);
-        var info=metaBook.Info(metaBook.head);
+        var info=metaReader.Info(metaReader.head);
         while (info) {
             var tocelt=document.getElementById("MBTOC4"+info.frag);
             var hinfo=info.head;
@@ -109,11 +109,11 @@
                 if (bar) bar.style.width=(progress)+"%";
                 if (appbar) appbar.style.width=(progress)+"%";}
             info=info.head;}
-        metaBook.location=location;}
-    metaBook.setLocation=setLocation;
+        metaReader.location=location;}
+    metaReader.setLocation=setLocation;
 
     function location2pct(location,loclen) {
-        if (!(loclen)) loclen=metaBook.ends_at;
+        if (!(loclen)) loclen=metaReader.ends_at;
         var pct=(100*location)/loclen;
         if (pct>100) pct=100;
         // This is (very roughly) intended to be the precision needed
@@ -123,16 +123,16 @@
         if (Math.floor(pct)===pct)
             return Math.floor(pct)+"%";
         else return fdjtString.precString(pct,prec)+"%";}
-    metaBook.location2pct=location2pct;
+    metaReader.location2pct=location2pct;
 
     function setTarget(target){
-        if (Trace.target) metaBook.trace("metaBook.setTarget",target);
-        if (target===metaBook.target) return;
-        else if ((metaBook.target)&&
-                 (metaBook.target.id===target.codexbaseid))
+        if (Trace.target) metaReader.trace("metaReader.setTarget",target);
+        if (target===metaReader.target) return;
+        else if ((metaReader.target)&&
+                 (metaReader.target.id===target.codexbaseid))
             return;
-        if (metaBook.target) {
-            var old_target=metaBook.target, oldid=old_target.id;
+        if (metaReader.target) {
+            var old_target=metaReader.target, oldid=old_target.id;
             var old_targets=getDups(oldid);
             dropClass(old_target,"mbtarget");
             dropClass(old_target,"mbnewtarget");
@@ -140,9 +140,9 @@
             dropClass(old_targets,"mbnewtarget");
             if (!(hasParent(old_target,target)))
                 clearHighlights(old_targets);
-            metaBook.target=false;}
+            metaReader.target=false;}
         if (!(target)) {
-            if (metaBook.UI.setTarget) metaBook.UI.setTarget(false);
+            if (metaReader.UI.setTarget) metaReader.UI.setTarget(false);
             return;}
         else if ((inUI(target))||(!(target.id||target.codexbaseid)))
             return;
@@ -161,11 +161,11 @@
         fdjtState.setCookie(
             "MB:TARGET",targetid||target.getAttribute('data-bookid'),
             false,false,(location.href.search('https:')===0));
-        metaBook.target=primary;
-        if (metaBook.UI.setTarget) metaBook.UI.setTarget(primary);
-        if ((mB.docinfo)&&(metaBook.empty_cloud))
-            metaBook.setCloudCuesFromTarget(metaBook.empty_cloud,primary);}
-    metaBook.setTarget=setTarget;
+        metaReader.target=primary;
+        if (metaReader.UI.setTarget) metaReader.UI.setTarget(primary);
+        if ((mR.docinfo)&&(metaReader.empty_cloud))
+            metaReader.setCloudCuesFromTarget(metaReader.empty_cloud,primary);}
+    metaReader.setTarget=setTarget;
 
     function clearHighlights(target){
         if (typeof target === "string") target=mbID(target);
@@ -181,7 +181,7 @@
             dropClass(target,"mbhighlightpassage");
             fdjtUI.Highlight.clear(target,"mbhighlightexcerpt");
             fdjtUI.Highlight.clear(target,"mbhighlightsearch");}}
-    metaBook.clearHighlights=clearHighlights;
+    metaReader.clearHighlights=clearHighlights;
 
     function findExcerpt(node,excerpt,off){
         if (typeof node === "string") node=mbID(node);
@@ -211,21 +211,21 @@
                 node,pattern,first.endOffset+1,1);}
         if ((matches)&&(matches.length)) return matches[0];
         else return result;}
-    metaBook.findExcerpt=findExcerpt;
+    metaReader.findExcerpt=findExcerpt;
 
     /* Navigation */
 
     var sbookUIclasses=/(\bhud\b)|(\bglossmark\b)|(\bleading\b)/;
 
     function inUI(elt){
-        if (elt.metabookui) return true;
-        else if (hasParent(elt,metaBook.HUD)) return true;
+        if (elt.metareaderui) return true;
+        else if (hasParent(elt,metaReader.HUD)) return true;
         else while (elt)
-            if (elt.metabookui) return true;
+            if (elt.metareaderui) return true;
         else if (hasClass(elt,sbookUIclasses)) return true;
         else elt=elt.parentNode;
         return false;}
-    metaBook.inUI=inUI;
+    metaReader.inUI=inUI;
 
     function setHashID(target){
         var targetid=target.codexbaseid||target.id;
@@ -233,9 +233,9 @@
             ((window.location.hash[0]==='#')&&
              (window.location.hash.slice(1)===targetid)))
             return;
-        if ((target===metaBook.body)||(target===document.body)) return;
+        if ((target===metaReader.body)||(target===document.body)) return;
         if (targetid) window.location.hash=targetid;}
-    metaBook.setHashID=setHashID;
+    metaReader.setHashID=setHashID;
 
     function getLocInfo(elt){
         var eltid=false;
@@ -243,17 +243,17 @@
         var forward=fdjtDOM.forward;
         while ((elt)&&(counter<lim)) {
             eltid=elt.codexbaseid||elt.id;
-            if ((eltid)&&(metaBook.docinfo[eltid])) break;
+            if ((eltid)&&(metaReader.docinfo[eltid])) break;
             else {counter++; elt=forward(elt);}}
-        if ((eltid)&&(metaBook.docinfo[eltid])) {
-            var info=metaBook.docinfo[eltid];
+        if ((eltid)&&(metaReader.docinfo[eltid])) {
+            var info=metaReader.docinfo[eltid];
             return {start: info.starts_at,end: info.ends_at,
                     len: info.ends_at-info.starts_at};}
         else return false;
-    } metaBook.getLocInfo=getLocInfo;
+    } metaReader.getLocInfo=getLocInfo;
 
     function resolveLocation(loc){
-        var allinfo=metaBook.docinfo._allinfo;
+        var allinfo=metaReader.docinfo._allinfo;
         var i=0; var lim=allinfo.length;
         while (i<lim) {
             if (allinfo[i].starts_at<loc) i++;
@@ -262,16 +262,16 @@
             if (allinfo[i].starts_at>loc) break;
             else i++;}
         return mbID(allinfo[i-1].frag);
-    } metaBook.resolveLocation=resolveLocation;
+    } metaReader.resolveLocation=resolveLocation;
 
     // This moves within the document in a persistent way
-    function metabookGoTo(arg,caller,istarget,savestate,skiphist,forgetcur){
+    function metareaderGoTo(arg,caller,istarget,savestate,skiphist,forgetcur){
         if (typeof istarget === 'undefined') istarget=true;
         if (typeof savestate === 'undefined') savestate=true;
         var target, location, locinfo;
-        if (savestate) metaBook.clearStateDialog();
+        if (savestate) metaReader.clearStateDialog();
         if ((!(arg))&&(arg!==0)) {
-            fdjtLog.warn("falsy arg (%s) to metabookGoTo from %s",arg,caller);
+            fdjtLog.warn("falsy arg (%s) to metareaderGoTo from %s",arg,caller);
             return;}
         if (typeof arg === 'string') {
             target=mbID(arg);
@@ -294,89 +294,89 @@
             locinfo=getLocInfo(arg);
             location=locinfo.start;}
         else {
-            fdjtLog.warn("Bad metabookGoTo %o",arg);
+            fdjtLog.warn("Bad metareaderGoTo %o",arg);
             return;}
         // Save the current state
-        if ((mB.state)&&(!(forgetcur))) setHistory(mB.state);
+        if ((mR.state)&&(!(forgetcur))) setHistory(mR.state);
         if ((istarget)&&(istarget.nodeType)) target=istarget;
         else if ((typeof istarget === "string")&&(mbID(istarget)))
             target=mbID(istarget);
         else {}
-        var info=(target)&&(mB.docinfo)&&
-            mB.docinfo[target.getAttribute("data-baseid")||target.id];
+        var info=(target)&&(mR.docinfo)&&
+            mR.docinfo[target.getAttribute("data-baseid")||target.id];
         if ((location)&&(info)&&(info.ends_at)&&(info.starts_at)&&
             ((location>(info.ends_at))||(location<(info.starts_at))))
             // Don't use the location if it's not in the node
             location=false;
-        var page=((metaBook.bypage)&&(metaBook.layout)&&
-                  (metaBook.getPage(target,location)));
+        var page=((metaReader.bypage)&&(metaReader.layout)&&
+                  (metaReader.getPage(target,location)));
         var pageno=(page)&&(parseInt(page.getAttribute("data-pagenum"),10));
         var targetid=(target)&&(target.codexbaseid||target.id);
-        if (mB.Trace.nav)
-            fdjtLog("mB.GoTo(%s%s%s%s%s) %o location=%o page=%o pageno=%d arg=%o",
+        if (mR.Trace.nav)
+            fdjtLog("mR.GoTo(%s%s%s%s%s) %o location=%o page=%o pageno=%d arg=%o",
                     caller||"",((caller)?(":"):("")),((istarget)?("t"):("")),
                     ((savestate)?("s"):("")),((!(skiphist))?("h"):("")),
                     target,((location)?(location):("none")),page,pageno,arg);
         if (!(target)) {
-            if (mB.bypage) {
-                if ((page)&&(metaBook.layout instanceof fdjt.Codex)) 
-                    metaBook.GoToPage(page||arg,caller,savestate);}
+            if (mR.bypage) {
+                if ((page)&&(metaReader.layout instanceof fdjt.Codex)) 
+                    metaReader.GoToPage(page||arg,caller,savestate);}
             else if (arg.nodeType) {
                 var scan=arg;
                 while (scan) {
                     if (scan.offsetTop) break;
                     else scan=scan.parentNode;}
-                if (scan) metaBook.content.style.offsetTop=-(scan.offsetTop);}
+                if (scan) metaReader.content.style.offsetTop=-(scan.offsetTop);}
             else {}
-            if (metaBook.curpage)
-                saveState({location: metaBook.location,
-                           page: metaBook.curpage,
-                           npages: metaBook.pagecount},
+            if (metaReader.curpage)
+                saveState({location: metaReader.location,
+                           page: metaReader.curpage,
+                           npages: metaReader.pagecount},
                           true);
-            else saveState({location: metaBook.location},true);
+            else saveState({location: metaReader.location},true);
             return;}
         if (Trace.nav)
-            fdjtLog("metaBook.GoTo%s() #%o@P%o/L%o %o",
+            fdjtLog("metaReader.GoTo%s() #%o@P%o/L%o %o",
                     ((caller)?("/"+caller):""),targetid,pageno,
                     ((info)&&(info.starts_at)),target);
         if (info) {
-            metaBook.point=target;
-            if (!((metaBook.hudup)||(metaBook.mode))) metaBook.skimpoint=false;}
-        if ((target)&&(mB.docinfo)) setHead(target);
+            metaReader.point=target;
+            if (!((metaReader.hudup)||(metaReader.mode))) metaReader.skimpoint=false;}
+        if ((target)&&(mR.docinfo)) setHead(target);
         if (location) setLocation(location);
         if ((istarget)&&(targetid)&&(!(inUI(target)))) setTarget(target);
         if ((savestate)&&(istarget)&&(target))
-            metaBook.saveState({
+            metaReader.saveState({
                 target: (target.getAttribute("data-baseid")||target.id),
-                location: location,page: pageno,npages: metaBook.pagecount},
+                location: location,page: pageno,npages: metaReader.pagecount},
                                skiphist);
         else if (savestate)
-            metaBook.saveState({location: location,page: pageno,
-                                npages: metaBook.pagecount},
+            metaReader.saveState({location: location,page: pageno,
+                                npages: metaReader.pagecount},
                                skiphist);
         else {}
         if (skiphist) {}
         else if (istarget)
             setHistory({
                 target: (target.getAttribute("data-baseid")||target.id),
-                location: location,page: pageno,npages: metaBook.pagecount});
+                location: location,page: pageno,npages: metaReader.pagecount});
         else if (target) 
             setHistory({
                 target: (target.getAttribute("data-baseid")||target.id),
-                location: location,page: pageno,npages: metaBook.pagecount});
+                location: location,page: pageno,npages: metaReader.pagecount});
         else {}
         if (page)
-            metaBook.GoToPage(page,caller||"metabookGoTo",false,true);
+            metaReader.GoToPage(page,caller||"metareaderGoTo",false,true);
         else {
-            if (metaBook.previewing)
-                metaBook.stopPreview(((caller)?("goto/"+caller):("goto")),target);
-            var offinfo=fdjtDOM.getGeometry(target,metaBook.content);
+            if (metaReader.previewing)
+                metaReader.stopPreview(((caller)?("goto/"+caller):("goto")),target);
+            var offinfo=fdjtDOM.getGeometry(target,metaReader.content);
             var use_top=offinfo.top-((fdjtDOM.viewHeight()-50)/2);
             if (use_top<0) use_top=0;
             window.scrollTo(0,use_top);}
-        if (metaBook.clearGlossmark) metaBook.clearGlossmark();
-        metaBook.location=location;
-    } metaBook.GoTo=metabookGoTo;
+        if (metaReader.clearGlossmark) metaReader.clearGlossmark();
+        metaReader.location=location;
+    } metaReader.GoTo=metareaderGoTo;
 
     function anchorFn(evt){
         var target=fdjtUI.T(evt);
@@ -385,20 +385,20 @@
         if ((target)&&(target.href)&&(target.href[0]==='#')) {
             var elt=mbID(target.href.slice(1));
             if (elt) {
-                metaBook.GoTo(elt,"anchorFn"); 
+                metaReader.GoTo(elt,"anchorFn"); 
                 fdjtUI.cancel(evt);}}}
-    metaBook.anchorFn=anchorFn;
+    metaReader.anchorFn=anchorFn;
 
     // This jumps and disables the HUD at the same time
-    function metaBookJumpTo(target){
-        if (metaBook.hudup) metaBook.setMode(false);
-        metaBook.GoTo(target,"JumpTo");}
-    metaBook.JumpTo=metaBookJumpTo;
+    function metaReaderJumpTo(target){
+        if (metaReader.hudup) metaReader.setMode(false);
+        metaReader.GoTo(target,"JumpTo");}
+    metaReader.JumpTo=metaReaderJumpTo;
 
     // This jumps and disables the HUD at the same time
-    function metaBookGoTOC(target){
-        if (target) metaBook.GoTo(target,"GoTOC");}
-    metaBook.GoTOC=metaBookGoTOC;
+    function metaReaderGoTOC(target){
+        if (target) metaReader.GoTo(target,"GoTOC");}
+    metaReader.GoTOC=metaReaderGoTOC;
 
 })();
 

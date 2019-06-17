@@ -8,30 +8,30 @@
     <input TYPE="HIDDEN" NAME="ITEMID" VALUE="" id="METABOOKUPLOADITEMID"/>
     <tr class="attachtype">
       <th class="headcell">
-        Attach<img src="{{bmg}}metabook/gloss_attach.svgz"/></th>
+        Attach<img src="{{bmg}}metareader/gloss_attach.svgz"/></th>
       <td>
         <button id="METABOOKATTACHDELETE" NAME="ATTACH" VALUE="DELETE">
           Delete</button>
         <span class="checkspan ischecked mbaddlink"
               title="Attach a link to this gloss">
           <input type="RADIO" NAME="ATTACHTYPE" VALUE="link"
-                 onchange="metaBook.UI.changeAttachment(event);"
+                 onchange="metaReader.UI.changeAttachment(event);"
                  CHECKED/>
           Link</span>
         <span class="checkspan mbupload"
               title="Upload a file and attach it to this gloss">
           <input type="RADIO" NAME="ATTACHTYPE" VALUE="upload"
-                 onchange="metaBook.UI.changeAttachment(event);"/>
+                 onchange="metaReader.UI.changeAttachment(event);"/>
           File</span>
         <span class="checkspan mbeditbody"
               title="Create or edit a 'body' for this gloss">
           <input type="RADIO" NAME="ATTACHTYPE" VALUE="body"
-                 onchange="metaBook.UI.changeAttachment(event);"/>
+                 onchange="metaReader.UI.changeAttachment(event);"/>
           Body</span>
         <span class="checkspan mbcapture"
               title="Attach audio or video recorded on this device">
           <input type="RADIO" NAME="ATTACHTYPE" VALUE="capture"
-                 onchange="metaBook.UI.changeAttachment(event);"/>
+                 onchange="metaReader.UI.changeAttachment(event);"/>
           Capture</span>
       </td>
       <th class="button">

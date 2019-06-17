@@ -7,20 +7,20 @@
 <div id="METABOOKTITLE" class="flap"
      style="position: absolute; top: 75px; left: 50px; right: 50px; width: auto; bottom: 100px; height: auto; overflow: hidden;">
 </div>
-<div id="METABOOKCREDITS" class="flap metabookcredits"
+<div id="METABOOKCREDITS" class="flap metareadercredits"
      style="position: absolute; top: 75px; left: 50px; right: 50px; width: auto; bottom: 100px; height: auto; overflow: hidden;">
 </div>
 <div id="METABOOKBLURB" class="scrolling flap"
      style="position: absolute; top: 50px; left: 50px; right: 50px; width: auto; bottom: 100px; height: auto;">
 </div>
-<div id="METABOOKAPPHELP" class="metabookhelp scrolling flap"
+<div id="METABOOKAPPHELP" class="metareaderhelp scrolling flap"
      style="position: absolute; top: 75px; left: 50px; right: 50px; width: auto; bottom: 100px; height: auto;">
-  <h1><span class="adjustfont">Welcome to the &metaBook; web-based
+  <h1><span class="adjustfont">Welcome to the &metaReader; web-based
       e-reader</span></h1>
   
-  <p>You're using &metaBook;, a web-based e-reader created to deepen
+  <p>You're using &metaReader;, a web-based e-reader created to deepen
     reading and engagement while connecting to networks of knowledge,
-    conversation, and commmunity.  &metaBook; aims to reclaim the
+    conversation, and commmunity.  &metaReader; aims to reclaim the
     virtues of physical books for electronic books, making them
     natural to navigate, annotate, search, and personalize.</p>
   <div id="METABOOKCOVERHELP"></div>
@@ -43,7 +43,7 @@
   <div id="METABOOKOPENCOVER">
     <span class="fortouch">Tap</span><span class="notouch">Click</span> to Open
   </div>
-  <div id="METABOOKCOVERLAYOUT" class="fdjtprogress metabooklayoutprogress">
+  <div id="METABOOKCOVERLAYOUT" class="fdjtprogress metareaderlayoutprogress">
     <div class="indicator"></div>
     <div class="message"></div>
   </div>
@@ -82,7 +82,7 @@
         tabindex="7">
     Settings</span>
   <span class="control" data-mode="help"
-        title="simple help for using metaBook"
+        title="simple help for using metaReader"
         tabindex="8">
     Help</span>
 </div>
@@ -91,11 +91,11 @@
   <span class="bookplate">
     <a href="https://www.bookhub.io/" target="_blank"
        class="booklink" id="METABOOKCATALOGLINK"
-       title="Learn more about the metaBook reader and bookhub.io" tabindex="9">
+       title="Learn more about the metaReader reader and bookhub.io" tabindex="9">
       This book</a>
     <span class="text">is personalized for</span>
     <a href="https://my.bookhub.io/profile/"
-       class="bookplate__username metabookusername userlink"
+       class="bookplate__username metareaderusername userlink"
        title="Edit your profile, add social networks, etc"
        target="_blank" tabindex="10">
       you</a></span>
@@ -105,7 +105,7 @@
   <div class="loginmessage">
     Login to bookhub.io to read smarter</div>
   <form action="https://auth.bookhub.io/"
-        onsubmit="metaBook.setMode('login');"
+        onsubmit="metaReader.setMode('login');"
         target="BOOKHUBLOGIN">
     <input TYPE="HIDDEN" NAME="FRESHLOGIN" VALUE="yes"/>
     <input TYPE="HIDDEN" NAME="LOGINFORM" VALUE="yes"/>
@@ -133,63 +133,63 @@
     </select>
     <button name="AUTHORITY" TABINDEX="11"
             value=":FACEBOOK">
-      <img src="{{bmg}}metabook/facebook64x64.png" class="nosvg"
+      <img src="{{bmg}}metareader/facebook64x64.png" class="nosvg"
            alt="Facebook" class="noautoscale"/>
-      <img src="{{bmg}}metabook/facebook.svgz" class="svg"
+      <img src="{{bmg}}metareader/facebook.svgz" class="svg"
            alt="Facebook" class="noautoscale"/>
     </button>
     <button NAME="AUTHORITY" TABINDEX="12"
             VALUE=":TWITTER">
-      <img src="{{bmg}}metabook/twitter64x64.png"
+      <img src="{{bmg}}metareader/twitter64x64.png"
            alt="Twitter" title="login with Twitter"
            class="nosvg"/>
-      <img src="{{bmg}}metabook/twitter.svgz"
+      <img src="{{bmg}}metareader/twitter.svgz"
            alt="Twitter" title="login with Twitter"
            class="svg"/>
     </button>
     <button NAME="AUTHORITY" TABINDEX="13"
             VALUE="https://open.login.yahooapis.com/openid/op/auth">
-      <img src="{{bmg}}metabook/yahoo64x64.png" class="nosvg"
+      <img src="{{bmg}}metareader/yahoo64x64.png" class="nosvg"
            alt="Yahoo!" title="login using Yahoo!"/>
-      <img src="{{bmg}}metabook/yahoo.svgz" class="svg"
+      <img src="{{bmg}}metareader/yahoo.svgz" class="svg"
            alt="Yahoo!" title="login using Yahoo!"/>
     </button>
     <button NAME="AUTHORITY" TABINDEX="14"
             VALUE=":GOOGLE">
-      <img src="{{bmg}}metabook/google64x64.png"
+      <img src="{{bmg}}metareader/google64x64.png"
            alt="Google" title="login using your Google account"
            class="nosvg"/>
-      <img src="{{bmg}}metabook/google.svgz"
+      <img src="{{bmg}}metareader/google.svgz"
            alt="Google" title="login using your Google account"
            class="svg"/>
     </button>
     <button NAME="AUTHORITY" TABINDEX="15"
             VALUE=":GPLUS">
-      <img src="{{bmg}}metabook/googleplus64x64.png"
+      <img src="{{bmg}}metareader/googleplus64x64.png"
            alt="Google" title="login using Google+"
            class="nosvg"/>
-      <img src="{{bmg}}metabook/googleplus.svgz"
+      <img src="{{bmg}}metareader/googleplus.svgz"
            alt="Google" title="login using Google+"
            class="svg"/>
     </button>
     <button NAME="AUTHORITY" VALUE=":LINKEDIN" TABINDEX="16">
-      <img src="{{bmg}}metabook/linkedin64x64.png"
+      <img src="{{bmg}}metareader/linkedin64x64.png"
            alt="Linked In" title="login with Linked In"
            class="nosvg"/>
-      <img src="{{bmg}}metabook/linkedin.svgz"
+      <img src="{{bmg}}metareader/linkedin.svgz"
            alt="Linked In" title="login with Linked In"
            class="svg"/>
     </button>
     <button name="AUTHORITY" TABINDEX="17"
             value=":AMAZON">
-      <img src="{{bmg}}metabook/amazon64x64.png"
+      <img src="{{bmg}}metareader/amazon64x64.png"
            alt="Amazon" title="login with your Amazon account"/>
     </button>
     <button name="AUTHORITY" TABINDEX="18"
             value=":PAYPAL">
-      <img src="{{bmg}}metabook/paypalsquare64x64.png" class="nosvg"
+      <img src="{{bmg}}metareader/paypalsquare64x64.png" class="nosvg"
            alt="PayPal" title="login with PayPal"/>
-      <img src="{{bmg}}metabook/paypalsquare.svgz" class="svg"
+      <img src="{{bmg}}metareader/paypalsquare.svgz" class="svg"
            alt="PayPal" title="login with PayPal"/>
     </button>
   </form>

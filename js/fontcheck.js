@@ -1,6 +1,6 @@
 /* -*- Mode: Javascript; Character-encoding: utf-8; -*- */
 
-/* ###################### metabook/core.js ###################### */
+/* ###################### metareader/core.js ###################### */
 
 /* Copyright (C) 2009-2015 beingmeta, inc.
    This file implements a Javascript/DHTML web application for reading

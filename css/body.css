@@ -49,25 +49,25 @@ body.mbMEDIA #METABOOKBODY, body.mbZOOM #METABOOKBODY {
 
 #METABOOKBODY {
     font-size: calc( 1em + 2vmin );}
-#METABOOKBODY.metabookbodysizelarge {
+#METABOOKBODY.metareaderbodysizelarge {
     font-size: calc( 1em + 4vmin );}
-#METABOOKBODY.metabookbodysizexlarge {
+#METABOOKBODY.metareaderbodysizexlarge {
     font-size: calc( 1em + 6vmin );}
-#METABOOKBODY.metabookbodysizenormal {
+#METABOOKBODY.metareaderbodysizenormal {
     font-size: calc( 1em + 2vmin );}
-#METABOOKBODY.metabookbodysizesmall {
+#METABOOKBODY.metareaderbodysizesmall {
     font-size: calc( 1ex + 1vmin );}
-#METABOOKBODY.metabookbodysizetiny {
+#METABOOKBODY.metareaderbodysizetiny {
     font-size: calc ( 1ex + 1vmin );}
-.metabooklinespacingsingle {
+.metareaderlinespacingsingle {
     line-height: 1.2;}
-.metabooklinespacingdouble {
+.metareaderlinespacingdouble {
     line-height: 2.0;}
-.metabooklinespacingnormal {}
-.metabooklinespacingonefive {
+.metareaderlinespacingnormal {}
+.metareaderlinespacingonefive {
     line-height: 1.5;}
 
-.metabookjustify p, .metabookjustify li {
+.metareaderjustify p, .metareaderjustify li {
     text-align: justify;}
 
 #METABOOKBODY h1, #METABOOKBODY h2, #METABOOKBODY h3, #METABOOKBODY h4 {
@@ -77,17 +77,17 @@ html._MOUSE #METABOOKBODY a[href]:hover,
 #METABOOKBODY a[href]:active {
     color: blue; }
 
-#METABOOKBODY .metabookcontent {
+#METABOOKBODY .metareadercontent {
     background-color: #ffffff; color: #111; }
-#METABOOKBODY.metabookcontrasthigh  .metabookcontent { color: #111; }
-#METABOOKBODY.metabookcontrastmedium .metabookcontent { color: #444; }
-#METABOOKBODY.metabookcontrastlow .metabookcontent {
+#METABOOKBODY.metareadercontrasthigh  .metareadercontent { color: #111; }
+#METABOOKBODY.metareadercontrastmedium .metareadercontent { color: #444; }
+#METABOOKBODY.metareadercontrastlow .metareadercontent {
     background-color: #e5e0d4; color: #333; }
 
 p { line-height: 1.2;}
-#METABOOKPAGES .codexpage.metabookcoversize p { line-height: 1.05;}
+#METABOOKPAGES .codexpage.metareadercoversize p { line-height: 1.05;}
 
-.metabookbody .titlepage, .metabookbody .sbooktitlepage,
+.metareaderbody .titlepage, .metareaderbody .sbooktitlepage,
 #METABOOKTITLE.sbooktitlepage {
     text-align: center;}
 
@@ -213,7 +213,7 @@ p { line-height: 1.2;}
 
 .codexbibpage { text-align: left;}
 
-/* Hide these body elements which are moved to the metaBook cover */
+/* Hide these body elements which are moved to the metaReader cover */
 #METABOOKBODY #SBOOKABOUTBOOK, #METABOOKBODY #SBOOKABOUTORIGIN,
 #METABOOKBODY #SBOOKABOUTAUTHOR, #METABOOKBODY #SBOOKABOUTPUBLISHER {
     display: none;}
@@ -268,11 +268,11 @@ a[href].wikicon, a[href].wikiref.wikicon {
     color: transparent; overflow: hidden; text-decoration: none;
     max-height: 1.5em; max-width: 1.5em; height: 1.5em; width: 1.5em; 
     padding: 1px; border: solid transparent 1px;
-    background-image: url(g/metabook/wikipedia.svgz);
+    background-image: url(g/metareader/wikipedia.svgz);
     background-position: center; background-repeat: no-repeat;
     background-size: contain;}
 html._NOSVG a[href].wikicon, html._NOSVG a[href].wikiref.wikicon {
-    background-image: url(g/metabook/wikipedia128w.png);}
+    background-image: url(g/metareader/wikipedia128w.png);}
 a[href].wikicon:hover, html._MOUSE a[href].wikicon:hover {
     color: transparent; text-deocration: none;}
 html._MOUSE a[href].wikicon:hover,
@@ -282,15 +282,15 @@ html._MOUSE a[href].wikicon.tapholding {
 
 a[href].wikiref, a[href].sbwikiref {
     white-space: nowrap; padding-right: 1em;
-    background-image: url(g/metabook/wikipedia.svgz);
+    background-image: url(g/metareader/wikipedia.svgz);
     background-position: bottom right; background-repeat: no-repeat;
     background-size: 1em;}
 html._NOSVG a[href].wikiref, html._NOSVG a[href].sbwikiref {
-    background-image: url(g/metabook/wikipedia64w.png);}
+    background-image: url(g/metareader/wikipedia64w.png);}
 */
 
-div.metabooknotebody { margin-left: 3em;}
-div.metabooknotebody a.mbackref { float: left; margin-left: -3em;}
+div.metareadernotebody { margin-left: 3em;}
+div.metareadernotebody a.mbackref { float: left; margin-left: -3em;}
 
 /* Custom media rules */
 
@@ -322,23 +322,23 @@ div.metabooknotebody a.mbackref { float: left; margin-left: -3em;}
         margin-left: 0; margin-right: 0;}}
 
 @media (lightlevel: dim OR lightlevel: washed) {
-    #METABOOKBODY .metabookcontent {
+    #METABOOKBODY .metareadercontent {
         background-color: #ffffff; color: #111; }
-    #METABOOKBODY.metabookcontrasthigh  .metabookcontent {
+    #METABOOKBODY.metareadercontrasthigh  .metareadercontent {
         background-color: #ffffff; color: #111; }
-    #METABOOKBODY.metabookcontrastmedium  .metabookcontent {
+    #METABOOKBODY.metareadercontrastmedium  .metareadercontent {
         background-color: #ffffff; color: #444; }
-    #METABOOKBODY.metabookcontrastlow  .metabookcontent {
+    #METABOOKBODY.metareadercontrastlow  .metareadercontent {
         background-color: #e5e0d4; color: #333; }}
 
 @media (lightlevel: bright) {
-    #METABOOKBODY  .metabookcontent {
+    #METABOOKBODY  .metareadercontent {
         background-color: #ffffff; color: #444; }
-    #METABOOKBODY.metabookcontrasthigh .metabookcontent {
+    #METABOOKBODY.metareadercontrasthigh .metareadercontent {
         background-color: #ffffff; color: #111; }
-    #METABOOKBODY.metabookcontrastmedium  .metabookcontent {
+    #METABOOKBODY.metareadercontrastmedium  .metareadercontent {
         background-color: #ffffff; color: #444; }
-    #METABOOKBODY.metabookcontrastlow   .metabookcontent {
+    #METABOOKBODY.metareadercontrastlow   .metareadercontent {
         background-color: #e5e0d4; color: #333; }}
 
 /* Emacs local variables

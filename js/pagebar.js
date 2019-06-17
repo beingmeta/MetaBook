@@ -1,6 +1,6 @@
 /* -*- Mode: Javascript; Character-encoding: utf-8; -*- */
 
-/* ###################### metabook/pagebar.js ###################### */
+/* ###################### metareader/pagebar.js ###################### */
 
 /* Copyright (C) 2009-2017 beingmeta, inc.
    This file implements a Javascript/DHTML web application for reading
@@ -37,19 +37,19 @@
     var fdjtString=fdjt.String;
     var dropClass=fdjtDOM.dropClass, hasClass=fdjtDOM.hasClass;
     var hasParent=fdjtDOM.hasParent, getParent=fdjtDOM.getParent;
-    var mB=metaBook, mbDOM=metaBook.DOM, previewTimeout=mB.previewTimeout;
+    var mR=metaReader, mbDOM=metaReader.DOM, previewTimeout=mR.previewTimeout;
     var cancel=fdjtUI.cancel;
-    var Trace=metaBook.Trace;
+    var Trace=metaReader.Trace;
 
     function getGoPage(target,evt){
         var pagebar=$ID("METABOOKPAGEBAR");
-        var w=pagebar.offsetWidth, npages=mB.pagecount;
+        var w=pagebar.offsetWidth, npages=mR.pagecount;
         var evt_x=evt.clientX||
             ((evt.touches)&&(evt.touches.length)&&
              (evt.touches[0].clientX));
         var off=pagebar.offsetLeft, relx=evt_x-off; 
         var gopage=npages*(relx/w);
-        if ((Trace.gestures>1)||(hasClass(pagebar,"metabooktrace")))
+        if ((Trace.gestures>1)||(hasClass(pagebar,"metareadertrace")))
             fdjtLog("pagebar_GoPage %o: %o-%o=%o/%o=%o => %o/%o",
                     evt,evt_x,off,relx,w,relx/w,gopage,npages);
         return Math.round(gopage+1);}
@@ -60,16 +60,16 @@
         if ((evt.type==="mousemove")&&(!(evt.buttons))) return;
         var pagebar=$ID("METABOOKPAGEBAR");
         previewTimeout(false);
-        if (((mB.hudup)||(mB.mode))&&
-            (!(mB.fullheight))) {
+        if (((mR.hudup)||(mR.mode))&&
+            (!(mR.fullheight))) {
             fdjtUI.cancel(evt);
-            metaBook.setMode(false);
+            metaReader.setMode(false);
             return;}
         if (target.nodeType===3) target=target.parentNode;
         var gopage=getGoPage(target,evt);
-        if ((Trace.gestures)||(hasClass(pagebar,"metabooktrace")))
+        if ((Trace.gestures)||(hasClass(pagebar,"metareadertrace")))
             fdjtLog("pagebar_hold %o t=%o gopage: %o=>%o/%o, start=%o",
-                    evt,target,previewing_page,gopage,mB.pagecount,
+                    evt,target,previewing_page,gopage,mR.pagecount,
                     preview_start_page);
         if (!(preview_start_page)) preview_start_page=gopage;
         if (previewing_page===gopage) return;
@@ -79,49 +79,49 @@
         if (previewing_page)
             pagebar.title=fdjtString(
                 "Release to go to this page (%d), move away to return to page %d",
-                gopage,mB.curpage);
+                gopage,mR.curpage);
         else pagebar.title=fdjtString(
-            ((mB.touch)?
+            ((mR.touch)?
              ("Release to return to page %d, tap the content or margin to settle here (page %d)"):
              ("Release to return to page %d, tap a key to settle here (page %d)")),
-            metaBook.curpage,gopage);
+            metaReader.curpage,gopage);
         previewing_page=gopage;
-        metaBook.startPreview(
+        metaReader.startPreview(
             "CODEXPAGE"+previewing_page,"pagebar_hold/timeout");}
     function pagebar_tap(evt,target){
         evt=evt||window.event; if (!(target)) target=fdjtUI.T(evt);
         var pagebar=$ID("METABOOKPAGEBAR");
-        if ((Trace.gestures)||(hasClass(pagebar,"metabooktrace")))
+        if ((Trace.gestures)||(hasClass(pagebar,"metareadertrace")))
             fdjtLog("pagebar_tap %o",evt);
         previewTimeout(false);
-        if ((mB.previewing)&&(!(previewing_page))) {
-            metaBook.stopPreview("pagebar_tap",true);
+        if ((mR.previewing)&&(!(previewing_page))) {
+            metaReader.stopPreview("pagebar_tap",true);
             return;}
-        if ((mB.hudup)||(mB.mode)||(mB.cxthelp)) {
+        if ((mR.hudup)||(mR.mode)||(mR.cxthelp)) {
             if (Trace.gestures)
-                fdjtLog("clearHUD %s %s %s",mB.mode,
-                        ((mB.hudup)?"hudup":""),
-                        ((mB.cxthelp)?"hudup":""));
+                fdjtLog("clearHUD %s %s %s",mR.mode,
+                        ((mR.hudup)?"hudup":""),
+                        ((mR.cxthelp)?"hudup":""));
             fdjtUI.cancel(evt);
-            metaBook.setMode(false);
+            metaReader.setMode(false);
             return;}
         if (target.nodeType===3) target=target.parentNode;
         var gopage=getGoPage(target,evt);
         if (previewing_page===gopage) return;
-        metaBook.GoToPage(gopage,"pagebar_tap",true);
-        metaBook.setMode(false);}
+        metaReader.GoToPage(gopage,"pagebar_tap",true);
+        metaReader.setMode(false);}
     function pagebar_release(evt,target){
         evt=evt||window.event; if (!(target)) target=fdjtUI.T(evt);
         var pagebar=$ID("METABOOKPAGEBAR");
-        if ((Trace.gestures)||(hasClass(pagebar,"metabooktrace")))
+        if ((Trace.gestures)||(hasClass(pagebar,"metareadertrace")))
             fdjtLog("pagebar_release %o, previewing=%o, ptarget=%o start=%o",
-                    evt,mB.previewing,mB.previewTarget,
+                    evt,mR.previewing,mR.previewTarget,
                     preview_start_page);
         previewTimeout(false);
         if (target.nodeType===3) target=target.parentNode;
-        if (!(mB.previewing)) {preview_start_page=false; return;}
+        if (!(mR.previewing)) {preview_start_page=false; return;}
         dropClass(target,"preview");
-        metaBook.stopPreview("pagebar_release",true);
+        metaReader.stopPreview("pagebar_release",true);
         preview_start_page=false;
         previewing_page=false;
         fdjtUI.cancel(evt);
@@ -132,32 +132,32 @@
         var rel=evt.relatedTarget;
         var pagebar=$ID("METABOOKPAGEBAR");
         previewTimeout(false);
-        if ((Trace.gestures)||(hasClass(pagebar,"metabooktrace")))
+        if ((Trace.gestures)||(hasClass(pagebar,"metareadertrace")))
             fdjtLog("pagebar_slip %o, pre=%o, target=%o start=%o, rel=%o",
-                    evt,mB.previewing,mB.previewTarget,
+                    evt,mR.previewing,mR.previewTarget,
                     preview_start_page,rel);
-        if (!(mB.previewing)) return;
+        if (!(mR.previewing)) return;
         if (getParent(rel,mbDOM.pagebar)) return;
-        if ((rel)&&(hasParent(rel,mB.body)))
+        if ((rel)&&(hasParent(rel,mR.body)))
             previewTimeout(function(){
                 var pagebar=$ID("METABOOKPAGEBAR");
-                pagebar.title=""; metaBook.GoTo(rel,evt);});
+                pagebar.title=""; metaReader.GoTo(rel,evt);});
         else previewTimeout(function(){
             var pagebar=$ID("METABOOKPAGEBAR");
             pagebar.title=""; dropClass(target,"preview");
-            metaBook.stopPagePreview("pagebar_slip/timeout");});
+            metaReader.stopPagePreview("pagebar_slip/timeout");});
         previewing_page=false;}
     function pagebar_touchtoo(evt,target){
         evt=evt||window.event; if (!(target)) target=fdjtUI.T(evt);
-        if (mB.previewing) {
-            metaBook.stopPreview("touchtoo");
+        if (mR.previewing) {
+            metaReader.stopPreview("touchtoo");
             fdjtUI.TapHold.clear();
-            metaBook.setHUD(false);
+            metaReader.setHUD(false);
             fdjt.UI.cancel(evt);
             return false;}}
     
     fdjt.DOM.defListeners(
-        metaBook.UI.handlers.mouse,
+        metaReader.UI.handlers.mouse,
         {"#METABOOKPAGEBAR": {
             tap: pagebar_tap,
             hold: pagebar_hold,
@@ -167,7 +167,7 @@
             click: cancel}});
     
     fdjt.DOM.defListeners(
-        metaBook.UI.handlers.touch,
+        metaReader.UI.handlers.touch,
         {"#METABOOKPAGEBAR": {tap: pagebar_tap,
                               hold: pagebar_hold,
                               touchmove: pagebar_hold,

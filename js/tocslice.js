@@ -1,13 +1,13 @@
 /* -*- Mode: Javascript; Character-encoding: utf-8; -*- */
 
-/* ###################### metabook/simpletoc.js ###################### */
+/* ###################### metareader/simpletoc.js ###################### */
 
 /* Copyright (C) 2009-2017 beingmeta, inc.
 
-   This file implements the "dynamic table of contents" for the metaBook
+   This file implements the "dynamic table of contents" for the metaReader
    e-reader web application.
 
-   This file is part of metaBook, a Javascript/DHTML web application for reading
+   This file is part of metaReader, a Javascript/DHTML web application for reading
    large structured documents.
 
    For more information on knodules, visit www.knodules.net
@@ -34,17 +34,17 @@
 
 */
 /* jshint browser: true */
-/* global metaBook: false */
+/* global metaReader: false */
 
 /* Initialize these here, even though they should always be
    initialized before hand.  This will cause various code checkers to
    not generate unbound variable warnings when called on individual
    files. */
 // var fdjt=((typeof fdjt !== "undefined")?(fdjt):({}));
-// var metaBook=((typeof metaBook !== "undefined")?(metaBook):({}));
+// var metaReader=((typeof metaReader !== "undefined")?(metaReader):({}));
 // var Knodule=((typeof Knodule !== "undefined")?(Knodule):({}));
 
-metaBook.TOCSlice=
+metaReader.TOCSlice=
     (function(){
         "use strict";
         var fdjtDOM=fdjt.DOM;
@@ -52,9 +52,9 @@ metaBook.TOCSlice=
         var dropClass=fdjtDOM.dropClass;
         var $=fdjtDOM.$;
         
-        var MetaBookSlice=metaBook.Slice;
+        var MetaBookSlice=metaReader.Slice;
 
-        var mbicon=metaBook.icon;
+        var mbicon=metaReader.icon;
         function navicon(kind){
             switch (kind) {
             case 'right': return mbicon("skim_right",64,64);
@@ -62,7 +62,7 @@ metaBook.TOCSlice=
             case 'start': return mbicon("skim_left_stop",64,64);
             case 'end': return mbicon("skim_right_stop",64,64);
             default: return false;}}
-        metaBook.navicon=navicon;
+        metaReader.navicon=navicon;
 
         function tocBar(headinfo,context){
             var title=fdjtDOM("a.mbtoc_sectname",headinfo.title);
@@ -141,13 +141,13 @@ metaBook.TOCSlice=
                     addClass(ref,"mblivetoc");
                     if (head===headinfo) addClass(ref,"mbcurtoc");}
                 head=head.head;}
-            var toc=metaBook.slices.statictoc;
+            var toc=metaReader.slices.statictoc;
             if (toc) {
                 var info=toc.byfrag[headinfo.frag];
                 if (info) toc.setSkim(info.dom);}};
         MetaBookTOC.prototype.mode="statictoc";
 
-        metaBook.TOC=MetaBookTOC;
+        metaReader.TOC=MetaBookTOC;
 
         return MetaBookTOC;})();
 

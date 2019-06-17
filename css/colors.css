@@ -15,7 +15,7 @@ body.mbMEDIA #METABOOKMEDIA {
 body.mbMEDIA #METABOOKMEDIA #METABOOKMEDIATARGET {
     background-color: rgba(0,0,0,1); z-index: 150;}
 
-.metabookcontent { background-color: white; color: #444; }
+.metareadercontent { background-color: white; color: #444; }
 
 /* hud.css */
 
@@ -57,7 +57,7 @@ html._MOUSE img.hudbutton:hover, img.hudbutton.tapholdtarget {
     border-color: darkblue;
     background-color: silver;}
 
-body img.metabookskimbutton.flash  {
+body img.metareaderskimbutton.flash  {
     background-color: silver;}
 
 /* foot.css */
@@ -68,19 +68,19 @@ hr#METABOOKLAYOUTINDICATOR {
     background-color: silver; color: gray;}
 #METABOOKLAYOUTADJUST {
     color: black; background-color: transparent;}
-#METABOOKFOOT #METABOOKPAGEBAR .metabookpagespans span.current {
+#METABOOKFOOT #METABOOKPAGEBAR .metareaderpagespans span.current {
     background-color: lightblue; color: transparent; }
 body.mbPAGEPREVIEW #METABOOKFOOT #METABOOKPAGEBAR
-  .metabookpagespans span.preview {
+  .metareaderpagespans span.preview {
     background-color: gold;}
 #METABOOKFOOT #METABOOKPAGEBAR #METABOOKPAGEPROGRESS {
     border-right: solid darkblue 2px;
     background-color: transparent;}
-#METABOOKFOOT #METABOOKPAGEBAR .metabooksectmarker {
+#METABOOKFOOT #METABOOKPAGEBAR .metareadersectmarker {
     background-color: rgba(0,0,255,0.3);}
-#METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER2.metabooksectmarker {
+#METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER2.metareadersectmarker {
     background-color: rgba(0,0,255,0.2);}
-#METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER3.metabooksectmarker {
+#METABOOKFOOT #METABOOKPAGEBAR #METABOOKSECTMARKER3.metareadersectmarker {
     background-color: rgba(0,0,255,0.1); }
 #METABOOKHUD #METABOOKFOOT #METABOOKSHOWTEXT > span > span {
     background-color: white; }
@@ -240,15 +240,15 @@ div.helpbox {
     border-color: blue;}
 div.helpbox .clicktarget { color: lightblue; }
 
-div.metabookhelp .action {color: darkblue;}
-div.metabookhelp .result {color: rgba(0,0,0,1);}
+div.metareaderhelp .action {color: darkblue;}
+div.metareaderhelp .result {color: rgba(0,0,0,1);}
 
-.metabookhelp .fdjtselected {
+.metareaderhelp .fdjtselected {
     background-color: rgba(255,255,0,0.7); }
-.metabookhelp .fdjtselectstart, .metabookhelp .fdjtselectend {
+.metareaderhelp .fdjtselectstart, .metareaderhelp .fdjtselectend {
     background-color: rgba(255,215,0,0.7); }
-.metabookhelp p { color: rgb(60,60,60); }
-.metabookhelp p dfn { color: black; white-space: nowrap;}
+.metareaderhelp p { color: rgb(60,60,60); }
+.metareaderhelp p dfn { color: black; white-space: nowrap;}
 
 #METABOOKHUD #METABOOKKEYBOARDHELPBOX.hudpanel {
     background-color: lightgray; color: black;
@@ -265,49 +265,49 @@ div.resultinfo .stats > span {
 
 /* settings.css */
 
-form.metabooksettings h1 .button {
+form.metareadersettings h1 .button {
     color: white; background-color: silver;}
-html._MOUSE form.metabooksettings h1 .button:hover {
+html._MOUSE form.metareadersettings h1 .button:hover {
     border-color: black;}
-form.metabooksettings .button.exit {
+form.metareadersettings .button.exit {
     color: red; background-color: white;}
 
 /* slices.css */
 
 body.hudup #METABOOKSKIMMER div.mbcard,
-div.metabookslice div.skimpoint {
+div.metareaderslice div.skimpoint {
     background-color: hsla(0, 44%, 90%, 0.7);}
-div.metabookslice.mbtocslice div.skimpoint {
+div.metareaderslice.mbtocslice div.skimpoint {
     background-color: hsla(207,44%,90%,0.2);
     border-bottom-color: blue;}
-div.metabooksources img.button.everyone.selected { background-color: silver; }
-div.metabooksources img.button.source.selected,
-div.metabooksources div.button.source.selected {
+div.metareadersources img.button.everyone.selected { background-color: silver; }
+div.metareadersources img.button.source.selected,
+div.metareadersources div.button.source.selected {
     border-color: blue;}
 div.mbcard_tochead { background-color: whitesmoke; color: blue; }
 div.mbcard_tochead hr { background-color: rgba(141,168,191, 0.5); color: lightblue; }
 
 /* addlgloss.css */
 
-div.metabookglossform div.response .respexcerpt {
+div.metareaderglossform div.response .respexcerpt {
     background-color: yellow;}
-div.metabookglossform div .respdate {
+div.metareaderglossform div .respdate {
     color: purple;}
-div.metabookglossform .glosslink.waschecked {
+div.metareaderglossform .glosslink.waschecked {
     background-color: pink; border-color: red;}
-div.metabookglossform .glosslink.ischecked.waschecked {
+div.metareaderglossform .glosslink.ischecked.waschecked {
     background-color: lightblue; border-color: blue;}
-div.metabookglossform form .button {
+div.metareaderglossform form .button {
     border-color: black; background-color: silver; color: black;}
 td#METABOOKATTACHFILE { background-color: lightgray;}
 #METABOOKGLOSSATTACH button[VALUE="DELETE"] { background-color: lightgray;}
-div.metabookglossform form div.addglossmenu > img.held {
+div.metareaderglossform form div.addglossmenu > img.held {
     background-color: lightgreen; border-color: green;}
-#METABOOKHUD .metabookglossform .checkspan.private {
+#METABOOKHUD .metareaderglossform .checkspan.private {
     color: white; background-color: green; }
-#METABOOKHUD .metabookglossform .checkspan.private.ischecked {
+#METABOOKHUD .metareaderglossform .checkspan.private.ischecked {
     background-color: red; color: white;}
-div.metabookglossform div.messageoverlay {
+div.metareaderglossform div.messageoverlay {
     background-color: rgba(255,255,255,0.5); }
 
 /* tocslice.css */
@@ -321,7 +321,7 @@ body.hudup #METABOOKHUD.statictoc #METABOOKSKIMMER {
     background-color: rgba(70, 130, 180, 0.5);}
 body.hudup #METABOOKHUD.statictoc #METABOOKSKIMMER .mbtoc .context {
     color: white;}
-div.metabookslice .mbtoc.mblivetoc {
+div.metareaderslice .mbtoc.mblivetoc {
     border-bottom-color: red;
     border-bottom-style: dotted;}
 .mbtoc .context {color: black;}

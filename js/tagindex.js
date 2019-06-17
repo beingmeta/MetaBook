@@ -1,6 +1,6 @@
 /* -*- Mode: Javascript; Character-encoding: utf-8; -*- */
 
-/* ###################### metabook/tagindex.js ###################### */
+/* ###################### metareader/tagindex.js ###################### */
 
 /* Copyright (C) 2009-2017 beingmeta, inc.
    This file implements a Javascript/DHTML web application for reading
@@ -41,18 +41,18 @@
     var getLink=fdjtDOM.getLink, isEmpty=fdjtString.isEmpty;
     var addListener=fdjtDOM.addListener;
 
-    var mB=metaBook, Trace=mB.Trace, Timeline=mB.Timeline;
+    var mR=metaReader, Trace=mR.Trace, Timeline=mR.Timeline;
 
     /* Indexing tags */
     
     function publisherIndex(pubindex){
-        mB._publisher_index=pubindex;
+        mR._publisher_index=pubindex;
         if (Timeline.metadata_done) indexReady();}
-    metaBook.publisherIndex=publisherIndex;
+    metaReader.publisherIndex=publisherIndex;
 
     function indexReady(){
-        var pubindex=metaBook._publisher_index||window._pubtool_autoindex;
-        if (metaBook._publisher_index) metaBook._publisher_index=false;
+        var pubindex=metaReader._publisher_index||window._pubtool_autoindex;
+        if (metaReader._publisher_index) metaReader._publisher_index=false;
         if (window._pubtool_autoindex) window._pubtool_autoindex=false;
         if (Timeline.index_done) return;
         Timeline.index_done=fdjtTime();
@@ -61,36 +61,36 @@
                 fdjtLog("Processing provided index of %d keys and %d refs",
                         pubindex._nkeys,pubindex._nrefs);
             else fdjtLog("Processing provided index");}
-        return mB.useIndexData(pubindex,metaBook.knodule,false,indexingDone);}
-    metaBook.indexReady=indexReady;
+        return mR.useIndexData(pubindex,metaReader.knodule,false,indexingDone);}
+    metaReader.indexReady=indexReady;
         
     function indexingDone(){
         if ((Trace.indexing)||(Trace.startup>1))
             fdjtLog("Content indexing is completed");
-        if (metaBook._started) setupClouds();
-        else metaBook.onsetup=setupClouds;}
+        if (metaReader._started) setupClouds();
+        else metaReader.onsetup=setupClouds;}
     
     var cloud_setup_start=false;
     function setupClouds(){
         var tracelevel=Math.max(Trace.startup,Trace.clouds);
-        var addTag2Cloud=metaBook.addTag2Cloud;
-        var empty_cloud=metaBook.empty_cloud;
-        var gloss_cloud=metaBook.gloss_cloud;
-        var taglist=metaBook.taglist||$ID("METABOOKTAGLIST");
+        var addTag2Cloud=metaReader.addTag2Cloud;
+        var empty_cloud=metaReader.empty_cloud;
+        var gloss_cloud=metaReader.gloss_cloud;
+        var taglist=metaReader.taglist||$ID("METABOOKTAGLIST");
         if (!(taglist)) {
-            taglist=metaBook.taglist=fdjt.DOM("datalist#METABOOKTAGLIST");
+            taglist=metaReader.taglist=fdjt.DOM("datalist#METABOOKTAGLIST");
             document.body.appendChild(taglist);}
-        var searchlist=metaBook.searchlist||$ID("METABOOKSEARCHLIST");
+        var searchlist=metaReader.searchlist||$ID("METABOOKSEARCHLIST");
         if (!(searchlist)) {
-            searchlist=metaBook.searchlist=fdjt.DOM("datalist#METABOOKSEARCHLIST");
+            searchlist=metaReader.searchlist=fdjt.DOM("datalist#METABOOKSEARCHLIST");
             document.body.appendChild(searchlist);}
         var knodeToOption=Knodule.knodeToOption;
 
         cloud_setup_start=fdjtTime();
-        metaBook.empty_query.results=
-            [].concat(metaBook.glossdb.allrefs).concat(metaBook.docdb.allrefs);
-        var searchtags=metaBook.searchtags=metaBook.empty_query.getCoTags();
-        var empty_query=metaBook.empty_query;
+        metaReader.empty_query.results=
+            [].concat(metaReader.glossdb.allrefs).concat(metaReader.docdb.allrefs);
+        var searchtags=metaReader.searchtags=metaReader.empty_query.getCoTags();
+        var empty_query=metaReader.empty_query;
         var tagfreqs=empty_query.tagfreqs;
         if (tracelevel)
             fdjtLog("Setting up initial tag clouds for %d tags",
@@ -108,7 +108,7 @@
                     var option=fdjtDOM("OPTION",tag); option.value=tag;
                     searchlist.appendChild(option);}
                 return;}
-            var elt=addTag2Cloud(tag,empty_cloud,metaBook.knodule,
+            var elt=addTag2Cloud(tag,empty_cloud,metaReader.knodule,
                                  tagfreqs,tagfreqs,false);
             // Ignore section name tags
             if (tag._id[0]==="\u00a7") return;
@@ -123,17 +123,17 @@
             then(tagindex_done);}
     
     function tagindex_done(searchtags){
-        var eq=metaBook.empty_query;
-        var knodule=metaBook.knodule;
-        var empty_cloud=metaBook.empty_cloud;
-        var gloss_cloud=metaBook.gloss_cloud;
+        var eq=metaReader.empty_query;
+        var knodule=metaReader.knodule;
+        var empty_cloud=metaReader.empty_cloud;
+        var gloss_cloud=metaReader.gloss_cloud;
         var searchlist=$ID("METABOOKSEARCHLIST");
         var knodeToOption=Knodule.knodeToOption;        
         var tracelevel=Math.max(Trace.startup,Trace.clouds);
         
         /* Take the top dterms and make them into cues, so there's at
          * least *something* */
-        metaBook.knodule.alldterms.slice(0,7).map(function(dterm){
+        metaReader.knodule.alldterms.slice(0,7).map(function(dterm){
             var ref=knodule.ref(dterm), elts=empty_cloud.getByValue(ref);
             elts.map(function(elt){addClass(elt,"cue");});});
 
@@ -143,16 +143,16 @@
         eq.cloud=empty_cloud;
         if (!(fdjtDOM.getChild(empty_cloud.dom,".showall")))
             fdjtDOM.prepend(empty_cloud.dom,
-                            metaBook.UI.getShowAll(
+                            metaReader.UI.getShowAll(
                                 true,empty_cloud.values.length));
         fdjtAsync.slowmap(function(string){
             searchlist.appendChild(knodeToOption(string));},
-                         metaBook.textindex.allterms,
+                         metaReader.textindex.allterms,
                          {slice: 50,space: 20});
-        metaBook.sortCloud(empty_cloud);
-        metaBook.sortCloud(gloss_cloud);
-        metaBook.sizeCloud(empty_cloud,metaBook.tagfreqs,[]);
-        metaBook.sizeCloud(gloss_cloud,metaBook.tagfreqs,[]);}
+        metaReader.sortCloud(empty_cloud);
+        metaReader.sortCloud(gloss_cloud);
+        metaReader.sizeCloud(empty_cloud,metaReader.tagfreqs,[]);
+        metaReader.sizeCloud(gloss_cloud,metaReader.tagfreqs,[]);}
 
     function tagindex_progress(state,i,lim){
         var tracelevel=Math.max(Trace.startup,Trace.clouds);
@@ -167,14 +167,14 @@
                 "Added %d tags (%d%% of %d) to clouds",
                 i,Math.floor(pct),lim));}
     
-    var addTags=metaBook.addTags;
+    var addTags=metaReader.addTags;
     
     /* Using the autoindex generated during book building */
     function useIndexData(autoindex,knodule,baseweight,whendone){
         var ntags=0, nitems=0, handle_weak=false;
-        var allterms=metaBook.allterms, prefixes=metaBook.prefixes;
-        var tagweights=metaBook.tagweights;
-        var maxweight=metaBook.tagmaxweight, minweight=metaBook.tagminweight;
+        var allterms=metaReader.allterms, prefixes=metaReader.prefixes;
+        var tagweights=metaReader.tagweights;
+        var maxweight=metaReader.tagmaxweight, minweight=metaReader.tagminweight;
         var tracelevel=Math.max(Trace.startup,Trace.indexing);
         var alltags=[];
         if (!(autoindex)) {
@@ -196,9 +196,9 @@
                 tagterm=tag.slice(tagstart,bar);}
             else tagterm=taghead=tag.slice(tagstart);
             if ((handle_weak)||(tag[0]!=='~'))
-                knode=metaBook.knodule.handleSubjectEntry(tag);
-            else knode=metaBook.knodule.probe(taghead)||
-                metaBook.knodule.probe(tagterm);
+                knode=metaReader.knodule.handleSubjectEntry(tag);
+            else knode=metaReader.knodule.probe(taghead)||
+                metaReader.knodule.probe(tagterm);
             /* Track weights */
             if (knode) {
                 weight=knode.weight;
@@ -228,10 +228,10 @@
                 var frag=((typeof idinfo === 'string')?
                           (idinfo):
                           (idinfo[0]));
-                var info=metaBook.docinfo[frag];
+                var info=metaReader.docinfo[frag];
                 // Pointer to non-existent node.  Warn here?
                 if (!(info)) {
-                    metaBook.missing_nodes.push(frag);
+                    metaReader.missing_nodes.push(frag);
                     continue;}
                 if (typeof idinfo !== 'string') {
                     // When the idinfo is an array, the first
@@ -259,11 +259,11 @@
             .then(function(state){
                 fdjtLog("Book index links %d keys to %d refs",ntags,nitems);
                 dropClass(document.body,"mbINDEXING");
-                metaBook.tagmaxweight=maxweight;
-                metaBook.tagminweight=minweight;
+                metaReader.tagmaxweight=maxweight;
+                metaReader.tagminweight=minweight;
                 if (whendone) return whendone();
                 else return state;});}
-    metaBook.useIndexData=useIndexData;
+    metaReader.useIndexData=useIndexData;
     function indexProgress(state,i,lim){
         if (state!=='suspend') return;
         // For chunks:
@@ -274,12 +274,12 @@
     /* Applying various tagging schemes */
 
     function applyMultiTagSpans() {
-        var tags=fdjtDOM.$(".metabooktags,.mbtags");
+        var tags=fdjtDOM.$(".metareadertags,.mbtags");
         var i=0, lim=tags.length;
         while (i<lim) {
             var elt=tags[i++];
-            var target=metaBook.getTarget(elt);
-            var info=metaBook.docinfo[target.id];
+            var target=metaReader.getTarget(elt);
+            var info=metaReader.docinfo[target.id];
             var tagtext=fdjtDOM.textify(elt);
             var tagsep=elt.getAttribute("tagsep")||";";
             var tagstrings=tagtext.split(tagsep);
@@ -287,17 +287,17 @@
                 var j=0, jlim=tagstrings.length;
                 while (j<jlim) addTags(info,tagstrings[j++]);}}}
     function applyTagSpans() {
-        var tags=fdjtDOM.$(".metabooktag,.mbtag");
+        var tags=fdjtDOM.$(".metareadertag,.mbtag");
         var i=0; var lim=tags.length;
         while (i<lim) {
             var tagelt=tags[i++];
-            var target=metaBook.getTarget(tagelt);
-            var info=metaBook.docinfo[target.id];
+            var target=metaReader.getTarget(tagelt);
+            var info=metaReader.docinfo[target.id];
             var tagtext=fdjtDOM.textify(tagelt);
             addTags(info,tagtext);}}
     
     function applyAnchorTags() {
-        var docinfo=metaBook.docinfo;
+        var docinfo=metaReader.docinfo;
         var anchors=document.getElementsByTagName("A");
         if (!(anchors)) return;
         var i=0; var len=anchors.length;
@@ -372,15 +372,15 @@
             tohandle,
             {watchfn: ((tohandle.length>100)&&(index_progress)),
              done: index_done,slice: 50, space: 5});}
-    metaBook.applyTagAttributes=applyTagAttributes;
+    metaReader.applyTagAttributes=applyTagAttributes;
     
     function handle_inline_tags(info){
         if (info.atags) addTags(info,info.atags);
         if (info.sectag) {
-            addTags(info,info.sectag,"tags",metaBook.knodule);
-            var knode=metaBook.knodule.ref(info.sectag);
-            metaBook.tagweights.set(
-                knode,metaBook.docdb.find('head',info).length);}}
+            addTags(info,info.sectag,"tags",metaReader.knodule);
+            var knode=metaReader.knodule.ref(info.sectag);
+            metaReader.tagweights.set(
+                knode,metaReader.docdb.find('head',info).length);}}
 
     function setupIndex(metadata){
         if ((Trace.startup>1)||(Trace.indexing>1))
@@ -391,7 +391,7 @@
         applyTagSpans();
         applyMultiTagSpans();
         applyTagAttributes(metadata);
-        var pubindex=metaBook._publisher_index||
+        var pubindex=metaReader._publisher_index||
             window._pubtool_autoindex;
         if (pubindex) indexReady();
         else if ($ID("PUTBOOLAUTOINDEX")) {
@@ -410,7 +410,7 @@
             else if (document.readyState==="complete")
                 indexReady();
             else addListener(window,"load",indexReady);}}
-    metaBook.setupIndex=setupIndex;
+    metaReader.setupIndex=setupIndex;
 
 })();
 

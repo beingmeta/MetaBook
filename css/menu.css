@@ -91,9 +91,9 @@ body._ANIMATE #METABOOKBREVET {
     transition-property: background-color;
     transition-duration: 0.2s;}
 #METABOOKBREVET {
-    background-image: url(g/metabook/downbar.svgz);}
+    background-image: url(g/metareader/downbar.svgz);}
 html._NOSVG #METABOOKBREVET {
-    background-image: url(g/metabook/downbar128w.png);}
+    background-image: url(g/metareader/downbar128w.png);}
 body.hudup #METABOOKBREVET, .mbcover #METABOOKBREVET { display: none;}
 
 #METABOOKSHOWCOVER {
@@ -127,9 +127,9 @@ body.hudup #METABOOKBREVET, .mbcover #METABOOKBREVET { display: none;}
         border-bottom-right-radius: 5px;
         background-size: contain; background-repeat: no-repeat;
         background-position: top center;
-        background-image: url(g/metabook/book.svgz);}
+        background-image: url(g/metareader/book.svgz);}
     ._NOSVG #METABOOKSHOWCOVER {
-        background-image: url(g/metabook/book50x50.png);}
+        background-image: url(g/metareader/book50x50.png);}
 
     #METABOOKSHOWCOVER {
         background-color: transparent;}

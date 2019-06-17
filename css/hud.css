@@ -12,16 +12,16 @@ html._MOUSE #METABOOKHUD a.mbtoc_sectbrick:hover { text-decoration: none;}
 /* Size rules */
 
 #METABOOKHUD { font-size: 3em; }
-#METABOOKFRAME.metabookuifontlarge #METABOOKHUD { font-size: 4em; }
-#METABOOKFRAME.metabookuifontnormal #METABOOKHUD { font-size: 3em; }
-#METABOOKFRAME.metabookuifontsmall #METABOOKHUD { font-size: 1.5em; }
+#METABOOKFRAME.metareaderuifontlarge #METABOOKHUD { font-size: 4em; }
+#METABOOKFRAME.metareaderuifontnormal #METABOOKHUD { font-size: 3em; }
+#METABOOKFRAME.metareaderuifontsmall #METABOOKHUD { font-size: 1.5em; }
 
-#METABOOKHUD .metabookhelp {
+#METABOOKHUD .metareaderhelp {
     font-size: 3vh;}
 
-#METABOOKHUD .metabookslice {
+#METABOOKHUD .metareaderslice {
     font-size: 16px; font-size: 1rem;}
-html._TOUCH #METABOOKHUD .metabookslice {
+html._TOUCH #METABOOKHUD .metareaderslice {
     font-size: 18px; font-size: 1.25rem;}
 
 /* Major HUD components, head and heart */
@@ -379,7 +379,7 @@ img.hudbutton.botright {
     border-bottom-width: 0; border-right-width: 0;
     border-top-left-radius: 6px;}
 
-img.closebutton, img.metabookpagebutton, img.metabookskimbutton, img.hudbutton {
+img.closebutton, img.metareaderpagebutton, img.metareaderskimbutton, img.hudbutton {
     cursor: pointer; z-index: 500;}
 
 #METABOOKHUD.about #METABOOKHEARTBODY .tabcontent#METABOOKABOUTBOOK,
@@ -425,7 +425,7 @@ body.openglossmark #METABOOKPOINTGLOSSES.hudpanel {
 #METABOOKPOINTGLOSSES { display: none;}
 body.openglossmark #METABOOKPOINTGLOSSES { display: block;}
 
-#METABOOKPOINTGLOSSES.hudpanel div.metabookslice {
+#METABOOKPOINTGLOSSES.hudpanel div.metareaderslice {
     overflow: hidden;}
 #METABOOKPOINTGLOSSES.hudpanel {
     border: solid blue 2px;
@@ -465,9 +465,9 @@ body.hudup #METABOOKHUD.help div.hudtip { display: block;}
 
 #METABOOKHUD.refinesearch #METABOOKSEARCH.norefiners
 div.completions#METABOOKSEARCHCLOUD { display: none;}
-#METABOOKHUD.refinesearch div.metabookslice#METABOOKSEARCHRESULTS { display: none;}
-#METABOOKHUD.expandsearch div.metabookslice#METABOOKSEARCHRESULTS { display: none;}
-#METABOOKHUD.searchresults div.metabookslice#METABOOKSEARCHRESULTS { display: block;}
+#METABOOKHUD.refinesearch div.metareaderslice#METABOOKSEARCHRESULTS { display: none;}
+#METABOOKHUD.expandsearch div.metareaderslice#METABOOKSEARCHRESULTS { display: none;}
+#METABOOKHUD.searchresults div.metareaderslice#METABOOKSEARCHRESULTS { display: block;}
 #METABOOKHUD.searchresults div.completions#METABOOKSEARCHCLOUD { display: none;}
 
 #METABOOKHUD.addgloss.glossaddtag #METABOOKHEARTBODY #METABOOKGLOSSCLOUD,
@@ -490,60 +490,60 @@ body.hudup #METABOOKHUD.addgloss .hudbutton {
 
 /* Skimmer buttons */
 
-body img.metabookskimbutton {
+body img.metareaderskimbutton {
     width: 50px; height: 100px;
     position: absolute; bottom: 50%; 
     display: none;}
-body._ANIMATE img.metabookskimbutton {
+body._ANIMATE img.metareaderskimbutton {
     transition-property: opacity,background-color;
     transition-duration: 0.2s;
     opacity: 0.50;}
-body img.metabookskimbutton.flash  {
+body img.metareaderskimbutton.flash  {
     background-color: silver;
     opacity: 0.90;}
 
-div.metabookskimindicator {
+div.metareaderskimindicator {
     position: absolute; bottom: 50%; z-index: 600;
     pointer-events: none;
     color: rgba(0,0,0,0.7);
     font-size: 2rem; padding-bottom: 2rem;
     display: none;}
-div#METABOOKSKIMINDEX.metabookskimindicator {left: 3px;}
-div#METABOOKSKIMLIMIT.metabookskimindicator {right: 3px;}
-body.mbSKIMMING div.metabookskimindicator {
+div#METABOOKSKIMINDEX.metareaderskimindicator {left: 3px;}
+div#METABOOKSKIMLIMIT.metareaderskimindicator {right: 3px;}
+body.mbSKIMMING div.metareaderskimindicator {
     display: block; }
 
-body img.metabookpagebutton {
+body img.metareaderpagebutton {
     width: 50px; height: 100px;
     position: absolute; bottom: 50%; opacity: 0.15;}
 
-body img.metabookskimbutton#METABOOKNEXTSKIM,
-body img.metabookskimbutton#METABOOKENDSKIM,
-body img.metabookpagebutton#METABOOKNEXTPAGE {
+body img.metareaderskimbutton#METABOOKNEXTSKIM,
+body img.metareaderskimbutton#METABOOKENDSKIM,
+body img.metareaderpagebutton#METABOOKNEXTPAGE {
     right: 0;}
-body img.metabookskimbutton#METABOOKPREVSKIM,
-body img.metabookskimbutton#METABOOKSTARTSKIM,
-body img.metabookpagebutton#METABOOKPREVPAGE {
+body img.metareaderskimbutton#METABOOKPREVSKIM,
+body img.metareaderskimbutton#METABOOKSTARTSKIM,
+body img.metareaderpagebutton#METABOOKPREVPAGE {
     left: 0;}
 
-body.mbSKIMMING img.metabookskimbutton {display: block;}
-body.mbSKIMMING img.metabookpagebutton { display: none;}
-body.mbSKIMMING img.metabookskimbutton#METABOOKSTARTSKIM,
-body.mbSKIMMING img.metabookskimbutton#METABOOKENDSKIM {
+body.mbSKIMMING img.metareaderskimbutton {display: block;}
+body.mbSKIMMING img.metareaderpagebutton { display: none;}
+body.mbSKIMMING img.metareaderskimbutton#METABOOKSTARTSKIM,
+body.mbSKIMMING img.metareaderskimbutton#METABOOKENDSKIM {
     display: none;}
 
-body.mbSKIMMING.mbSKIMSTART img.metabookskimbutton#METABOOKSTARTSKIM,
-body.mbSKIMMING.mbSKIMEND img.metabookskimbutton#METABOOKENDSKIM {
+body.mbSKIMMING.mbSKIMSTART img.metareaderskimbutton#METABOOKSTARTSKIM,
+body.mbSKIMMING.mbSKIMEND img.metareaderskimbutton#METABOOKENDSKIM {
     display: block;}
-body.mbSKIMMING.mbSKIMSTART img.metabookskimbutton#METABOOKPREVSKIM,
-body.mbSKIMMING.mbSKIMEND img.metabookskimbutton#METABOOKNEXTSKIM {
+body.mbSKIMMING.mbSKIMSTART img.metareaderskimbutton#METABOOKPREVSKIM,
+body.mbSKIMMING.mbSKIMEND img.metareaderskimbutton#METABOOKNEXTSKIM {
     display: none;}
 
 /* Don't display any buttons when you're at both the start and end */
-body.mbSKIMMING.mbSKIMSTART.mbSKIMEND img.metabookskimbutton#METABOOKSTARTSKIM,
-body.mbSKIMMING.mbSKIMSTART.mbSKIMEND img.metabookskimbutton#METABOOKENDSKIM,
-body.mbSKIMMING.mbSKIMSTART.mbSKIMEND img.metabookskimbutton#METABOOKNEXTSKIM,
-body.mbSKIMMING.mbSKIMSTART.mbSKIMEND img.metabookskimbutton#METABOOKPREVSKIM {
+body.mbSKIMMING.mbSKIMSTART.mbSKIMEND img.metareaderskimbutton#METABOOKSTARTSKIM,
+body.mbSKIMMING.mbSKIMSTART.mbSKIMEND img.metareaderskimbutton#METABOOKENDSKIM,
+body.mbSKIMMING.mbSKIMSTART.mbSKIMEND img.metareaderskimbutton#METABOOKNEXTSKIM,
+body.mbSKIMMING.mbSKIMSTART.mbSKIMEND img.metareaderskimbutton#METABOOKPREVSKIM {
     display: none;}
 
 #METABOOKHUD #SBOOKABOUT {
@@ -652,20 +652,20 @@ html._USER._DISCONN .mbwithconn {display: none;}
 
 /* Close HUD buttons */
 
-img.metabookclosehud {
+img.metareaderclosehud {
     border-radius: 50%; border: solid red 3px;
     width: 32px; height: 32px;
     display: none;}
-#METABOOKSHOWTEXT img.metabookclosehud {
+#METABOOKSHOWTEXT img.metareaderclosehud {
     margin-left: 5px; height: 1.5ex; width: auto;
     vertical-align: top; margin-top: 2px;
     display: inline-block;}
-img.metabookclosehud#METABOOKSTOPSKIM {
+img.metareaderclosehud#METABOOKSTOPSKIM {
     position: absolute; top: 0; right: 5px;
     width: 40px; height: 40px;
     /* Let's try to do without this for now */
     display: none;}
-body.mbSKIMMING #METABOOKHUD img.metabookclosehud#METABOOKSTOPSKIM {
+body.mbSKIMMING #METABOOKHUD img.metareaderclosehud#METABOOKSTOPSKIM {
     z-index: 500; display: block;}
 
 /* Full height/width rules */
@@ -700,8 +700,8 @@ html._MOUSE body:not(.hudup) #METABOOKHUD:hover #METABOOKSHOWCOVER {
 html._MOUSE body:not(.hudup) #METABOOKHUD:hover #METABOOKBREVET {
     display: none;}
 
-html._MOUSE img.metabookpagebutton:hover,
-body.hudup img.metabookpagebutton {
+html._MOUSE img.metareaderpagebutton:hover,
+body.hudup img.metareaderpagebutton {
     opacity: 0.7;}
 
 /* Media rules */
@@ -748,7 +748,7 @@ body.hudup img.metabookpagebutton {
     #METABOOKHUD.expandsearch.emptysearch #METABOOKHEARTBODY {
         top: 32px;}
 
-    img.metabookclosehud#METABOOKSTOPSKIM {
+    img.metareaderclosehud#METABOOKSTOPSKIM {
         bottom: 50px; top: auto;}
 
     #METABOOKHUD.openhead #METABOOKHEAD,
@@ -765,7 +765,7 @@ body.hudup img.metabookpagebutton {
     body.hudup.mbSKIMMING #METABOOKSHOWTEXT {
         display: none; }
 
-    html._TOUCH #METABOOKHUD .metabookslice {
+    html._TOUCH #METABOOKHUD .metareaderslice {
         font-size: 16px; font-size: 1rem;}
     html._TOUCH div.fdjtpageinfo {
         font-size: 150%;}
